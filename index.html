@@ -96,17 +96,6 @@
       text-shadow: 0 1px 8px rgba(0,0,0,0.25);
     }
 
-    .dark-toggle {
-      width: 28px; height: 28px; border-radius: 7px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.82rem; color: rgba(255,255,255,0.7);
-      flex-shrink: 0;
-      transition: background 0.14s;
-    }
-    .dark-toggle:hover { background: rgba(255,255,255,0.16); }
-
     .sb-block {
       font-size: 0.72rem; font-weight: 500;
       color: rgba(255,255,255,0.42);
@@ -213,9 +202,10 @@
 
     /* ── HERO JUMP BUTTONS ── */
     .hero-jump {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
       margin-top: 6px;
     }
+    @media (max-width: 1024px) { .hero-jump { grid-template-columns: repeat(2, 1fr); } }
     .hero-jump-btn {
       display: flex; align-items: center; justify-content: center; gap: 7px;
       padding: 10px 14px; border-radius: 10px;
@@ -331,6 +321,24 @@
     .bc-purple { background: var(--bc-pur-bg); border-color: var(--bc-pur-br); }
     .bc-purple:hover { box-shadow: 0 12px 40px rgba(109,40,217,0.14), 0 3px 10px rgba(109,40,217,0.07); }
     .bc-purple .bcard-cta, .bc-purple .bcard-label { color: var(--bc-pur-tx); }
+
+    .bc-dkpurple { background: #4c1d95; border-color: #6d28d9; color: #f1f5f9; }
+    .bc-dkpurple:hover { box-shadow: 0 12px 40px rgba(76,29,149,0.35), 0 3px 10px rgba(76,29,149,0.2); }
+    .bc-dkpurple h3 { color: #f1f5f9; }
+    .bc-dkpurple p  { color: #e9d5ff; }
+    .bc-dkpurple .bcard-label { color: #c4b5fd; }
+    .bc-dkpurple .bcard-cta   { color: #4ade80; }
+    .bc-dkpurple .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dkpurple .bcard-watermark { color: #fff; }
+
+    .bc-dark { background: #6b1a2e; border-color: #881337; color: #f1f5f9; }
+    .bc-dark:hover { box-shadow: 0 12px 40px rgba(107,26,46,0.35), 0 3px 10px rgba(107,26,46,0.2); }
+    .bc-dark h3 { color: #f1f5f9; }
+    .bc-dark p  { color: #fecdd3; }
+    .bc-dark .bcard-label { color: #fda4af; }
+    .bc-dark .bcard-cta   { color: #fef08a; }
+    .bc-dark .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dark .bcard-watermark { color: #fff; }
 
     /* ══════════════════════════════════════
        UTILITY ROWS
@@ -533,6 +541,25 @@
       color: var(--bc-grn-tx);
     }
 
+    /* Themed mini variant — uses the hub's primary palette (green in GI / rose in Repro) */
+    .mini-link-card.mlc-themed {
+      background: var(--bc-grn-bg);
+      border-color: var(--bc-grn-br);
+    }
+    .mini-link-card.mlc-themed:hover { border-color: var(--bc-grn-tx); }
+    .mini-link-card.mlc-themed .mlc-icon {
+      background: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,0.55);
+    }
+    .mini-link-card.mlc-themed .mlc-title { color: var(--bc-grn-tx); }
+
+    /* "Coming Soon" placeholder — dimmed, non-interactive */
+    .mini-link-card.mlc-coming-soon {
+      opacity: 0.55;
+      cursor: default;
+      pointer-events: none;
+    }
+
   </style>
 </head>
 <body>
@@ -541,8 +568,7 @@
   <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
     <div class="sb-brand">
-      <span class="sb-name">HoyaDocs</span>
-      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+      <a href="https://hoyadocs.com/" class="sb-name">HoyaDocs</a>
     </div>
     <div class="sb-block">Block 4 - Repro</div>
 
@@ -609,6 +635,7 @@
           <a class="hero-jump-btn" href="#lecture-tools"><span class="hero-jump-icon">📘</span>Lecture Study Tools</a>
           <a class="hero-jump-btn" href="#mapping-tools"><span class="hero-jump-icon">🗂</span>3rd Party Mapping</a>
           <a class="hero-jump-btn" href="#exam-tools"><span class="hero-jump-icon">🩺</span>Exam Study Tools</a>
+          <a class="hero-jump-btn" href="https://hoyadocs.com/"><span class="hero-jump-icon">🏠</span>Return to HoyaDocs Main Page</a>
         </div>
       </section>
 
@@ -618,51 +645,9 @@
           <span class="section-divider-text">Lecture Study Tools</span>
           <div class="section-divider-line"></div>
         </div>
-        <div class="bento">
+        <div class="bento bento-3">
 
-          <div style="display:flex; flex-direction:column; gap:12px;">
-
-            <a class="bcard bc-green" href="./lecture-guides/index.html" style="flex:1;">
-              <span class="bcard-watermark">📖</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">📖</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 01</span>
-                  <h3>Lecture Study Guides</h3>
-                </div>
-              </div>
-              <p>Per-lecture organized guides with key concepts, diagrams, and exam-focused notes.</p>
-              <span class="bcard-cta">Open section →</span>
-            </a>
-
-            <a class="bcard bc-green" href="./active-recall-hub.html" style="flex:1;">
-              <span class="bcard-watermark">🎯</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">🎯</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 02</span>
-                  <h3>Active Drills</h3>
-                </div>
-              </div>
-              <p>Gamified practice for vignettes, trap questions, mechanisms, and drug facts.</p>
-              <span class="bcard-cta">Open section →</span>
-            </a>
-
-            <a class="bcard bc-green" href="https://strettyit10.github.io/Block4-Repro/planning/daily_checklist.html" style="flex:1;">
-              <span class="bcard-watermark">✅</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">✅</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 03</span>
-                  <h3>Daily Checklist</h3>
-                </div>
-              </div>
-              <p>Track daily study tasks and complete learning objectives lecture by lecture.</p>
-              <span class="bcard-cta">Open checklist →</span>
-            </a>
-
-          </div>
-
+          <!-- Column 1: Calendar (spans full column height) -->
           <div style="display:flex; flex-direction:column; gap:12px;">
 
             <div class="bcard bc-blue" style="flex:1;">
@@ -679,11 +664,74 @@
               </div>
             </div>
 
-            <a class="mini-link-card" href="https://docs.google.com/spreadsheets/d/1iKT6BxPEcrVOFnnVmOoIC7GjRkJfnoFkPkksKhp-Xo8/edit?usp=sharing" target="_blank" rel="noopener">
+          </div>
+
+          <!-- Column 2: Lecture Study Guides + Active Drills -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <a class="bcard bc-dark" href="./lecture-guides/index.html" style="flex:1;">
+              <span class="bcard-watermark">📖</span>
+              <div class="bcard-header">
+                <div class="bcard-icon">📖</div>
+                <div class="bcard-header-text">
+                  <span class="bcard-label">Lecture · 01</span>
+                  <h3>Lecture Study Guides</h3>
+                </div>
+              </div>
+              <p>Per-lecture organized guides with key concepts, diagrams, and exam-focused notes.</p>
+              <span class="bcard-cta">Open section →</span>
+            </a>
+
+            <a class="bcard bc-dark" href="./active-recall-hub.html" style="flex:1;">
+              <span class="bcard-watermark">🎯</span>
+              <div class="bcard-header">
+                <div class="bcard-icon">🎯</div>
+                <div class="bcard-header-text">
+                  <span class="bcard-label">Lecture · 02</span>
+                  <h3>Active Drills</h3>
+                </div>
+              </div>
+              <p>Gamified practice for vignettes, trap questions, mechanisms, and drug facts.</p>
+              <span class="bcard-cta">Open section →</span>
+            </a>
+
+          </div>
+
+          <!-- Column 3: 4 themed quick-access minis -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <a class="mini-link-card mlc-themed" href="https://docs.google.com/spreadsheets/d/1iKT6BxPEcrVOFnnVmOoIC7GjRkJfnoFkPkksKhp-Xo8/edit?usp=sharing" target="_blank" rel="noopener">
               <span class="mlc-icon">📋</span>
               <div class="mlc-body">
                 <div class="mlc-title">Block 4 Repro Check List</div>
-                <div class="mlc-desc">Google sheet checklist of Repro lectures</div>
+                <div class="mlc-desc">Google sheet of Repro lectures</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed" href="./planning/daily_checklist.html">
+              <span class="mlc-icon">✅</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Daily Checklist</div>
+                <div class="mlc-desc">Daily study tasks & LOs</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed" href="./planning/lecture_planner.html">
+              <span class="mlc-icon">📅</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Lecture Planning</div>
+                <div class="mlc-desc">Plan your lecture study week</div>
+              </div>
+              <span class="mlc-arrow">→</span>
+            </a>
+
+            <a class="mini-link-card mlc-themed mlc-coming-soon" aria-disabled="true">
+              <span class="mlc-icon">✨</span>
+              <div class="mlc-body">
+                <div class="mlc-title">Coming Soon</div>
+                <div class="mlc-desc">New study tool in development</div>
               </div>
               <span class="mlc-arrow">→</span>
             </a>
@@ -740,7 +788,7 @@
             <span class="bcard-cta">Open explorer →</span>
           </a>
 
-          <a class="bcard bc-purple" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+          <a class="bcard bc-dkpurple" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
             <span class="bcard-watermark">📊</span>
             <div class="bcard-header">
               <div class="bcard-icon">📊</div>
@@ -753,10 +801,10 @@
             <span class="bcard-cta">Download xlsx →</span>
           </a>
 
-          <a class="bcard bc-purple" href="./resource-mapping/Repro_Resource_Mapping.xlsx">
-            <span class="bcard-watermark">📑</span>
+          <a class="bcard bc-dkpurple" href="./resource-mapping/Repro_Resource_Mapping.xlsx">
+            <span class="bcard-watermark">📊</span>
             <div class="bcard-header">
-              <div class="bcard-icon">📑</div>
+              <div class="bcard-icon">📊</div>
               <div class="bcard-header-text">
                 <span class="bcard-label">Mapping · 05</span>
                 <h3>Resource Mapping</h3>
@@ -766,17 +814,17 @@
             <span class="bcard-cta">Download xlsx →</span>
           </a>
 
-          <a class="bcard bc-purple" href="./planning/lecture_planner.html">
-            <span class="bcard-watermark">📅</span>
+          <a class="bcard bc-purple" href="./anki_package_parser_v10.html">
+            <span class="bcard-watermark">🃏</span>
             <div class="bcard-header">
-              <div class="bcard-icon">📅</div>
+              <div class="bcard-icon">🃏</div>
               <div class="bcard-header-text">
                 <span class="bcard-label">Mapping · 06</span>
-                <h3>Lecture Planning</h3>
+                <h3>Anki Mapping</h3>
               </div>
             </div>
-            <p>Plan your weekly lecture study schedule with per-lecture resource selection and task tracking.</p>
-            <span class="bcard-cta">Open planner →</span>
+            <p>Upload an Anki deck (.apkg) and extract out the relevant tags — map cards to your lectures.</p>
+            <span class="bcard-cta">Open tool →</span>
           </a>
 
         </div>
@@ -914,21 +962,6 @@
 </nav>
 
 <script>
-  // ── Dark mode toggle ──
-  function toggleDark() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    document.getElementById('darkToggle').textContent = next === 'dark' ? '☀️' : '🌙';
-  }
-
-  // Set correct icon on load
-  document.addEventListener('DOMContentLoaded', function () {
-    const t = document.documentElement.getAttribute('data-theme');
-    document.getElementById('darkToggle').textContent = t === 'dark' ? '☀️' : '🌙';
-  });
-
   // ── Today's Repro Lectures ──
   const REPRO_LECTURES = [{"d":"2026-04-08","title":"IL Urogenital Primer","lecturer":"","start":"18:00","end":"18:30","course":"Embr","location":"","link":""},{"d":"2026-04-13","title":"MANDATORY Module Orientation","lecturer":"","start":"09:00","end":"10:00","course":"Embr-HS","location":"","link":""},{"d":"2026-04-13","title":"Urogenital System","lecturer":"","start":"10:00","end":"11:30","course":"Embr","location":"","link":""},{"d":"2026-04-15","title":"IL Urogenital Primer - Quiz DUE at 11:59PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-04-16","title":"Female Reproductive System","lecturer":"","start":"11:00","end":"12:00","course":"Hist","location":"","link":""},{"d":"2026-04-17","title":"Male Reproductive System","lecturer":"","start":"10:00","end":"11:00","course":"Hist","location":"","link":""},{"d":"2026-04-19","title":"SDL Worksheet DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-04-23","title":"Endocrinology of the Ovary & Female Reproductive Tract I","lecturer":"","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-04-23","title":"Endocrinology of the Ovary & Female Reproductive Tract II","lecturer":"","start":"11:00","end":"12:00","course":"Phys","location":"","link":""},{"d":"2026-04-23","title":"Embryology Paper Library Consultation Feedback Received by 11:59PM","lecturer":"","start":"14:00","end":"16:00","course":"Embr","location":"","link":""},{"d":"2026-04-28","title":"Pelvic Structure & Neurovasculature","lecturer":"","start":"11:00","end":"12:00","course":"Anat","location":"","link":""},{"d":"2026-04-29","title":"CCS 1: Ovary and Female Reproductive Tract","lecturer":"","start":"10:00","end":"11:00","course":"Phys-Bioch","location":"","link":""},{"d":"2026-04-29","title":"Pelvic Viscera & Perineum","lecturer":"","start":"11:00","end":"12:00","course":"Anat","location":"","link":""},{"d":"2026-04-30","title":"Sexual Health and Development Across the Lifespan I","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-04-30","title":"Sexual Health and Development Across the Lifespan II","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-04-30","title":"GA Lab #1 - Ischioanal Fossa and Perineum","lecturer":"","start":"13:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-04","title":"Endocrinology of Testes and Male Reproductive Tract","lecturer":"","start":"09:00","end":"10:00","course":"Phys-Bioch","location":"","link":""},{"d":"2026-05-04","title":"Ovary and Testes","lecturer":"","start":"10:00","end":"11:30","course":"Path","location":"","link":""},{"d":"2026-05-04","title":"GA Lab #2 - Pelvis: Viscera, Vasculature, Sacral Plexus","lecturer":"","start":"13:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-05","title":"Contraception","lecturer":"","start":"09:00","end":"10:30","course":"HS","location":"","link":""},{"d":"2026-05-05","title":"Fertility and Infertility","lecturer":"","start":"10:30","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-05-05","title":"Embryology Paper DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-06","title":"Ovary/Testes Lab","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-06","title":"Obstetrical/Placenta","lecturer":"","start":"10:00","end":"11:00","course":"Path","location":"","link":""},{"d":"2026-05-06","title":"Endocrinology of Pregnancy, Labor and Lactation","lecturer":"","start":"11:00","end":"12:00","course":"Bioch","location":"","link":""},{"d":"2026-05-06","title":"MANDATORY SG 5: Guideline","lecturer":"","start":"13:00","end":"14:15","course":"EBM","location":"","link":""},{"d":"2026-05-06","title":"Optional RPD/GA Review","lecturer":"","start":"15:00","end":"16:00","course":"Anat","location":"","link":""},{"d":"2026-05-07","title":"Pregnancy 101","lecturer":"","start":"09:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-07","title":"Pelvic Imaging","lecturer":"","start":"11:00","end":"12:00","course":"DRT","location":"","link":""},{"d":"2026-05-07","title":"Optional RPD/GA Practice Questions Review","lecturer":"","start":"15:00","end":"16:30","course":"Anat","location":"","link":""},{"d":"2026-05-08","title":"Psychosocial Aspects of Pregnancy and Postpartum","lecturer":"","start":"09:00","end":"10:00","course":"HS","location":"","link":""},{"d":"2026-05-08","title":"Menopause","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-08","title":"Optional RPD GA Practical Review (Snowball)","lecturer":"","start":"13:00","end":"14:30","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"GA Written Exam","lecturer":"","start":"09:00","end":"09:30","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"GA Practical Exam","lecturer":"","start":"09:40","end":"15:40","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"MANDATORY GA Lab Clean Up","lecturer":"","start":"16:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-12","title":"Breast Diseases","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-12","title":"PE - Female Pelvis and GYN Exam","lecturer":"","start":"13:00","end":"14:30","course":"CP","location":"","link":""},{"d":"2026-05-12","title":"Embryology Paper Critique DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-13","title":"Breast Clinical","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-13","title":"MANDATORY Sexual History Taking","lecturer":"","start":"11:30","end":"12:30","course":"HS","location":"","link":""},{"d":"2026-05-13","title":"MANDATORY Panel - Ethical Issues in Reproduction and Beginning of Life","lecturer":"","start":"13:30","end":"15:30","course":"Ethics","location":"","link":""},{"d":"2026-05-13","title":"Group A - Educational Case Review - DCIS","lecturer":"","start":"16:00","end":"17:00","course":"Path","location":"","link":""},{"d":"2026-05-14","title":"PE - Breast Exam","lecturer":"","start":"11:30","end":"12:00","course":"CP","location":"","link":""},{"d":"2026-05-14","title":"MANDATORY SG Sexual History Taking","lecturer":"","start":"13:00","end":"14:30","course":"HS","location":"","link":""},{"d":"2026-05-14","title":"Group B - Educational Case Review - DCIS","lecturer":"","start":"16:00","end":"17:00","course":"Path","location":"","link":""},{"d":"2026-05-15","title":"Disorders of the Cervix/HPV","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-15","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-15","title":"Embryology Paper Peer Evals and Optional Rebuttal DUE by 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-18","title":"Disorders of the Vulva and Uterus","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-18","title":"GYN: Case Review","lecturer":"","start":"10:00","end":"11:00","course":"Path","location":"","link":""},{"d":"2026-05-18","title":"Breast/GYN Lab","lecturer":"","start":"11:00","end":"12:00","course":"Path","location":"","link":""},{"d":"2026-05-20","title":"Male Pelvis and GU Exam","lecturer":"","start":"09:00","end":"10:00","course":"CP","location":"","link":""},{"d":"2026-05-21","title":"Sexually Transmitted Infections","lecturer":"","start":"09:00","end":"10:00","course":"Micro","location":"","link":""},{"d":"2026-05-21","title":"CCS3: Sexuality, Illness and Disability","lecturer":"","start":"10:00","end":"11:30","course":"HS","location":"","link":""},{"d":"2026-05-22","title":"Prostate","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-22","title":"IL Sexual Boundary Issue","lecturer":"","start":"14:00","end":"15:00","course":"HS","location":"","link":""},{"d":"2026-05-25","title":"Sexual Boundary Issues IL and Quiz due 11:59pm","lecturer":"","start":"","end":"23:59","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Prostate Clinical","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-26","title":"Hormone Therapy of Cancer","lecturer":"","start":"10:00","end":"11:00","course":"Pharm","location":"","link":""},{"d":"2026-05-26","title":"LGBT Health I","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Intimate Partner Violence & Sexual Trauma","lecturer":"","start":"13:30","end":"14:30","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"MANDATORY Rape Survivor Patient Panel","lecturer":"","start":"14:30","end":"15:30","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Gross Image Assignment DUE 11:59pm","lecturer":"","start":"","end":"23:59","course":"Path","location":"","link":""},{"d":"2026-05-27","title":"LGBT Health II","lecturer":"","start":"09:00","end":"10:00","course":"HS","location":"","link":""},{"d":"2026-05-27","title":"MANDATORY SG LGBT Cases","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-27","title":"MANDATORY LGBT Panel Discussion","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-06-08","title":"RPD Exam 1","lecturer":"","start":"09:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-06-11","title":"RPD Exam 2","lecturer":"","start":"09:00","end":"12:00","course":"N/A","location":"","link":""}];
 

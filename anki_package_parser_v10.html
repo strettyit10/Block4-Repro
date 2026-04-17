@@ -203,7 +203,7 @@ function getSubject() { return document.getElementById('subject-input').value.tr
 function getFullPrefix() {
   const base = getBasePrefix(), mode = getMode();
   if (!base) return '';
-  if (mode === 'sketchy' || mode === 'depth4' || mode === 'inhouse2') return base + '::';
+  if (mode === 'sketchy' || mode === 'depth4' || mode === 'inhouse2' || mode === 'custom') return base + '::';
   const sub = getSubject();
   return sub ? `${base}::${sub}::` : `${base}::`;
 }
