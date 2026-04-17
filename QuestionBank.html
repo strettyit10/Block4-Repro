@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoyaDocs | Repro Question Bank</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --accent: #9f1239;
+      --accent-dark: #fb7185;
+      --accent-tint: rgba(159,18,57,0.1);
+      --accent-hover: #881337;
+      --sidebar-bg: #1c0810;
+      --bg: #fef5f7;
+      --surface: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+    
+
+    html, body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100%; }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .header::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    }
+    .header-inner {
+      padding: 1rem 1.5rem 0;
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .header-left { display: flex; flex-direction: column; gap: 2px; }
+    .header-eyebrow {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .header-title {
+      font-size: 1.4rem; font-weight: 900;
+      letter-spacing: -0.035em; color: var(--text); line-height: 1.1;
+    }
+    .header-title em {
+      font-style: normal; color: var(--accent);
+    }
+    .header-right { display: flex; gap: 0.5rem; align-items: center; padding-top: 0.25rem; }
+    .header-stats {
+      display: flex; gap: 6px; margin-right: 0.5rem;
+    }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 999px;
+      background: var(--accent-tint); border: 1px solid var(--border);
+      font-size: 0.72rem; font-weight: 600; color: var(--text-muted);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .header-badge strong {
+      color: var(--accent); font-weight: 800;
+    }
+    .icon-btn {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: transparent; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; color: var(--text-muted); cursor: pointer;
+      transition: background 0.14s, border-color 0.14s, color 0.14s;
+      flex-shrink: 0;
+    }
+    .icon-btn:hover { background: var(--accent-tint); border-color: var(--accent); color: var(--accent); }
+
+    /* ===== TABS ===== */
+    .tabs {
+      display: flex; gap: 0; padding: 0 1.5rem;
+      background: var(--surface);
+    }
+    .tab {
+      padding: 0.7rem 1.25rem 0.65rem; background: none; border: none; cursor: pointer;
+      font-size: 0.82rem; font-weight: 600; color: var(--text-muted);
+      border-bottom: 2.5px solid transparent; transition: 0.2s;
+      letter-spacing: -0.01em;
+    }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab:hover:not(.active) { color: var(--text); }
+
+    /* ===== LAYOUT ===== */
+    .app { display: flex; flex-direction: column; height: 100vh; }
+    .content { flex: 1; overflow: hidden; position: relative; }
+    .mode { display: none; height: 100%; }
+    .mode.active { display: flex; flex-direction: row; }
+
+    /* ===== SIDEBAR (shared by mode-1 and mode-2) ===== */
+    .sidebar {
+      width: 260px; min-width: 260px; background: var(--surface);
+      border-right: 1px solid var(--border); overflow-y: auto;
+      padding: 1rem; transition: width 0.2s, min-width 0.2s, padding 0.2s;
+      position: relative; flex-shrink: 0;
+    }
+    .sidebar.collapsed { width: 0; min-width: 0; padding: 0; overflow: hidden; border-right: none; }
+    .sidebar-toggle {
+      position: absolute; top: 50%; right: -14px; transform: translateY(-50%);
+      width: 28px; height: 28px; border-radius: 50%; background: var(--surface);
+      border: 1px solid var(--border); cursor: pointer; display: flex;
+      align-items: center; justify-content: center; font-size: 0.7rem;
+      z-index: 10; box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: var(--text-muted);
+    }
+    .sidebar-toggle:hover { background: var(--accent-tint); border-color: var(--accent); color: var(--accent); }
+    /* When sidebar collapsed, put toggle at left edge */
+    .sidebar.collapsed + .main-area .sidebar-reopen {
+      display: flex;
+    }
+    .sidebar-reopen {
+      display: none; position: absolute; top: 50%; left: 8px; transform: translateY(-50%);
+      width: 28px; height: 28px; border-radius: 50%; background: var(--surface);
+      border: 1px solid var(--border); cursor: pointer; align-items: center;
+      justify-content: center; font-size: 0.7rem; z-index: 10;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: var(--text-muted);
+    }
+    .sidebar-reopen:hover { background: var(--accent-tint); border-color: var(--accent); }
+
+    /* ===== MAIN AREA (test taking) ===== */
+    .main-area {
+      flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;
+    }
+
+    /* ===== FILTER PANEL INSIDE SIDEBAR ===== */
+    .filter-section { margin-bottom: 1.25rem; }
+    .filter-section-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.4rem; cursor: pointer; user-select: none;
+    }
+    .filter-section-header:hover { color: var(--accent); }
+    .section-title {
+      font-weight: 600; font-size: 0.8rem; text-transform: uppercase;
+      letter-spacing: 0.05em; color: var(--text-muted); display: flex; align-items: center; gap: 0.3rem;
+    }
+    .section-title .arrow { font-size: 0.65rem; transition: transform 0.2s; }
+    .section-title .arrow.down { transform: rotate(90deg); }
+    .section-actions { display: flex; gap: 0.25rem; }
+    .section-actions button {
+      font-size: 0.65rem; padding: 2px 6px; border: 1px solid var(--border);
+      border-radius: 3px; background: var(--surface); color: var(--text-muted);
+      cursor: pointer; white-space: nowrap;
+    }
+    .section-actions button:hover { background: var(--accent-tint); color: var(--accent); }
+    .section-body { transition: max-height 0.25s ease, opacity 0.2s; overflow: hidden; }
+    .section-body.collapsed { max-height: 0 !important; opacity: 0; }
+
+    /* ===== PILLS ===== */
+    .pill-grid { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.3rem; }
+    .pill {
+      padding: 4px 10px; border: 1px solid var(--border); border-radius: 14px;
+      background: var(--surface); color: var(--text); font-size: 0.75rem;
+      cursor: pointer; transition: 0.15s; font-weight: 500; white-space: nowrap;
+    }
+    .pill:hover { border-color: var(--accent); }
+    .pill.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .pill-list { display: flex; flex-direction: column; gap: 0.25rem; max-height: 200px; overflow-y: auto; margin-top: 0.3rem; }
+    .pill-list .pill { border-radius: 6px; white-space: normal; text-align: left; font-size: 0.75rem; padding: 5px 10px; }
+    .pill-list .pill.hidden { display: none; }
+    .lec-search {
+      width: 100%; padding: 5px 8px; border: 1px solid var(--border); border-radius: 5px;
+      background: var(--surface); color: var(--text); font-size: 0.75rem;
+      margin: 0.3rem 0; font-family: inherit;
+    }
+    .lec-search:focus { outline: none; border-color: var(--accent); }
+
+    /* ===== COUNT SELECTOR ===== */
+    .count-row { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.3rem; }
+    .count-row button {
+      padding: 4px 8px; border: 1px solid var(--border); border-radius: 5px;
+      background: var(--surface); color: var(--text); font-size: 0.75rem;
+      cursor: pointer; font-weight: 500; min-width: 34px; transition: 0.15s;
+    }
+    .count-row button:hover { border-color: var(--accent); }
+    .count-row button.active { background: var(--accent); color: white; border-color: var(--accent); }
+    .count-row input {
+      width: 50px; padding: 4px 6px; border: 1px solid var(--border); border-radius: 5px;
+      font-size: 0.75rem; background: var(--surface); color: var(--text); font-family: inherit;
+    }
+
+    /* ===== SEEN TOGGLE ===== */
+    .seen-toggle { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; cursor: pointer; margin-top: 0.5rem; }
+    .seen-toggle input { width: 16px; height: 16px; }
+
+    /* ===== START / GENERATE BUTTONS ===== */
+    .action-btn {
+      width: 100%; padding: 0.6rem; background: var(--accent); color: white;
+      border: none; border-radius: 6px; font-weight: 600; cursor: pointer;
+      font-size: 0.85rem; margin-top: 0.75rem; transition: 0.2s;
+    }
+    .action-btn:hover { opacity: 0.9; }
+    .action-btn:disabled { background: var(--border); cursor: not-allowed; }
+    .pool-info { font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.5rem; }
+
+    /* ===== TEST LIST (Mode 2 sidebar) ===== */
+    .test-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .test-card {
+      padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px;
+      cursor: pointer; font-size: 0.8rem; transition: 0.15s;
+    }
+    .test-card:hover { background: var(--accent-tint); border-color: var(--accent); }
+    .test-card .t-name { font-weight: 600; }
+    .test-card .t-info { color: var(--text-muted); font-size: 0.75rem; margin-top: 0.15rem; }
+
+    /* ===== TEST TAKING ===== */
+    .test-content { flex: 1; overflow-y: auto; padding: 1.5rem; }
+    .placeholder { display: flex; justify-content: center; align-items: center; height: 100%; color: var(--text-muted); font-size: 0.95rem; }
+    .q-header { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; display: flex; justify-content: space-between; }
+    .q-stem { font-size: 1rem; line-height: 1.65; margin-bottom: 1.25rem; font-weight: 500; }
+    .choices { display: flex; flex-direction: column; gap: 0.6rem; }
+    .choice {
+      padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 8px;
+      cursor: pointer; display: flex; gap: 0.75rem; align-items: flex-start; transition: 0.15s;
+    }
+    .choice:hover { background: var(--accent-tint); border-color: var(--accent); }
+    .choice.selected { background: var(--accent-tint); border-color: var(--accent); }
+    .choice-letter {
+      width: 28px; height: 28px; border-radius: 50%; background: var(--accent-tint);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; color: var(--accent); flex-shrink: 0; font-size: 0.85rem;
+    }
+    .choice-text { flex: 1; padding-top: 0.2rem; font-size: 0.95rem; }
+    .choice-tag { font-size: 0.75rem; flex-shrink: 0; padding-top: 0.3rem; font-weight: 600; }
+
+    /* Review colors */
+    .choice.correct { background: #ecfdf5; border-color: #10b981; }
+    .choice.correct .choice-letter { background: #d1fae5; color: #059669; }
+    .choice.correct .choice-tag { color: #059669; }
+    .choice.wrong { background: #fef2f2; border-color: #ef4444; }
+    .choice.wrong .choice-letter { background: #fee2e2; color: #dc2626; }
+    .choice.wrong .choice-tag { color: #dc2626; }
+
+    /* ===== QUESTION GRID ===== */
+    .q-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .q-dot {
+      width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      font-size: 0.7rem; font-weight: 600; transition: 0.15s; color: var(--text);
+    }
+    .q-dot:hover { border-color: var(--accent); }
+    .q-dot.answered { background: var(--accent-tint); border-color: var(--accent); }
+    .q-dot.current { background: var(--accent); color: white; border-color: var(--accent); }
+
+    /* ===== NAV BAR ===== */
+    .nav-bar {
+      padding: 0.75rem 1.5rem; background: var(--surface); border-top: 1px solid var(--border);
+      display: flex; gap: 0.75rem; justify-content: center; align-items: center;
+    }
+    .nav-bar button {
+      padding: 0.5rem 1.25rem; border: 1px solid var(--border); border-radius: 6px;
+      background: var(--surface); color: var(--text); cursor: pointer;
+      font-weight: 600; font-size: 0.85rem; transition: 0.15s;
+    }
+    .nav-bar button:hover:not(:disabled) { background: var(--accent-tint); border-color: var(--accent); }
+    .nav-bar button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .nav-bar .submit-btn {
+      background: var(--accent); color: white; border-color: var(--accent);
+    }
+    .nav-bar .submit-btn:hover { opacity: 0.9; }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 1rem; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.3s; }
+
+    /* ===== REVIEW ===== */
+    .score-box {
+      text-align: center; padding: 1.5rem; background: var(--accent-tint);
+      border-radius: 10px; margin-bottom: 2rem;
+    }
+    .score-num { font-size: 2.5rem; font-weight: 700; color: var(--accent); }
+    .score-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+    .review-q { margin-bottom: 2rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
+    .review-tag {
+      display: inline-block; padding: 4px 10px; border-radius: 4px;
+      font-weight: 600; font-size: 0.8rem; margin-bottom: 0.75rem;
+    }
+    .review-tag.pass { background: #d1fae5; color: #059669; }
+    .review-tag.fail { background: #fee2e2; color: #dc2626; }
+    .explanation {
+      margin: 1rem 0; padding: 0.75rem 1rem; background: var(--bg);
+      border-left: 3px solid var(--accent); border-radius: 4px;
+      font-size: 0.88rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word;
+    }
+    .answer-meta { margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 0.75rem; }
+    .meta-row {
+      display: flex; justify-content: space-between; padding: 0.4rem 0;
+      font-size: 0.85rem; border-bottom: 1px solid var(--border);
+    }
+    .meta-row:last-child { border-bottom: none; }
+    .meta-label { font-weight: 600; }
+    .meta-value { color: var(--text-muted); text-align: right; }
+
+    /* ===== STATS TAB ===== */
+    .stats-page { padding: 2rem; max-width: 700px; margin: 0 auto; overflow-y: auto; height: 100%; }
+    .stats-page h2 { font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--accent); }
+    .stats-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card {
+      padding: 1rem; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; text-align: center;
+    }
+    .stat-card .val { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .stat-card .lbl { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; }
+    .stats-section { margin-bottom: 2rem; }
+    .stats-section h3 { font-size: 0.95rem; margin-bottom: 0.75rem; }
+    .stats-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .stats-table th {
+      background: var(--accent); color: white; padding: 0.5rem 0.75rem;
+      text-align: left; font-weight: 600;
+    }
+    .stats-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+    .stats-table tr:nth-child(even) td { background: var(--accent-tint); }
+    .stats-table .num { text-align: center; }
+    .reset-stats-btn {
+      padding: 0.5rem 1rem; border: 1px solid #dc2626; border-radius: 6px;
+      background: white; color: #dc2626; cursor: pointer; font-weight: 600;
+      font-size: 0.85rem; margin-top: 1rem;
+    }
+    .reset-stats-btn:hover { background: #fef2f2; }
+
+    /* ===== BOTTOM BAR ===== */
+    .bottom-bar {
+      padding: 0.4rem 1.25rem; background: var(--surface); border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);
+    }
+
+    /* ===== RESPONSIVE ===== */
+
+    /* Tablet */
+    @media (max-width: 900px) {
+      .header-stats { display: none; }
+      .sidebar { width: 220px; min-width: 220px; }
+      .stats-cards { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      /* Header compact */
+      .header-inner { padding: 0.75rem 1rem 0; }
+      .header-eyebrow { font-size: 0.56rem; }
+      .header-title { font-size: 1.1rem; }
+      .header-stats { display: none; }
+
+      /* Tabs scroll horizontally */
+      .tabs { padding: 0 0.75rem; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .tab { padding: 0.6rem 0.9rem 0.55rem; font-size: 0.76rem; white-space: nowrap; flex: none; }
+
+      /* Sidebar becomes full-screen overlay drawer */
+      .sidebar {
+        position: fixed; left: 0; top: 0; width: 85vw; max-width: 320px;
+        height: 100vh; z-index: 500; padding: 1rem;
+        box-shadow: 4px 0 24px rgba(0,0,0,0.18);
+        transition: transform 0.25s ease, opacity 0.25s ease;
+        transform: translateX(0);
+      }
+      .sidebar.collapsed {
+        transform: translateX(-100%);
+        width: 85vw; max-width: 320px; padding: 1rem;
+        overflow: hidden; border-right: none;
+        opacity: 0; pointer-events: none;
+      }
+
+      /* Overlay backdrop when sidebar open */
+      .sidebar-backdrop {
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.4); z-index: 499;
+      }
+      .sidebar-backdrop.visible { display: block; }
+
+      /* Hide the circular toggle on mobile — use bottom FAB instead */
+      .sidebar-toggle { display: none; }
+      .sidebar-reopen { display: none !important; }
+
+      /* Floating filter button (bottom-right) */
+      .mobile-filter-fab {
+        display: flex !important;
+      }
+
+      /* Main area takes full width */
+      .main-area { position: relative; }
+      .test-content { padding: 1rem; }
+      .nav-bar { padding: 0.6rem 1rem; }
+      .nav-bar button { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
+
+      /* Questions */
+      .q-stem { font-size: 0.92rem; }
+      .choice { padding: 0.7rem 0.8rem; }
+      .choice-letter { width: 26px; height: 26px; font-size: 0.8rem; }
+      .choice-text { font-size: 0.88rem; }
+      .q-dot { width: 28px; height: 28px; font-size: 0.65rem; }
+
+      /* Stats */
+      .stats-page { padding: 1rem; }
+      .stats-cards { grid-template-columns: 1fr 1fr; }
+      .stats-table { font-size: 0.78rem; }
+      .stats-table th, .stats-table td { padding: 0.4rem 0.5rem; }
+
+      /* Review */
+      .review-q { padding: 1rem; }
+      .score-box { padding: 1rem; }
+      .score-num { font-size: 2rem; }
+      .explanation { font-size: 0.82rem; padding: 0.6rem 0.8rem; }
+      .meta-row { font-size: 0.78rem; }
+
+      /* Bottom bar compact */
+      .bottom-bar { padding: 0.35rem 0.75rem; font-size: 0.7rem; }
+
+      /* Count row wraps better */
+      .count-row { gap: 0.25rem; }
+      .count-row button { padding: 3px 7px; font-size: 0.7rem; min-width: 30px; }
+
+      /* Pills touch-friendly */
+      .pill { padding: 6px 11px; font-size: 0.74rem; }
+      .pill-list .pill { padding: 7px 10px; }
+    }
+
+    /* Very small screens */
+    @media (max-width: 380px) {
+      .header-title { font-size: 0.95rem; }
+      .tab { padding: 0.55rem 0.7rem; font-size: 0.72rem; }
+      .stats-cards { grid-template-columns: 1fr; }
+    }
+
+    /* Mobile filter FAB — hidden by default, shown on mobile */
+    .mobile-filter-fab {
+      display: none; position: fixed; bottom: 56px; right: 16px; z-index: 200;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--accent); color: white; border: none;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+      align-items: center; justify-content: center;
+      font-size: 1.2rem; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .mobile-filter-fab:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+
+    /* Sidebar backdrop */
+    .sidebar-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4); z-index: 499;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <span class="header-eyebrow">HoyaDocs &middot; Block 4</span>
+        <h1 class="header-title">Repro <em>Question Bank</em></h1>
+      </div>
+      <div class="header-right">
+        <div class="header-stats">
+          <span class="header-badge"><strong id="hdr-answered">0</strong>&nbsp;answered</span>
+          <span class="header-badge"><strong id="hdr-accuracy">0%</strong>&nbsp;accuracy</span>
+          <span class="header-badge"><strong id="hdr-remaining">0</strong>&nbsp;remaining</span>
+        </div>
+        
+        <button class="icon-btn" id="menu-btn" title="Menu">&#9776;</button>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-mode="mode-1">Filtered Practice</button>
+      <button class="tab" data-mode="mode-2">Premade Tests</button>
+      <button class="tab" data-mode="mode-stats">Stats</button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <!-- MODE 1: FILTERED PRACTICE -->
+    <div class="mode mode-1 active" id="mode-1">
+      <div class="sidebar" id="sidebar-1">
+        <div class="filter-section">
+          <div class="section-title" style="margin-bottom:0.4rem">QUESTIONS</div>
+          <div class="count-row" id="count-row"></div>
+          <input type="number" id="custom-count" placeholder="Custom" min="1" max="999" style="width:100%;padding:4px 8px;border:1px solid var(--border);border-radius:5px;font-size:0.75rem;margin-top:0.3rem;background:var(--surface);color:var(--text);font-family:inherit;">
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-section-header" data-target="subj-body">
+            <span class="section-title"><span class="arrow down">&#9654;</span> SUBJECTS</span>
+            <div class="section-actions">
+              <button data-action="all" data-set="subject">All</button>
+              <button data-action="none" data-set="subject">None</button>
+            </div>
+          </div>
+          <div class="section-body" id="subj-body">
+            <div class="pill-grid" id="subj-pills"></div>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-section-header" data-target="lec-body">
+            <span class="section-title"><span class="arrow down">&#9654;</span> LECTURES</span>
+            <div class="section-actions">
+              <button data-action="all" data-set="lecture">All</button>
+              <button data-action="none" data-set="lecture">None</button>
+            </div>
+          </div>
+          <div class="section-body" id="lec-body">
+            <input type="text" class="lec-search" id="lec-search" placeholder="Search lectures..." autocomplete="off">
+            <div class="pill-list" id="lec-pills"></div>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-section-header" data-target="src-body">
+            <span class="section-title"><span class="arrow down">&#9654;</span> SOURCES</span>
+            <div class="section-actions">
+              <button data-action="all" data-set="source">All</button>
+              <button data-action="none" data-set="source">None</button>
+            </div>
+          </div>
+          <div class="section-body" id="src-body">
+            <div class="pill-grid" id="src-pills"></div>
+          </div>
+        </div>
+
+        <label class="seen-toggle">
+          <input type="checkbox" id="include-seen" checked>
+          <span>Include seen questions</span>
+        </label>
+
+        <div class="pool-info" id="pool-info">—</div>
+        <button class="action-btn" id="start-practice">Start Practice</button>
+
+        <div style="position:absolute;top:50%;right:-14px;transform:translateY(-50%);">
+          <button class="sidebar-toggle" id="toggle-1" title="Hide sidebar">&lsaquo;</button>
+        </div>
+      </div>
+      <div class="main-area" id="main-1">
+        <button class="sidebar-reopen" id="reopen-1" title="Show sidebar">&rsaquo;</button>
+        <div class="test-content" id="content-1">
+          <div class="placeholder">Configure filters and press Start Practice</div>
+        </div>
+        <div class="nav-bar" id="nav-1" style="display:none;">
+          <button id="prev-1">&#8592; Previous</button>
+          <button id="next-1">Next &#8594;</button>
+          <button class="submit-btn" id="submit-1" style="display:none;">Submit Test</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODE 2: PREMADE TESTS -->
+    <div class="mode mode-2" id="mode-2">
+      <div class="sidebar" id="sidebar-2">
+        <div class="section-title" style="margin-bottom:0.75rem">YOUR TESTS</div>
+        <div class="test-list" id="test-list"></div>
+        <button class="action-btn" id="gen-test">Generate New Test</button>
+        <button class="action-btn" id="gen-incorrect" style="margin-top:0.4rem;background:transparent;color:var(--accent);border:1.5px solid var(--accent);">Generate from Incorrect</button>
+        <div class="pool-info" id="unseen-info">—</div>
+        <div class="pool-info" id="incorrect-info">—</div>
+        <div style="position:absolute;top:50%;right:-14px;transform:translateY(-50%);">
+          <button class="sidebar-toggle" id="toggle-2" title="Hide sidebar">&lsaquo;</button>
+        </div>
+      </div>
+      <div class="main-area" id="main-2">
+        <button class="sidebar-reopen" id="reopen-2" title="Show sidebar">&rsaquo;</button>
+        <div class="test-content" id="content-2">
+          <div class="placeholder">Click Generate New Test to begin</div>
+        </div>
+        <div class="nav-bar" id="nav-2" style="display:none;">
+          <button id="prev-2">&#8592; Previous</button>
+          <button id="next-2">Next &#8594;</button>
+          <button class="submit-btn" id="submit-2" style="display:none;">Submit Test</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODE STATS -->
+    <div class="mode mode-stats" id="mode-stats">
+      <div class="stats-page" id="stats-content">
+        <h2>Performance Stats</h2>
+        <p style="color:var(--text-muted)">Answer some questions to see your stats here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="bottom-bar">
+    <span><strong id="stat-answered">0</strong> answered &middot; <strong id="stat-accuracy">0%</strong> accuracy</span>
+    <span><strong id="stat-remaining">0</strong> remaining</span>
+  </div>
+
+<!-- Mobile filter FAB + backdrop -->
+<div class="sidebar-backdrop" id="sidebar-backdrop-1"></div>
+<div class="sidebar-backdrop" id="sidebar-backdrop-2"></div>
+<button class="mobile-filter-fab" id="mobile-fab" title="Filters">&#9881;</button>
+</div>
+
+<!-- Menu dropdown -->
+<div id="menu-overlay" style="display:none;position:fixed;inset:0;z-index:999;" onclick="this.style.display='none';document.getElementById('menu-dd').style.display='none';"></div>
+<div id="menu-dd" style="display:none;position:fixed;top:50px;right:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.12);z-index:1000;min-width:180px;">
+  <div style="padding:0.6rem 1rem;border-bottom:1px solid var(--border);cursor:pointer;font-size:0.85rem;" id="menu-export">Export Data</div>
+  <div style="padding:0.6rem 1rem;border-bottom:1px solid var(--border);cursor:pointer;font-size:0.85rem;" id="menu-import">Import Data</div>
+  <div style="padding:0.6rem 1rem;cursor:pointer;font-size:0.85rem;color:#dc2626;" id="menu-reset">Reset All Progress</div>
+</div>
+<input type="file" id="import-file" accept=".json" style="display:none;">
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const QUESTIONS = [
+  {
+    "id": "lg-01-01",
+    "stem": "A 25-year-old woman presents with a pelvic mass. Imaging reveals a cystic mass arising from the ovary. During surgery, the surgeon must ligate the ovarian artery. Which of the following is the direct origin of this artery?</p>",
+    "choices": {
+      "A": "Internal iliac artery",
+      "B": "External iliac artery",
+      "C": "Abdominal aorta",
+      "D": "Uterine artery",
+      "E": "Superior mesenteric artery"
+    },
+    "correct": "C",
+    "explanation": "The ovarian artery arises directly from the abdominal aorta at the level of L2, similar to the testicular artery in males. The uterine artery arises from the internal iliac artery and anastomoses with the ovarian artery.",
+    "metadata": {
+      "source": "lecture-guide",
+      "sub_source": null,
+      "lecture_id": 1,
+      "lecture_title": "Reproductive Anatomy",
+      "subject": "Anat",
+      "concept_tested": "Reproductive anatomy - arterial supply and surgical anatomy",
+      "question_format": "clinical-vignette",
+      "hub_number": null,
+      "difficulty": "medium"
+    }
+  },
+  {
+    "id": "lg-01-02",
+    "stem": "During a hysterectomy, the surgeon must identify the ureter to avoid injury. Where is the ureter most vulnerable to surgical injury in relation to the uterine artery?</p>",
+    "choices": {
+      "A": "The ureter crosses over the uterine artery superiorly",
+      "B": "The ureter passes under the uterine artery at the level of the cervix",
+      "C": "The ureter runs parallel to the uterine artery along the broad ligament",
+      "D": "The ureter crosses the uterine artery at the pelvic brim",
+      "E": "The ureter is lateral to the uterine artery throughout its course"
+    },
+    "correct": "B",
+    "explanation": "\"Water under the bridge\" \u2014 the ureter passes under the uterine artery approximately 2 cm lateral to the cervix. This is the most common site of ureteral injury during hysterectomy.",
+    "metadata": {
+      "source": "lecture-guide",
+      "sub_source": null,
+      "lecture_id": 1,
+      "lecture_title": "Reproductive Anatomy",
+      "subject": "Anat",
+      "concept_tested": "Reproductive anatomy - arterial supply and surgical anatomy",
+      "question_format": "clinical-vignette",
+      "hub_number": null,
+      "difficulty": "medium"
+    }
+  },
+  {
+    "id": "us-01-01",
+    "stem": "A 22-year-old woman undergoes laparoscopic left oophorectomy for a ruptured ovarian cyst. The surgeon ligates the ovarian artery at its origin. Injury to which of the following structures would most likely occur if the surgeon dissects too far medially during this procedure?",
+    "choices": {
+      "A": "Left renal artery",
+      "B": "Left lumbar vein",
+      "C": "Left psoas major muscle",
+      "D": "Inferior mesenteric artery",
+      "E": "Gonadal vein"
+    },
+    "correct": "A",
+    "explanation": "The correct answer is A. The ovarian artery arises from the abdominal aorta at the level of L2, just below the renal arteries. Overzealous dissection or inadvertent medial traction during oophorectomy can injure the ipsilateral renal artery, which is in close proximity.\n\nB is incorrect because while the lumbar veins are nearby, they are not as immediately at risk from medial dissection in the gonadal vessels.\nC is incorrect because the psoas major is deeper and not directly in the field of dissection of the ovarian vessels.\nD is incorrect because the inferior mesenteric artery arises more caudally from the aorta and is not in the immediate operative field.\nE is incorrect because the gonadal vein runs with the artery and is typically ligated intentionally, not inadvertently.",
+    "metadata": {
+      "source": "usmle-generated",
+      "sub_source": null,
+      "lecture_id": 1,
+      "lecture_title": "Reproductive Anatomy",
+      "subject": "Anat",
+      "concept_tested": "Ovarian artery origin and adjacent vascular anatomy",
+      "question_format": "clinical-vignette",
+      "hub_number": null,
+      "difficulty": "medium"
+    }
+  },
+  {
+    "id": "us-01-02",
+    "stem": "A 35-year-old woman presents with lower abdominal pain and is found to have a large uterine fibroid causing uterine enlargement. The radiologist describes compression of adjacent structures. Which of the following anatomical relationships best explains why uterine fibroids can cause ureteral obstruction?",
+    "choices": {
+      "A": "The ureter runs in the cardinal ligament anterior to the uterine artery",
+      "B": "The ureter courses through the broad ligament medial to the ovarian vessels",
+      "C": "The ureter passes posterior to the uterus and is compressed by anterior fibroid expansion",
+      "D": "The ureter travels lateral to the uterus within the lateral pelvic sidewall fascia",
+      "E": "The ureter enters the bladder after passing under the uterine artery near the cervix"
+    },
+    "correct": "E",
+    "explanation": "The correct answer is E. The ureter enters the bladder after passing under (posterior to) the uterine artery approximately 2 cm lateral to the cervix. Large uterine masses, particularly those extending laterally or into the lower uterine segment, can compress the ureter at this critical point where it is crossed by the uterine artery (\"water under the bridge\"), leading to obstructive uropathy.\n\nA is incorrect because the ureter passes under (not anterior to) the uterine artery, and this relationship exists at the level of the cervix, not the cardinal ligament superiorly.\nB is incorrect because the ureter does not course through the broad ligament; it runs in the retroperitoneal pelvic sidewall.\nC is incorrect because the ureter runs anterior to the uterus (in the pelvis), not posterior to it.\nD is incorrect because while the ureter is in the lateral pelvic sidewall, this does not fully explain the mechanism of ureteral obstruction from uterine fibroids.",
+    "metadata": {
+      "source": "usmle-generated",
+      "sub_source": null,
+      "lecture_id": 1,
+      "lecture_title": "Reproductive Anatomy",
+      "subject": "Anat",
+      "concept_tested": "Ureter-uterine artery relationship and clinical significance",
+      "question_format": "clinical-vignette",
+      "hub_number": null,
+      "difficulty": "medium"
+    }
+  },
+  {
+    "id": "us-01-03",
+    "stem": "During embryonic development, the gonad migrates from its origin near the mesonephros to its final position. In females, this process is arrested by the gubernaculum, which attaches to the uterus and becomes the ovarian ligament and uterosacral ligament. Which of the following best explains why ovarian cancer can metastasize to para-aortic lymph nodes rather than inguinal lymph nodes, unlike testicular cancer?",
+    "choices": {
+      "A": "The ovarian arteries and veins drain directly to para-aortic nodes via the ovarian pedicle",
+      "B": "The gubernaculum of the female develops into lymphatic channels that bypass inguinal nodes",
+      "C": "Ovarian lymphatics follow the venous drainage pattern from the hilum of the ovary cephalad to para-aortic nodes",
+      "D": "Female gonads descend further caudally than male gonads, increasing para-aortic nodal involvement",
+      "E": "The broad ligament contains lymphatic vessels that drain directly to inguinal nodes, creating an alternative metastatic pathway"
+    },
+    "correct": "C",
+    "explanation": "The correct answer is C. Ovarian lymphatic drainage follows the pattern of venous drainage from the ovarian hilum superiorly along the ovarian vessels to the para-aortic (lumbar) lymph nodes at the level of L2, reflecting the developmental origin of the gonad at the upper abdominal level. In contrast, testicular lymphatic drainage also follows the testicular vessels cephalad to para-aortic nodes (not inguinal nodes), making this a comparable drainage pattern. The difference arises only in gubernacular attachment: the female gubernaculum attaches to the uterus (creating ovarian and uterosacral ligaments) and does not form a scrotal ligament, so it does not create an alternate lymphatic pathway to inguinal nodes. The primary drainage remains para-aortic.\n\nA is incorrect because while arteries and veins do follow this course, the question specifically asks about the developmental/anatomical basis for lymphatic drainage pattern.\nB is incorrect because the gubernaculum does not develop into lymphatic channels; it becomes ligamentous tissue.\nD is incorrect because ovarian descent is arrested and they do not reach the scrotum (as testes do).\nE is incorrect because the broad ligament contains lymphatic vessels, but they drain to para-aortic nodes, not inguinal nodes.",
+    "metadata": {
+      "source": "usmle-generated",
+      "sub_source": null,
+      "lecture_id": 1,
+      "lecture_title": "Reproductive Anatomy",
+      "subject": "Anat",
+      "concept_tested": "Gonadal lymphatic drainage and embryologic development",
+      "question_format": "two-step-reasoning",
+      "hub_number": null,
+      "difficulty": "hard"
+    }
+  }
+];
+
+const SUBJECTS = [...new Set(QUESTIONS.map(q => q.metadata.subject))].sort();
+const LECTURES = [...new Map(QUESTIONS.map(q =>
+  [q.metadata.lecture_id, {id: q.metadata.lecture_id, title: q.metadata.lecture_title}]
+)).values()].sort((a,b) => a.id - b.id);
+const SOURCES = [...new Set(QUESTIONS.map(q => q.metadata.source))];
+const SRC_LABELS = {'lecture-guide':'Lecture Guide','testing-drill':'Testing Drill','practice-problems':'Practice Problems','usmle-generated':'USMLE Step 1'};
+const STORAGE_KEY = 'repro-qbank';
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  seen: new Set(),
+  incorrect: new Set(),
+  tests: [],
+  darkMode: false,
+  stats: { totalAnswered: 0, totalCorrect: 0, bySubject: {}, bySource: {}, byLecture: {} }
+};
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const d = JSON.parse(raw);
+      state.seen = new Set(d.seen || []);
+      state.incorrect = new Set(d.incorrect || []);
+      state.tests = d.tests || [];
+      state.darkMode = d.darkMode || false;
+      state.stats = d.stats || { totalAnswered:0, totalCorrect:0, bySubject:{}, bySource:{}, byLecture:{} };
+      if (!state.stats.byLecture) state.stats.byLecture = {};
+    }
+  } catch(e) {}
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    seen: [...state.seen], incorrect: [...state.incorrect], tests: state.tests, darkMode: state.darkMode, stats: state.stats
+  }));
+}
+
+// ============================================================
+// FILTER STATE
+// ============================================================
+let selectedSubjects = new Set(SUBJECTS);
+let selectedLectures = new Set(LECTURES.map(l => l.id));
+let selectedSources = new Set(SOURCES);
+let selectedCount = 25;
+let includeSeen = true;
+
+// ============================================================
+// TEST STATE (shared between modes)
+// ============================================================
+let activeMode = null; // 'mode-1' or 'mode-2'
+let currentTest = null;
+let testAnswers = {};
+let qIndex = 0;
+
+// ============================================================
+// HELPERS
+// ============================================================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getFilteredPool() {
+  return QUESTIONS.filter(q => {
+    if (!selectedSubjects.has(q.metadata.subject)) return false;
+    if (!selectedLectures.has(q.metadata.lecture_id)) return false;
+    if (!selectedSources.has(q.metadata.source)) return false;
+    if (!includeSeen && state.seen.has(q.id)) return false;
+    return true;
+  });
+}
+
+function $(id) { return document.getElementById(id); }
+
+function openSidebar(sfx) {
+  $('sidebar-' + sfx).classList.remove('collapsed');
+  $('reopen-' + sfx).style.display = 'none';
+  $('sidebar-backdrop-' + sfx).classList.add('visible');
+}
+function closeSidebar(sfx) {
+  $('sidebar-' + sfx).classList.add('collapsed');
+  $('reopen-' + sfx).style.display = 'flex';
+  $('sidebar-backdrop-' + sfx).classList.remove('visible');
+}
+
+// ============================================================
+// INIT UI
+// ============================================================
+function initUI() {
+  // Count buttons
+  const countRow = $('count-row');
+  [5,10,15,20,25,30,40,50].forEach(n => {
+    const b = document.createElement('button');
+    b.textContent = n;
+    if (n === 25) b.classList.add('active');
+    b.addEventListener('click', () => {
+      countRow.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      selectedCount = n;
+      $('custom-count').value = '';
+    });
+    countRow.appendChild(b);
+  });
+  $('custom-count').addEventListener('input', e => {
+    if (e.target.value) {
+      countRow.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+      selectedCount = parseInt(e.target.value) || 25;
+    }
+  });
+
+  // Subject pills
+  const sp = $('subj-pills');
+  SUBJECTS.forEach(s => {
+    const p = document.createElement('button');
+    p.className = 'pill active'; p.textContent = s; p.dataset.value = s;
+    p.addEventListener('click', () => {
+      p.classList.toggle('active');
+      if (p.classList.contains('active')) selectedSubjects.add(s); else selectedSubjects.delete(s);
+      updatePool();
+    });
+    sp.appendChild(p);
+  });
+
+  // Lecture pills
+  const lp = $('lec-pills');
+  LECTURES.forEach(l => {
+    const p = document.createElement('button');
+    p.className = 'pill active'; p.textContent = 'Lec ' + l.id + ': ' + l.title; p.dataset.value = l.id;
+    p.addEventListener('click', () => {
+      p.classList.toggle('active');
+      if (p.classList.contains('active')) selectedLectures.add(l.id); else selectedLectures.delete(l.id);
+      updatePool();
+    });
+    lp.appendChild(p);
+  });
+
+  // Source pills
+  const srp = $('src-pills');
+  SOURCES.forEach(s => {
+    const p = document.createElement('button');
+    p.className = 'pill active'; p.textContent = SRC_LABELS[s] || s; p.dataset.value = s;
+    p.addEventListener('click', () => {
+      p.classList.toggle('active');
+      if (p.classList.contains('active')) selectedSources.add(s); else selectedSources.delete(s);
+      updatePool();
+    });
+    srp.appendChild(p);
+  });
+
+  // Lecture search
+  $('lec-search').addEventListener('input', e => {
+    const q = e.target.value.toLowerCase();
+    lp.querySelectorAll('.pill').forEach(p => {
+      p.classList.toggle('hidden', q && !p.textContent.toLowerCase().includes(q));
+    });
+  });
+
+  // Include seen
+  $('include-seen').addEventListener('change', e => { includeSeen = e.target.checked; updatePool(); });
+
+  // Bulk select/deselect
+  document.querySelectorAll('.section-actions button').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const action = btn.dataset.action;
+      const setName = btn.dataset.set;
+      let container, stateSet, allValues;
+      if (setName === 'subject') { container = sp; stateSet = selectedSubjects; allValues = SUBJECTS; }
+      else if (setName === 'lecture') { container = lp; stateSet = selectedLectures; allValues = LECTURES.map(l => l.id); }
+      else { container = srp; stateSet = selectedSources; allValues = SOURCES; }
+
+      if (action === 'all') {
+        allValues.forEach(v => stateSet.add(v));
+        container.querySelectorAll('.pill').forEach(p => p.classList.add('active'));
+      } else {
+        stateSet.clear();
+        container.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      }
+      updatePool();
+    });
+  });
+
+  // Section collapse toggles
+  document.querySelectorAll('.filter-section-header').forEach(hdr => {
+    hdr.addEventListener('click', () => {
+      const target = hdr.dataset.target;
+      if (!target) return;
+      const body = $(target);
+      const arrow = hdr.querySelector('.arrow');
+      body.classList.toggle('collapsed');
+      if (arrow) arrow.classList.toggle('down');
+    });
+  });
+
+  // Sidebar toggles (desktop circular buttons)
+  $('toggle-1').addEventListener('click', () => { closeSidebar('1'); });
+  $('reopen-1').addEventListener('click', () => { openSidebar('1'); });
+  $('toggle-2').addEventListener('click', () => { closeSidebar('2'); });
+  $('reopen-2').addEventListener('click', () => { openSidebar('2'); });
+
+  // Mobile backdrop clicks close sidebar
+  $('sidebar-backdrop-1').addEventListener('click', () => { closeSidebar('1'); });
+  $('sidebar-backdrop-2').addEventListener('click', () => { closeSidebar('2'); });
+
+  // Mobile filter FAB — opens sidebar for current active mode
+  $('mobile-fab').addEventListener('click', () => {
+    const activeTab = document.querySelector('.tab.active');
+    const mode = activeTab ? activeTab.dataset.mode : 'mode-1';
+    if (mode === 'mode-1') openSidebar('1');
+    else if (mode === 'mode-2') openSidebar('2');
+  });
+
+  // Start practice
+  $('start-practice').addEventListener('click', startPractice);
+
+  // Generate test
+  $('gen-test').addEventListener('click', generateTest);
+  $('gen-incorrect').addEventListener('click', generateFromIncorrect);
+
+  // Menu
+  $('menu-btn').addEventListener('click', () => {
+    $('menu-dd').style.display = $('menu-dd').style.display === 'none' ? 'block' : 'none';
+    $('menu-overlay').style.display = $('menu-dd').style.display;
+  });
+  $('menu-export').addEventListener('click', exportData);
+  $('menu-import').addEventListener('click', () => $('import-file').click());
+  $('menu-reset').addEventListener('click', resetAll);
+  $('import-file').addEventListener('change', importData);
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.mode').forEach(m => m.classList.remove('active'));
+      tab.classList.add('active');
+      $(tab.dataset.mode).classList.add('active');
+      // Hide mobile FAB on stats tab
+      $('mobile-fab').style.display = tab.dataset.mode === 'mode-stats' ? 'none' : '';
+      if (tab.dataset.mode === 'mode-stats') renderStats();
+    });
+  });
+
+  updatePool();
+  updateTestList();
+  updateBottomBar();
+}
+
+function updatePool() {
+  const pool = getFilteredPool();
+  $('pool-info').textContent = pool.length + ' question' + (pool.length !== 1 ? 's' : '') + ' available';
+}
+
+// ============================================================
+// MODE 1: FILTERED PRACTICE
+// ============================================================
+function startPractice() {
+  const pool = getFilteredPool();
+  if (pool.length === 0) { alert('No questions match your filters.'); return; }
+  const count = Math.min(selectedCount, pool.length);
+  const selected = shuffle(pool).slice(0, count);
+
+  activeMode = 'mode-1';
+  currentTest = { questions: selected.map(q => q.id), type: 'practice', submitted: false };
+  testAnswers = {};
+  qIndex = 0;
+
+  $('nav-1').style.display = 'flex';
+  setupNav('1');
+  showQuestion('1');
+}
+
+// ============================================================
+// MODE 2: PREMADE TESTS
+// ============================================================
+function generateTest() {
+  const unseen = QUESTIONS.filter(q => !state.seen.has(q.id));
+  if (unseen.length === 0) { alert("You've seen all questions! Reset progress to generate new tests."); return; }
+
+  const target = Math.min(25, unseen.length);
+  const byLec = {};
+  unseen.forEach(q => { const l = q.metadata.lecture_id; if (!byLec[l]) byLec[l] = []; byLec[l].push(q); });
+  const lids = Object.keys(byLec).map(Number).sort((a,b) => a-b);
+
+  const sel = [];
+  let round = 0;
+  while (sel.length < target) {
+    let added = false;
+    for (const lid of lids) {
+      if (sel.length >= target) break;
+      const avail = byLec[lid].filter(q => !sel.includes(q));
+      if (avail.length > round) { sel.push(avail[round]); added = true; }
+    }
+    if (!added) break;
+    round++;
+  }
+
+  activeMode = 'mode-2';
+  currentTest = {
+    id: state.tests.length + 1, questions: shuffle(sel).map(q => q.id),
+    type: 'premade', submitted: false, created: new Date().toISOString()
+  };
+  testAnswers = {};
+  qIndex = 0;
+
+  $('nav-2').style.display = 'flex';
+  setupNav('2');
+  showQuestion('2');
+  updateTestList();
+}
+
+function generateFromIncorrect() {
+  const incorrectQs = QUESTIONS.filter(q => state.incorrect.has(q.id));
+  if (incorrectQs.length === 0) { alert("No incorrect questions to review! Keep practicing."); return; }
+
+  const target = Math.min(25, incorrectQs.length);
+  const sel = shuffle(incorrectQs).slice(0, target);
+
+  activeMode = 'mode-2';
+  currentTest = {
+    id: state.tests.length + 1, questions: sel.map(q => q.id),
+    type: 'incorrect-review', submitted: false, created: new Date().toISOString()
+  };
+  testAnswers = {};
+  qIndex = 0;
+
+  $('nav-2').style.display = 'flex';
+  setupNav('2');
+  showQuestion('2');
+  updateTestList();
+}
+
+// ============================================================
+// TEST TAKING (mode-agnostic via suffix)
+// ============================================================
+function setupNav(sfx) {
+  $('prev-' + sfx).onclick = () => { if (qIndex > 0) { qIndex--; showQuestion(sfx); } };
+  $('next-' + sfx).onclick = () => { if (qIndex < currentTest.questions.length - 1) { qIndex++; showQuestion(sfx); } };
+  $('submit-' + sfx).onclick = () => submitTest(sfx);
+}
+
+function showQuestion(sfx) {
+  const qId = currentTest.questions[qIndex];
+  const q = QUESTIONS.find(x => x.id === qId);
+  if (!q) return;
+
+  const content = $('content-' + sfx);
+  let gridHtml = '<div class="q-grid">';
+  currentTest.questions.forEach((id, i) => {
+    let cls = 'q-dot';
+    if (testAnswers[id]) cls += ' answered';
+    if (i === qIndex) cls += ' current';
+    gridHtml += '<div class="' + cls + '" data-i="' + i + '">' + (i+1) + '</div>';
+  });
+  gridHtml += '</div>';
+
+  const pct = ((qIndex + 1) / currentTest.questions.length * 100).toFixed(0);
+
+  let choicesHtml = '<div class="choices">';
+  ['A','B','C','D','E'].forEach(letter => {
+    const sel = testAnswers[qId] === letter ? ' selected' : '';
+    choicesHtml += '<div class="choice' + sel + '" data-letter="' + letter + '">' +
+      '<span class="choice-letter">' + letter + '</span>' +
+      '<span class="choice-text">' + q.choices[letter] + '</span>' +
+      '</div>';
+  });
+  choicesHtml += '</div>';
+
+  content.innerHTML = gridHtml +
+    '<div class="progress"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+    '<div class="q-header"><span>Question ' + (qIndex+1) + ' of ' + currentTest.questions.length + '</span></div>' +
+    '<div class="q-stem">' + q.stem + '</div>' +
+    choicesHtml;
+
+  // Wire up grid clicks
+  content.querySelectorAll('.q-dot').forEach(dot => {
+    dot.addEventListener('click', () => { qIndex = parseInt(dot.dataset.i); showQuestion(sfx); });
+  });
+
+  // Wire up choice clicks
+  content.querySelectorAll('.choice').forEach(ch => {
+    ch.addEventListener('click', () => {
+      testAnswers[qId] = ch.dataset.letter;
+      content.querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
+      ch.classList.add('selected');
+      updateNav(sfx);
+      // Refresh grid dots
+      content.querySelectorAll('.q-dot').forEach((dot, i) => {
+        dot.classList.toggle('answered', !!testAnswers[currentTest.questions[i]]);
+      });
+    });
+  });
+
+  updateNav(sfx);
+}
+
+function updateNav(sfx) {
+  $('prev-' + sfx).disabled = qIndex === 0;
+  $('next-' + sfx).disabled = qIndex === currentTest.questions.length - 1;
+  const allDone = currentTest.questions.every(id => testAnswers[id]);
+  $('submit-' + sfx).style.display = allDone ? 'inline-block' : 'none';
+}
+
+// ============================================================
+// SUBMIT & REVIEW
+// ============================================================
+function submitTest(sfx) {
+  currentTest.submitted = true;
+  let score = 0;
+  currentTest.questions.forEach(qId => {
+    const q = QUESTIONS.find(x => x.id === qId);
+    const correct = testAnswers[qId] === q.correct;
+    if (correct) score++;
+    recordStat(qId, correct);
+  });
+  currentTest.score = score;
+
+  if (currentTest.type === 'premade' || currentTest.type === 'incorrect-review') {
+    state.tests.push({ id: currentTest.id, type: currentTest.type, score, total: currentTest.questions.length, date: new Date().toISOString() });
+  }
+  saveState();
+  updateTestList();
+  updateBottomBar();
+
+  // Hide nav
+  $('nav-' + sfx).style.display = 'none';
+
+  // Render review in-place
+  const content = $('content-' + sfx);
+  const total = currentTest.questions.length;
+  const pct = Math.round(score / total * 100);
+
+  let html = '<div class="score-box"><div class="score-num">' + score + '/' + total + '</div>' +
+    '<div class="score-label">' + pct + '% correct</div></div>';
+
+  currentTest.questions.forEach((qId, idx) => {
+    const q = QUESTIONS.find(x => x.id === qId);
+    const picked = testAnswers[qId];
+    const isCorrect = picked === q.correct;
+
+    html += '<div class="review-q">';
+    html += '<div class="review-tag ' + (isCorrect ? 'pass' : 'fail') + '">' + (isCorrect ? '&#10003; Correct' : '&#10007; Incorrect') + '</div>';
+    html += '<div style="font-weight:600;font-size:0.85rem;margin-bottom:0.5rem;">Question ' + (idx+1) + '</div>';
+    html += '<div class="q-stem">' + q.stem + '</div>';
+    html += '<div class="choices">';
+    ['A','B','C','D','E'].forEach(letter => {
+      let cls = 'choice';
+      let tag = '';
+      if (letter === q.correct) { cls += ' correct'; tag = '<span class="choice-tag">&#10003; Correct</span>'; }
+      else if (letter === picked) { cls += ' wrong'; tag = '<span class="choice-tag">&#10007; Your answer</span>'; }
+      html += '<div class="' + cls + '"><span class="choice-letter">' + letter + '</span>' +
+        '<span class="choice-text">' + q.choices[letter] + '</span>' + tag + '</div>';
+    });
+    html += '</div>';
+    html += '<div class="explanation">' + q.explanation + '</div>';
+    html += '<div class="answer-meta">';
+    html += '<div class="meta-row"><span class="meta-label">Source</span><span class="meta-value">' + (SRC_LABELS[q.metadata.source] || q.metadata.source) + '</span></div>';
+    html += '<div class="meta-row"><span class="meta-label">Concept Tested</span><span class="meta-value">' + q.metadata.concept_tested + '</span></div>';
+    html += '<div class="meta-row"><span class="meta-label">Related Lecture</span><span class="meta-value">Lec ' + q.metadata.lecture_id + ': ' + q.metadata.lecture_title + '</span></div>';
+    html += '<div class="meta-row"><span class="meta-label">Difficulty</span><span class="meta-value">' + q.metadata.difficulty + '</span></div>';
+    html += '</div></div>';
+  });
+
+  content.innerHTML = html;
+}
+
+// ============================================================
+// STATS TRACKING
+// ============================================================
+function recordStat(questionId, isCorrect) {
+  state.seen.add(questionId);
+  state.stats.totalAnswered++;
+  if (isCorrect) {
+    state.stats.totalCorrect++;
+    state.incorrect.delete(questionId);
+  } else {
+    state.incorrect.add(questionId);
+  }
+
+  const q = QUESTIONS.find(x => x.id === questionId);
+  const subj = q.metadata.subject;
+  const src = q.metadata.source;
+  const lecId = q.metadata.lecture_id;
+
+  if (!state.stats.bySubject[subj]) state.stats.bySubject[subj] = {answered:0, correct:0};
+  state.stats.bySubject[subj].answered++;
+  if (isCorrect) state.stats.bySubject[subj].correct++;
+
+  if (!state.stats.bySource[src]) state.stats.bySource[src] = {answered:0, correct:0};
+  state.stats.bySource[src].answered++;
+  if (isCorrect) state.stats.bySource[src].correct++;
+
+  if (!state.stats.byLecture[lecId]) state.stats.byLecture[lecId] = {answered:0, correct:0, title: q.metadata.lecture_title};
+  state.stats.byLecture[lecId].answered++;
+  if (isCorrect) state.stats.byLecture[lecId].correct++;
+
+  saveState();
+}
+
+// ============================================================
+// STATS TAB RENDERING
+// ============================================================
+function renderStats() {
+  const s = state.stats;
+  const el = $('stats-content');
+  const remaining = getRemainingCount();
+  const acc = s.totalAnswered > 0 ? Math.round(s.totalCorrect / s.totalAnswered * 100) : 0;
+
+  let html = '<h2>Performance Stats</h2>';
+
+  // Cards
+  html += '<div class="stats-cards">';
+  html += '<div class="stat-card"><div class="val">' + s.totalAnswered + '</div><div class="lbl">Answered</div></div>';
+  html += '<div class="stat-card"><div class="val">' + acc + '%</div><div class="lbl">Accuracy</div></div>';
+  html += '<div class="stat-card"><div class="val">' + remaining + '</div><div class="lbl">Remaining</div></div>';
+  html += '</div>';
+
+  if (s.totalAnswered === 0) {
+    html += '<p style="color:var(--text-muted);text-align:center;">Answer some questions to see detailed stats.</p>';
+    el.innerHTML = html;
+    return;
+  }
+
+  // By Subject
+  html += '<div class="stats-section"><h3>By Subject</h3><table class="stats-table">';
+  html += '<tr><th>Subject</th><th class="num">Answered</th><th class="num">Correct</th><th class="num">Wrong</th><th class="num">Accuracy</th></tr>';
+  Object.keys(s.bySubject).sort().forEach(subj => {
+    const d = s.bySubject[subj];
+    const wrong = d.answered - d.correct;
+    const a = Math.round(d.correct / d.answered * 100);
+    html += '<tr><td>' + subj + '</td><td class="num">' + d.answered + '</td><td class="num">' + d.correct + '</td><td class="num">' + wrong + '</td><td class="num">' + a + '%</td></tr>';
+  });
+  html += '</table></div>';
+
+  // By Lecture (sorted by most wrong)
+  const lecEntries = Object.entries(s.byLecture).map(([id, d]) => ({ id: parseInt(id), ...d, wrong: d.answered - d.correct }))
+    .sort((a,b) => b.wrong - a.wrong);
+
+  if (lecEntries.length > 0) {
+    html += '<div class="stats-section"><h3>By Lecture <span style="font-weight:400;font-size:0.8rem;color:var(--text-muted)">(sorted by most wrong)</span></h3>';
+    html += '<table class="stats-table"><tr><th>Lecture</th><th class="num">Answered</th><th class="num">Wrong</th><th class="num">Accuracy</th></tr>';
+    lecEntries.forEach(d => {
+      const a = Math.round(d.correct / d.answered * 100);
+      html += '<tr><td>Lec ' + d.id + ': ' + d.title + '</td><td class="num">' + d.answered + '</td><td class="num">' + d.wrong + '</td><td class="num">' + a + '%</td></tr>';
+    });
+    html += '</table></div>';
+  }
+
+  // By Source
+  html += '<div class="stats-section"><h3>By Source</h3><table class="stats-table">';
+  html += '<tr><th>Source</th><th class="num">Answered</th><th class="num">Correct</th><th class="num">Accuracy</th></tr>';
+  Object.keys(s.bySource).forEach(src => {
+    const d = s.bySource[src];
+    const a = Math.round(d.correct / d.answered * 100);
+    html += '<tr><td>' + (SRC_LABELS[src] || src) + '</td><td class="num">' + d.answered + '</td><td class="num">' + d.correct + '</td><td class="num">' + a + '%</td></tr>';
+  });
+  html += '</table></div>';
+
+  // Reset button
+  html += '<button class="reset-stats-btn" onclick="resetStats()">Reset Stats Only</button>';
+  html += '<p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem;">Resets stats and seen questions. Test history is preserved.</p>';
+
+  el.innerHTML = html;
+}
+
+function resetStats() {
+  if (!confirm('Reset all stats and seen questions? Test history will be kept.')) return;
+  state.seen.clear();
+  state.incorrect.clear();
+  state.stats = { totalAnswered:0, totalCorrect:0, bySubject:{}, bySource:{}, byLecture:{} };
+  saveState();
+  updateBottomBar();
+  updateTestList();
+  renderStats();
+}
+
+// ============================================================
+// TEST LIST
+// ============================================================
+function updateTestList() {
+  const list = $('test-list');
+  list.innerHTML = '';
+  state.tests.forEach(t => {
+    const pct = Math.round(t.score / t.total * 100);
+    const d = new Date(t.date).toLocaleDateString('en-US', {month:'short',day:'numeric'});
+    const card = document.createElement('div');
+    card.className = 'test-card';
+    const typeLabel = t.type === 'incorrect-review' ? ' (Review)' : '';
+    card.innerHTML = '<div class="t-name">Test ' + t.id + typeLabel + '</div><div class="t-info">' + t.score + '/' + t.total + ' (' + pct + '%) &middot; ' + d + '</div>';
+    list.appendChild(card);
+  });
+  const unseen = getRemainingCount();
+  $('unseen-info').textContent = unseen + ' unseen question' + (unseen !== 1 ? 's' : '') + ' remaining';
+  $('gen-test').disabled = unseen === 0;
+  const incorrectCount = QUESTIONS.filter(q => state.incorrect.has(q.id)).length;
+  $('incorrect-info').textContent = incorrectCount + ' incorrect question' + (incorrectCount !== 1 ? 's' : '') + ' to review';
+  $('gen-incorrect').disabled = incorrectCount === 0;
+}
+
+// ============================================================
+// BOTTOM BAR
+// ============================================================
+function getRemainingCount() {
+  return QUESTIONS.filter(q => !state.seen.has(q.id)).length;
+}
+
+function updateBottomBar() {
+  const s = state.stats;
+  const remaining = getRemainingCount();
+  const acc = (s.totalAnswered > 0 ? Math.round(s.totalCorrect / s.totalAnswered * 100) : 0) + '%';
+  $('stat-answered').textContent = s.totalAnswered;
+  $('stat-accuracy').textContent = acc;
+  $('stat-remaining').textContent = remaining;
+  // Also update header badges
+  $('hdr-answered').textContent = s.totalAnswered;
+  $('hdr-accuracy').textContent = acc;
+  $('hdr-remaining').textContent = remaining;
+}
+
+// ============================================================
+// MENU ACTIONS
+// ============================================================
+function exportData() {
+  const d = { version:1, hub:'repro', exported:new Date().toISOString(), seen:[...state.seen], incorrect:[...state.incorrect], tests:state.tests, stats:state.stats };
+  const blob = new Blob([JSON.stringify(d,null,2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'repro_qbank.json'; a.click();
+  $('menu-dd').style.display = 'none'; $('menu-overlay').style.display = 'none';
+}
+
+function importData(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const d = JSON.parse(ev.target.result);
+      state.seen = new Set(d.seen || []);
+      state.incorrect = new Set(d.incorrect || []);
+      state.tests = d.tests || [];
+      state.stats = d.stats || { totalAnswered:0, totalCorrect:0, bySubject:{}, bySource:{}, byLecture:{} };
+      if (!state.stats.byLecture) state.stats.byLecture = {};
+      saveState(); updateBottomBar(); updateTestList();
+      alert('Imported successfully!');
+    } catch(err) { alert('Error: ' + err.message); }
+  };
+  reader.readAsText(file);
+  $('menu-dd').style.display = 'none'; $('menu-overlay').style.display = 'none';
+}
+
+function resetAll() {
+  if (!confirm('Delete ALL progress, stats, and test history?')) return;
+  state.seen.clear(); state.incorrect.clear(); state.tests = [];
+  state.stats = { totalAnswered:0, totalCorrect:0, bySubject:{}, bySource:{}, byLecture:{} };
+  saveState(); updateBottomBar(); updateTestList();
+  $('content-1').innerHTML = '<div class="placeholder">Configure filters and press Start Practice</div>';
+  $('content-2').innerHTML = '<div class="placeholder">Click Generate New Test to begin</div>';
+  $('nav-1').style.display = 'none'; $('nav-2').style.display = 'none';
+  $('menu-dd').style.display = 'none'; $('menu-overlay').style.display = 'none';
+}
+
+
+
+// ============================================================
+// KEYBOARD
+// ============================================================
+document.addEventListener('keydown', e => {
+  if (!currentTest || currentTest.submitted) return;
+  if (e.target.tagName === 'INPUT') return;
+  const sfx = activeMode === 'mode-1' ? '1' : '2';
+  if (e.key === 'ArrowRight' && qIndex < currentTest.questions.length - 1) { qIndex++; showQuestion(sfx); }
+  if (e.key === 'ArrowLeft' && qIndex > 0) { qIndex--; showQuestion(sfx); }
+  const letters = ['a','b','c','d','e'];
+  if (letters.includes(e.key.toLowerCase()) && !e.ctrlKey && !e.metaKey) {
+    const letter = e.key.toUpperCase();
+    const qId = currentTest.questions[qIndex];
+    testAnswers[qId] = letter;
+    showQuestion(sfx);
+  }
+});
+
+// ============================================================
+// STARTUP
+// ============================================================
+loadState();
+if (state.darkMode) document.documentElement.setAttribute('data-theme', 'dark');
+initUI();
+</script>
+</body>
+</html>
