@@ -1,0 +1,802 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#fff;color:#111;padding:16px;font-size:13px}
+h2{font-size:16px;font-weight:600;margin-bottom:4px}
+.sub{color:#666;font-size:12px;margin-bottom:14px}
+.resource-banner{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#1E40AF}
+.resource-banner strong{display:block;margin-bottom:2px;font-size:13px}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:20px;border:1.5px solid #CBD5E1;font-size:12px;cursor:pointer;background:#fff;color:#475569;font-weight:500}
+.tab.active{background:#1D4ED8;color:#fff;border-color:#1D4ED8}
+.panel{display:none}.panel.active{display:block}
+.sec{font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:12px}
+th{background:#F1F5F9;text-align:left;padding:7px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#475569;border:1px solid #E2E8F0;font-weight:600}
+td{padding:6px 8px;border:1px solid #E2E8F0;vertical-align:top}
+td input{width:100%;border:none;border-bottom:1.5px solid #e2e8f0;font-size:11px;background:transparent;outline:none;padding:1px 0;color:#1e293b}
+td input:focus{border-bottom-color:#1D4ED8}
+tr:nth-child(even) td{background:#FAFAFA}
+.rl{font-weight:600;font-size:11px;color:#1e293b;background:#F8FAFC!important;white-space:nowrap}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.f{margin-bottom:6px}
+.f label{font-size:10px;color:#94a3b8;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em}
+.f input{width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b}
+.f input:focus{border-bottom-color:#1D4ED8}
+.f textarea{width:100%;border:1px solid #CBD5E1;border-radius:6px;font-size:12px;background:transparent;outline:none;padding:4px 6px;color:#1e293b;resize:vertical;min-height:52px}
+.f textarea:focus{border-color:#1D4ED8}
+.btn{background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;cursor:pointer;font-weight:500;margin-top:8px}
+.btn:hover{background:#1e40af}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.fb{margin-top:14px;display:none;border-radius:10px;overflow:hidden;border:1.5px solid #BFDBFE}.fb-header{background:#1D4ED8;color:#fff;font-size:11px;font-weight:700;padding:8px 14px;letter-spacing:.04em;text-transform:uppercase}.fb-row{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid #DBEAFE}.fb-row:last-child{border-bottom:none}.fb-row:nth-child(even){background:#F0F7FF}.fb-row:nth-child(odd){background:#fff}.fb-q{font-size:11px;font-weight:700;color:#1E40AF;padding:7px 10px;border-right:1px solid #DBEAFE;line-height:1.5}.fb-a{font-size:11px;color:#1E293B;padding:7px 10px;line-height:1.6}
+.warn{background:#FFFBEB;border-left:3px solid #F59E0B;padding:7px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#92400E;margin:8px 0}
+.on-exam{background:#FEE2E2;border:1px solid #FDA4AF;border-radius:6px;padding:4px 10px;font-size:11px;color:#991B1B;font-weight:700;display:inline-block;margin-bottom:8px}
+.lo-tag{background:#EDE9FE;border:1px solid #C4B5FD;border-radius:5px;padding:2px 8px;font-size:10px;color:#5B21B6;font-weight:600;margin-bottom:6px;display:inline-block}
+.pq-box{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:12px}
+.pq-q{font-weight:600;margin-bottom:6px;color:#92400E}
+.pq-choices{margin-left:12px;margin-bottom:6px;color:#78350F;line-height:1.8}
+.pq-ans{display:none;background:#EFF6FF;border:1px solid #93C5FD;border-radius:6px;padding:6px 10px;font-size:11px;color:#1E40AF;margin-top:4px}
+.pq-btn{font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid #2563EB;background:#DBEAFE;color:#1E40AF;cursor:pointer}
+.pq-btn:hover{background:#BFDBFE}
+.card{border:1px solid #E2E8F0;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+
+@media(max-width:640px){
+  body{padding:10px;font-size:12px}
+  h2{font-size:14px}
+  .tabs{gap:4px}
+  .tab{padding:6px 10px;font-size:11px}
+  .fg,.fg3{grid-template-columns:1fr!important}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .fb-row{grid-template-columns:1fr;grid-template-rows:auto auto}
+  .fb-q{border-right:none;border-bottom:1px solid #DBEAFE}
+  .inline-blank{width:120px}
+  .pq-choices{margin-left:4px}
+  .btn{width:100%;text-align:center}
+}
+</style><style>
+.ki{background:#f0fdf4!important;border-bottom-color:#22c55e!important;color:#14532d!important;font-weight:500}
+.ki-text{
+  display:block;width:100%;min-height:18px;
+  border-bottom:1.5px solid #22c55e;
+  font-size:11px;background:#f0fdf4;color:#14532d;
+  font-weight:500;padding:3px 2px;line-height:1.6;
+  word-break:break-word;white-space:pre-wrap;
+  border-radius:0;
+}
+.ki-text.wu{font-size:12px;border-bottom-color:#22c55e;}
+.key-banner{background:#14532d;color:#fff;padding:10px 16px;border-radius:8px;margin-bottom:14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+</style></head><body>
+
+<div class="key-banner">&#9989; ANSWER KEY — all fields pre-filled. Use this to check your work.</div>
+<h2>Male Reproductive System — Answer Key</h2>
+<p class="sub">Built from Repro Lecture 04 (LOs 1&ndash;4). Close notes. Fill from memory. Reveal only after a genuine attempt.</p>
+
+<div class="resource-banner">
+  <strong>&#128214; Use alongside: Repro Lecture 04 &mdash; Male Reproductive System (HoyaDocs)</strong>
+  Focus on: testicular descent + cryptorchidism hormone pattern, pampiniform plexus countercurrent + left varicocele, 3 tunicas (V-A-V), Leydig (LH → T, Reinke crystals) vs Sertoli (FSH → ABP/inhibin B/MIS + blood-testis barrier), HPG axis feedback, 74-day spermatogenesis, spermiogenesis + 9+2 axoneme + Kartagener, 6-step excurrent duct pathway (scalloped border = efferent ductules, stereocilia = epididymis/vas, thick 3-layer muscle = vas), ejaculate composition (seminal vesicles 70% + fructose, prostate 25% + PSA, Cowper's), BPH (transition zone) vs cancer (peripheral zone + osteoblastic mets), Point-&-Shoot autonomics, 3 urethral segments + trauma sites.
+</div>
+
+<div style="margin-bottom:14px">
+  <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#374151">SPERM EXIT PATHWAY &mdash; fill in all 6 stops in order + one-word function:</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px">
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">1. Site of production</div><div class="ki-text wu">Seminiferous tubules</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">2. Collects output in mediastinum testis</div><div class="ki-text wu">Rete testis</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">3. ~20 ducts; concentrates sperm (scalloped border)</div><div class="ki-text wu">Efferent ductules</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">4. 7-m coiled duct: maturation + storage</div><div class="ki-text wu">Epididymis</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">5. Thick 3-layer muscle; transport</div><div class="ki-text wu">Vas (ductus) deferens</div></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">6. Vas ampulla + seminal vesicle duct → prostate</div><div class="ki-text wu">Ejaculatory duct</div></div>
+  </div>
+  <div style="font-size:11px;color:#6b7280;margin-top:4px">Plus: what's the one-line "SEVEN UP" mnemonic for this pathway?</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="sw(0)">Testis &amp; Spermatogenesis</div>
+  <div class="tab" onclick="sw(1)">Excurrent Ducts</div>
+  <div class="tab" onclick="sw(2)">Accessory Glands &amp; Penis</div>
+  <div class="tab" onclick="sw(3)">Male Urethra</div>
+  <div class="tab" onclick="sw(4)">Practice Qs</div>
+</div>
+
+<!-- TAB 0: TESTIS & SPERMATOGENESIS -->
+<div class="panel active" id="p0">
+<div class="lo-tag">LO 1</div>
+<div class="on-exam">ON EXAM &mdash; cryptorchidism labs (normal T, low inhibin B, high FSH), left varicocele / "bag of worms" / new RIGHT varicocele = RCC, torsion vs epididymitis (Prehn sign, cremasteric reflex, 6-hour window), tunicas V-A-V, Leydig (LH + Reinke crystals + tubular cristae) vs Sertoli (FSH + ABP + inhibin B + MIS + blood-testis barrier), 74-day spermatogenesis, spermiogenesis 5 steps, 9+2 axoneme + Kartagener</div>
+
+<div class="sec">Testicular descent (LO1)</div>
+<div class="fg">
+  <div class="f"><label>Testes originate near what organ? (Shared embryologic origin)</label><div class="ki-text">Near the kidneys — same intermediate mesoderm origin as the urogenital tract</div></div>
+  <div class="f"><label>Structure that guides descent</label><div class="ki-text">GUBERNACULUM — guides descent through inguinal canal into scrotum</div></div>
+  <div class="f"><label>Gestational month when descent completes, and what hormone triggers gubernacular contraction</label><div class="ki-text">Month 7 of gestation; fetal androgens (testosterone/DHT) trigger GUBERNACULAR CONTRACTION that pulls testes down</div></div>
+  <div class="f"><label>Scrotal temperature vs core; why does this matter?</label><div class="ki-text">Scrotum ~34°C vs core 37°C — spermatogenesis requires cooler temperature (Sertoli + germ cells are heat-sensitive; Leydig are heat-resistant)</div></div>
+</div>
+
+<div class="sec">Cryptorchidism (LO1)</div>
+<div class="fg">
+  <div class="f"><label>Most common congenital GU anomaly in males? Rate in term vs preterm</label><div class="ki-text">MOST COMMON congenital GU anomaly in males — ~3% term, ~30% preterm</div></div>
+  <div class="f"><label>Classic lab pattern: T, LH, FSH, inhibin B</label><div class="ki-text">T = NORMAL | LH = normal/high | FSH = HIGH | inhibin B = LOW — isolated FSH elevation</div></div>
+  <div class="f"><label>Why is testosterone NORMAL but inhibin B LOW? (Which cells are heat-resistant vs heat-sensitive?)</label><div class="ki-text">Leydig cells are HEAT-RESISTANT (T stays normal). Sertoli + germ cells are HEAT-SENSITIVE → ↓ inhibin B → loss of selective FSH feedback → FSH rises; spermatogenesis impaired</div></div>
+  <div class="f"><label>Most feared long-term consequence + classic tumor type</label><div class="ki-text">↑ Risk of GERM CELL TUMORS — classically SEMINOMA in an abdominal testis; risk persists even after orchidopexy</div></div>
+  <div class="f"><label>Timing of orchidopexy</label><div class="ki-text">Orchidopexy BEFORE 1 year of age (after 6-month observation for spontaneous descent)</div></div>
+</div>
+
+<div class="sec">Pampiniform plexus &amp; varicocele (LO1)</div>
+<div class="fg">
+  <div class="f"><label>Pampiniform plexus — structure + physiologic function</label><div class="ki-text">Dense venous plexus surrounding the testicular artery within the spermatic cord → COUNTERCURRENT HEAT EXCHANGE (cools warm arterial blood before it reaches the testis)</div></div>
+  <div class="f"><label>Drainage pattern: R testicular vein → ? | L testicular vein → ?</label><div class="ki-text">Right testicular vein → IVC (at acute angle) | Left testicular vein → LEFT RENAL VEIN (at 90° angle)</div></div>
+  <div class="f"><label>Varicocele — classic exam finding; which side predominates and why (anatomy)</label><div class="ki-text">LEFT-sided ~90% ("bag of worms" on exam) because the left testicular vein enters the left renal vein at a right angle → ↑ backpressure → plexus dilation</div></div>
+  <div class="f"><label>Clinical RED FLAG varicocele (2 scenarios) → what cancer must you rule out?</label><div class="ki-text">NEW right-sided varicocele OR a left varicocele that does NOT decompress supine → evaluate for RENAL CELL CARCINOMA invading the renal vein / IVC</div></div>
+</div>
+
+<div class="sec">Testicular torsion vs epididymitis (LO1)</div>
+<table>
+  <tr><th>Feature</th><th>Torsion</th><th>Epididymitis</th></tr>
+  <tr><td class="rl">Onset</td><td><div class="ki-text">SUDDEN, severe (adolescents 12–18); predisposed by bell-clapper deformity</div></td><td><div class="ki-text">Gradual (hours to days); often with dysuria or STI history</div></td></tr>
+  <tr><td class="rl">Prehn sign (elevation relieves pain?)</td><td><div class="ki-text">NEGATIVE — elevation does NOT relieve pain</div></td><td><div class="ki-text">POSITIVE — elevation RELIEVES pain</div></td></tr>
+  <tr><td class="rl">Cremasteric reflex</td><td><div class="ki-text">ABSENT</div></td><td><div class="ki-text">Preserved</div></td></tr>
+  <tr><td class="rl">Doppler flow</td><td><div class="ki-text">↓ or absent flow</div></td><td><div class="ki-text">↑ flow (inflammation)</div></td></tr>
+  <tr><td class="rl">Management</td><td><div class="ki-text">Surgical EMERGENCY — detorsion + bilateral orchiopexy within 6 hours</div></td><td><div class="ki-text">Antibiotics (GC/Chlamydia young; E. coli / coliforms older) + scrotal support + NSAIDs</div></td></tr>
+</table>
+<div class="f" style="margin-top:6px"><label>Surgical window to save torsed testis</label><div class="ki-text">Within 6 hours to preserve the testis (complete ischemia beyond this)</div></div>
+<div class="f"><label>"Bell-clapper deformity" — what is it and why does it predispose to torsion?</label><div class="ki-text">Abnormally free testis within the tunica vaginalis (horizontal lie) → predisposes to twisting around the spermatic cord; typically bilateral → hence bilateral orchiopexy</div></div>
+<div class="f"><label>Epididymitis pathogens: young men vs older men</label><div class="ki-text">Young men: Chlamydia trachomatis + Neisseria gonorrhoeae | Older men: E. coli, Pseudomonas, other coliforms</div></div>
+
+<div class="sec">Three tunicas (outside → in) (LO1)</div>
+<table>
+  <tr><th>Layer (outside → in)</th><th>Histology</th><th>Clinical / HY</th></tr>
+  <tr><td class="rl">Tunica vaginalis (outermost)</td><td><div class="ki-text">Single layer of mesothelial (simple cuboidal) cells — visceral + parietal layers from processus vaginalis</div></td><td><div class="ki-text">Fluid accumulation → HYDROCELE (transilluminates); patent processus vaginalis → communicating hydrocele / indirect inguinal hernia</div></td></tr>
+  <tr><td class="rl">Tunica albuginea (middle)</td><td><div class="ki-text">THICK DENSE CONNECTIVE TISSUE — fibrous capsule</div></td><td><div class="ki-text">Sends septa inward to divide testis into lobules; extends to form MEDIASTINUM TESTIS (contains rete testis); torsion twists cord within this capsule</div></td></tr>
+  <tr><td class="rl">Tunica vasculosa (innermost)</td><td><div class="ki-text">Loose CT with abundant vasculature</div></td><td><div class="ki-text">Supplies blood + carries hormones to seminiferous tubules; extensive capillary network</div></td></tr>
+</table>
+
+<div class="sec">Leydig vs Sertoli cells (LO1)</div>
+<table>
+  <tr><th>Feature</th><th>Leydig cells</th><th>Sertoli cells</th></tr>
+  <tr><td class="rl">Location</td><td><div class="ki-text">INTERSTITIAL — between seminiferous tubules, in loose CT</div></td><td><div class="ki-text">INSIDE seminiferous tubules — attached to basal lamina, extending to the lumen</div></td></tr>
+  <tr><td class="rl">Pituitary hormone that regulates it</td><td><div class="ki-text">LH (anterior pituitary)</div></td><td><div class="ki-text">FSH (anterior pituitary); also paracrine testosterone from neighboring Leydig cells</div></td></tr>
+  <tr><td class="rl">Main secretion(s)</td><td><div class="ki-text">Testosterone (from cholesterol, via StAR + CYP11A1 pathway)</div></td><td><div class="ki-text">ABP, inhibin B, MIS (fetal), plus aromatase activity (T→estradiol); also "nurse" support of germ cells</div></td></tr>
+  <tr><td class="rl">Feedback inhibitor of its gonadotropin</td><td><div class="ki-text">Testosterone → negative feedback on LH (and GnRH)</div></td><td><div class="ki-text">INHIBIN B → SELECTIVE negative feedback on FSH (not LH)</div></td></tr>
+  <tr><td class="rl">Characteristic histologic feature</td><td><div class="ki-text">REINKE CRYSTALS (rectangular eosinophilic cytoplasmic inclusions) + abundant smooth ER + mitochondria with tubular cristae</div></td><td><div class="ki-text">Tall columnar cells spanning the seminiferous epithelium from basal lamina to lumen; irregular outlines (envelop germ cells)</div></td></tr>
+  <tr><td class="rl">Heat sensitivity</td><td><div class="ki-text">HEAT-RESISTANT — testosterone preserved in cryptorchidism</div></td><td><div class="ki-text">HEAT-SENSITIVE — inhibin B drops in cryptorchidism, FSH rises</div></td></tr>
+</table>
+
+<div class="fg" style="margin-top:8px">
+  <div class="f"><label>Sertoli-cell secretion that KEEPS intratubular T ~100× plasma level</label><div class="ki-text">ABP (androgen-binding protein) — concentrates intratubular testosterone to ~100× plasma level (required for spermatogenesis)</div></div>
+  <div class="f"><label>Sertoli-cell secretion in FETAL life that regresses Müllerian ducts</label><div class="ki-text">MIS (Müllerian Inhibiting Substance, also AMH) — causes regression of paramesonephric (Müllerian) ducts in fetal male</div></div>
+  <div class="f"><label>Local enzyme in Sertoli cells that converts T → estradiol</label><div class="ki-text">AROMATASE — locally converts testosterone to estradiol within the tubule</div></div>
+  <div class="f"><label>DHT conversion: enzyme + why DHT matters (potency)</label><div class="ki-text">5α-reductase converts T → DHT in target tissues; DHT is ~50× more potent at the androgen receptor; drives external virilization + prostate growth</div></div>
+</div>
+
+<div class="sec">Blood-testis barrier (LO1)</div>
+<div class="fg">
+  <div class="f"><label>Formed by what junctions between what cells?</label><div class="ki-text">TIGHT JUNCTIONS (Sertoli-Sertoli junctions) between adjacent Sertoli cells</div></div>
+  <div class="f"><label>Two compartments it creates; which cell types live in each?</label><div class="ki-text">BASAL compartment (below junctions) = SPERMATOGONIA, open to systemic circulation, mitotic. ADLUMINAL compartment (above junctions) = primary spermatocytes → spermatids → spermatozoa (meiotic + post-meiotic)</div></div>
+  <div class="f"><label>Why is the barrier needed immunologically? (What antigens are "new"?)</label><div class="ki-text">Meiotic + haploid germ cells express NEW surface antigens not present at fetal immune tolerance → would be recognized as foreign without the barrier → prevents autoimmune orchitis</div></div>
+  <div class="f"><label>Disruption scenarios (3) that can cause anti-sperm antibodies</label><div class="ki-text">(1) Vasectomy (sperm antigen leakage); (2) Testicular trauma; (3) Mumps orchitis — any can produce anti-sperm antibodies</div></div>
+  <div class="f"><label>Sertoli-cell-only (Del Castillo) syndrome — lab pattern + semen finding</label><div class="ki-text">Sertoli-cell-only (Del Castillo) syndrome — tubules contain ONLY Sertoli cells (no germ cells); AZOOSPERMIA + isolated ↑↑ FSH, normal LH, normal T</div></div>
+</div>
+
+<div class="sec">HPG axis — fill each row (LO1)</div>
+<table>
+  <tr><th>Hormone</th><th>Target cell</th><th>Effect</th><th>Feedback inhibitor</th></tr>
+  <tr><td class="rl">LH</td><td><div class="ki-text">Leydig cells</div></td><td><div class="ki-text">Testosterone synthesis (cAMP-PKA → StAR → cholesterol pathway)</div></td><td><div class="ki-text">Testosterone (own negative feedback on LH and GnRH)</div></td></tr>
+  <tr><td class="rl">FSH</td><td><div class="ki-text">Sertoli cells</div></td><td><div class="ki-text">Support spermatogenesis; secrete ABP + inhibin B + MIS; convert T → estradiol</div></td><td><div class="ki-text">INHIBIN B (selective — does not affect LH)</div></td></tr>
+  <tr><td class="rl">Testosterone</td><td><div class="ki-text">Neighboring Sertoli cells (paracrine) + peripheral target tissues</div></td><td><div class="ki-text">Paracrine support of spermatogenesis; virilization; secondary sex characteristics</div></td><td><div class="ki-text">Own negative feedback on LH and GnRH</div></td></tr>
+</table>
+
+<div class="fg" style="margin-top:8px">
+  <div class="f"><label>Primary testicular failure pattern (T / LH / FSH / inhibin B)</label><div class="ki-text">Hypergonadotropic hypogonadism: ↓ T, ↓ inhibin B → ↑↑ LH, ↑↑ FSH (e.g., Klinefelter, post-chemo, cryptorchidism)</div></div>
+  <div class="f"><label>Hypothalamic-pituitary failure pattern (Kallmann, pit adenoma)</label><div class="ki-text">Hypogonadotropic hypogonadism: ↓ GnRH → ↓ LH, ↓ FSH, ↓ T (e.g., Kallmann, pituitary adenoma)</div></div>
+  <div class="f"><label>Anabolic steroid use pattern (T / LH / testis size / gyneco)</label><div class="ki-text">Exogenous T → suppresses LH → ↓ endogenous T → TESTICULAR ATROPHY + infertility; aromatization → ↑ estradiol → gynecomastia</div></div>
+  <div class="f"><label>Sertoli-cell-only pattern (T / LH / FSH)</label><div class="ki-text">Isolated ↑ FSH (Sertoli dysfunction → no inhibin B), normal LH, normal T (Leydig intact); azoospermia</div></div>
+</div>
+
+<div class="sec">Spermatogenesis — fill each stage (LO1)</div>
+<table>
+  <tr><th>Cell</th><th>Ploidy / DNA</th><th>Stage</th><th>Compartment</th></tr>
+  <tr><td class="rl">Spermatogonium (type A / B)</td><td><div class="ki-text">2n, 2C</div></td><td><div class="ki-text">Mitosis (Type A maintains pool; Type B commits to spermatogenesis)</div></td><td><div class="ki-text">Basal compartment (below tight junctions)</div></td></tr>
+  <tr><td class="rl">Primary spermatocyte</td><td><div class="ki-text">2n, 4C (DNA replicated)</div></td><td><div class="ki-text">Meiosis I — long prophase (the cell you usually see on histology)</div></td><td><div class="ki-text">Moves ACROSS tight junctions into adluminal compartment</div></td></tr>
+  <tr><td class="rl">Secondary spermatocyte</td><td><div class="ki-text">1n, 2C</div></td><td><div class="ki-text">Meiosis II — very brief (rarely seen on histology)</div></td><td><div class="ki-text">Adluminal compartment</div></td></tr>
+  <tr><td class="rl">Spermatid</td><td><div class="ki-text">1n, 1C</div></td><td><div class="ki-text">Spermiogenesis (remodeling only — no further division)</div></td><td><div class="ki-text">Adluminal, near lumen</div></td></tr>
+  <tr><td class="rl">Spermatozoon</td><td><div class="ki-text">1n, 1C</div></td><td><div class="ki-text">Mature; released into lumen</div></td><td><div class="ki-text">In the tubule lumen</div></td></tr>
+</table>
+
+<div class="fg" style="margin-top:8px">
+  <div class="f"><label>Total duration of spermatogenesis in the tubule</label><div class="ki-text">~74 days from spermatogonium to mature spermatozoon in the seminiferous tubule</div></div>
+  <div class="f"><label>Additional maturation time in the epididymis</label><div class="ki-text">~12–21 days additional for maturation in the epididymis</div></div>
+  <div class="f"><label>How many mature spermatozoa per 1 spermatogonium? (vs oogenesis?)</label><div class="ki-text">One spermatogonium → 4 mature spermatozoa (contrast: oogenesis → 1 ovum + 3 polar bodies)</div></div>
+  <div class="f"><label>Why do cohorts develop synchronously (mechanism)?</label><div class="ki-text">INCOMPLETE CYTOKINESIS during mitosis/meiosis leaves cytoplasmic bridges between sister germ cells → synchronous development of cohorts</div></div>
+</div>
+
+<div class="sec">Spermiogenesis — 5 remodeling events (LO1)</div>
+<div class="fg">
+  <div class="f"><label>1. Formation of ____ (cap over nucleus; hyaluronidase + acrosin)</label><div class="ki-text">ACROSOME — Golgi-derived cap over the nucleus; contains hydrolytic enzymes (hyaluronidase + acrosin) for penetrating corona radiata + zona pellucida during fertilization</div></div>
+  <div class="f"><label>2. Nuclear condensation — histones replaced by ____</label><div class="ki-text">PROTAMINES — replace histones during nuclear condensation → compact, stable haploid nucleus</div></div>
+  <div class="f"><label>3. Flagellum — what microtubule arrangement forms from the centriole?</label><div class="ki-text">9+2 microtubule arrangement (9 peripheral doublets + 2 central singlets) — centriole-derived; grows as the flagellum/tail</div></div>
+  <div class="f"><label>4. Midpiece — what wraps the axoneme? What does it power?</label><div class="ki-text">MITOCHONDRIAL SHEATH coils around the axoneme in the midpiece → provides ATP for flagellar motility</div></div>
+  <div class="f"><label>5. Cytoplasm elimination — what are the discarded fragments, and who phagocytoses them?</label><div class="ki-text">"RESIDUAL BODIES" — excess cytoplasm shed during spermiogenesis and PHAGOCYTOSED by Sertoli cells</div></div>
+</div>
+
+<div class="sec">Sperm anatomy — fill each region (LO1)</div>
+<table>
+  <tr><th>Region</th><th>Contents</th><th>Function</th></tr>
+  <tr><td class="rl">Head</td><td><div class="ki-text">Nucleus (haploid) + ACROSOME (Golgi-derived cap of hydrolytic enzymes)</div></td><td><div class="ki-text">Deliver haploid genome; acrosome reaction penetrates zona pellucida during fertilization</div></td></tr>
+  <tr><td class="rl">Neck</td><td><div class="ki-text">Proximal centriole + connecting piece</div></td><td><div class="ki-text">Structural link between head and tail; contributes zygote centriole</div></td></tr>
+  <tr><td class="rl">Midpiece</td><td><div class="ki-text">Axoneme (9+2 microtubules) + MITOCHONDRIAL SHEATH</div></td><td><div class="ki-text">ATP production for flagellar movement</div></td></tr>
+  <tr><td class="rl">Principal piece</td><td><div class="ki-text">Axoneme + FIBROUS SHEATH (longest tail segment)</div></td><td><div class="ki-text">Main motile segment; whip-like propulsive motion</div></td></tr>
+  <tr><td class="rl">End piece</td><td><div class="ki-text">Axoneme only + plasma membrane (no fibrous sheath)</div></td><td><div class="ki-text">Terminal tip</div></td></tr>
+</table>
+
+<div class="f" style="margin-top:6px"><label>Kartagener syndrome: defect + classic triad (3 features)</label><div class="ki-text">Kartagener / primary ciliary dyskinesia = DYNEIN ARM DEFECT → immotile sperm flagella + respiratory cilia + embryonic node cilia. Triad: SITUS INVERSUS + chronic SINUSITIS &amp; BRONCHIECTASIS + INFERTILITY</div></div>
+<button class="btn" onclick="rev('fb0',a0)">Reveal answers</button>
+<div id="fb0" class="fb"></div>
+</div>
+
+<!-- TAB 1: EXCURRENT DUCTS -->
+<div class="panel" id="p1">
+<div class="lo-tag">LO 2</div>
+<div class="on-exam">ON EXAM &mdash; SEVEN UP pathway, efferent ductules = scalloped border + mesonephric origin, epididymis = pseudostratified columnar with STEREOCILIA (NOT cilia — no 9+2), vas = thick 3-layer muscle around small lumen, vasectomy physiology (2–3 months to clear; T + ejaculate unaffected), verumontanum = where ejaculatory ducts open into prostatic urethra</div>
+
+<div class="sec">Tubulus rectus &amp; rete testis (LO2)</div>
+<div class="fg">
+  <div class="f"><label>Tubulus rectus — epithelium + function</label><div class="ki-text">Short, straight transitional tubules; simple CUBOIDAL epithelium (Sertoli-free); direct exit from seminiferous tubule into rete testis</div></div>
+  <div class="f"><label>Rete testis — where is it located? What epithelium?</label><div class="ki-text">Located in the MEDIASTINUM TESTIS (posterior testicular CT); anastomosing network; simple cuboidal ± occasional microvilli/cilia</div></div>
+  <div class="f"><label>Why "intratesticular" matters: what's the role of both segments?</label><div class="ki-text">Both are INTRATESTICULAR — they collect sperm-containing fluid from ALL seminiferous tubules and funnel it into a single route toward the efferent ductules</div></div>
+</div>
+
+<div class="sec">Efferent ductules (LO2)</div>
+<div class="fg">
+  <div class="f"><label>Approximate number of ductules + where they connect</label><div class="ki-text">~20 small ducts connecting the rete testis to the HEAD (caput) of the epididymis</div></div>
+  <div class="f"><label>Embryologic origin (and why it's important for their FUNCTION)</label><div class="ki-text">Derived from MESONEPHRIC TUBULES (same origin as kidney tubules) — retain strong fluid/solute-reabsorbing capability</div></div>
+  <div class="f"><label>Two epithelial cell types + what each does</label><div class="ki-text">(1) TALL CILIATED cells — beat to move sperm toward epididymis; (2) SHORT NON-CILIATED RESORPTIVE cells — reabsorb fluid</div></div>
+  <div class="f"><label>Pathognomonic luminal appearance on histology</label><div class="ki-text">"SCALLOPED" or "toothed" luminal border — alternating tall + short cells produce the signature pattern</div></div>
+  <div class="f"><label>Primary physiologic role (what % of fluid is reabsorbed?)</label><div class="ki-text">Reabsorb ~90% of testicular fluid → dramatically CONCENTRATE sperm before they enter the epididymis</div></div>
+</div>
+
+<div class="sec">Epididymis (LO2)</div>
+<div class="fg">
+  <div class="f"><label>Length + shape</label><div class="ki-text">~7 meters, highly coiled, single duct on the posterior testis</div></div>
+  <div class="f"><label>Epithelium — specific type + what's on the apical surface</label><div class="ki-text">PSEUDOSTRATIFIED COLUMNAR with STEREOCILIA (long, non-motile microvilli); contains principal cells (absorption + secretion) + basal cells (progenitors)</div></div>
+  <div class="f"><label>Trap: are stereocilia true cilia? Why not? (axoneme)</label><div class="ki-text">NO — stereocilia are LONG MICROVILLI (actin-based, non-motile, no 9+2 axoneme). True cilia (respiratory tract, oviduct, efferent ductules) have a 9+2 arrangement and are motile via dynein</div></div>
+  <div class="f"><label>Two functions of the epididymis</label><div class="ki-text">(1) Sperm MATURATION (gain motility + fertilizing capability via epididymal secretions); (2) Sperm STORAGE (up to ~1 month in the tail)</div></div>
+</div>
+
+<table>
+  <tr><th>Region</th><th>Function</th><th>Sperm state</th></tr>
+  <tr><td class="rl">Head (caput)</td><td><div class="ki-text">Receives efferent ductules; initial fluid absorption</div></td><td><div class="ki-text">Sperm IMMATURE — cannot fertilize yet</div></td></tr>
+  <tr><td class="rl">Body (corpus)</td><td><div class="ki-text">Progressive maturation; continued absorption + secretion</div></td><td><div class="ki-text">Sperm gaining motility</div></td></tr>
+  <tr><td class="rl">Tail (cauda)</td><td><div class="ki-text">Wider lumen slows fluid → STORAGE</div></td><td><div class="ki-text">Sperm fully mature; can fertilize; stored ~1 month</div></td></tr>
+</table>
+
+<div class="sec">Vas deferens &amp; vasectomy (LO2)</div>
+<div class="fg">
+  <div class="f"><label>Epithelium + defining histologic feature</label><div class="ki-text">Pseudostratified columnar with STEREOCILIA (similar to epididymis, often shorter); defining feature = disproportionately THICK muscular wall around small stellate lumen</div></div>
+  <div class="f"><label>Three muscular layers (inside → out)</label><div class="ki-text">Inner longitudinal + Middle circular (thickest) + Outer longitudinal — three smooth muscle layers</div></div>
+  <div class="f"><label>Nerve driving ejaculatory peristalsis</label><div class="ki-text">Sympathetic (hypogastric plexus, T10–L2) → peristaltic contraction during emission phase of ejaculation</div></div>
+  <div class="f"><label>Vasectomy: why does testosterone stay normal?</label><div class="ki-text">Leydig cells are in the testicular interstitium — not affected by cutting the duct. LH/T feedback remains intact → T stays normal</div></div>
+  <div class="f"><label>Vasectomy: why does ejaculate volume stay ~normal?</label><div class="ki-text">~70% of ejaculate is seminal vesicle fluid, ~25% prostate — none affected by vasectomy. Sperm-free ejaculate looks the same in volume</div></div>
+  <div class="f"><label>Why is backup contraception needed for 2–3 months post-vasectomy?</label><div class="ki-text">Residual mature sperm DISTAL to the ligation (in the ampulla, seminal vesicles, ejaculatory duct) must clear — takes ~2–3 months / ~20 ejaculations. Semen analysis confirms azoospermia before discontinuing backup</div></div>
+  <div class="f"><label>Two potential complications (granuloma; immune)</label><div class="ki-text">(1) SPERM GRANULOMAS (leaked sperm antigens provoke granulomatous inflammation); (2) ANTI-SPERM ANTIBODIES (crossing damaged blood-testis barrier → can impair later vasectomy-reversal fertility)</div></div>
+</div>
+
+<div class="sec">Ampulla &amp; ejaculatory duct (LO2)</div>
+<div class="fg">
+  <div class="f"><label>Where is the ampulla anatomically? What's its role?</label><div class="ki-text">Dilated distal end of the vas deferens, located behind the bladder; MIXING site where sperm meets accessory gland secretions</div></div>
+  <div class="f"><label>How is the ejaculatory duct formed? Where does it empty?</label><div class="ki-text">Formed by union of vas ampulla + seminal vesicle duct; ~2 cm long; passes through the prostate and empties onto the VERUMONTANUM of the prostatic urethra</div></div>
+  <div class="f"><label>Verumontanum / seminal colliculus — what is it + what opens there?</label><div class="ki-text">VERUMONTANUM (seminal colliculus) — midline posterior prominence of the prostatic urethra; EJACULATORY DUCTS open here (flanking the prostatic utricle, a Müllerian remnant)</div></div>
+</div>
+
+<div class="sec">Distinguishing ducts on histology &mdash; master table (LO2)</div>
+<table>
+  <tr><th>Structure</th><th>Epithelium</th><th>Luminal contour</th><th>Muscular layer</th><th>Key clue</th></tr>
+  <tr><td class="rl">Tubulus rectus</td><td><div class="ki-text">Simple cuboidal</div></td><td><div class="ki-text">Small, round</div></td><td><div class="ki-text">Minimal</div></td><td><div class="ki-text">Straight exit from seminiferous tubule</div></td></tr>
+  <tr><td class="rl">Rete testis</td><td><div class="ki-text">Simple cuboidal ± cilia</div></td><td><div class="ki-text">Irregular, anastomosing channels</div></td><td><div class="ki-text">Minimal</div></td><td><div class="ki-text">Embedded in MEDIASTINUM TESTIS</div></td></tr>
+  <tr><td class="rl">Efferent ductules</td><td><div class="ki-text">Ciliated + non-ciliated (resorptive) cells</div></td><td><div class="ki-text">SCALLOPED / "toothed" border</div></td><td><div class="ki-text">Thin</div></td><td><div class="ki-text">~20 ducts; fluid reabsorption; mesonephric-tubule origin</div></td></tr>
+  <tr><td class="rl">Epididymis</td><td><div class="ki-text">PSEUDOSTRATIFIED COLUMNAR WITH STEREOCILIA</div></td><td><div class="ki-text">Smooth, regular</div></td><td><div class="ki-text">Thin smooth muscle</div></td><td><div class="ki-text">7-m coiled duct; sperm maturation + storage</div></td></tr>
+  <tr><td class="rl">Vas deferens</td><td><div class="ki-text">Pseudostratified columnar with stereocilia</div></td><td><div class="ki-text">Narrow, irregular (stellate)</div></td><td><div class="ki-text">THREE THICK LAYERS (inner long + mid circular + outer long)</div></td><td><div class="ki-text">Massive muscular wall relative to tiny stellate lumen</div></td></tr>
+</table>
+<button class="btn" onclick="rev('fb1',a1)">Reveal answers</button>
+<div id="fb1" class="fb"></div>
+</div>
+
+<!-- TAB 2: ACCESSORY GLANDS & PENIS -->
+<div class="panel" id="p2">
+<div class="lo-tag">LO 3</div>
+<div class="on-exam">ON EXAM &mdash; ejaculate: seminal vesicles ~70% + FRUCTOSE, prostate ~25% + PSA (cleaves semenogelin), Cowper's <5%; CBAVD + CFTR + no fructose; 4 prostate zones (BPH = transition; cancer = peripheral, osteoblastic mets to lumbar spine); BPH Rx (tamsulosin α1 + finasteride 5α-RI); Cowper's = mucus gland SURROUNDED BY SKELETAL MUSCLE; erection Point (PSNS/NO/cGMP) &amp; Shoot (SNS/T10–L2); sildenafil + nitrates = hypotension</div>
+
+<div class="sec">Ejaculate composition (LO3)</div>
+<table>
+  <tr><th>Source</th><th>% Volume</th><th>Key contents</th><th>Function</th></tr>
+  <tr><td class="rl">Seminal vesicles</td><td><div class="ki-text">~65–70%</div></td><td><div class="ki-text">FRUCTOSE, prostaglandins, alkaline mucus, SEMENOGELIN, vitamin C</div></td><td><div class="ki-text">Nourish sperm (fructose = energy source); initial semen coagulum via semenogelin</div></td></tr>
+  <tr><td class="rl">Prostate</td><td><div class="ki-text">~20–25%</div></td><td><div class="ki-text">PSA, acid phosphatase, zinc, citrate, proteolytic enzymes</div></td><td><div class="ki-text">LIQUEFY coagulum (PSA cleaves semenogelin); enzymatically activate sperm</div></td></tr>
+  <tr><td class="rl">Bulbourethral (Cowper's)</td><td><div class="ki-text">&lt;5%</div></td><td><div class="ki-text">Alkaline mucus (pre-ejaculate)</div></td><td><div class="ki-text">Neutralize urethral acidity; lubricate urethra</div></td></tr>
+  <tr><td class="rl">Epididymis + vas</td><td><div class="ki-text">&lt;5%</div></td><td><div class="ki-text">Mature sperm (~200–400 million per ejaculate)</div></td><td><div class="ki-text">Deliver the actual gametes</div></td></tr>
+</table>
+
+<div class="sec">Seminal vesicles (LO3)</div>
+<div class="fg">
+  <div class="f"><label>Location; where does each empty?</label><div class="ki-text">Paired glands posterior to the bladder; each empties into the ipsilateral vas deferens to form the ejaculatory duct</div></div>
+  <div class="f"><label>Classic histologic appearance (mucosa shape + pigment?)</label><div class="ki-text">Highly folded / labyrinthine mucosa = "HONEYCOMB" appearance on histology; pseudostratified/simple columnar epithelium; lipofuscin pigment (golden-brown) accumulates with age</div></div>
+  <div class="f"><label>Sperm storage site? (trap)</label><div class="ki-text">NO — seminal vesicles are NOT a sperm storage site. Sperm transit through but are not stored here</div></div>
+  <div class="f"><label>Role of FRUCTOSE in semen analysis (what does absent fructose suggest?)</label><div class="ki-text">Absent fructose → suggests EJACULATORY DUCT OBSTRUCTION or CONGENITAL ABSENCE OF SEMINAL VESICLES (often seen with CBAVD)</div></div>
+  <div class="f"><label>CBAVD — what does it stand for, what gene, and what 2 findings on semen analysis?</label><div class="ki-text">CBAVD = Congenital Bilateral Absence of the Vas Deferens; associated with CFTR mutations. Often paired with absent seminal vesicles → LOW EJACULATE VOLUME + ABSENT FRUCTOSE + obstructive azoospermia</div></div>
+</div>
+
+<div class="sec">Prostate zones &amp; histology (LO3)</div>
+<table>
+  <tr><th>Zone</th><th>% of gland</th><th>Classic pathology</th></tr>
+  <tr><td class="rl">Peripheral zone</td><td><div class="ki-text">~70% of prostate</div></td><td><div class="ki-text">~70% of PROSTATE CANCERS (posterior; palpable on DRE)</div></td></tr>
+  <tr><td class="rl">Central zone</td><td><div class="ki-text">~25% of prostate</div></td><td><div class="ki-text">~5% of cancers</div></td></tr>
+  <tr><td class="rl">Transition zone</td><td><div class="ki-text">~5% in young males (expands with age)</div></td><td><div class="ki-text">BPH ARISES HERE → compresses urethra → obstructive urinary symptoms</div></td></tr>
+  <tr><td class="rl">Anterior fibromuscular stroma</td><td><div class="ki-text">~0% glandular (all stromal)</div></td><td><div class="ki-text">No glands → no cancer</div></td></tr>
+</table>
+
+<div class="fg" style="margin-top:6px">
+  <div class="f"><label>Corpora amylacea — what are they + clinical significance?</label><div class="ki-text">CORPORA AMYLACEA — small, round, eosinophilic, concentrically laminated calcified bodies in prostatic lumina; increase with age; benign signature but NOT diagnostic of cancer</div></div>
+  <div class="f"><label>"Two-cell layer" on histology — what loss supports invasive cancer? (markers)</label><div class="ki-text">Normal/BPH has TWO-cell epithelium (inner luminal + outer basal). Prostate adenocarcinoma = LOSS of basal cell layer (confirmed on p63 or HMWCK immunostain)</div></div>
+  <div class="f"><label>PSA — what enzyme class + physiologic job?</label><div class="ki-text">PSA (prostate-specific antigen) = serine protease that cleaves semenogelin to liquefy the semen coagulum; clinical biomarker for BPH and prostate cancer</div></div>
+  <div class="f"><label>Four prostate secretions besides PSA</label><div class="ki-text">Acid phosphatase, zinc (antibacterial/sperm-stabilizing), citrate (energy), proteolytic enzymes</div></div>
+  <div class="f"><label>What androgen specifically drives prostate growth?</label><div class="ki-text">DHT (from 5α-reductase conversion of T) specifically drives prostate growth and secretion — basis for finasteride / dutasteride therapy</div></div>
+</div>
+
+<div class="sec">BPH vs prostate cancer (LO3)</div>
+<table>
+  <tr><th>Feature</th><th>BPH</th><th>Prostate Cancer</th></tr>
+  <tr><td class="rl">Zone</td><td><div class="ki-text">TRANSITION zone (central, around urethra)</div></td><td><div class="ki-text">PERIPHERAL zone (posterior)</div></td></tr>
+  <tr><td class="rl">Symptoms</td><td><div class="ki-text">Urinary obstructive LUTS (hesitancy, weak stream, nocturia, incomplete emptying)</div></td><td><div class="ki-text">Often asymptomatic early; late: BONE PAIN (osteoblastic mets to lumbar spine + pelvis)</div></td></tr>
+  <tr><td class="rl">DRE finding</td><td><div class="ki-text">Symmetric, rubbery enlargement</div></td><td><div class="ki-text">Nodular, hard, asymmetric mass</div></td></tr>
+  <tr><td class="rl">Histology (cell layers)</td><td><div class="ki-text">Hyperplasia (↑ glands + stroma) with RETAINED two-cell layer</div></td><td><div class="ki-text">Adenocarcinoma; LOSS of basal cells; small crowded glands; prominent nucleoli</div></td></tr>
+  <tr><td class="rl">Labs</td><td><div class="ki-text">Mildly elevated PSA</div></td><td><div class="ki-text">Markedly elevated PSA; ↑ acid phosphatase; ↑ alk phos (bone mets)</div></td></tr>
+  <tr><td class="rl">Treatment</td><td><div class="ki-text">α1 blockers (TAMSULOSIN — relax smooth muscle, immediate relief) + 5α-reductase inhibitors (FINASTERIDE, dutasteride — shrink volume over months); TURP if refractory</div></td><td><div class="ki-text">Active surveillance (low risk); radical prostatectomy; radiation; ANDROGEN DEPRIVATION (GnRH agonists like leuprolide; AR antagonists like bicalutamide/enzalutamide; abiraterone CYP17i)</div></td></tr>
+</table>
+
+<div class="fg" style="margin-top:6px">
+  <div class="f"><label>Most common cancer in men? How it metastasizes (pattern + classic site)?</label><div class="ki-text">MOST COMMON CANCER IN MEN; 2nd most common cause of cancer death. Spreads via OSTEOBLASTIC bone metastases (vs most cancers which are osteolytic) — classic lumbar spine + pelvis</div></div>
+  <div class="f"><label>Gleason score — what is it?</label><div class="ki-text">GLEASON SCORE — histologic grade (2 values summed, 2–10); guides risk stratification alongside PSA + DRE</div></div>
+  <div class="f"><label>4 classes of androgen-deprivation drugs for advanced prostate cancer</label><div class="ki-text">(1) GnRH AGONISTS (leuprolide — initial flare then sustained suppression); (2) GnRH ANTAGONISTS (degarelix — no flare); (3) AR ANTAGONISTS (bicalutamide, enzalutamide, flutamide); (4) CYP17 INHIBITOR (abiraterone)</div></div>
+  <div class="f"><label>How does finasteride affect PSA? Clinical relevance?</label><div class="ki-text">Finasteride lowers PSA by ~50% — must DOUBLE measured PSA or use an adjusted reference range when screening patients on these drugs</div></div>
+</div>
+
+<div class="sec">Bulbourethral (Cowper's) glands (LO3)</div>
+<div class="fg">
+  <div class="f"><label>Size + location</label><div class="ki-text">Pea-sized; located at the base of the penis, embedded in the urogenital diaphragm</div></div>
+  <div class="f"><label>Pathognomonic histology — what muscle surrounds them?</label><div class="ki-text">Simple columnar mucus-secreting cells SURROUNDED BY SKELETAL MUSCLE (from the urogenital diaphragm / external urethral sphincter) — pathognomonic Step 1 feature</div></div>
+  <div class="f"><label>Three functions of the secretion</label><div class="ki-text">(1) Neutralize urethral acidity (protect sperm from residual acidic urine); (2) Lubricate the urethra before ejaculation; (3) Shield urethra from destructive enzymes in ejaculate</div></div>
+  <div class="f"><label>Female homologue + embryologic origin</label><div class="ki-text">Female homologue = BARTHOLIN'S (greater vestibular) glands; both derived from the urogenital sinus</div></div>
+</div>
+
+<div class="sec">Penis — structure &amp; erection (LO3)</div>
+<div class="fg">
+  <div class="f"><label>Three erectile bodies (name + how many)</label><div class="ki-text">Three erectile bodies: paired CORPORA CAVERNOSA (2) + single CORPUS SPONGIOSUM (1)</div></div>
+  <div class="f"><label>Which erectile body contains the urethra?</label><div class="ki-text">Corpus SPONGIOSUM contains the penile (spongy) urethra; extends distally to form the glans penis</div></div>
+  <div class="f"><label>Which erectile body(ies) is/are primary for rigidity? Why do they trap blood well?</label><div class="ki-text">Corpora CAVERNOSA provide primary rigidity — surrounded by rigid TUNICA ALBUGINEA that traps blood by compressing emissary veins against it</div></div>
+  <div class="f"><label>Why does the corpus spongiosum remain compressible during erection?</label><div class="ki-text">Corpus spongiosum has a THINNER tunica albuginea → remains compressible during erection so the urethra stays patent for ejaculation</div></div>
+</div>
+
+<div class="sec">Erection vs ejaculation (Point &amp; Shoot) (LO3)</div>
+<div class="warn">Mnemonic: Point = Parasympathetic (erection); Shoot = Sympathetic (emission/ejaculation).</div>
+<table>
+  <tr><th>Phase</th><th>Autonomic branch + nerve roots</th><th>Transmitter / Mechanism</th></tr>
+  <tr><td class="rl">Erection</td><td><div class="ki-text">PARASYMPATHETIC — S2–S4 pelvic splanchnic nerves</div></td><td><div class="ki-text">Release ACh + NO (nitric oxide) → NO activates guanylate cyclase → ↑ cGMP → smooth muscle relaxation → helicine artery dilation → sinusoid engorgement → emissary veins compressed against tunica albuginea → blood trapped → erection</div></td></tr>
+  <tr><td class="rl">Emission</td><td><div class="ki-text">SYMPATHETIC — hypogastric nerves (T10–L2)</div></td><td><div class="ki-text">Peristalsis of epididymis, vas deferens, accessory glands → semen delivered into the prostatic urethra; internal urethral sphincter contracts to prevent retrograde flow</div></td></tr>
+  <tr><td class="rl">Ejaculation (somatic expulsion)</td><td><div class="ki-text">SOMATIC — pudendal nerve (S2–S4)</div></td><td><div class="ki-text">Bulbospongiosus + ischiocavernosus muscles contract to expel semen out of the urethra (voluntary + reflex)</div></td></tr>
+</table>
+
+<div class="fg" style="margin-top:6px">
+  <div class="f"><label>PDE5 inhibitors — name 3 + mechanism</label><div class="ki-text">SILDENAFIL, tadalafil, vardenafil — inhibit PDE5 (enzyme that breaks down cGMP) → prolonged smooth-muscle relaxation → sustained erection</div></div>
+  <div class="f"><label>PDE5 + nitrates — what happens and why?</label><div class="ki-text">Nitrates produce NO → ↑ cGMP; PDE5i prevents cGMP breakdown. COMBINATION = severe vasodilation → life-threatening HYPOTENSION + MI. ABSOLUTE contraindication</div></div>
+  <div class="f"><label>Priapism — definition + 3 common causes + why it's an emergency</label><div class="ki-text">Prolonged erection (&gt;4 hours) — urologic emergency; risk of permanent ED if untreated. Causes: PDE5-inhibitor overuse, SICKLE CELL disease, trazodone</div></div>
+  <div class="f"><label>3 causes of autonomic-driven ED</label><div class="ki-text">(1) Pelvic surgery (radical prostatectomy) — autonomic nerve injury; (2) Diabetic autonomic neuropathy; (3) Spinal cord injury / pelvic trauma</div></div>
+</div>
+<button class="btn" onclick="rev('fb2',a2)">Reveal answers</button>
+<div id="fb2" class="fb"></div>
+</div>
+
+<!-- TAB 3: MALE URETHRA -->
+<div class="panel" id="p3">
+<div class="lo-tag">LO 4</div>
+<div class="on-exam">ON EXAM &mdash; 3 segments + epithelium (Prostatic = transitional/urothelium; Membranous = pseudostratified/stratified columnar; Penile = same w/ stratified squamous near meatus); internal sphincter smooth α1 (retrograde ejaculation trap) vs external sphincter skeletal pudendal; membranous = SHORTEST + pelvic fracture site; straddle = bulbous; epithelium predicts malignancy (proximal = urothelial CA, distal = SCC); blood at meatus → retrograde urethrogram BEFORE catheter</div>
+
+<div class="sec">Two sphincters (LO4)</div>
+<table>
+  <tr><th>Feature</th><th>Internal urethral sphincter</th><th>External urethral sphincter</th></tr>
+  <tr><td class="rl">Muscle type</td><td><div class="ki-text">Smooth muscle</div></td><td><div class="ki-text">Skeletal muscle</div></td></tr>
+  <tr><td class="rl">Voluntary?</td><td><div class="ki-text">NO — involuntary</div></td><td><div class="ki-text">YES — voluntary</div></td></tr>
+  <tr><td class="rl">Innervation</td><td><div class="ki-text">Sympathetic α1-adrenergic (from hypogastric plexus)</div></td><td><div class="ki-text">Somatic PUDENDAL nerve (S2–S4) — "S2, 3, 4 keeps the penis off the floor"</div></td></tr>
+  <tr><td class="rl">Key role</td><td><div class="ki-text">Prevents retrograde ejaculation (contracts during emission); involuntary urinary continence</div></td><td><div class="ki-text">Voluntary urinary continence</div></td></tr>
+</table>
+
+<div class="sec">Retrograde ejaculation (LO4)</div>
+<div class="fg">
+  <div class="f"><label>Mechanism: which sphincter fails and why?</label><div class="ki-text">INTERNAL urethral sphincter fails to close during emission → semen flows backward into the bladder instead of forward through the meatus</div></div>
+  <div class="f"><label>Classic presentation (ejaculate + urine findings)</label><div class="ki-text">Low-volume or "dry" ejaculate; preserved orgasm; CLOUDY POST-COITAL URINE containing sperm (diagnostic)</div></div>
+  <div class="f"><label>4 causes (drug + neuropathy + surgery)</label><div class="ki-text">(1) α1 blockers (TAMSULOSIN); (2) Diabetic autonomic neuropathy; (3) Post-prostatectomy or TURP; (4) Spinal cord injury</div></div>
+  <div class="f"><label>Why doesn't tamsulosin cause urinary incontinence?</label><div class="ki-text">Tamsulosin blocks α1-mediated INTERNAL sphincter tone (smooth muscle) — but the EXTERNAL sphincter is SKELETAL muscle controlled by the pudendal nerve (not α1) — so urinary continence is preserved</div></div>
+</div>
+
+<div class="sec">Three urethral segments — master table (LO4)</div>
+<table>
+  <tr><th>Segment</th><th>Length</th><th>Epithelium</th><th>Surrounding structure</th><th>Unique landmark / clinical</th></tr>
+  <tr><td class="rl">Prostatic</td><td><div class="ki-text">~3–4 cm</div></td><td><div class="ki-text">TRANSITIONAL (urothelium) — same as bladder</div></td><td><div class="ki-text">Prostate gland</div></td><td><div class="ki-text">VERUMONTANUM + ejaculatory duct openings; internal urethral sphincter at bladder neck</div></td></tr>
+  <tr><td class="rl">Membranous</td><td><div class="ki-text">~1–2 cm (SHORTEST segment)</div></td><td><div class="ki-text">Pseudostratified or stratified columnar</div></td><td><div class="ki-text">Urogenital diaphragm; encircled by EXTERNAL URETHRAL SPHINCTER (skeletal muscle)</div></td><td><div class="ki-text">Shortest segment; most common site of TRAUMATIC RUPTURE in pelvic fractures</div></td></tr>
+  <tr><td class="rl">Penile (spongy)</td><td><div class="ki-text">~15 cm (LONGEST segment)</div></td><td><div class="ki-text">Pseudostratified/stratified columnar; STRATIFIED SQUAMOUS non-keratinized near meatus (fossa navicularis)</div></td><td><div class="ki-text">Corpus spongiosum</div></td><td><div class="ki-text">GLANDS OF LITTRÉ (mucus glands); Cowper's (bulbourethral) duct openings</div></td></tr>
+</table>
+
+<div class="fg" style="margin-top:6px">
+  <div class="f"><label>Verumontanum — location + what opens here + significance of the prostatic utricle</label><div class="ki-text">Midline prominence on the posterior wall of the prostatic urethra; EJACULATORY DUCTS open here. PROSTATIC UTRICLE (blind pouch between openings) is a Müllerian-duct REMNANT — analogous to uterus/upper vagina in females</div></div>
+  <div class="f"><label>Glands of Littré — what are they and where?</label><div class="ki-text">Small mucus-secreting glands along the wall of the penile (spongy) urethra; lubricate during passage of ejaculate</div></div>
+  <div class="f"><label>Fossa navicularis — location + epithelium</label><div class="ki-text">Dilated distal portion of the penile urethra, just proximal to the external urethral meatus; lined by STRATIFIED SQUAMOUS non-keratinized epithelium (transitioning to keratinized glans skin)</div></div>
+</div>
+
+<div class="sec">Urethral trauma &amp; obstruction (LO4)</div>
+<div class="fg">
+  <div class="f"><label>Pelvic fracture → which urethral segment? Why?</label><div class="ki-text">Pelvic fracture disrupts the MEMBRANOUS urethra — it's the shortest, narrowest, and most fixed segment (passes through urogenital diaphragm); pelvic diastasis shears it</div></div>
+  <div class="f"><label>Straddle injury → which urethral segment? Classic perineal finding?</label><div class="ki-text">Straddle injury ruptures the BULBOUS (proximal penile) urethra — classic "BUTTERFLY" perineal ecchymosis</div></div>
+  <div class="f"><label>4 red-flag signs suggesting urethral injury (that stop you from catheterizing)</label><div class="ki-text">(1) Blood at urethral meatus; (2) Inability to void; (3) Perineal bruising; (4) HIGH-RIDING PROSTATE on DRE (displaced superiorly from urethral discontinuity)</div></div>
+  <div class="f"><label>Next step when urethral injury is suspected? Alternative drainage?</label><div class="ki-text">Obtain a RETROGRADE URETHROGRAM before any catheterization (blind catheter can worsen tear + create false passage). If urgent bladder drainage is needed → SUPRAPUBIC CYSTOSTOMY bypasses the urethra</div></div>
+  <div class="f"><label>Posterior urethral valves (PUV) — what, who, consequence chain</label><div class="ki-text">Posterior Urethral Valves — congenital mucosal flaps in the PROSTATIC urethra of male infants → severe bladder outlet obstruction → bilateral hydronephrosis → oligohydramnios (Potter sequence); fatal without intervention</div></div>
+  <div class="f"><label>Urethral strictures — 3 causes</label><div class="ki-text">(1) Post-trauma; (2) Post-infection (classically gonococcal); (3) Iatrogenic (repeat catheterization, instrumentation)</div></div>
+</div>
+
+<div class="sec">Urethritis (LO4)</div>
+<table>
+  <tr><th>Type</th><th>Organism(s)</th><th>Clinical clue</th></tr>
+  <tr><td class="rl">Gonococcal urethritis</td><td><div class="ki-text">Neisseria gonorrhoeae (Gram-negative intracellular diplococci)</div></td><td><div class="ki-text">Thick, PURULENT YELLOW discharge; symptomatic &lt;1 week post-exposure</div></td></tr>
+  <tr><td class="rl">Non-gonococcal urethritis (NGU)</td><td><div class="ki-text">Chlamydia trachomatis (most common); also Mycoplasma genitalium, Ureaplasma, Trichomonas</div></td><td><div class="ki-text">Thinner, watery discharge; often minimally symptomatic or asymptomatic</div></td></tr>
+</table>
+
+<div class="fg" style="margin-top:6px">
+  <div class="f"><label>Empiric urethritis treatment (covers both)</label><div class="ki-text">Empirically cover BOTH: CEFTRIAXONE (GC) + DOXYCYCLINE (Chlamydia); test + treat partners</div></div>
+  <div class="f"><label>Reactive arthritis (Reiter) — classic triad + HLA + trigger</label><div class="ki-text">Reactive arthritis (Reiter) — triad "can't SEE, can't PEE, can't climb a TREE" = conjunctivitis + urethritis + arthritis. Associated with HLA-B27 and post-infectious triggers (Chlamydia, Salmonella, Shigella, Yersinia, Campylobacter)</div></div>
+  <div class="f"><label>Epithelium predicts malignancy: proximal urethra → ? | distal urethra → ?</label><div class="ki-text">Epithelium predicts histology: PROXIMAL (prostatic, transitional) = urothelial/transitional cell carcinoma; DISTAL (penile, near meatus, squamous) = SQUAMOUS CELL CARCINOMA</div></div>
+</div>
+<button class="btn" onclick="rev('fb3',a3)">Reveal answers</button>
+<div id="fb3" class="fb"></div>
+</div>
+
+<!-- TAB 4: PRACTICE QUESTIONS -->
+<div class="panel" id="p4">
+<div class="lo-tag">LO 1–4 · USMLE Step 1 Style</div>
+<div class="on-exam">8 questions &mdash; cover all 4 LOs. Use these after finishing all tabs.</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q1. A 28-year-old man with a history of unilateral cryptorchidism that underwent orchidopexy at age 8 presents with infertility. Semen analysis shows azoospermia. Labs: testosterone 420 ng/dL (normal), LH 9 mIU/mL (normal-high), FSH 28 mIU/mL (high), inhibin B 20 pg/mL (low). Which ONE cell population is MOST directly responsible for the pattern of isolated FSH elevation?</div>
+  <div class="pq-choices">
+    A. Leydig cells — heat-damaged → loss of testosterone → ↑ LH<br>
+    B. Sertoli cells — heat-damaged → loss of inhibin B → ↑ FSH<br>
+    C. Spermatogonia — directly suppress LH by paracrine signaling<br>
+    D. Myoid cells around the tubule produce inhibin B<br>
+    E. Pituitary gonadotrophs are intrinsically damaged by heat
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Heat-damaged Sertoli cells → ↓ inhibin B → loss of selective FSH negative feedback.</strong><br>Leydig cells are heat-RESISTANT, so testosterone stays normal and LH is only mildly elevated. Sertoli cells (and germ cells) are heat-SENSITIVE: damage → ↓ inhibin B, which is the specific negative-feedback inhibitor of FSH → FSH rises in isolation. Late orchidopexy (age 8) did not prevent the damage — intervention before age 1 preserves more fertility. Cancer surveillance is still required (↑ seminoma risk persists).</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q2. A 35-year-old man presents with a left-sided scrotal mass that feels like a "bag of worms" and decompresses when he lies supine. Which venous drainage anomaly BEST explains the left-sided predominance of this finding?</div>
+  <div class="pq-choices">
+    A. The left testicular vein drains into the IVC at an acute angle<br>
+    B. The right testicular vein drains into the left renal vein at a right angle<br>
+    C. The left testicular vein drains into the left renal vein at a 90° angle → ↑ backpressure<br>
+    D. Left-sided varicoceles are caused by congenital absence of the pampiniform plexus<br>
+    E. The cremasteric artery is shorter on the left
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Left testicular vein drains into the left renal vein at 90° → ↑ backpressure → dilation of the pampiniform plexus.</strong><br>~90% of varicoceles are left-sided for this reason. The RIGHT testicular vein drains directly into the IVC at an acute angle (less resistance). A new RIGHT-sided varicocele — or a left varicocele that does NOT decompress supine — should raise concern for renal cell carcinoma invading the renal vein/IVC and occluding drainage.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q3. A pathologist examines a prostate biopsy and reports small, crowded glands with prominent nucleoli and a single layer of cells (no basal layer identified on p63 or HMWCK staining). Corpora amylacea are visible in adjacent benign-appearing glands. Which of the following BEST explains the pathologist's conclusion?</div>
+  <div class="pq-choices">
+    A. BPH — the missing basal layer is a hyperplasia artifact<br>
+    B. Prostatitis — acute inflammation obscures the basal cells<br>
+    C. Prostatic adenocarcinoma — loss of the basal cell layer supports invasion<br>
+    D. Granulomatous prostatitis after BCG therapy<br>
+    E. Normal prostatic histology
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Prostate adenocarcinoma. Loss of the basal cell layer is a hallmark of invasion.</strong><br>Normal and benign (BPH) prostatic glands have a TWO-cell epithelium — inner luminal secretory + outer basal. Pathologists confirm the basal layer with <strong>p63</strong> or <strong>HMWCK</strong> (high-molecular-weight cytokeratin). Absence of basal cells + small crowded glands + prominent nucleoli → adenocarcinoma. Cancer typically arises in the PERIPHERAL zone (vs BPH in the TRANSITION zone). Corpora amylacea are age-related benign inclusions — they sit in neighboring glands but don't confer malignancy.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q4. A 42-year-old man with infertility, bilateral absence of the vas deferens on palpation, and an ejaculate volume of 0.4 mL with ABSENT fructose undergoes genetic testing. Which mutation is MOST likely, and what is the embryologic link explaining the low volume and absent fructose?</div>
+  <div class="pq-choices">
+    A. AR mutation — Wolffian derivatives never form without androgen signaling<br>
+    B. SRY mutation — testes don't form, so no ducts form<br>
+    C. CFTR mutation — CBAVD with associated hypoplastic seminal vesicles (Wolffian-duct derivatives)<br>
+    D. 5α-reductase deficiency — external genitalia defects but normal ducts<br>
+    E. Kallmann syndrome — hypothalamic GnRH deficiency
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; CFTR mutation → Congenital Bilateral Absence of the Vas Deferens (CBAVD).</strong><br>CFTR mutations cause fetal obstruction/atresia of the developing vas deferens. Because the vas and seminal vesicles are both derived from the <strong>mesonephric (Wolffian) duct</strong>, seminal vesicles are often absent or hypoplastic as well. Seminal vesicles contribute ~70% of ejaculate volume AND are the sole source of fructose — so CBAVD classically presents with low-volume, fructose-negative azoospermic ejaculate. Leydig function (and testosterone) is preserved. Management: testicular sperm extraction + ICSI; genetic counseling for the partner.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q5. A 17-year-old boy presents to the ED with sudden, severe right-sided testicular pain that began 3 hours ago while playing basketball. On exam, the right testis is high-riding and transverse, the cremasteric reflex is absent, and elevation of the scrotum does NOT relieve pain. Doppler US shows absent flow to the right testis. What is the MOST appropriate next step?</div>
+  <div class="pq-choices">
+    A. Start ceftriaxone + doxycycline empirically<br>
+    B. Schedule outpatient urology follow-up within 48 hours<br>
+    C. Emergent surgical detorsion with bilateral orchiopexy<br>
+    D. Give IV antibiotics and observe for 24 hours<br>
+    E. MRI pelvis to confirm the diagnosis
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Emergent surgical detorsion + bilateral orchiopexy.</strong><br>Classic testicular torsion: sudden onset, high-riding/transverse testis, absent cremasteric reflex, negative Prehn sign (elevation does NOT help), and absent Doppler flow. This is a surgical emergency — the <strong>6-hour window</strong> is key; delay risks ischemic infarction. Bilateral orchiopexy is done because the predisposing "bell-clapper deformity" is typically bilateral. Epididymitis (A) would have positive Prehn, preserved cremasteric reflex, and INCREASED Doppler flow.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q6. A pathologist identifies a male reproductive duct whose luminal epithelium has a characteristic "scalloped" or "toothed" appearance from alternating tall ciliated and short non-ciliated cells. What structure is this, and what is its embryologic origin?</div>
+  <div class="pq-choices">
+    A. Rete testis; intermediate mesoderm<br>
+    B. Epididymis; mesonephric duct<br>
+    C. Efferent ductules; mesonephric tubules<br>
+    D. Vas deferens; mesonephric duct<br>
+    E. Seminal vesicle; urogenital sinus
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Efferent ductules, derived from mesonephric TUBULES.</strong><br>The "scalloped" or "toothed" border is the pathognomonic visual feature of efferent ductules. The tall ciliated cells move sperm toward the epididymis; the short non-ciliated cells reabsorb ~90% of testicular fluid, concentrating sperm. The mesonephric-tubule origin (same as kidney tubules) is why they retain strong fluid-resorptive capacity. The vas deferens and epididymis come from the mesonephric DUCT (not tubules) and have smooth pseudostratified columnar epithelium with stereocilia.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q7. A 68-year-old man with BPH on tamsulosin and diabetic autonomic neuropathy reports that his ejaculate volume has dropped to almost nothing, and his post-coital urine is cloudy. Which structure and mechanism BEST explain this finding?</div>
+  <div class="pq-choices">
+    A. External urethral sphincter dysfunction → urinary incontinence<br>
+    B. Internal urethral sphincter fails to close → retrograde flow of semen into the bladder<br>
+    C. Seminal vesicles atrophy from chronic α1 blockade<br>
+    D. Prostatic ductal obstruction from BPH<br>
+    E. Pelvic floor weakness from aging
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Retrograde ejaculation — internal urethral sphincter fails to close during emission.</strong><br>During normal emission, sympathetic α1 tone closes the internal urethral sphincter at the bladder neck, directing semen forward. Tamsulosin (selective α1A antagonist) blocks this — AND diabetic autonomic neuropathy further impairs sympathetic function — so semen flows backward into the bladder. Orgasm is preserved; post-coital urinalysis shows sperm, confirming the diagnosis. The external urethral sphincter (skeletal, pudendal-controlled) is unaffected → urinary continence is preserved.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q8. A 30-year-old man is brought to the ED after a motorcycle accident with a displaced pelvic fracture. He is unable to void, and blood is visible at the urethral meatus. DRE reveals a high-riding prostate. The urology resident wants to place a Foley catheter. What is the next appropriate step, and which urethral segment is MOST likely disrupted?</div>
+  <div class="pq-choices">
+    A. Place the Foley immediately; the membranous urethra is resilient to trauma<br>
+    B. Obtain a retrograde urethrogram; the membranous urethra is most vulnerable to pelvic fractures<br>
+    C. CT cystogram; the prostatic urethra usually ruptures in pelvic trauma<br>
+    D. Suprapubic cystostomy only; never image urethra in trauma<br>
+    E. Attempt a small-caliber catheter under fluoroscopic guidance
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Retrograde urethrogram; pelvic fractures classically disrupt the MEMBRANOUS urethra.</strong><br>The membranous urethra is the SHORTEST, narrowest, and most fixed segment — it traverses the urogenital diaphragm, so pelvic fractures that disrupt the diaphragm shear it. Red-flag signs are present: blood at meatus + high-riding prostate + inability to void. Blind catheterization risks converting a partial tear into a complete one. Always do retrograde urethrogram first; if urgent bladder drainage is needed, use suprapubic cystostomy. Contrast this with straddle injury (perineum against a bike crossbar) → bulbous urethra rupture + "butterfly" perineal bruising.</div>
+</div>
+
+</div>
+
+<script>
+function sw(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',i===n)});
+  document.querySelectorAll('.panel').forEach((p,i)=>{p.classList.toggle('active',i===n)});
+}
+
+const a0={
+  'Testes origin':'Near the kidneys — same intermediate mesoderm origin as the urogenital tract',
+  'Descent guide':'Gubernaculum — pulls testes into scrotum (contracts under androgen influence)',
+  'Descent timing':'Month 7 of gestation; fetal androgens (testosterone/DHT) trigger gubernacular contraction',
+  'Scrotal temp':'Scrotum ~34°C vs core 37°C — spermatogenesis requires cooler temps (Sertoli + germ cells heat-sensitive; Leydig heat-resistant)',
+  'Cryptorchidism rate':'Most common congenital GU anomaly in males — ~3% term, ~30% preterm',
+  'Cryptorchidism labs':'T = NORMAL | LH = normal/high | FSH = HIGH | inhibin B = LOW — isolated FSH elevation pattern',
+  'Cell heat sensitivity':'Leydig cells HEAT-RESISTANT (T stays normal); Sertoli + germ cells HEAT-SENSITIVE (inhibin B drops → FSH rises; spermatogenesis impaired)',
+  'Cryptorchidism tumor':'↑ Germ cell tumors — SEMINOMA classic in an abdominal testis; risk persists even after orchidopexy',
+  'Orchidopexy timing':'BEFORE 1 year of age (after 6-month observation for spontaneous descent)',
+  'Pampiniform function':'Dense venous plexus around testicular artery within spermatic cord → COUNTERCURRENT HEAT EXCHANGE (cools warm arterial blood before it reaches testis)',
+  'Testicular vein drainage':'Right testicular vein → IVC at acute angle | Left testicular vein → LEFT RENAL VEIN at 90° angle',
+  'Varicocele side':'"Bag of worms"; LEFT-sided ~90% because left testicular vein enters left renal vein at right angle → ↑ backpressure',
+  'Varicocele red flag':'NEW right-sided varicocele OR left varicocele that does NOT decompress supine → rule out RENAL CELL CARCINOMA invading renal vein / IVC',
+  'Torsion onset':'SUDDEN, severe (adolescents 12–18; bell-clapper deformity)',
+  'Epididymitis onset':'Gradual, associated dysuria or STI history',
+  'Torsion Prehn':'NEGATIVE — elevation does NOT relieve pain',
+  'Epididymitis Prehn':'POSITIVE — elevation RELIEVES pain',
+  'Torsion cremasteric':'ABSENT',
+  'Epididymitis cremasteric':'Preserved',
+  'Torsion Doppler':'↓ or absent flow',
+  'Epididymitis Doppler':'↑ flow (inflammation)',
+  'Torsion Rx':'Surgical EMERGENCY — detorsion + bilateral orchiopexy',
+  'Epididymitis Rx':'Antibiotics (GC/Chlamydia young; E. coli/coliforms older); scrotal support, NSAIDs',
+  'Torsion window':'Within 6 hours to preserve the testis (complete ischemia beyond this)',
+  'Bell-clapper':'Abnormally free testis within the tunica vaginalis (horizontal lie) — predisposes to twisting around the spermatic cord; typically bilateral → hence bilateral orchiopexy',
+  'Epididymitis bugs':'Young men: Chlamydia trachomatis + Neisseria gonorrhoeae | Older men: E. coli, Pseudomonas, other coliforms',
+  'Tunica vaginalis':'Mesothelial (simple cuboidal) — visceral + parietal layers derived from processus vaginalis | Fluid accumulation → HYDROCELE (transilluminates); patent processus → communicating hydrocele / indirect hernia',
+  'Tunica albuginea':'THICK DENSE CONNECTIVE TISSUE — fibrous capsule | Sends septa inward → divides testis into lobules; extends to form mediastinum testis (contains rete testis); torsion twists cord within this capsule',
+  'Tunica vasculosa':'Loose CT with abundant vasculature | Supplies seminiferous tubules with blood + hormones; extensive capillary network',
+  'Leydig location':'INTERSTITIAL — between seminiferous tubules, in loose CT',
+  'Sertoli location':'INSIDE seminiferous tubules — attached to basal lamina, extending to the lumen',
+  'Leydig regulator':'LH (anterior pituitary)',
+  'Sertoli regulator':'FSH (anterior pituitary); also paracrine testosterone from Leydig',
+  'Leydig secretion':'TESTOSTERONE (from cholesterol)',
+  'Sertoli secretion':'ABP, inhibin B, MIS (fetal), aromatase (→ estradiol); plus "nurse" functions',
+  'Leydig feedback':'Testosterone → negative feedback on LH (and GnRH)',
+  'Sertoli feedback':'Inhibin B → SELECTIVELY INHIBITS FSH (not LH)',
+  'Leydig histo':'Reinke crystals (rectangular eosinophilic cytoplasmic inclusions) + abundant smooth ER + mitochondria with tubular cristae',
+  'Sertoli histo':'Tall columnar cells spanning the seminiferous epithelium from basal lamina to lumen; irregular outlines (envelop germ cells)',
+  'Leydig heat':'HEAT-RESISTANT — testosterone preserved in cryptorchidism',
+  'Sertoli heat':'HEAT-SENSITIVE — inhibin B drops in cryptorchidism',
+  'ABP':'Androgen-Binding Protein — Sertoli-secreted; concentrates intratubular testosterone to ~100× plasma levels (needed for spermatogenesis)',
+  'MIS':'Müllerian Inhibiting Substance (AMH) — Sertoli-secreted in fetal life; causes regression of paramesonephric (Müllerian) ducts',
+  'Aromatase':'Sertoli cells contain aromatase → local conversion of testosterone to estradiol (tubule-level estrogen signaling)',
+  'DHT':'5α-reductase converts testosterone → DHT in target tissues; DHT is ~50× more potent at the androgen receptor; drives external virilization + prostate growth',
+  'BTB junctions':'TIGHT JUNCTIONS between adjacent SERTOLI cells (Sertoli-Sertoli junctions)',
+  'BTB compartments':'BASAL compartment (below junctions) = spermatogonia (open to circulation, mitotic). ADLUMINAL compartment (above junctions) = primary spermatocytes → spermatids → spermatozoa (meiotic + post-meiotic)',
+  'BTB immune':'Meiotic/haploid germ cells express NEW surface antigens not present at fetal immune tolerance → would be seen as foreign without the barrier → prevents autoimmune orchitis',
+  'BTB disruption':'(1) Vasectomy (leakage of sperm antigens); (2) Testicular trauma; (3) Mumps orchitis — any can produce anti-sperm antibodies → infertility',
+  'SCO':'Sertoli-cell-only (Del Castillo) syndrome — seminiferous tubules contain ONLY Sertoli cells (no germ cells); labs: AZOOSPERMIA + ↑↑ FSH, normal LH, normal T',
+  'LH row':'Leydig cells | Testosterone synthesis (via cAMP-PKA → StAR → cholesterol pathway) | Testosterone (own negative feedback on LH)',
+  'FSH row':'Sertoli cells | Supports spermatogenesis; ABP + inhibin B + MIS secretion | INHIBIN B (selective)',
+  'T row':'Neighboring Sertoli cells (paracrine) + peripheral target tissues | Paracrine support of spermatogenesis; virilization; secondary sex characteristics | Own negative feedback on LH and GnRH',
+  'Primary failure':'Hypergonadotropic hypogonadism: ↓ T, ↓ inhibin B → ↑↑ LH, ↑↑ FSH (e.g., Klinefelter, post-chemo, cryptorchidism)',
+  'Secondary failure':'Hypogonadotropic hypogonadism: ↓ GnRH → ↓ LH, ↓ FSH, ↓ T (e.g., Kallmann, pituitary adenoma)',
+  'Steroid abuse':'Exogenous T → suppresses LH → ↓ endogenous T → TESTICULAR ATROPHY + infertility; aromatization → ↑ estradiol → gynecomastia',
+  'SCO pattern':'Isolated ↑ FSH (Sertoli dysfunction → no inhibin B), normal LH, normal T (Leydig intact); azoospermia',
+  'Spermatogonium':'2n, 2C | Mitosis (Type A maintains pool; Type B commits to spermatogenesis) | Basal compartment (below tight junctions)',
+  'Primary spermatocyte':'2n, 4C (DNA replicated) | Meiosis I (long prophase — the cell you usually see on histology) | Moves across tight junctions into adluminal compartment',
+  'Secondary spermatocyte':'1n, 2C | Meiosis II (very brief — rarely seen on histology) | Adluminal compartment',
+  'Spermatid':'1n, 1C | Spermiogenesis (no further division — just remodeling) | Adluminal, near lumen',
+  'Spermatozoon':'1n, 1C | Mature, released into lumen | In the tubule lumen',
+  'Spermatogenesis days':'~74 days from spermatogonium to mature spermatozoon in the seminiferous tubule',
+  'Epididymal maturation':'Additional ~12–21 days for maturation in the epididymis',
+  'One sperm cell yield':'One spermatogonium → 4 mature spermatozoa (contrast: oogenesis → 1 ovum + 3 polar bodies)',
+  'Synchronous cohort':'INCOMPLETE CYTOKINESIS during mitosis/meiosis leaves cytoplasmic bridges between sister germ cells → synchronous development of cohorts',
+  'Acrosome':'ACROSOME — Golgi-derived cap over the nucleus containing hydrolytic enzymes (hyaluronidase + acrosin) for penetrating corona radiata + zona pellucida',
+  'Protamines':'PROTAMINES — replace histones during nuclear condensation → compact, stable haploid nucleus',
+  'Axoneme':'9+2 microtubule arrangement (9 peripheral doublets + 2 central singlets) — centriole-derived; forms the flagellum',
+  'Midpiece':'Mitochondrial sheath coils around the axoneme in the midpiece → ATP for flagellar motility',
+  'Residual bodies':'"RESIDUAL BODIES" — excess cytoplasm shed during spermiogenesis and PHAGOCYTOSED by Sertoli cells',
+  'Head':'Nucleus (haploid) + ACROSOME (Golgi-derived cap of hydrolytic enzymes) | Deliver genome; acrosome reaction penetrates zona pellucida',
+  'Neck':'Proximal centriole + connecting piece | Structural link between head and tail; contributes zygote centriole',
+  'Sperm midpiece':'Axoneme (9+2 microtubules) + MITOCHONDRIAL SHEATH | ATP production for flagellar movement',
+  'Principal piece':'Axoneme + FIBROUS SHEATH (longest tail segment) | Main motile segment; whip-like motion',
+  'End piece':'Axoneme only + plasma membrane (no fibrous sheath) | Terminal tip',
+  'Kartagener':'Dynein arm defect (primary ciliary dyskinesia) → immotile sperm flagella + respiratory cilia + embryonic node cilia. Triad: SITUS INVERSUS + chronic SINUSITIS & BRONCHIECTASIS + INFERTILITY'
+};
+
+const a1={
+  'Tubulus rectus':'Simple cuboidal epithelium (Sertoli-free) | Direct "exit door" from seminiferous tubule → rete testis',
+  'Rete testis':'Simple cuboidal (± occasional microvilli/cilia); embedded in the MEDIASTINUM TESTIS (posterior testicular CT)',
+  'Intratesticular role':'Both are intratesticular — they collect sperm-containing fluid from ALL seminiferous tubules and funnel it into a single exit route toward the efferent ductules',
+  'Efferent # + connection':'~20 small ducts connecting the rete testis to the head (caput) of the epididymis',
+  'Efferent origin':'MESONEPHRIC TUBULES — same origin as kidney tubules → retain strong water/solute-reabsorbing capability',
+  'Efferent cell types':'Alternating TALL CILIATED cells (beat to move sperm) + SHORT NON-CILIATED RESORPTIVE cells (reabsorb fluid)',
+  'Efferent border':'"Scalloped" or "toothed" luminal border — pathognomonic Step 1 buzzphrase',
+  'Efferent function':'Reabsorb ~90% of testicular fluid → CONCENTRATE sperm before they enter the epididymis',
+  'Epididymis length':'~7 meters, highly coiled, single duct on posterior testis',
+  'Epididymis epi':'PSEUDOSTRATIFIED COLUMNAR with STEREOCILIA (long microvilli — NOT true cilia); principal cells + basal cells',
+  'Stereocilia trap':'Stereocilia = LONG MICROVILLI — actin-based, NON-motile, NO 9+2 axoneme. True cilia (respiratory, oviduct, efferent ductules) have 9+2 arrangement and are motile via dynein',
+  'Epididymis functions':'(1) Sperm MATURATION (gain motility + fertilizing capability via epididymal secretions); (2) Sperm STORAGE (up to ~1 month in the tail)',
+  'Head caput':'Receives efferent ductules; initial fluid absorption | Sperm IMMATURE — cannot fertilize yet',
+  'Body corpus':'Progressive maturation; continued absorption + secretion | Sperm gaining motility',
+  'Tail cauda':'Wider lumen slows fluid → STORAGE | Sperm fully mature; can fertilize; stored ~1 month',
+  'Vas epi':'Pseudostratified columnar with stereocilia (similar to epididymis, often shorter stereocilia)',
+  'Vas muscle':'Inner longitudinal + Middle circular (thickest) + Outer longitudinal — three smooth muscle layers',
+  'Vas innervation':'Sympathetic (hypogastric plexus, T10–L2) → peristaltic contraction during emission phase of ejaculation',
+  'Vasectomy testosterone':'Leydig cells are in the testicular INTERSTITIUM — not affected by cutting the duct. LH/testosterone feedback remains intact → T stays normal',
+  'Vasectomy volume':'~70% of ejaculate is seminal vesicle fluid, ~25% prostate — none affected by vasectomy. Sperm-free ejaculate looks the same',
+  'Vasectomy 2-3 months':'Residual mature sperm DISTAL to the ligation (in the ampulla, seminal vesicles, ejaculatory duct) must clear — takes ~2–3 months / ~20 ejaculations. Semen analysis confirms azoospermia before discontinuing backup',
+  'Vasectomy complications':'(1) Sperm granulomas (leaked sperm antigens provoke granulomatous inflammation); (2) Anti-sperm antibodies (crossing damaged blood-testis barrier → can impair later vasectomy-reversal fertility)',
+  'Ampulla location':'Dilated distal end of the vas deferens, located behind the bladder — MIXING site where sperm meets accessory gland secretions',
+  'Ejaculatory duct':'Formed by union of vas ampulla + seminal vesicle duct; ~2 cm long; passes through prostate and opens on the VERUMONTANUM of the prostatic urethra',
+  'Verumontanum':'Seminal colliculus — midline posterior prominence of the prostatic urethra; EJACULATORY DUCTS open here (flanking the prostatic utricle, a Müllerian remnant)',
+  'TR epi':'Simple cuboidal',
+  'TR lumen':'Small, round',
+  'TR muscle':'Minimal',
+  'TR clue':'Straight exit from seminiferous tubule',
+  'RT epi':'Simple cuboidal ± cilia',
+  'RT lumen':'Irregular, anastomosing channels',
+  'RT muscle':'Minimal',
+  'RT clue':'Embedded in MEDIASTINUM TESTIS',
+  'ED epi':'Ciliated + non-ciliated (resorptive) cells',
+  'ED lumen':'SCALLOPED / "toothed" border',
+  'ED muscle':'Thin',
+  'ED clue':'~20 ducts; fluid reabsorption; mesonephric tubule origin',
+  'EP epi':'PSEUDOSTRATIFIED COLUMNAR WITH STEREOCILIA',
+  'EP lumen':'Smooth, regular',
+  'EP muscle':'Thin smooth muscle',
+  'EP clue':'7-m coiled duct; sperm maturation + storage',
+  'VD epi':'Pseudostratified columnar with stereocilia',
+  'VD lumen':'Narrow, irregular (stellate)',
+  'VD muscle':'THREE THICK LAYERS of smooth muscle (inner long + mid circular + outer long)',
+  'VD clue':'Massive muscular wall relative to tiny stellate lumen — #1 distinguishing feature'
+};
+
+const a2={
+  'SV row':'~65–70% | FRUCTOSE, prostaglandins, alkaline mucus, SEMENOGELIN | Nourish sperm (fructose = energy); initial semen coagulum via semenogelin',
+  'Prostate row':'~20–25% | PSA, acid phosphatase, zinc, citrate, proteolytic enzymes | LIQUEFY coagulum (PSA cleaves semenogelin); activate sperm',
+  'Cowper row':'<5% | Clear mucus (pre-ejaculate) | Neutralize urethral acidity; lubricate urethra',
+  'Epi+vas row':'<5% | Mature sperm (~200–400 million/ejaculate) | Deliver the actual gametes',
+  'SV location':'Paired glands posterior to the bladder; each empties into the ipsilateral vas deferens to form the ejaculatory duct',
+  'SV histo':'Highly folded / labyrinthine mucosa = "HONEYCOMB" appearance; pseudostratified/simple columnar; lipofuscin pigment (golden-brown) accumulates with age',
+  'SV storage trap':'NO — seminal vesicles are NOT a sperm storage site. Sperm transit through but are not stored here',
+  'Fructose clinical':'Absent semen fructose → suggests EJACULATORY DUCT OBSTRUCTION or CONGENITAL ABSENCE OF SEMINAL VESICLES (often seen with CBAVD)',
+  'CBAVD':'Congenital Bilateral Absence of the Vas Deferens — associated with CFTR mutations (cystic fibrosis spectrum). Often paired with absent seminal vesicles → LOW EJACULATE VOLUME + ABSENT FRUCTOSE + obstructive azoospermia',
+  'Peripheral zone':'~70% | ~70% of PROSTATE CANCERS (posterior — palpable on DRE)',
+  'Central zone':'~25% | ~5% of cancers',
+  'Transition zone':'~5% (young) → expands with age | BPH ARISES HERE → compresses urethra → obstructive symptoms',
+  'Anterior fibromuscular':'~0% glandular | No glands, no cancer',
+  'Corpora amylacea':'Small, round, eosinophilic, concentrically laminated calcified bodies in prostatic lumina; increase with age; BENIGN — classic histologic signature but NOT diagnostic of cancer',
+  'Two-cell layer':'Normal/BPH: inner luminal secretory + outer basal. Prostate adenocarcinoma = LOSS of basal cell layer (confirmed with p63, HMWCK stains)',
+  'PSA':'Prostate-specific antigen = serine protease; cleaves semenogelin to liquefy semen coagulum; clinical biomarker for BPH and prostate cancer surveillance',
+  'Prostate secretions':'Acid phosphatase, zinc, citrate, proteolytic enzymes (+ PSA)',
+  'DHT prostate':'DHT (from 5α-reductase conversion of T) specifically drives prostate growth and secretion — basis for finasteride/dutasteride therapy',
+  'BPH zone':'TRANSITION zone (central, around urethra)',
+  'Cancer zone':'PERIPHERAL zone (posterior)',
+  'BPH symptoms':'Urinary obstructive (hesitancy, weak stream, nocturia, incomplete emptying) from urethral compression',
+  'Cancer symptoms':'Often asymptomatic early; late: BONE PAIN (osteoblastic mets to lumbar spine + pelvis)',
+  'BPH DRE':'Symmetric, rubbery enlargement',
+  'Cancer DRE':'Nodular, hard, asymmetric mass',
+  'BPH histo':'Hyperplasia (↑ glands + stroma) with RETAINED two-cell layer',
+  'Cancer histo':'Adenocarcinoma; LOSS of basal cells; small crowded glands, prominent nucleoli',
+  'BPH labs':'Mildly elevated PSA',
+  'Cancer labs':'Markedly elevated PSA; ↑ acid phosphatase; ↑ alk phos (bone mets)',
+  'BPH Rx':'α1 blockers (TAMSULOSIN — relax smooth muscle, immediate symptom relief) + 5α-reductase inhibitors (FINASTERIDE, dutasteride — shrink volume over months); TURP surgery if refractory',
+  'Cancer Rx':'Active surveillance (low risk); radical prostatectomy; radiation; ANDROGEN DEPRIVATION (GnRH agonists — leuprolide; AR antagonists — bicalutamide, enzalutamide; abiraterone CYP17i)',
+  'Prostate cancer epi':'MOST COMMON CANCER IN MEN; 2nd most common cause of cancer death. Spreads via OSTEOBLASTIC bone metastases (unlike most cancers which are osteolytic) — classic lumbar spine + pelvis',
+  'Gleason':'Gleason score — histologic grade (2 scores summed, 2–10). Guides risk stratification and treatment alongside PSA + DRE',
+  'ADT classes':'(1) GnRH AGONISTS (leuprolide — initial flare then sustained suppression); (2) GnRH ANTAGONISTS (degarelix — no flare); (3) AR ANTAGONISTS (bicalutamide, enzalutamide, flutamide); (4) CYP17 inhibitor — abiraterone',
+  'Finasteride PSA':'Finasteride (and dutasteride) lowers PSA by ~50% — must DOUBLE measured PSA or use a separate reference range when screening patients on these drugs',
+  'Cowper size':'Pea-sized, located at base of penis within the urogenital diaphragm',
+  'Cowper histo':'Simple columnar mucus-secreting cells SURROUNDED BY SKELETAL MUSCLE (from the urogenital diaphragm / external urethral sphincter) — pathognomonic Step 1 feature',
+  'Cowper functions':'(1) Neutralize urethral acidity (protect sperm from residual acidic urine); (2) Lubricate the urethra before ejaculation; (3) Shield the urethra from destructive enzymes in ejaculate',
+  'Cowper homologue':'Female homologue = BARTHOLIN\'S (greater vestibular) glands; both derived from the urogenital sinus',
+  'Erectile bodies':'Three: paired CORPORA CAVERNOSA (2) + single CORPUS SPONGIOSUM (1)',
+  'Urethra body':'Corpus spongiosum contains the penile (spongy) urethra',
+  'Rigidity body':'Corpora cavernosa provide primary rigidity — surrounded by rigid TUNICA ALBUGINEA that traps blood by compressing emissary veins against it',
+  'Spongiosum compressible':'Corpus spongiosum has a THINNER tunica albuginea → stays compressible during erection so the urethra stays patent for ejaculation',
+  'Erection':'PARASYMPATHETIC (S2–S4 pelvic splanchnics) | ACh + NO release → ↑ cGMP in smooth muscle via guanylate cyclase → relaxation → helicine artery dilation → sinusoid engorgement → emissary vein compression against tunica albuginea → blood trapped → erection',
+  'Emission':'SYMPATHETIC (hypogastric nerves, T10–L2) | Peristalsis of epididymis, vas deferens, accessory glands → semen propelled into prostatic urethra; internal urethral sphincter contracts to prevent retrograde flow',
+  'Ejaculation expulsion':'SOMATIC (pudendal nerve, S2–S4) | Bulbospongiosus + ischiocavernosus contractions expel semen out of the urethra',
+  'PDE5':'Sildenafil, tadalafil, vardenafil — block PDE5 (which breaks down cGMP) → prolonged smooth-muscle relaxation → sustained erection',
+  'PDE5 + nitrates':'Nitrates produce NO → ↑ cGMP; PDE5i prevents cGMP breakdown. COMBINATION → severe vasodilation → life-threatening hypotension + MI. ABSOLUTE contraindication',
+  'Priapism':'Prolonged erection >4 hours — urologic emergency (risk of permanent ED if untreated). Common causes: PDE5 inhibitor overuse, sickle cell disease, trazodone',
+  'ED causes':'Autonomic injury from: (1) Pelvic surgery (radical prostatectomy); (2) Diabetes (autonomic neuropathy); (3) Spinal cord injury / pelvic trauma'
+};
+
+const a3={
+  'IUS muscle':'Smooth muscle',
+  'EUS muscle':'Skeletal muscle',
+  'IUS voluntary':'NO — involuntary',
+  'EUS voluntary':'YES — voluntary',
+  'IUS innervation':'Sympathetic α1-adrenergic (from hypogastric plexus)',
+  'EUS innervation':'Somatic PUDENDAL nerve (S2–S4) — "S2, 3, 4 keeps the penis off the floor"',
+  'IUS role':'Prevents retrograde ejaculation (contracts during emission); involuntary urinary continence',
+  'EUS role':'Voluntary urinary continence',
+  'Retrograde mechanism':'INTERNAL urethral sphincter fails to close during emission → semen flows backward into the bladder (rather than forward through the meatus)',
+  'Retrograde presentation':'Low-volume or "dry" ejaculate; preserved orgasm; CLOUDY POST-COITAL URINE containing sperm (diagnostic)',
+  'Retrograde causes':'(1) α1 blockers (TAMSULOSIN); (2) Diabetic autonomic neuropathy; (3) Post-prostatectomy / TURP; (4) Spinal cord injury',
+  'Tamsulosin no incontinence':'Tamsulosin blocks α1-mediated INTERNAL sphincter tone (smooth muscle) — but the EXTERNAL sphincter is SKELETAL muscle controlled by the pudendal nerve, not α1 — so urinary continence is preserved',
+  'Prost length':'~3–4 cm',
+  'Prost epi':'TRANSITIONAL (urothelium) — same as bladder',
+  'Prost surrounding':'Prostate gland',
+  'Prost landmark':'VERUMONTANUM + ejaculatory duct openings (flanking prostatic utricle); internal urethral sphincter at bladder neck',
+  'Memb length':'~1–2 cm (SHORTEST segment)',
+  'Memb epi':'Pseudostratified or stratified columnar',
+  'Memb surrounding':'Urogenital diaphragm; encircled by EXTERNAL URETHRAL SPHINCTER (skeletal muscle)',
+  'Memb landmark':'Shortest segment; most common site of TRAUMATIC RUPTURE in pelvic fractures',
+  'Pen length':'~15 cm (LONGEST segment)',
+  'Pen epi':'Pseudostratified/stratified columnar; STRATIFIED SQUAMOUS non-keratinized near meatus (fossa navicularis)',
+  'Pen surrounding':'Corpus spongiosum',
+  'Pen landmark':'GLANDS OF LITTRÉ (mucus glands along the wall); Cowper\'s (bulbourethral) duct openings',
+  'Verumontanum full':'Midline prominence on the posterior wall of the prostatic urethra; ejaculatory ducts open here. PROSTATIC UTRICLE (a blind-ending pouch between the openings) is a Müllerian-duct REMNANT — analogous to uterus/upper vagina in females',
+  'Glands of Littré':'Small mucus-secreting glands along the wall of the penile (spongy) urethra — provide lubrication during passage of ejaculate',
+  'Fossa navicularis':'Dilated distal portion of the penile urethra, just proximal to the external urethral meatus; lined by STRATIFIED SQUAMOUS non-keratinized epithelium (transitioning to keratinized glans skin)',
+  'Pelvic fracture':'Disrupts the MEMBRANOUS urethra — it\'s the shortest, narrowest, and MOST FIXED segment (passes through urogenital diaphragm); pelvic diastasis shears it',
+  'Straddle injury':'Ruptures the BULBOUS (proximal penile) urethra — perineal bruising in a classic "BUTTERFLY" pattern',
+  'Injury red flags':'(1) Blood at urethral meatus; (2) Inability to void; (3) Perineal bruising; (4) HIGH-RIDING PROSTATE on DRE (prostate displaced superiorly from urethral discontinuity)',
+  'Injury next step':'RETROGRADE URETHROGRAM before any catheter attempt (blind catheterization can convert partial tear to complete + create false passage). Urgent bladder drainage: SUPRAPUBIC CYSTOSTOMY bypasses the urethra',
+  'PUV':'POSTERIOR URETHRAL VALVES — congenital mucosal flaps in the PROSTATIC urethra of male infants → severe bladder outlet obstruction → hydronephrosis, oligohydramnios (Potter sequence), often fatal without in-utero or neonatal intervention',
+  'Stricture causes':'(1) Post-trauma; (2) Post-infection (classically gonococcal); (3) Iatrogenic (repeat catheterization, instrumentation)',
+  'GC urethritis':'Neisseria gonorrhoeae (Gram-negative intracellular diplococci) | THICK, PURULENT YELLOW discharge; symptomatic <1 week post-exposure',
+  'NGU':'Chlamydia trachomatis (most common); also Mycoplasma genitalium, Ureaplasma, Trichomonas | Thinner, watery discharge; often minimally symptomatic or asymptomatic',
+  'Urethritis Rx':'Empirically cover BOTH: CEFTRIAXONE (GC) + DOXYCYCLINE (Chlamydia) — always co-treat; also test+treat partners',
+  'Reactive arthritis':'Triad "can\'t SEE, can\'t PEE, can\'t climb a TREE" = conjunctivitis + urethritis + arthritis. Associated with HLA-B27 and post-infectious (Chlamydia, Salmonella, Shigella, Yersinia, Campylobacter)',
+  'Urethra malignancy':'Epithelium predicts histology: PROXIMAL (prostatic, transitional epithelium) = urothelial/transitional cell carcinoma. DISTAL (penile, near meatus, squamous epithelium) = SQUAMOUS CELL CARCINOMA'
+};
+
+function rev(id,obj){
+  const el=document.getElementById(id);
+  el.style.display='block';
+  el.innerHTML='<strong>Answer key:</strong><br><br>'+Object.entries(obj).map(([k,v])=>`<b>${k}:</b> ${v}`).join('<br><br>');
+}
+</script>
+</body></html>
