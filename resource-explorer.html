@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HoyaDocs | Repro Resource Explorer</title>
+<script>(function(){const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sb:#0d2416;--bg:#f4f8f5;--surface:#ffffff;--ink:#0f172a;--ink-2:#334155;--ink-3:#64748b;
+  --rule:#e2e8f0;--card-sh:0 1px 3px rgba(0,0,0,0.05);--accent:#9f1239;--accent-light:#dcfce7;
+  --accent-muted:#86efac;--hero-em:#9f1239;--radius:10px;
+}
+[data-theme="dark"]{
+  --bg:#0a1f10;--surface:#3d141e;--ink:#f1f5f9;--ink-2:#cbd5e1;--ink-3:#94a3b8;
+  --rule:#1e4a2a;--card-sh:0 1px 3px rgba(0,0,0,0.4);--accent-light:#0a2218;--hero-em:#fb7185;
+  --accent-muted:#9f1239;
+}
+html,body{height:100%}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;transition:background .2s,color .2s}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+
+/* ── TOPBAR ── */
+.topbar{
+  background:var(--sb);color:#fff;padding:16px 28px;display:flex;align-items:center;gap:14px;
+  position:sticky;top:0;z-index:100;
+}
+.topbar-brand{font-size:1.25rem;font-weight:800;letter-spacing:-.01em}
+.topbar-sep{width:1px;height:24px;background:rgba(255,255,255,.15)}
+.topbar-title{font-size:.95rem;font-weight:500;opacity:.85}
+.topbar-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.dark-toggle{
+  width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.12);
+  background:transparent;color:#fff;font-size:1rem;display:grid;place-items:center;
+  transition:background .15s;
+}
+.dark-toggle:hover{background:rgba(255,255,255,.08)}
+.back-link{
+  font-size:.85rem;padding:6px 14px;border-radius:7px;
+  background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.1);
+  transition:background .15s;text-decoration:none;
+}
+.back-link:hover{background:rgba(255,255,255,.14)}
+
+/* ── LAYOUT ── */
+.container{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
+
+/* ── STEPPER ── */
+.stepper{display:flex;gap:0;margin-bottom:32px;background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-sh);border:1px solid var(--rule)}
+.step{
+  flex:1;padding:14px 18px;display:flex;align-items:center;gap:10px;
+  border-right:1px solid var(--rule);position:relative;
+  transition:background .15s;cursor:default;opacity:.45;
+}
+.step:last-child{border-right:none}
+.step.active{opacity:1;background:var(--accent-light)}
+.step.done{opacity:.7}
+.step-num{
+  width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;
+  display:grid;place-items:center;font-weight:700;font-size:.8rem;flex-shrink:0;
+}
+.step.done .step-num{background:var(--accent-muted)}
+.step-label{font-size:.85rem;font-weight:600;color:var(--ink)}
+.step-sub{font-size:.75rem;color:var(--ink-3);margin-top:1px}
+
+/* ── CARDS ── */
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:var(--card-sh);padding:24px;margin-bottom:20px}
+.card-title{font-size:1.1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+
+/* ── LECTURE SELECT ── */
+.lecture-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.lec-btn{
+  padding:12px 16px;border:2px solid var(--rule);border-radius:8px;
+  background:var(--surface);text-align:left;transition:all .15s;cursor:pointer;
+}
+.lec-btn:hover{border-color:var(--accent);background:var(--accent-light)}
+.lec-btn.selected{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 3px rgba(22,101,52,.15)}
+.lec-btn .lec-class{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}
+.lec-btn .lec-name{font-size:.9rem;font-weight:600;margin-top:2px}
+.lec-btn .lec-info{font-size:.75rem;color:var(--ink-3);margin-top:2px}
+
+/* ── RESOURCE SELECT ── */
+.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.res-btn{
+  padding:14px 16px;border:2px solid var(--rule);border-radius:8px;
+  background:var(--surface);text-align:center;transition:all .15s;cursor:pointer;
+  position:relative;
+}
+.res-btn:hover{border-color:var(--accent)}
+.res-btn.selected{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 3px rgba(22,101,52,.15)}
+.res-btn.disabled{opacity:.35;pointer-events:none}
+.res-btn .res-icon{font-size:1.4rem;margin-bottom:4px}
+.res-btn .res-name{font-size:.85rem;font-weight:700}
+.res-btn .res-type{font-size:.7rem;color:var(--ink-3);margin-top:2px}
+.res-btn .res-badge{
+  position:absolute;top:6px;right:8px;font-size:.6rem;font-weight:700;
+  padding:2px 6px;border-radius:4px;background:#fef3c7;color:#92400e;
+}
+.select-all-row{display:flex;gap:10px;margin-bottom:12px;align-items:center}
+.select-all-btn{
+  padding:6px 14px;border-radius:6px;border:1px solid var(--rule);
+  background:var(--surface);font-size:.8rem;font-weight:600;transition:all .15s;
+}
+.select-all-btn:hover{background:var(--accent-light);border-color:var(--accent)}
+
+/* ── FIELD SELECT ── */
+.field-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.field-btn{
+  padding:14px 16px;border:2px solid var(--rule);border-radius:8px;
+  background:var(--surface);text-align:left;transition:all .15s;cursor:pointer;
+}
+.field-btn:hover{border-color:var(--accent)}
+.field-btn.selected{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 3px rgba(22,101,52,.15)}
+.field-btn .field-icon{font-size:1.2rem;margin-bottom:4px}
+.field-btn .field-name{font-size:.85rem;font-weight:700}
+.field-btn .field-desc{font-size:.72rem;color:var(--ink-3);margin-top:2px}
+
+/* ── BUTTONS ── */
+.btn-row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{
+  padding:10px 22px;border-radius:8px;font-weight:600;font-size:.88rem;
+  border:none;transition:all .15s;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#14532d}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-outline{background:transparent;border:2px solid var(--rule);color:var(--ink)}
+.btn-outline:hover{border-color:var(--accent);background:var(--accent-light)}
+.btn-export{background:#1e40af;color:#fff}
+.btn-export:hover{background:#1e3a8a}
+
+/* ── RESULTS ── */
+.results-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.results-title{font-size:1.2rem;font-weight:800}
+.results-subtitle{font-size:.85rem;color:var(--ink-3)}
+
+.resource-result{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--card-sh);margin-bottom:16px;overflow:hidden;
+}
+.rr-header{
+  padding:16px 20px;display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid var(--rule);cursor:pointer;transition:background .15s;
+}
+.rr-header:hover{background:var(--accent-light)}
+.rr-icon{font-size:1.3rem}
+.rr-name{font-size:1rem;font-weight:700;flex:1}
+.rr-stats{display:flex;gap:12px;font-size:.78rem;color:var(--ink-3)}
+.rr-stat{display:flex;align-items:center;gap:4px}
+.rr-stat strong{color:var(--ink);font-weight:700}
+.rr-chevron{font-size:.8rem;transition:transform .2s;color:var(--ink-3)}
+.rr-header.open .rr-chevron{transform:rotate(90deg)}
+
+.rr-body{padding:0 20px 20px;display:none}
+.rr-body.open{display:block}
+
+/* ── SECTIONS WITHIN RESULTS ── */
+.section-card{
+  background:var(--bg);border:1px solid var(--rule);border-radius:8px;
+  padding:14px 16px;margin-top:12px;
+}
+.sc-title{font-size:.88rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.sc-meta{display:flex;gap:16px;font-size:.78rem;color:var(--ink-3);margin-bottom:10px;flex-wrap:wrap}
+.sc-meta-item{display:flex;align-items:center;gap:4px}
+.sc-meta-item strong{color:var(--ink);font-weight:600}
+
+/* ── TAGS DISPLAY ── */
+.tags-wrap{margin-top:8px}
+.tags-label{font-size:.72rem;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.tag-list{display:flex;flex-wrap:wrap;gap:4px}
+.tag-chip{
+  font-size:.68rem;padding:3px 8px;border-radius:5px;
+  background:var(--accent-light);color:var(--accent);font-family:'Menlo','Consolas',monospace;
+  border:1px solid var(--accent-muted);word-break:break-all;cursor:pointer;
+  transition:background .15s;
+}
+.tag-chip:hover{background:var(--accent-muted)}
+.tag-chip.copied{background:#fef3c7;color:#92400e;border-color:#fbbf24}
+
+/* ── SUBCHAPTER TABLE ── */
+.sub-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:8px}
+.sub-table th{
+  text-align:left;padding:6px 10px;background:var(--surface);
+  border-bottom:2px solid var(--rule);font-weight:700;color:var(--ink-2);font-size:.72rem;
+  text-transform:uppercase;letter-spacing:.03em;
+}
+.sub-table td{padding:6px 10px;border-bottom:1px solid var(--rule)}
+.sub-table tr:last-child td{border-bottom:none}
+.sub-table .cards-col{text-align:center;font-weight:700;color:var(--accent)}
+.sub-table .tag-col{font-family:'Menlo','Consolas',monospace;font-size:.65rem;color:var(--ink-2);word-break:break-all;cursor:pointer}
+.sub-table .tag-col:hover{color:var(--accent)}
+
+/* ── EMPTY / NOTICE ── */
+.notice{
+  padding:16px 20px;background:#fef3c7;border:1px solid #fbbf24;
+  border-radius:8px;font-size:.85rem;color:#78350f;margin-top:12px;
+}
+
+/* ── COPY TOAST ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;background:#9f1239;color:#fff;
+  padding:10px 20px;border-radius:8px;font-size:.85rem;font-weight:600;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:999;opacity:0;
+  transform:translateY(10px);transition:all .2s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .stepper{flex-direction:column}
+  .step{border-right:none;border-bottom:1px solid var(--rule)}
+  .container{padding:16px 12px 40px}
+  .lecture-grid{grid-template-columns:1fr}
+  .resource-grid{grid-template-columns:1fr 1fr}
+  .field-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body><div style="position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#fff1f2;border:1px solid #fda4af;color:#9f1239;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;z-index:499;box-shadow:0 2px 8px rgba(159,18,57,0.1);">
+  ⓘ Repro Anki deck drill-down coming soon — Resource Hub + Mapping pages have full data
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-brand">HoyaDocs</div>
+  <div class="topbar-sep"></div>
+  <div class="topbar-title">Repro Resource Explorer</div>
+  <div class="topbar-right">
+    <a class="back-link" href="./index.html">&larr; Hub Home</a>
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()">&#127769;</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- STEPPER -->
+  <div class="stepper" id="stepper">
+    <div class="step active" data-step="1">
+      <div class="step-num">1</div>
+      <div><div class="step-label">Select Lecture</div><div class="step-sub">Choose a Repro lecture</div></div>
+    </div>
+    <div class="step" data-step="2">
+      <div class="step-num">2</div>
+      <div><div class="step-label">Select Resources</div><div class="step-sub">Pick study resources</div></div>
+    </div>
+    <div class="step" data-step="3">
+      <div class="step-num">3</div>
+      <div><div class="step-label">Select Fields</div><div class="step-sub">Choose export data</div></div>
+    </div>
+    <div class="step" data-step="4">
+      <div class="step-num">4</div>
+      <div><div class="step-label">Results</div><div class="step-sub">View & export</div></div>
+    </div>
+  </div>
+
+  <!-- PANELS -->
+  <div id="panel-1" class="panel">
+    <div class="card">
+      <div class="card-title">&#128218; Select a Repro Lecture</div>
+      <div class="lecture-grid" id="lectureGrid"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btnNext1" disabled onclick="goStep(2)">Next: Select Resources &rarr;</button>
+    </div>
+  </div>
+
+  <div id="panel-2" class="panel" style="display:none">
+    <div class="card">
+      <div class="card-title">&#128214; Select Resources</div>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:14px">Choose which in-house or 3rd-party resources to explore for the selected lecture. Greyed-out resources have no mapping for this lecture.</p>
+      <div class="select-all-row">
+        <button class="select-all-btn" onclick="selectAllResources()">Select All Available</button>
+        <button class="select-all-btn" onclick="clearAllResources()">Clear All</button>
+      </div>
+      <div class="resource-grid" id="resourceGrid"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goStep(1)">&larr; Back</button>
+      <button class="btn btn-primary" id="btnNext2" disabled onclick="goStep(3)">Next: Select Fields &rarr;</button>
+    </div>
+  </div>
+
+  <div id="panel-3" class="panel" style="display:none">
+    <div class="card">
+      <div class="card-title">&#9881;&#65039; Select Export Fields</div>
+      <p style="font-size:.82rem;color:var(--ink-3);margin-bottom:14px">Choose which data fields to display and export for each selected resource.</p>
+      <div class="field-grid" id="fieldGrid"></div>
+      <div class="notice" style="margin-top:14px;background:var(--accent-light);border-color:var(--accent-muted);color:var(--accent)">
+        <strong>Note:</strong> First Aid, Block4 Anki, and GUSOM Anki are reference-only resources &mdash; they provide Anki tags and card counts but do not have mapped lectures or watch times.
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goStep(2)">&larr; Back</button>
+      <button class="btn btn-primary" id="btnSubmit" disabled onclick="showResults()">Submit &amp; View Results</button>
+    </div>
+  </div>
+
+  <div id="panel-4" class="panel" style="display:none">
+    <div class="results-header">
+      <div>
+        <div class="results-title" id="resultsTitle"></div>
+        <div class="results-subtitle" id="resultsSub"></div>
+      </div>
+      <div class="btn-row" style="margin-top:0">
+        <button class="btn btn-outline" onclick="goStep(1)">&#8634; Start Over</button>
+        <button class="btn btn-export" onclick="exportExcel()">&#128229; Export to Excel</button>
+      </div>
+    </div>
+    <div id="resultsContainer"></div>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════
+// DATA
+// ══════════════════════════════════════
+const MAPPING = [{"class": 1, "classLabel": "1", "subject": "Embr", "lecture": "IL Urogenital Primer", "lecturer": "", "los": [{"header": "IL Urogenital Primer", "items": ["Be able to relate normal urogenital development to clinical abnormalities", "Distinguish anatomical changes over time", "Identify the timing of divergence between the two systems"]}], "uworld_qids": [], "bootcamp": [{"section": "Ch. 1 · Fetal Development", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch01.html", "count": 72, "subchapters": "1.01 Early Development · 1.02 Germ Layers", "xref": ""}], "bb": [{"section": "Ch. 1 · Embryology", "html": "./Repro%20Anki/BnB/BNB-Ch01.html", "count": 28, "subchapters": "1.02 Embryogenesis · 1.03 Germ Layers", "xref": ""}], "pathoma": [], "physeo": [{"section": "Embryology · Ch. 1", "html": "./Repro%20Anki/Physeo/Physeo-Embryology-Ch01.html", "count": 52, "subchapters": "physeo-embryo 1.01 Early Fetal Development · physeo-embryo 1.03 Embryologic Derivatives", "xref": ""}], "sketchy": []}, {"class": 2, "classLabel": "2", "subject": "Embr", "lecture": "Urogenital System", "lecturer": "", "los": [{"header": "Urogenital System", "items": ["Correlate embryological development of the genitourinary system to clinical concepts"]}], "uworld_qids": [{"qid": 1809, "topic": "Amenorrhea", "subject": "Embryology (Embr)", "repeats": 2, "lectures": "Class 2"}, {"qid": 8390, "topic": "Imperforate hymen", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 2"}, {"qid": 1831, "topic": "Mullerian anomalies", "subject": "Embryology (Embr)", "repeats": 1, "lectures": "Class 2"}, {"qid": 256, "topic": "Turner syndrome", "subject": "Genetics (Gene)", "repeats": 6, "lectures": "Class 2"}, {"qid": 339, "topic": "Turner syndrome", "subject": "Genetics (Gene)", "repeats": 6, "lectures": "Class 2"}, {"qid": 1810, "topic": "Turner syndrome", "subject": "Genetics (Gene)", "repeats": 6, "lectures": "Class 2"}, {"qid": 7489, "topic": "Turner syndrome", "subject": "Genetics (Gene)", "repeats": 6, "lectures": "Class 2"}, {"qid": 1870, "topic": "Hypospadia and epispadia", "subject": "Embryology (Embr)", "repeats": 1, "lectures": "Class 2"}, {"qid": 343, "topic": "Klinefelter syndrome", "subject": "Genetics (Gene)", "repeats": 3, "lectures": "Class 2"}, {"qid": 1055, "topic": "Klinefelter syndrome", "subject": "Pathology (Path)", "repeats": 3, "lectures": "Class 2"}, {"qid": 1427, "topic": "Mullerian inhibitory factor", "subject": "Embryology (Embr)", "repeats": 1, "lectures": "Class 2"}, {"qid": 1449, "topic": "Sexual differentiation", "subject": "Embryology (Embr)", "repeats": 2, "lectures": "Class 2"}, {"qid": 12225, "topic": "Mosaicism", "subject": "Genetics (Gene)", "repeats": 1, "lectures": "Class 2"}], "bootcamp": [{"section": "Ch. 1 · Fetal Development", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch01.html", "count": 129, "subchapters": "1.05 Sexual Differentiation · 1.06 Disorders of Genital Embryology · 1.07 Chromosomal Disorders · 1.08 Disorders of Sexual Development Part 1 · 1.09 Disorders of Sexual Development Part 2", "xref": ""}], "bb": [{"section": "Ch. 1 · Embryology", "html": "./Repro%20Anki/BnB/BNB-Ch01.html", "count": 44, "subchapters": "1.10 Genital Embryology", "xref": ""}, {"section": "Ch. 7 · Other", "html": "./Repro%20Anki/BnB/BNB-Ch07.html", "count": 36, "subchapters": "7.01 Disorders of Sexual Development", "xref": ""}], "pathoma": [], "physeo": [{"section": "Embryology · Ch. 1", "html": "./Repro%20Anki/Physeo/Physeo-Embryology-Ch01.html", "count": 36, "subchapters": "physeo-embryo 1.11 Normal Genital Development · physeo-embryo 1.12 Pathology of Genital Development", "xref": ""}], "sketchy": []}, {"class": 3, "classLabel": "3", "subject": "Hist", "lecture": "Female Reproductive System", "lecturer": "", "los": [{"header": "Female Reproductive System", "items": ["Know the structure and function of the different follicles in the ovary.", "Know the different components of the oviduct.", "Know the structure of the uterus and understand the integration of pituitary hormones and follicular development as they pertain to the menstrual cycle.", "Know the structure and function of the vagina, vestibular glands, external genitalia and mammary glands"]}], "uworld_qids": [{"qid": 2056, "topic": "Female genital tract histology", "subject": "Pathology (Path)", "repeats": 1, "lectures": "Class 3"}], "bootcamp": [{"section": "Ch. 1 · Fetal Development", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch01.html", "count": 31, "subchapters": "1.11 Female Anatomy", "xref": ""}], "bb": [], "pathoma": [], "physeo": [{"section": "Anatomy · Ch. 6", "html": "./Repro%20Anki/Physeo/Physeo-Anatomy-Ch06.html", "count": 7, "subchapters": "physeo-anat 6.01 Female Repro Organs", "xref": ""}], "sketchy": []}, {"class": 4, "classLabel": "4", "subject": "Hist", "lecture": "Male Reproductive System", "lecturer": "", "los": [{"header": "Male Reproductive System", "items": ["Know the structure and function the testis. Understand the process of spermatogenesis.", "Know the different components of the excurrent ducts, how to distinguish between them, and their function.", "Know the structure and function of the accessary glands and penis.", "Know the structure of the different components of the urethra."]}], "uworld_qids": [{"qid": 8326, "topic": "Scrotum", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 4"}], "bootcamp": [{"section": "Ch. 1 · Fetal Development", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch01.html", "count": 36, "subchapters": "1.10 Male Anatomy", "xref": ""}], "bb": [], "pathoma": [], "physeo": [{"section": "Anatomy · Ch. 6", "html": "./Repro%20Anki/Physeo/Physeo-Anatomy-Ch06.html", "count": 20, "subchapters": "physeo-anat 6.04 Male Repro Organs", "xref": ""}], "sketchy": []}, {"class": 5, "classLabel": "5 & 6", "subject": "Phys", "lecture": "Endocrinology of the Ovary & Female Reproductive Tract I & II", "lecturer": "", "los": [{"header": "Endocrinology of the Ovary & Female Reproductive Tract I & II", "items": ["DISCUSS the structure and functional compartments of the ovary.", "EXPLAIN the differences between estrogen negative and estrogen positive feedback on the hypothalamic-pituitary unit.", "DESCRIBE the endometrial events in the menstrual cycle.", "DESCRIBE the steroid precursors of androgens and estrogens.", "DESCRIBE the development of the dominant follicle.", "DESCRIBE the effects of estrogen and progesterone on various tissues of the female reproductive tract.", "DISCUSS the mechanisms of action of oral contraceptives", "DESCRIBE the function of inhibin; where is it synthesized? DESCRIBE the relationship of inhibin to activin"]}], "uworld_qids": [{"qid": 299, "topic": "Apoptosis", "subject": "Physiology (Phys)", "repeats": 1, "lectures": "Class 5 & 6"}, {"qid": 1560, "topic": "Estrogen synthesis", "subject": "Physiology (Phys)", "repeats": 1, "lectures": "Class 5 & 6"}, {"qid": 1317, "topic": "Menstrual cycle", "subject": "Physiology (Phys)", "repeats": 2, "lectures": "Class 5 & 6"}, {"qid": 1986, "topic": "Menstrual cycle", "subject": "Physiology (Phys)", "repeats": 2, "lectures": "Class 5 & 6"}], "bootcamp": [{"section": "Ch. 2 · Pregnancy and Menstruation", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch02.html", "count": 118, "subchapters": "2.01 Gametogenesis · 2.03 Menstrual Cycle · 2.04 Menstrual Cycle Disorders", "xref": ""}], "bb": [{"section": "Ch. 2 · Pregnancy", "html": "./Repro%20Anki/BnB/BNB-Ch02.html", "count": 18, "subchapters": "2.01 Spermatogenesis and Oogenesis", "xref": ""}], "pathoma": [], "physeo": [{"section": "Physiology · Ch. 7", "html": "./Repro%20Anki/Physeo/Physeo-Physiology-Ch07.html", "count": 50, "subchapters": "physeo-phys 7.03 Menstrual Cycle & Oogenesis · physeo-phys 7.06 Integrated Female Physiology", "xref": ""}], "sketchy": [{"section": "SketchyPhysiology · Ch. 4", "html": "./Repro%20Anki/Sketchy/SketchyPhysiology-Ch04.html", "count": 7, "subchapters": "sketchy-phys 4.04.02 Anterior Pituitary (FSH/LH/Prolactin)", "xref": ""}, {"section": "SketchyPhysiology · Ch. 5", "html": "./Repro%20Anki/Sketchy/SketchyPhysiology-Ch05.html", "count": 23, "subchapters": "sketchy-phys 5.02.02 Menstrual Cycle", "xref": ""}]}, {"class": 7, "classLabel": "7", "subject": "Anat", "lecture": "Pelvic Structure & Neurovasculature", "lecturer": "", "los": [{"header": "Pelvic Structure & Neurovasculature", "items": ["Identify the pelvic organs and discuss their functions and relationships to other structures and spaces of the pelvic cavity.", "Explain the autonomic innervation of the pelvis and explain their functional contributions to the pelvic viscera.", "Outline the basic steps of micturition, erection, and ejaculation and distinguish the differing sources of nerve stimulation and their targets throughout these processes."]}], "uworld_qids": [{"qid": 11800, "topic": "Erectile dysfunction", "subject": "Anatomy (Anat)", "repeats": 2, "lectures": "Class 7"}], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [{"section": "Anatomy · Ch. 6", "html": "./Repro%20Anki/Physeo/Physeo-Anatomy-Ch06.html", "count": 12, "subchapters": "physeo-anat 6.02 Female Ligaments & Local Structures", "xref": ""}], "sketchy": [{"section": "SketchyAnatomy · Ch. 5", "html": "./Repro%20Anki/Sketchy/SketchyAnatomy-Ch05.html", "count": 3, "subchapters": "sketchy-anat 5.01.01 Branches of Iliac Arteries (Pelvis)", "xref": ""}]}, {"class": 8, "classLabel": "8", "subject": "Phys-Bioch", "lecture": "CCS 1: Ovary and Female Reproductive Tract", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 9, "classLabel": "9", "subject": "Anat", "lecture": "Pelvic Viscera & Perineum", "lecturer": "", "los": [{"header": "Pelvic Viscera & Perineum", "items": ["Distinguish between the individual bones of the pelvis and label important landmarks.", "Describe the pathway of the pudendal nerve and distinguish between its motor and sensory functions.", "Identify the muscles of the pelvic floor and describe its functions.", "Demonstrate an understanding of the layers, musculature, and genitalia comprising the male and female perineum"]}], "uworld_qids": [{"qid": 1739, "topic": "Anesthesia", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 9"}, {"qid": 11823, "topic": "Perineal lacerations", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 9"}, {"qid": 11781, "topic": "Ureter injury", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 9"}, {"qid": 11762, "topic": "Superficial inguinal ring", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 9"}, {"qid": 839, "topic": "Urethral injury", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 9"}], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [{"section": "Anatomy · Ch. 6", "html": "./Repro%20Anki/Physeo/Physeo-Anatomy-Ch06.html", "count": 1, "subchapters": "physeo-anat 6.03 Pelvic Floor", "xref": ""}], "sketchy": [{"section": "SketchyAnatomy · Ch. 4", "html": "./Repro%20Anki/Sketchy/SketchyAnatomy-Ch04.html", "count": 9, "subchapters": "sketchy-anat 4.02.02 Inguinal Canal", "xref": ""}]}, {"class": 9, "classLabel": "10 & 11", "subject": "HS", "lecture": "Sexual Health and Development Across the Lifespan I & II", "lecturer": "", "los": [{"header": "Sexual Health and Development Across the Lifespan I & II", "items": ["Describe the epidemiology of male and female sexual disorders with a focus on the most common disorders: erectile dysfunction in men and hypoactive sexual desire disorder (HSDD) in women.", "Define the sexual disorders, and identify barriers to appropriate assessment and diagnosis.", "List common causes of sexual dysfunction", "Describe the clinical evaluation of the patient with sexual dysfunction.", "Describe common medical, behavioral, and psychological interventions and outline management strategies for the treatment of male and female sexual problems"]}], "uworld_qids": [{"qid": 8351, "topic": "Erectile dysfunction", "subject": "Pathology (Path)", "repeats": 2, "lectures": "Class 10 & 11"}], "bootcamp": [{"section": "Ch. 2 · Pregnancy and Menstruation", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch02.html", "count": 6, "subchapters": "2.08 Childhood Development", "xref": ""}], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 12, "classLabel": "12", "subject": "Anat", "lecture": "GA Lab #1 — Ischioanal Fossa and Perineum", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 13, "classLabel": "13", "subject": "Phys-Bioch", "lecture": "Endocrinology of Testes and Male Reproductive Tract", "lecturer": "", "los": [{"header": "Endocrinology of Testes and Male Reproductive Tract", "items": ["LIST the cell types of the testes; INDICATE their function.", "DESCRIBE the secretion, transport and cellular fates of testosterone.", "LIST the physiologic actions of testosterone.", "DESCRIBE the body changes at puberty in boys (male secondary sex characteristics).", "DESCRIBE the function of inhibin; where is it synthesized?", "DESCRIBE disease states associated with defective hypothalamic, pituitary, and testicular function. DEVISE a treatment for each disorder.", "EXPLAIN the roles of testosterone fluctuations throughout the prenatal and postnatal life of the male"]}], "uworld_qids": [{"qid": 1902, "topic": "Inhibin", "subject": "Physiology (Phys)", "repeats": 1, "lectures": "Class 13"}], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [{"section": "Pharmacology · Ch. 12", "html": "./Repro%20Anki/Physeo/Physeo-Pharmacology-Ch12.html", "count": 7, "subchapters": "physeo-pharm 12.09 Testosterone, Methyltestosterone", "xref": ""}, {"section": "Physiology · Ch. 7", "html": "./Repro%20Anki/Physeo/Physeo-Physiology-Ch07.html", "count": 41, "subchapters": "physeo-phys 7.01 Spermatogenesis & Erectile Dysfunction · physeo-phys 7.02 Testosterone & DHT", "xref": ""}], "sketchy": []}, {"class": 14, "classLabel": "14", "subject": "Path", "lecture": "Ovary and Testes (Pathology)", "lecturer": "", "los": [{"header": "Ovary and Testes (Pathology)", "items": ["Describe clinical and pathologic features of endometriosis that involves the ovary.", "List predisposing conditions and risk factors for ovarian cancer.", "Describe how tumor type, grade and stage affect overall prognosis.", "Describe pathologic features of atrophy and list causes.", "Define cryptorchidism, list common sites, pathologic features and potential complications.", "Describe conditions that predispose to torsion and the associated clinical and pathologic features."]}], "uworld_qids": [{"qid": 127, "topic": "Ovarian cancer", "subject": "Pathology (Path)", "repeats": 7, "lectures": "Class 14"}, {"qid": 578, "topic": "Ovarian cancer", "subject": "Pathophysiology (Patp)", "repeats": 7, "lectures": "Class 14"}, {"qid": 1158, "topic": "Ovarian cancer", "subject": "Pathology (Path)", "repeats": 7, "lectures": "Class 14"}, {"qid": 1632, "topic": "Ovarian cancer", "subject": "Anatomy (Anat)", "repeats": 7, "lectures": "Class 14"}, {"qid": 1837, "topic": "Ovarian cancer", "subject": "Pathology (Path)", "repeats": 7, "lectures": "Class 14"}, {"qid": 1928, "topic": "Ovarian cancer", "subject": "Pathology (Path)", "repeats": 7, "lectures": "Class 14"}, {"qid": 11652, "topic": "Ovarian cancer", "subject": "Pathology (Path)", "repeats": 7, "lectures": "Class 14"}, {"qid": 11901, "topic": "Ovarian torsion", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 14"}, {"qid": 258, "topic": "Polycystic ovary disease", "subject": "Physiology (Phys)", "repeats": 4, "lectures": "Class 14"}, {"qid": 2094, "topic": "Polycystic ovary disease", "subject": "Pathophysiology (Patp)", "repeats": 4, "lectures": "Class 14"}, {"qid": 2095, "topic": "Polycystic ovary disease", "subject": "Pathophysiology (Patp)", "repeats": 4, "lectures": "Class 14"}, {"qid": 580, "topic": "Cryptorchidism", "subject": "Pathology (Path)", "repeats": 2, "lectures": "Class 14"}, {"qid": 419, "topic": "Hydrocele", "subject": "Embryology (Embr)", "repeats": 2, "lectures": "Class 14"}, {"qid": 1827, "topic": "Hydrocele", "subject": "Anatomy (Anat)", "repeats": 2, "lectures": "Class 14"}, {"qid": 624, "topic": "Testicular cancer", "subject": "Pathology (Path)", "repeats": 4, "lectures": "Class 14"}, {"qid": 2021, "topic": "Testicular cancer", "subject": "Anatomy (Anat)", "repeats": 4, "lectures": "Class 14"}, {"qid": 15804, "topic": "Testicular cancer", "subject": "Pathology (Path)", "repeats": 4, "lectures": "Class 14"}, {"qid": 15828, "topic": "Testicular cancer", "subject": "Pathology (Path)", "repeats": 4, "lectures": "Class 14"}, {"qid": 11658, "topic": "Testicular torsion", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 14"}], "bootcamp": [{"section": "Ch. 4 · Female Pathology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch04.html", "count": 118, "subchapters": "4.04 Polycystic Ovarian Syndrome (PCOS) · 4.09 Ovarian Cysts · 4.10 Ovarian Cancer Overview · 4.11 Ovarian Cancer Subtypes", "xref": ""}, {"section": "Ch. 5 · Male Pathology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch05.html", "count": 91, "subchapters": "5.01 Cryptorchidism and Testicular Torsion · 5.02 Testicular Fluid Collections (Varicocele · 5.03 Testicular Cancer Overview · 5.04 Germ Cell Tumors · 5.05 Non-Germ Cell Tumors", "xref": ""}], "bb": [{"section": "Ch. 4 · Ovary", "html": "./Repro%20Anki/BnB/BNB-Ch04.html", "count": 67, "subchapters": "4.01 Ovarian Cysts · 4.02 Ovarian Epithelial Tumors · 4.03 Ovarian Stromal Tumors · 4.04 Ovarian Germ Cell Tumors", "xref": ""}, {"section": "Ch. 6 · Male Disorders", "html": "./Repro%20Anki/BnB/BNB-Ch06.html", "count": 79, "subchapters": "6.02 Scrotal Disorders · 6.03 Testicular Cancer", "xref": ""}], "pathoma": [{"section": "Ch. 13 · Female", "html": "./Repro%20Anki/Pathoma/Pathoma-Ch13.html", "count": 62, "subchapters": "13.05 Ovary · 13.06 Ovarian Tumors", "xref": ""}, {"section": "Ch. 14 · Male", "html": "./Repro%20Anki/Pathoma/Pathoma-Ch14.html", "count": 58, "subchapters": "14.02 Testicle · 14.03 Testicular Tumors", "xref": ""}], "physeo": [{"section": "Pathology · Ch. 9", "html": "./Repro%20Anki/Physeo/Physeo-Pathology-Ch09.html", "count": 126, "subchapters": "physeo-path 9.02 Testicle · physeo-path 9.03 Testicular Tumors · physeo-path 9.13 Polycystic Ovarian Syndrome · physeo-path 9.14 Surface Epithelial Tumors Ovary · physeo-path 9.15 Other Ovarian Tumors", "xref": ""}], "sketchy": [{"section": "SketchyPath · Ch. 8", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch08.html", "count": 222, "subchapters": "sketchy-path 8.02.01 Repro Hormones Overview & PCOS · sketchy-path 8.02.03 Ovarian Cysts & Epithelial Ovarian Cance · sketchy-path 8.02.04 Ovarian Neoplasms (Germ Cell & Sex Cord- · sketchy-path 8.05.01 Testicular Disorders & Cancer", "xref": ""}]}, {"class": 15, "classLabel": "15", "subject": "Anat", "lecture": "GA Lab #2 — Pelvis: Viscera, Vasculature, Sacral Plexus", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 16, "classLabel": "16", "subject": "HS", "lecture": "Contraception", "lecturer": "", "los": [{"header": "Contraception", "items": ["Describe contraceptive options currently available", "List efficacy, mechanism of action, indications and contraindications, and candidate examples", "Apply principles of patient-centered care in the provision of contraceptive technologies", "Identify strategies for successful use of contraceptives", "Discuss interplay between hormonal contraceptives and medical conditions", "Explain concept of (patient’s) medical eligibility for different types of contraceptive methods"]}], "uworld_qids": [{"qid": 583, "topic": "Abortion", "subject": "Pharmacology (Phar)", "repeats": 2, "lectures": "Class 16"}, {"qid": 879, "topic": "Contraception", "subject": "Pharmacology (Phar)", "repeats": 2, "lectures": "Class 16"}, {"qid": 8468, "topic": "Contraception", "subject": "Physiology (Phys)", "repeats": 2, "lectures": "Class 16"}], "bootcamp": [{"section": "Ch. 6 · Pharmacology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch06.html", "count": 32, "subchapters": "6.06 Contraception", "xref": ""}], "bb": [], "pathoma": [], "physeo": [{"section": "Pharmacology · Ch. 12", "html": "./Repro%20Anki/Physeo/Physeo-Pharmacology-Ch12.html", "count": 21, "subchapters": "physeo-pharm 12.05 Progestins & Antiprogestins · physeo-pharm 12.06 Combined Contraception and Copper IUDs", "xref": ""}], "sketchy": []}, {"class": 17, "classLabel": "17", "subject": "HS", "lecture": "Fertility and Infertility", "lecturer": "", "los": [{"header": "Fertility and Infertility", "items": ["Describe when evaluation or testing for infertility should begin", "List common diagnostic tests ordered for the female patient and for the male patient.", "Discuss the theory behind basal body temperature testing and how this differs from ovulation predictor kit testing.", "Understand basic concepts in genetic testing of embryos.", "Describe contraceptive options currently available", "List efficacy, mechanism of action, indications and contraindications, and candidate examples", "Apply principles of patient-centered care in the provision of contraceptive technologies", "Identify strategies for successful use of contraceptives"]}], "uworld_qids": [{"qid": 207, "topic": "Infertility", "subject": "Physiology (Phys)", "repeats": 3, "lectures": "Class 17"}, {"qid": 208, "topic": "Infertility", "subject": "Physiology (Phys)", "repeats": 3, "lectures": "Class 17"}, {"qid": 664, "topic": "Bronchiectasis", "subject": "Pathology (Path)", "repeats": 1, "lectures": "Class 17"}, {"qid": 807, "topic": "Cystic fibrosis", "subject": "Genetics (Gene)", "repeats": 3, "lectures": "Class 17"}, {"qid": 1917, "topic": "Pituitary adenoma", "subject": "Pathology (Path)", "repeats": 7, "lectures": "Class 17"}, {"qid": 12298, "topic": "Turner syndrome", "subject": "Genetics (Gene)", "repeats": 6, "lectures": "Class 17"}, {"qid": 12512, "topic": "Hypothyroidism", "subject": "Anatomy (Anat)", "repeats": 12, "lectures": "Class 17"}], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": [{"section": "SketchyPath · Ch. 8", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch08.html", "count": 38, "subchapters": "sketchy-path 8.02.02 Amenorrhea", "xref": ""}]}, {"class": 18, "classLabel": "18", "subject": "Path", "lecture": "Ovary/Testes Lab", "lecturer": "", "los": [{"header": "Ovary/Testes Lab", "items": ["Identify anatomic structures and vascular supply for ovary and testis.", "Discuss the classification of ovarian and testicular tumors and list major categories.", "Describe the clinical presentation(s) of a patient with ovarian or testicular cancer.", "Identify gross and microscopic features of these tumors and discuss the biologic behavior of the different types of cancer.", "Correlate treatment options with each tumor type."]}], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 19, "classLabel": "19", "subject": "Path", "lecture": "Obstetrical/Placenta", "lecturer": "", "los": [{"header": "Obstetrical/Placenta", "items": ["Outline the causes of both early and late pregnancy loss including risk factors, clinical signs and symptoms, pathologic findings and potential complications.", "Outline the spectrum of gestational trophoblastic disease and be able to distinguish a complete from a partial hydatidiform mole.", "Describe the clinical and pathologic features as well as outcomes and complications for the following disorders of infancy:"]}], "uworld_qids": [{"qid": 11961, "topic": "Abortion", "subject": "Microbiology (Micr)", "repeats": 2, "lectures": "Class 19"}, {"qid": 1830, "topic": "Gestational trophoblastic disease", "subject": "Genetics (Gene)", "repeats": 1, "lectures": "Class 19"}, {"qid": 11908, "topic": "Postpartum hemorrhage", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 19"}], "bootcamp": [{"section": "Ch. 2 · Pregnancy and Menstruation", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch02.html", "count": 45, "subchapters": "2.06 Placenta and Umbilical Cord · 2.07 Fetal Circulation", "xref": ""}, {"section": "Ch. 3 · Pathologies of Pregnancy", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch03.html", "count": 79, "subchapters": "3.01 Ectopic Pregnancy · 3.02 Molar Pregnancy · 3.03 Hypertension in Pregnancy · 3.04 Transient Complications of Pregnancy · 3.05 Polyhydramnios and Oligohydramnios · 3.06 Twin-Twin Transfusion Syndrome · 3.07 Placental Pathology · 3.08 Postpartum Hemorrhage", "xref": ""}], "bb": [{"section": "Ch. 2 · Pregnancy", "html": "./Repro%20Anki/BnB/BNB-Ch02.html", "count": 84, "subchapters": "2.02 Placenta · 2.05 Maternal-Fetal Disorders · 2.06 Hypertension in Pregnancy · 2.07 Placental Complications · 2.08 Gestational Tumors", "xref": ""}], "pathoma": [{"section": "Ch. 13 · Female", "html": "./Repro%20Anki/Pathoma/Pathoma-Ch13.html", "count": 52, "subchapters": "13.07 Gestational (Ectopic / Molar / Pre-eclam", "xref": ""}], "physeo": [{"section": "Embryology · Ch. 1", "html": "./Repro%20Anki/Physeo/Physeo-Embryology-Ch01.html", "count": 1, "subchapters": "physeo-embryo 1.04 Errors in Morphogenesis", "xref": ""}, {"section": "Pathology · Ch. 9", "html": "./Repro%20Anki/Physeo/Physeo-Pathology-Ch09.html", "count": 51, "subchapters": "physeo-path 9.16 Gestational Pathology", "xref": ""}], "sketchy": [{"section": "SketchyPath · Ch. 8", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch08.html", "count": 85, "subchapters": "sketchy-path 8.03.01 Hydatidiform Mole & Choriocarcinoma · sketchy-path 8.03.02 Gestational Disorders · sketchy-path 8.03.03 Polyhydramnios & Oligohydramnios", "xref": ""}]}, {"class": 20, "classLabel": "20", "subject": "Bioch", "lecture": "Endocrinology of Pregnancy, Labor and Lactation", "lecturer": "", "los": [{"header": "Endocrinology of Pregnancy, Labor and Lactation", "items": ["DISCUSS maternal and fetal hormonal production during first, second and third trimester.", "DESCRIBE the endocrine role of the placenta during pregnancy.", "DESCRIBE the changes in estrogen and progesterone that take place throughout pregnancy and the importance of their ratio at the end of pregnancy.", "DESCRIBE the other hormones that play a role in the onset of parturition.", "DESCRIBE the hormonally-related diseases associated with pregnancy.", "EXPLAIN the possible anti-fertility effect of prolactin during breast feeding"]}], "uworld_qids": [{"qid": 11888, "topic": "Labor management", "subject": "Histology (Hist)", "repeats": 1, "lectures": "Class 20"}], "bootcamp": [{"section": "Ch. 2 · Pregnancy and Menstruation", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch02.html", "count": 94, "subchapters": "2.02 Hormones of Pregnancy · 2.05 Pregnancy Physiology", "xref": ""}], "bb": [{"section": "Ch. 2 · Pregnancy", "html": "./Repro%20Anki/BnB/BNB-Ch02.html", "count": 28, "subchapters": "2.04 Pregnancy", "xref": ""}], "pathoma": [], "physeo": [{"section": "Physiology · Ch. 7", "html": "./Repro%20Anki/Physeo/Physeo-Physiology-Ch07.html", "count": 58, "subchapters": "physeo-phys 7.04 Pregnancy - Part 1 · physeo-phys 7.05 Pregnancy - Part 2", "xref": ""}], "sketchy": [{"section": "SketchyPharm · Ch. 5", "html": "./Repro%20Anki/Sketchy/SketchyPharm-Ch05.html", "count": 1, "subchapters": "sketchy-pharm 5.04.02 ADH, DDAVP, ADH Receptor Antagonists", "xref": ""}, {"section": "SketchyPhysiology · Ch. 4", "html": "./Repro%20Anki/Sketchy/SketchyPhysiology-Ch04.html", "count": 1, "subchapters": "sketchy-phys 4.04.03 Posterior Pituitary (oxytocin, ADH)", "xref": ""}]}, {"class": 21, "classLabel": "21", "subject": "EBM", "lecture": "MANDATORY SG 5: Guideline-Directed Care", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 22, "classLabel": "22", "subject": "HS", "lecture": "Pregnancy 101", "lecturer": "", "los": [{"header": "Pregnancy 101", "items": ["Learn about clinically relevant physiologic changes and common pathology for"]}], "uworld_qids": [], "bootcamp": [{"section": "Ch. 1 · Fetal Development", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch01.html", "count": 38, "subchapters": "1.03 Teratogenic Medications", "xref": ""}], "bb": [{"section": "Ch. 1 · Embryology", "html": "./Repro%20Anki/BnB/BNB-Ch01.html", "count": 35, "subchapters": "1.05 Teratogens I · 1.06 Teratogens II", "xref": ""}], "pathoma": [], "physeo": [{"section": "Embryology · Ch. 1", "html": "./Repro%20Anki/Physeo/Physeo-Embryology-Ch01.html", "count": 5, "subchapters": "physeo-embryo 1.05 Teratogens", "xref": ""}, {"section": "Pharmacology · Ch. 12", "html": "./Repro%20Anki/Physeo/Physeo-Pharmacology-Ch12.html", "count": 3, "subchapters": "physeo-pharm 12.07 Tocolytics", "xref": ""}], "sketchy": []}, {"class": 23, "classLabel": "23", "subject": "DRT", "lecture": "Pelvic Imaging", "lecturer": "", "los": [{"header": "Pelvic Imaging", "items": ["Review normal female and male pelvic anatomy on different imaging modalities", "Be able to select the appropriate imaging modality best suited for different clinical scenarios", "Learn the imaging appearances of some common pelvic pathology"]}], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 24, "classLabel": "24", "subject": "HS", "lecture": "Psychosocial Aspects of Pregnancy and Postpartum", "lecturer": "", "los": [{"header": "Psychosocial Aspects of Pregnancy and Postpartum", "items": ["Identify and describe specific challenges associated with the pregnancy experience from the first through “fourth” trimester.", "Identify contributing factors to problems of psychological adjustment including risk factors for perinatal mood and anxiety disorders.", "Understand the risk to mother and baby of untreated depression in pregnancy.", "Recognize the unique features and challenges of transition to parenthood for fathers and partners."]}], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 25, "classLabel": "25", "subject": "HS", "lecture": "Menopause", "lecturer": "", "los": [], "uworld_qids": [{"qid": 215, "topic": "Menopause", "subject": "Physiology (Phys)", "repeats": 1, "lectures": "Class 25"}], "bootcamp": [{"section": "Ch. 6 · Pharmacology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch06.html", "count": 32, "subchapters": "6.05 Hormone Replacement Therapy", "xref": ""}], "bb": [{"section": "Ch. 7 · Other", "html": "./Repro%20Anki/BnB/BNB-Ch07.html", "count": 29, "subchapters": "7.02 Hypogonadism", "xref": ""}], "pathoma": [], "physeo": [{"section": "Pharmacology · Ch. 12", "html": "./Repro%20Anki/Physeo/Physeo-Pharmacology-Ch12.html", "count": 10, "subchapters": "physeo-pharm 12.02 Estrogens and Hormone Replacement Therap", "xref": ""}], "sketchy": [{"section": "SketchyPath · Ch. 7", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch07.html", "count": 7, "subchapters": "sketchy-path 7.01.01 Hypothalamic & Pituitary Dysfunction - E · sketchy-path 7.01.02 Hypothalamic & Pituitary Dysfunction - C", "xref": ""}]}, {"class": 26, "classLabel": "26", "subject": "Path", "lecture": "Breast Diseases", "lecturer": "", "los": [{"header": "Breast Diseases", "items": ["Define and list the histologic features (stromal fibrosis, cysts, adenosis and ductal hyperplasia).", "Discuss the clinical significance of proliferative fibrocystic change.", "Describe a patient with an intraductal papilloma.", "List histologic features of intractuctal papilloma.", "Review risk factors for the development of breast cancer (covered in clinical breast session).", "Describe histology and clinical significance of DCIS and LCIS.", "List factors that affect the prognosis of breast cancer."]}], "uworld_qids": [{"qid": 1056, "topic": "Breast cancer", "subject": "Anatomy (Anat)", "repeats": 2, "lectures": "Class 26"}, {"qid": 1057, "topic": "Ductal carcinoma in situ", "subject": "Pathology (Path)", "repeats": 1, "lectures": "Class 26"}, {"qid": 1109, "topic": "Fibroadenoma breast", "subject": "Pathology (Path)", "repeats": 1, "lectures": "Class 26"}, {"qid": 11890, "topic": "Intraductal papilloma", "subject": "Histology (Hist)", "repeats": 1, "lectures": "Class 26"}], "bootcamp": [{"section": "Ch. 4 · Female Pathology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch04.html", "count": 98, "subchapters": "4.12 Breast Cancer Overview · 4.13 Benign Breast Conditions · 4.14 Benign Breast Tumors · 4.15 Invasive Breast Carcinoma", "xref": ""}], "bb": [{"section": "Ch. 5 · Breast", "html": "./Repro%20Anki/BnB/BNB-Ch05.html", "count": 89, "subchapters": "5.01 Breast Tissue · 5.02 Breast Disorders · 5.03 Breast Carcinoma", "xref": ""}], "pathoma": [{"section": "Ch. 16 · Breast", "html": "./Repro%20Anki/Pathoma/Pathoma-Ch16.html", "count": 71, "subchapters": "16.01 Introduction · 16.02 Inflammatory Conditions · 16.03 Benign Tumors & Fibrocystic Changes · 16.04 Breast Cancer", "xref": ""}], "physeo": [{"section": "Pathology · Ch. 9", "html": "./Repro%20Anki/Physeo/Physeo-Pathology-Ch09.html", "count": 68, "subchapters": "physeo-path 9.05 Inflammatory Conditions of Breast · physeo-path 9.06 Benign Tumors and Fibrocystic Changes of · physeo-path 9.07 Breast Cancer", "xref": ""}], "sketchy": [{"section": "SketchyPath · Ch. 8", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch08.html", "count": 96, "subchapters": "sketchy-path 8.04.01 Benign Breast Disorders · sketchy-path 8.04.02 Breast Cancer", "xref": ""}]}, {"class": 27, "classLabel": "27", "subject": "CP", "lecture": "PE — Female Pelvis and GYN Exam", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 28, "classLabel": "28", "subject": "Path", "lecture": "Breast Clinical", "lecturer": "", "los": [{"header": "Breast Clinical", "items": ["Review the morphology of breast carcinoma and subtypes.", "List the reproductive and non-reproductive risk factors associated with breast cancer.", "Describe the clinical approach to a breast mass.", "Discuss the studies used to stage a patient with breast cancer.", "Distinguish between local and systemic treatments of breast cancer."]}], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 29, "classLabel": "29", "subject": "HS", "lecture": "MANDATORY Sexual History Taking", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 30, "classLabel": "30", "subject": "CP", "lecture": "PE — Breast Exam", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 31, "classLabel": "31", "subject": "HS", "lecture": "MANDATORY SG Sexual History Taking", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 32, "classLabel": "32", "subject": "Path", "lecture": "Disorders of the Cervix / HPV", "lecturer": "", "los": [{"header": "Disorders of the Cervix / HPV", "items": ["Describe the role of HPV in the pathogenesis of cervical dysplasia and carcinoma.", "Review the terminology of HPV related findings in cytologic preparations (PAP smear) and in biopsy specimens.", "Describe general features of the Bethesda system for the evaluation of PAP smears.", "Describe the etiology, clinical and histologic features of cervical intraepithelial neoplasia and review high and low risk serotypes.", "Describe possible prevention of cervical intraepithelial neoplasia and carcinoma"]}], "uworld_qids": [{"qid": 869, "topic": "Cervical cancer", "subject": "Pathophysiology (Patp)", "repeats": 2, "lectures": "Class 32"}, {"qid": 1992, "topic": "Cervical cancer", "subject": "Pathology (Path)", "repeats": 2, "lectures": "Class 32"}, {"qid": 11858, "topic": "Human papillomavirus", "subject": "Pathology (Path)", "repeats": 3, "lectures": "Class 32"}, {"qid": 11929, "topic": "Human papillomavirus", "subject": "Pathology (Path)", "repeats": 3, "lectures": "Class 32"}], "bootcamp": [{"section": "Ch. 4 · Female Pathology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch04.html", "count": 19, "subchapters": "4.08 Cervical Pathology", "xref": ""}], "bb": [{"section": "Ch. 3 · Vagina / Cervix / Uterus", "html": "./Repro%20Anki/BnB/BNB-Ch03.html", "count": 10, "subchapters": "3.02 Cervical Cancer", "xref": ""}], "pathoma": [{"section": "Ch. 13 · Female", "html": "./Repro%20Anki/Pathoma/Pathoma-Ch13.html", "count": 8, "subchapters": "13.03 Cervix", "xref": ""}], "physeo": [{"section": "Pathology · Ch. 9", "html": "./Repro%20Anki/Physeo/Physeo-Pathology-Ch09.html", "count": 8, "subchapters": "physeo-path 9.10 Cervix", "xref": ""}], "sketchy": [{"section": "SketchyPath · Ch. 8", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch08.html", "count": 14, "subchapters": "sketchy-path 8.01.02 Cervical Neoplasia", "xref": ""}]}, {"class": 33, "classLabel": "33", "subject": "Path", "lecture": "Disorders of the Vulva and Uterus", "lecturer": "", "los": [{"header": "Disorders of the Vulva and Uterus", "items": ["Describe associated signs and symptoms", "Interpret the pathologic findings", "Summarize available treatment options"]}], "uworld_qids": [{"qid": 1957, "topic": "Adenomyosis", "subject": "Histology (Hist)", "repeats": 1, "lectures": "Class 33"}, {"qid": 1899, "topic": "Dysfunctional uterine bleeding, anovulation", "subject": "Physiology (Phys)", "repeats": 1, "lectures": "Class 33"}, {"qid": 333, "topic": "Endometriosis", "subject": "Pathology (Path)", "repeats": 1, "lectures": "Class 33"}, {"qid": 11820, "topic": "Urinary incontinence", "subject": "Anatomy (Anat)", "repeats": 2, "lectures": "Class 33"}, {"qid": 11926, "topic": "Urinary incontinence", "subject": "Pathophysiology (Patp)", "repeats": 2, "lectures": "Class 33"}, {"qid": 11885, "topic": "Uterine fibroids", "subject": "Anatomy (Anat)", "repeats": 1, "lectures": "Class 33"}], "bootcamp": [{"section": "Ch. 4 · Female Pathology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch04.html", "count": 158, "subchapters": "4.01 Internal Vaginal Pathology (Bartholin) · 4.02 Vaginal Skin Pathology (Lichen Sclerosus · 4.03 Vaginal Cancer (HPV-related) · 4.05 Adenomyosis, Endometrial Hyperplasia, As · 4.06 Endometriosis and Postpartum Endometriti · 4.07 Uterine Cancer", "xref": ""}], "bb": [{"section": "Ch. 3 · Vagina / Cervix / Uterus", "html": "./Repro%20Anki/BnB/BNB-Ch03.html", "count": 84, "subchapters": "3.01 Vaginal Cancer · 3.03 Endometrial Disorders · 3.04 Endometriosis · 3.05 Endometrial Cancer", "xref": ""}], "pathoma": [{"section": "Ch. 13 · Female", "html": "./Repro%20Anki/Pathoma/Pathoma-Ch13.html", "count": 87, "subchapters": "13.01 Vulva · 13.02 Vagina · 13.04 Endometrium & Myometrium", "xref": ""}], "physeo": [{"section": "Pathology · Ch. 9", "html": "./Repro%20Anki/Physeo/Physeo-Pathology-Ch09.html", "count": 83, "subchapters": "physeo-path 9.08 Vulva · physeo-path 9.09 Vagina · physeo-path 9.11 Endometrium · physeo-path 9.12 Myometrium", "xref": ""}, {"section": "Pharmacology · Ch. 12", "html": "./Repro%20Anki/Physeo/Physeo-Pharmacology-Ch12.html", "count": 7, "subchapters": "physeo-pharm 12.08 Danazol", "xref": ""}], "sketchy": [{"section": "SketchyPath · Ch. 8", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch08.html", "count": 89, "subchapters": "sketchy-path 8.01.01 Abnormal Uterine Bleeding & Endometriosi · sketchy-path 8.01.03 Vulvar & Vaginal Lesions", "xref": ""}]}, {"class": 34, "classLabel": "34", "subject": "Path", "lecture": "GYN: Case Review", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 35, "classLabel": "35", "subject": "Path", "lecture": "Breast/GYN Lab", "lecturer": "", "los": [{"header": "Breast/GYN Lab", "items": ["Identify anatomic structures associated with organs of the genital tract and breast.", "Describe the pathogenesis of cervical dysplasia and neoplasia and associated histologic findings.", "Correlate the histologic findings of diseases of the uterus with clinical symptoms, treatment and outcome.", "Discuss the pathogenesis and risk factors of breast carcinoma.", "Describe the subtypes of breast carcinoma and identify the classic histology."]}], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 36, "classLabel": "36", "subject": "CP", "lecture": "Male Pelvis and GU Exam", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 37, "classLabel": "37", "subject": "Micro", "lecture": "Sexually Transmitted Infections", "lecturer": "", "los": [{"header": "Sexually Transmitted Infections", "items": ["Understand the clinical presentation, diagnosis, and treatment for Syphilis.", "Understand the clinical presentation, diagnosis, and treatment for GC.", "Understand the clinical presentation, diagnosis, and treatment for Chlamydia and LGV.", "Understand the clinical presentation, diagnosis, and treatment for Chancroid and GranulomaInguinale.", "Review the etiology and presentation of epididymitis.", "Review the etiology, presentation, sequelae, and treatment of PID."]}], "uworld_qids": [{"qid": 1929, "topic": "Bacterial vaginosis", "subject": "Microbiology (Micr)", "repeats": 2, "lectures": "Class 37"}, {"qid": 11765, "topic": "Bacterial vaginosis", "subject": "Microbiology (Micr)", "repeats": 2, "lectures": "Class 37"}, {"qid": 1008, "topic": "Cervicitis", "subject": "Microbiology (Micr)", "repeats": 1, "lectures": "Class 37"}, {"qid": 1549, "topic": "HSV infection", "subject": "Microbiology (Micr)", "repeats": 1, "lectures": "Class 37"}, {"qid": 1015, "topic": "Human papillomavirus", "subject": "Pathology (Path)", "repeats": 3, "lectures": "Class 37"}, {"qid": 1447, "topic": "Metronidazole", "subject": "Pharmacology (Phar)", "repeats": 1, "lectures": "Class 37"}, {"qid": 1027, "topic": "Pelvic inflammatory disease", "subject": "Pathophysiology (Patp)", "repeats": 2, "lectures": "Class 37"}, {"qid": 1932, "topic": "Pelvic inflammatory disease", "subject": "Microbiology (Micr)", "repeats": 2, "lectures": "Class 37"}, {"qid": 11802, "topic": "Vulvovaginitis", "subject": "Microbiology (Micr)", "repeats": 1, "lectures": "Class 37"}, {"qid": 15560, "topic": "Epididymitis", "subject": "Pathology (Path)", "repeats": 1, "lectures": "Class 37"}, {"qid": 110, "topic": "Mucocutaneous candidiasis", "subject": "Microbiology (Micr)", "repeats": 1, "lectures": "Class 37"}], "bootcamp": [{"section": "Ch. 5 · Male Pathology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch05.html", "count": 43, "subchapters": "5.06 Penile Pathology · 5.07 Inflammatory Pathology (Orchitis/Urethri", "xref": ""}], "bb": [{"section": "Ch. 6 · Male Disorders", "html": "./Repro%20Anki/BnB/BNB-Ch06.html", "count": 22, "subchapters": "6.01 Penile Disorders", "xref": ""}], "pathoma": [{"section": "Ch. 14 · Male", "html": "./Repro%20Anki/Pathoma/Pathoma-Ch14.html", "count": 15, "subchapters": "14.01 Penis", "xref": ""}], "physeo": [{"section": "Pathology · Ch. 9", "html": "./Repro%20Anki/Physeo/Physeo-Pathology-Ch09.html", "count": 16, "subchapters": "physeo-path 9.01 Penis", "xref": ""}], "sketchy": [{"section": "SketchyMicro · Ch. 1", "html": "./Repro%20Anki/Sketchy/SketchyMicro-Ch01.html", "count": 159, "subchapters": "sketchy-micro 1.04.01 Neisseria overview · sketchy-micro 1.04.03 Neisseria gonorrhoeae · sketchy-micro 1.09.03 Treponema pallidum (Syphilis) · sketchy-micro 1.10.01 Chlamydia trachomatis · sketchy-micro 1.10.03 Gardnerella vaginalis (BV)", "xref": ""}, {"section": "SketchyMicro · Ch. 3", "html": "./Repro%20Anki/Sketchy/SketchyMicro-Ch03.html", "count": 141, "subchapters": "sketchy-micro 3.01.12 HIV Overview (Retroviridae) · sketchy-micro 3.01.13 HIV Life Cycle · sketchy-micro 3.03.01 Herpes Simplex Virus Types 1 & 2 · sketchy-micro 3.03.08 Human Papillomavirus (HPV)", "xref": ""}, {"section": "SketchyMicro · Ch. 4", "html": "./Repro%20Anki/Sketchy/SketchyMicro-Ch04.html", "count": 10, "subchapters": "sketchy-micro 4.04.01 Trichomonas vaginalis", "xref": ""}, {"section": "SketchyPath · Ch. 8", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch08.html", "count": 28, "subchapters": "sketchy-path 8.05.03 Bladder Cancer & Penile Disorders", "xref": ""}]}, {"class": 38, "classLabel": "38", "subject": "HS", "lecture": "CCS 3: Sexuality, Illness and Disability", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 39, "classLabel": "39", "subject": "Path", "lecture": "Prostate", "lecturer": "", "los": [{"header": "Prostate", "items": ["Describe the etiology, clinical and pathologic features of:", "Describe the age, possible risk factors and clinical features of a typical patient with benign prostatic hyperplasia (BPH).", "Describe how hormones play a role in the pathogenesis.", "List potential complications of the disease.", "Discuss the clinical features and the evaluation of a patient with prostate carcinoma.", "List the gross and microscopic features.", "List important prognostic factors."]}], "uworld_qids": [{"qid": 1737, "topic": "Benign prostatic hyperplasia", "subject": "Anatomy (Anat)", "repeats": 3, "lectures": "Class 39"}, {"qid": 8930, "topic": "Benign prostatic hyperplasia", "subject": "Pharmacology (Phar)", "repeats": 3, "lectures": "Class 39"}, {"qid": 11747, "topic": "Prostate cancer", "subject": "Anatomy (Anat)", "repeats": 3, "lectures": "Class 39"}], "bootcamp": [{"section": "Ch. 5 · Male Pathology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch05.html", "count": 48, "subchapters": "5.08 Benign Prostatic Hyperplasia (BPH) · 5.09 Prostate Adenocarcinoma", "xref": ""}], "bb": [{"section": "Ch. 6 · Male Disorders", "html": "./Repro%20Anki/BnB/BNB-Ch06.html", "count": 40, "subchapters": "6.04 Prostate", "xref": ""}], "pathoma": [{"section": "Ch. 14 · Male", "html": "./Repro%20Anki/Pathoma/Pathoma-Ch14.html", "count": 41, "subchapters": "14.04 Prostate", "xref": ""}], "physeo": [{"section": "Pathology · Ch. 9", "html": "./Repro%20Anki/Physeo/Physeo-Pathology-Ch09.html", "count": 38, "subchapters": "physeo-path 9.04 Prostate", "xref": ""}], "sketchy": [{"section": "SketchyPath · Ch. 8", "html": "./Repro%20Anki/Sketchy/SketchyPath-Ch08.html", "count": 44, "subchapters": "sketchy-path 8.05.02 BPH & Prostate Cancer", "xref": ""}]}, {"class": 40, "classLabel": "40", "subject": "HS", "lecture": "IL Sexual Boundary Issues", "lecturer": "", "los": [], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}, {"class": 41, "classLabel": "41", "subject": "Path", "lecture": "Prostate Clinical", "lecturer": "", "los": [{"header": "Prostate Clinical", "items": ["Discuss the role of PSA in the diagnosis of prostate cancer.", "Identify pertinent physical exam findings associated with prostate cancer.", "Describe treatment options for prostate carcinoma."]}], "uworld_qids": [], "bootcamp": [{"section": "Ch. 6 · Pharmacology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch06.html", "count": 15, "subchapters": "6.07 Tamsulosin, Minoxidil, Tocolytics", "xref": ""}], "bb": [], "pathoma": [], "physeo": [{"section": "Pharmacology · Ch. 12", "html": "./Repro%20Anki/Physeo/Physeo-Pharmacology-Ch12.html", "count": 3, "subchapters": "physeo-pharm 12.11 Phosphodiesterase type 5 inhibitors · physeo-pharm 12.12 Micturition Control", "xref": ""}], "sketchy": []}, {"class": 42, "classLabel": "42", "subject": "Pharm", "lecture": "Hormone Therapy of Cancer", "lecturer": "", "los": [], "uworld_qids": [{"qid": 581, "topic": "Breast cancer", "subject": "Pharmacology (Phar)", "repeats": 2, "lectures": "Class 42"}, {"qid": 657, "topic": "Prostate cancer", "subject": "Pharmacology (Phar)", "repeats": 3, "lectures": "Class 42"}], "bootcamp": [{"section": "Ch. 6 · Pharmacology", "html": "./Repro%20Anki/Bootcamp/Bootcamp-Ch06.html", "count": 88, "subchapters": "6.01 GnRH Modulators · 6.02 Selective Estrogen Receptor Modulators ( · 6.03 Androgen Modulators · 6.04 Antiandrogens", "xref": ""}], "bb": [], "pathoma": [], "physeo": [{"section": "Pharmacology · Ch. 12", "html": "./Repro%20Anki/Physeo/Physeo-Pharmacology-Ch12.html", "count": 48, "subchapters": "physeo-pharm 12.01 Leuprolide, Goserelin and Degarelix · physeo-pharm 12.03 Raloxifene, Clomiphene, Tamoxifen · physeo-pharm 12.04 Aromatase Inhibitors · physeo-pharm 12.10 Antiandrogens · physeo-pharm 12.13 Minoxidil", "xref": ""}], "sketchy": [{"section": "SketchyPharm · Ch. 5", "html": "./Repro%20Anki/Sketchy/SketchyPharm-Ch05.html", "count": 40, "subchapters": "sketchy-pharm 5.04.01 Growth hormone, mecasermin, octreotide,  · sketchy-pharm 5.05.01 SERMs & Aromatase Inhibitors · sketchy-pharm 5.05.02 LHRH agonists / GnRH analogs · sketchy-pharm 5.05.03 Non-Steroidal Antiandrogens (NSAA)", "xref": ""}]}, {"class": 41, "classLabel": "43 & 44", "subject": "HS", "lecture": "LGBT Health I & II", "lecturer": "", "los": [{"header": "LGBT Health I & II", "items": ["Review sexuality and Gender development in LGB and T individuals", "Describe social and medical risks in LGBTQ+ individuals", "Describe medical benefits and risks of providing sex hormones in transgender individuals"]}], "uworld_qids": [], "bootcamp": [], "bb": [], "pathoma": [], "physeo": [], "sketchy": []}];
+
+const ANKI = {};
+
+// Resource definitions
+const RESOURCES = [
+  {id:'bootcamp', name:'Bootcamp', icon:'\u{1F3AF}', type:'3rd Party', ankiKey:'bootcamp', mapKey:'bootcamp', hasLectures:true},
+  {id:'bnb', name:'Boards & Beyond', icon:'\u{1F4FA}', type:'3rd Party', ankiKey:'bnb', mapKey:'bb', hasLectures:true},
+  {id:'pathoma', name:'Pathoma', icon:'\u{1F9EC}', type:'3rd Party', ankiKey:'pathoma', mapKey:'pathoma', hasLectures:true},
+  {id:'physeo', name:'Physeo', icon:'\u{1F3AC}', type:'3rd Party', ankiKey:['physeo_physiology','physeo_path','physeo_pharm','physeo_embryo'], mapKey:'physeo', hasLectures:true},
+  {id:'sketchy', name:'Sketchy', icon:'\u{1F3A8}', type:'3rd Party', ankiKey:'sketchy_micro', mapKey:'sketchy', hasLectures:true},
+  {id:'firstaid', name:'First Aid', icon:'\u{1F4D5}', type:'3rd Party (Anki Only)', ankiKey:'firstaid', mapKey:null, hasLectures:false},
+  {id:'block4', name:'Block4 Anki', icon:'\u{1F3E5}', type:'In-House (Anki Only)', ankiKey:null, mapKey:null, hasLectures:false},
+  {id:'gusom', name:'GUSOM Anki', icon:'\u{1F393}', type:'In-House (Anki Only)', ankiKey:null, mapKey:null, hasLectures:false},
+];
+
+const FIELDS = [
+  {id:'anki_tags', name:'Mapped Anki Tags', icon:'\u{1F3F7}', desc:'ANKing tag paths for Anki deck filtering'},
+  {id:'card_count', name:'Number of Anki Cards', icon:'\u{1F4CA}', desc:'Card counts per section/subchapter'},
+  {id:'mapped_lectures', name:'Mapped 3rd Party Lectures', icon:'\u{1F4D6}', desc:'Section/chapter names from the resource'},
+  {id:'watch_time', name:'Lecture Watch Times', icon:'\u{23F1}', desc:'Estimated run times from mapping data'},
+];
+
+const SUBJECT_COLORS = {
+  'Phys':['#dbeafe','#1e40af'],'Anat':['#dcfce7','#9f1239'],'Path':['#ffe4e6','#9f1239'],
+  'Pharm':['#d1fae5','#065f46'],'Embr':['#ede9fe','#5b21b6'],'Hist':['#f3e8ff','#6b21a8'],
+  'Micro':['#fef3c7','#92400e'],'DRT':['#dbeafe','#1e3a8a']
+};
+
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+let currentStep = 1;
+let selectedLecture = null;
+let selectedResources = new Set();
+let selectedFields = new Set();
+
+// ══════════════════════════════════════
+// STEP NAVIGATION
+// ══════════════════════════════════════
+function goStep(n) {
+  currentStep = n;
+  document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+  document.getElementById('panel-' + n).style.display = 'block';
+  document.querySelectorAll('.step').forEach(s => {
+    const sn = parseInt(s.dataset.step);
+    s.classList.remove('active','done');
+    if (sn === n) s.classList.add('active');
+    else if (sn < n) s.classList.add('done');
+  });
+  if (n === 2) renderResources();
+  if (n === 3) renderFields();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ══════════════════════════════════════
+// STEP 1: LECTURE SELECT
+// ══════════════════════════════════════
+function renderLectures() {
+  const grid = document.getElementById('lectureGrid');
+  grid.innerHTML = MAPPING.map((lec, i) => {
+    const [bg, tx] = SUBJECT_COLORS[lec.subject] || ['#f1f5f9','#64748b'];
+    const resCount = ['bootcamp','bb','pathoma','physeo','sketchy'].reduce((s,k) => s + (lec[k]||[]).length, 0);
+    return `<button class="lec-btn" data-idx="${i}" onclick="selectLecture(${i})">
+      <div class="lec-class"><span style="display:inline-block;padding:1px 6px;border-radius:4px;background:${bg};color:${tx}">${lec.subject}</span> Class ${lec.classLabel}</div>
+      <div class="lec-name">${lec.lecture}</div>
+      <div class="lec-info">${lec.lecturer} &middot; ${resCount} resource mapping${resCount!==1?'s':''}</div>
+    </button>`;
+  }).join('');
+}
+
+function selectLecture(idx) {
+  selectedLecture = idx;
+  selectedResources.clear();
+  document.querySelectorAll('.lec-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector(`.lec-btn[data-idx="${idx}"]`).classList.add('selected');
+  document.getElementById('btnNext1').disabled = false;
+}
+
+// ══════════════════════════════════════
+// STEP 2: RESOURCE SELECT
+// ══════════════════════════════════════
+function renderResources() {
+  const lec = MAPPING[selectedLecture];
+  const grid = document.getElementById('resourceGrid');
+  grid.innerHTML = RESOURCES.map(res => {
+    let available = false;
+    let sectionCount = 0;
+    if (res.mapKey && lec[res.mapKey] && lec[res.mapKey].length > 0) {
+      available = true;
+      sectionCount = lec[res.mapKey].length;
+    }
+    // Anki-only resources are always available
+    if (!res.hasLectures && res.ankiKey) available = true;
+    // Block4 and GUSOM are always available (in-house decks)
+    if (res.id === 'block4' || res.id === 'gusom') available = true;
+    // FirstAid is always available
+    if (res.id === 'firstaid') available = true;
+
+    const sel = selectedResources.has(res.id);
+    const dis = !available;
+    const badge = !res.hasLectures ? '<div class="res-badge">Anki Only</div>' : '';
+    return `<button class="res-btn ${sel?'selected':''} ${dis?'disabled':''}" data-res="${res.id}" onclick="toggleResource('${res.id}')">
+      ${badge}
+      <div class="res-icon">${res.icon}</div>
+      <div class="res-name">${res.name}</div>
+      <div class="res-type">${res.type}${sectionCount ? ' &middot; '+sectionCount+' section'+(sectionCount>1?'s':'') : ''}</div>
+    </button>`;
+  }).join('');
+  updateNext2();
+}
+
+function toggleResource(id) {
+  if (selectedResources.has(id)) selectedResources.delete(id);
+  else selectedResources.add(id);
+  document.querySelectorAll('.res-btn').forEach(b => {
+    b.classList.toggle('selected', selectedResources.has(b.dataset.res));
+  });
+  updateNext2();
+}
+
+function selectAllResources() {
+  document.querySelectorAll('.res-btn:not(.disabled)').forEach(b => {
+    selectedResources.add(b.dataset.res);
+    b.classList.add('selected');
+  });
+  updateNext2();
+}
+function clearAllResources() {
+  selectedResources.clear();
+  document.querySelectorAll('.res-btn').forEach(b => b.classList.remove('selected'));
+  updateNext2();
+}
+function updateNext2() {
+  document.getElementById('btnNext2').disabled = selectedResources.size === 0;
+}
+
+// ══════════════════════════════════════
+// STEP 3: FIELD SELECT
+// ══════════════════════════════════════
+function renderFields() {
+  const grid = document.getElementById('fieldGrid');
+  // Check if any selected resource has lectures
+  const anyHasLectures = [...selectedResources].some(rid => {
+    const res = RESOURCES.find(r => r.id === rid);
+    return res && res.hasLectures;
+  });
+
+  grid.innerHTML = FIELDS.map(f => {
+    const disabled = (f.id === 'mapped_lectures' || f.id === 'watch_time') && !anyHasLectures;
+    const sel = selectedFields.has(f.id);
+    return `<button class="field-btn ${sel?'selected':''} ${disabled?'disabled':''}" data-field="${f.id}" onclick="toggleField('${f.id}')" ${disabled?'disabled':''} style="${disabled?'opacity:.35;pointer-events:none':''}">
+      <div class="field-icon">${f.icon}</div>
+      <div class="field-name">${f.name}</div>
+      <div class="field-desc">${f.desc}${disabled?' (N/A for selected resources)':''}</div>
+    </button>`;
+  }).join('');
+  updateSubmit();
+}
+
+function toggleField(id) {
+  if (selectedFields.has(id)) selectedFields.delete(id);
+  else selectedFields.add(id);
+  document.querySelectorAll('.field-btn:not([disabled])').forEach(b => {
+    b.classList.toggle('selected', selectedFields.has(b.dataset.field));
+  });
+  updateSubmit();
+}
+function updateSubmit() {
+  document.getElementById('btnSubmit').disabled = selectedFields.size === 0;
+}
+
+// ══════════════════════════════════════
+// STEP 4: RESULTS
+// ══════════════════════════════════════
+function showResults() {
+  goStep(4);
+  const lec = MAPPING[selectedLecture];
+  document.getElementById('resultsTitle').textContent = `Class ${lec.classLabel}: ${lec.lecture}`;
+  document.getElementById('resultsSub').textContent = `${lec.subject} \u00b7 ${lec.lecturer} \u00b7 ${selectedResources.size} resource${selectedResources.size>1?'s':''} \u00b7 ${selectedFields.size} field${selectedFields.size>1?'s':''}`;
+
+  const container = document.getElementById('resultsContainer');
+  let html = '';
+
+  for (const rid of selectedResources) {
+    const res = RESOURCES.find(r => r.id === rid);
+    const sections = res.mapKey ? (lec[res.mapKey] || []) : [];
+
+    // Gather anki data
+    let ankiSections = [];
+    if (res.ankiKey) {
+      const keys = Array.isArray(res.ankiKey) ? res.ankiKey : [res.ankiKey];
+      for (const k of keys) {
+        if (ANKI[k]) {
+          for (const [chName, chData] of Object.entries(ANKI[k])) {
+            ankiSections.push({chapter: chName, ...chData});
+          }
+        }
+      }
+    }
+
+    // Calculate totals
+    let totalCards = 0;
+    let totalSections = sections.length;
+    if (res.hasLectures && sections.length > 0) {
+      totalCards = sections.reduce((s, sec) => s + (sec.count || 0), 0);
+    } else if (ankiSections.length > 0) {
+      totalCards = ankiSections.reduce((s, ch) => s + ch.totalCards, 0);
+    }
+
+    html += `<div class="resource-result">
+      <div class="rr-header" onclick="toggleResult(this)">
+        <div class="rr-icon">${res.icon}</div>
+        <div class="rr-name">${res.name}</div>
+        <div class="rr-stats">
+          ${selectedFields.has('card_count') ? `<div class="rr-stat"><strong>${totalCards.toLocaleString()}</strong> cards</div>` : ''}
+          ${res.hasLectures && sections.length > 0 ? `<div class="rr-stat"><strong>${totalSections}</strong> section${totalSections!==1?'s':''}</div>` : ''}
+          ${!res.hasLectures ? '<div class="rr-stat" style="color:#92400e">Anki Only</div>' : ''}
+        </div>
+        <div class="rr-chevron">&#9654;</div>
+      </div>
+      <div class="rr-body">`;
+
+    // ── Resources with lecture mappings ──
+    if (res.hasLectures && sections.length > 0) {
+      for (const sec of sections) {
+        html += `<div class="section-card">
+          <div class="sc-title">\u{1F4CC} ${sec.section}</div>
+          <div class="sc-meta">`;
+
+        if (selectedFields.has('card_count')) {
+          html += `<div class="sc-meta-item"><strong>${(sec.count||0).toLocaleString()}</strong> Anki cards</div>`;
+        }
+        if (selectedFields.has('mapped_lectures') && sec.subchapters) {
+          html += `<div class="sc-meta-item">\u{1F4D6} ${sec.subchapters}</div>`;
+        }
+        if (selectedFields.has('watch_time') && sec.subchapters) {
+          // Extract time if in subchapters field
+          const timeMatch = sec.subchapters ? sec.subchapters.match(/(\d+\s*min)/i) : null;
+          if (timeMatch) {
+            html += `<div class="sc-meta-item">\u{23F1} ${timeMatch[1]}</div>`;
+          }
+        }
+        if (sec.xref) {
+          html += `<div class="sc-meta-item" style="color:#92400e">\u{1F517} ${sec.xref}</div>`;
+        }
+        html += `</div>`;
+
+        // Anki tags for this section
+        if (selectedFields.has('anki_tags')) {
+          const matchedTags = findAnkiTagsForSection(res, sec);
+          if (matchedTags.length > 0) {
+            html += `<div class="tags-wrap"><div class="tags-label">ANKing Tags</div><div class="tag-list">`;
+            for (const t of matchedTags) {
+              const shortTag = t.replace('#AK_Step1_v12::', '');
+              html += `<span class="tag-chip" onclick="copyTag(this, '${escapeHtml(t)}')" title="Click to copy full tag">${escapeHtml(shortTag)}</span>`;
+            }
+            html += `</div></div>`;
+          }
+        }
+
+        html += `</div>`;
+      }
+    }
+    // ── Anki-only resources ──
+    else if (!res.hasLectures) {
+      if (ankiSections.length > 0 && (selectedFields.has('anki_tags') || selectedFields.has('card_count'))) {
+        html += `<div class="notice" style="margin-bottom:12px">Showing all available ${res.name} Anki data. This resource provides tags and card counts only.</div>`;
+
+        if (selectedFields.has('card_count')) {
+          html += `<table class="sub-table"><thead><tr><th>Chapter</th><th>Total Cards</th></tr></thead><tbody>`;
+          for (const ch of ankiSections) {
+            html += `<tr><td>${escapeHtml(ch.chapter)}</td><td class="cards-col">${ch.totalCards.toLocaleString()}</td></tr>`;
+          }
+          html += `</tbody></table>`;
+        }
+
+        if (selectedFields.has('anki_tags')) {
+          for (const ch of ankiSections) {
+            html += `<div class="section-card">
+              <div class="sc-title">${escapeHtml(ch.chapter)} <span style="font-size:.72rem;color:var(--ink-3);font-weight:500">(${ch.totalCards} cards)</span></div>
+              <div class="tags-wrap"><div class="tags-label">ANKing Tags</div><div class="tag-list">`;
+            // Show unique tags
+            const uniqueTags = [...new Set(ch.allTags)];
+            for (const t of uniqueTags.slice(0, 30)) {
+              const shortTag = t.replace('#AK_Step1_v12::', '');
+              html += `<span class="tag-chip" onclick="copyTag(this, '${escapeHtml(t)}')" title="Click to copy">${escapeHtml(shortTag)}</span>`;
+            }
+            if (uniqueTags.length > 30) {
+              html += `<span class="tag-chip" style="background:#fef3c7;color:#92400e;border-color:#fbbf24">+${uniqueTags.length - 30} more</span>`;
+            }
+            html += `</div></div></div>`;
+          }
+        }
+      } else if (res.id === 'block4' || res.id === 'gusom') {
+        html += `<div class="notice">This is an in-house Anki deck. Tag data is available via the .apkg files in the Repro/3rd Party/ANKing folder. Import the deck into Anki and browse by tags.</div>`;
+      }
+    }
+    // No data
+    else {
+      html += `<div class="notice">No mapping data available for this resource on this lecture.</div>`;
+    }
+
+    html += `</div></div>`;
+  }
+
+  container.innerHTML = html;
+
+  // Auto-open first result
+  const firstHeader = container.querySelector('.rr-header');
+  if (firstHeader) toggleResult(firstHeader);
+}
+
+function findAnkiTagsForSection(res, sec) {
+  // Try to match section name to anki chapter data
+  const keys = Array.isArray(res.ankiKey) ? res.ankiKey : [res.ankiKey];
+  const sectionLower = (sec.section || '').toLowerCase();
+  let tags = [];
+
+  for (const k of keys) {
+    if (!ANKI[k]) continue;
+    for (const [chName, chData] of Object.entries(ANKI[k])) {
+      // Fuzzy match: check if chapter name keywords appear in section name
+      const chLower = chName.toLowerCase().replace(/^\d+\s*/, '');
+      const secWords = sectionLower.replace(/ch\.?\s*\d+\s*[·\-]?\s*/i, '').replace(/sec\.?\s*\d+\s*[·\-]?\s*/i, '');
+      const words = chLower.split(/\s+/).filter(w => w.length > 3);
+      const matchScore = words.filter(w => secWords.includes(w)).length;
+
+      if (matchScore >= 1 || sectionLower.includes(chLower)) {
+        // Add primary tags (first tag from each subchapter)
+        for (const sub of chData.subchapters) {
+          if (sub.tags && sub.tags[0]) {
+            tags.push(sub.tags[0]);
+          }
+        }
+      }
+    }
+  }
+  // Dedupe
+  return [...new Set(tags)].slice(0, 20);
+}
+
+function toggleResult(el) {
+  el.classList.toggle('open');
+  const body = el.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ══════════════════════════════════════
+// EXCEL EXPORT
+// ══════════════════════════════════════
+function exportExcel() {
+  const lec = MAPPING[selectedLecture];
+  const wb = XLSX.utils.book_new();
+
+  // Summary sheet
+  const summaryRows = [
+    ['Repro Resource Explorer Export'],
+    ['Lecture', `Class ${lec.classLabel}: ${lec.lecture}`],
+    ['Subject', lec.subject],
+    ['Lecturer', lec.lecturer],
+    ['Export Date', new Date().toLocaleDateString()],
+    [],
+    ['Resource', 'Section', 'Cards', 'Subchapters / Watch Time', 'Anki Tags']
+  ];
+
+  for (const rid of selectedResources) {
+    const res = RESOURCES.find(r => r.id === rid);
+    const sections = res.mapKey ? (lec[res.mapKey] || []) : [];
+
+    if (res.hasLectures && sections.length > 0) {
+      for (const sec of sections) {
+        const tags = selectedFields.has('anki_tags') ? findAnkiTagsForSection(res, sec).join(' | ') : '';
+        summaryRows.push([
+          res.name,
+          sec.section || '',
+          sec.count || 0,
+          sec.subchapters || '',
+          tags
+        ]);
+      }
+    } else if (!res.hasLectures && res.ankiKey) {
+      const keys = Array.isArray(res.ankiKey) ? res.ankiKey : [res.ankiKey];
+      for (const k of keys) {
+        if (!ANKI[k]) continue;
+        for (const [chName, chData] of Object.entries(ANKI[k])) {
+          const allTags = [...new Set(chData.allTags)].join(' | ');
+          summaryRows.push([
+            res.name,
+            chName,
+            chData.totalCards,
+            'Anki Only',
+            selectedFields.has('anki_tags') ? allTags : ''
+          ]);
+        }
+      }
+    } else {
+      summaryRows.push([res.name, 'No data', 0, '', '']);
+    }
+  }
+
+  const ws = XLSX.utils.aoa_to_sheet(summaryRows);
+  // Column widths
+  ws['!cols'] = [{wch:18},{wch:35},{wch:8},{wch:40},{wch:80}];
+  XLSX.utils.book_append_sheet(wb, ws, 'Resource Export');
+
+  // If anki_tags selected, create detailed tag sheet
+  if (selectedFields.has('anki_tags')) {
+    const tagRows = [['Resource', 'Chapter', 'Subchapter', 'Cards', 'Primary Tag']];
+    for (const rid of selectedResources) {
+      const res = RESOURCES.find(r => r.id === rid);
+      const keys = Array.isArray(res.ankiKey) ? res.ankiKey : (res.ankiKey ? [res.ankiKey] : []);
+      for (const k of keys) {
+        if (!ANKI[k]) continue;
+        for (const [chName, chData] of Object.entries(ANKI[k])) {
+          for (const sub of chData.subchapters) {
+            tagRows.push([res.name, chName, sub.name, sub.cards, sub.tags[0] || '']);
+          }
+        }
+      }
+    }
+    if (tagRows.length > 1) {
+      const ws2 = XLSX.utils.aoa_to_sheet(tagRows);
+      ws2['!cols'] = [{wch:18},{wch:30},{wch:40},{wch:8},{wch:80}];
+      XLSX.utils.book_append_sheet(wb, ws2, 'Detailed Tags');
+    }
+  }
+
+  const filename = `GI_Resource_Export_Class${lec.classLabel.replace(/[^\w]/g,'')}_${new Date().toISOString().slice(0,10)}.xlsx`;
+  XLSX.writeFile(wb, filename);
+  showToast('Excel file exported!');
+}
+
+// ══════════════════════════════════════
+// UTILITIES
+// ══════════════════════════════════════
+function escapeHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function copyTag(el, tag) {
+  navigator.clipboard.writeText(tag).then(() => {
+    el.classList.add('copied');
+    showToast('Tag copied!');
+    setTimeout(() => el.classList.remove('copied'), 1500);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function toggleDark() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('darkToggle').textContent = next === 'dark' ? '\u2600\uFE0F' : '\u{1F319}';
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  const t = document.documentElement.getAttribute('data-theme');
+  document.getElementById('darkToggle').textContent = t === 'dark' ? '\u2600\uFE0F' : '\u{1F319}';
+  renderLectures();
+});
+</script>
+</body>
+</html>
