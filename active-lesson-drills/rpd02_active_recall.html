@@ -1,0 +1,717 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#fff;color:#111;padding:16px;font-size:13px}
+h2{font-size:16px;font-weight:600;margin-bottom:4px}
+.sub{color:#666;font-size:12px;margin-bottom:14px}
+.resource-banner{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#1E40AF}
+.resource-banner strong{display:block;margin-bottom:2px;font-size:13px}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:20px;border:1.5px solid #CBD5E1;font-size:12px;cursor:pointer;background:#fff;color:#475569;font-weight:500}
+.tab.active{background:#1D4ED8;color:#fff;border-color:#1D4ED8}
+.panel{display:none}.panel.active{display:block}
+.sec{font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:12px}
+th{background:#F1F5F9;text-align:left;padding:7px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#475569;border:1px solid #E2E8F0;font-weight:600}
+td{padding:6px 8px;border:1px solid #E2E8F0;vertical-align:top}
+td input{width:100%;border:none;border-bottom:1.5px solid #e2e8f0;font-size:11px;background:transparent;outline:none;padding:1px 0;color:#1e293b}
+td input:focus{border-bottom-color:#1D4ED8}
+tr:nth-child(even) td{background:#FAFAFA}
+.rl{font-weight:600;font-size:11px;color:#1e293b;background:#F8FAFC!important;white-space:nowrap}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.f{margin-bottom:6px}
+.f label{font-size:10px;color:#94a3b8;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em}
+.f input{width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b}
+.f input:focus{border-bottom-color:#1D4ED8}
+.f textarea{width:100%;border:1px solid #CBD5E1;border-radius:6px;font-size:12px;background:transparent;outline:none;padding:4px 6px;color:#1e293b;resize:vertical;min-height:52px}
+.f textarea:focus{border-color:#1D4ED8}
+.btn{background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;cursor:pointer;font-weight:500;margin-top:8px}
+.btn:hover{background:#1e40af}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.fb{margin-top:14px;display:none;border-radius:10px;overflow:hidden;border:1.5px solid #BFDBFE}.fb-header{background:#1D4ED8;color:#fff;font-size:11px;font-weight:700;padding:8px 14px;letter-spacing:.04em;text-transform:uppercase}.fb-row{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid #DBEAFE}.fb-row:last-child{border-bottom:none}.fb-row:nth-child(even){background:#F0F7FF}.fb-row:nth-child(odd){background:#fff}.fb-q{font-size:11px;font-weight:700;color:#1E40AF;padding:7px 10px;border-right:1px solid #DBEAFE;line-height:1.5}.fb-a{font-size:11px;color:#1E293B;padding:7px 10px;line-height:1.6}
+.warn{background:#FFFBEB;border-left:3px solid #F59E0B;padding:7px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#92400E;margin:8px 0}
+.on-exam{background:#FEE2E2;border:1px solid #FDA4AF;border-radius:6px;padding:4px 10px;font-size:11px;color:#991B1B;font-weight:700;display:inline-block;margin-bottom:8px}
+.lo-tag{background:#EDE9FE;border:1px solid #C4B5FD;border-radius:5px;padding:2px 8px;font-size:10px;color:#5B21B6;font-weight:600;margin-bottom:6px;display:inline-block}
+.pq-box{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:12px}
+.pq-q{font-weight:600;margin-bottom:6px;color:#92400E}
+.pq-choices{margin-left:12px;margin-bottom:6px;color:#78350F;line-height:1.8}
+.pq-ans{display:none;background:#EFF6FF;border:1px solid #93C5FD;border-radius:6px;padding:6px 10px;font-size:11px;color:#1E40AF;margin-top:4px}
+.pq-btn{font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid #2563EB;background:#DBEAFE;color:#1E40AF;cursor:pointer}
+.pq-btn:hover{background:#BFDBFE}
+.card{border:1px solid #E2E8F0;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+
+@media(max-width:640px){
+  body{padding:10px;font-size:12px}
+  h2{font-size:14px}
+  .tabs{gap:4px}
+  .tab{padding:6px 10px;font-size:11px}
+  .fg,.fg3{grid-template-columns:1fr!important}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .fb-row{grid-template-columns:1fr;grid-template-rows:auto auto}
+  .fb-q{border-right:none;border-bottom:1px solid #DBEAFE}
+  .inline-blank{width:120px}
+  .pq-choices{margin-left:4px}
+  .btn{width:100%;text-align:center}
+}
+
+/* ── Print / PDF export: 1 page per tab, handwriting-friendly blank lines ── */
+@media print {
+  @page { size: letter; margin: 0.4in; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { padding: 0 !important; font-size: 10pt !important; color: #000; }
+  /* Hide interactive chrome that doesn't belong on paper */
+  .tabs, .btn, .pq-btn, .pq-ans, .fb, .no-print { display: none !important; }
+  /* Show every tab's panel, one per page */
+  .panel { display: block !important; page-break-before: always; }
+  .panel:first-of-type { page-break-before: auto; }
+  /* Auto-inject the tab name at the top of each printed page */
+  .panel::before {
+    content: attr(data-tab-name);
+    display: block;
+    font-size: 14pt;
+    font-weight: 700;
+    color: #1D4ED8;
+    border-bottom: 1.5pt solid #1D4ED8;
+    padding-bottom: 4pt;
+    margin-bottom: 10pt;
+  }
+  /* Give inputs real writing room */
+  input { border: none !important; border-bottom: 1pt solid #555 !important; min-height: 22pt !important; height: 22pt !important; background: transparent !important; }
+  td input, .f input { min-height: 24pt !important; height: 24pt !important; }
+  td { padding: 5pt 6pt !important; }
+  .f { margin-bottom: 10pt !important; }
+  /* Lighten bulky color blocks for ink economy while keeping structure */
+  .on-exam { background: #fff !important; border: 1pt solid #991B1B !important; color: #991B1B !important; }
+  .warn { background: #fff !important; border-left: 2pt solid #92400E !important; color: #1f2937 !important; }
+  .resource-banner { background: #fff !important; border: 1pt solid #666 !important; color: #1f2937 !important; }
+  .lo-tag { background: #fff !important; border: 1pt solid #5B21B6 !important; color: #5B21B6 !important; }
+  .pq-box { background: #fff !important; border: 1pt solid #888 !important; page-break-inside: avoid; }
+  /* Keep section units together where possible */
+  tr, .pq-box, .card { page-break-inside: avoid; }
+  .sec { page-break-after: avoid; }
+  h2, h3, h4 { page-break-after: avoid; }
+  /* Hide the "View Answer Key" link on paper */
+  a[href$="_key.html"] { display: none !important; }
+}
+</style></head><body>
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+  <h2 style="margin-bottom:0">Urogenital System I &amp; II — Active Recall</h2>
+  <div class="no-print" style="display:flex;gap:6px;flex-wrap:wrap">
+    <button onclick="window.print()" title="Print to PDF — 1 page per tab" style="display:inline-flex;align-items:center;gap:6px;background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;white-space:nowrap;cursor:pointer">&#128196; Print PDF (1 page/tab)</button>
+    <a href="rpd02_key.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#14532d;color:#fff;text-decoration:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;white-space:nowrap">&#9989; View Answer Key</a>
+  </div>
+</div>
+<p class="sub">Built from Repro Lecture 02 (LOs 1&ndash;5). Close notes. Fill from memory. Reveal only after a genuine attempt.</p>
+
+<div class="resource-banner">
+  <strong>&#128214; Use alongside: Repro Lecture 02 &mdash; Urogenital System I &amp; II (HoyaDocs)</strong>
+  Focus on: intermediate mesoderm origin, pronephros/mesonephros/metanephros sequence, ureteric bud vs metanephric blastema, kidney ascent &amp; rotation, Wolffian/M&uuml;llerian duct fates, SRY &rarr; Sertoli/Leydig &rarr; MIS/T/DHT cascade, Potter sequence, horseshoe kidney, hypospadias, CAH (21-OH vs 11&beta; vs 17&alpha;), CAIS vs 5&alpha;-reductase, Klinefelter, Turner.
+</div>
+
+<div style="margin-bottom:14px">
+  <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#374151">SEED &mdash; fill all 4 Wolffian (male) duct derivatives from memory before starting:</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:6px">
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">S</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">E</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">E</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">D</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+  </div>
+  <div style="font-size:11px;color:#6b7280;margin-top:4px">Plus: where does the <em>trigone</em> come from, and why is it the "odd one out" in bladder wall origin?</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="sw(0)">Kidney Development</div>
+  <div class="tab" onclick="sw(1)">Bladder &amp; Ducts</div>
+  <div class="tab" onclick="sw(2)">Genital Differentiation</div>
+  <div class="tab" onclick="sw(3)">Urinary &amp; Genital Anomalies</div>
+  <div class="tab" onclick="sw(4)">DSDs</div>
+  <div class="tab" onclick="sw(5)">Practice Qs</div>
+</div>
+
+<!-- TAB 0: KIDNEY DEVELOPMENT -->
+<div class="panel active" id="p0" data-tab-name="Tab 1 — Kidney Development (LO 1)">
+<div class="lo-tag">LO 1</div>
+<div class="on-exam">ON EXAM &mdash; intermediate mesoderm, 3 kidney stages + functional status, ureteric bud vs metanephric blastema derivatives, reciprocal induction (GDNF, WNT9B), ascent + rotation, adrenal cortex (mesoderm) vs medulla (neural crest)</div>
+
+<div class="sec">Germ layer origins of urogenital structures (LO1)</div>
+<table>
+  <tr><th>Urogenital structure</th><th>Germ layer of origin</th><th>Tested angle</th></tr>
+  <tr><td class="rl">Kidneys, ureters, gonads, reproductive ducts</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Adrenal cortex</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Adrenal medulla</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Bladder (except trigone) &amp; urethra</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">External genitalia (surface)</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Urogenital ridge &mdash; splits into (LO1)</div>
+<div class="fg">
+  <div class="f"><label>Lateral zone (becomes what?)</label><input></div>
+  <div class="f"><label>Medial zone (becomes what?)</label><input></div>
+</div>
+
+<div class="sec">Three embryonic kidneys &mdash; compare (LO1)</div>
+<table>
+  <tr><th>Kidney</th><th>Location</th><th>Timing</th><th>Function?</th><th>Legacy / Fate</th></tr>
+  <tr><td class="rl">Pronephros</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Mesonephros</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Metanephros</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Metanephros &mdash; two origins, two destinies (LO1)</div>
+<div class="warn">KEY: Metanephric <em>blastema</em> = nephron (Bowman, PCT, LOH, DCT). Ureteric <em>bud</em> = collecting system (ducts &rarr; calyces &rarr; pelvis &rarr; ureter).</div>
+<table>
+  <tr><th>Source</th><th>Origin</th><th>Adult derivatives</th></tr>
+  <tr><td class="rl">Metanephric blastema (mesoderm)</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Ureteric bud</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Reciprocal induction &mdash; step-by-step (LO1)</div>
+<div class="fg">
+  <div class="f"><label>Step 1 &mdash; metanephric blastema secretes WHAT, triggering WHAT?</label><input></div>
+  <div class="f"><label>Step 2 &mdash; ureteric bud reciprocally secretes WHAT, triggering WHAT?</label><input></div>
+  <div class="f"><label>Step 3 &mdash; ureteric bud branches: what order of structures does it form?</label><input></div>
+  <div class="f"><label>Failure of reciprocal induction &rarr; what clinical outcome?</label><input></div>
+</div>
+
+<div class="sec">Kidney ascent, rotation, blood supply (LO1)</div>
+<div class="fg">
+  <div class="f"><label>Weeks of ascent; starts where, ends where?</label><input></div>
+  <div class="f"><label>Rotation &mdash; how many degrees, which direction? Where does the hilum end up?</label><input></div>
+  <div class="f"><label>Final blood supply &mdash; artery name + spinal level</label><input></div>
+  <div class="f"><label>Why do "accessory renal arteries" exist? (failed involution of what?)</label><input></div>
+</div>
+
+<div class="sec">Timing markers (LO1)</div>
+<div class="fg">
+  <div class="f"><label>Week the metanephros starts producing urine</label><input></div>
+  <div class="f"><label>After ~20 weeks, what is the main source of amniotic fluid?</label><input></div>
+  <div class="f"><label>Nephrogenesis continues until what gestational age?</label><input></div>
+  <div class="f"><label>Why is a preterm birth relevant to future CKD risk?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb0',a0)">Reveal answers</button>
+<div id="fb0" class="fb"></div>
+</div>
+
+<!-- TAB 1: BLADDER & DUCTS -->
+<div class="panel" id="p1" data-tab-name="Tab 2 — Bladder & Duct Derivatives (LO 2)">
+<div class="lo-tag">LO 2</div>
+<div class="on-exam">ON EXAM &mdash; cloaca &rarr; UGS + anorectal, urorectal septum, 3 regions of UGS, trigone origin, allantois/urachus anomalies, Wolffian (T-dependent) vs M&uuml;llerian (default) fates, MRKH, bicornuate uterus + renal agenesis, PMDS</div>
+
+<div class="sec">Cloaca split (LO2)</div>
+<div class="fg">
+  <div class="f"><label>What wedge of tissue splits the cloaca, and when?</label><input></div>
+  <div class="f"><label>Anterior chamber becomes &rarr;</label><input></div>
+  <div class="f"><label>Posterior chamber becomes &rarr;</label><input></div>
+  <div class="f"><label>Failed urorectal septum fusion &rarr; what class of anomaly? Part of what association?</label><input></div>
+</div>
+
+<div class="sec">Three regions of urogenital sinus &mdash; fill male and female derivatives (LO2)</div>
+<table>
+  <tr><th>Region of UGS</th><th>In both sexes</th><th>Female</th><th>Male</th></tr>
+  <tr><td class="rl">Upper (vesical)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Middle (pelvic)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Lower (phallic)</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Bladder &amp; trigone assembly (LO2)</div>
+<div class="fg">
+  <div class="f"><label>Bulk of bladder wall &mdash; germ layer origin</label><input></div>
+  <div class="f"><label>Trigone &mdash; germ layer origin (odd one out &mdash; why?)</label><input></div>
+  <div class="f"><label>What 3 openings define the trigone?</label><input></div>
+  <div class="f"><label>Vagina: upper 2/3 vs lower 1/3 &mdash; origins?</label><input></div>
+</div>
+
+<div class="sec">Allantois/urachus &mdash; name the four anomalies (LO2)</div>
+<div class="fg">
+  <div class="f"><label>Patent urachus &mdash; clinical finding</label><input></div>
+  <div class="f"><label>Urachal cyst</label><input></div>
+  <div class="f"><label>Urachal sinus</label><input></div>
+  <div class="f"><label>Malignant transformation &rarr; what cancer, in what location?</label><input></div>
+</div>
+
+<div class="sec">Wolffian vs M&uuml;llerian duct fates (LO2)</div>
+<table>
+  <tr><th>Feature</th><th>Mesonephric (Wolffian)</th><th>Paramesonephric (M&uuml;llerian)</th></tr>
+  <tr><td class="rl">Hormone required</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Source cell</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Male adult derivatives</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Female adult derivatives</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Regressed remnant (opposite sex)</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Clinical tie-ins &mdash; name each condition (LO2)</div>
+<div class="fg">
+  <div class="f"><label>46,XX, absent upper vagina/uterus/tubes, NORMAL ovaries, primary amenorrhea &rarr; name the syndrome</label><input></div>
+  <div class="f"><label>Bicornuate uterus + ipsilateral renal agenesis &mdash; why do they go together embryologically?</label><input></div>
+  <div class="f"><label>46,XY with internal female ducts (uterus/tubes) + normal testosterone &mdash; name the syndrome + mechanism</label><input></div>
+  <div class="f"><label>Default developmental pathway is &mdash; male or female? Why?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb1',a1)">Reveal answers</button>
+<div id="fb1" class="fb"></div>
+</div>
+
+<!-- TAB 2: GENITAL DIFFERENTIATION -->
+<div class="panel" id="p2" data-tab-name="Tab 3 — Genital Differentiation (LO 3)">
+<div class="lo-tag">LO 3</div>
+<div class="on-exam">ON EXAM &mdash; SRY on Yp &rarr; TDF, Sertoli &rarr; MIS; Leydig &rarr; T &rarr; 5&alpha;-reductase &rarr; DHT; internal (T) vs external (DHT); bipotential genitalia &rarr; penis vs clitoris, scrotum vs labia majora; CAIS vs 5&alpha;-reductase; Swyer vs 46,XX male</div>
+
+<div class="sec">Gonad formation (LO3)</div>
+<div class="fg">
+  <div class="f"><label>Where do primordial germ cells (PGCs) originate, and where do they migrate to?</label><input></div>
+  <div class="f"><label>What forms the primitive sex cords?</label><input></div>
+  <div class="f"><label>When is the indifferent (bipotential) gonad fully formed?</label><input></div>
+  <div class="f"><label>Turner syndrome &mdash; PGCs arrive, but what happens next &rarr; what gonad result?</label><input></div>
+</div>
+
+<div class="sec">SRY decision tree &mdash; fill in each step (LO3)</div>
+<div class="fg3">
+  <div class="card">
+    <div style="font-weight:700;font-size:12px;margin-bottom:4px;color:#1D4ED8">SRY present (46,XY)</div>
+    <div class="f"><label>Primitive sex cords &rarr; cell type &rarr; hormone</label><input></div>
+    <div class="f"><label>Interstitial mesenchyme &rarr; cell type &rarr; hormone</label><input></div>
+    <div class="f"><label>Testosterone &rarr; enzyme &rarr; what potent androgen?</label><input></div>
+  </div>
+  <div class="card">
+    <div style="font-weight:700;font-size:12px;margin-bottom:4px;color:#1D4ED8">SRY absent (46,XX)</div>
+    <div class="f"><label>Primitive sex cords &rarr;</label><input></div>
+    <div class="f"><label>M&uuml;llerian duct fate (no MIS)</label><input></div>
+    <div class="f"><label>Wolffian duct fate (no T)</label><input></div>
+  </div>
+  <div class="card">
+    <div style="font-weight:700;font-size:12px;margin-bottom:4px;color:#1D4ED8">SRY translocations</div>
+    <div class="f"><label>46,XX male (de la Chapelle) &mdash; mechanism</label><input></div>
+    <div class="f"><label>46,XY female (Swyer) &mdash; mechanism + gonad type</label><input></div>
+    <div class="f"><label>Why is gonadectomy indicated in Swyer?</label><input></div>
+  </div>
+</div>
+
+<div class="sec">Hormone / enzyme atlas &mdash; fill target + effect (LO3)</div>
+<table>
+  <tr><th>Hormone / enzyme</th><th>Made by</th><th>Target tissue</th><th>Effect</th></tr>
+  <tr><td class="rl">MIS (AMH)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Testosterone</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">5&alpha;-reductase</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">DHT</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Aromatase</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="warn">EXAM TRAP: <strong>Testosterone</strong> acts on <strong>internal</strong> Wolffian ducts. <strong>DHT</strong> acts on <strong>external</strong> genitalia + prostate. Both use the same androgen receptor &mdash; AIS blocks BOTH.</div>
+
+<div class="sec">Bipotential external genitalia &mdash; fill derivative with / without DHT (LO3)</div>
+<table>
+  <tr><th>Bipotential structure</th><th>With DHT (&#9794;)</th><th>Without DHT (&#9792;)</th></tr>
+  <tr><td class="rl">Genital tubercle</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Urogenital (urethral) folds</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Labioscrotal swellings</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Gubernaculum</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Timing-dependent androgen exposure &mdash; 46,XX fetus (LO3)</div>
+<div class="fg">
+  <div class="f"><label>1st trimester androgens &rarr; external genitalia result?</label><input></div>
+  <div class="f"><label>3rd trimester androgens &rarr; external genitalia result? Why different?</label><input></div>
+  <div class="f"><label>"If X is missing" &mdash; Leydig/T missing in 46,XY &rarr; predict internal ducts + external</label><input></div>
+  <div class="f"><label>"If X is missing" &mdash; 5&alpha;-reductase missing in 46,XY &rarr; predict internal + external</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb2',a2)">Reveal answers</button>
+<div id="fb2" class="fb"></div>
+</div>
+
+<!-- TAB 3: URINARY & GENITAL ANOMALIES -->
+<div class="panel" id="p3" data-tab-name="Tab 4 — Urinary & Genital Anomalies (LO 4)">
+<div class="lo-tag">LO 4</div>
+<div class="on-exam">ON EXAM &mdash; Potter sequence (cause of death = pulmonary hypoplasia), horseshoe kidney caught at IMA, pelvic kidney (adrenal stays put), duplex kidney + Weigert-Meyer, ectopic ureter + female incontinence, cryptorchidism (heat &darr; inhibin B), hypospadias (ventral, do NOT circumcise) vs epispadias (dorsal, bladder exstrophy)</div>
+
+<div class="sec">Potter sequence (LO4)</div>
+<div class="fg">
+  <div class="f"><label>Four possible causes of Potter sequence</label><input></div>
+  <div class="f"><label>Trigger/pathway: low urine &rarr; _____ &rarr; compression + lung defect</label><input></div>
+  <div class="f"><label>Actual cause of death</label><input></div>
+  <div class="f"><label>POTTER mnemonic &mdash; spell it out</label><input></div>
+</div>
+
+<div class="sec">Structural kidney anomalies (LO4)</div>
+<table>
+  <tr><th>Anomaly</th><th>Mechanism</th><th>Classic finding / clinical</th></tr>
+  <tr><td class="rl">Multicystic dysplastic kidney (MCDK)</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Horseshoe kidney</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Pelvic (ectopic) kidney</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">ARPKD</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">ADPKD</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Ureteric bud anomalies (LO4)</div>
+<div class="fg">
+  <div class="f"><label>Ureteral duplication &mdash; mechanism (when does the bud split?)</label><input></div>
+  <div class="f"><label>Weigert-Meyer rule &mdash; upper-pole ureter inserts where? Lower-pole?</label><input></div>
+  <div class="f"><label>Ectopic ureter in a FEMALE &mdash; why continuous dribbling? (anatomic reason)</label><input></div>
+  <div class="f"><label>Ectopic ureter in a MALE &mdash; why NO continuous incontinence?</label><input></div>
+  <div class="f"><label>Ureterocele &mdash; classic imaging sign</label><input></div>
+  <div class="f"><label>Most common cause of fetal hydronephrosis</label><input></div>
+</div>
+
+<div class="sec">Testicular descent &amp; cryptorchidism (LO4)</div>
+<div class="fg">
+  <div class="f"><label>Two structures that guide testicular descent</label><input></div>
+  <div class="f"><label>3 abdominal wall layers &rarr; 3 spermatic cord layers</label><input></div>
+  <div class="f"><label>Processus vaginalis fate: normal = _____; patent = _____</label><input></div>
+  <div class="f"><label>Hydrocele vs indirect inguinal hernia &mdash; distinguishing exam maneuver</label><input></div>
+  <div class="f"><label>Cryptorchidism labs: T = ___, inhibin B = ___, FSH = ___ &mdash; why this pattern?</label><input></div>
+  <div class="f"><label>Most feared long-term consequence of uncorrected cryptorchidism</label><input></div>
+  <div class="f"><label>Orchidopexy &mdash; ideal age window</label><input></div>
+</div>
+
+<div class="sec">Hypospadias vs epispadias (LO4)</div>
+<div class="warn">Mnemonic: <em>Hypo</em> = below (ventral). <em>Epi</em> = above (dorsal). One key management pearl: do NOT circumcise a hypospadias.</div>
+<table>
+  <tr><th>Feature</th><th>Hypospadias</th><th>Epispadias</th></tr>
+  <tr><td class="rl">Mechanism</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Location of meatus</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Common or rare?</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Classic association</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Why avoid routine circumcision?</td><td colspan="2"><input></td></tr>
+</table>
+<button class="btn" onclick="rev('fb3',a3)">Reveal answers</button>
+<div id="fb3" class="fb"></div>
+</div>
+
+<!-- TAB 4: DSDs -->
+<div class="panel" id="p4" data-tab-name="Tab 5 — Disorders of Sex Development (LO 5)">
+<div class="lo-tag">LO 5</div>
+<div class="on-exam">ON EXAM &mdash; 21-OH CAH (virilized XX + salt-wasting), 11&beta;-OH (HTN + virilization), 17&alpha;-OH (HTN + hypogonadism), CAIS (46,XY, breasts, no hair, no uterus), 5&alpha;-reductase ("female at birth, male at puberty"), Klinefelter (tall, small firm testes, gyneco), Turner (short, streak gonads, BAV, coarct, horseshoe)</div>
+
+<div class="sec">Adrenal cortex zones &mdash; GFR mnemonic (LO5)</div>
+<div class="fg3">
+  <div class="f"><label>G &mdash; Glomerulosa &rarr; what hormone? Regulated by?</label><input></div>
+  <div class="f"><label>F &mdash; Fasciculata &rarr; what hormone? Regulated by?</label><input></div>
+  <div class="f"><label>R &mdash; Reticularis &rarr; what hormones?</label><input></div>
+</div>
+
+<div class="sec">CAH &mdash; fill every row (LO5)</div>
+<table>
+  <tr><th>Enzyme deficiency</th><th>Aldo</th><th>Cortisol</th><th>Androgens</th><th>BP / Key Feature</th><th>46,XX genitalia</th><th>46,XY genitalia</th></tr>
+  <tr><td class="rl">21-hydroxylase (95%)</td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">11&beta;-hydroxylase</td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">17&alpha;-hydroxylase</td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">3&beta;-HSD</td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="fg" style="margin-top:10px">
+  <div class="f"><label>Screening lab for 21-OH CAH</label><input></div>
+  <div class="f"><label>Rule of thumb: HTN in CAH = which enzymes? Hypotension = which?</label><input></div>
+  <div class="f"><label>Treatment of 21-OH CAH (2 drugs)</label><input></div>
+  <div class="f"><label>"Virilized female with HTN" = which CAH?</label><input></div>
+</div>
+
+<div class="sec">46,XY DSDs &mdash; compare (LO5)</div>
+<table>
+  <tr><th>Condition</th><th>Defect</th><th>Gonad</th><th>Internal</th><th>External</th><th>Puberty</th></tr>
+  <tr><td class="rl">CAIS</td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">5&alpha;-reductase deficiency</td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Swyer (46,XY gonadal dysgenesis)</td><td><input></td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="fg" style="margin-top:10px">
+  <div class="f"><label>CAIS &mdash; why are breasts present but pubic hair is sparse?</label><input></div>
+  <div class="f"><label>5&alpha;-reductase &mdash; key lab (ratio)</label><input></div>
+  <div class="f"><label>CAIS &mdash; timing of gonadectomy and why</label><input></div>
+  <div class="f"><label>CAIS vs MRKH &mdash; one test that distinguishes them</label><input></div>
+</div>
+
+<div class="sec">Chromosomal DSDs (LO5)</div>
+<div class="fg">
+  <div class="f"><label>Klinefelter karyotype + phenotype (4 features)</label><input></div>
+  <div class="f"><label>Klinefelter hormone pattern: T = ___, FSH/LH = ___, inhibin B = ___, estradiol = ___</label><input></div>
+  <div class="f"><label>Klinefelter &mdash; fertility? cancer risk?</label><input></div>
+  <div class="f"><label>Turner karyotype + 4 classic physical features</label><input></div>
+  <div class="f"><label>Turner hormone pattern (estrogen, FSH/LH)</label><input></div>
+  <div class="f"><label>Turner cardiac associations (2) + renal association + endocrine associations</label><input></div>
+  <div class="f"><label>Gene responsible for Turner short stature</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb4',a4)">Reveal answers</button>
+<div id="fb4" class="fb"></div>
+</div>
+
+<!-- TAB 5: PRACTICE QUESTIONS -->
+<div class="panel" id="p5" data-tab-name="Tab 6 — Practice Questions (USMLE Step 1 Style)">
+<div class="lo-tag">LO 1&ndash;5 &middot; USMLE Step 1 Style</div>
+<div class="on-exam">8 questions &mdash; cover all 5 LOs. Use these after finishing all tabs.</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q1. A research team generates a mouse embryo in which the ureteric bud is surgically ablated on the right side at the equivalent of human gestational week 5, while the left side is left intact. At birth, imaging on the right side would MOST likely show which of the following?</div>
+  <div class="pq-choices">
+    A. A normal-sized right kidney with a duplicated ureter<br>
+    B. A dysplastic right kidney with cystic remnants and no ureter<br>
+    C. Complete absence of the right kidney and right ureter<br>
+    D. A pelvic right kidney with variant iliac blood supply<br>
+    E. A horseshoe-shaped kidney with bilateral ureters
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Complete absence of the right kidney and right ureter (unilateral renal agenesis).</strong><br>Without a ureteric bud, there is no WNT9B/FGF2 signal to induce the metanephric blastema, so no nephrons condense. Reciprocal induction fails on that side &rarr; no collecting system AND no functional nephrons. The contralateral side compensates (hypertrophy); unilateral disease is usually compatible with life. Bilateral bud failure &rarr; bilateral renal agenesis &rarr; <strong>Potter sequence</strong> (oligohydramnios &rarr; pulmonary hypoplasia).</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q2. A neonate dies shortly after birth from respiratory failure. Autopsy reveals flattened facies, clubbed feet, and severely hypoplastic lungs. Prenatal ultrasound had shown oligohydramnios and bilateral absent kidneys. Which of the following BEST explains the cause of death?</div>
+  <div class="pq-choices">
+    A. Acute renal failure from bilateral renal agenesis<br>
+    B. Uremia-induced encephalopathy<br>
+    C. Pulmonary hypoplasia due to absent fetal urine &rarr; oligohydramnios &rarr; failed lung distension<br>
+    D. Pulmonary surfactant deficiency from premature birth<br>
+    E. Cardiac defects from failed neural crest migration
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Pulmonary hypoplasia from oligohydramnios (Potter sequence).</strong><br>The placenta filters fetal blood during gestation, so the fetus does not die of uremia. After ~20 weeks, amniotic fluid comes almost entirely from fetal urine; without kidneys, oligohydramnios develops &rarr; mechanical compression (Potter facies, limb deformities) AND failed amniotic-fluid-driven lung distension &rarr; <strong>pulmonary hypoplasia</strong> = actual cause of neonatal death.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q3. A 16-year-old girl presents with primary amenorrhea. Pelvic imaging reveals a bicornuate uterus, and renal ultrasound shows an absent right kidney. Which single embryologic principle BEST explains the co-occurrence of these two findings?</div>
+  <div class="pq-choices">
+    A. Failure of neural crest migration<br>
+    B. Failed urorectal septum fusion<br>
+    C. Abnormal SRY translocation<br>
+    D. The mesonephric duct scaffolds paramesonephric descent and sprouts the ureteric bud &mdash; one disruption, two findings<br>
+    E. Failed sinovaginal node fusion
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>D &mdash; The mesonephric (Wolffian) duct is the shared scaffold.</strong><br>The paramesonephric (M&uuml;llerian) ducts descend alongside the mesonephric ducts; partial fusion failure produces a <strong>bicornuate uterus</strong>. The ureteric bud sprouts from the <em>caudal mesonephric duct</em>; its failure &rarr; unilateral renal agenesis. A single Wolffian/paramesonephric disruption can produce both defects on the same side. <strong>Always order a renal ultrasound when a M&uuml;llerian anomaly is identified.</strong></div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q4. A phenotypically male newborn is undergoing surgery for bilateral non-palpable testes. The surgeon unexpectedly finds a uterus and two fallopian tubes. Karyotype is 46,XY; testosterone, DHT, and LH are all normal for age. Which embryologic event failed?</div>
+  <div class="pq-choices">
+    A. Leydig cells failed to produce testosterone<br>
+    B. Neural crest migration into the distal cloaca failed<br>
+    C. Sertoli cells failed to produce MIS, or target tissues lack the MIS receptor<br>
+    D. The metanephric blastema failed to receive WNT9B<br>
+    E. 5&alpha;-reductase activity was absent in target tissues
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Persistent M&uuml;llerian Duct Syndrome (PMDS).</strong><br>Sertoli cells normally produce <strong>MIS (AMH)</strong>, which triggers regression of the paramesonephric ducts at week 7&ndash;8. If MIS is absent (AMH gene mutation) or the MIS type II receptor is nonfunctional, M&uuml;llerian structures persist despite otherwise normal male development (testosterone from Leydig &rarr; Wolffian SEED; DHT &rarr; external male genitalia). Retained M&uuml;llerian structures often tether the testes intra-abdominally &rarr; cryptorchidism.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q5. A 14-year-old phenotypically female patient presents with primary amenorrhea. Exam reveals Tanner IV breasts, sparse pubic hair, and a short blind-ending vagina. Imaging shows no uterus or fallopian tubes; bilateral inguinal masses are present. Karyotype is 46,XY. Which ONE of the following best explains both the absent uterus AND the breast development?</div>
+  <div class="pq-choices">
+    A. Functional Sertoli cells (MIS active) AND functional aromatase converting testosterone to estradiol<br>
+    B. Failed SRY signaling with streak gonads producing endogenous estrogen<br>
+    C. Defective 5&alpha;-reductase with normal aromatase<br>
+    D. 21-hydroxylase deficiency with virilization<br>
+    E. Functional M&uuml;llerian ducts with exogenous androgen exposure
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>A &mdash; Complete Androgen Insensitivity (CAIS).</strong><br>Testes form normally (SRY present). <strong>Sertoli cells make MIS &rarr; M&uuml;llerian regression &rarr; no uterus, no upper vagina.</strong> Leydig cells produce testosterone normally or high, but the mutant androgen receptor cannot respond &rarr; Wolffian ducts regress and external genitalia default to female. Peripheral <strong>aromatase</strong> converts the high circulating testosterone to estradiol &rarr; breast development at puberty. Sparse pubic/axillary hair reflects lost androgen receptor signaling. Inguinal masses = undescended testes.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q6. A 46,XY infant is born with ambiguous, predominantly female-appearing external genitalia: a small phallus, penoscrotal hypospadias, labial fusion, and a blind-ending vagina. Testosterone level is high-normal and LH is mildly elevated. By late adolescence, the patient has developed increased muscle mass, a deepened voice, and growth of the phallus, but no breast development. What lab finding would confirm the diagnosis?</div>
+  <div class="pq-choices">
+    A. Elevated 17-hydroxyprogesterone<br>
+    B. Elevated testosterone-to-DHT ratio<br>
+    C. Karyotype showing 47,XXY<br>
+    D. Elevated FSH with low inhibin B<br>
+    E. Absent response to exogenous HCG stimulation
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Elevated testosterone-to-DHT ratio (5&alpha;-reductase deficiency).</strong><br>Autosomal recessive loss of 5&alpha;-reductase prevents T &rarr; DHT conversion in target tissues. Internal Wolffian ducts (T-dependent) form normally; external genitalia (DHT-dependent) do not masculinize until the pubertal T surge directly overwhelms the block. Classic "female at birth, male at puberty"; androgen receptor works (hence muscle/phallus growth, no breast development).</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q7. A 2-week-old 46,XX infant with ambiguous genitalia presents with vomiting, poor feeding, hyponatremia, hyperkalemia, and hypotension. Serum 17-hydroxyprogesterone is markedly elevated. Which of the following is the MOST appropriate immediate management?</div>
+  <div class="pq-choices">
+    A. Testosterone replacement therapy to masculinize genitalia<br>
+    B. Hydrocortisone + fludrocortisone + IV fluids/glucose<br>
+    C. Surgical gonadectomy<br>
+    D. Methylprednisolone taper only<br>
+    E. Spironolactone and potassium restriction
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Hydrocortisone + fludrocortisone + IV fluids.</strong><br>This is classic salt-wasting <strong>21-hydroxylase deficiency</strong>. Hydrocortisone replaces cortisol AND suppresses ACTH (reducing androgen shunting). Fludrocortisone replaces aldosterone to correct the salt-wasting (hyponatremia, hyperkalemia). Giving testosterone (A) to a virilized 46,XX would worsen virilization. Gonadectomy (C) has no role &mdash; gonads are ovaries. Spironolactone (E) would further deplete aldosterone activity.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q8. A 15-year-old girl is evaluated for short stature, primary amenorrhea, webbed neck, and shield chest. Echocardiography shows a bicuspid aortic valve with mild coarctation. Renal ultrasound reveals a horseshoe kidney. Which embryologic mechanism BEST unifies the renal finding with the rest of her presentation?</div>
+  <div class="pq-choices">
+    A. Failure of neural crest migration into the distal cloaca<br>
+    B. Fusion of the two metanephric blastemas across the midline, trapped under the IMA during ascent<br>
+    C. Failed reciprocal induction between the ureteric bud and metanephric blastema<br>
+    D. Failure of the urorectal septum to fuse with the cloacal membrane<br>
+    E. Abnormal rotation of the kidneys with failure of the nephrogenic cord
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Midline fusion of the metanephric blastemas, caught under the inferior mesenteric artery during ascent.</strong><br>The patient has <strong>Turner syndrome (45,XO)</strong>: short stature (SHOX haploinsufficiency), streak gonads with hypergonadotropic hypogonadism, webbed neck (cystic hygroma), bicuspid aortic valve + coarctation, and <strong>horseshoe kidney</strong>. The horseshoe is formed when the lower poles fuse across the midline; the isthmus catches on the IMA &rarr; the kidney sits low at L3&ndash;L5. Turner patients should have lifelong cardiac monitoring for aortic dissection and renal monitoring for reflux/UTIs.</div>
+</div>
+
+</div>
+
+<script>
+function sw(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',i===n)});
+  document.querySelectorAll('.panel').forEach((p,i)=>{p.classList.toggle('active',i===n)});
+}
+
+const a0={
+  'Kidneys/ureters/gonads/ducts germ layer':'Intermediate mesoderm — "UG tract = intermediate mesoderm" is the classic stem',
+  'Adrenal cortex germ layer':'Mesoderm (coelomic epithelium) — cortex ≠ medulla origin',
+  'Adrenal medulla germ layer':'Ectoderm (neural crest) — pheochromocytoma & neuroblastoma arise here',
+  'Bladder/urethra germ layer':'Endoderm (urogenital sinus) — except trigone',
+  'External genitalia surface':'Ectoderm (surface) + mesoderm (core)',
+  'Urogenital ridge — lateral':'Nephrogenic cord → kidneys, ureters, collecting system',
+  'Urogenital ridge — medial':'Genital ridge → gonads (ovaries / testes)',
+  'Pronephros':'Cervical (neck) | Beginning of week 4 | NONE — no urine | Regresses by end of week 4; leaves behind the pronephric duct',
+  'Mesonephros':'Thoracolumbar | Weeks 4–10 (functions weeks 5–10) | YES — first "fake" kidney that makes urine | Regresses except the duct (Wolffian/mesonephric duct → male internal genitalia + trigone)',
+  'Metanephros':'Pelvis (ascends to lumbar) | Week 5+ (urine from week 10) | YES — definitive kidney | Becomes the adult kidney',
+  'Metanephric blastema derivatives':'Origin: caudal intermediate mesoderm; Derivatives: NEPHRON (Bowman\'s capsule, glomerulus, PCT, Loop of Henle, DCT) + renal cortex & medulla',
+  'Ureteric bud derivatives':'Origin: outgrowth from distal mesonephric duct; Derivatives: COLLECTING system (collecting ducts → minor calyces → major calyces → renal pelvis → ureter)',
+  'Reciprocal induction — Step 1':'Metanephric blastema secretes GDNF → stimulates mesonephric duct to sprout the ureteric bud',
+  'Reciprocal induction — Step 2':'Ureteric bud secretes WNT9B + FGF2 → induces metanephric mesoderm to condense around it and form nephrons',
+  'Reciprocal induction — Step 3':'Ureteric bud bifurcates: renal pelvis → major calyces → minor calyces → collecting ducts',
+  'Reciprocal induction failure':'Renal agenesis — unilateral (compatible with life) or bilateral (Potter sequence)',
+  'Ascent weeks':'Weeks 6–9; starts in pelvis, ends in lumbar region (L1–L2)',
+  'Kidney rotation':'90° medially — hilum ends up facing medially, not anteriorly',
+  'Final blood supply':'Renal arteries from abdominal aorta at L1–L2',
+  'Accessory renal arteries':'Failed involution of early fetal vessels (from iliac/lower aorta) that supplied the kidney during ascent — left as asymptomatic accessory arteries',
+  'Week metanephros starts urine':'Week 10',
+  'Source of amniotic fluid after week 20':'Fetal urine (that\'s why bilateral renal agenesis → oligohydramnios → Potter)',
+  'Nephrogenesis completion':'~Week 36 of gestation',
+  'Preterm CKD risk':'Preterm infants may have incomplete nephron count → ↑ CKD risk later in life'
+};
+
+const a1={
+  'Urorectal septum':'Wedge of mesoderm that descends weeks 6–7 and fuses with cloacal membrane → splits cloaca',
+  'Anterior chamber':'Urogenital sinus (urinary + genital)',
+  'Posterior chamber':'Anorectal canal (GI)',
+  'Urorectal septum failure':'Rectourethral / rectovaginal fistulas; part of VACTERL association (A = anal atresia + R = renal anomalies)',
+  'UGS upper — both sexes':'Bladder (except trigone)',
+  'UGS upper — female':'Bladder',
+  'UGS upper — male':'Bladder',
+  'UGS middle — both sexes':'Urethra',
+  'UGS middle — female':'Entire urethra + Skene\'s (paraurethral) glands + Bartholin\'s glands',
+  'UGS middle — male':'Prostatic + membranous urethra; prostate gland buds off; bulbourethral (Cowper\'s) glands',
+  'UGS lower — both sexes':'Genital tubercle / vestibule',
+  'UGS lower — female':'Lower 1/3 of vagina; vestibule; hymen',
+  'UGS lower — male':'Penile / spongy urethra (after urethral-fold fusion)',
+  'Bladder wall origin':'Endoderm (from upper urogenital sinus)',
+  'Trigone origin':'Mesoderm (from absorbed mesonephric ducts — Wolffian territory); odd one out because rest of bladder is endodermal',
+  'Trigone openings':'Two ureteric orifices + internal urethral meatus',
+  'Vagina origins':'Upper 2/3 = Müllerian (paramesonephric); Lower 1/3 = urogenital sinus (endoderm); sinovaginal node = fusion point',
+  'Patent urachus':'Urine leaks from umbilicus',
+  'Urachal cyst':'Fluid-filled midline mass between bladder and umbilicus',
+  'Urachal sinus':'Umbilical drainage without bladder communication',
+  'Urachal cancer':'Adenocarcinoma at the bladder DOME (classic Step 1 stem — distinct from urothelial TCC of the wall)',
+  'Wolffian — hormone':'Testosterone',
+  'Müllerian — hormone':'Default; regresses if MIS is present',
+  'Wolffian — source cell':'Leydig cells make testosterone',
+  'Müllerian — source cell':'Sertoli cells make MIS (AMH)',
+  'Wolffian — male derivatives':'SEED + efferent ductules + rete testis + trigone (both sexes)',
+  'Müllerian — male derivatives':'Regresses; remnants = appendix testis + prostatic utricle',
+  'Wolffian — female derivatives':'Regresses; trigone; may persist as Gartner duct cyst on lateral vagina',
+  'Müllerian — female derivatives':'Fallopian tubes, uterus, cervix, upper 2/3 vagina',
+  'Wolffian — opposite sex remnant':'In females: Gartner duct cyst',
+  'Müllerian — opposite sex remnant':'In males: appendix testis + prostatic utricle',
+  'MRKH':'Müllerian agenesis (Mayer-Rokitansky-Küster-Hauser): 46,XX, absent uterus/upper vagina/fallopian tubes, NORMAL ovaries, primary amenorrhea with normal secondary sex characteristics',
+  'Bicornuate + renal agenesis':'Müllerian ducts use mesonephric ducts as a scaffold; the ureteric bud sprouts from mesonephric duct. A unilateral Wolffian disruption simultaneously fails paramesonephric fusion (bicornuate) AND ureteric bud formation (renal agenesis)',
+  'PMDS':'Persistent Müllerian Duct Syndrome: 46,XY with uterus/tubes + cryptorchidism. Mechanism: MIS deficiency (AMH mutation) OR MIS type II receptor defect. Testosterone & external phenotype normal',
+  'Default pathway':'FEMALE — without hormones, ducts default to Müllerian persistence + Wolffian regression; external genitalia default to unfused/female'
+};
+
+const a2={
+  'PGCs origin':'Endoderm of the yolk sac wall; migrate along dorsal mesentery of the hindgut → seed genital ridge at week 5',
+  'Primitive sex cords':'Coelomic epithelium invades the mesodermal core of the genital ridge',
+  'Bipotential gonad formation':'Week 6 — indifferent gonad formed; paramesonephric ducts also forming alongside mesonephric ducts',
+  'Turner gonad':'PGCs arrive but ovarian follicles undergo accelerated apoptosis → "streak gonads"',
+  'XY — sex cords to Sertoli':'Primitive sex cords → Sertoli cells → MIS (AMH) → Müllerian regression',
+  'XY — mesenchyme to Leydig':'Interstitial mesenchyme → Leydig cells (week 8–10) → testosterone (stimulated by hCG → later fetal LH) → Wolffian persistence',
+  'XY — T to DHT':'Testosterone → 5α-reductase (in target tissue) → DHT → virilizes external genitalia + prostate',
+  'XX — sex cords':'Primitive sex cords → ovarian follicles (house oocytes)',
+  'XX — Müllerian fate':'No MIS → Müllerian persists → fallopian tubes, uterus, upper 2/3 vagina',
+  'XX — Wolffian fate':'No testosterone → Wolffian regresses',
+  'de la Chapelle':'46,XX male — SRY translocated to X during paternal meiosis; phenotypic male with testes but typically infertile',
+  'Swyer':'46,XY female — SRY deletion/mutation; streak gonads; no T or MIS; female internal + external; primary amenorrhea',
+  'Swyer gonadectomy':'Streak gonads carry a high risk of gonadoblastoma → prophylactic gonadectomy indicated',
+  'MIS row':'Made by Sertoli cells → acts on paramesonephric (Müllerian) duct → regression',
+  'Testosterone row':'Made by Leydig cells (stim by hCG then fetal LH) → acts on Wolffian duct → differentiation into SEED structures',
+  '5α-reductase row':'Active in target tissue (external genitalia, prostate, skin) → converts T → DHT',
+  'DHT row':'Derived from T → acts on UG sinus, genital tubercle, urethral/labioscrotal folds, prostate → virilization of EXTERNAL genitalia + prostate',
+  'Aromatase row':'Made by gonads, placenta, adipose, skin → converts T → estradiol → female secondary sex characteristics at puberty (relevant in CAIS)',
+  'Genital tubercle fates':'With DHT: elongates → glans & shaft of penis. Without: small → clitoris',
+  'Urethral folds fates':'With DHT: fuse midline → ventral penile shaft + penile urethra. Without: remain unfused → labia minora',
+  'Labioscrotal fates':'With DHT: fuse midline → scrotum (raphe = fusion seam). Without: unfused → labia majora',
+  'Gubernaculum fates':'Male: gubernaculum testis (guides testicular descent). Female: round ligament of uterus + ovarian ligament',
+  '1st trimester androgens XX':'Labioscrotal fusion + clitoromegaly + common urogenital sinus → full genital virilization',
+  '3rd trimester androgens XX':'Only clitoromegaly — the labioscrotal folds have already "decided" their fate; timing matters',
+  'Leydig/T missing XY':'Testes present; no T → no Wolffian (SEED absent); MIS works → no Müllerian → NEITHER internal duct. External = female (no DHT)',
+  '5α-reductase missing XY':'Testes present; T works → Wolffian present (internal SEED normal); MIS works → no Müllerian; external = female/ambiguous at birth, virilizes at puberty'
+};
+
+const a3={
+  'Potter causes':'(1) Bilateral Renal Agenesis (BRA); (2) ARPKD; (3) Bilateral obstructive uropathy (e.g., posterior urethral valves); (4) Esophageal atresia or upstream issues preventing fetus from swallowing amniotic fluid (VACTERL)',
+  'Potter pathway':'Low fetal urine output → OLIGOHYDRAMNIOS → fetal compression (flat facies, clubbed feet, limb deformities) → failed lung distension → pulmonary hypoplasia',
+  'Potter cause of death':'PULMONARY HYPOPLASIA → respiratory failure (NOT kidney failure — placenta handles waste)',
+  'POTTER mnemonic':'P — Pulmonary hypoplasia | O — Oligohydramnios (trigger) | T — Twisted face | T — Twisted/extremity deformities | E — Extremity defects | R — Renal failure (in utero)',
+  'MCDK':'Mechanism: failed reciprocal induction → parenchyma replaced by non-functioning cysts | Finding: "bunch of grapes" on prenatal US; most common cause of abdominal mass in a newborn; usually unilateral',
+  'Horseshoe':'Mechanism: midline fusion of metanephric blastemas caught on IMA during ascent (stops at L3–L5) | Finding: Turner (XO), trisomy 13/18/21; ↑ UTIs, stones, Wilms tumor, RCC',
+  'Pelvic kidney':'Mechanism: failed ascent | Finding: variant iliac blood supply; adrenal is in NORMAL position (adrenals don\'t migrate with kidneys)',
+  'ARPKD':'PKHD1 mutation; bilateral enlarged kidneys with collecting-duct cysts; infantile presentation with Potter + hepatic fibrosis',
+  'ADPKD':'PKD1/PKD2; adult-onset HTN, bilateral massive kidneys, berry aneurysms, hepatic cysts, MVP',
+  'Ureteral duplication':'Premature bifurcation of the ureteric bud → two ureters drain one kidney; most common renal structural anomaly',
+  'Weigert-Meyer rule':'Upper-pole ureter inserts INFERIOR + MEDIAL (often ectopic, often with ureterocele); Lower-pole ureter inserts normally at the trigone (often with VUR)',
+  'Ectopic female dribbling':'Distal ureter opens BELOW the external urethral sphincter (urethra distal to sphincter, vagina, or vestibule) → urine bypasses voluntary continence → constant dribbling despite normal voiding from the other ureter',
+  'Ectopic male no incontinence':'Ureter opens ABOVE the external sphincter (vas deferens, seminal vesicle, epididymis) → no continuous leakage; risk of epididymitis / infertility',
+  'Ureterocele':'Cobra-head sign on imaging (balloon-like dilation of distal intramural ureter); often associated with duplex kidney',
+  'Fetal hydronephrosis':'Uretero-pelvic junction (UPJ) obstruction is MOST common cause',
+  'Descent guides':'(1) Gubernaculum testis (caudal ligament that guides direction) + (2) Processus vaginalis (peritoneal outpouching that creates the path through the inguinal canal)',
+  'Spermatic cord layers':'External oblique aponeurosis → external spermatic fascia | Internal oblique → cremaster muscle + cremasteric fascia | Transversalis fascia → internal spermatic fascia',
+  'Processus vaginalis':'Normal: obliterates after descent (remnant = tunica vaginalis around testis). Patent: indirect inguinal hernia OR communicating hydrocele',
+  'Hydrocele vs hernia':'Hydrocele TRANSILLUMINATES; indirect inguinal hernia does NOT',
+  'Cryptorchidism labs':'Testosterone NORMAL (Leydig cells heat-resistant); inhibin B LOW (Sertoli heat damage); FSH ELEVATED (loss of inhibin B feedback)',
+  'Cryptorchidism long-term':'↑ Germ cell tumors — especially SEMINOMA in an abdominal testis; early orchidopexy reduces malignancy risk',
+  'Orchidopexy timing':'Ideally BEFORE 1 year of age (after 6-month observation for spontaneous descent)',
+  'Hypospadias mechanism':'Failure of urogenital (urethral) fold fusion ventrally along the shaft',
+  'Epispadias mechanism':'Abnormal genital tubercle positioning / defective cloacal membrane',
+  'Hypospadias location':'VENTRAL (underside) of penis — anywhere from glanular to penoscrotal/perineal',
+  'Epispadias location':'DORSAL (top) surface of penis',
+  'Hypospadias common':'More common (1 in 200–300 male births)',
+  'Epispadias common':'Less common, rarer',
+  'Hypospadias association':'Cryptorchidism (shared androgen-dependent); 5α-reductase deficiency → penoscrotal hypospadias; partial AIS',
+  'Epispadias association':'Bladder exstrophy (failure of abdominal wall closure exposes bladder)',
+  'No circumcision hypospadias':'The foreskin is harvested for urethroplasty/reconstruction — do NOT circumcise'
+};
+
+const a4={
+  'G — Glomerulosa':'Mineralocorticoids (aldosterone) — "Salty"; regulated by angiotensin II & K⁺',
+  'F — Fasciculata':'Glucocorticoids (cortisol) — "Sweet"; regulated by ACTH',
+  'R — Reticularis':'Androgens (DHEA, androstenedione) — "Sexy"; regulated by ACTH',
+  '21-hydroxylase':'Aldo ↓ | Cortisol ↓ | Androgens ↑↑ | SALT-WASTING, ↓ BP, hyponatremia, hyperkalemia | XX virilized (ambiguous) | XY normal male at birth, salt-wasting crisis at 1–2 weeks',
+  '11β-hydroxylase':'Aldo ↓ (but DOC ↑↑ = mineralocorticoid activity) | Cortisol ↓ | Androgens ↑↑ | HYPERTENSION, ↓K⁺ | XX virilized ("virilized female with HTN") | XY normal male',
+  '17α-hydroxylase':'Aldo normal/↑ (DOC accumulates) | Cortisol ↓ | Androgens ↓↓ | HYPERTENSION, ↓K⁺ | XX phenotypic female, primary amenorrhea, no puberty | XY phenotypic female (no T → no virilization)',
+  '3β-HSD':'Aldo ↓ | Cortisol ↓ | Potent androgens ↓ / DHEA ↑ (weak) | Salt-wasting | XX mild virilization (from DHEA) | XY under-virilized/ambiguous',
+  '21-OH screening':'17-hydroxyprogesterone (↑↑) — pathognomonic newborn screen',
+  'HTN vs hypotension CAH':'HTN = 11β-OH or 17α-OH ("one-one" blocks accumulate DOC). Hypotension/salt-wasting = 21-OH or 3β-HSD ("two-one" or upstream — no mineralocorticoid path)',
+  '21-OH treatment':'(1) Hydrocortisone (replaces cortisol + suppresses ACTH to stop androgen shunting) + (2) Fludrocortisone (replaces mineralocorticoid); IV saline/glucose for acute crisis; delayed feminizing genitoplasty',
+  'Virilized female with HTN':'11β-hydroxylase deficiency',
+  'CAIS':'Defect: androgen receptor mutation (X-linked) | Gonad: testes (often inguinal) | Internal: no Müllerian (MIS works) + no Wolffian (AR broken) = NEITHER | External: female (short blind vagina) | Puberty: breasts (from aromatase-converted estradiol), sparse hair, NO virilization',
+  '5α-reductase':'Defect: can\'t convert T → DHT | Gonad: testes | Internal: Wolffian present (T works); no Müllerian (MIS works) | External: female/ambiguous at birth | Puberty: VIRILIZATION (deep voice, phallic growth, muscle) — NO breast development',
+  'Swyer':'Defect: SRY deletion/mutation | Gonad: streak | Internal: Müllerian (no MIS, no T) | External: female | Puberty: NO virilization, NO breast development (no estrogen either) → needs estrogen replacement',
+  'CAIS breasts vs hair':'Testes still make T → aromatase converts to ESTRADIOL → breast development. But AR is broken → no pubic/axillary hair (which needs androgen receptor signaling)',
+  '5α-reductase key lab':'Elevated testosterone-to-DHT ratio (T:DHT ↑)',
+  'CAIS gonadectomy timing':'AFTER puberty — testes allow feminization via estradiol from aromatase. Remove after puberty to reduce gonadoblastoma/testicular cancer risk',
+  'CAIS vs MRKH':'Both = 46 chromosomes, primary amenorrhea, absent uterus, blind vagina. Karyotype distinguishes: CAIS = 46,XY (testes in inguinal canal); MRKH = 46,XX (normal ovaries)',
+  'Klinefelter karyotype':'47,XXY | Tall with eunuchoid proportions (long extremities) | Small FIRM testes (hyalinized seminiferous tubules) | Gynecomastia | Developmental delay / learning difficulty',
+  'Klinefelter hormones':'T = ↓ or low-normal | FSH/LH = ↑↑ (↑ FSH from loss of inhibin B; ↑ LH from partial Leydig failure) | Inhibin B = ↓ | Estradiol = ↑ (→ gynecomastia, female fat distribution)',
+  'Klinefelter fertility/cancer':'Infertile (azoospermia); ↑ risk of breast cancer (vs other men), extragonadal (mediastinal) germ cell tumors',
+  'Turner karyotype':'45,XO | Short stature (SHOX deletion) | Webbed neck (cystic hygroma) | Shield chest with widely-spaced nipples | Cubitus valgus | Low posterior hairline; lymphedema of hands/feet in infancy',
+  'Turner hormones':'Estrogen ↓↓; FSH ↑↑, LH ↑ (hypergonadotropic hypogonadism)',
+  'Turner associations':'Cardiac: BICUSPID AORTIC VALVE (most common), COARCTATION OF THE AORTA (classic), ↑ aortic dissection risk | Renal: HORSESHOE KIDNEY | Endocrine: Hashimoto\'s thyroiditis, T1DM/T2DM | Lymphatic: cystic hygroma, pedal edema',
+  'Turner short stature gene':'SHOX (Short stature HOmeoboX-containing gene) on Xp — haploinsufficiency'
+};
+
+function rev(id,obj){
+  const el=document.getElementById(id);
+  el.style.display='block';
+  el.innerHTML='<strong>Answer key:</strong><br><br>'+Object.entries(obj).map(([k,v])=>`<b>${k}:</b> ${v}`).join('<br><br>');
+}
+</script>
+</body></html>
