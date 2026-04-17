@@ -91,6 +91,11 @@
       <option value="sketchy|#AK_Step1_v12::#SketchyPhysiology">SketchyPhysiology</option>
       <option value="sketchy|#AK_Step1_v12::#SketchyAnatomy">SketchyAnatomy</option>
     </optgroup>
+    <optgroup label="In-House">
+      <option value="sketchy|GUSOM">GUSOM</option>
+      <option value="inhouse2|Block4">Block 4</option>
+      <option value="depth4|AnkiHub_Optional::Georgetown::Block4">Georgetown Block4 (AnkiHub)</option>
+    </optgroup>
     <optgroup label="Other">
       <option value="subject|#AK_Step1_v12::#B&B">Boards &amp; Beyond (B&amp;B)</option>
       <option value="subject|#AK_Step1_v12::#FirstAid">First Aid</option>
@@ -180,13 +185,17 @@ function getResourceDisplayName() {
     '#AK_Step1_v12::#SketchyPath':'SketchyPath','#AK_Step1_v12::#SketchyPhysiology':'SketchyPhysiology',
     '#AK_Step1_v12::#SketchyAnatomy':'SketchyAnatomy',
     '#AK_Step1_v12::#B&B':'B&B','#AK_Step1_v12::#FirstAid':'First Aid',
-    '#AK_Step1_v12::Pathoma':'Pathoma','#AK_Step1_v12::Physeo':'Physeo'
+    '#AK_Step1_v12::Pathoma':'Pathoma','#AK_Step1_v12::Physeo':'Physeo',
+    'GUSOM':'GUSOM','Block4':'Block 4',
+    'AnkiHub_Optional::Georgetown::Block4':'Georgetown Block4'
   };
   return map[base] || base.split('::').pop();
 }
 function getDepth() {
   const mode = getMode();
   if (mode === 'sketchy') return 3;
+  if (mode === 'depth4') return 4;
+  if (mode === 'inhouse2') return 2;
   if (mode === 'custom') return parseInt(document.getElementById('custom-depth-select').value, 10);
   return 2;
 }
@@ -194,7 +203,7 @@ function getSubject() { return document.getElementById('subject-input').value.tr
 function getFullPrefix() {
   const base = getBasePrefix(), mode = getMode();
   if (!base) return '';
-  if (mode === 'sketchy') return base + '::';
+  if (mode === 'sketchy' || mode === 'depth4' || mode === 'inhouse2') return base + '::';
   const sub = getSubject();
   return sub ? `${base}::${sub}::` : `${base}::`;
 }
@@ -205,9 +214,13 @@ function updatePreview() {
   let preview;
   if (mode === 'sketchy' || (mode === 'custom' && depth === 3))
     preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Heading&gt;</strong>::<strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
+  else if (mode === 'depth4')
+    preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Subject&gt;</strong>::<strong>&lt;Heading&gt;</strong>::<strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
   else if (mode === 'custom' && depth === 4)
     preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Group&gt;</strong>::<strong>&lt;Heading&gt;</strong>::<strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
   else if (mode === 'custom')
+    preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
+  else if (mode === 'inhouse2')
     preview = `<span class="seg-matched">${esc(base)}::</span><strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
   else
     preview = `<span class="seg-matched">${esc(base)}::${esc(sub)}::</span><strong>&lt;Chapter&gt;</strong>::<strong>&lt;Subchapter&gt;</strong>`;
@@ -215,7 +228,7 @@ function updatePreview() {
 }
 
 function onConfigChange() {
-  const mode = getMode(), isCustom = mode === 'custom', needsSubject = !isCustom && (mode === 'bootcamp' || mode === 'subject');
+  const mode = getMode(), isCustom = mode === 'custom', needsSubject = !isCustom && mode !== 'inhouse2' && mode !== 'sketchy' && mode !== 'depth4' && (mode === 'bootcamp' || mode === 'subject');
   document.getElementById('subject-label').style.display = needsSubject ? '' : 'none';
   document.getElementById('subject-input').style.display = needsSubject ? '' : 'none';
   document.getElementById('custom-base-label').style.display = isCustom ? '' : 'none';
@@ -281,9 +294,11 @@ function extractRows(noteRows, prefix, depth) {
     const tags = (row[0] || '').trim().split(/\s+/);
     for (const rawTag of tags) {
       if (!rawTag) continue;
-      const tag = rawTag.startsWith('#') ? rawTag : '#' + rawTag;
-      if (!tag.toLowerCase().startsWith(prefixLower)) continue;
-      const parts = tag.slice(prefix.length).split('::');
+      const tag = rawTag;
+      const tagNorm = tag.startsWith('#') ? tag.slice(1) : tag;
+      if (!tagNorm.toLowerCase().startsWith(prefixLower)) continue;
+      const prefixNorm = prefixLower.startsWith('#') ? prefixLower.slice(1) : prefixLower;
+      const parts = tagNorm.slice(prefixNorm.length).split('::');
       if (parts.length < depth || parts.slice(0, depth).some(p => !p)) continue;
       const key = parts.slice(0, depth).join('|||') + '|||' + tag;
       tagMap[key] = (tagMap[key] || 0) + 1;
@@ -391,8 +406,8 @@ function renderTree(depth) {
   const resourceName=getResourceDisplayName(), struct=buildStructure(depth);
   let html='<div class="tree-node">';
   if (depth===2) {
-    const subjectName=label(getSubject());
-    html+=`<div class="tree-row" onclick="toggleNode('root')"><span class="tog" id="tog-root">▾</span><span class="t-resource">${esc(resourceName)}</span><span class="t-arrow">→</span><span class="t-l1">${esc(subjectName)}</span></div><div class="tree-children" id="ch-root">`;
+    const subjectName = (getMode()==='custom' || getMode()==='inhouse2') ? '' : label(getSubject());
+    html+=`<div class="tree-row" onclick="toggleNode('root')"><span class="tog" id="tog-root">▾</span><span class="t-resource">${esc(resourceName)}</span>${subjectName?`<span class="t-arrow">→</span><span class="t-l1">${esc(subjectName)}</span>`:''}</div><div class="tree-children" id="ch-root">`;
     html+=Object.keys(struct).sort().map(ch=>{
       const cid='c_'+slug(ch);
       return `<div class="tree-node"><div class="tree-row" onclick="toggleNode('${esc(cid)}')"><span class="tog" id="tog-${esc(cid)}">▾</span><span class="t-heading">${esc(label(ch))}</span></div><div class="tree-children" id="ch-${esc(cid)}">${leafRows(ch,struct[ch])}</div></div>`;
