@@ -163,7 +163,7 @@ table tr:hover td{background:#EDEAE3}
   <div class="source-strip">
     <div class="source-badge"><strong>Lecturer:</strong> Dr. Djakiew — Histology</div>
     <div class="source-badge"><strong>Step 1:</strong> First Aid Repro — Histology + Physiology + Pathology</div>
-    <div class="source-badge"><strong>Topics:</strong> Follicular Histology, Menstrual Cycle, Gyn Pathology, Repro Pharmacology</div>
+    <div class="source-badge"><strong>Topics:</strong> Testicular Histology, Spermatogenesis, Excurrent Ducts, Male Repro Pathology</div>
   </div>
 </div>
 
@@ -190,12 +190,12 @@ table tr:hover td{background:#EDEAE3}
   <button class="tab-btn" onclick="switchTab('score',this)">Score Report</button>
 </div>
 
-<!-- ══ BLOCK 1: OVARIAN & FOLLICULAR HISTOLOGY ═════════════════════════════ -->
+<!-- ══ BLOCK 1: TESTICULAR HISTOLOGY & SPERMATOGENESIS ═════════════════════ -->
 <div class="tab-content active" id="tab-block1">
   <div class="exam-header">
     <div class="exam-header-left">
-      <div class="exam-header-title">Block 1 — Ovarian &amp; Follicular Histology</div>
-      <div class="exam-header-sub">5 questions · Follicle stages, hormones, 2-cell model, corpus luteum</div>
+      <div class="exam-header-title">Block 1 — Testicular Histology &amp; Spermatogenesis</div>
+      <div class="exam-header-sub">5 questions · Leydig/Sertoli, blood-testis barrier, HPG axis, sperm structure</div>
     </div>
     <div class="exam-timer">
       <span class="timer-icon">⏱</span>
@@ -212,87 +212,87 @@ table tr:hover td{background:#EDEAE3}
   <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. Review your answers at the end of the block before proceeding.</div>
 
   <div class="vig-item" data-block="b1">
-    <div class="vig-num">Question 1 of 5 — Oocyte Meiotic Arrest</div>
+    <div class="vig-num">Question 1 of 5 — Blood-Testis Barrier</div>
     <div class="vig-stem">
-      A 28-year-old woman undergoing IVF evaluation has her pre-ovulatory follicle aspirated after hCG trigger administration. The retrieved oocyte is examined under the microscope; chromatin analysis reveals the oocyte has completed meiosis I and arrested again. Which stage of meiosis is the oocyte currently in, and what intracellular factor maintains this arrest until fertilization?
+      A 34-year-old man presents to a fertility clinic with his wife after 3 years of unsuccessful conception attempts. History reveals a <strong>testicular trauma</strong> (falling from a ladder onto fence railing) 6 years ago. Testicular biopsy shows normal spermatogenesis but laboratory analysis reveals circulating <strong>anti-sperm antibodies</strong>. Which histologic structure — when disrupted — most likely produced this finding?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Prophase I; maintained by oocyte meiosis inhibitor (OMI) in follicular fluid</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Anaphase I; maintained by cyclin B degradation</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Metaphase II; maintained by cytostatic factor (CSF) / high MPF activity</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Telophase II; maintained by nuclear envelope reformation</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Interphase; awaiting DNA replication after fertilization</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Tunica albuginea</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Leydig cell gap junctions</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Sertoli-Sertoli tight junctions (blood-testis barrier)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Basement membrane of the seminiferous tubule</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Pampiniform venous plexus</div>
     </div>
-    <div class="vig-exp"><strong>C — Metaphase II (maintained by CSF/MPF).</strong> The complete meiotic sequence: <span class="vig-buzzword">Prophase I arrest at birth</span> → follicular recruitment at puberty → transition to <span class="vig-buzzword">Prophase II arrest in antral follicle (OMI-mediated)</span> → <span class="vig-buzzword">LH surge overrides OMI</span> → meiosis resumes → completes meiosis I → <span class="vig-buzzword">arrests at metaphase II</span>. Metaphase II arrest is maintained by cytostatic factor (CSF) keeping maturation-promoting factor (MPF) active. Only fertilization (calcium influx) can break metaphase II arrest → completion of meiosis II. OMI (A) arrests at prophase II earlier in development, not metaphase II.</div>
+    <div class="vig-exp"><strong>C — Blood-testis barrier via Sertoli tight junctions.</strong> The <span class="vig-buzzword">blood-testis barrier</span> is formed by tight junctions between adjacent <strong>Sertoli cells</strong>, separating seminiferous tubules into <span class="vig-buzzword">basal compartment (spermatogonia)</span> and <span class="vig-buzzword">adluminal compartment (meiotic + post-meiotic cells)</span>. Meiotic cells begin dividing at puberty — AFTER the immune system has been educated to recognize "self" — so they express novel antigens that would be seen as foreign. The barrier prevents exposure. Trauma (or vasectomy reversal) can breach the barrier → immune system develops <strong>anti-sperm antibodies</strong> → impaired fertility even if spermatogenesis itself is normal. This is an important cause of immunologic male infertility.</div>
   </div>
 
   <div class="vig-item" data-block="b1">
-    <div class="vig-num">Question 2 of 5 — 2-Cell Model of Steroidogenesis</div>
+    <div class="vig-num">Question 2 of 5 — Leydig vs Sertoli Cell Identity</div>
     <div class="vig-stem">
-      A researcher isolates cells from a human pre-ovulatory Graafian follicle and cultures them with different hormones. Group 1 (theca interna cells) + LH produces compound X. When compound X is transferred to Group 2 (granulosa cells) + FSH, it is converted to estrogen. Which enzyme in Group 2 is responsible for this conversion, and what is compound X?
+      On routine testicular histology, a pathologist identifies two cell populations. Cell population A is located <strong>INSIDE the seminiferous tubules</strong>, extends from basement membrane to lumen, and embraces developing germ cells at all stages. Cell population B is located in the <strong>INTERSTITIUM between tubules</strong>, contains abundant lipid droplets, smooth ER, and mitochondria with tubular cristae. Which gonadotropin primarily stimulates Cell population B, and what is its main product?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>5α-reductase; compound X is testosterone</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Aromatase (CYP19); compound X is androstenedione</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>21-hydroxylase; compound X is 17-OH-progesterone</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Desmolase; compound X is cholesterol</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>11β-hydroxylase; compound X is 11-deoxycorticosterone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>FSH; inhibin B</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>FSH; androgen-binding protein (ABP)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>LH; testosterone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>ACTH; cortisol</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>GnRH; androstenedione</div>
     </div>
-    <div class="vig-exp"><strong>B — Aromatase; compound X is androstenedione.</strong> This is the classic <span class="vig-buzzword">2-cell 2-gonadotropin model</span>: <span class="vig-buzzword">LH stimulates THECA interna cells</span> to produce <strong>androstenedione</strong> (from cholesterol via 17α-hydroxylase + 17,20-lyase; theca cells LACK aromatase). Androstenedione diffuses into <span class="vig-buzzword">GRANULOSA cells, where FSH-induced aromatase (CYP19)</span> converts it to estrogen (estradiol). Granulosa cells lack the androgen-producing enzymes. This cross-talk is essential — neither cell can make estrogen alone. <strong>Clinical relevance:</strong> Aromatase inhibitors (letrozole, anastrozole) block granulosa conversion — used for ovulation induction in PCOS and postmenopausal ER+ breast cancer.</div>
+    <div class="vig-exp"><strong>C — LH; testosterone.</strong> Cell population A describes <strong>Sertoli cells</strong> (INSIDE tubules; form blood-testis barrier; FSH-stimulated → produce ABP, inhibin B, MIS). Cell population B describes <strong>Leydig cells</strong> (INTERSTITIAL; lipid droplets, smooth ER, tubular cristae = hallmarks of steroidogenic cells; LH-stimulated → produce testosterone + a small amount of DHT). Mnemonic: <span class="vig-buzzword">"LH → Leydig; FSH → Follicle/Sertoli"</span>. Pathognomonic Leydig feature: <strong>Reinke crystals</strong>. DHT (50× more potent than T) is the main androgen acting on external male genitalia and prostate.</div>
   </div>
 
   <div class="vig-item" data-block="b1">
-    <div class="vig-num">Question 3 of 5 — Corpus Luteum Hormone Switch</div>
+    <div class="vig-num">Question 3 of 5 — Spermatogenesis Mitosis vs Meiosis</div>
     <div class="vig-stem">
-      A 29-year-old woman's day-22 endometrial biopsy shows coiled, tortuous glands filled with glycogen-rich secretions. Her ovaries contain a large corpus luteum. The pathologist comments that granulosa lutein cells have taken on a NEW steroidogenic function distinct from their pre-ovulation role. Which of the following best describes this change?
+      A medical student studying germ cell progression in the testis asks which cells undergo mitosis vs meiosis. A senior histology faculty responds that <strong>only ONE type of germ cell maintains the ability to undergo MITOSIS</strong>, and this cell type sits on the basement membrane as a renewable stem population. Which cell is this, and what is its ploidy?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Granulosa cells continue producing estrogen; theca lutein cells now make progesterone</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Granulosa lutein cells now produce progesterone; theca lutein cells now produce estrogen</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Granulosa lutein cells stop all steroidogenesis; the oocyte itself secretes hormones</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Both granulosa and theca lutein cells now produce only androgens</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Granulosa lutein cells now produce cortisol under LH stimulation</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>Spermatogonium (2n)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Primary spermatocyte (4n)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Secondary spermatocyte (2n)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Spermatid (n)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Spermatozoon (n)</div>
     </div>
-    <div class="vig-exp"><strong>B — Progesterone from granulosa lutein; estrogen from theca lutein.</strong> After ovulation, the residual granulosa + theca cells "luteinize" and their hormone outputs <span class="vig-buzzword">swap</span>. <span class="vig-buzzword">Granulosa lutein cells → progesterone (dominant)</span>; <span class="vig-buzzword">theca lutein cells → estrogen</span>. This is the reverse of the pre-ovulation 2-cell model. Progesterone drives the <span class="vig-buzzword">secretory phase endometrium</span>: glands become coiled/tortuous, spiral arteries elongate, glycogen-rich secretions for potential implantation. If pregnancy occurs, hCG (LH-like) from the syncytiotrophoblast rescues the CL. If not, the CL regresses → corpus albicans, P/E drop → menses.</div>
+    <div class="vig-exp"><strong>A — Spermatogonium (2n).</strong> <span class="vig-buzzword">Spermatogonia</span> are the stem cells of the male germ line, located on the basement membrane of the seminiferous tubule. They are diploid (2n) and undergo <strong>MITOSIS</strong> throughout adult life — Type A daughters remain as stem cells for self-renewal; Type B daughters commit to differentiation and become primary spermatocytes. From there, <strong>MEIOSIS begins</strong>: primary spermatocytes (4n → 2n after meiosis I) → secondary spermatocytes (2n → n after meiosis II, rapidly) → round spermatids (n). Spermatids don't divide — they undergo <span class="vig-buzzword">spermiogenesis</span> (morphologic transformation into spermatozoa with acrosome, flagellum, mitochondrial sheath). Entire cycle: ~74 days.</div>
   </div>
 
   <div class="vig-item" data-block="b1">
-    <div class="vig-num">Question 4 of 5 — LH Surge Physiology</div>
+    <div class="vig-num">Question 4 of 5 — Acrosome Function</div>
     <div class="vig-stem">
-      A medical student reviewing the menstrual cycle notes that estrogen from the dominant follicle exerts negative feedback on the hypothalamus throughout the early follicular phase. Yet at mid-cycle, estrogen suddenly triggers a massive LH surge instead of inhibiting it. Which of the following best explains this apparently paradoxical switch?
+      A researcher studying fertilization observes that a mature sperm penetrating the zona pellucida releases proteolytic enzymes in a localized burst at its anterior head. Which of the following best describes the structure and function involved, and what is its developmental origin?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Inhibin B from granulosa cells temporarily blocks the negative feedback loop</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Rising progesterone from the corpus luteum removes estrogen's feedback</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Sustained high estrogen above a critical threshold switches to positive feedback on the hypothalamus and pituitary</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>FSH directly stimulates LH secretion at mid-cycle</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>GnRH receptors on pituitary gonadotrophs downregulate</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Mitochondrial sheath; generates ATP for flagellar motility; derived from mitochondrial biogenesis</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Acrosome (modified lysosome-like vesicle) containing hyaluronidase, acrosin, and other hydrolytic enzymes; derived from the Golgi apparatus during spermiogenesis</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Fibrous sheath; structural support of the principal piece; derived from centrosome</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Centriole; organizes axoneme; derived from proximal microtubule organizing center</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Zona pellucida glycoproteins; released from oocyte surface during fertilization</div>
     </div>
-    <div class="vig-exp"><strong>C — Estrogen threshold → positive feedback.</strong> Most of the menstrual cycle, estrogen exerts <span class="vig-buzzword">negative feedback</span> on GnRH/LH/FSH. However, when estrogen reaches a <span class="vig-buzzword">sustained high level</span> (typically &gt;200 pg/mL for ~50 hours) from the dominant Graafian follicle, it paradoxically <span class="vig-buzzword">SWITCHES to POSITIVE feedback</span> on the hypothalamus (↑ GnRH pulse frequency) and pituitary (↑ responsiveness) → the <strong>LH surge</strong>. This is the rising estrogen of Graafian follicle → LH surge → ovulation. Pharmacologically, <strong>clomiphene</strong> (SERM that blocks hypothalamic estrogen receptors) removes the estrogen signal → hypothalamus "senses" low estrogen → ↑ GnRH pulses → ↑ FSH → ovulation induction in PCOS.</div>
+    <div class="vig-exp"><strong>B — Acrosome.</strong> The <span class="vig-buzzword">acrosome</span> is a modified <strong>lysosome-like cap</strong> covering the anterior half of the sperm nucleus. It is formed during <strong>spermiogenesis</strong> from the <span class="vig-buzzword">Golgi apparatus</span>. Contents include <strong>hyaluronidase</strong> (digests hyaluronic acid in the corona radiata), <strong>acrosin</strong> (serine protease — digests zona pellucida glycoproteins), and other hydrolytic enzymes. On contact with the zona pellucida's ZP3 receptor, the acrosome reaction releases these enzymes → sperm penetration → fertilization. Sperm structure review: Head (acrosome + nucleus) · Mid-piece (axoneme + mitochondrial sheath) · Principal piece (axoneme + fibrous sheath) · End piece (axoneme + plasma membrane).</div>
   </div>
 
   <div class="vig-item" data-block="b1">
-    <div class="vig-num">Question 5 of 5 — Follicular Identification</div>
+    <div class="vig-num">Question 5 of 5 — Pampiniform Plexus &amp; Temperature</div>
     <div class="vig-stem">
-      An ovarian histology slide shows a follicle with an eccentrically located oocyte surrounded by a thin ring of granulosa cells, connected to the main follicular wall by a thicker stalk of granulosa cells. A large fluid-filled space dominates the center of the follicle. Well-defined theca interna and theca externa layers are visible at the periphery. Which structure directly surrounding the oocyte travels with it at ovulation?
+      A 19-year-old athlete who habitually uses hot tubs, wears tight briefs, and keeps his laptop on his lap presents with secondary infertility. Semen analysis shows reduced sperm motility and count. His serum testosterone and gonadotropins are normal. Which of the following anatomic structures fails in this scenario, and why is this clinically important?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Theca interna cells</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Zona pellucida alone (no cells)</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Corona radiata — innermost layer of granulosa cells</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Cumulus oophorus — the stalk of granulosa cells</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Basal lamina of the granulosa layer</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Sertoli-Sertoli tight junctions; immune disruption of germ cells</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Pampiniform plexus countercurrent cooling; spermatogenesis requires ~2°C below core body temperature</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Blood-testis barrier; prevents systemic exposure to sperm antigens</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Acrosome formation; Golgi dysfunction during spermiogenesis</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Tunica albuginea; mechanical compression during erection</div>
     </div>
-    <div class="vig-exp"><strong>C — Corona radiata.</strong> This describes a <span class="vig-buzzword">Graafian (tertiary) follicle</span> — the dominant pre-ovulatory follicle. Structures: <strong>antrum</strong> (large fluid-filled space), <strong>cumulus oophorus</strong> (granulosa stalk anchoring oocyte to follicle wall), <strong>corona radiata</strong> (innermost single layer of granulosa cells tightly surrounding the oocyte), zona pellucida (glycoprotein coat inside corona radiata), theca interna + externa (outside granulosa). At ovulation, the <span class="vig-buzzword">oocyte + zona pellucida + corona radiata</span> are released together — the corona radiata must be "drilled through" by sperm (acrosome reaction) to access the zona pellucida and then the oocyte. Cumulus (D) anchors to the follicle wall; it does NOT travel with the oocyte.</div>
+    <div class="vig-exp"><strong>B — Pampiniform plexus cooling failure.</strong> The <span class="vig-buzzword">pampiniform plexus</span> is a web of veins wrapping around the testicular artery, functioning as a <strong>countercurrent heat exchanger</strong> to cool arterial blood before it reaches the testis. Testicular temperature is maintained <strong>~2°C below core body temp</strong> — critical for spermatogenesis. Chronic heat exposure (hot tubs, tight underwear, laptops, occupational heat, fever) degrades sperm production → oligospermia, asthenospermia. <strong>Varicocele</strong> is the pathologic dilation of this plexus → loss of cooling → infertility (#1 treatable male infertility cause). Intervention: avoidance of heat sources; varicocele ligation/embolization if identified. Spermatogenesis recovers over ~3 months (one full cycle) after heat removal.</div>
   </div>
 </div>
 
-<!-- ══ BLOCK 2: MENSTRUAL CYCLE & UTERUS ═══════════════════════════════════ -->
+<!-- ══ BLOCK 2: EXCURRENT DUCTS & ACCESSORY GLANDS ═════════════════════════ -->
 <div class="tab-content" id="tab-block2">
   <div class="exam-header">
     <div class="exam-header-left">
-      <div class="exam-header-title">Block 2 — Menstrual Cycle &amp; Uterus</div>
-      <div class="exam-header-sub">5 questions · Menstrual cycle, uterine pathology, cervix</div>
+      <div class="exam-header-title">Block 2 — Excurrent Ducts &amp; Accessory Glands</div>
+      <div class="exam-header-sub">5 questions · Epididymis, vas, seminal vesicles, prostate, urethra</div>
     </div>
     <div class="exam-timer">
       <span class="timer-icon">⏱</span>
@@ -309,87 +309,87 @@ table tr:hover td{background:#EDEAE3}
   <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. Review your answers at the end of the block before proceeding.</div>
 
   <div class="vig-item" data-block="b2">
-    <div class="vig-num">Question 6 of 15 — Endometrial Histology</div>
+    <div class="vig-num">Question 6 of 15 — Epididymis Histology</div>
     <div class="vig-stem">
-      A 34-year-old woman undergoing workup for infertility has an endometrial biopsy on day 22 of her menstrual cycle. Histology demonstrates <strong>coiled, tortuous glands with vacuolated cells</strong>, prominent spiral arteries extending close to the surface, and edematous stroma. Serum progesterone at the time of biopsy is 15 ng/mL. Which of the following best describes the endocrine state responsible for these findings?
+      A pathologist examines a section from the male excurrent ductal system. The epithelium is <strong>pseudostratified columnar</strong> with tall apical projections that look like microvilli but are much longer. Immunohistochemistry confirms these projections are NOT motile (they lack dynein). Surrounding smooth muscle is thin (single circular layer). Which structure is this, and what do the apical projections do?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Early follicular phase; FSH-dominant, low estrogen</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Mid-follicular phase; rising estrogen from developing follicles</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Mid-cycle; LH surge from estrogen positive feedback</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Mid-secretory phase; corpus luteum producing progesterone + estrogen</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Late secretory / ischemic; degenerating CL, falling hormones</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Rete testis; intratesticular channel network</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Efferent ductules; ciliated + resorptive cells</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Epididymis; stereocilia for surface area (sperm maturation)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Vas deferens; cilia for propulsion</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Seminal vesicle; cilia for fluid mixing</div>
     </div>
-    <div class="vig-exp"><strong>D — Mid-secretory (luteal) phase.</strong> Day 22 is mid-luteal. <span class="vig-buzzword">Coiled/tortuous glands + prominent spiral arteries + stromal edema + serum progesterone ~15 ng/mL</span> = classic secretory phase signature driven by <strong>corpus luteum progesterone</strong>. The secretory phase readies the endometrium for implantation (~day 21–24 = "implantation window"). Contrast: proliferative phase shows <strong>straight tubular glands</strong> (not coiled) driven by estrogen. Late secretory / ischemic phase shows gland breakdown and spiral artery vasospasm as progesterone falls. Progesterone levels &gt; 3–5 ng/mL confirm ovulation has occurred.</div>
+    <div class="vig-exp"><strong>C — Epididymis with STEREOCILIA.</strong> The <span class="vig-buzzword">epididymis</span> is lined by pseudostratified columnar epithelium with long <span class="vig-buzzword">stereocilia</span> — non-motile microvilli (NOT true motile cilia, despite the confusing name). Function: <strong>increase surface area</strong> for fluid reabsorption and sperm maturation. Smooth muscle is THIN (single layer) in the epididymis, distinguishing it from the vas deferens which has <strong>3 THICK muscle layers</strong>. Sperm propulsion happens via smooth muscle contractions, not cilia. Sperm mature during their ~2-week transit and are stored in the tail. Both epididymis and vas deferens are Wolffian duct derivatives with stereocilia; you distinguish them by wall thickness.</div>
   </div>
 
   <div class="vig-item" data-block="b2">
-    <div class="vig-num">Question 7 of 15 — Asherman Syndrome</div>
+    <div class="vig-num">Question 7 of 15 — Vas Deferens &amp; Vasectomy</div>
     <div class="vig-stem">
-      A 32-year-old G3P3 woman had a dilation and curettage (D&amp;C) after a miscarriage 6 months ago. She has now developed <strong>secondary amenorrhea</strong> and inability to conceive. Hysteroscopy reveals <strong>intrauterine adhesions and scarring</strong>. Which of the following anatomic structures was most likely destroyed during her procedure, preventing normal endometrial regeneration?
+      A 34-year-old man with 2 children elects to undergo vasectomy. He returns 4 months postoperatively with a repeat semen analysis showing <strong>azoospermia</strong>. He reports normal libido and sexual function. Which of the following best describes the expected physiologic profile after vasectomy?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Functionalis layer of the endometrium</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Basalis layer of the endometrium</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Myometrium</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Perimetrium</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Muscularis mucosae</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>↓ testosterone, ↓ ejaculate volume by ~50%, ↓ libido</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>↓ testosterone, unchanged ejaculate volume, ↓ libido</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Unchanged testosterone, unchanged ejaculate volume (sperm are only ~5%), unchanged libido</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>↑ testosterone (feedback effect), ↓ ejaculate volume, ↓ libido</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Unchanged testosterone, complete absence of ejaculate</div>
     </div>
-    <div class="vig-exp"><strong>B — Basalis layer.</strong> This is <span class="vig-buzzword">Asherman syndrome</span> — intrauterine adhesions from trauma (D&amp;C, infection, retained products of conception). The <strong>basalis</strong> is the deep layer of the endometrium that <span class="vig-buzzword">serves as the stem cell source for regenerating the functionalis</span> each cycle. Supplied by straight arteries (not hormone-responsive). Destruction of the basalis → cannot regenerate functionalis → amenorrhea/hypomenorrhea + infertility. The functionalis (A) is what normally sheds with menses; its destruction doesn't cause Asherman because it would normally regrow. Tx: hysteroscopic adhesiolysis.</div>
+    <div class="vig-exp"><strong>C — All unchanged except sperm absence.</strong> <span class="vig-buzzword">Vasectomy</span> transects the vas deferens — sperm can no longer enter the ejaculate. Because sperm are only <strong>~5% of ejaculate volume</strong>, the ejaculate volume is essentially unchanged. <strong>Seminal vesicles</strong> (70%) and <strong>prostate</strong> (25%) contribute the bulk of volume; those ducts are unaffected. <strong>Testosterone</strong> is unchanged because Leydig cells are intact and blood flow preserved — libido and sexual function are normal. Sperm are still produced in the testis but get reabsorbed or phagocytosed in the epididymis. Risk of <span class="vig-buzzword">anti-sperm antibody formation</span> due to breach of the blood-testis barrier — this is why vasectomy reversal often fails to restore fertility even after surgical reconnection.</div>
   </div>
 
   <div class="vig-item" data-block="b2">
-    <div class="vig-num">Question 8 of 15 — Cervical Cancer Mechanism</div>
+    <div class="vig-num">Question 8 of 15 — Prostate Zones</div>
     <div class="vig-stem">
-      A 42-year-old woman has a Pap smear showing high-grade squamous intraepithelial lesion (HSIL). HPV testing is positive for HPV-16. Colposcopy with biopsy at the squamocolumnar junction confirms CIN III with carcinoma in situ. Which of the following molecular mechanisms best explains the loss of cell cycle control in her lesion?
+      A 67-year-old man presents with urinary frequency, nocturia, weak stream, and hesitancy. Digital rectal examination reveals a <strong>symmetrically enlarged, smooth, rubbery prostate</strong>. PSA is 3.8 ng/mL (mildly elevated for age). Which anatomic zone of the prostate is MOST affected, and which treatment MOST directly targets the pathogenesis?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>HPV E1 protein induces DNA hypermethylation of tumor suppressors</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>HPV E6 promotes p53 degradation; HPV E7 inhibits Rb protein</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>HPV capsid proteins L1/L2 directly bind to DNA polymerase</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>HPV induces chromosomal translocation activating MYC oncogene</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>HPV activates PI3K/AKT/mTOR signaling via receptor tyrosine kinase mutations</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Peripheral zone; radical prostatectomy</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Transitional (periurethral) zone; finasteride (5α-reductase inhibitor)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Central zone; GnRH agonist</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Fibromuscular stroma; chemotherapy</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Capsular surface; topical corticosteroids</div>
     </div>
-    <div class="vig-exp"><strong>B — E6 degrades p53; E7 inhibits Rb.</strong> High-risk HPV types (16, 18, 31, 33, 45) encode two critical oncoproteins: <span class="vig-buzzword">E6 binds and promotes ubiquitin-mediated degradation of p53</span> — losing the G1 DNA-damage checkpoint. <span class="vig-buzzword">E7 binds Rb</span>, displacing E2F transcription factors → unchecked G1/S progression. Loss of both tumor suppressors allows uncontrolled proliferation → CIN progression → invasive SCC. Location: <span class="vig-buzzword">transformation zone</span> (squamocolumnar junction). L1 (C) is the capsid protein used to make Gardasil vaccine (L1-based VLPs). Prevention: Gardasil 9 (9–45 yo).</div>
+    <div class="vig-exp"><strong>B — Transitional (periurethral) zone; finasteride targets DHT.</strong> <span class="vig-buzzword">BPH affects the TRANSITIONAL (periurethral/central) zone</span> of the prostate — this zone surrounds the urethra, so hyperplasia obstructs urine flow. Driven by <strong>DHT</strong> (formed from T via 5α-reductase). <span class="vig-buzzword">Finasteride</span> blocks this conversion → shrinks the gland over 3–6 months. Symmetric smooth enlargement on DRE. PSA mildly ↑. Contrast with <span class="vig-buzzword">prostate cancer</span>, which arises in the <strong>PERIPHERAL (posterior) zone</strong> (palpable as hard nodules) — would warrant biopsy + radical prostatectomy/radiation/ADT. First-line for BPH symptoms is also α1-blocker (tamsulosin) for quick relief by smooth-muscle relaxation.</div>
   </div>
 
   <div class="vig-item" data-block="b2">
-    <div class="vig-num">Question 9 of 15 — Adenomyosis</div>
+    <div class="vig-num">Question 9 of 15 — Cowper's Gland Identification</div>
     <div class="vig-stem">
-      A 45-year-old G4P4 woman presents with progressively worsening heavy, painful menstrual periods over the past 2 years. Pelvic exam shows a <strong>diffusely enlarged, globular, boggy, and tender uterus</strong>. Pelvic MRI demonstrates thickening of the <strong>junctional zone</strong> with small cystic foci within the myometrium. Which of the following best describes the pathophysiology of her condition?
+      A histology slide shows a paired exocrine gland with <strong>simple columnar epithelium</strong> secreting mucus. The glands are <strong>surrounded by a thick layer of SKELETAL muscle</strong>, distinguishing them from nearby glandular structures. Location clues: the glands sit at the base of the penis near the urogenital diaphragm. Which structure is this, and what is its primary function?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Endometrial tissue outside the uterus (ovaries, peritoneum)</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Endometrial glands and stroma within the myometrium</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Benign smooth muscle tumors arising from myometrium</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Malignant proliferation of endometrial glands</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Chronic infection with endomyometritis</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Seminal vesicles; fructose production</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Prostate gland; PSA secretion</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Bulbourethral (Cowper's) glands; alkaline mucin to protect urethra + shield sperm from acidic urine residues and acrosomal enzymes</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Glands of Littré; urethral lubrication</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Skene glands; female-specific</div>
     </div>
-    <div class="vig-exp"><strong>B — Endometrial tissue within myometrium (adenomyosis).</strong> Buzzwords: <span class="vig-buzzword">multiparous woman ~ 40s</span>, <span class="vig-buzzword">heavy painful menses</span>, <span class="vig-buzzword">globular/boggy/tender uterus</span>, <span class="vig-buzzword">thickened junctional zone on MRI</span>. <strong>Adenomyosis</strong> = endometrial glands + stroma trapped WITHIN the myometrium (contrast to endometriosis = ectopic endometrium OUTSIDE uterus). These ectopic foci bleed with each menstrual cycle, causing dysmenorrhea and uterine enlargement. Definitive dx is post-hysterectomy histology. Fibroids (C) would give an <em>irregularly</em> enlarged uterus. Endometrial cancer (D) presents with postmenopausal bleeding. Tx: OCPs, IUD, hysterectomy (definitive).</div>
+    <div class="vig-exp"><strong>C — Bulbourethral (Cowper's) glands.</strong> The <span class="vig-buzzword">pathognomonic histologic feature</span> of bulbourethral glands is being <strong>surrounded by SKELETAL muscle</strong> — no other male accessory gland has this. Cowper's glands sit within the urogenital diaphragm, which is composed of skeletal muscle (external urethral sphincter). Function: secrete <strong>alkaline mucin pre-ejaculate</strong> that (1) <span class="vig-buzzword">neutralizes residual urine acidity</span> in the urethra and (2) <span class="vig-buzzword">protects sperm from acrosomal proteases</span> that may damage them during transit. Female homolog: <strong>Bartholin (greater vestibular) glands</strong>. Seminal vesicles have simple/pseudostratified columnar with highly folded mucosa (not skeletal muscle surround). Prostate has corpora amylacea + smooth muscle stroma.</div>
   </div>
 
   <div class="vig-item" data-block="b2">
-    <div class="vig-num">Question 10 of 15 — Endometrial Cancer</div>
+    <div class="vig-num">Question 10 of 15 — Urethra Epithelial Transitions</div>
     <div class="vig-stem">
-      A 62-year-old obese postmenopausal woman (BMI 36) with diabetes, hypertension, and nulliparity presents with 2 months of intermittent vaginal bleeding. Her last menstrual period was at age 54. She has taken tamoxifen for 4 years for ER+ breast cancer. Endometrial biopsy reveals <strong>well-differentiated endometrioid adenocarcinoma</strong>. Which of the following is the most important underlying mechanism for her endometrial cancer risk?
+      A forensic pathologist examines the male urethra microscopically along its full length. Four distinct epithelial zones are identified: Zone 1 (proximal, near bladder) is lined by one type; Zone 2 (through the external urethral sphincter) and Zone 3 (most of the penis length) share a different epithelium; Zone 4 (at the tip of the glans, the navicular fossa) transitions to yet another type. Which of the following correctly pairs each zone with its epithelium?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Direct mutagenic effect of insulin on endometrial DNA</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Chronic unopposed estrogen exposure from multiple sources (adipose aromatization, nulliparity, tamoxifen's uterine agonism)</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Age-related accumulation of somatic p53 mutations as in Type II cancer</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Microsatellite instability from Lynch syndrome (MLH1 germline)</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>HPV infection of the endometrium</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>Zone 1: transitional (urothelium); Zones 2-3: pseudostratified/stratified columnar; Zone 4: stratified squamous</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Zone 1: stratified squamous; Zones 2-3: simple cuboidal; Zone 4: transitional</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Zone 1: simple columnar; Zones 2-3: pseudostratified; Zone 4: simple cuboidal</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>All four zones are lined by transitional epithelium</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Zone 1: keratinized squamous; Zones 2-3: columnar; Zone 4: non-keratinized squamous</div>
     </div>
-    <div class="vig-exp"><strong>B — Chronic unopposed estrogen.</strong> Type I endometrial cancer (80%, endometrioid) is <strong>estrogen-driven</strong>, preceded by endometrial hyperplasia. Risk factors all share unopposed estrogen exposure: <span class="vig-buzzword">obesity</span> (peripheral aromatization of androstenedione → estrone in adipose), <span class="vig-buzzword">nulliparity</span> (more ovulatory cycles + unopposed proliferative stimulation), <span class="vig-buzzword">late menopause/early menarche</span>, <span class="vig-buzzword">PCOS</span> (anovulation), <span class="vig-buzzword">estrogen-only HRT</span>, <span class="vig-buzzword">tamoxifen</span> (uterine agonist while breast antagonist). Postmenopausal bleeding requires endometrial biopsy. Type II (C — serous/clear cell, p53-driven) is non-estrogen, worse prognosis. Lynch syndrome (D) is hereditary, usually earlier onset.</div>
+    <div class="vig-exp"><strong>A — Transitional → columnar → squamous.</strong> The male urethra has 3 anatomic segments with epithelial transitions:<br><br>• <span class="vig-buzzword">Prostatic urethra</span>: <strong>transitional (urothelium)</strong> — same epithelium as the bladder it continues from. Site of the verumontanum + ejaculatory duct openings.<br>• <span class="vig-buzzword">Membranous urethra</span>: <strong>pseudostratified/stratified columnar</strong>. Shortest segment; passes through the urogenital diaphragm (external urethral sphincter — skeletal muscle = voluntary continence).<br>• <span class="vig-buzzword">Penile (spongy) urethra</span>: <strong>pseudostratified/stratified columnar</strong> for most of its length, transitioning to <span class="vig-buzzword">stratified squamous</span> at the <strong>navicular fossa</strong> (distal glans, where continuous with skin of glans penis).<br><br>Pattern: transitional → columnar → squamous as you move distally.</div>
   </div>
 </div>
 
-<!-- ══ BLOCK 3: GYN PATHOLOGY & CLINICAL CORRELATES ═══════════════════════ -->
+<!-- ══ BLOCK 3: MALE REPRO PATHOLOGY & CLINICAL CORRELATES ═════════════════ -->
 <div class="tab-content" id="tab-block3">
   <div class="exam-header">
     <div class="exam-header-left">
-      <div class="exam-header-title">Block 3 — Gyn Pathology &amp; Clinical Correlates</div>
-      <div class="exam-header-sub">5 questions · PCOS, endometriosis, ovarian CA, ectopic pregnancy, breast CA</div>
+      <div class="exam-header-title">Block 3 — Male Repro Pathology &amp; Clinical Correlates</div>
+      <div class="exam-header-sub">5 questions · Torsion, testicular CA, BPH, prostate CA, ED pharmacology</div>
     </div>
     <div class="exam-timer">
       <span class="timer-icon">⏱</span>
@@ -403,81 +403,81 @@ table tr:hover td{background:#EDEAE3}
       <button class="exam-ctrl-btn" onclick="resetTimer('b3',450)">Reset</button>
     </div>
   </div>
-  <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. These questions integrate multiple concepts from female reproductive pathology.</div>
+  <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. These questions integrate male reproductive histology with clinical pathology.</div>
 
   <div class="vig-item" data-block="b3">
-    <div class="vig-num">Question 11 of 15 — PCOS &amp; Ovulation Induction</div>
+    <div class="vig-num">Question 11 of 15 — Klinefelter Hormone Pattern</div>
     <div class="vig-stem">
-      A 26-year-old woman with a BMI of 31 presents with 18 months of secondary infertility. Her cycles are 45–60 days. She has moderate facial hirsutism. Labs: LH 18, FSH 5 mIU/mL; testosterone 82 ng/dL (elevated); fasting insulin elevated with HOMA-IR 4.2. Pelvic US shows bilateral ovaries with 15+ subcapsular follicles (2–9 mm). Which first-line agent is most effective for ovulation induction in this patient, and by what mechanism?
+      A 22-year-old tall thin man presents to a fertility clinic with his wife after 2 years of unsuccessful conception. On exam, he has <strong>gynecomastia</strong>, <strong>small firm testes</strong> bilaterally, a eunuchoid habitus, and mild intellectual disability. Labs: testosterone 180 ng/dL (low), LH 36 mIU/mL (elevated), FSH 52 mIU/mL (markedly elevated), estradiol 65 pg/mL (elevated). Semen analysis shows <strong>azoospermia</strong>. Which karyotype is most likely, and what underlying defect explains the elevated FSH?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Clomiphene citrate — SERM antagonist at hypothalamus → ↑ FSH</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Letrozole — aromatase inhibitor → ↓ estrogen → ↑ FSH; superior live birth rates vs clomiphene in PCOS</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Exogenous LH injections to simulate an LH surge</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Progesterone suppositories to induce ovulation</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Combined OCP — suppresses the HPO axis to "reset" ovulation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>46 XY; 5α-reductase deficiency blocks DHT synthesis</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>46 XY; defective androgen receptor (CAIS)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>47 XXY (Klinefelter); seminiferous tubule dysgenesis → ↓ inhibin B → loss of FSH negative feedback</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>45 XO (Turner); streak ovaries with absent sex steroids</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>46 XY; Kallmann syndrome with absent GnRH</div>
     </div>
-    <div class="vig-exp"><strong>B — Letrozole (aromatase inhibitor).</strong> This is classic PCOS (<span class="vig-buzzword">obese + oligomenorrhea + hirsutism + LH:FSH &gt; 3 + insulin resistance + string of pearls</span>). Recent RCTs (PPCOS II, Legro et al.) showed <span class="vig-buzzword">letrozole is SUPERIOR to clomiphene for live birth rates in PCOS</span>, making it first-line for ovulation induction. <strong>Mechanism:</strong> aromatase inhibitor → blocks peripheral + granulosa estrogen synthesis → removes negative feedback → ↑ FSH → follicle recruitment → ovulation. <strong>Clomiphene (A)</strong> is also effective but second-line in PCOS. Also key: weight loss is first intervention; add metformin for insulin resistance. OCPs (E) <em>suppress</em> ovulation — opposite of what's needed.</div>
+    <div class="vig-exp"><strong>C — Klinefelter (47 XXY).</strong> Buzzwords: <span class="vig-buzzword">tall eunuchoid</span>, <span class="vig-buzzword">gynecomastia</span>, <span class="vig-buzzword">small firm testes</span>, <span class="vig-buzzword">azoospermia</span>, ↑↑ FSH > ↑ LH with ↓ T + ↑ estradiol. Pathophysiology: extra X chromosome causes <strong>seminiferous tubule dysgenesis during puberty</strong> → loss of germ cells + Sertoli cell dysfunction → <strong>↓ inhibin B</strong> → removes feedback → <strong>↑↑ FSH</strong>. Leydig cells are also impaired → ↓ T → ↑ LH. Residual T is peripherally aromatized → ↑ estradiol → gynecomastia. Most common genetic cause of male infertility; ↑ risk for breast cancer, extragonadal germ cell tumors, autoimmune disease. Kallmann (E) would show ↓ LH/FSH (hypogonadotropic) + anosmia. CAIS (B) is 46 XY but phenotypically female.</div>
   </div>
 
   <div class="vig-item" data-block="b3">
-    <div class="vig-num">Question 12 of 15 — Ectopic Pregnancy</div>
+    <div class="vig-num">Question 12 of 15 — Seminoma — "Fried-Egg" Cells</div>
     <div class="vig-stem">
-      A 24-year-old G1P0 woman presents to the ED with 2 hours of <strong>severe right lower quadrant pain</strong> and <strong>scant vaginal bleeding</strong>. Her last menstrual period was 7 weeks ago. She has tachycardia (HR 118), BP 90/60, and diffuse abdominal tenderness with rebound. Urine β-hCG is positive; serum β-hCG is 2,200 mIU/mL but rose only 20% over 48 hours. Transvaginal US shows <strong>no intrauterine pregnancy</strong> but demonstrates a complex adnexal mass with free fluid in the cul-de-sac. Which anatomic structure has most likely been involved?
+      A 30-year-old man notices a painless firm mass in his right testis. Scrotal US confirms a hypoechoic intratesticular lesion. Tumor markers: β-hCG 25 mIU/mL (slightly elevated), <strong>AFP NORMAL</strong>, LDH 680 U/L, PLAP elevated. Radical inguinal orchiectomy reveals tumor composed of uniform cells with clear cytoplasm and large central nuclei ("<strong>fried-egg cells</strong>") arranged in sheets separated by <strong>fibrous septa infiltrated with lymphocytes</strong>. Which of the following statements about this tumor is correct?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Uterine fundus</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Endocervical canal</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Ovarian cortex</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Fallopian tube ampulla</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Abdominal peritoneum</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>It is a non-seminomatous germ cell tumor requiring aggressive BEP chemotherapy</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>It is a pure seminoma; highly radiosensitive with excellent 5-year survival; AFP is NEVER elevated in pure seminoma</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>It is a yolk sac tumor; Schiller-Duval bodies expected</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>It is a Leydig cell tumor; would cause Cushingoid features</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>It is a lymphoma; managed with CHOP chemotherapy alone</div>
     </div>
-    <div class="vig-exp"><strong>D — Fallopian tube ampulla.</strong> Classic <span class="vig-buzzword">ruptured ectopic pregnancy</span>: amenorrhea + unilateral pain + bleeding + hemodynamic instability + β-hCG not doubling + no IUP + complex adnexal mass + free fluid. The <span class="vig-buzzword">ampulla is the most common site (&gt;70%) of ectopic pregnancy</span> — same place where normal fertilization occurs. Risk factors: prior PID, tubal surgery, IUD, endometriosis, smoking. Order of frequency: <span class="vig-buzzword">Ampulla &gt; isthmus &gt; fimbria &gt; ovary &gt; abdomen &gt; cervix</span>. <strong>Management:</strong> unstable → surgery (salpingectomy/salpingostomy); stable with low β-hCG and no rupture → methotrexate (folate antagonist blocks trophoblast proliferation). Ruptured ectopic → surgical emergency + blood products.</div>
+    <div class="vig-exp"><strong>B — Pure seminoma.</strong> Classic histology: <span class="vig-buzzword">"fried-egg" cells</span> (large clear cells with central nuclei) in sheets separated by <span class="vig-buzzword">fibrous septa + lymphocytic infiltrate</span>. <strong>AFP is NEVER elevated in pure seminoma</strong> — if it were, this would be a mixed/non-seminomatous GCT. β-hCG may be slightly elevated (from syncytiotrophoblast-like cells in ~15%), LDH reflects tumor burden, PLAP is often elevated. Seminomas are <strong>extraordinarily radiosensitive</strong> and chemosensitive → excellent prognosis even with metastasis. Tx options: inguinal orchiectomy + surveillance (stage I) / retroperitoneal radiation / single-agent carboplatin. NSGCTs (embryonal, yolk sac, choriocarcinoma, teratoma) require BEP (bleomycin, etoposide, cisplatin) chemo for most stages. Risk factors: cryptorchidism (↑ 4–6× even after orchiopexy), Klinefelter, family Hx, contralateral testicular CA.</div>
   </div>
 
   <div class="vig-item" data-block="b3">
-    <div class="vig-num">Question 13 of 15 — Invasive Lobular Breast Cancer</div>
+    <div class="vig-num">Question 13 of 15 — Prostate Cancer Metastasis</div>
     <div class="vig-stem">
-      A 49-year-old woman has a screening mammogram showing subtle architectural distortion in the left breast. Biopsy reveals tumor cells infiltrating the stroma in a <strong>single-file pattern</strong>. Immunohistochemistry demonstrates <strong>absent E-cadherin</strong>, ER positive, PR positive, HER2 negative. MRI reveals a similar-appearing contralateral lesion. Which gene is most likely mutated, and what is the tumor's predicted response to endocrine therapy?
+      A 72-year-old man presents with 6 weeks of worsening <strong>low back pain</strong> and a recent fall. PSA is 76 ng/mL. DRE reveals a <strong>hard nodule on the posterior prostate</strong>. Plain film of the lumbar spine shows <strong>sclerotic lesions</strong> in multiple vertebrae. Alkaline phosphatase is 480 U/L (elevated). Which of the following best characterizes his metastatic disease, and why is this pattern distinctive?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>BRCA1; poor response to tamoxifen (triple-negative)</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>TP53; responds well to trastuzumab (HER2-targeted)</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>CDH1 (E-cadherin); responds to endocrine therapy (tamoxifen pre- / aromatase inhibitor postmenopausal)</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>ERBB2 (HER2) amplification; responds to trastuzumab</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>PTEN; responds to PI3K inhibitors</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Osteolytic (lytic) bone mets with hypercalcemia; characteristic of breast + lung + kidney cancers</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Osteoblastic (sclerotic, bone-forming) mets; prostate cancer uniquely promotes osteoblast activity → ↑ alk phos; bone mets cause pain/pathologic fractures</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Mixed lytic-blastic lesions indistinguishable from other cancers</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Pure lymphatic spread with no bone involvement</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Primary bone tumor arising independently in the spine</div>
     </div>
-    <div class="vig-exp"><strong>C — CDH1 (E-cadherin); responsive to endocrine therapy.</strong> The <span class="vig-buzzword">single-file ("Indian file") infiltration</span> pattern + <span class="vig-buzzword">loss of E-cadherin</span> + frequent bilaterality are pathognomonic for <span class="vig-buzzword">invasive lobular carcinoma</span>. <strong>E-cadherin</strong> (encoded by CDH1 gene) normally maintains epithelial cell-cell adhesion — loss allows single-cell dispersion. Hereditary CDH1 mutations cause <strong>hereditary diffuse gastric cancer + lobular breast cancer</strong> syndrome. Since this tumor is <strong>ER+/PR+</strong>, it responds well to endocrine therapy: <span class="vig-buzzword">tamoxifen (SERM) premenopausal</span> or <span class="vig-buzzword">aromatase inhibitors (anastrozole, letrozole) postmenopausal</span>. HER2-negative → trastuzumab not indicated (D wrong). Contrast: invasive <em>ductal</em> carcinoma forms stellate/spiculated mass with retraction — not single-file.</div>
+    <div class="vig-exp"><strong>B — Osteoblastic bone mets.</strong> Prostate adenocarcinoma arises in the <span class="vig-buzzword">peripheral (posterior) zone</span> (palpable as hard nodule on DRE). Metastases distinctively cause <span class="vig-buzzword">OSTEOBLASTIC (sclerotic) lesions</span> — NOT osteolytic — by secreting factors that stimulate osteoblast activity (endothelin-1, BMPs). This manifests as:<br>• <strong>Bone pain</strong> (especially axial skeleton: pelvis, lumbar spine, femur, ribs)<br>• <strong>↑ alkaline phosphatase</strong> (marker of bone formation)<br>• <strong>Sclerotic lesions</strong> on X-ray/CT/bone scan (dense, white appearance)<br>• Pathologic fractures; epidural cord compression (oncologic emergency)<br><br>Contrast: breast, lung, kidney, multiple myeloma → osteolytic (lytic) mets + hypercalcemia. Treatment for metastatic prostate CA: <strong>ADT</strong> (leuprolide + bicalutamide) + bone-directed agents (bisphosphonates, denosumab) + radiation for symptomatic lesions.</div>
   </div>
 
   <div class="vig-item" data-block="b3">
-    <div class="vig-num">Question 14 of 15 — Ovarian CA + Psammoma Bodies</div>
+    <div class="vig-num">Question 14 of 15 — Sildenafil + Nitrates Interaction</div>
     <div class="vig-stem">
-      A 58-year-old woman with a BRCA1 mutation (diagnosed after her sister's ovarian cancer) opts for prophylactic bilateral salpingo-oophorectomy at age 55. Pathology reveals a 1.8-cm tumor in the right ovary; histologic sections show papillary projections with <strong>concentric laminated calcifications</strong> within the tumor cells. Which of the following ovarian tumor types is most likely, and from what cell layer does it arise?
+      A 62-year-old man with stable angina on daily isosorbide mononitrate presents to the ED 90 minutes after taking his friend's sildenafil for ED. He is hypotensive (BP 68/38), tachycardic (HR 110), and nearly syncopal. Which of the following molecular mechanisms best explains this hemodynamic catastrophe?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Granulosa cell tumor from follicular cells — produces estrogen</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Dysgerminoma from primordial germ cells — ↑ LDH</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Serous cystadenocarcinoma from germinal (surface) epithelium</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Mature teratoma (dermoid cyst) from totipotent germ cells</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Krukenberg tumor from gastric metastasis — signet ring cells</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Sildenafil directly blocks α1-adrenergic receptors → massive vasodilation</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Nitrates release NO → activate guanylyl cyclase → ↑ cGMP; sildenafil is a PDE5 inhibitor that prevents cGMP breakdown → synergistic cGMP accumulation → profound systemic vasodilation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Both drugs are direct β-adrenergic agonists → tachycardia with hypotension</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Sildenafil metabolizes nitroglycerin into a toxic vasodilator</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Additive anticoagulant effect causes unrecognized GI hemorrhage</div>
     </div>
-    <div class="vig-exp"><strong>C — Serous cystadenocarcinoma from germinal (surface) epithelium.</strong> <span class="vig-buzzword">Psammoma bodies</span> (concentric laminated calcifications) are highly associated with: <span class="vig-buzzword">PSaMMoma mnemonic</span> — <strong>P</strong>apillary thyroid CA, <strong>S</strong>erous ovarian cystadenoCA, <strong>M</strong>eningioma, <strong>M</strong>esothelioma. Most ovarian cancers (65–70%) arise from the <span class="vig-buzzword">germinal (surface) epithelium</span> — and serous cystadenocarcinoma is the most common subtype. <span class="vig-buzzword">BRCA1/BRCA2 mutations</span> increase risk of high-grade serous ovarian CA (and breast CA) because BRCA proteins perform <strong>homologous recombination DNA repair</strong>. Risk-reducing salpingo-oophorectomy is recommended at 35–40. Other ovarian tumor origins: sex cord-stromal (granulosa — Call-Exner bodies, estrogen-producing), germ cell (dysgerminoma, teratoma), metastasis (Krukenberg, bilateral signet ring).</div>
+    <div class="vig-exp"><strong>B — Synergistic cGMP accumulation.</strong> Normal erection physiology: parasympathetic S2-S4 ("<strong>Point</strong>") → NO release from cavernous nerves → <strong>guanylyl cyclase</strong> → <span class="vig-buzzword">↑ cGMP</span> in corpora cavernosa smooth muscle → relaxation → engorgement. <strong>Nitrates</strong> (nitroglycerin, isosorbide) elevate cGMP systemically via the same NO-GC pathway for coronary vasodilation. <strong>PDE5 inhibitors</strong> (sildenafil, tadalafil, vardenafil) block the enzyme that breaks down cGMP, sustaining elevation. <span class="vig-buzzword">Combined use → massive cGMP accumulation → profound systemic vasodilation</span> → severe hypotension, reflex tachycardia, syncope, MI, and potentially death. <span style="color:#8B2242"><strong>ABSOLUTE contraindication</strong></span>. Separate doses by at least 24h (sildenafil, shorter t½) or 48h (tadalafil, longer t½). Treat acute hypotension with IV fluids + phenylephrine (α1 agonist). Also caution with α1-blockers (tamsulosin) due to additive hypotension.</div>
   </div>
 
   <div class="vig-item" data-block="b3">
-    <div class="vig-num">Question 15 of 15 — Comprehensive Menopause/HRT</div>
+    <div class="vig-num">Question 15 of 15 — Comprehensive Male Infertility</div>
     <div class="vig-stem">
-      A 52-year-old woman presents with 18 months of hot flashes, night sweats, and vaginal dryness causing dyspareunia. Her last menstrual period was 16 months ago. She has no personal or family history of breast/ovarian/endometrial cancer, VTE, CAD, or stroke. Her uterus is intact. She wishes to start HRT for symptom relief. Which of the following represents the MOST APPROPRIATE hormonal regimen AND the physiologic rationale?
+      A 32-year-old man presents with his wife after 2 years of unsuccessful conception. His history includes testicular trauma from a bicycle accident at age 12 and occasional marijuana use. Physical exam reveals a <strong>left-sided "bag of worms" scrotal swelling</strong> that enlarges with Valsalva and decompresses when supine. Testicular volumes are slightly reduced bilaterally (14 mL each). Labs: testosterone 320 ng/dL (borderline), LH 6 mIU/mL (normal), FSH 12 mIU/mL (mildly elevated), inhibin B borderline low. Semen: count 8 million/mL (low), motility 22% (low), morphology 3% normal. Which intervention would MOST directly address his primary reproductive problem?
     </div>
     <div class="vig-opts">
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Estrogen alone (oral); progesterone is unnecessary since she's postmenopausal</div>
-      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Combined estrogen + progestin; progestin protects the intact endometrium from estrogen-driven hyperplasia/cancer</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Progesterone-only regimen; sufficient for vasomotor symptoms</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Clomiphene citrate to restart ovulation</div>
-      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Testosterone + estrogen; testosterone boosts libido</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Discontinue marijuana and repeat semen analysis in 3 months only</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Surgical ligation or embolization of the left varicocele, which impairs testicular cooling and causes oligoasthenoteratospermia — the most common treatable cause of male infertility</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Begin testosterone replacement therapy to improve sperm production</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Karyotype analysis + empiric BEP chemotherapy</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Start sildenafil for ED-related infertility</div>
     </div>
-    <div class="vig-exp"><strong>B — Combined estrogen + progestin.</strong> This is classic menopause (12+ months amenorrhea + vasomotor symptoms + vaginal atrophy). HRT relieves symptoms and preserves bone/skin/brain in appropriately selected patients. <span class="vig-buzzword">The key rule: if a uterus is present, progestin MUST be added to estrogen</span>. Unopposed estrogen → chronic stimulation of the endometrium → endometrial hyperplasia → type I endometrial adenocarcinoma. Progestin counteracts by preventing uncontrolled proliferation (and induces decidualization → regular withdrawal bleeding on cyclic regimens). <strong>Estrogen-only HRT</strong> is only appropriate for women who have had a hysterectomy (A wrong — the vignette specifies intact uterus). Progesterone alone (C) doesn't treat hot flashes effectively. Clomiphene (D) can't restart ovulation after ovarian follicles are depleted. WHI data informed risks: HRT CI in breast CA hx, VTE, active liver disease, unexplained vaginal bleeding, CAD/stroke history.</div>
+    <div class="vig-exp"><strong>B — Varicocele repair.</strong> Classic <span class="vig-buzzword">varicocele</span> presentation: "<strong>bag of worms</strong>" scrotal swelling, Valsalva-responsive, decompresses supine, <strong>LEFT-sided (left gonadal vein → left renal vein at 90°)</strong>. Causes impaired testicular cooling → <span class="vig-buzzword">oligoasthenoteratospermia</span> (↓ count + ↓ motility + ↓ morphology) — the classic semen profile. Mildly elevated FSH + low-normal inhibin B reflects early Sertoli dysfunction from heat stress. <strong>Varicocele is the MOST COMMON treatable cause of male infertility</strong>. Treatment: surgical ligation or percutaneous embolization → improves semen parameters in 60–70% + pregnancy rates. Other points: (A) good advice but not primary cause; (C) <span style="color:#8B2242">testosterone replacement WORSENS fertility</span> — it suppresses LH/FSH via feedback → less intratesticular testosterone → ↓ spermatogenesis (common clinical error); (D) no indication without azoospermia and suspected germ cell tumor; (E) no ED implied.</div>
   </div>
 </div>
 
