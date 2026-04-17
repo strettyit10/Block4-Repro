@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 04: Male Reproductive System — HoyaDocs Repro Block</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            color: #1f2937;
+            line-height: 1.6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0;
+            width: 220px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 20px 0 140px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+        .sidebar-header {
+            padding: 0 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+        }
+        .sidebar-header h2 {
+            font-size: 14px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        .sidebar-header p { font-size: 12px; opacity: 0.8; margin: 0; }
+        .sidebar-nav { padding: 0 15px; }
+        .sidebar-link {
+            display: block; padding: 10px 12px;
+            background: #1e293b; color: #cbd5e1;
+            border-left: 3px solid transparent; border-radius: 4px;
+            cursor: pointer; font-size: 13px;
+            transition: all 0.2s ease; text-decoration: none; margin-bottom: 6px;
+        }
+        .sidebar-link:hover { background: #334155; border-left-color: #2563eb; color: #f1f5f9; }
+        .sidebar-link.active { background: #1e293b; border-left-color: #2563eb; color: #2563eb; font-weight: 600; }
+        .sidebar-divider { height: 1px; background: #334155; margin: 12px 0; }
+
+        .sidebar-footer {
+            position: fixed; bottom: 0; left: 0; width: 220px;
+            padding: 10px 15px 12px;
+            background: linear-gradient(to top, #0f172a 60%, transparent);
+            z-index: 102;
+        }
+        .export-actions { display: flex; gap: 6px; margin-bottom: 8px; }
+        .export-btn {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; gap: 3px; padding: 7px 6px;
+            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 6px; color: #cbd5e1; font-size: 10.5px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease; font-family: inherit; line-height: 1.2;
+        }
+        .export-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #f1f5f9; }
+        .export-btn .btn-icon { font-size: 16px; line-height: 1; }
+        .hub-return-btn {
+            display: flex; align-items: center; gap: 7px;
+            width: 100%; padding: 9px 12px;
+            background: rgba(37,99,235,0.18); border: 1px solid rgba(96,165,250,0.35);
+            border-radius: 6px; color: #93c5fd; font-size: 12px; font-weight: 600;
+            text-decoration: none; transition: all 0.2s ease; cursor: pointer;
+        }
+        .hub-return-btn:hover { background: rgba(37,99,235,0.32); border-color: rgba(96,165,250,0.7); color: #dbeafe; }
+        .hub-return-btn .btn-arrow { font-size: 14px; line-height: 1; }
+
+        @media print {
+            .sidebar, .sidebar-footer { display: none !important; }
+            body { display: block !important; overflow: visible !important; height: auto !important; background: white !important; }
+            .main { margin-left: 0 !important; height: auto !important; overflow: visible !important; max-width: 100% !important; padding: 20px !important; }
+            .lo-section { display: block !important; box-shadow: none !important; border: 1px solid #e2e8f0; margin-bottom: 30px; page-break-before: always; }
+            .lo-section:first-child { page-break-before: auto; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body { display: block !important; }
+            .section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron { display: none !important; }
+            .header { page-break-after: avoid; }
+            a { color: inherit; text-decoration: none; }
+        }
+
+        .main { margin-left: 220px; flex: 1; padding: 40px; max-width: 1000px; overflow-y: auto; height: 100vh; }
+        .header { margin-bottom: 40px; }
+        .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 10px; color: #0f172a; }
+        .header p { font-size: 16px; color: #475569; margin: 0; }
+
+        .lo-section { display: none; background: white; border-radius: 8px; padding: 28px 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); animation: fadeIn 0.3s ease; }
+        .lo-section.active { display: block; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        .lo-title { font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 5px; }
+        .lo-subtitle { font-size: 13px; color: #64748b; margin-bottom: 20px; font-weight: 500; }
+
+        .lo-content h3 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin: 24px 0 10px; padding: 6px 10px; border-left: 3px solid #2563eb; background: transparent; }
+        .lo-content h4 { font-size: 14.5px; font-weight: 700; color: #1e3a5f; background: #dbeafe; border-radius: 4px; padding: 6px 12px; margin: 18px 0 8px; }
+        .lo-content h5 { font-size: 13px; font-weight: 700; color: #1e293b; margin: 12px 0 4px; }
+        .lo-content p { font-size: 14px; line-height: 1.7; color: #1e293b; margin-bottom: 10px; }
+        .lo-content ul { margin-left: 22px; margin-bottom: 12px; }
+        .lo-content ol { margin-left: 22px; margin-bottom: 12px; }
+        .lo-content li { font-size: 14px; line-height: 1.7; color: #1e293b; margin-bottom: 6px; }
+
+        .lo-content table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 13px; }
+        .lo-content table thead tr { background: #1e3a5f; color: white; }
+        .lo-content table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.3px; color: white; }
+        .lo-content table td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; color: #1e293b; vertical-align: top; }
+        .lo-content table tbody tr:nth-child(even) { background: #eff6ff; }
+        .lo-content table tbody tr:hover { background: #dbeafe; }
+
+        .section-rule { border: none; border-top: 1px solid #e2e8f0; margin: 22px 0; }
+
+        .flow-diagram { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px; margin: 12px 0 18px; font-size: 13px; line-height: 1.85; color: #1e293b; }
+        .flow-diagram strong { color: #1e3a5f; }
+        .flow-arrow { color: #2563eb; font-weight: 700; margin: 0 4px; }
+
+        .exam-trap { background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .exam-trap .trap-header { font-weight: 700; color: #b91c1c; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .exam-trap ul { margin-left: 18px; margin-top: 6px; }
+        .exam-trap li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .exam-trap p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        .exam-trap strong { color: #991b1b; }
+
+        .hy-box { background-color: #fefce8; border-left: 4px solid #ca8a04; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .hy-box strong { color: #a16207; font-weight: 700; font-size: 13px; }
+        .hy-box ul { margin-left: 18px; margin-top: 6px; }
+        .hy-box li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+
+        .mnemonic { background-color: #fff7ed; border-left: 4px solid #ea580c; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .mnemonic .mnemonic-header { font-weight: 700; color: #c2410c; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .mnemonic strong { color: #c2410c; font-size: 13px; }
+        .mnemonic ul { margin-left: 18px; margin-top: 6px; }
+        .mnemonic li { font-size: 13px; margin-bottom: 5px; color: #431407; line-height: 1.5; }
+
+        .usmle-summary { background: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .usmle-header { font-weight: 700; color: #1e40af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .usmle-summary ul { margin-left: 18px; margin-top: 6px; }
+        .usmle-summary li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .usmle-summary p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+
+        .collapsible-h3 { cursor: pointer; user-select: none; }
+        .collapsible-h3:hover { color: #1e3a8a; }
+        h3.collapsible-h3 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin: 24px 0 10px; padding: 6px 10px; border-left: 3px solid #2563eb; cursor: pointer; user-select: none; }
+        .section-chevron { display: inline-block; font-size: 12px; color: #2563eb; transition: transform 0.2s ease; margin-right: 6px; }
+        .collapsible-h3.collapsed .section-chevron { transform: rotate(-90deg); }
+        .section-body { padding-left: 16px; margin-left: 4px; }
+        .section-body.collapsed { display: none; }
+
+        .h4-body { padding-left: 14px; margin-left: 4px; margin-bottom: 6px; }
+
+        .trap-header { cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .trap-chevron { font-size: 11px; font-weight: 400; color: #b91c1c; transition: transform 0.2s ease; margin-left: 8px; flex-shrink: 0; }
+        .trap-header.collapsed .trap-chevron { transform: rotate(-90deg); }
+        .trap-body.collapsed { display: none; }
+
+        .h5-subheading { font-size: 13px; font-weight: 700; color: #1e3a5f; background: #eff6ff; border-left: 2px solid #93c5fd; border-radius: 3px; padding: 4px 10px; margin: 14px 0 6px; cursor: pointer; user-select: none; }
+        .h5-subheading:hover { background: #dbeafe; }
+        .h5-subheading .h5-chevron { display: inline-block; font-size: 10px; color: #2563eb; transition: transform 0.2s ease; margin-right: 5px; }
+        .h5-subheading.collapsed .h5-chevron { transform: rotate(-90deg); }
+        .h5-body { padding-left: 18px; margin-left: 4px; margin-bottom: 8px; }
+        .h5-body.collapsed { display: none; }
+
+        .mnemonic-toggle-header { cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .mnemonic-toggle-header .mnemonic-chevron { font-size: 11px; color: #c2410c; transition: transform 0.2s ease; margin-left: 8px; flex-shrink: 0; }
+        .mnemonic-toggle-header.collapsed .mnemonic-chevron { transform: rotate(-90deg); }
+        .mnemonic-body.collapsed { display: none; }
+
+        .lo-controls { display: flex; gap: 8px; margin-bottom: 16px; }
+        .lo-controls button { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 4px; border: 1px solid #2563eb; cursor: pointer; background: white; color: #2563eb; transition: all 0.15s ease; }
+        .lo-controls button:hover { background: #2563eb; color: white; }
+
+        .lo-toc { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; font-size: 13px; }
+        .lo-toc-title { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #64748b; margin-bottom: 8px; }
+        .lo-toc ol { margin: 0; padding-left: 20px; }
+        .lo-toc li { margin-bottom: 5px; }
+        .lo-toc a { color: #2563eb; text-decoration: none; font-weight: 500; }
+        .lo-toc a:hover { text-decoration: underline; color: #1d4ed8; }
+
+        .lo-covered { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #2563eb; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; }
+        .lo-covered-title { font-weight: 700; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+        .lo-covered ul { margin: 0; padding-left: 18px; }
+        .lo-covered li { margin-bottom: 3px; color: #1e293b; line-height: 1.5; }
+        .lo-covered li strong { color: #1e3a5f; }
+
+        .practice-question { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; padding: 16px; margin: 14px 0; border-radius: 6px; }
+        .practice-question h4 { background: none !important; padding: 0 !important; border-radius: 0 !important; margin: 4px 0 8px !important; color: #1d4ed8; font-size: 14.5px; font-weight: 700; }
+        .practice-question p { font-size: 13px; }
+        .practice-question .option { color: #475569; font-style: italic; margin-bottom: 4px; font-size: 13px; }
+        .reveal-btn { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 4px; border: 1px solid #2563eb; cursor: pointer; background: white; color: #2563eb; transition: all 0.15s ease; margin-top: 8px; }
+        .reveal-btn:hover { background: #2563eb; color: white; }
+        .answer { display: none; margin-top: 12px; background: #f0fdf4; border-left: 3px solid #16a34a; padding: 12px; border-radius: 4px; font-size: 13px; line-height: 1.7; color: #1f2937; }
+        .answer.show { display: block; }
+        .answer strong { color: #14532d; }
+
+        .tyu-section { margin: 24px 0; border-top: 1px solid #e2e8f0; padding-top: 18px; }
+        .tyu-section > h4 { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 14px; background: none; padding: 0; }
+        .tyu-section .practice-question h4 { background: none !important; padding: 0 !important; }
+
+        .sidebar { transition: transform 0.25s ease; }
+        .hamburger-btn {
+            display: none;
+            position: fixed; top: 12px; left: 12px; z-index: 200;
+            background: #1e293b; border: none; border-radius: 6px;
+            padding: 8px 11px; cursor: pointer; color: white; font-size: 20px;
+            line-height: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+        }
+        .hamburger-btn:hover { background: #334155; }
+        .sidebar-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.45); z-index: 99;
+        }
+        .sidebar-overlay.open { display: block; }
+        @media (max-width: 768px) {
+            .hamburger-btn { display: block; }
+            .sidebar {
+                transform: translateX(-240px);
+                z-index: 150;
+            }
+            .sidebar.mob-open { transform: translateX(0); }
+            .main {
+                margin-left: 0 !important;
+                padding: 60px 16px 30px 16px !important;
+                max-width: 100% !important;
+            }
+            .header h1 { font-size: 22px !important; }
+            .header p  { font-size: 14px !important; }
+            .lo-section { padding: 20px 16px !important; }
+            .lo-content table {
+                display: block; overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                font-size: 12px !important;
+            }
+            .lo-toc ol { padding-left: 14px; }
+            .export-actions { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+            div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+            .main { padding: 55px 12px 24px 12px !important; }
+            .lo-acc-header { flex-wrap: wrap; gap: 6px !important; }
+        }
+    </style>
+</head>
+<body>
+<button class="hamburger-btn" onclick="toggleMobileSidebar()" aria-label="Open menu">&#9776;</button>
+<div class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <a href="https://strettyit10.github.io/Block4-Repro/"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-block; margin-bottom:8px; font-size:17px; font-weight:700;
+                  color:#60a5fa; text-decoration:none; letter-spacing:0.5px;
+                  border-bottom:1px solid rgba(96,165,250,0.35); padding-bottom:1px;"
+           onmouseover="this.style.color='#93c5fd'"
+           onmouseout="this.style.color='#60a5fa'">HoyaDocs &#8599;</a>
+        <h2>Lecture 04</h2>
+        <p>Male Reproductive System</p>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#overview" class="sidebar-link active" onclick="switchLO(event,'overview')">📋 Lecture Overview</a>
+        <div class="sidebar-divider"></div>
+        <a href="#lo1" class="sidebar-link" onclick="switchLO(event,'lo1')">♂️ Testis &amp; Spermatogenesis</a>
+        <a href="#lo2" class="sidebar-link" onclick="switchLO(event,'lo2')">🔀 Excurrent Ducts</a>
+        <a href="#lo3" class="sidebar-link" onclick="switchLO(event,'lo3')">💧 Accessory Glands &amp; Penis</a>
+        <a href="#lo4" class="sidebar-link" onclick="switchLO(event,'lo4')">🚿 Urethra</a>
+        <div class="sidebar-divider"></div>
+        <a href="#practice" class="sidebar-link" onclick="switchLO(event,'practice')">📝 Practice Questions</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="export-actions">
+            <button class="export-btn" onclick="printAll(this)" title="Save as PDF">
+                <span class="btn-icon">🖨️</span>Print PDF
+            </button>
+            <button class="export-btn" onclick="downloadWord(this)" title="Download as Word document">
+                <span class="btn-icon">📄</span>Word Doc
+            </button>
+        </div>
+        <a href="https://strettyit10.github.io/Block4-Repro/resource-mapping/repro_resource_hub.html"
+           class="hub-return-btn" target="_blank" rel="noopener noreferrer">
+            <span class="btn-arrow">&#8592;</span> Study Hub Resources
+        </a>
+    </div>
+</aside>
+
+<main class="main">
+    <div class="header">
+        <h1>Lecture 04: Male Reproductive System</h1>
+        <p>HoyaDocs — Repro Block | USMLE Step 1 Preparation</p>
+    </div>
+
+    <section class="lo-section active" id="overview"><!--OVERVIEW_PLACEHOLDER--></section>
+    <section class="lo-section" id="lo1">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 1 — Testis &amp; Spermatogenesis</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Structure · Descent · Leydig/Sertoli · HPG Axis · Spermatogenesis · HoyaDocs Repro Block</p>
+
+        <div class="lo-content">
+
+            <div class="lo-covered">
+                <div class="lo-covered-title">Learning Objectives Covered</div>
+                <ul>
+                    <li><strong>LO 1:</strong> Know the structure and function of the testis. Understand the process of spermatogenesis.</li>
+                </ul>
+            </div>
+
+            <div class="lo-controls">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <div class="lo-toc">
+                <div class="lo-toc-title">On This Page</div>
+                <ol>
+                    <li><a href="#t-descent">Testicular Descent &amp; Cryptorchidism</a></li>
+                    <li><a href="#t-pampiniform">Pampiniform Plexus &amp; Torsion</a></li>
+                    <li><a href="#t-tunicas">Testis Coverings — Three Tunicas</a></li>
+                    <li><a href="#t-cells">Leydig &amp; Sertoli Cells</a></li>
+                    <li><a href="#t-bt-barrier">&nbsp;&nbsp;↳ Blood-Testis Barrier</a></li>
+                    <li><a href="#t-hpg">Hypothalamus-Pituitary-Gonadal Axis</a></li>
+                    <li><a href="#t-spermatogen">Spermatogenesis (74-Day Timeline)</a></li>
+                    <li><a href="#t-spermiogen">Spermiogenesis &amp; Mature Sperm Anatomy</a></li>
+                </ol>
+            </div>
+
+            <!-- DESCENT -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="t-descent"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> ⚽ Testicular Descent &amp; Cryptorchidism
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The testes originate near the kidneys (same intermediate mesoderm origin) and descend into the scrotum by month 7 of gestation, guided by the <strong>gubernaculum</strong>. This moves them to a cooler environment (2–4°C below core) required for normal spermatogenesis.</p>
+
+                <h4>🧭 Timeline &amp; Mechanism</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        <strong>~Week 13:</strong> testes begin developing in the abdomen, near the embryonic kidneys<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Months 2–7:</strong> descent down the posterior abdominal wall → through inguinal canal → into scrotum<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Month 7:</strong> fetal <strong>androgens (testosterone/DHT)</strong> trigger <strong>gubernacular contraction</strong> → pulls testes into scrotum<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>After descent:</strong> processus vaginalis should obliterate (leaving tunica vaginalis around testis)
+                    </div>
+
+                    <div class="hy-box">
+                        <strong>⚡ Why Descent Matters:</strong>
+                        <ul>
+                            <li>Scrotal temperature = <strong>~34°C</strong> (core is 37°C).</li>
+                            <li>Spermatogenesis requires this cooler environment — high heat damages <strong>Sertoli cells + germ cells</strong> (Leydig cells are relatively heat-resistant).</li>
+                            <li>Embryology crossover: the <strong>mesonephric tubules → efferent ducts</strong>, and the <strong>mesonephric (Wolffian) duct → epididymis + vas deferens + seminal vesicles</strong>. Testes + their plumbing share kidney embryology.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>🎯 Cryptorchidism — Undescended Testis</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Definition:</strong> one or both testes fail to descend into the scrotum (usually stuck in inguinal canal)</li>
+                        <li><strong>Most common congenital GU anomaly in males</strong> — ~3% of term, ~30% of preterm</li>
+                        <li><strong>Consequences if uncorrected:</strong>
+                            <ul>
+                                <li>↓ Fertility — heat damages seminiferous tubules, impairs spermatogenesis</li>
+                                <li><strong>↑ Risk of germ cell tumors</strong> (classically <strong>seminoma</strong>) — risk persists even after orchidopexy</li>
+                                <li>Indirect inguinal hernia (persistent processus vaginalis), testicular torsion</li>
+                            </ul>
+                        </li>
+                        <li><strong>Labs:</strong>
+                            <ul>
+                                <li>Testosterone: normal (Leydig cells heat-resistant)</li>
+                                <li><strong>Inhibin B: ↓</strong> (Sertoli dysfunction from heat)</li>
+                                <li><strong>FSH: ↑</strong> (loss of inhibin B feedback)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Management:</strong> orchidopexy (surgical fixation) <strong>before age 1</strong> — earlier intervention preserves more fertility &amp; decreases (but does not eliminate) malignancy risk</li>
+                    </ul>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Testosterone Levels in Cryptorchidism <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>Testosterone is usually normal</strong> — Leydig cells are heat-resistant. What's affected is <strong>spermatogenesis</strong>: inhibin B falls, FSH rises.</li>
+                            <li>Classic Step 1 stem: "40 yo man with history of undescended testis presents with infertility. Labs show ↑ FSH, normal testosterone, ↓ inhibin B."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAMPINIFORM -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="t-pampiniform"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🌡️ Pampiniform Plexus &amp; Testicular Torsion
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The <strong>pampiniform plexus</strong> is a web of veins that wraps around the testicular artery. It acts as a <strong>countercurrent heat exchanger</strong> — cooling warm arterial blood before it reaches the testis (maintaining scrotal temperature for spermatogenesis).</p>
+
+                <h4>🧬 Structure &amp; Function</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>A dense venous plexus surrounding the testicular artery within the spermatic cord</li>
+                        <li>Warm blood descending in the artery transfers heat to cooler blood ascending in the veins → <strong>countercurrent heat exchange</strong></li>
+                        <li>Drains to the <strong>right testicular vein → IVC</strong> (at acute angle), <strong>left testicular vein → left renal vein</strong> (at 90° angle)</li>
+                    </ul>
+                </div>
+
+                <h4>🔵 Varicocele</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Dilated pampiniform plexus, classically described as a "<strong>bag of worms</strong>" on exam</li>
+                        <li><strong>Left side predominant</strong> (~90%) — because the left testicular vein enters the left renal vein at a right angle, increasing backpressure</li>
+                        <li><strong>Clinical red flag:</strong> a right-sided varicocele OR a new left varicocele that does NOT decompress when supine → evaluate for <strong>renal cell carcinoma</strong> (invading the renal vein / IVC)</li>
+                        <li>Long-standing varicocele → impaired thermoregulation → infertility (heat damages spermatogenesis)</li>
+                    </ul>
+                </div>
+
+                <h4>🔄 Testicular Torsion</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Twisting of the spermatic cord → occludes venous then arterial blood flow → <strong>ischemic infarction</strong> of testis</li>
+                        <li>Most common in adolescents (12–18 years); "<strong>bell-clapper deformity</strong>" (abnormally free testis within tunica vaginalis) is a predisposing anatomic variant</li>
+                        <li><strong>Presentation:</strong> sudden, severe unilateral testicular pain; testis may appear high-riding and transverse; <strong>loss of cremasteric reflex</strong>; no relief with elevation (negative Prehn sign — vs. epididymitis, where elevation relieves pain)</li>
+                        <li><strong>Imaging:</strong> Doppler US shows ↓/absent flow</li>
+                        <li><strong>Management:</strong> <strong>surgical emergency</strong> — detorsion within <strong>6 hours</strong> to preserve the testis; bilateral orchiopexy to prevent recurrence</li>
+                    </ul>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Torsion vs. Epididymitis (Prehn Sign) <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>Torsion</strong> — sudden onset, <strong>no relief with scrotal elevation</strong> (negative Prehn), <strong>absent cremasteric reflex</strong>, absent Doppler flow → surgical detorsion NOW.</li>
+                            <li><strong>Epididymitis</strong> — gradual onset, pain relieved by elevation (positive Prehn), cremasteric reflex preserved, increased Doppler flow → antibiotics (GC/Chlamydia in young; coliforms in older men).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TUNICAS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="t-tunicas"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🛡️ Testis Coverings — Three Tunicas
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The testis has three concentric coverings from outside → in. Each has distinct histology and clinical importance.</p>
+
+                <h4>📘 The Three Tunicas</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Layer (outside → in)</th><th>Histology</th><th>Clinical / HY</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Tunica vaginalis</strong> (outermost)</td><td>Single layer of mesothelial (simple cuboidal) cells — visceral and parietal layers from the processus vaginalis</td><td>Fluid accumulation → <strong>hydrocele</strong> (transilluminates); communicates with abdomen if processus vaginalis remains patent (communicating hydrocele / indirect hernia)</td></tr>
+                            <tr><td><strong>Tunica albuginea</strong> (middle)</td><td><strong>Thick dense connective tissue</strong> — fibrous capsule</td><td>Sends septa inward to divide testis into lobules; extends to form <strong>mediastinum testis</strong> (contains rete testis); testicular torsion twists the cord within this capsule</td></tr>
+                            <tr><td><strong>Tunica vasculosa</strong> (innermost)</td><td>Loose CT with abundant vasculature</td><td>Supplies blood and carries hormones to seminiferous tubules; extensive capillary network</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Order of Tunicas: "Vaginalis, Albuginea, Vasculosa" (VAV)</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>V</strong>aginalis (outermost, mesothelium — from peritoneum)</li>
+                                <li><strong>A</strong>lbuginea (middle, dense connective tissue — toughest; where the fibrous "capsule" description comes from)</li>
+                                <li><strong>V</strong>asculosa (innermost, vessel-rich loose CT)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEYDIG / SERTOLI CELLS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="t-cells"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🧬 Leydig &amp; Sertoli Cells — Two Cell Types, Two Functions
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The testis has two functional cell types: <strong>Leydig cells</strong> (between tubules, make testosterone) and <strong>Sertoli cells</strong> (inside seminiferous tubules, support germ cells). Germ cells are the third "cargo" — not endocrine or support.</p>
+
+                <h4>🔶 Leydig Cells — The Endocrine Cells</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Location:</strong> <strong>interstitial</strong> — between seminiferous tubules, in the loose CT</li>
+                        <li><strong>Function:</strong> steroidogenesis — synthesize <strong>testosterone</strong> from cholesterol (via same pathway as ovarian theca)</li>
+                        <li><strong>Regulation:</strong> <strong>LH</strong> from anterior pituitary binds Leydig cell → cAMP-mediated testosterone synthesis</li>
+                        <li><strong>Histology:</strong>
+                            <ul>
+                                <li>Abundant <strong>lipid droplets</strong> (cholesterol storage)</li>
+                                <li>Prominent <strong>smooth ER</strong> (steroid synthesis)</li>
+                                <li>Mitochondria with <strong>tubular cristae</strong> (steroid hormone signature)</li>
+                                <li>Characteristic <strong>Reinke crystals</strong> (rod-shaped cytoplasmic inclusions) — found only in Leydig cells</li>
+                            </ul>
+                        </li>
+                        <li><strong>Testosterone effects:</strong>
+                            <ul>
+                                <li>Supports <strong>spermatogenesis</strong> (paracrine — locally diffuses into seminiferous tubules)</li>
+                                <li>Maintains accessory glands (prostate, seminal vesicles, bulbourethral)</li>
+                                <li>Male secondary sex characteristics; libido</li>
+                                <li>Converted to more potent <strong>DHT (50× more potent)</strong> by <strong>5α-reductase</strong> in target tissues</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ Reinke Crystals — A Key Histologic Buzzword:</strong>
+                        <ul>
+                            <li>Rectangular, eosinophilic intracytoplasmic inclusions unique to Leydig cells.</li>
+                            <li>Often asked on path questions as an identifier for Leydig cell tumors (which may cause precocious puberty in boys or gynecomastia via peripheral testosterone → estradiol conversion).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>🔷 Sertoli Cells — The Support Cells</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Location:</strong> inside seminiferous tubules, attached to the basal lamina and extending to the lumen</li>
+                        <li><strong>Function:</strong>
+                            <ul>
+                                <li><strong>Nurse cells</strong> — nourish and physically support developing germ cells</li>
+                                <li>Phagocytose residual bodies (excess cytoplasm shed during spermiogenesis)</li>
+                                <li>Secrete <strong>androgen-binding protein (ABP)</strong> → concentrates testosterone within seminiferous tubules (paracrine, 100× higher local concentration)</li>
+                                <li>Secrete <strong>inhibin B</strong> → negative feedback on FSH</li>
+                                <li>Secrete <strong>Müllerian Inhibiting Substance (MIS/AMH)</strong> during fetal life → regresses paramesonephric ducts</li>
+                                <li>Form the <strong>blood-testis barrier</strong> (see below)</li>
+                                <li>Contain aromatase → local conversion of some testosterone to estradiol</li>
+                            </ul>
+                        </li>
+                        <li><strong>Regulation:</strong> <strong>FSH</strong> (primary); also <strong>testosterone</strong> from neighboring Leydig cells (paracrine)</li>
+                        <li><strong>Histology:</strong> tall, columnar cells spanning the seminiferous epithelium from basal lamina to lumen; irregular outlines from enveloping germ cells</li>
+                    </ul>
+                </div>
+
+                <h4 id="t-bt-barrier">🔒 The Blood-Testis Barrier</h4>
+                <div class="h4-body">
+                    <p>Adjacent Sertoli cells form <strong>tight junctions (Sertoli-Sertoli junctions)</strong>, creating a barrier that divides the seminiferous tubule into two compartments:</p>
+                    <ul>
+                        <li><strong>Basal compartment</strong> (below the junctions) — contains spermatogonia; open to systemic circulation; mitotic activity (spermatogonia divide here)</li>
+                        <li><strong>Adluminal compartment</strong> (above the junctions) — contains primary spermatocytes → spermatids → spermatozoa; meiotic and post-meiotic cells</li>
+                    </ul>
+
+                    <div class="flow-diagram">
+                        <strong>Why the barrier matters:</strong><br>
+                        <span class="flow-arrow">1.</span> Meiotic + haploid germ cells express <strong>new surface antigens</strong> not present at fetal immune tolerance<br>
+                        <span class="flow-arrow">→</span> Immune system would view them as <strong>foreign</strong><br>
+                        <span class="flow-arrow">2.</span> Barrier sequesters these cells from systemic circulation — prevents <strong>autoimmune orchitis</strong><br>
+                        <span class="flow-arrow">3.</span> Creates a unique microenvironment (high testosterone, specialized nutrients) maintained by Sertoli cells
+                    </div>
+
+                    <div class="hy-box">
+                        <strong>⚡ Clinical Tie-Ins:</strong>
+                        <ul>
+                            <li><strong>Vasectomy reversal / testicular trauma</strong> → anti-sperm antibodies can form when sperm antigens leak → infertility.</li>
+                            <li><strong>Mumps orchitis</strong> disrupts the barrier → post-mumps infertility.</li>
+                            <li><strong>Sertoli-cell-only syndrome (Del Castillo):</strong> seminiferous tubules contain ONLY Sertoli cells (no germ cells) → azoospermia, high FSH, normal testosterone/LH.</li>
+                            <li><strong>Androgen-binding protein (ABP)</strong> keeps intratubular testosterone at ~100× plasma level — needed for spermatogenesis.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Sertoli Cell Functions — "F SHIPS MAnufacture"</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <p><strong>Sertoli cells</strong> do a lot. Key secretions:</p>
+                            <ul>
+                                <li><strong>I</strong>nhibin B (suppresses FSH)</li>
+                                <li><strong>A</strong>BP (androgen-binding protein — concentrates testosterone)</li>
+                                <li><strong>M</strong>IS / AMH (fetal Müllerian regression)</li>
+                                <li>Form blood-testis <strong>barrier</strong> via tight junctions</li>
+                                <li>Respond to <strong>FSH + testosterone</strong></li>
+                                <li>Convert T → estradiol via <strong>aromatase</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Androgen Insensitivity vs. 5α-Reductase Deficiency <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>Complete Androgen Insensitivity (CAIS):</strong> Androgen receptor nonfunctional → 46,XY with female external phenotype. Leydig still make testosterone (↑), MIS works → no uterus.</li>
+                            <li><strong>5α-reductase deficiency:</strong> Testosterone can't be converted to DHT → ambiguous/female external genitalia at birth, but virilization at puberty. Internal ducts normal (Wolffian structures depend on T, not DHT).</li>
+                            <li><strong>DHT is 50× more potent than testosterone</strong> at the androgen receptor; it drives external virilization and prostate development.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HPG AXIS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="t-hpg"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🧠 Hypothalamus-Pituitary-Gonadal (HPG) Axis
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The HPG axis is the master regulator of spermatogenesis and testosterone production. Two pituitary hormones (LH, FSH) target two testicular cell types (Leydig, Sertoli) with two distinct feedback loops.</p>
+
+                <h4>🧭 The Cascade</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        <strong>Hypothalamus:</strong> pulsatile <strong>GnRH</strong> release<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Anterior pituitary</strong> (basophils of pars distalis/tuberalis) secretes:<br>
+                        <strong>LH</strong> <span class="flow-arrow">→</span> <strong>Leydig cells</strong> <span class="flow-arrow">→</span> <strong>testosterone</strong> → negative feedback on hypothalamus + pituitary<br>
+                        <strong>FSH</strong> <span class="flow-arrow">→</span> <strong>Sertoli cells</strong> <span class="flow-arrow">→</span> support germ cells, ABP, <strong>inhibin B</strong> → <strong>selective</strong> negative feedback on FSH (not LH)<br>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr><th>Hormone</th><th>Target cell</th><th>Effect</th><th>Feedback inhibitor</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>LH</strong></td><td>Leydig</td><td>Testosterone synthesis</td><td>Testosterone (↓ LH release)</td></tr>
+                            <tr><td><strong>FSH</strong></td><td>Sertoli</td><td>Support spermatogenesis, secrete ABP + inhibin B + MIS</td><td><strong>Inhibin B</strong> (↓ FSH selectively)</td></tr>
+                            <tr><td><strong>Testosterone</strong></td><td>Neighboring Sertoli + peripheral tissues</td><td>Paracrine support of spermatogenesis; virilization</td><td>Own negative feedback on LH and GnRH</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Predicting Hormone Patterns:</strong>
+                        <ul>
+                            <li><strong>Primary testicular failure</strong> (Klinefelter, post-chemo, cryptorchidism): ↓ T, ↓ inhibin B → <strong>↑↑ LH, ↑↑ FSH</strong> (hypergonadotropic).</li>
+                            <li><strong>Hypothalamic / pituitary failure</strong> (Kallmann, pituitary adenoma): ↓ GnRH → <strong>↓ LH, ↓ FSH, ↓ T</strong> (hypogonadotropic).</li>
+                            <li><strong>Anabolic steroid use:</strong> exogenous T suppresses LH → ↓ endogenous T → testicular atrophy + infertility (often with elevated estradiol from aromatization → gynecomastia).</li>
+                            <li><strong>Sertoli-cell-only syndrome:</strong> azoospermia with <strong>isolated ↑ FSH</strong>, normal LH, normal T (Leydig cells intact).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPERMATOGENESIS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="t-spermatogen"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🧬 Spermatogenesis — The 74-Day Journey
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Spermatogenesis is the process of converting a diploid <strong>spermatogonium (2n)</strong> into a haploid <strong>spermatozoon (n)</strong>. It takes <strong>~74 days</strong> end-to-end and occurs continuously throughout male adult life.</p>
+
+                <h4>📘 Step-by-Step</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Cell</th><th>Ploidy / DNA</th><th>Stage</th><th>Location in tubule</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Spermatogonium (Type A/B)</strong></td><td>2n, 2C</td><td>Mitosis (Type A maintains pool; Type B commits)</td><td>Basal compartment (below tight junctions)</td></tr>
+                            <tr><td><strong>Primary spermatocyte</strong></td><td>2n, 4C (DNA replicated)</td><td>Meiosis I (prophase is long — this is the cell you usually see)</td><td>Moves across tight junctions into adluminal compartment</td></tr>
+                            <tr><td><strong>Secondary spermatocyte</strong></td><td>1n, 2C</td><td>Meiosis II (very brief — rarely seen on histology)</td><td>Adluminal compartment</td></tr>
+                            <tr><td><strong>Spermatid</strong></td><td>1n, 1C</td><td>Spermiogenesis (no further division)</td><td>Adluminal, near lumen</td></tr>
+                            <tr><td><strong>Spermatozoon</strong></td><td>1n, 1C</td><td>Mature, released into lumen</td><td>In the tubule lumen</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="flow-diagram">
+                        Spermatogonium (2n) <span class="flow-arrow">→</span> mitosis <span class="flow-arrow">→</span> more spermatogonia<br>
+                        <span class="flow-arrow">↓</span> (DNA replicates)<br>
+                        Primary spermatocyte (4C, 2n)<br>
+                        <span class="flow-arrow">↓</span> Meiosis I (reductional division)<br>
+                        Secondary spermatocyte (2C, 1n)<br>
+                        <span class="flow-arrow">↓</span> Meiosis II (equational division)<br>
+                        <strong>4 Spermatids</strong> (1C, 1n)<br>
+                        <span class="flow-arrow">↓</span> Spermiogenesis (remodeling, no division)<br>
+                        <strong>4 Spermatozoa</strong>
+                    </div>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY Spermatogenesis Facts:</strong>
+                        <ul>
+                            <li>~<strong>74 days</strong> from spermatogonium to mature spermatozoon in the seminiferous tubule.</li>
+                            <li>Additional ~<strong>12–21 days</strong> for maturation in the epididymis.</li>
+                            <li><strong>Incomplete cytokinesis</strong> during mitosis/meiosis leaves cytoplasmic bridges between sister germ cells → <strong>synchronous development</strong> of cohorts.</li>
+                            <li>One spermatogonium → <strong>4 mature spermatozoa</strong> (in females, one oogonium → 1 ovum + 3 polar bodies).</li>
+                            <li>Unlike oogenesis, spermatogenesis continues <strong>from puberty to death</strong> (though decreases with age).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPERMIOGENESIS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="t-spermiogen"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🏁 Spermiogenesis &amp; Mature Sperm Anatomy
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ <strong>Spermiogenesis</strong> is the final remodeling step — a round <strong>spermatid</strong> (n) becomes a streamlined motile <strong>spermatozoon</strong>. No further division; just morphologic transformation.</p>
+
+                <h4>🧬 Key Events of Spermiogenesis</h4>
+                <div class="h4-body">
+                    <ol>
+                        <li><strong>Acrosome formation</strong> — Golgi-derived cap over the nucleus, containing hydrolytic enzymes (hyaluronidase, acrosin) to penetrate corona radiata &amp; zona pellucida during fertilization</li>
+                        <li><strong>Nuclear condensation</strong> — histones replaced by <strong>protamines</strong> → compact nucleus</li>
+                        <li><strong>Flagellum formation</strong> — centriole-derived <strong>axoneme</strong> (9+2 microtubule arrangement) grows from the tail of the cell</li>
+                        <li><strong>Mitochondrial sheath</strong> — mitochondria coil around the axoneme in the midpiece (ATP for motility)</li>
+                        <li><strong>Cytoplasm elimination</strong> — excess cytoplasm shed as "<strong>residual bodies</strong>" phagocytosed by Sertoli cells</li>
+                    </ol>
+                </div>
+
+                <h4>🧲 Mature Spermatozoon Anatomy</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Region</th><th>Contents</th><th>Function</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Head</strong></td><td>Nucleus (haploid) + <strong>acrosome</strong> (Golgi-derived cap of hydrolytic enzymes)</td><td>Deliver haploid genome; penetrate zona pellucida via acrosome reaction</td></tr>
+                            <tr><td><strong>Neck</strong></td><td>Proximal centriole + connecting piece</td><td>Structural link between head and tail; contributes zygote centriole</td></tr>
+                            <tr><td><strong>Midpiece</strong></td><td><strong>Axoneme (9+2 microtubules)</strong> + <strong>mitochondrial sheath</strong></td><td>ATP production for flagellar movement</td></tr>
+                            <tr><td><strong>Principal piece</strong></td><td>Axoneme + <strong>fibrous sheath</strong> (longest segment of the tail)</td><td>Main motile segment; whip-like motion</td></tr>
+                            <tr><td><strong>End piece</strong></td><td>Axoneme only (no fibrous sheath) + plasma membrane</td><td>Terminal tip</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ Kartagener Syndrome (Primary Ciliary Dyskinesia):</strong>
+                        <ul>
+                            <li><strong>Dynein arm defect</strong> → immotile cilia AND immotile sperm flagella (axoneme structure is identical).</li>
+                            <li>Triad: <strong>situs inversus</strong>, <strong>chronic sinusitis &amp; bronchiectasis</strong>, <strong>infertility</strong>.</li>
+                            <li>Perfect Step 1 "connect the dots" question — 9+2 axoneme motility defect hits sperm tail + respiratory cilia + embryonic node ciliated cells.</li>
+                        </ul>
+                    </div>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Spermatogenesis vs. Spermiogenesis <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>Spermatogenesis</strong> = the entire process, spermatogonium → spermatozoon, including mitosis + meiosis + remodeling.</li>
+                            <li><strong>Spermiogenesis</strong> = the <em>remodeling</em> step only (spermatid → spermatozoon), post-meiotic, no further division.</li>
+                            <li>Every spermiogenesis event happens inside spermatogenesis, but not every spermatogenesis event is spermiogenesis.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYU -->
+            <div class="tyu-section">
+                <h4 id="tyu-lo1">🧠 Testing Your Understanding!</h4>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 1, Question 1</h4>
+                    <p>A 28-year-old man with a history of unilateral cryptorchidism treated with orchidopexy at age 8 presents with infertility. Semen analysis shows azoospermia. Labs: testosterone 420 ng/dL (normal), LH 9 mIU/mL (normal-high), FSH 28 mIU/mL (high), inhibin B 20 pg/mL (low). Explain the hormonal pattern in terms of Leydig vs. Sertoli cell heat sensitivity.</p>
+                    <p class="option"><em>Consider: heat-resistant Leydig cells, heat-sensitive Sertoli/germ cells, negative feedback loops, inhibin B</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Selective Sertoli/germ cell damage from prolonged heat exposure — Leydig function preserved.</strong>
+                        <p style="margin-top:10px;">The scrotal position of the testis normally keeps the testes ~2–4°C cooler than core body temperature. With cryptorchidism, the abdominal environment damages <strong>heat-sensitive seminiferous tubules</strong> — specifically the <strong>Sertoli cells and germ cells</strong>. <strong>Leydig cells are heat-resistant</strong>, so testosterone production continues normally (normal T, normal-high LH). The Sertoli-cell damage reduces <strong>inhibin B</strong>, which selectively inhibits FSH → loss of this feedback causes <strong>isolated FSH elevation</strong>. Spermatogenesis is severely impaired → <strong>azoospermia</strong>. The late orchidopexy (age 8) did not prevent the damage — intervention <strong>before age 1</strong> preserves much more fertility and modestly decreases malignancy risk. Consider: what additional surveillance is warranted long-term? (↑ risk of seminoma — regular self-exam + clinical follow-up.)</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 1, Question 2</h4>
+                    <p>A researcher uses electron microscopy to examine cells within the interstitium of the testis and identifies rectangular cytoplasmic inclusions, abundant smooth endoplasmic reticulum, and mitochondria with tubular cristae. Name the cell type, its principal hormone, and the transcriptional regulation that drives its secretion.</p>
+                    <p class="option"><em>Consider: Reinke crystals, cholesterol side-chain cleavage, LH receptor pathway</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Leydig cells producing testosterone, stimulated by LH via the cAMP-PKA pathway.</strong>
+                        <p style="margin-top:10px;">The three ultrastructural features are the classic tip-off for <strong>Leydig cells</strong>: (1) <strong>Reinke crystals</strong> — rectangular eosinophilic cytoplasmic inclusions unique to Leydig cells; (2) abundant <strong>smooth ER</strong> reflecting active steroid synthesis (membranes for enzymes); (3) <strong>tubular cristae</strong> in mitochondria — a morphologic signature of steroid-producing cells (also seen in adrenal cortex). LH binds its GPCR on Leydig cells → Gs → adenylyl cyclase → <strong>↑ cAMP</strong> → PKA activation → phosphorylates <strong>StAR (steroidogenic acute regulatory protein)</strong>, which moves cholesterol into the mitochondrion → CYP11A1 (side-chain cleavage) converts cholesterol to pregnenolone → subsequent enzymes generate <strong>testosterone</strong>. Consider: how would the histology differ in prolonged chronic LH stimulation (e.g., Klinefelter)? (Leydig cell hyperplasia — fewer tubules, more interstitial Leydig cells dominating the image.)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="lo-section" id="lo2">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 2 — Excurrent Duct System</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Tubulus Rectus → Rete Testis → Efferent Ductules → Epididymis → Vas Deferens → Ampulla · HoyaDocs Repro Block</p>
+
+        <div class="lo-content">
+
+            <div class="lo-covered">
+                <div class="lo-covered-title">Learning Objectives Covered</div>
+                <ul>
+                    <li><strong>LO 2:</strong> Know the different components of the excurrent ducts, how to distinguish between them, and their function.</li>
+                </ul>
+            </div>
+
+            <div class="lo-controls">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <div class="lo-toc">
+                <div class="lo-toc-title">On This Page</div>
+                <ol>
+                    <li><a href="#e-overview">Overview — Sperm's Exit Pathway</a></li>
+                    <li><a href="#e-rectus">Tubulus Rectus &amp; Rete Testis</a></li>
+                    <li><a href="#e-efferent">Efferent Ductules</a></li>
+                    <li><a href="#e-epididymis">Epididymis (Head, Body, Tail)</a></li>
+                    <li><a href="#e-vas">Vas Deferens &amp; Vasectomy</a></li>
+                    <li><a href="#e-ampulla">Ampulla &amp; Ejaculatory Duct</a></li>
+                    <li><a href="#e-summary">Histologic Distinguishing Table</a></li>
+                </ol>
+            </div>
+
+            <!-- OVERVIEW -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="e-overview"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🗺️ Overview — Sperm's Exit Pathway
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Sperm produced in the seminiferous tubules are immotile and dilute. They must travel through a carefully-staged system of ducts to <strong>concentrate, mature, gain motility</strong>, and finally be propelled during ejaculation.</p>
+
+                <h4>📍 Master Pathway</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        <strong>Seminiferous tubule</strong> (production, Sertoli+germ cells)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Tubulus rectus</strong> (straight tubules — exit door)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Rete testis</strong> (network in mediastinum testis)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Efferent ductules</strong> (~20 ducts; <strong>reabsorb fluid → concentrate sperm</strong>)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Ductus epididymis</strong> (7 m coiled duct; <strong>sperm maturation &amp; storage</strong>)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Vas deferens</strong> (thick muscular tube; <strong>propulsion during ejaculation</strong>)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Ampulla of vas</strong> → joins duct of seminal vesicle → <strong>ejaculatory duct</strong> → <strong>prostatic urethra</strong>
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Mnemonic: "SEVEN UP" (sperm exit order)</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <p><strong>SEVE(N) UP</strong> — sperm's path from production to penis:</p>
+                            <ul>
+                                <li><strong>S</strong>eminiferous tubules</li>
+                                <li><strong>E</strong>pididymis</li>
+                                <li><strong>V</strong>as deferens</li>
+                                <li><strong>E</strong>jaculatory duct</li>
+                                <li>(Nothing / "Nothing")</li>
+                                <li><strong>U</strong>rethra</li>
+                                <li><strong>P</strong>enis</li>
+                                <li>Between S and E: tubulus rectus → rete testis → efferent ductules round out the full pathway.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TUBULUS RECTUS & RETE -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="e-rectus"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> ➡️ Tubulus Rectus &amp; Rete Testis — Intratesticular Start
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The first two segments are <strong>intratesticular</strong> — they live inside the testis and simply collect sperm-containing fluid from all the seminiferous tubules into a single route toward the efferent ductules.</p>
+
+                <h4>🔹 Tubulus Rectus (Straight Tubules)</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Structure:</strong> short, straight transitional tubules</li>
+                        <li><strong>Epithelium:</strong> <strong>simple cuboidal</strong> (lacking Sertoli cells — cleanly Sertoli-cell-only then transitions to cuboidal)</li>
+                        <li><strong>Function:</strong> direct exit from seminiferous tubule into rete testis</li>
+                    </ul>
+                </div>
+
+                <h4>🔹 Rete Testis</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Structure:</strong> anastomosing network of small channels embedded in the <strong>mediastinum testis</strong> (posterior testicular connective tissue)</li>
+                        <li><strong>Epithelium:</strong> <strong>simple cuboidal</strong> with occasional microvilli and cilia to help move fluid/sperm</li>
+                        <li><strong>Surrounded by:</strong> dense connective tissue with blood and lymphatic vessels</li>
+                        <li><strong>Function:</strong> collects output from all seminiferous tubules and funnels it to efferent ductules</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- EFFERENT DUCTULES -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="e-efferent"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🌊 Efferent Ductules — The Concentration Step
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The efferent ductules (<strong>~20 small ducts</strong>) connect the rete testis to the head of the epididymis. Their defining job is to <strong>reabsorb most of the testicular fluid</strong>, dramatically concentrating sperm before they enter the epididymis.</p>
+
+                <h4>🧬 Structure &amp; Embryology</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Origin:</strong> derived from <strong>mesonephric tubules</strong> — that's why they retain water/solute-reabsorbing capability similar to renal tubules</li>
+                        <li><strong>Characteristic histologic appearance:</strong> <strong>"scalloped" or "toothed" luminal border</strong> — alternating short non-ciliated (resorptive) cells and tall ciliated (motile) cells</li>
+                        <li><strong>Epithelium:</strong>
+                            <ul>
+                                <li><strong>Tall ciliated cells</strong> — beat to move sperm toward epididymis</li>
+                                <li><strong>Short non-ciliated resorptive cells</strong> — reabsorb ~90% of testicular fluid</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY Distinguishing Feature:</strong>
+                        <ul>
+                            <li>The "<strong>scalloped luminal border</strong>" from alternating tall + short cells is the #1 Step 1 buzzphrase for efferent ductules.</li>
+                            <li>Contrast with the smooth, straight "brush border" of epididymis (stereocilia).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EPIDIDYMIS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="e-epididymis"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🌀 Epididymis — Maturation &amp; Storage
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The epididymis is a single, <strong>~7-meter highly coiled duct</strong> sitting on the posterior testis. Sperm <strong>mature</strong> (gain motility + fertilizing ability) and are <strong>stored</strong> here. It has three gross regions.</p>
+
+                <h4>📘 Histology</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Epithelium:</strong> <strong>pseudostratified columnar with stereocilia</strong> (long, non-motile microvilli — NOT true cilia)
+                            <ul>
+                                <li><strong>Principal cells</strong> absorb fluid and secrete factors that mature sperm</li>
+                                <li><strong>Basal cells</strong> sit on the basement membrane (progenitor cells)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Muscular layer:</strong> thin smooth muscle — contractions increase during ejaculation</li>
+                        <li>Stereocilia are a key Step 1 finding — they are actually <strong>long microvilli</strong>, not cilia (no motility, no 9+2 axoneme).</li>
+                    </ul>
+                </div>
+
+                <h4>📍 Three Regions (Head, Body, Tail)</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Region</th><th>Function</th><th>Sperm state</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Head (caput)</strong></td><td>Receives efferent ductules; initial fluid absorption</td><td>Sperm <strong>immature</strong> — cannot fertilize yet</td></tr>
+                            <tr><td><strong>Body (corpus)</strong></td><td>Progressive maturation; absorption + secretion</td><td>Sperm gaining motility</td></tr>
+                            <tr><td><strong>Tail (cauda)</strong></td><td>Wider lumen slows fluid → <strong>storage</strong></td><td>Sperm fully mature; can fertilize; storage up to ~1 month</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY Epididymis Facts:</strong>
+                        <ul>
+                            <li>Epididymis is the classic site of <strong>epididymitis</strong> — in young men, think <em>Chlamydia trachomatis</em> + <em>Neisseria gonorrhoeae</em>; in older men, think <em>E. coli</em>, <em>Pseudomonas</em>, or other coliforms.</li>
+                            <li><strong>Prehn sign</strong>: elevation of scrotum relieves epididymitis pain but NOT torsion pain.</li>
+                            <li>Sperm develop motility + fertilizing capacity during transit — this is a <strong>passive maturation</strong> driven by epididymal secretions, not by sperm metabolism alone.</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="section-rule">
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Stereocilia vs. True Cilia <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>Stereocilia</strong> (epididymis, vas deferens, hair cells of inner ear) = <strong>long microvilli</strong>. Actin-based, NON-motile, no 9+2 axoneme.</li>
+                            <li><strong>True cilia</strong> (respiratory tract, oviduct, efferent ductules) = <strong>9+2 microtubule arrangement</strong>, motile via dynein.</li>
+                            <li>Step 1 favorite: "long apical projections without 9+2 axoneme" = stereocilia, not cilia.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VAS DEFERENS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="e-vas"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🚀 Vas Deferens &amp; Vasectomy
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The vas (ductus) deferens is a <strong>thick, muscular tube</strong> that carries sperm from the tail of the epididymis toward the ejaculatory duct. Its defining feature is a prominent <strong>three-layer smooth-muscle wall</strong> that propels sperm by peristalsis during ejaculation.</p>
+
+                <h4>🔬 Histology</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Epithelium:</strong> <strong>pseudostratified columnar with stereocilia</strong> (similar to epididymis, but often shorter stereocilia)</li>
+                        <li><strong>Lumen:</strong> narrow and relatively irregular</li>
+                        <li><strong>Muscularis:</strong> THREE layers of smooth muscle:
+                            <ul>
+                                <li>Inner longitudinal</li>
+                                <li>Middle circular (thickest)</li>
+                                <li>Outer longitudinal</li>
+                            </ul>
+                        </li>
+                        <li><strong>Innervation:</strong> sympathetic (hypogastric plexus) → peristaltic contraction during emission phase of ejaculation</li>
+                    </ul>
+                </div>
+
+                <h4>✂️ Vasectomy</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>A permanent male contraception procedure: the vas deferens is <strong>cut and a segment removed</strong>, or tied off with sutures</li>
+                        <li>Effect: sperm cannot reach the ejaculate; <strong>testosterone production and ejaculate volume are unaffected</strong> (seminal/prostatic fluid continues)</li>
+                        <li>Sperm continue to be produced by testis → reabsorbed in the epididymis/vas stump</li>
+                        <li>Post-procedure: takes <strong>2–3 months / ~20 ejaculations</strong> for residual sperm downstream of the ligation to be cleared; <strong>backup contraception</strong> required until semen analysis confirms azoospermia</li>
+                        <li>Potential complications: <strong>sperm granulomas</strong>, <strong>anti-sperm antibodies</strong> (from leaked sperm antigens crossing damaged blood-testis barrier)</li>
+                    </ul>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Thick Muscular Wall <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>On histology, the <strong>vas deferens</strong> is immediately recognizable by its <strong>disproportionately thick three-layer smooth-muscle wall relative to its small lumen</strong>. This is the #1 distinguisher vs. epididymis (which has a thin muscular coat).</li>
+                            <li>Classic image: tiny stellate lumen surrounded by a massive muscularis.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AMPULLA -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="e-ampulla"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🔀 Ampulla &amp; Ejaculatory Duct
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The <strong>ampulla of the vas deferens</strong> is the dilated distal end, located behind the bladder. It joins the <strong>duct of the seminal vesicle</strong> to form the <strong>ejaculatory duct</strong>, which traverses the prostate to empty into the prostatic urethra.</p>
+
+                <h4>📘 Structure &amp; Function</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Ampulla:</strong> widened, folded terminal segment of the vas; <strong>mixing site</strong> where sperm from the epididymis meets secretions from accessory glands</li>
+                        <li><strong>Ejaculatory duct:</strong> short (~2 cm), formed by union of ampulla + seminal vesicle duct; passes through the prostate and opens on the <strong>verumontanum (seminal colliculus)</strong> of the prostatic urethra</li>
+                        <li><strong>Epithelium:</strong> simple/pseudostratified columnar; surrounded by less muscle than the main vas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SUMMARY TABLE -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="e-summary"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 📊 Distinguishing the Ducts on Histology — Master Table
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Step 1 loves "identify this structure on histology" questions. Each duct has a unique combination of <strong>epithelium + luminal contour + muscular layer</strong> that pins it down.</p>
+
+                <h4>One-Look Histology Table</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Structure</th><th>Epithelium</th><th>Luminal contour</th><th>Muscular layer</th><th>Key feature / clue</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Tubulus rectus</td><td>Simple cuboidal</td><td>Small, round</td><td>Minimal</td><td>Straight exit from seminiferous tubule</td></tr>
+                            <tr><td>Rete testis</td><td>Simple cuboidal ± cilia</td><td>Irregular, anastomosing channels</td><td>Minimal</td><td>Embedded in <strong>mediastinum testis</strong></td></tr>
+                            <tr><td>Efferent ductules</td><td>Ciliated + non-ciliated (resorptive) cells</td><td><strong>Scalloped / "toothed" border</strong></td><td>Thin</td><td>~20 ducts; <strong>fluid reabsorption</strong>; mesonephric tubule origin</td></tr>
+                            <tr><td>Epididymis</td><td><strong>Pseudostratified columnar with stereocilia</strong></td><td>Smooth, regular</td><td>Thin smooth muscle</td><td>7-m coiled duct; <strong>sperm maturation &amp; storage</strong></td></tr>
+                            <tr><td>Vas deferens</td><td>Pseudostratified columnar with stereocilia</td><td>Narrow, irregular (stellate)</td><td><strong>Three thick layers of smooth muscle</strong></td><td>Massive muscular wall relative to lumen</td></tr>
+                            <tr><td>Ampulla</td><td>Simple/pseudostratified columnar</td><td>Folded, wider</td><td>Moderate smooth muscle</td><td>Mixing zone; joins seminal vesicle duct</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="usmle-summary">
+                        <div class="usmle-header">📚 Step 1 Summary — Distinguishing Male Ducts</div>
+                        <ul>
+                            <li><strong>Cuboidal</strong> = inside the testis (tubulus rectus, rete testis).</li>
+                            <li><strong>Scalloped border</strong> = efferent ductules (the only "toothed-lumen" duct).</li>
+                            <li><strong>Stereocilia</strong> = epididymis + vas deferens.</li>
+                            <li><strong>Thick three-layer muscle around tiny lumen</strong> = vas deferens.</li>
+                            <li>Efferent ductules are mesonephric-derived — that's why they resorb fluid.</li>
+                            <li>Epididymis is the site of sperm maturation and storage; vas deferens is the transport tube.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYU -->
+            <div class="tyu-section">
+                <h4 id="tyu-lo2">🧠 Testing Your Understanding!</h4>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 2, Question 1</h4>
+                    <p>A pathology resident is shown a high-magnification image of a male reproductive duct. The epithelium is characterized by alternating tall ciliated cells and short non-ciliated cells, producing a "scalloped" or "toothed" luminal profile. Name the structure, its embryologic origin, and its primary physiologic role in sperm handling.</p>
+                    <p class="option"><em>Consider: mesonephric tubules, fluid reabsorption, ciliary transport, concentration of sperm</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Efferent ductules — mesonephric tubule origin; their role is to reabsorb testicular fluid and concentrate sperm.</strong>
+                        <p style="margin-top:10px;">The "scalloped" luminal profile is the single-best visual cue for the <strong>efferent ductules</strong>. These ~20 small ducts connect the rete testis to the head of the epididymis. Their key histologic feature is the <strong>alternation of tall ciliated cells (transport)</strong> and <strong>short non-ciliated resorptive cells (absorption)</strong>, which creates the toothed/saw-tooth appearance. Embryologically, they derive from <strong>mesonephric tubules</strong> — the same tissue that forms kidney tubules, which is why they retain strong fluid-resorptive capacity. Functionally: testicular fluid arriving from the rete testis is ~90% reabsorbed here, <strong>concentrating sperm</strong> dramatically before they enter the epididymis for maturation and storage. Consider: what would happen with a selective efferent-ductule transport defect? (Accumulated fluid → testicular fluid backup → obstructive oligo/azoospermia.)</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 2, Question 2</h4>
+                    <p>A 32-year-old man requests permanent contraception via vasectomy. After the procedure, he asks why he still needs backup contraception for the next 3 months and why his testosterone and ejaculate volume are expected to remain unchanged. Explain the anatomy and physiology that justify both points.</p>
+                    <p class="option"><em>Consider: sperm storage distal to the vasectomy site, fluid contributions to ejaculate, Leydig cell testosterone production</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Residual sperm downstream of the ligation must be cleared; ejaculate volume and testosterone are dominated by accessory gland and Leydig-cell output, both unaffected by vasectomy.</strong>
+                        <p style="margin-top:10px;">Vasectomy cuts/ties the <strong>vas deferens</strong>, blocking sperm transit from the epididymis to the ejaculatory duct. However, <strong>downstream</strong> of the ligation site — in the ampulla, seminal vesicles, and ejaculatory duct — there are residual mature sperm. These take ~2–3 months (or ~20 ejaculations) to be cleared. Semen analysis is required to confirm azoospermia before discontinuing backup contraception. As for unchanged ejaculate/testosterone: (1) <strong>~70% of ejaculate volume is from seminal vesicles</strong> (fructose-rich fluid), ~25% from prostate (PSA, zinc, acid phosphatase), and only a small percentage from the epididymis/vas. None of those glands are affected by vasectomy. (2) <strong>Testosterone is made by Leydig cells</strong> in the testicular interstitium — independent of ductal plumbing. Leydig function is preserved, as is LH/FSH feedback. Consider: what might cause infertility if the patient later tries to reverse the vasectomy? (<strong>Anti-sperm antibodies</strong> — leakage of sperm antigens post-vasectomy can cross the damaged blood-testis barrier, sensitizing the immune system.)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="lo-section" id="lo3">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 3 — Accessory Glands &amp; Penis</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Seminal Vesicles · Prostate · Bulbourethral Glands · Penis · HoyaDocs Repro Block</p>
+
+        <div class="lo-content">
+
+            <div class="lo-covered">
+                <div class="lo-covered-title">Learning Objectives Covered</div>
+                <ul>
+                    <li><strong>LO 3:</strong> Know the structure and function of the accessory glands and penis.</li>
+                </ul>
+            </div>
+
+            <div class="lo-controls">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <div class="lo-toc">
+                <div class="lo-toc-title">On This Page</div>
+                <ol>
+                    <li><a href="#a-overview">Accessory Glands Overview &amp; Ejaculate Composition</a></li>
+                    <li><a href="#a-seminal">Seminal Vesicles</a></li>
+                    <li><a href="#a-prostate">Prostate Gland</a></li>
+                    <li><a href="#a-prostate-path">&nbsp;&nbsp;↳ BPH &amp; Prostate Cancer</a></li>
+                    <li><a href="#a-cowper">Bulbourethral (Cowper's) Glands</a></li>
+                    <li><a href="#a-penis">Penis — Structure &amp; Erectile Tissue</a></li>
+                    <li><a href="#a-erection">&nbsp;&nbsp;↳ Erection Physiology</a></li>
+                </ol>
+            </div>
+
+            <!-- OVERVIEW / EJACULATE -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="a-overview"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🥛 Accessory Glands &amp; Ejaculate Composition
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The three pairs of accessory glands — <strong>seminal vesicles, prostate, bulbourethral (Cowper's) glands</strong> — add the bulk of fluid to the ejaculate. Sperm themselves make up only a tiny fraction by volume.</p>
+
+                <h4>📊 Ejaculate Breakdown</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Source</th><th>% Volume</th><th>Key contents</th><th>Function</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Seminal vesicles</strong></td><td>~65–70%</td><td><strong>Fructose</strong>, prostaglandins, alkaline mucus, <strong>semenogelin</strong></td><td>Nourish sperm (fructose energy); initial coagulum via semenogelin</td></tr>
+                            <tr><td><strong>Prostate</strong></td><td>~20–25%</td><td><strong>PSA</strong>, acid phosphatase, zinc, citrate, proteolytic enzymes</td><td>Liquefy the coagulum (PSA cleaves semenogelin); enzymatically activate sperm</td></tr>
+                            <tr><td><strong>Bulbourethral glands</strong></td><td>&lt;5%</td><td>Mucus (pre-ejaculate)</td><td>Neutralize urethral acidity; lubricate urethra</td></tr>
+                            <tr><td><strong>Epididymis + vas</strong></td><td>&lt;5%</td><td>Mature sperm</td><td>Deliver the actual gametes</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 "Seminal vesicles are a sugar daddy"</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li>Seminal vesicles are the <strong>largest volume source</strong> (~70%) and provide <strong>fructose</strong> as the main sperm fuel.</li>
+                                <li>Prostate = <strong>PSA + zinc + acid phosphatase + liquefier</strong> — clinically the most "testable" gland.</li>
+                                <li>Cowper's glands = pre-ejaculate → <strong>neutralize urethral acidity</strong> to protect sperm.</li>
+                                <li>Mnemonic: <strong>S</strong>eminal → <strong>S</strong>ugar (fructose); <strong>P</strong>rostate → <strong>P</strong>SA; <strong>C</strong>owper's → <strong>C</strong>lean the urethra.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMINAL VESICLES -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="a-seminal"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🍯 Seminal Vesicles
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Paired accessory glands sitting posterior to the bladder. Each is a coiled tube emptying into the vas deferens to form the <strong>ejaculatory duct</strong>.</p>
+
+                <h4>🔬 Histology</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Epithelium:</strong> pseudostratified or simple columnar</li>
+                        <li>Mucosa is <strong>HIGHLY folded</strong> with complex labyrinthine infoldings → massive surface area for secretion; classic "<strong>honeycomb</strong>" histologic appearance</li>
+                        <li>Secretory cells have <strong>lipofuscin pigment</strong> (golden-brown granules) accumulating with age</li>
+                        <li>Smooth muscle coat contracts during ejaculation to empty contents</li>
+                    </ul>
+                </div>
+
+                <h4>🧪 Secretion</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Alkaline, viscous fluid</strong> rich in:
+                            <ul>
+                                <li><strong>Fructose</strong> — primary sperm energy source (hexokinase in sperm head uses it for ATP)</li>
+                                <li><strong>Prostaglandins</strong> — stimulate smooth-muscle contractility in female genital tract</li>
+                                <li><strong>Semenogelin</strong> — clotting factor that forms the initial semen coagulum; later cleaved by PSA to liquefy</li>
+                                <li>Vitamin C, flavins, potassium</li>
+                            </ul>
+                        </li>
+                        <li><strong>NOT a sperm storage site</strong> — sperm transit through but are not stored here</li>
+                        <li>Testosterone-dependent: androgen deprivation causes atrophy</li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY Clinical Tie-In:</strong>
+                        <ul>
+                            <li>Absent or low <strong>fructose</strong> in semen → suggests <strong>ejaculatory duct obstruction</strong> or <strong>congenital absence of seminal vesicles</strong>.</li>
+                            <li><strong>Congenital Bilateral Absence of the Vas Deferens (CBAVD)</strong> is associated with <strong>CFTR mutations (cystic fibrosis spectrum)</strong> — these patients also often lack seminal vesicles → low ejaculate volume, low fructose, obstructive azoospermia.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROSTATE -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="a-prostate"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🏛️ Prostate Gland
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The prostate is a walnut-sized gland encircling the prostatic urethra just below the bladder. It has four distinct zones with different pathologies, and its secretion contains the clinically-used biomarker <strong>PSA</strong>.</p>
+
+                <h4>🗺️ Four Prostatic Zones</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Zone</th><th>% of prostate</th><th>Classic pathology</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Peripheral zone</strong></td><td>~70%</td><td><strong>~70% of prostate cancers</strong> (posterior — palpable on DRE)</td></tr>
+                            <tr><td><strong>Central zone</strong></td><td>~25%</td><td>~5% of cancers</td></tr>
+                            <tr><td><strong>Transition zone</strong></td><td>~5% (young) → expands with age</td><td><strong>BPH arises here</strong> → compresses urethra</td></tr>
+                            <tr><td>Anterior fibromuscular stroma</td><td>~0% glandular</td><td>No glands; no cancer</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>🔬 Histology</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Epithelium:</strong> simple or pseudostratified columnar lining glandular alveoli</li>
+                        <li><strong>Corpora amylacea:</strong> small, round, eosinophilic, concentrically laminated calcified bodies in the prostatic lumina — classic histologic signature; increase with age</li>
+                        <li>Verumontanum (seminal colliculus) — midline prominence of the posterior prostatic urethra where <strong>ejaculatory ducts open</strong>; also the boundary between bladder-cancer and urothelial histology considerations</li>
+                        <li><strong>Two-cell epithelium:</strong> luminal secretory cells + basal cells. Loss of basal cell layer (proven via p63, HMWCK staining) supports invasion → prostate carcinoma</li>
+                    </ul>
+                </div>
+
+                <h4>🧪 Secretion</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Acidic, thin fluid</strong> comprising ~25% of ejaculate</li>
+                        <li>Contents:
+                            <ul>
+                                <li><strong>PSA (prostate-specific antigen)</strong> — serine protease that cleaves semenogelin to liquefy the coagulum; clinical biomarker for BPH/cancer surveillance</li>
+                                <li><strong>Acid phosphatase</strong> (prostatic acid phosphatase, PAP) — historically used as a prostate cancer marker</li>
+                                <li><strong>Zinc</strong> — antibacterial, supports sperm stability</li>
+                                <li><strong>Citrate</strong> — for sperm energy</li>
+                                <li>Proteolytic enzymes</li>
+                            </ul>
+                        </li>
+                        <li>Androgen-dependent: DHT drives prostate growth and secretion</li>
+                    </ul>
+                </div>
+
+                <h4 id="a-prostate-path">🦠 BPH &amp; Prostate Cancer</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Feature</th><th>BPH</th><th>Prostate Cancer</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Zone</td><td><strong>Transition zone</strong> (central, around urethra)</td><td><strong>Peripheral zone</strong> (posterior)</td></tr>
+                            <tr><td>Symptoms</td><td>Urinary obstructive (hesitancy, weak stream, nocturia, incomplete emptying) from urethral compression</td><td>Often asymptomatic early; late: bone pain (classic <strong>osteoblastic mets to lumbar spine</strong>)</td></tr>
+                            <tr><td>DRE</td><td>Symmetric, rubbery enlargement</td><td>Nodular, hard, asymmetric mass</td></tr>
+                            <tr><td>Histology</td><td>Hyperplasia (increased glands + stroma) with retained two-cell layer</td><td>Adenocarcinoma; <strong>loss of basal cells</strong>; small gland crowding, prominent nucleoli</td></tr>
+                            <tr><td>Labs</td><td>Mildly elevated PSA</td><td>Markedly elevated PSA; ↑ acid phosphatase; ↑ alk phos (bone mets)</td></tr>
+                            <tr><td>Mechanism</td><td><strong>DHT-driven</strong> hyperplasia with aging</td><td>Androgen-dependent growth; many pathways (PTEN loss, AR amplification)</td></tr>
+                            <tr><td>Treatment</td><td><strong>α1 blockers</strong> (tamsulosin — relax smooth muscle); <strong>5α-reductase inhibitors</strong> (finasteride, dutasteride — shrink volume); TURP surgery</td><td>Active surveillance (low risk); <strong>radical prostatectomy</strong>, radiation; <strong>androgen deprivation</strong> (GnRH agonists like leuprolide, AR antagonists like flutamide)</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Prostate Cancer Buzzwords:</strong>
+                        <ul>
+                            <li><strong>Most common cancer in men</strong>; second most common cause of cancer death.</li>
+                            <li><strong>Osteoblastic bone metastases</strong> (vs. most cancers which are osteolytic) → ↑ alk phos, ↑ PSA, bone pain, especially in the <strong>lumbar spine &amp; pelvis</strong>.</li>
+                            <li><strong>Gleason score</strong> (grade) and PSA + DRE guide management.</li>
+                            <li><strong>Androgen deprivation</strong> is the mainstay for advanced disease: GnRH agonists (leuprolide — initial flare → sustained suppression), GnRH antagonists (degarelix — no flare), AR antagonists (bicalutamide, enzalutamide), abiraterone (CYP17 inhibitor).</li>
+                        </ul>
+                    </div>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Zones of BPH vs. Cancer <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>BPH = Transition zone</strong> (central, around the urethra → obstructive symptoms).</li>
+                            <li><strong>Cancer = Peripheral zone</strong> (posterior → palpable on DRE, often asymptomatic early).</li>
+                            <li>Don't confuse! Students sometimes mix these up because "transition" sounds benign and "peripheral" sounds far-away.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COWPER'S -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="a-cowper"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 💧 Bulbourethral (Cowper's) Glands
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Small pea-sized glands at the base of the penis, embedded in the urogenital diaphragm. Secrete clear mucus ("pre-ejaculate") that precedes ejaculation.</p>
+
+                <h4>🔬 Histology &amp; Function</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Epithelium:</strong> simple columnar mucus-secreting cells</li>
+                        <li><strong>Distinctive feature:</strong> <strong>surrounded by skeletal muscle</strong> (from the urogenital diaphragm) — the classic Step 1 histology clue distinguishing bulbourethral glands from other male accessory glands</li>
+                        <li><strong>Secretion:</strong>
+                            <ul>
+                                <li>Alkaline mucus → <strong>neutralizes acidic urine residue</strong> in the urethra (would otherwise damage sperm)</li>
+                                <li><strong>Lubricates</strong> the urethra before ejaculation</li>
+                                <li>Shields the urethra from destructive enzymes in ejaculate</li>
+                            </ul>
+                        </li>
+                        <li><strong>Female homologue:</strong> Bartholin's (greater vestibular) glands</li>
+                        <li><strong>Embryologic origin:</strong> urogenital sinus (same as prostate)</li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Cowper's Gland Histology:</strong>
+                        <ul>
+                            <li>"Mucus-secreting gland <strong>surrounded by skeletal muscle</strong>" = Cowper's / bulbourethral.</li>
+                            <li>Surrounding skeletal muscle = urogenital diaphragm (external urethral sphincter).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PENIS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="a-penis"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🍆 Penis — Structure &amp; Erectile Tissue
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The penis has three parts (root, body, glans) and three erectile bodies (paired corpora cavernosa + single corpus spongiosum). Each is a meshwork of vascular sinusoids that fills with blood during erection.</p>
+
+                <h4>🌳 Gross Structure</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Root:</strong> fixed, attached to the body wall (ischiocavernosus + bulbospongiosus muscles)</li>
+                        <li><strong>Body (shaft):</strong> free portion; skin + subcutaneous dartos-like layer + deep tunica albuginea encasing erectile bodies</li>
+                        <li><strong>Glans:</strong> expanded distal tip; continuous with corpus spongiosum</li>
+                        <li><strong>Prepuce (foreskin):</strong> covers the glans; removed in circumcision; can be inflamed (<strong>balanitis</strong>) or retracted and trapped (<strong>paraphimosis</strong>)</li>
+                    </ul>
+                </div>
+
+                <h4>💉 Three Erectile Bodies</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Body</th><th>Location</th><th>Function</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Corpora cavernosa</strong> (paired)</td><td>Dorsal-lateral; surrounded by rigid <strong>tunica albuginea</strong></td><td>Primary erection structure; trap blood via compression of emissary veins against tunica</td></tr>
+                            <tr><td><strong>Corpus spongiosum</strong> (single)</td><td>Ventral; contains the <strong>penile urethra</strong></td><td>Extends distally to form the <strong>glans penis</strong>; remains compressible during erection (so urethra doesn't collapse)</td></tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li>Erectile bodies are composed of <strong>helicine arteries</strong> feeding into trabeculated sinusoids of endothelium-lined cavernous spaces</li>
+                        <li>Smooth muscle tone in the sinusoid trabeculae controls erection</li>
+                    </ul>
+                </div>
+
+                <h4 id="a-erection">⚡ Erection &amp; Ejaculation Physiology</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        <strong>Erection</strong> (parasympathetic — "Point")<br>
+                        Sacral S2–S4 pelvic splanchnic nerves <span class="flow-arrow">→</span> release <strong>ACh + NO (nitric oxide)</strong><br>
+                        <span class="flow-arrow">↓</span><br>
+                        NO → <strong>guanylate cyclase</strong> in smooth muscle → <strong>↑ cGMP</strong> → smooth muscle relaxation<br>
+                        <span class="flow-arrow">↓</span><br>
+                        Helicine arteries dilate <span class="flow-arrow">→</span> sinusoids engorge <span class="flow-arrow">→</span> compress <strong>emissary veins against tunica albuginea</strong> <span class="flow-arrow">→</span> blood trapped <span class="flow-arrow">→</span> erection<br>
+                        <br>
+                        <strong>Emission + Ejaculation</strong> (sympathetic — "Shoot")<br>
+                        Hypogastric nerves (T10–L2) <span class="flow-arrow">→</span> peristalsis of epididymis, vas deferens, accessory glands <span class="flow-arrow">→</span> semen into prostatic urethra<br>
+                        <span class="flow-arrow">↓</span><br>
+                        Ejaculation (somatic via pudendal nerve) <span class="flow-arrow">→</span> bulbospongiosus contractions expel semen
+                    </div>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Erection Pharmacology:</strong>
+                        <ul>
+                            <li><strong>PDE5 inhibitors</strong> (sildenafil, tadalafil, vardenafil) — block breakdown of cGMP → prolonged smooth-muscle relaxation → erection. Contraindicated with nitrates (risk of severe hypotension) and with α1 blockers (hypotension risk).</li>
+                            <li><strong>Autonomic mnemonic:</strong> <strong>P</strong>oint (<strong>P</strong>arasympathetic = erection) and <strong>S</strong>hoot (<strong>S</strong>ympathetic = ejaculation).</li>
+                            <li><strong>Priapism</strong> (prolonged erection &gt; 4 h) is a urologic emergency — causes include PDE5 inhibitor overuse, sickle cell disease, trazodone. Risk of permanent erectile dysfunction if not treated.</li>
+                            <li><strong>Autonomic injury</strong> (e.g., pelvic surgery, prostatectomy, diabetes neuropathy) → erectile dysfunction.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Point &amp; Shoot</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>P</strong>arasympathetic (S2–S4) → <strong>P</strong>oint (erection; NO → cGMP → vasodilation)</li>
+                                <li><strong>S</strong>ympathetic (T10–L2) → <strong>S</strong>hoot (emission + ejaculation — smooth-muscle contractions of vas/seminal vesicles/prostate)</li>
+                                <li>Somatic (S2–S4, pudendal) → bulbospongiosus + ischiocavernosus contractions propel semen out</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <hr class="section-rule">
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Sildenafil + Nitrates <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>Sildenafil raises cGMP by <strong>inhibiting PDE5</strong>. Nitrates raise cGMP by producing NO.</li>
+                            <li>Taken together, severe vasodilation → <strong>life-threatening hypotension, MI</strong>.</li>
+                            <li>Classic stem: a patient on nitrates for angina takes sildenafil → presents with hypotension, dizziness, chest pain.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYU -->
+            <div class="tyu-section">
+                <h4 id="tyu-lo3">🧠 Testing Your Understanding!</h4>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 3, Question 1</h4>
+                    <p>A 68-year-old man presents with urinary hesitancy, weak stream, and nocturia. DRE reveals a symmetrically enlarged, rubbery prostate. His PSA is mildly elevated. He is started on tamsulosin and finasteride. Explain how each drug targets a different component of the pathophysiology of the patient's condition, and why both are often used together.</p>
+                    <p class="option"><em>Consider: which prostatic zone is enlarged, α1 receptors on smooth muscle, DHT-driven hyperplasia, 5α-reductase pharmacology</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: BPH involves both static (bulk) and dynamic (tone) obstruction — finasteride addresses volume, tamsulosin addresses muscle tone.</strong>
+                        <p style="margin-top:10px;">BPH arises in the <strong>transition zone</strong> and causes obstruction via two mechanisms: (1) <strong>Static</strong> — bulk enlargement of glandular/stromal tissue compresses the prostatic urethra; this is <strong>DHT-driven</strong>. <strong>Finasteride (5α-reductase inhibitor)</strong> blocks testosterone → DHT conversion, shrinking volume over several months (takes time). (2) <strong>Dynamic</strong> — α1-adrenergic tone of prostatic smooth muscle + bladder neck actively constricts urine flow. <strong>Tamsulosin (α1A-selective antagonist)</strong> relaxes this smooth muscle, giving <strong>immediate</strong> symptomatic relief. Combination therapy is standard because it addresses both components. Important teaching points: finasteride artificially <strong>lowers PSA by ~50%</strong> — must be accounted for in cancer screening; side effects include sexual dysfunction and gynecomastia. Tamsulosin can cause orthostatic hypotension and <strong>intraoperative floppy iris syndrome</strong> in cataract surgery. Consider: why would you avoid combining tamsulosin with sildenafil? (Additive vasodilation → hypotension.)</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 3, Question 2</h4>
+                    <p>A 42-year-old man presents with erectile dysfunction and infertility. Exam reveals bilateral absence of the vas deferens on palpation. Semen analysis shows azoospermia with a low ejaculate volume (0.5 mL) and <strong>absent fructose</strong>. Which underlying genetic disorder most likely explains all of these findings, and what developmental mechanism links them?</p>
+                    <p class="option"><em>Consider: CFTR, Wolffian duct-derived structures, seminal vesicle function, fructose as a marker</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Congenital Bilateral Absence of the Vas Deferens (CBAVD) — associated with CFTR mutations.</strong>
+                        <p style="margin-top:10px;"><strong>CBAVD</strong> is strongly linked to CFTR mutations — it can occur in classic cystic fibrosis (&gt;95% of CF males are infertile from CBAVD) and also in men with milder CFTR variants who lack overt pulmonary/pancreatic CF disease. Without the vas deferens, sperm cannot reach the ejaculate → azoospermia. Because the vas deferens develops from the <strong>mesonephric (Wolffian) duct</strong> alongside the <strong>seminal vesicles</strong>, CBAVD is often accompanied by <strong>absent or hypoplastic seminal vesicles</strong>. This explains: (1) <strong>low ejaculate volume</strong> (seminal vesicles contribute ~70% of volume); (2) <strong>absent fructose</strong> (the seminal vesicles are the sole source). CFTR mutations are thought to cause fetal obstruction → atresia of the developing duct. Work-up includes CFTR genotyping, partner genetic testing, and fertility via <strong>testicular sperm extraction + IVF/ICSI</strong>. Consider: why is Leydig function preserved in these patients? (Leydig cells are in the testicular interstitium and not derived from mesonephric ducts — testosterone, LH, and secondary sex characteristics are normal.)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="lo-section" id="lo4">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 4 — Male Urethra</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Prostatic · Membranous · Penile (Spongy) Segments · HoyaDocs Repro Block</p>
+
+        <div class="lo-content">
+
+            <div class="lo-covered">
+                <div class="lo-covered-title">Learning Objectives Covered</div>
+                <ul>
+                    <li><strong>LO 4:</strong> Know the structure of the different components of the urethra.</li>
+                </ul>
+            </div>
+
+            <div class="lo-controls">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <div class="lo-toc">
+                <div class="lo-toc-title">On This Page</div>
+                <ol>
+                    <li><a href="#u-overview">Overview — Three Segments, Two Sphincters</a></li>
+                    <li><a href="#u-prostatic">Prostatic Urethra</a></li>
+                    <li><a href="#u-membranous">Membranous Urethra</a></li>
+                    <li><a href="#u-penile">Penile (Spongy) Urethra</a></li>
+                    <li><a href="#u-summary">Histology Distinguishing Table</a></li>
+                    <li><a href="#u-clinical">Clinical Correlates</a></li>
+                </ol>
+            </div>
+
+            <!-- OVERVIEW -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-overview"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🗺️ Overview — Three Segments, Two Sphincters
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The male urethra is ~18–20 cm long and serves a dual role — carrying urine AND semen. It has <strong>three segments</strong>, each with its own characteristic epithelium, plus <strong>two sphincters</strong> (involuntary internal and voluntary external) controlling flow.</p>
+
+                <h4>📏 Sequential Anatomy</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        <strong>Bladder neck</strong> <span class="flow-arrow">→</span> <strong>Internal urethral sphincter</strong> (smooth muscle, involuntary, sympathetic α1)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Prostatic urethra</strong> (~3 cm; through prostate; receives ejaculatory ducts at verumontanum)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>External urethral sphincter</strong> (skeletal muscle, voluntary, somatic pudendal)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Membranous urethra</strong> (~1–2 cm; through urogenital diaphragm)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Penile (spongy) urethra</strong> (~15 cm; through corpus spongiosum)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>External urethral meatus</strong> (glans penis)
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Mnemonic: "Please Make Pee" — Three Segments</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>P</strong>rostatic urethra — transitional epithelium (urothelium)</li>
+                                <li><strong>M</strong>embranous urethra — pseudostratified / stratified columnar</li>
+                                <li><strong>P</strong>enile (spongy) urethra — pseudostratified / stratified columnar; stratified squamous near meatus</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROSTATIC -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-prostatic"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🏛️ Prostatic Urethra — Through the Prostate
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The first segment of the urethra passes through the prostate. It receives the <strong>ejaculatory ducts</strong> (bringing sperm + seminal vesicle fluid) and multiple prostatic ducts — essentially the "confluence point" where urine and semen pathways merge.</p>
+
+                <h4>🔬 Histology &amp; Key Landmarks</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Length:</strong> ~3–4 cm</li>
+                        <li><strong>Epithelium:</strong> <strong>transitional epithelium (urothelium)</strong> — same as the bladder
+                            <ul>
+                                <li>"Umbrella cells" at the surface allow stretching as volume changes</li>
+                                <li>Continuous with bladder urothelium (hence shared pathology: urothelial/transitional cell carcinoma)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Landmarks:</strong>
+                            <ul>
+                                <li><strong>Verumontanum (seminal colliculus)</strong> — midline posterior prominence; the <strong>ejaculatory ducts open here</strong>, flanking the <strong>prostatic utricle</strong> (a small Müllerian-duct remnant analogous to the uterus in females)</li>
+                                <li>Multiple small openings of prostatic ducts around the verumontanum</li>
+                            </ul>
+                        </li>
+                        <li><strong>Sphincter:</strong> <strong>internal urethral sphincter</strong> (smooth muscle, α1-sympathetic control) at the bladder-urethra junction — contracts during ejaculation to prevent retrograde flow into the bladder</li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Retrograde Ejaculation:</strong>
+                        <ul>
+                            <li><strong>Internal urethral sphincter dysfunction</strong> → ejaculate flows backward into the bladder → <strong>low-volume ejaculate, cloudy post-coital urine, infertility</strong>.</li>
+                            <li>Causes: diabetic autonomic neuropathy, α1 blockers (tamsulosin), post-prostatectomy, post-TURP.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEMBRANOUS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-membranous"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 💪 Membranous Urethra — Through the Diaphragm
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The shortest and narrowest segment — just ~1–2 cm — passing through the <strong>urogenital diaphragm</strong>. It is encircled by the <strong>external urethral sphincter</strong> (voluntary, skeletal muscle). Paired bulbourethral glands sit lateral to it.</p>
+
+                <h4>🔬 Histology</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Length:</strong> ~1–2 cm (shortest segment)</li>
+                        <li><strong>Epithelium:</strong> <strong>pseudostratified or stratified columnar</strong></li>
+                        <li><strong>Sphincter:</strong> <strong>external urethral sphincter</strong> — skeletal muscle, voluntary control via somatic <strong>pudendal nerve (S2–S4)</strong> ("S2, 3, 4 keeps the penis off the floor" also applies)</li>
+                        <li><strong>Relations:</strong> bulbourethral (Cowper's) gland ducts open into the <em>next</em> segment (penile urethra), but the glands themselves sit around this section</li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Clinical Pearls:</strong>
+                        <ul>
+                            <li>Membranous urethra is the <strong>most fixed/narrowest segment</strong> → most common site of traumatic rupture in <strong>straddle injuries + pelvic fractures</strong> (as the pelvis fractures, the urogenital diaphragm shears).</li>
+                            <li>Urethral catheterization is more challenging here because of the external sphincter tone — a "stop, relax, advance" technique is often needed.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PENILE -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-penile"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🍆 Penile (Spongy) Urethra — Through the Corpus Spongiosum
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The longest segment (~15 cm) runs through the <strong>corpus spongiosum</strong>, which cushions it and prevents it from collapsing during erection. It terminates at the <strong>external urethral meatus</strong> on the glans.</p>
+
+                <h4>🔬 Histology</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Length:</strong> ~15 cm (longest segment)</li>
+                        <li><strong>Epithelium along its course:</strong>
+                            <ul>
+                                <li>Most of the length: <strong>pseudostratified or stratified columnar</strong></li>
+                                <li>Near the external meatus / <strong>fossa navicularis</strong> (dilated distal portion): <strong>stratified squamous non-keratinized</strong> (continuous with glans skin)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Glands of Littré:</strong> small mucus-secreting glands along the wall that lubricate during passage of ejaculate</li>
+                        <li><strong>Bulbourethral (Cowper's) gland ducts</strong> empty into the proximal penile urethra</li>
+                        <li>The corpus spongiosum surrounds it — remains compressible during erection so urethra stays patent</li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Urethral Injury Locations:</strong>
+                        <ul>
+                            <li><strong>Bulbous urethra</strong> (proximal penile): straddle injury to perineum → blood/bruising at the perineum.</li>
+                            <li><strong>Membranous urethra</strong>: pelvic fracture with diastasis of the urogenital diaphragm.</li>
+                            <li><strong>Prostatic urethra</strong>: iatrogenic (TURP, catheter trauma).</li>
+                            <li>Classic finding: <strong>blood at the urethral meatus</strong> after pelvic trauma → obtain retrograde urethrogram before attempting catheterization.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUMMARY -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-summary"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 📊 Urethra Histology — Master Distinguishing Table
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Pathology boards love "identify the urethral segment" questions based on <strong>epithelial type + surrounding structure</strong>. Memorize this.</p>
+
+                <h4>One-Glance Summary</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Segment</th><th>Length</th><th>Epithelium</th><th>Surrounding structure</th><th>Unique landmark</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Prostatic</strong></td><td>~3–4 cm</td><td><strong>Transitional (urothelium)</strong> — like bladder</td><td>Prostate gland</td><td><strong>Verumontanum</strong> + ejaculatory duct openings</td></tr>
+                            <tr><td><strong>Membranous</strong></td><td>~1–2 cm</td><td><strong>Pseudostratified or stratified columnar</strong></td><td>Urogenital diaphragm; <strong>external urethral sphincter</strong> (skeletal muscle)</td><td>Shortest segment; site of traumatic rupture</td></tr>
+                            <tr><td><strong>Penile (spongy)</strong></td><td>~15 cm</td><td><strong>Pseudostratified or stratified columnar</strong>; stratified squamous near meatus (fossa navicularis)</td><td>Corpus spongiosum</td><td><strong>Glands of Littré</strong>; Cowper's duct openings</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Urethra Epithelium Pattern</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <p>From proximal to distal, the epithelium <strong>transitions from transitional → columnar → squamous</strong>. Think of it as a step-down:</p>
+                            <ul>
+                                <li><strong>Bladder + Prostatic urethra</strong>: transitional (stretches)</li>
+                                <li><strong>Membranous + most of Penile</strong>: pseudostratified/stratified columnar</li>
+                                <li><strong>External meatus / fossa navicularis</strong>: stratified squamous non-keratinized (transitions to keratinized glans skin)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLINICAL -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-clinical"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🚑 Clinical Correlates — Urethra in the Wild
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Many Step 1-testable conditions involve the urethra. Key categories: obstruction, infection, trauma, and malignancy.</p>
+
+                <h4>🚧 Obstruction</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>BPH</strong> — benign enlargement of transition-zone prostate compresses prostatic urethra → obstructive LUTS</li>
+                        <li><strong>Posterior urethral valves (PUV)</strong> — congenital mucosal flaps in male infants' prostatic urethra → severe bladder outlet obstruction, hydronephrosis, oligohydramnios (Potter sequence), often fatal without intervention</li>
+                        <li><strong>Urethral strictures</strong> — post-trauma, post-infection (gonococcal), iatrogenic (repeat catheterization)</li>
+                    </ul>
+                </div>
+
+                <h4>🦠 Infection (Urethritis)</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Type</th><th>Organism</th><th>Clinical clue</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Gonococcal urethritis</strong></td><td><em>Neisseria gonorrhoeae</em> (Gram-negative diplococci)</td><td>Thick, purulent yellow discharge; symptomatic &lt;1 week post-exposure</td></tr>
+                            <tr><td><strong>Non-gonococcal urethritis (NGU)</strong></td><td><em>Chlamydia trachomatis</em> (most common); also <em>Mycoplasma genitalium</em>, <em>Ureaplasma</em>, <em>Trichomonas</em></td><td>Thinner, watery discharge; often asymptomatic/minimal</td></tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li><strong>Treatment:</strong> empirically cover both — <strong>ceftriaxone</strong> (GC) + <strong>doxycycline</strong> (Chlamydia)</li>
+                        <li><strong>Reiter / Reactive arthritis</strong>: classic triad "can't see, can't pee, can't climb a tree" — conjunctivitis + urethritis + arthritis — associated with HLA-B27 and Chlamydia exposure</li>
+                    </ul>
+                </div>
+
+                <h4>💥 Trauma</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Straddle injury</strong> → <strong>bulbous (penile) urethra</strong> rupture → perineal bruising ("butterfly" pattern)</li>
+                        <li><strong>Pelvic fracture</strong> → <strong>membranous urethra</strong> rupture at the urogenital diaphragm</li>
+                        <li><strong>Penile fracture</strong> → can involve corpus spongiosum and urethra; presents with sudden pain + "cracking" sensation during intercourse, flaccid penis with hematoma</li>
+                        <li><strong>Always suspect urethral injury with:</strong> blood at meatus, high-riding prostate on DRE, perineal bruising, inability to void, hematuria</li>
+                        <li><strong>Work-up:</strong> <strong>retrograde urethrogram</strong> BEFORE attempting any catheterization</li>
+                    </ul>
+                </div>
+
+                <h4>🎗️ Malignancy</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Proximal urethra (prostatic):</strong> urothelial (transitional) cell carcinoma — matches its epithelium</li>
+                        <li><strong>Distal urethra (penile, near meatus):</strong> squamous cell carcinoma — matches the squamous epithelium there</li>
+                        <li>This "<strong>epithelium predicts histology</strong>" rule is a Step 1 favorite</li>
+                    </ul>
+                    <hr class="section-rule">
+
+                    <div class="usmle-summary">
+                        <div class="usmle-header">📚 Step 1 Summary</div>
+                        <ul>
+                            <li>Three segments: Prostatic (transitional) → Membranous (pseudostrat/strat columnar; external sphincter here) → Penile/Spongy (pseudostrat/strat columnar; squamous at meatus).</li>
+                            <li>Internal sphincter = smooth muscle, α1, involuntary — prevents retrograde ejaculation.</li>
+                            <li>External sphincter = skeletal muscle, pudendal (S2–S4), voluntary — urinary continence.</li>
+                            <li>Epithelium predicts malignancy: proximal = urothelial CA, distal = squamous CA.</li>
+                            <li>Straddle trauma = bulbous urethra; pelvic fracture = membranous urethra.</li>
+                            <li>Retrograde urethrogram before catheter if urethral injury suspected.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYU -->
+            <div class="tyu-section">
+                <h4 id="tyu-lo4">🧠 Testing Your Understanding!</h4>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 4, Question 1</h4>
+                    <p>A 72-year-old man with diabetes and BPH on tamsulosin reports that during intercourse he now has a barely perceptible ejaculate volume, but his post-coital urine is cloudy. Explain the underlying urethral and autonomic physiology, and why tamsulosin contributes to the problem.</p>
+                    <p class="option"><em>Consider: internal urethral sphincter, sympathetic α1 tone, ejaculatory duct opening, mechanical vs. neural dysfunction</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Retrograde ejaculation — internal urethral sphincter fails to close → semen enters the bladder.</strong>
+                        <p style="margin-top:10px;">Normally, during the <strong>emission phase</strong> of ejaculation, <strong>sympathetic α1-adrenergic tone</strong> closes the <strong>internal urethral sphincter</strong> at the bladder neck, ensuring that semen released into the prostatic urethra is propelled <strong>forward through the external meatus</strong> rather than backward into the bladder. <strong>Tamsulosin</strong> is a selective α1A-antagonist used to relax prostatic and bladder-neck smooth muscle in BPH — but it also <strong>disables the internal sphincter</strong>, causing <strong>retrograde ejaculation</strong>. Additive causes in this patient: <strong>diabetic autonomic neuropathy</strong> further impairs sympathetic function. Clinical findings: low-volume or anejaculation, orgasm preserved, post-coital urinalysis reveals sperm in urine (confirming the diagnosis). Management: if fertility is not desired, no treatment needed; if desired, switch off α1 blockers or use sympathomimetics (imipramine, pseudoephedrine) or perform sperm retrieval from post-orgasm urine for IVF/ICSI. Consider: why does tamsulosin NOT cause urinary incontinence? (The <strong>external urethral sphincter</strong> — skeletal muscle controlled by the pudendal nerve, independent of α1 tone.)</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 4, Question 2</h4>
+                    <p>A 30-year-old man presents to the ED after a high-speed motorcycle accident with a displaced pelvic fracture. He is hemodynamically stable, unable to void, and has blood at the urethral meatus. The urology resident wants to place a Foley catheter to drain the bladder. What is the next appropriate step, and what is the underlying anatomic reason for this concern?</p>
+                    <p class="option"><em>Consider: urethral segments and their vulnerability; what imaging rules out or localizes injury; which urethral segment is most fixed</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Obtain a retrograde urethrogram before attempting catheterization — pelvic fracture classically disrupts the membranous urethra.</strong>
+                        <p style="margin-top:10px;">The <strong>membranous urethra</strong> is the <strong>shortest and most fixed</strong> segment, passing through the <strong>urogenital diaphragm</strong>. In a pelvic fracture with diastasis of the pubic symphysis, the shearing forces disrupt the diaphragm and commonly rupture the membranous urethra. Signs that should stop any clinician from passing a blind Foley are: <strong>blood at the urethral meatus, inability to void, perineal bruising, and a "high-riding" prostate on DRE</strong> (prostate displaced superiorly due to loss of urethral continuity). Blind catheterization risks converting a partial tear into a complete tear and creating a false passage. The appropriate step is a <strong>retrograde urethrogram</strong> — contrast instilled at the meatus shows the site + extent of injury. If urgent bladder drainage is needed, a <strong>suprapubic cystostomy</strong> bypasses the urethra entirely. Consider: how would a straddle injury (bike crossbar) differ? (Straddle injury usually ruptures the <strong>bulbous (proximal penile) urethra</strong> — perineal ecchymosis in a "butterfly" pattern.)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="practice-section lo-section" id="practice"><!--PRACTICE_PLACEHOLDER--></section>
+
+</main>
+
+<script>
+    function switchLO(event, loId) {
+        event.preventDefault();
+        document.querySelectorAll('.lo-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        const section = document.getElementById(loId);
+        if (section) section.classList.add('active');
+        let link = event.target;
+        while (link && !link.classList.contains('sidebar-link')) link = link.parentElement;
+        if (link) link.classList.add('active');
+        const mainEl = document.querySelector('.main');
+        if (mainEl) mainEl.scrollTop = 0;
+    }
+
+    function toggleAnswer(btn) {
+        const answer = btn.nextElementSibling;
+        const isShowing = answer.classList.contains('show');
+        answer.classList.toggle('show');
+        btn.textContent = isShowing ? 'Reveal Answer' : 'Hide Answer';
+    }
+
+    function toggleSection(h3El) {
+        h3El.classList.toggle('collapsed');
+        const body = h3El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) body.classList.toggle('collapsed');
+    }
+    function toggleTrap(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('trap-body')) body.classList.toggle('collapsed');
+    }
+    function toggleH5(h5El) {
+        h5El.classList.toggle('collapsed');
+        const body = h5El.nextElementSibling;
+        if (body && body.classList.contains('h5-body')) body.classList.toggle('collapsed');
+    }
+    function toggleMnemonic(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('mnemonic-body')) body.classList.toggle('collapsed');
+    }
+
+    function expandAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .h5-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .h5-subheading').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .mnemonic-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .mnemonic-toggle-header').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .trap-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .trap-header').forEach(el => el.classList.remove('collapsed'));
+    }
+    function collapseAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .h5-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .h5-subheading').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .mnemonic-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .mnemonic-toggle-header').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .trap-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .trap-header').forEach(el => el.classList.add('collapsed'));
+    }
+
+    function buildExportDoc(forPrint) {
+        const collapsedEls = Array.from(document.querySelectorAll('.collapsed'));
+        const hiddenSections = Array.from(document.querySelectorAll('.lo-section:not(.active)'));
+        hiddenSections.forEach(s => s.style.display = 'block');
+        collapsedEls.forEach(el => el.classList.remove('collapsed'));
+
+        const clone = document.querySelector('.main').cloneNode(true);
+
+        hiddenSections.forEach(s => s.style.display = '');
+        collapsedEls.forEach(el => el.classList.add('collapsed'));
+
+        clone.querySelectorAll(
+            '.section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron, ' +
+            '.export-actions, .sidebar-footer, .hub-return-btn, button'
+        ).forEach(el => el.remove());
+
+        const pageCSS = Array.from(document.querySelectorAll('style')).map(s => s.textContent).join('\n');
+
+        const overrideCSS = `
+            * { box-sizing: border-box; }
+            body { display:block !important; overflow:visible !important; height:auto !important; background:white !important; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Calibri,sans-serif; }
+            .main { margin-left:0 !important; height:auto !important; overflow:visible !important; max-width:100% !important; padding:24px 32px !important; }
+            .lo-section { display:block !important; box-shadow:none !important; animation:none !important; ${forPrint ? 'page-break-before:always;' : ''} }
+            .lo-section:first-child { page-break-before:auto !important; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body { display:block !important; }
+            .answer { display:block !important; }
+            .collapsible-h3.collapsed .section-chevron,
+            .h5-subheading.collapsed .h5-chevron,
+            .mnemonic-toggle-header.collapsed .mnemonic-chevron,
+            .trap-header.collapsed .trap-chevron { transform:none !important; }
+            ${forPrint ? '@media print { .main { padding:0 !important; } }' : ''}
+        `;
+
+        const ns = forPrint ? '' :
+            `xmlns:o='urn:schemas-microsoft-com:office:office'
+             xmlns:w='urn:schemas-microsoft-com:office:word'
+             xmlns='http://www.w3.org/TR/REC-html40'`;
+
+        return `<!DOCTYPE html>
+<html ${ns}>
+<head>
+    <meta charset="UTF-8">
+    <title>Lecture 04: Male Reproductive System — HoyaDocs Repro Block</title>
+    <style>${pageCSS}</style>
+    <style>${overrideCSS}</style>
+</head>
+<body>
+${clone.outerHTML}
+</body>
+</html>`;
+    }
+
+    function printAll(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Opening…';
+        btn.disabled = true;
+        const html = buildExportDoc(true);
+        const win = window.open('', '_blank', 'width=960,height=750,scrollbars=yes');
+        if (!win) {
+            alert('Pop-ups are blocked. Please allow pop-ups for this page, then try again.');
+            btn.innerHTML = origHTML; btn.disabled = false; return;
+        }
+        win.document.open(); win.document.write(html); win.document.close();
+        win.onload = function() { setTimeout(() => { win.focus(); win.print(); }, 1800); };
+        btn.innerHTML = origHTML; btn.disabled = false;
+    }
+
+    function downloadWord(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Building…';
+        btn.disabled = true;
+        const html = buildExportDoc(false);
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'rpd04-male-reproductive-system.doc';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        btn.innerHTML = origHTML; btn.disabled = false;
+    }
+
+    function toggleMobileSidebar() {
+        document.querySelector('.sidebar').classList.toggle('mob-open');
+        document.querySelector('.sidebar-overlay').classList.toggle('open');
+    }
+    document.querySelectorAll('.sidebar-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                document.querySelector('.sidebar').classList.remove('mob-open');
+                document.querySelector('.sidebar-overlay').classList.remove('open');
+            }
+        });
+    });
+</script>
+</body>
+</html>
