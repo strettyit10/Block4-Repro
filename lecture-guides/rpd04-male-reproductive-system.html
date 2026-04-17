@@ -297,7 +297,176 @@
         <p>HoyaDocs — Repro Block | USMLE Step 1 Preparation</p>
     </div>
 
-    <section class="lo-section active" id="overview"><!--OVERVIEW_PLACEHOLDER--></section>
+    <section class="lo-section active" id="overview">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">Lecture 04 — Overview</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Male Reproductive System · HoyaDocs Repro Block</p>
+        <div class="lo-content">
+
+            <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:0 0 12px; padding:6px 10px; border-left:3px solid #2563eb;">Page Summaries</h3>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px;">
+                <div style="background:#dbeafe; border:1px solid #93c5fd; border-radius:8px; padding:16px;">
+                    <div style="font-weight:700; color:#1e3a5f; margin-bottom:6px; font-size:14px;">♂️ Testis &amp; Spermatogenesis</div>
+                    <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">
+                        Descent &amp; cryptorchidism · Pampiniform plexus &amp; torsion · Three tunicas · Leydig/Sertoli · Blood-testis barrier · HPG axis · 74-day spermatogenesis · Spermiogenesis<br>
+                        <em style="color:#475569;">Practice Qs: 1–4</em>
+                    </div>
+                </div>
+                <div style="background:#dcfce7; border:1px solid #86efac; border-radius:8px; padding:16px;">
+                    <div style="font-weight:700; color:#14532d; margin-bottom:6px; font-size:14px;">🔀 Excurrent Ducts</div>
+                    <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">
+                        Tubulus rectus → Rete testis → Efferent ductules → Epididymis → Vas deferens → Ampulla · Distinguishing histology · Vasectomy<br>
+                        <em style="color:#475569;">Practice Qs: 5–7</em>
+                    </div>
+                </div>
+                <div style="background:#f3e8ff; border:1px solid #d8b4fe; border-radius:8px; padding:16px;">
+                    <div style="font-weight:700; color:#581c87; margin-bottom:6px; font-size:14px;">💧 Accessory Glands &amp; Penis</div>
+                    <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">
+                        Seminal vesicles (fructose) · Prostate zones · BPH vs. cancer · PSA · Cowper's glands · Penile erectile tissue · Erection/ejaculation autonomics<br>
+                        <em style="color:#475569;">Practice Qs: 8–11</em>
+                    </div>
+                </div>
+                <div style="background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:16px;">
+                    <div style="font-weight:700; color:#78350f; margin-bottom:6px; font-size:14px;">🚿 Urethra</div>
+                    <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">
+                        Prostatic (transitional) · Membranous (pseudostratified + external sphincter) · Penile/spongy (pseudostrat → squamous) · Urethritis · Trauma<br>
+                        <em style="color:#475569;">Practice Qs: 12–14</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lo-controls" style="margin-top:24px;">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:24px 0 12px; padding:6px 10px; border-left:3px solid #2563eb;">Official Learning Objectives Map</h3>
+
+            <!-- Official LO 1 -->
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the structure and function of the testis. Understand the process of spermatogenesis.</span>
+                    <span style="background:#dbeafe; color:#1e40af; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Testis</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                            <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;">
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('t-descent')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Testicular Descent &amp; Cryptorchidism</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('t-pampiniform')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Pampiniform Plexus &amp; Torsion</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('t-tunicas')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Three Tunicas</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('t-cells')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Leydig &amp; Sertoli Cells</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('t-bt-barrier')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Blood-Testis Barrier</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('t-hpg')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">HPG Axis</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('t-spermatogen')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Spermatogenesis (74 Days)</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('t-spermiogen')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Spermiogenesis &amp; Sperm Anatomy</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                            <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q1, Q2, Q3, Q4</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Official LO 2 -->
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the different components of the excurrent ducts, how to distinguish between them, and their function.</span>
+                    <span style="background:#dcfce7; color:#14532d; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Ducts</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                            <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;">
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('e-overview')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Sperm's Exit Pathway Overview</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('e-rectus')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Tubulus Rectus &amp; Rete Testis</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('e-efferent')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Efferent Ductules</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('e-epididymis')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Epididymis</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('e-vas')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Vas Deferens &amp; Vasectomy</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('e-summary')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Distinguishing Ducts Table</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                            <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q5, Q6, Q7</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Official LO 3 -->
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the structure and function of the accessory glands and penis.</span>
+                    <span style="background:#f3e8ff; color:#581c87; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Glands &amp; Penis</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                            <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;">
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('a-overview')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Accessory Glands Overview &amp; Ejaculate Composition</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('a-seminal')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Seminal Vesicles</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('a-prostate')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Prostate Gland</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('a-prostate-path')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">BPH &amp; Prostate Cancer</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('a-cowper')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Bulbourethral (Cowper's) Glands</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('a-penis')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Penis Structure</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('a-erection')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Erection &amp; Ejaculation Physiology</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                            <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q8, Q9, Q10, Q11</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Official LO 4 -->
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">4</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the structure of the different components of the urethra.</span>
+                    <span style="background:#fef3c7; color:#78350f; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Urethra</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                            <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;">
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('u-overview')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Three Segments &amp; Two Sphincters</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('u-prostatic')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Prostatic Urethra</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('u-membranous')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Membranous Urethra</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('u-penile')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Penile (Spongy) Urethra</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('u-summary')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Distinguishing Histology Table</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('u-clinical')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Clinical Correlates (Urethritis, Trauma, Malignancy)</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                            <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q12, Q13, Q14</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
     <section class="lo-section" id="lo1">
         <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 1 — Testis &amp; Spermatogenesis</h2>
         <p class="lo-subtitle" style="margin-bottom:28px;">Structure · Descent · Leydig/Sertoli · HPG Axis · Spermatogenesis · HoyaDocs Repro Block</p>
@@ -1797,7 +1966,238 @@
 
         </div>
 </section>
-    <section class="practice-section lo-section" id="practice"><!--PRACTICE_PLACEHOLDER--></section>
+    <section class="practice-section lo-section" id="practice">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">Practice Questions</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Lecture 04 — Male Reproductive System · HoyaDocs Repro Block</p>
+        <div class="lo-content">
+
+            <!-- LO 1 -->
+            <h4 style="color:#7c3aed; font-size:15px; margin-bottom:4px; margin-top:20px; background:none; padding:0;">LO 1 — Testis &amp; Spermatogenesis (Q1–Q4)</h4>
+
+            <div class="practice-question">
+                <h4>Question 1</h4>
+                <p>A 34-year-old man is evaluated for infertility. History reveals a bout of mumps at age 16 complicated by bilateral orchitis. Semen analysis now shows azoospermia. Serum labs: testosterone 460 ng/dL (normal), LH 8 mIU/mL (normal), FSH 32 mIU/mL (elevated), inhibin B 18 pg/mL (low). Which structure or cell type is most severely damaged?</p>
+                <p class="option">A. Leydig cells</p>
+                <p class="option">B. Sertoli cells and germ cells within the seminiferous tubules</p>
+                <p class="option">C. Anterior pituitary gonadotroph cells</p>
+                <p class="option">D. Hypothalamic GnRH-producing neurons</p>
+                <p class="option">E. Prostate gland</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Sertoli cells and germ cells (seminiferous tubule damage).</strong>
+                    <p style="margin-top:10px;">The hormonal pattern — <strong>normal testosterone + LH</strong>, <strong>elevated FSH</strong>, and <strong>low inhibin B</strong> — is classic for <strong>isolated Sertoli/germ cell damage</strong>. Mumps orchitis disrupts the <strong>blood-testis barrier</strong> and damages the thermally and immunologically sensitive seminiferous epithelium. Leydig cells are in the interstitium and relatively spared → testosterone preserved. Because Sertoli cells make <strong>inhibin B</strong> (selective FSH inhibitor), their damage removes negative feedback on FSH → <strong>↑↑ FSH</strong>. LH remains normal because testosterone negative feedback is intact. A (Leydig) would show ↓ T, ↑ LH. C (pituitary) would show ↓ LH/FSH. D (hypothalamus) would show ↓ all gonadotropins. E (prostate) doesn't affect spermatogenesis or hormonal axis.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 2</h4>
+                <p>A researcher performs electron microscopy on a cross-section of a seminiferous tubule. She identifies tight junctions between adjacent support cells, dividing the seminiferous epithelium into two compartments: a basal compartment containing mitotic cells and an adluminal compartment containing meiotic and post-meiotic cells. Which of the following best explains the physiologic purpose of this barrier?</p>
+                <p class="option">A. To prevent bacterial translocation from the bloodstream</p>
+                <p class="option">B. To sequester meiotic germ cells expressing novel surface antigens from immune surveillance</p>
+                <p class="option">C. To concentrate FSH within the seminiferous lumen</p>
+                <p class="option">D. To block testosterone diffusion into the tubule</p>
+                <p class="option">E. To prevent sperm from entering the ductus epididymis prematurely</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Blood-testis barrier sequesters meiotic germ cells from the immune system.</strong>
+                    <p style="margin-top:10px;">The <strong>blood-testis barrier</strong> is formed by <strong>Sertoli-Sertoli tight junctions</strong>. Meiotic and post-meiotic germ cells express <strong>unique antigens</strong> (e.g., sperm-specific proteins) that the immune system never encountered during fetal development when self-tolerance was established. Without the barrier, these cells would be attacked → <strong>autoimmune orchitis + infertility</strong>. The barrier also creates a <strong>specialized microenvironment</strong> with ~100× higher testosterone (via Sertoli-secreted ABP), needed for spermatogenesis. A — the barrier isn't primarily antibacterial. C — FSH acts on Sertoli cell basal surface; it doesn't need to cross the barrier. D — testosterone actually DOES cross (paracrine from Leydig cells). E — sperm do enter the epididymis; that's their exit route.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 3</h4>
+                <p>A 19-year-old bodybuilder has been taking high-dose anabolic steroids for 18 months. On exam, both testes appear small and soft. He complains of infertility and gynecomastia. Labs: testosterone 950 ng/dL (high; exogenous), LH 1.2 mIU/mL (low), FSH 0.8 mIU/mL (low), estradiol 60 pg/mL (high). Which of the following best explains the testicular atrophy and infertility?</p>
+                <p class="option">A. Leydig cell hyperplasia from elevated LH</p>
+                <p class="option">B. Exogenous testosterone suppresses GnRH/LH/FSH → loss of intratesticular testosterone and FSH support</p>
+                <p class="option">C. Direct anabolic steroid toxicity on germ cells</p>
+                <p class="option">D. Autoimmune destruction of seminiferous tubules</p>
+                <p class="option">E. Anti-sperm antibody formation from an abnormal blood-testis barrier</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Exogenous testosterone negatively feeds back on the hypothalamus/pituitary, suppressing LH and FSH → testicular atrophy and infertility.</strong>
+                    <p style="margin-top:10px;">Although serum testosterone is elevated (from the exogenous source), the <strong>intratesticular testosterone concentration drops dramatically</strong> because Leydig cells are no longer being stimulated by LH. Spermatogenesis requires <strong>very high intratesticular testosterone</strong> (~100× plasma levels, maintained by Sertoli-cell ABP and LH-driven Leydig production). Without endogenous Leydig stimulation + FSH support of Sertoli cells, spermatogenesis ceases → infertility. The unused Leydig cells atrophy. <strong>Gynecomastia</strong> comes from peripheral aromatization of excess testosterone to <strong>estradiol</strong>. Similar pattern seen with any exogenous androgen abuse, transgender hormone therapy, or prostate cancer androgen-deprivation treatment. Management: stop steroids; fertility typically returns over 6–12 months; in severe cases, hCG + clomiphene or recombinant FSH can be used to restart spermatogenesis.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 4</h4>
+                <p>A 4-year-old boy has chronic recurrent sinus and lung infections, was found to have dextrocardia on a preoperative chest X-ray, and now his parents are told he may have infertility when he grows up. A defect in which subcellular structure explains all of these findings?</p>
+                <p class="option">A. Mitochondrial electron-transport chain</p>
+                <p class="option">B. 9+2 microtubule axoneme / dynein arm</p>
+                <p class="option">C. Actin-myosin crossbridges</p>
+                <p class="option">D. Gap junction connexins</p>
+                <p class="option">E. Intermediate filaments</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Dynein arm defect in the 9+2 axoneme (Kartagener syndrome / primary ciliary dyskinesia).</strong>
+                    <p style="margin-top:10px;"><strong>Kartagener syndrome (PCD)</strong> is caused by mutations affecting <strong>dynein arms</strong> of the <strong>9+2 axoneme</strong>, which is the core motility apparatus of cilia AND sperm flagella (identical structure). The clinical triad: (1) <strong>situs inversus</strong> or heterotaxy (because ciliary beating of the embryonic node establishes L–R asymmetry during gastrulation); (2) <strong>chronic sinusitis + bronchiectasis</strong> (immotile respiratory cilia → mucus stasis → recurrent infection); (3) <strong>infertility</strong> in males (immotile sperm) and reduced fertility in females (reduced oviduct ciliary transport). The same 9+2 axoneme is shared by respiratory cilia, oviduct cilia, ependymal cilia, and sperm flagella — a classic Step 1 "one defect, many organs" question.</p>
+                </div>
+            </div>
+
+            <!-- LO 2 -->
+            <h4 style="color:#7c3aed; font-size:15px; margin-bottom:4px; margin-top:28px; background:none; padding:0;">LO 2 — Excurrent Ducts (Q5–Q7)</h4>
+
+            <div class="practice-question">
+                <h4>Question 5</h4>
+                <p>A pathology resident examines a histology image showing a small, coiled duct with a single-layered pseudostratified columnar epithelium bearing long, non-motile apical projections. The lumen contains numerous spermatozoa. The surrounding smooth-muscle coat is thin. Which structure is most likely shown?</p>
+                <p class="option">A. Seminiferous tubule</p>
+                <p class="option">B. Rete testis</p>
+                <p class="option">C. Efferent ductule</p>
+                <p class="option">D. Ductus epididymis</p>
+                <p class="option">E. Vas deferens</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: D — Ductus epididymis (pseudostratified columnar with stereocilia + thin muscle).</strong>
+                    <p style="margin-top:10px;">The combination of <strong>pseudostratified columnar epithelium with long non-motile apical projections (stereocilia)</strong>, a <strong>lumen full of mature sperm</strong>, and a <strong>thin smooth-muscle coat</strong> is diagnostic of the <strong>ductus epididymis</strong>. Stereocilia are actually long actin-based microvilli (not true cilia — they have no 9+2 axoneme and are non-motile). Key distinguishers: (A) seminiferous tubules are multi-layered with developing germ cells + Sertoli cells; (B) rete testis has simple cuboidal epithelium in anastomosing channels; (C) efferent ductules have a "scalloped" luminal border from alternating tall ciliated and short resorptive cells; (E) vas deferens also has stereocilia but its wall is dominated by a <strong>massive three-layer smooth-muscle coat</strong>.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 6</h4>
+                <p>A 16-year-old boy with recurrent pulmonary infections and pancreatic insufficiency is found to have a CFTR mutation. Which additional finding is most likely to be identified on reproductive-system evaluation in adulthood?</p>
+                <p class="option">A. Klinefelter karyotype</p>
+                <p class="option">B. Bilateral absence of the vas deferens</p>
+                <p class="option">C. Hydrocele</p>
+                <p class="option">D. Sertoli-cell-only syndrome</p>
+                <p class="option">E. Testicular torsion</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Congenital Bilateral Absence of the Vas Deferens (CBAVD) — a CFTR-linked anomaly.</strong>
+                    <p style="margin-top:10px;">CFTR mutations (classic cystic fibrosis or milder variants) are strongly associated with <strong>CBAVD</strong> — fetal obstruction/atresia of the mesonephric (Wolffian) duct derivatives leads to absent vas deferens + often absent or hypoplastic seminal vesicles. Clinical findings: <strong>azoospermia</strong> (obstructive), <strong>low ejaculate volume</strong> (&lt;1 mL), <strong>absent fructose</strong> in semen (seminal vesicles make it). Because Leydig cells and spermatogenesis are preserved, testosterone and FSH/LH are normal, and fertility can be achieved via testicular sperm extraction + IVF/ICSI. A — Klinefelter is unrelated. C — hydrocele is a tunica vaginalis fluid collection. D — Sertoli-cell-only is a different infertility cause. E — torsion is anatomic, not CFTR-related.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 7</h4>
+                <p>A medical student is shown a histology slide that shows a small stellate lumen lined by pseudostratified columnar epithelium with stereocilia, surrounded by a disproportionately thick wall of three layers of smooth muscle. Which structure is being shown?</p>
+                <p class="option">A. Ureter</p>
+                <p class="option">B. Epididymis</p>
+                <p class="option">C. Vas deferens</p>
+                <p class="option">D. Ejaculatory duct</p>
+                <p class="option">E. Penile urethra</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — Vas deferens: pseudostratified columnar with stereocilia + three thick smooth-muscle layers around a small stellate lumen.</strong>
+                    <p style="margin-top:10px;">The absolutely-diagnostic feature is the <strong>disproportionately thick three-layer smooth-muscle wall</strong> (inner longitudinal, middle circular, outer longitudinal) surrounding a <strong>tiny stellate lumen</strong>. This muscular architecture drives powerful peristaltic contractions during ejaculation. The epithelium is similar to epididymis (pseudostratified columnar with stereocilia), but the epididymis has only a thin smooth-muscle layer. The ureter (A) has three muscular layers but transitional epithelium — not columnar with stereocilia. Ejaculatory duct (D) has less muscle. Penile urethra (E) is lined by columnar epithelium without stereocilia and has no surrounding thick muscle.</p>
+                </div>
+            </div>
+
+            <!-- LO 3 -->
+            <h4 style="color:#7c3aed; font-size:15px; margin-bottom:4px; margin-top:28px; background:none; padding:0;">LO 3 — Accessory Glands &amp; Penis (Q8–Q11)</h4>
+
+            <div class="practice-question">
+                <h4>Question 8</h4>
+                <p>A 72-year-old man has been experiencing progressive lower back pain and difficulty walking. X-rays reveal multiple dense (sclerotic) lesions in the lumbar vertebrae and pelvis. His PSA is 120 ng/mL. Alkaline phosphatase is elevated. Biopsy confirms metastatic adenocarcinoma. Which zone of the prostate gland is the most likely origin, and what is the most appropriate initial treatment approach?</p>
+                <p class="option">A. Transition zone; 5α-reductase inhibitors</p>
+                <p class="option">B. Peripheral zone; androgen deprivation therapy (GnRH agonist)</p>
+                <p class="option">C. Central zone; chemotherapy with doxorubicin</p>
+                <p class="option">D. Anterior fibromuscular stroma; radical prostatectomy alone</p>
+                <p class="option">E. Ejaculatory duct opening; radiation only</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Peripheral zone (posterior prostate, most cancers); androgen deprivation with GnRH agonist is first-line for metastatic disease.</strong>
+                    <p style="margin-top:10px;">Prostate adenocarcinoma arises predominantly in the <strong>peripheral zone</strong> (~70% of cancers) — posterior and thus palpable as a hard nodule on DRE. <strong>Osteoblastic (sclerotic) bone metastases</strong> to the lumbar spine and pelvis are classic for prostate cancer (vs. most other carcinomas which are osteolytic) — explaining the dense lesions and elevated alk phos. For advanced/metastatic disease, the backbone of therapy is <strong>androgen deprivation</strong>: options include <strong>GnRH agonists</strong> (leuprolide — causes initial flare; give with AR antagonist for first month), <strong>GnRH antagonists</strong> (degarelix — no flare), bilateral orchiectomy, AR antagonists (bicalutamide, enzalutamide), and CYP17 inhibitors (abiraterone). A (transition zone) is BPH territory. C — chemo is second-line. D (anterior stroma) has no glands. E — ED opening is the verumontanum.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 9</h4>
+                <p>An infertility specialist performs a semen analysis on a 38-year-old man. Results: ejaculate volume 0.4 mL (low), sperm count essentially zero, <strong>absent fructose</strong>. Subsequent scrotal ultrasound is normal; transrectal ultrasound shows absent seminal vesicles bilaterally. What is the most likely underlying molecular diagnosis?</p>
+                <p class="option">A. 46,XY karyotype with SRY deletion</p>
+                <p class="option">B. Klinefelter syndrome (47,XXY)</p>
+                <p class="option">C. CFTR gene mutation</p>
+                <p class="option">D. Kallmann syndrome (anosmin mutation)</p>
+                <p class="option">E. 5α-reductase deficiency</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — CFTR mutation causing Congenital Bilateral Absence of the Vas Deferens (CBAVD) with concomitant seminal vesicle agenesis.</strong>
+                    <p style="margin-top:10px;">The triad of <strong>azoospermia + low ejaculate volume + absent seminal vesicles</strong> points to a <strong>mesonephric duct developmental failure</strong>. CFTR mutations produce luminal obstruction of developing Wolffian duct structures → atresia of vas deferens AND seminal vesicles. Because the seminal vesicles are the source of fructose (~70% of ejaculate volume), their absence explains both the <strong>low volume and absent fructose</strong>. Testes, Leydig cells, and spermatogenesis are intact, so testosterone and gonadotropins are normal; the issue is purely transport/delivery. Management: CFTR genotyping of patient + partner; testicular sperm extraction + IVF/ICSI. A (Swyer) has a female phenotype. B (Klinefelter) has small testes, ↑ FSH, ↑ LH. D (Kallmann) causes hypogonadotropic hypogonadism + anosmia. E (5α-reductase) causes ambiguous external genitalia.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 10</h4>
+                <p>A 55-year-old man on nitrates for stable angina takes a tablet of sildenafil before intercourse. He becomes severely hypotensive and develops chest pain. What is the mechanism of the drug interaction?</p>
+                <p class="option">A. Additive effects on guanylate cyclase → cGMP accumulation → excessive vasodilation</p>
+                <p class="option">B. Competitive antagonism at β1 receptors → bradycardia</p>
+                <p class="option">C. Inhibition of angiotensin-converting enzyme → loss of vasopressor tone</p>
+                <p class="option">D. Blockade of calcium channels → decreased cardiac output</p>
+                <p class="option">E. Direct myocardial toxicity from sildenafil</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: A — Both drugs increase cGMP (nitrates via NO → guanylate cyclase; sildenafil via PDE5 inhibition) → additive, severe vasodilation.</strong>
+                    <p style="margin-top:10px;">During erection, parasympathetic nerves release NO → activates <strong>guanylate cyclase</strong> → ↑ cGMP → smooth-muscle relaxation → penile vasodilation. <strong>Phosphodiesterase-5 (PDE5)</strong> normally degrades cGMP. <strong>Sildenafil (and tadalafil, vardenafil)</strong> inhibit PDE5 → more cGMP → prolonged vasodilation. <strong>Nitrates</strong> (nitroglycerin, isosorbide) generate NO, which activates guanylate cyclase → also ↑ cGMP. Combining these drugs produces <strong>additive cGMP accumulation</strong> → profound systemic vasodilation → <strong>severe hypotension</strong>, coronary hypoperfusion (especially in fixed coronary disease), and potentially MI. Sildenafil is also contraindicated or cautious with α1 blockers (additive hypotension). Teaching points: always screen for nitrate use before prescribing PDE5 inhibitors; they can be used 24 h after last nitrate dose (48 h for tadalafil due to longer half-life).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 11</h4>
+                <p>A 68-year-old man with symptomatic BPH is prescribed finasteride. After 6 months, his PSA has decreased by 50% and his prostate has visibly shrunk on imaging. By what molecular mechanism does finasteride produce these effects?</p>
+                <p class="option">A. Competitive antagonism at the androgen receptor</p>
+                <p class="option">B. Inhibition of 5α-reductase → decreased conversion of testosterone to DHT</p>
+                <p class="option">C. Inhibition of aromatase → reduced estradiol</p>
+                <p class="option">D. GnRH receptor desensitization → ↓ LH → ↓ testosterone</p>
+                <p class="option">E. Competitive binding to PSA active site</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Finasteride inhibits 5α-reductase, blocking testosterone → DHT conversion.</strong>
+                    <p style="margin-top:10px;"><strong>DHT</strong> is the <strong>dominant androgen</strong> driving prostatic and external genital development (50× more potent than T at the androgen receptor). Finasteride (type II selective) and dutasteride (both types) block <strong>5α-reductase</strong> → ↓ intraprostatic DHT → <strong>prostate shrinks</strong> over months and PSA falls ~50%. This must be remembered when interpreting PSA during cancer screening (multiply by 2). Clinical notes: other 5α-reductase inhibitor uses include <strong>male-pattern baldness</strong> and <strong>hirsutism</strong>. Side effects: ↓ libido, erectile dysfunction, gynecomastia, and a controversial association with high-grade prostate cancer. A (AR antagonist) = flutamide/bicalutamide/enzalutamide. C (aromatase) = anastrozole/letrozole. D (GnRH desensitization) = leuprolide. E is not a real pharmacology.</p>
+                </div>
+            </div>
+
+            <!-- LO 4 -->
+            <h4 style="color:#7c3aed; font-size:15px; margin-bottom:4px; margin-top:28px; background:none; padding:0;">LO 4 — Urethra (Q12–Q14)</h4>
+
+            <div class="practice-question">
+                <h4>Question 12</h4>
+                <p>A 27-year-old man has sexual contact that results in dysuria and a thick, purulent yellow urethral discharge 4 days later. Gram stain reveals Gram-negative diplococci within neutrophils. Which of the following is the most appropriate empirical treatment regimen?</p>
+                <p class="option">A. Doxycycline alone</p>
+                <p class="option">B. Ceftriaxone alone</p>
+                <p class="option">C. Ceftriaxone plus doxycycline</p>
+                <p class="option">D. Acyclovir</p>
+                <p class="option">E. Metronidazole</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — Ceftriaxone + doxycycline (cover both gonorrhea and chlamydia).</strong>
+                    <p style="margin-top:10px;">The Gram-stain finding of Gram-negative diplococci within neutrophils is diagnostic of <strong>gonococcal urethritis</strong> (<em>Neisseria gonorrhoeae</em>). However, <strong>co-infection with <em>Chlamydia trachomatis</em></strong> occurs in ~30% of patients, and chlamydia is often asymptomatic or presents with thinner discharge. Guidelines now recommend treating both whenever gonorrhea is diagnosed: <strong>ceftriaxone 500 mg IM</strong> (for GC, with dose increase due to β-lactamase resistance trends) PLUS <strong>doxycycline 100 mg PO BID × 7 days</strong> (for Chlamydia). Azithromycin is no longer first-line for chlamydia per updated CDC guidelines. Partner tracing and HIV/syphilis testing are essential. A alone misses GC; B alone misses Chlamydia; D is for HSV; E is for trichomoniasis.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 13</h4>
+                <p>A pathologist examines a biopsy from a mass at the distal penile urethra near the meatus. The tumor cells show keratin pearls, intercellular bridges, and a nest-like invasive pattern. Which epithelial type best accounts for this tumor's histology, and what is the most likely diagnosis?</p>
+                <p class="option">A. Transitional epithelium → urothelial (transitional cell) carcinoma</p>
+                <p class="option">B. Pseudostratified columnar epithelium → adenocarcinoma</p>
+                <p class="option">C. Stratified squamous (non-keratinized) epithelium near the fossa navicularis → squamous cell carcinoma</p>
+                <p class="option">D. Simple cuboidal epithelium → clear-cell carcinoma</p>
+                <p class="option">E. Mesothelium → mesothelioma</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — Distal penile urethra has stratified squamous epithelium near the meatus → squamous cell carcinoma (keratin pearls + intercellular bridges are classic SCC features).</strong>
+                    <p style="margin-top:10px;">The <strong>epithelium-predicts-malignancy rule</strong> applies along the length of the urethra:
+                    <br>• <strong>Proximal urethra (prostatic, membranous, most of penile) → transitional or pseudostratified columnar epithelium → urothelial carcinoma</strong>
+                    <br>• <strong>Distal urethra (near external meatus, fossa navicularis) → stratified squamous non-keratinized epithelium → squamous cell carcinoma</strong>
+                    <br>The histologic features described — <strong>keratin pearls</strong> (whorled keratin in tumor nests) and <strong>intercellular bridges</strong> (desmosomal connections between adjacent cells) — are pathognomonic for squamous cell carcinoma. Risk factors for distal urethral SCC include chronic inflammation (strictures, STIs), HPV infection, and poor hygiene. Proximal urothelial carcinomas are more common in smokers and occupational exposures (aromatic amines).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 14</h4>
+                <p>A 25-year-old man is brought to the ED after a motorcycle crash with pelvic instability on imaging showing a diastasis of the pubic symphysis. On exam, he has blood at the urethral meatus, perineal ecchymosis, and is unable to void. The trauma team wants to place a Foley catheter. What is the single best next step?</p>
+                <p class="option">A. Pass a Foley catheter gently; if resistance is met, withdraw</p>
+                <p class="option">B. Obtain a retrograde urethrogram before attempting any urethral instrumentation</p>
+                <p class="option">C. Place a suprapubic catheter immediately without imaging</p>
+                <p class="option">D. Obtain a CT cystogram</p>
+                <p class="option">E. Observe without drainage until the bladder is palpable</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Retrograde urethrogram (RUG) first — diagnose urethral injury before instrumentation.</strong>
+                    <p style="margin-top:10px;">The trio of findings — <strong>blood at the meatus, perineal ecchymosis, inability to void</strong>, in the setting of <strong>pelvic fracture</strong> — is highly suspicious for <strong>urethral injury</strong>, most likely at the <strong>membranous urethra</strong> as the urogenital diaphragm shears during pelvic disruption. <strong>Attempting to pass a Foley blindly can convert a partial tear into a complete one and create a false passage</strong>, making subsequent repair much harder. The correct algorithm is to obtain a <strong>retrograde urethrogram</strong> — contrast is instilled gently at the meatus under fluoroscopy. If the urethra is intact, the contrast flows smoothly to the bladder and Foley placement can proceed. If disrupted, contrast extravasates at the injury site. Definitive drainage is then achieved via <strong>suprapubic cystostomy</strong>, bypassing the urethra; urologic repair (primary realignment or delayed reconstruction) follows. A is dangerous. C is reasonable AFTER confirming injury but RUG is the standard first step. D (CT cystogram) assesses the bladder, not the urethra. E fails to address the urologic emergency.</p>
+                </div>
+            </div>
+
+        </div>
+</section>
 
 </main>
 
