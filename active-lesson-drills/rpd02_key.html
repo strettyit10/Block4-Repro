@@ -55,37 +55,6 @@ tr:nth-child(even) td{background:#FAFAFA}
   .pq-choices{margin-left:4px}
   .btn{width:100%;text-align:center}
 }
-
-/* ── Print / PDF export: 1 page per tab — key version ── */
-@media print {
-  @page { size: letter; margin: 0.4in; }
-  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-  body { padding: 0 !important; font-size: 10pt !important; color: #000; }
-  .tabs, .btn, .pq-btn, .fb, .no-print { display: none !important; }
-  /* Auto-reveal practice answers in the printed key */
-  .pq-ans { display: block !important; background: #f0fdf4 !important; border: 1pt solid #14532d !important; color: #14532d !important; }
-  /* One panel per page */
-  .panel { display: block !important; page-break-before: always; }
-  .panel:first-of-type { page-break-before: auto; }
-  .panel::before {
-    content: attr(data-tab-name);
-    display: block;
-    font-size: 14pt;
-    font-weight: 700;
-    color: #14532d;
-    border-bottom: 1.5pt solid #14532d;
-    padding-bottom: 4pt;
-    margin-bottom: 10pt;
-  }
-  td { padding: 5pt 6pt !important; }
-  .on-exam { background: #fff !important; border: 1pt solid #991B1B !important; color: #991B1B !important; }
-  .warn { background: #fff !important; border-left: 2pt solid #92400E !important; color: #1f2937 !important; }
-  .resource-banner { background: #fff !important; border: 1pt solid #666 !important; color: #1f2937 !important; }
-  .lo-tag { background: #fff !important; border: 1pt solid #5B21B6 !important; color: #5B21B6 !important; }
-  .pq-box { background: #fff !important; border: 1pt solid #888 !important; page-break-inside: avoid; }
-  tr, .pq-box, .card { page-break-inside: avoid; }
-  .sec, h2, h3, h4 { page-break-after: avoid; }
-}
 </style><style>
 .ki{background:#f0fdf4!important;border-bottom-color:#22c55e!important;color:#14532d!important;font-weight:500}
 .ki-text{
@@ -100,10 +69,7 @@ tr:nth-child(even) td{background:#FAFAFA}
 .key-banner{background:#14532d;color:#fff;padding:10px 16px;border-radius:8px;margin-bottom:14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
 </style></head><body>
 
-<div class="key-banner">
-  <span style="flex:1">&#9989; ANSWER KEY — all fields pre-filled. Use this to check your work.</span>
-  <button class="no-print" onclick="window.print()" title="Print to PDF — 1 page per tab" style="background:#fff;color:#14532d;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer">&#128196; Print PDF</button>
-</div>
+<div class="key-banner">&#9989; ANSWER KEY — all fields pre-filled. Use this to check your work.</div>
 <h2>Urogenital System I &amp; II — Answer Key</h2>
 <p class="sub">Built from Repro Lecture 02 (LOs 1&ndash;5). Close notes. Fill from memory. Reveal only after a genuine attempt.</p>
 
@@ -133,7 +99,7 @@ tr:nth-child(even) td{background:#FAFAFA}
 </div>
 
 <!-- TAB 0: KIDNEY DEVELOPMENT -->
-<div class="panel active" id="p0" data-tab-name="Tab 1 — Kidney Development (LO 1)">
+<div class="panel active" id="p0">
 <div class="lo-tag">LO 1</div>
 <div class="on-exam">ON EXAM &mdash; intermediate mesoderm, 3 kidney stages + functional status, ureteric bud vs metanephric blastema derivatives, reciprocal induction (GDNF, WNT9B), ascent + rotation, adrenal cortex (mesoderm) vs medulla (neural crest)</div>
 
@@ -197,7 +163,7 @@ tr:nth-child(even) td{background:#FAFAFA}
 </div>
 
 <!-- TAB 1: BLADDER & DUCTS -->
-<div class="panel" id="p1" data-tab-name="Tab 2 — Bladder & Duct Derivatives (LO 2)">
+<div class="panel" id="p1">
 <div class="lo-tag">LO 2</div>
 <div class="on-exam">ON EXAM &mdash; cloaca &rarr; UGS + anorectal, urorectal septum, 3 regions of UGS, trigone origin, allantois/urachus anomalies, Wolffian (T-dependent) vs M&uuml;llerian (default) fates, MRKH, bicornuate uterus + renal agenesis, PMDS</div>
 
@@ -255,7 +221,7 @@ tr:nth-child(even) td{background:#FAFAFA}
 </div>
 
 <!-- TAB 2: GENITAL DIFFERENTIATION -->
-<div class="panel" id="p2" data-tab-name="Tab 3 — Genital Differentiation (LO 3)">
+<div class="panel" id="p2">
 <div class="lo-tag">LO 3</div>
 <div class="on-exam">ON EXAM &mdash; SRY on Yp &rarr; TDF, Sertoli &rarr; MIS; Leydig &rarr; T &rarr; 5&alpha;-reductase &rarr; DHT; internal (T) vs external (DHT); bipotential genitalia &rarr; penis vs clitoris, scrotum vs labia majora; CAIS vs 5&alpha;-reductase; Swyer vs 46,XX male</div>
 
@@ -322,7 +288,7 @@ tr:nth-child(even) td{background:#FAFAFA}
 </div>
 
 <!-- TAB 3: URINARY & GENITAL ANOMALIES -->
-<div class="panel" id="p3" data-tab-name="Tab 4 — Urinary & Genital Anomalies (LO 4)">
+<div class="panel" id="p3">
 <div class="lo-tag">LO 4</div>
 <div class="on-exam">ON EXAM &mdash; Potter sequence (cause of death = pulmonary hypoplasia), horseshoe kidney caught at IMA, pelvic kidney (adrenal stays put), duplex kidney + Weigert-Meyer, ectopic ureter + female incontinence, cryptorchidism (heat &darr; inhibin B), hypospadias (ventral, do NOT circumcise) vs epispadias (dorsal, bladder exstrophy)</div>
 
@@ -380,7 +346,7 @@ tr:nth-child(even) td{background:#FAFAFA}
 </div>
 
 <!-- TAB 4: DSDs -->
-<div class="panel" id="p4" data-tab-name="Tab 5 — Disorders of Sex Development (LO 5)">
+<div class="panel" id="p4">
 <div class="lo-tag">LO 5</div>
 <div class="on-exam">ON EXAM &mdash; 21-OH CAH (virilized XX + salt-wasting), 11&beta;-OH (HTN + virilization), 17&alpha;-OH (HTN + hypogonadism), CAIS (46,XY, breasts, no hair, no uterus), 5&alpha;-reductase ("female at birth, male at puberty"), Klinefelter (tall, small firm testes, gyneco), Turner (short, streak gonads, BAV, coarct, horseshoe)</div>
 
@@ -437,7 +403,7 @@ tr:nth-child(even) td{background:#FAFAFA}
 </div>
 
 <!-- TAB 5: PRACTICE QUESTIONS -->
-<div class="panel" id="p5" data-tab-name="Tab 6 — Practice Questions (USMLE Step 1 Style)">
+<div class="panel" id="p5">
 <div class="lo-tag">LO 1&ndash;5 &middot; USMLE Step 1 Style</div>
 <div class="on-exam">8 questions &mdash; cover all 5 LOs. Use these after finishing all tabs.</div>
 
