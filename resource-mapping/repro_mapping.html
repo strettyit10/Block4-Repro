@@ -1331,7 +1331,8 @@ document.addEventListener('keydown', e => {
 // Navigate to hub when a lecture is selected from the coverage matrix
 function selectLecture(idx) {
   var classNum = DATA[idx] && DATA[idx].class;
-  window.location.href = 'https://hoyadocs.com/Block4-Repro/resource-mapping/repro_resource_hub.html';
+  var hubUrl = 'https://hoyadocs.com/Block4-Repro/resource-mapping/repro_resource_hub.html';
+  window.location.href = classNum != null ? `${hubUrl}?class=${encodeURIComponent(classNum)}` : hubUrl;
 }
 // Also override showCovTip's button to use the navigation version
 // (already handled since selectLecture is overridden above)
