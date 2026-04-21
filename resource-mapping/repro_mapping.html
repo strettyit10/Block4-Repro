@@ -1332,7 +1332,10 @@ document.addEventListener('keydown', e => {
 function selectLecture(idx) {
   var classNum = DATA[idx] && DATA[idx].class;
   var hubUrl = 'https://hoyadocs.com/Block4-Repro/resource-mapping/repro_resource_hub.html';
-  window.location.href = classNum != null ? `${hubUrl}?class=${encodeURIComponent(classNum)}` : hubUrl;
+  var params = new URLSearchParams();
+  params.set('lecture', String(idx));
+  if (classNum != null) params.set('class', String(classNum));
+  window.location.href = `${hubUrl}?${params.toString()}`;
 }
 // Also override showCovTip's button to use the navigation version
 // (already handled since selectLecture is overridden above)

@@ -1073,19 +1073,40 @@ const HUB_FILES = {
 
 let activeSubject = 'all';
 let searchQuery = '';
-let selectedLecture = (() => {
+let selectedLectureIndex = (() => {
   const p = new URLSearchParams(window.location.search);
+  const lectureParam = p.get('lecture');
+  if (lectureParam !== null) {
+    const lectureIndex = Number(lectureParam);
+    if (Number.isInteger(lectureIndex) && lectureIndex >= 0 && lectureIndex < DATA.length) {
+      return lectureIndex;
+    }
+  }
   const c = p.get('class');
   if (c !== null) {
     const num = Number(c);
-    if (DATA.some(d => d.class === num)) return num;
+    const matchedIndex = DATA.findIndex((lecture) => lecture.class === num);
+    if (matchedIndex !== -1) return matchedIndex;
   }
-  return DATA[0]?.class ?? null;
+  return DATA.length ? 0 : null;
 })();
 let showQidTable = false;
 let showObjectives = false;
 let showResources = false;
 let resourceVisibility = Object.fromEntries(RESOURCE_META.map((resource) => [resource.key, true]));
+
+function syncSelectedLectureUrl() {
+  if (selectedLectureIndex === null || selectedLectureIndex === undefined || !DATA[selectedLectureIndex]) return;
+  const url = new URL(window.location.href);
+  const lecture = DATA[selectedLectureIndex];
+  url.searchParams.set('lecture', String(selectedLectureIndex));
+  if (lecture.class !== null && lecture.class !== undefined) {
+    url.searchParams.set('class', String(lecture.class));
+  } else {
+    url.searchParams.delete('class');
+  }
+  window.history.replaceState({}, '', url);
+}
 
 function esc(value) {
   const div = document.createElement('div');
@@ -1223,8 +1244,8 @@ function refreshList() {
   const list = document.getElementById('lectureList');
   document.getElementById('listSummary').textContent = `${lectures.length} lecture${lectures.length === 1 ? '' : 's'} showing`;
 
-  if (!lectures.some((lecture) => lecture.class === selectedLecture)) {
-    selectedLecture = lectures[0]?.class ?? null;
+  if (!lectures.some((lecture) => DATA[selectedLectureIndex] === lecture)) {
+    selectedLectureIndex = lectures.length ? DATA.indexOf(lectures[0]) : null;
   }
 
   if (!lectures.length) {
@@ -1234,8 +1255,9 @@ function refreshList() {
   }
 
   const renderLectureButton = (lecture) => {
+    const lectureIndex = DATA.indexOf(lecture);
     return `
-      <button class="lecture-item${lecture.class === selectedLecture ? ' active' : ''}" data-class="${lecture.class}">
+      <button class="lecture-item${lectureIndex === selectedLectureIndex ? ' active' : ''}" data-index="${lectureIndex}">
         <div class="lecture-kicker">
           <span class="class-badge">Class ${esc(lecture.classLabel)}</span>
         </div>
@@ -1264,7 +1286,8 @@ function refreshList() {
 
   document.querySelectorAll('.lecture-item').forEach((button) => {
     button.addEventListener('click', () => {
-      selectedLecture = Number(button.dataset.class);
+      selectedLectureIndex = Number(button.dataset.index);
+      syncSelectedLectureUrl();
       refreshList();
       if (window.matchMedia && window.matchMedia('(max-width: 1100px)').matches) {
         toggleLectureList(true);
@@ -1274,7 +1297,7 @@ function refreshList() {
     });
   });
 
-  renderDetail(lectures.find((lecture) => lecture.class === selectedLecture) || lectures[0]);
+  renderDetail(lectures.find((lecture) => DATA[selectedLectureIndex] === lecture) || lectures[0]);
 }
 
 function renderDetail(lecture) {
