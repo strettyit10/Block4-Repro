@@ -76,8 +76,8 @@
     .sidebar {
       width: 232px; flex-shrink: 0;
       background: var(--sb);
-      position: sticky; top: 0; height: 100vh;
-      align-self: flex-start;
+      position: fixed; top: 0; left: 0; height: 100vh;
+      z-index: 300;
       display: flex; flex-direction: column;
       padding: 28px 18px 24px;
       overflow-y: auto;
@@ -169,7 +169,7 @@
     /* ══════════════════════════════════════
        MAIN CONTENT
     ══════════════════════════════════════ */
-    .main { flex: 1; min-width: 0; background: var(--bg); transition: background 0.2s; }
+    .main { flex: 1; min-width: 0; background: var(--bg); transition: background 0.2s; margin-left: 232px; }
 
     .main-inner { max-width: 1320px; padding: 52px 48px 80px; margin: 0 auto; }
 
@@ -291,9 +291,10 @@
     ══════════════════════════════════════ */
     @media (max-width: 960px) {
       .shell { flex-direction: column; }
+      .main { margin-left: 0; }
 
       .sidebar {
-        width: 100%; height: auto; position: sticky; top: 0; z-index: 400;
+        width: 100%; height: auto; position: sticky; top: 0; left: auto; z-index: 400;
         flex-direction: row; align-items: center;
         padding: 12px 18px; gap: 12px; flex-wrap: nowrap;
       }
@@ -1347,15 +1348,24 @@ document.addEventListener('keydown', e => {
 });
 
 /* ── HOME PAGE OVERRIDES ─────────────────────────── */
-// Navigate to hub when a lecture is selected from the coverage matrix
-function selectLecture(idx) {
-  var classNum = DATA[idx] && DATA[idx].class;
-  var hubUrl = './repro_resource_hub.html';
-  var params = new URLSearchParams();
-  params.set('lecture', String(idx));
-  if (classNum != null) params.set('class', String(classNum));
-  window.location.href = `${hubUrl}?${params.toString()}`;
-}
+// Navigate to hub when a lecture is selected from the coverage matrix.
+// Keep this bulletproof — no dependency on DATA (which lives in a different
+// <script> tag and may not be reachable from this function's scope).
+// The resource hub resolves the lecture from ?lecture=<index> on its own.
+window.selectLecture = function (idx) {
+  try {
+    var params = new URLSearchParams();
+    params.set('lecture', String(idx));
+    if (typeof DATA !== 'undefined' && DATA[idx] && DATA[idx].class != null) {
+      params.set('class', String(DATA[idx].class));
+    }
+    window.location.href = './repro_resource_hub.html?' + params.toString();
+  } catch (e) {
+    // Last-ditch fallback — still navigate even if something unexpected happens.
+    window.location.href = './repro_resource_hub.html?lecture=' + encodeURIComponent(idx);
+  }
+};
+function selectLecture(idx) { return window.selectLecture(idx); }
 
 // Make entire lecture row clickable (not just the lecture-name cell).
 // Pip clicks already call e.stopPropagation() in showCovTip, so those
