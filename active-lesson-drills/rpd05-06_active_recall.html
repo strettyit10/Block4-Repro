@@ -1,0 +1,917 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#fff;color:#111;padding:16px;font-size:13px}
+h2{font-size:16px;font-weight:600;margin-bottom:4px}
+.sub{color:#666;font-size:12px;margin-bottom:14px}
+.resource-banner{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#1E40AF}
+.resource-banner strong{display:block;margin-bottom:2px;font-size:13px}
+.tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:7px 14px;border-radius:20px;border:1.5px solid #CBD5E1;font-size:12px;cursor:pointer;background:#fff;color:#475569;font-weight:500}
+.tab.active{background:#1D4ED8;color:#fff;border-color:#1D4ED8}
+.panel{display:none}.panel.active{display:block}
+.sec{font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:12px}
+th{background:#F1F5F9;text-align:left;padding:7px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#475569;border:1px solid #E2E8F0;font-weight:600}
+td{padding:6px 8px;border:1px solid #E2E8F0;vertical-align:top}
+td input{width:100%;border:none;border-bottom:1.5px solid #e2e8f0;font-size:11px;background:transparent;outline:none;padding:1px 0;color:#1e293b}
+td input:focus{border-bottom-color:#1D4ED8}
+tr:nth-child(even) td{background:#FAFAFA}
+.rl{font-weight:600;font-size:11px;color:#1e293b;background:#F8FAFC!important;white-space:nowrap}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.f{margin-bottom:6px}
+.f label{font-size:10px;color:#94a3b8;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:.03em}
+.f input{width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b}
+.f input:focus{border-bottom-color:#1D4ED8}
+.btn{background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;cursor:pointer;font-weight:500;margin-top:8px}
+.btn:hover{background:#1e40af}
+.fb{margin-top:14px;display:none;border-radius:10px;overflow:hidden;border:1.5px solid #BFDBFE}
+.warn{background:#FFFBEB;border-left:3px solid #F59E0B;padding:7px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#92400E;margin:8px 0}
+.on-exam{background:#FEE2E2;border:1px solid #FDA4AF;border-radius:6px;padding:4px 10px;font-size:11px;color:#991B1B;font-weight:700;display:inline-block;margin-bottom:8px}
+.lo-tag{background:#EDE9FE;border:1px solid #C4B5FD;border-radius:5px;padding:2px 8px;font-size:10px;color:#5B21B6;font-weight:600;margin-bottom:6px;display:inline-block}
+.pq-box{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:12px}
+.pq-q{font-weight:600;margin-bottom:6px;color:#92400E}
+.pq-choices{margin-left:12px;margin-bottom:6px;color:#78350F;line-height:1.8}
+.pq-ans{display:none;background:#EFF6FF;border:1px solid #93C5FD;border-radius:6px;padding:6px 10px;font-size:11px;color:#1E40AF;margin-top:4px}
+.pq-btn{font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid #2563EB;background:#DBEAFE;color:#1E40AF;cursor:pointer}
+.pq-btn:hover{background:#BFDBFE}
+.card{border:1px solid #E2E8F0;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+
+@media(max-width:640px){
+  body{padding:10px;font-size:12px}
+  h2{font-size:14px}
+  .tabs{gap:4px}
+  .tab{padding:6px 10px;font-size:11px}
+  .fg,.fg3{grid-template-columns:1fr!important}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .pq-choices{margin-left:4px}
+  .btn{width:100%;text-align:center}
+}
+
+.hoyadocs-brand{font-size:14px;font-weight:700;color:#1D4ED8;letter-spacing:-0.02em;margin-bottom:12px}
+
+@media print{
+  @page{size:letter landscape;margin:0.35in 0.4in}
+  html,body{background:#fff!important}
+  body{padding:0;font-size:10px}
+  body > *:not(.panel){display:none!important}
+  .panel{display:block!important;page-break-before:always;break-before:page;page-break-inside:auto}
+  .panel:first-of-type{page-break-before:auto;break-before:auto}
+  .panel::before{content:"HoyaDocs";display:block;font-size:13px;font-weight:700;color:#1D4ED8;margin-bottom:8px;padding-bottom:4px;border-bottom:1.5px solid #1D4ED8;letter-spacing:-0.02em}
+  .btn,.pq-btn{display:none!important}
+  .sec{margin:5px 0 3px;font-size:9.5px}
+  table{margin-bottom:5px;font-size:10px;page-break-inside:avoid}
+  th{font-size:9px;padding:3px 4px}
+  td{padding:2px 4px;font-size:10px}
+  td input{font-size:10px;padding:0}
+  .on-exam{font-size:10px;padding:3px 7px;margin-bottom:5px;display:block;white-space:normal}
+  .warn{font-size:9.5px;padding:4px 7px;margin:3px 0}
+  .pq-box{font-size:9.5px;padding:5px 8px;margin-bottom:4px;page-break-inside:avoid}
+  .pq-ans{display:block!important;font-size:9px;margin-top:3px}
+  .pq-choices{line-height:1.5;margin-bottom:3px}
+  .fb{display:block!important}
+  .fg,.fg3{gap:6px}
+  .f{margin-bottom:3px}
+  .f label{font-size:9px}
+  .f input{font-size:10px;padding:0}
+  .card{padding:6px 8px;margin-bottom:6px}
+  .lo-tag{font-size:9px;padding:1px 6px;margin-bottom:3px}
+  a[href$=".html"]{display:none!important}
+}
+</style></head><body>
+
+<div class="hoyadocs-brand">HoyaDocs</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+  <h2 style="margin-bottom:0">Endocrinology of the Ovary &amp; Female Reproductive Tract — Active Recall</h2>
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <button onclick="window.print()" style="background:#1D4ED8;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">&#128424; Print</button>
+    <a href="rpd05-06_key.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#14532d;color:#fff;text-decoration:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;white-space:nowrap">&#9989; View Answer Key</a>
+  </div>
+</div>
+<p class="sub">Built from Reproduction Module 05-06 (LOs 1&ndash;6). Close notes. Fill from memory. Reveal only after a genuine attempt.</p>
+
+<div class="resource-banner">
+  <strong>&#128214; Use alongside: Rep 05-06 &mdash; Endocrinology of the Ovary &amp; Female Reproductive Tract (HoyaDocs)</strong>
+  Focus on: (1) 6-tier differentiation cascade (Chromosomal&rarr;Gonadal&rarr;Hormonal&rarr;Morphological&rarr;Secondary sex&rarr;Brain/behavior; default = female; SRY/AR/5&alpha;-RD2 gate the switches); (2) T makes Wolffian, AMH murders M&uuml;llerian, DHT virilizes external (SEED/FUTV); (3) HPG with two-cell model (LAT/FAG) + biphasic E<sub>2</sub> feedback via AVPV vs arcuate kisspeptin; (4) follicle parade (primordial &rarr; Graafian &rarr; CL &rarr; albicans); oocyte meiotic arrests; AMH tracks antral pool; (5) cycle hormone curves + E<sub>2</sub> vs P tissue effects + luteoplacental shift; (6) Hi-Lo/Lo-Lo/Hi-Hi disorder framework (Turner, Swyer, POI, Kallmann, FHA, prolactinoma, PCOS, CAIS, 5&alpha;-RD, CAH, menopause, HRT).
+</div>
+
+<div style="margin-bottom:14px">
+  <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:#374151">SEED &mdash; recall the 6 tiers of sexual differentiation in order, name the 3 hormone gates to male morphology, and state the default phenotype:</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px">
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">6 tiers (in order)</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">3 male-morphology hormone gates</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+    <div><div style="font-size:10px;color:#94a3b8;margin-bottom:2px">Default phenotype</div><input style="width:100%;border:none;border-bottom:1.5px solid #CBD5E1;font-size:12px;background:transparent;outline:none;padding:2px 0;color:#1e293b"></div>
+  </div>
+  <div style="font-size:11px;color:#6b7280;margin-top:4px">Plus: name the two kisspeptin populations and what each does &mdash; and state the estradiol threshold that flips feedback positive.</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="sw(0)">Sexual Differentiation Cascade</div>
+  <div class="tab" onclick="sw(1)">Hormones of Morphology</div>
+  <div class="tab" onclick="sw(2)">HPG Axis &amp; Feedback</div>
+  <div class="tab" onclick="sw(3)">Follicles &amp; Corpus Luteum</div>
+  <div class="tab" onclick="sw(4)">Hormone Cycle &amp; Effects</div>
+  <div class="tab" onclick="sw(5)">Disorders</div>
+  <div class="tab" onclick="sw(6)">Practice Qs</div>
+</div>
+
+<!-- TAB 0: SEXUAL DIFFERENTIATION CASCADE -->
+<div class="panel active" id="p0">
+<div class="lo-tag">LO 1</div>
+<div class="on-exam">ON EXAM &mdash; 6-TIER CASCADE: Chromosomal &rarr; Gonadal &rarr; Hormonal &rarr; Morphological &rarr; Secondary sex &rarr; Brain/behavior. DEFAULT is FEMALE at every tier &mdash; male anatomy needs active testis-secreted hormones (T + AMH). SRY (not the Y chromosome itself) determines sex &rarr; SOX9 &rarr; Sertoli commitment &rarr; testis. Sertoli FIRST (AMH), Leydig SECOND (T). Estrogen closes epiphyses in BOTH sexes. Male brain masculinization is actually estradiol (T aromatized locally; &alpha;-fetoprotein protects female fetus). Karyotype variants: Turner (45,X), Klinefelter (47,XXY), de la Chapelle (46,XX SRY+ &rarr; male), Swyer (46,XY SRY&minus; &rarr; female)</div>
+
+<div class="sec">The 6 levels of sexual differentiation (LO 1)</div>
+<table>
+  <tr><th>Level</th><th>Female-typical</th><th>Male-typical</th><th>Controls next tier via&hellip;</th></tr>
+  <tr><td class="rl">1. Chromosomal</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">2. Gonadal</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">3. Hormonal</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">4. Morphological</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">5. Secondary sex</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">6. Brain &amp; behavior</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Chromosomal level &amp; SRY (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>What does SRY stand for, and where on the Y chromosome?</label><input></div>
+  <div class="f"><label>What transcription factor does SRY activate &rarr; testis fate?</label><input></div>
+  <div class="f"><label>Without SRY, which default ovarian pathway takes over (3 genes)?</label><input></div>
+  <div class="f"><label>45,X karyotype &mdash; name, gonad, and 3 classic features</label><input></div>
+  <div class="f"><label>47,XXY karyotype &mdash; name, phenotype, fertility</label><input></div>
+  <div class="f"><label>46,XX SRY+ &mdash; name and phenotype</label><input></div>
+  <div class="f"><label>46,XY SRY&minus; &mdash; name, phenotype, and why gonads must be removed</label><input></div>
+</div>
+
+<div class="sec">Gonadal differentiation &mdash; bipotential ridge (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>Where does the germinal ridge form, and when?</label><input></div>
+  <div class="f"><label>Testis fate: which cell forms FIRST? Which SECOND? Why does order matter?</label><input></div>
+  <div class="f"><label>Ovary fate cells + what stays quiet in the fetal ovary</label><input></div>
+</div>
+
+<div class="sec">Hormonal tier &mdash; T vs AMH vs DHT (LO 1)</div>
+<div class="fg3">
+  <div class="f"><label>Testosterone (fetal Leydig) &mdash; what does it do?</label><input></div>
+  <div class="f"><label>AMH (fetal Sertoli) &mdash; what does it do?</label><input></div>
+  <div class="f"><label>DHT (peripheral 5&alpha;-RD2) &mdash; what does it do?</label><input></div>
+</div>
+
+<div class="sec">Secondary sex + brain/behavior tiers (LO 1)</div>
+<div class="fg">
+  <div class="f"><label>Estrogen and epiphyseal closure &mdash; effect in BOTH sexes</label><input></div>
+  <div class="f"><label>Aromatase paradox &mdash; what actually masculinizes the male brain?</label><input></div>
+  <div class="f"><label>Why is the female fetal brain protected from maternal/fetal estrogen?</label><input></div>
+  <div class="f"><label>AVPV kisspeptin fate in males &mdash; consequence for LH surge ability</label><input></div>
+  <div class="f"><label>Organizational vs activational brain effects &mdash; distinguish</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb0',a0)">Reveal answers</button>
+<div id="fb0" class="fb"></div>
+</div>
+
+<!-- TAB 1: HORMONES OF MORPHOLOGY -->
+<div class="panel" id="p1">
+<div class="lo-tag">LO 2</div>
+<div class="on-exam">ON EXAM &mdash; T for TUBES (Wolffian/internal), DHT for DONG/PROSTATE/PATTERN HAIR (external), AMH MURDERS MOM (M&uuml;llerian regression). SEED = Wolffian (Seminal vesicles, Epididymis, Ejaculatory duct, Ductus deferens). FUTV = M&uuml;llerian (Fallopian tubes, Uterus, Top 1/3 vagina, cerVix). Lower 2/3 vagina = urogenital SINUS (endoderm, NOT M&uuml;llerian). Fused hypo/failed: hypospadias = urogenital fold fusion failure. CAIS = high T + no uterus + female external + testes inguinal. 5&alpha;-RD = normal internal male, female-appearing external, virilize at puberty</div>
+
+<div class="sec">Unified hormone requirement (LO 2)</div>
+<table>
+  <tr><th>Structure</th><th>Hormone required</th><th>Source</th><th>If missing&hellip;</th></tr>
+  <tr><td class="rl">Testis formation</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Ovary formation</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">M&uuml;llerian regression</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Wolffian stabilization</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">External virilization</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Testis descent</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">M&uuml;llerian vs Wolffian derivatives (LO 2)</div>
+<div class="fg">
+  <div class="f"><label>M&uuml;llerian (paramesonephric) derivatives &mdash; mnemonic + 4 structures</label><input></div>
+  <div class="f"><label>Origin of lower 2/3 of vagina (NOT M&uuml;llerian)</label><input></div>
+  <div class="f"><label>Wolffian (mesonephric) derivatives &mdash; mnemonic + 4 structures</label><input></div>
+  <div class="f"><label>Why does T act paracrine (not systemic) on Wolffian?</label><input></div>
+</div>
+
+<div class="sec">External genitalia &mdash; bipotential primordia (LO 2)</div>
+<table>
+  <tr><th>Primordium</th><th>Female (no DHT)</th><th>Male (DHT present)</th><th>Failure state</th></tr>
+  <tr><td class="rl">Genital tubercle</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Urogenital (urethral) folds</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Labioscrotal swellings</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Urogenital sinus</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">T vs DHT territories (LO 2)</div>
+<div class="fg">
+  <div class="f"><label>T controls which tissues/processes? (4)</label><input></div>
+  <div class="f"><label>DHT controls which tissues/processes? (3)</label><input></div>
+  <div class="f"><label>Why does 5&alpha;-RD2 matter &mdash; what does it add to T (+ where expressed)?</label><input></div>
+  <div class="f"><label>Drugs that block 5&alpha;-RD + their clinical uses</label><input></div>
+</div>
+
+<div class="sec">Clinical mutations &mdash; side-by-side (LO 2)</div>
+<table>
+  <tr><th>Condition</th><th>Karyotype</th><th>Fetal state / labs</th><th>External</th><th>Internal</th></tr>
+  <tr><td class="rl">Complete AIS</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">5&alpha;-RD type 2 deficiency</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">21-OH CAH</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Persistent M&uuml;llerian duct syndrome</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+<div class="warn">KEY RULE: Female phenotype requires ZERO hormones in utero. Male phenotype requires BOTH T/DHT (masculinization) AND AMH (defeminization). A defect anywhere &mdash; enzyme, receptor, or hormone &mdash; creates a predictable mix-and-match DSD phenotype.</div>
+<button class="btn" onclick="rev('fb1',a1)">Reveal answers</button>
+<div id="fb1" class="fb"></div>
+</div>
+
+<!-- TAB 2: HPG AXIS & FEEDBACK -->
+<div class="panel" id="p2">
+<div class="lo-tag">LO 3</div>
+<div class="on-exam">ON EXAM &mdash; Pulsatile GnRH only (continuous = shutdown, basis of leuprolide depot). Two-cell/two-gonadotropin model: LH&rarr;THECA&rarr;androgens; FSH&rarr;GRANULOSA&rarr;aromatase&rarr;estradiol. Granulosa LACKS 17&alpha;-hydroxylase &mdash; can&apos;t finish estradiol alone. Feedback: moderate E<sub>2</sub> = NEGATIVE; sustained E<sub>2</sub> &gt;200 pg/mL x 48 h = POSITIVE &rarr; LH surge (AVPV kisspeptin). Progesterone BLOCKS positive feedback (no second surge in luteal phase). Kisspeptin: AVPV (positive) + arcuate (negative) &mdash; AVPV apoptoses in males. LH/FSH/TSH/hCG share &alpha;-subunit &rarr; hCG can trigger ovulation and cross-stimulate TSHR</div>
+
+<div class="sec">HPG pipeline (LO 3)</div>
+<div class="fg3">
+  <div class="f"><label>Hypothalamus &mdash; hormone + pulse frequency + nucleus</label><input></div>
+  <div class="f"><label>Pituitary &mdash; which hormones + shared subunit</label><input></div>
+  <div class="f"><label>Ovary &mdash; which cells + hormones produced</label><input></div>
+</div>
+
+<div class="sec">GnRH details (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>GnRH size (amino acids) + where released</label><input></div>
+  <div class="f"><label>Pulse frequency in females + who drives it</label><input></div>
+  <div class="f"><label>Slow vs fast GnRH pulse effect on FSH:LH ratio</label><input></div>
+  <div class="f"><label>Continuous GnRH effect + clinical application</label><input></div>
+  <div class="f"><label>Which &alpha;-subunit does LH share with 3 other hormones? Consequence?</label><input></div>
+</div>
+
+<div class="sec">Two-cell, two-gonadotropin model (LO 3)</div>
+<table>
+  <tr><th>Cell</th><th>Tropic hormone</th><th>Key enzymes present</th><th>Key enzymes MISSING</th><th>Secretes</th></tr>
+  <tr><td class="rl">Thecal cell</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Granulosa cell</td><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+<div class="fg">
+  <div class="f"><label>How does androstenedione get from theca to granulosa?</label><input></div>
+  <div class="f"><label>Late-follicular phase change on granulosa (which receptor appears)?</label><input></div>
+  <div class="f"><label>Why does this late receptor change matter at ovulation?</label><input></div>
+</div>
+
+<div class="sec">Feedback rules (LO 3)</div>
+<table>
+  <tr><th>Signal</th><th>Target</th><th>Effect</th><th>Dominant when&hellip;</th></tr>
+  <tr><td class="rl">Moderate estradiol</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">High sustained E<sub>2</sub> (threshold?)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Progesterone</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Inhibin A / B</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Kisspeptin &mdash; the two populations (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>AVPV kisspeptin &mdash; where, stimulated by what, function</label><input></div>
+  <div class="f"><label>Arcuate kisspeptin &mdash; where, regulated by what, function</label><input></div>
+  <div class="f"><label>KISS1R loss-of-function &rarr; what clinical syndrome?</label><input></div>
+  <div class="f"><label>KISS1R gain-of-function &rarr; what clinical syndrome?</label><input></div>
+</div>
+
+<div class="sec">Modulators of the GnRH neuron (LO 3)</div>
+<div class="fg">
+  <div class="f"><label>Kisspeptin + norepinephrine &mdash; effect on GnRH</label><input></div>
+  <div class="f"><label>&beta;-endorphins + GnIH + dopamine &mdash; effect on GnRH (when would each dominate?)</label><input></div>
+  <div class="f"><label>Leptin &mdash; how it signals energy availability to axis</label><input></div>
+  <div class="f"><label>Glucocorticoid (stress) &mdash; 3 levels of inhibition</label><input></div>
+  <div class="f"><label>Prolactin mechanism in amenorrhea-galactorrhea + treatment</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb2',a2)">Reveal answers</button>
+<div id="fb2" class="fb"></div>
+</div>
+
+<!-- TAB 3: FOLLICLES & CORPUS LUTEUM -->
+<div class="panel" id="p3">
+<div class="lo-tag">LO 4</div>
+<div class="on-exam">ON EXAM &mdash; Oocytes arrest PROPHASE I from fetal life &rarr; LH SURGE completes meiosis I &rarr; arrest METAPHASE II &rarr; fertilization completes meiosis II. Stage parade: Primordial &rarr; Primary &rarr; Secondary &rarr; Antral &rarr; Graafian &rarr; CL &rarr; Albicans. Theca has LH-R from secondary stage; granulosa has FSH-R throughout + LH-R LATE (Graafian) &mdash; this enables surge to trigger ovulation. CL hormones: PEI (Progesterone, Estradiol, Inhibin A). CL LIFESPAN = 12 days without hCG rescue. AMH tracks antral pool &mdash; HIGH in PCOS, LOW in POI/menopause. Peak oocyte count ~6&ndash;7 million at 20 wk gestation &rarr; ~1-2M at birth &rarr; ~400K at puberty &rarr; ~400-500 ovulated</div>
+
+<div class="sec">Primordial pool across lifespan (LO 4)</div>
+<table>
+  <tr><th>Time point</th><th>Approximate oocyte count</th></tr>
+  <tr><td class="rl">20 weeks gestation</td><td><input></td></tr>
+  <tr><td class="rl">Birth</td><td><input></td></tr>
+  <tr><td class="rl">Puberty / menarche</td><td><input></td></tr>
+  <tr><td class="rl">Lifetime ovulations</td><td><input></td></tr>
+  <tr><td class="rl">Menopause</td><td><input></td></tr>
+</table>
+
+<div class="sec">Meiotic arrest &mdash; two pauses (LO 4)</div>
+<div class="fg">
+  <div class="f"><label>First arrest &mdash; stage, when starts, when resolves</label><input></div>
+  <div class="f"><label>Second arrest &mdash; stage, when resolves, by what event</label><input></div>
+  <div class="f"><label>Why does advanced maternal age &uarr; aneuploidy risk?</label><input></div>
+</div>
+
+<div class="sec">Follicle stages &mdash; histology + hormones (LO 4)</div>
+<table>
+  <tr><th>Stage</th><th>Histology</th><th>Endocrine cells</th><th>Hormones secreted</th></tr>
+  <tr><td class="rl">Primordial</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Primary</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Secondary (preantral)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Antral (tertiary)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Graafian (preovulatory)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Corpus luteum</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Corpus albicans</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Dominant follicle selection (LO 4)</div>
+<div class="fg">
+  <div class="f"><label>What triggers the rising FSH at the start of the cycle?</label><input></div>
+  <div class="f"><label>How does the winner kill off the loser follicles?</label><input></div>
+  <div class="f"><label>Clomiphene / letrozole break this loop how &rarr; clinical consequence?</label><input></div>
+  <div class="f"><label>PCOS &mdash; why does the string-of-pearls appearance happen?</label><input></div>
+</div>
+
+<div class="sec">AMH as ovarian reserve marker (LO 4)</div>
+<div class="fg">
+  <div class="f"><label>Source of AMH &mdash; which cells, which follicle size?</label><input></div>
+  <div class="f"><label>Low AMH &mdash; which clinical states (2)?</label><input></div>
+  <div class="f"><label>High AMH &mdash; which clinical state + why?</label><input></div>
+  <div class="f"><label>AMH use in IVF workup</label><input></div>
+</div>
+
+<div class="sec">Corpus luteum &rarr; corpus albicans (LO 4)</div>
+<div class="fg">
+  <div class="f"><label>What triggers luteinization? What do the cells physically become?</label><input></div>
+  <div class="f"><label>3 main hormones of the CL (mnemonic PEI)</label><input></div>
+  <div class="f"><label>CL lifespan WITHOUT hCG rescue</label><input></div>
+  <div class="f"><label>CL rescue mechanism by hCG (which receptor?)</label><input></div>
+  <div class="f"><label>Luteoplacental shift &mdash; when does placenta take over?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb3',a3)">Reveal answers</button>
+<div id="fb3" class="fb"></div>
+</div>
+
+<!-- TAB 4: HORMONE CYCLE & EFFECTS -->
+<div class="panel" id="p4">
+<div class="lo-tag">LO 5</div>
+<div class="on-exam">ON EXAM &mdash; Day 1 = 1st day of bleeding. Ovulation day 14 (~36 h after LH begins rising). Luteal phase = FIXED 14 days; cycle variability lives in FOLLICULAR phase. Ovarian cycle (follicular&rarr;ovulation&rarr;luteal) drives uterine cycle (menses&rarr;proliferative&rarr;secretory). Day-21 progesterone &gt;5&ndash;10 ng/mL confirms ovulation. BBT rises 0.3&ndash;0.5&deg;C after ovulation (progesterone thermogenic). Estrogen = GROW (endometrium, breasts); Progesterone = PROTECT (thickens cervical mucus, quiets myometrium, builds glycogen). Unopposed estrogen &rarr; endometrial hyperplasia/cancer</div>
+
+<div class="sec">Master cycle figure (LO 5)</div>
+<table>
+  <tr><th>Day</th><th>Ovarian phase</th><th>Uterine phase</th><th>Dominant hormone(s)</th></tr>
+  <tr><td class="rl">1&ndash;5</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">6&ndash;13</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">14</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">15&ndash;28</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">28+</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Follicular phase details (LO 5)</div>
+<div class="fg">
+  <div class="f"><label>What triggers the rise in FSH at the start of the cycle?</label><input></div>
+  <div class="f"><label>Late-follicular hormone shift &mdash; dominant follicle + E<sub>2</sub> threshold</label><input></div>
+  <div class="f"><label>Proliferative phase endometrium &mdash; histologic features</label><input></div>
+  <div class="f"><label>When does the LH surge begin + how long until ovulation?</label><input></div>
+  <div class="f"><label>Mechanism of follicle rupture (local progesterone + enzymes)</label><input></div>
+</div>
+
+<div class="sec">Luteal phase details (LO 5)</div>
+<div class="fg">
+  <div class="f"><label>Day of peak progesterone</label><input></div>
+  <div class="f"><label>Day-21 progesterone threshold that confirms ovulation</label><input></div>
+  <div class="f"><label>Secretory phase endometrium &mdash; histology (subnuclear vacuoles when?)</label><input></div>
+  <div class="f"><label>Why no 2nd LH surge despite high E<sub>2</sub> during luteal phase?</label><input></div>
+  <div class="f"><label>What causes menses if no pregnancy? (sequence)</label><input></div>
+</div>
+
+<div class="sec">Estrogen vs progesterone tissue effects (LO 5)</div>
+<table>
+  <tr><th>Target</th><th>Estrogen</th><th>Progesterone</th></tr>
+  <tr><td class="rl">Endometrium</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Myometrium</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Cervical mucus</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Vagina</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Breast</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Bone</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Basal body temperature</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Water / Na balance</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Clotting</td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">HPG feedback</td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Pregnancy &amp; luteoplacental shift (LO 5)</div>
+<div class="fg">
+  <div class="f"><label>When is &beta;-hCG first detectable + doubling time</label><input></div>
+  <div class="f"><label>When does placenta take over progesterone production?</label><input></div>
+  <div class="f"><label>Source of fetal-placental estriol (2 organs)</label><input></div>
+  <div class="f"><label>Why does maternal SHBG rise in pregnancy?</label><input></div>
+  <div class="f"><label>Two mechanisms by which combined OCPs prevent pregnancy</label><input></div>
+  <div class="f"><label>Why does unopposed estrogen cause endometrial cancer (e.g., PCOS)?</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb4',a4)">Reveal answers</button>
+<div id="fb4" class="fb"></div>
+</div>
+
+<!-- TAB 5: DISORDERS -->
+<div class="panel" id="p5">
+<div class="lo-tag">LO 6</div>
+<div class="on-exam">ON EXAM &mdash; Hi-Lo (primary) / Lo-Lo (secondary) / Hi-Hi (receptor defect) decoder. Primary: Turner (45,X), Swyer (46,XY SRY&minus;), POI (&lt;40). Secondary: Kallmann (anosmia + hypogonadotropic), FHA (low leptin &rarr; low GnRH), prolactinoma. PCOS: LH:FSH &gt; 2, hyperandrogenism, anovulation, insulin resistance, string of pearls. CAIS: 46,XY phenotypic female with testes inguinal, no uterus. 5&alpha;-RD: normal internal male, female-appearing at birth, virilize at puberty. 21-OH CAH: virilized 46,XX + salt-wasting. Menopause: FSH &gt; LH (inhibin lost). HRT with uterus MUST include progestin</div>
+
+<div class="sec">The primary-vs-secondary decoder (LO 6)</div>
+<table>
+  <tr><th>Pattern</th><th>LH / FSH</th><th>E<sub>2</sub> or T</th><th>Where&apos;s the lesion?</th></tr>
+  <tr><td class="rl">Primary hypogonadism (Hi-Lo)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Secondary (hypogonadotropic) (Lo-Lo)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Overproduction</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Receptor/enzyme defect</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">Disorder exam table &mdash; lock these patterns (LO 6)</div>
+<table>
+  <tr><th>Condition</th><th>LH / FSH</th><th>E<sub>2</sub> / T</th><th>Key clue</th></tr>
+  <tr><td class="rl">Turner (45,X)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Swyer (46,XY SRY&minus;)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">POI</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Kallmann</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Functional hypothalamic amenorrhea</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Prolactinoma</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">PCOS</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Complete AIS</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">5&alpha;-RD deficiency</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">21-OH CAH (46,XX)</td><td><input></td><td><input></td><td><input></td></tr>
+  <tr><td class="rl">Menopause</td><td><input></td><td><input></td><td><input></td></tr>
+</table>
+
+<div class="sec">PCOS deep dive (LO 6)</div>
+<div class="fg">
+  <div class="f"><label>Rotterdam criteria (2 of 3)</label><input></div>
+  <div class="f"><label>Why LH:FSH &gt; 2? (mechanism)</label><input></div>
+  <div class="f"><label>Source of unopposed estrogen &rarr; endometrial cancer risk</label><input></div>
+  <div class="f"><label>Insulin resistance feedback on SHBG + theca</label><input></div>
+  <div class="f"><label>First-line ovulation induction drug + mechanism</label><input></div>
+  <div class="f"><label>AR antagonist for hirsutism + caution</label><input></div>
+</div>
+
+<div class="sec">Menopause &amp; HRT (LO 6)</div>
+<div class="fg">
+  <div class="f"><label>Earliest perimenopausal hormone change + why</label><input></div>
+  <div class="f"><label>Why does FSH rise MORE than LH in menopause?</label><input></div>
+  <div class="f"><label>Main remaining estrogen + source after menopause</label><input></div>
+  <div class="f"><label>Menopause symptoms mnemonic (HAVOCS)</label><input></div>
+  <div class="f"><label>HRT rule for uterus intact vs post-hysterectomy</label><input></div>
+  <div class="f"><label>Timing hypothesis for HRT benefit/risk</label><input></div>
+  <div class="f"><label>2 main HRT risks to counsel patient about</label><input></div>
+</div>
+
+<div class="sec">Other clinical patterns (LO 6)</div>
+<div class="fg">
+  <div class="f"><label>POI treatment goal + duration</label><input></div>
+  <div class="f"><label>Kallmann single distinguishing symptom</label><input></div>
+  <div class="f"><label>Female athlete triad &mdash; components + management</label><input></div>
+  <div class="f"><label>Prolactinoma first-line treatment + drug name</label><input></div>
+  <div class="f"><label>Hypothyroidism mechanism for menstrual irregularity</label><input></div>
+</div>
+<button class="btn" onclick="rev('fb5',a5)">Reveal answers</button>
+<div id="fb5" class="fb"></div>
+</div>
+
+<!-- TAB 6: PRACTICE QUESTIONS -->
+<div class="panel" id="p6">
+<div class="lo-tag">LO 1&ndash;6 &middot; USMLE Step 1 Style</div>
+<div class="on-exam">10 vignettes weighted across LOs.</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q1. A 16-year-old phenotypically female patient presents with primary amenorrhea. Exam shows normal breast development, sparse axillary/pubic hair, and a blind-ending vagina. Karyotype is 46,XY. Bilateral inguinal masses are palpable. Labs: elevated testosterone, elevated LH, elevated estradiol. No uterus on imaging. Which BEST explains this presentation?</div>
+  <div class="pq-choices">
+    A. Swyer syndrome (SRY mutation)<br>
+    B. 5&alpha;-reductase type 2 deficiency<br>
+    C. Complete androgen insensitivity syndrome (CAIS) &mdash; X-linked AR loss-of-function<br>
+    D. Persistent M&uuml;llerian duct syndrome<br>
+    E. 21-hydroxylase deficiency
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Complete AIS.</strong><br>46,XY with functional Sertoli cells makes AMH &rarr; M&uuml;llerian regression (no uterus, blind vagina). Leydig cells make T but AR is non-functional &rarr; Wolffian regresses, external defaults female, no pubic/axillary hair (AR-dependent). <strong>Peripheral aromatase converts circulating T &rarr; E<sub>2</sub> &rarr; ER&alpha; drives breast development.</strong> AR on the X chromosome &rarr; X-linked recessive inheritance. Testes are usually in the inguinal canal.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q2. A 3-day-old 46,XX infant presents with ambiguous genitalia (clitoromegaly, partial labial fusion), vomiting, hypotension, hyponatremia, and hyperkalemia. Newborn screen returns elevated 17-hydroxyprogesterone. The MOST likely diagnosis is:</div>
+  <div class="pq-choices">
+    A. Turner syndrome<br>
+    B. 21-hydroxylase deficiency CAH<br>
+    C. 5&alpha;-reductase deficiency<br>
+    D. Complete AIS<br>
+    E. Aromatase deficiency
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; 21-OH deficiency CAH.</strong><br>Can&apos;t make cortisol or aldosterone &rarr; substrate shunts to androgens (DHEA, androstenedione, T) in a 46,XX fetus &rarr; in-utero virilization of external genitalia. Normal uterus and ovaries (gonadal T not required). Aldosterone deficiency &rarr; salt-wasting crisis (hypotension, hyponatremia, hyperkalemia). <strong>Elevated 17-OH-progesterone</strong> is diagnostic. Medical emergency &mdash; IV hydrocortisone + fluids + electrolyte correction + later fludrocortisone.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q3. A 46,XY infant is born with female-appearing external genitalia. Internal exam reveals normal testes, vasa deferentia, and epididymides, but no uterus. At puberty, the patient develops phallic growth, muscle mass, and deepening voice. Labs: normal testosterone, LOW DHT, elevated testosterone-to-DHT ratio. Enzyme deficient?</div>
+  <div class="pq-choices">
+    A. 17,20-lyase<br>
+    B. Aromatase<br>
+    C. 5&alpha;-reductase type 2<br>
+    D. 21-hydroxylase<br>
+    E. 17&beta;-HSD3
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; 5&alpha;-reductase type 2 deficiency.</strong><br>5&alpha;-RD2 converts T &rarr; DHT in peripheral tissues (genital skin, prostate, hair follicles). Without DHT, external genital masculinization fails in utero &rarr; female-appearing external at birth. Wolffian ducts (T-dependent, not DHT) develop normally &rarr; normal internal male. At PUBERTY, rising testosterone partially overcomes the DHT block &rarr; late virilization (&ldquo;guevedoces&rdquo; &mdash; &ldquo;penis at 12&rdquo;). Labs: normal T, LOW DHT, elevated T:DHT ratio.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q4. In the ovarian two-cell / two-gonadotropin model, which statement is CORRECT?</div>
+  <div class="pq-choices">
+    A. Thecal cells express aromatase and produce estradiol<br>
+    B. Granulosa cells express 17&alpha;-hydroxylase and produce androgens<br>
+    C. LH stimulates thecal cells to produce androstenedione; FSH stimulates granulosa cells, which aromatize androstenedione to estrone &rarr; 17&beta;-HSD1 &rarr; estradiol<br>
+    D. FSH stimulates theca; LH stimulates granulosa<br>
+    E. Both cells make estradiol independently
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; LH/theca &amp; FSH/granulosa.</strong><br>Thecal cells have 17&alpha;-hydroxylase + 17,20-lyase &rarr; produce androstenedione under LH. They LACK aromatase. Granulosa cells have FSH-driven aromatase (CYP19A1) but lack 17&alpha;-hydroxylase. Androstenedione diffuses from theca to granulosa &rarr; aromatized to estrone &rarr; 17&beta;-HSD1 converts to 17&beta;-estradiol. Mnemonic: LAT (LH-Androgens-Theca) / FAG (FSH-Aromatase-Granulosa).</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q5. During the normal menstrual cycle, sustained elevation of estradiol above ~200 pg/mL for approximately 48 hours triggers an LH surge. Which hypothalamic population mediates this positive feedback, and why can&apos;t adult males mount an LH surge?</div>
+  <div class="pq-choices">
+    A. Arcuate kisspeptin; males have apoptosed arcuate neurons<br>
+    B. AVPV kisspeptin (positive feedback); in males, perinatal androgens are aromatized to estradiol locally, which triggers APOPTOSIS of AVPV kisspeptin neurons<br>
+    C. Paraventricular GnRH; males lack PVN neurons<br>
+    D. SON vasopressin; suppressed in males<br>
+    E. No hypothalamic mediator &mdash; surge is pituitary-intrinsic
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; AVPV kisspeptin; apoptosed perinatally in males.</strong><br>Two kisspeptin populations: <strong>AVPV</strong> (anteroventral periventricular, within the POA) mediates POSITIVE feedback; sustained high E<sub>2</sub> activates it &rarr; GnRH burst &rarr; LH surge. <strong>Arcuate</strong> kisspeptin mediates NEGATIVE feedback and tonic pulses. In males, perinatal androgens are locally aromatized to estradiol in the hypothalamus &rarr; triggers apoptosis of AVPV kisspeptin neurons. Arcuate population preserved. Males retain negative feedback but cannot produce a surge. This is the &ldquo;aromatase paradox.&rdquo;</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q6. A 29-year-old woman with normal cycles until 3 months ago presents with oligomenorrhea, hirsutism, acne, and a BMI of 34. Labs: LH:FSH ratio 2.8, elevated free testosterone, mildly elevated DHEA-S, and transvaginal ultrasound shows bilateral &ldquo;string of pearls&rdquo; follicles. Which mechanism BEST explains her elevated FREE testosterone despite normal total?</div>
+  <div class="pq-choices">
+    A. Exogenous anabolic steroids<br>
+    B. Adrenal androgen-secreting tumor<br>
+    C. Hyperinsulinemia and obesity suppress hepatic SHBG synthesis &rarr; raise free T<br>
+    D. 21-hydroxylase deficiency<br>
+    E. Pregnancy
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Hyperinsulinemia suppresses SHBG.</strong><br>PCOS hyperandrogenism has two drivers: (1) ovarian thecal overproduction of androgens (LH:FSH &gt; 2 + insulin co-stimulation of theca); (2) <strong>hyperinsulinemia + obesity SUPPRESS hepatic SHBG synthesis</strong> &rarr; higher free testosterone fraction for the same total. Metformin and weight loss raise SHBG and reduce clinical hyperandrogenism. Classic Rotterdam criteria met: oligomenorrhea + hyperandrogenism + polycystic ovaries.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q7. A 22-year-old elite distance runner with BMI 17 presents with secondary amenorrhea of 10 months duration, frequent stress fractures, and low bone mineral density. Labs: LH 1.2, FSH 2.8, estradiol 18 pg/mL. Prolactin and TSH normal. Pregnancy test negative. MOST likely diagnosis and mechanism?</div>
+  <div class="pq-choices">
+    A. Primary ovarian insufficiency (POI)<br>
+    B. Prolactinoma<br>
+    C. Functional hypothalamic amenorrhea (FHA) &mdash; low leptin &rarr; low kisspeptin &rarr; low GnRH<br>
+    D. Polycystic ovary syndrome<br>
+    E. Kallmann syndrome
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; FHA (female athlete triad).</strong><br>Low energy availability (BMI 17 + excessive training) &rarr; <strong>low leptin</strong> &rarr; reduced kisspeptin drive &rarr; reduced GnRH pulse frequency/amplitude &rarr; Lo-Lo pattern (low LH/FSH + low E<sub>2</sub>). Female athlete triad = low energy availability + menstrual dysfunction + low bone mineral density. POI would show HIGH FSH/LH; prolactinoma would elevate prolactin; PCOS would have high LH + androgens; Kallmann would include anosmia and congenital delayed puberty. Treat with behavioral intervention first (restore energy + reduce training); HRT/OCP for bone if persists.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q8. A 37-year-old woman presents with 9 months of secondary amenorrhea, hot flashes, and vaginal dryness. Labs: FSH 68, LH 42, estradiol 12 pg/mL, normal TSH, normal prolactin, negative pregnancy test. Karyotype shows 45,X/46,XX mosaicism. Fragile X premutation positive. What is the diagnosis and mechanism?</div>
+  <div class="pq-choices">
+    A. Menopause (too young to matter)<br>
+    B. Primary ovarian insufficiency (POI) &mdash; accelerated follicular atresia<br>
+    C. Kallmann syndrome<br>
+    D. Turner syndrome classic (45,X)<br>
+    E. Complete AIS
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>B &mdash; Primary Ovarian Insufficiency.</strong><br>POI = menopausal labs (FSH &gt; 40) + amenorrhea before age 40. Causes include Fragile X premutation, Turner mosaic, autoimmune oophoritis, chemo/radiation, galactosemia, idiopathic. Hi-Lo pattern: loss of ovarian inhibin + estradiol &rarr; negative feedback gone &rarr; FSH/LH rise. <strong>Treatment: HRT until average age of menopause (~51)</strong> to protect bone + cardiovascular health. Fertility counseling: spontaneous conception rare but possible. Work up karyotype, fragile X, autoimmune screen.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q9. A healthy 29-year-old woman undergoes endometrial biopsy on day 22 of her menstrual cycle for evaluation of infertility. The specimen shows tortuous sacculated glands, glycogen-rich cells, and subnuclear vacuoles with decidualized stroma. The dominant hormone driving this appearance is:</div>
+  <div class="pq-choices">
+    A. Estradiol<br>
+    B. FSH<br>
+    C. Progesterone from the corpus luteum<br>
+    D. Prolactin<br>
+    E. hCG
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Progesterone from the corpus luteum.</strong><br>Day 22 = mid-luteal phase. The <strong>secretory phase endometrium</strong> (glandular, tortuous, glycogen-rich, decidualized stroma) is driven by progesterone from the CL. Subnuclear vacuoles classically appear days 16&ndash;18 (&ldquo;early secretory&rdquo;). This biopsy finding CONFIRMS that the patient ovulated (she has a functioning CL). Endometrial biopsy is one way to confirm ovulation in an infertility workup; serum day-21 progesterone &gt;5-10 ng/mL is the standard test.</div>
+</div>
+
+<div class="pq-box">
+  <div class="pq-q">Q10. A 58-year-old postmenopausal woman with an intact uterus is considering HRT for persistent vasomotor symptoms. Her physician recommends combined estrogen-progestin rather than estrogen alone. The BEST reason is:</div>
+  <div class="pq-choices">
+    A. Progestin amplifies estrogen&apos;s vasomotor relief<br>
+    B. Progestin prevents estrogen-induced VTE<br>
+    C. Progestin opposes estrogen&apos;s proliferative effect on the ENDOMETRIUM &mdash; reducing endometrial hyperplasia and adenocarcinoma risk<br>
+    D. Progestin is required for bone preservation<br>
+    E. Estrogen alone causes hot flashes
+  </div>
+  <button class="pq-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal answer</button>
+  <div class="pq-ans"><strong>C &mdash; Progestin protects the endometrium.</strong><br>Unopposed estrogen drives endometrial proliferation &rarr; hyperplasia &rarr; adenocarcinoma. In a woman with a uterus, HRT MUST include a progestin. Post-hysterectomy patients can use estrogen alone. Timing hypothesis: HRT risk-benefit most favorable when started &lt;60 years old or within 10 years of menopause. VTE and breast CA risks are intrinsic to estrogen (not mitigated by progestin). Same principle underlies endometrial cancer risk in PCOS (unopposed low-level estrone from adipose aromatase without progesterone).</div>
+</div>
+
+</div>
+
+<script>
+function sw(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',i===n)});
+  document.querySelectorAll('.panel').forEach((p,i)=>{p.classList.toggle('active',i===n)});
+}
+
+const a0={
+  'Chromosomal female':'XX (homogametic)',
+  'Chromosomal male':'XY (heterogametic)',
+  'Chromosomal control':'Presence/absence of the SRY gene on Yp',
+  'Gonadal female':'Ovary (default; WNT4/RSPO1/FOXL2 pathway)',
+  'Gonadal male':'Testis (SRY → SOX9 → Sertoli commitment)',
+  'Gonadal control':'Fetal testis secretes T + AMH; fetal ovary is endocrinologically quiet',
+  'Hormonal female':'Low T, no AMH, no DHT',
+  'Hormonal male':'High T (Leydig), AMH (Sertoli), peripheral DHT (5α-RD2)',
+  'Hormonal control':'Target-tissue receptors respond (AR) or enzymes act (5α-RD2) — or not',
+  'Morphological female':'Müllerian ducts persist → uterus, tubes, upper 1/3 vagina; feminized external genitalia (no DHT)',
+  'Morphological male':'Wolffian ducts persist → SEED; Müllerian regressed by AMH; virilized external by DHT',
+  'Morphological control':'Organs remodel at puberty under sex steroids',
+  'Secondary sex female':'Breasts (E2), gluteofemoral fat (E2), pubic/axillary hair (adrenal DHEA → androgens)',
+  'Secondary sex male':'Facial/body hair (DHT), muscle (T), voice deepening (T), sperm (T)',
+  'Secondary sex control':'Hormonal milieu patterns the CNS',
+  'Brain female':'AVPV kisspeptin preserved → can mount LH surge (positive feedback intact)',
+  'Brain male':'AVPV kisspeptin apoptosed perinatally → no surge; negative feedback only (arcuate preserved)',
+  'Brain control':'Terminal tier — behavior, libido, mood track current steroid milieu',
+  'SRY meaning':'Sex-determining Region of the Y chromosome. Encoded on the SHORT ARM (Yp). Encodes testis-determining factor (TDF), a transcription factor',
+  'SRY downstream':'SOX9 — pushes the bipotential germinal ridge toward testis fate (Sertoli-cell commitment)',
+  'No SRY pathway':'WNT4, RSPO1, FOXL2 — default ovarian developmental pathway. This is why \"default is female\" at every downstream tier',
+  '45X':'Turner syndrome. Streak gonads (accelerated follicular atresia) → no hormones. Female phenotype with short stature, webbed neck, bicuspid aortic valve, horseshoe kidney, lymphedema hand/foot at birth',
+  '47XXY':'Klinefelter syndrome. SRY present → male phenotype. Extra X impairs seminiferous tubules → infertility, small firm testes, tall stature, gynecomastia, learning difficulties',
+  'XX SRY+':'De la Chapelle syndrome (46,XX male). Y→X SRY translocation during paternal meiosis → phenotypic male with testes. Typically infertile (no spermatogenesis genes from Yq)',
+  'XY SRY-':'Swyer syndrome. Loss-of-function SRY mutation → streak gonads (no testis). Female phenotype with primary amenorrhea. Y-bearing streak gonads carry GONADOBLASTOMA risk → must be surgically removed',
+  'Ridge origin':'Mesodermal tissue on the medial side of the mesonephros (proto-kidney). Forms around week 5 of gestation. Truly bipotential — equally capable of becoming ovary or testis',
+  'Sertoli vs Leydig':'Sertoli FIRST (secretes AMH; Müllerian ducts begin regressing early). Leydig SECOND (secretes T; stabilizes Wolffian ducts). Order matters — a Sertoli-only defect can leave a 46,XY with a persistent uterus (PMDS)',
+  'Ovary cells':'Granulosa + theca cells form around primordial germ cells. Fetal ovary is endocrinologically quiet — no AMH, no T',
+  'T role':'(1) Stabilizes Wolffian ducts into SEED (epididymis, vas, seminal vesicles, ejaculatory duct). (2) Paracrine — each testis masculinizes its IPSILATERAL duct. (3) Drives male brain patterning AFTER LOCAL aromatization to E2',
+  'AMH role':'Regresses Müllerian ducts → no uterus, tubes, or upper 1/3 vagina in males. Loss → persistent Müllerian duct syndrome (46,XY with uterus often discovered at hernia repair)',
+  'DHT role':'Virilizes EXTERNAL genitalia (penis, scrotum, prostate) + pattern hair. Made peripherally from T by 5α-RD2 in genital skin + prostate + hair follicles',
+  'Estrogen epiphyses':'Estrogen drives epiphyseal closure in BOTH sexes. Without estrogen (aromatase deficiency in XX or XY; ER mutations) → long bones keep growing → tall stature + osteoporosis',
+  'Aromatase paradox':'T masculinizes the male brain only AFTER local conversion to ESTRADIOL in the hypothalamus. Estrogen is the actual masculinizing signal in the male brain — counterintuitive but consistent',
+  'Female fetus protection':'α-fetoprotein binds maternal and fetal estrogens → keeps them out of the female fetal brain. Prevents inadvertent masculinization. Without this barrier, female fetal brain would be exposed to maternal E2',
+  'Male AVPV':'Perinatal androgen (aromatized locally to E2) triggers APOPTOSIS of AVPV kisspeptin neurons in males. AVPV mediates positive feedback → males cannot mount an LH surge. Arcuate (negative feedback) is preserved',
+  'Organizational vs activational':'ORGANIZATIONAL = perinatal, permanent (brain structure — AVPV apoptosis, sexual dimorphic nuclei). ACTIVATIONAL = adult, reversible (libido tracks current T/E2; mood tracks menstrual E2; postpartum mood disorders from steroid withdrawal)'
+};
+
+const a1={
+  'Testis formation':'SRY → SOX9 (genetic, not hormonal) | Genetic | Streak gonad → Swyer syndrome (46,XY with SRY mutation)',
+  'Ovary formation':'None (default) | — | Streak gonad only if chromosomal defect (Turner 45,X)',
+  'Müllerian regression':'AMH | Fetal Sertoli cells | Persistent Müllerian duct syndrome — 46,XY male with a uterus (often found at inguinal hernia repair). T intact → normal external male and Wolffian',
+  'Wolffian stabilization':'Testosterone | Fetal Leydig cells | Wolffian regresses → NO male internal ducts (epididymis, vas, seminal vesicles, ejaculatory duct). Acts paracrine',
+  'External virilization':'DHT (converted from T by 5α-RD2) | Peripheral tissues (genital skin, prostate, hair follicles) | Female-appearing external genitalia in 5α-RD deficiency; or AR loss (AIS)',
+  'Testis descent':'T + INSL3 | Fetal Leydig cells | Cryptorchidism (undescended testes) — risk of infertility, testicular cancer',
+  'FUTV':'FUTV mnemonic — Fallopian tubes, Uterus, Top 1/3 vagina, cerVix. All from paramesonephric (Müllerian) ducts',
+  'Lower vagina origin':'Lower 2/3 of vagina comes from the UROGENITAL SINUS (endoderm), NOT Müllerian ducts. Meets Müllerian-derived upper 1/3 at the sinovaginal bulb',
+  'SEED':'SEED mnemonic — Seminal vesicles, Epididymis, Ejaculatory duct, Ductus (vas) deferens. All from mesonephric (Wolffian) ducts',
+  'T paracrine':'Wolffian ducts need very HIGH local concentrations of T that only the ipsilateral testis can provide (via diffusion across short distance). Systemic T levels (maternal or even fetal adrenal) aren\'t enough. Each testis masculinizes its own side',
+  'Tubercle F':'Clitoris',
+  'Tubercle M':'Glans penis',
+  'Tubercle fail':'Micropenis (if T/DHT insufficient); clitoromegaly (if androgen exposure in 46,XX)',
+  'Folds F':'Labia minora',
+  'Folds M':'Penile (spongy) shaft + penile urethra — urogenital folds fuse midline over urethra',
+  'Folds fail':'HYPOSPADIAS = failed fusion → urethral meatus opens on ventral surface. Classic sign of in-utero androgen insufficiency or EDC exposure',
+  'Swellings F':'Labia majora',
+  'Swellings M':'Scrotum (midline raphe = fusion scar)',
+  'Swellings fail':'Bifid scrotum (failed fusion) in severe androgen insufficiency',
+  'Sinus F':'Lower 2/3 vagina, urethra, Skene glands, Bartholin glands',
+  'Sinus M':'Prostate, bulbourethral (Cowper) glands, prostatic + membranous urethra',
+  'Sinus fail':'Persistent urogenital sinus in 21-OH CAH (single opening for urethra + vagina in virilized 46,XX)',
+  'T territory':'T for TUBES (internal Wolffian structures — SEED), axial musculature, brain patterning (after aromatization), deep voice. T is the systemic hormone',
+  'DHT territory':'DHT for DONG + PROSTATE + PATTERN HAIR (external genitalia virilization + prostate growth + scalp/body hair). Also sebaceous gland activity (acne, seborrhea)',
+  '5α-RD2':'5α-reductase type 2 — expressed in GENITAL SKIN, prostate, hair follicles. Converts T → DHT (much higher AR affinity, ~2-5× T). Type 1 is in scalp + sebaceous glands',
+  '5α-RD drugs':'Finasteride (type 2 selective) — BPH + male-pattern baldness. Dutasteride (types 1 + 2, more complete DHT suppression). Both TERATOGENIC in male fetus (handle carefully in pregnancy)',
+  'CAIS karyotype':'46,XY',
+  'CAIS fetal state':'Testes descend partially (often inguinal). T + DHT produced but cannot signal (non-functional AR). High T, elevated LH (no negative feedback), elevated E2 (peripheral aromatization)',
+  'CAIS external':'Female-appearing (no DHT effect on external primordia). Breasts develop at puberty from peripheral aromatization of T → E2 → ERα. No pubic/axillary hair (AR-dependent)',
+  'CAIS internal':'NO uterus (AMH worked, regressed Müllerian). NO Wolffian structures (AR broken). Blind-ending vagina. Testes in inguinal canal (needs removal after puberty — cancer risk)',
+  '5α-RD karyotype':'46,XY',
+  '5α-RD fetal':'Normal T, low DHT. Normal testes + AMH + T',
+  '5α-RD external':'Female-appearing at birth (no DHT in utero). At puberty, rising T partially virilizes externally → \"guevedoces\" phenotype',
+  '5α-RD internal':'Normal internal male (T-dependent Wolffian structures preserved)',
+  'CAH karyotype':'46,XX',
+  'CAH fetal':'Can\'t make cortisol or aldosterone → substrate shunts to androgens (DHEA, androstenedione, T). Elevated 17-OH-progesterone on newborn screen. Systemic: salt-wasting, hyperkalemia, hypotension',
+  'CAH external':'VIRILIZED by in-utero adrenal androgens — fused labia, clitoromegaly, ambiguous genitalia, persistent urogenital sinus',
+  'CAH internal':'NORMAL ovaries + uterus + upper vagina (no gonadal T, no AMH). Fertility preserved with treatment',
+  'PMDS karyotype':'46,XY',
+  'PMDS fetal':'Loss-of-function of AMH or AMH receptor. T intact → normal external male + Wolffian. AMH failed → Müllerian persists',
+  'PMDS external':'NORMAL male external (T and DHT work)',
+  'PMDS internal':'Normal male Wolffian (T) PLUS persistent uterus + fallopian tubes. Often discovered at inguinal hernia repair (uterus herniates)'
+};
+
+const a2={
+  'Hypothalamus':'GnRH (decapeptide) released in PULSES every 60-90 min. Cell bodies in MEDIAL PREOPTIC AREA + arcuate nucleus',
+  'Pituitary':'LH + FSH (glycoprotein heterodimers). α-subunit SHARED with TSH and hCG',
+  'Ovary':'Theca + granulosa cells (two-cell unit) → E2, progesterone, inhibin A (luteal) or inhibin B (follicular)',
+  'GnRH aa':'10 amino acids (decapeptide). Released from median eminence axon terminals into hypophyseal portal system',
+  'GnRH pulse freq':'Every 60-90 min in females. ARCUATE kisspeptin drives tonic pulses; AVPV kisspeptin drives the pre-ovulatory surge',
+  'Slow vs fast pulses':'SLOW GnRH pulses → FSH-dominant release. FAST pulses → LH-dominant. Part of why PCOS has LH > FSH (fast pulse pattern)',
+  'Continuous GnRH':'Continuous GnRH → gonadotropes DOWNREGULATE GnRH receptors and desensitize → axis shutdown after initial \"flare\". Clinical: LEUPROLIDE depot for prostate cancer, endometriosis, central precocious puberty, IVF. Initial flare covered with anti-androgen in prostate CA',
+  'α-subunit shared':'LH / FSH / TSH / hCG all share the α-subunit. Consequence: hCG cross-reacts at LH receptor (basis of IVF trigger shots + CL rescue in pregnancy) AND at TSH receptor (can cause GESTATIONAL THYROTOXICOSIS)',
+  'Theca tropic':'LH (Gs-coupled receptor → cAMP → steroidogenic enzymes)',
+  'Theca enzymes':'Cholesterol desmolase (CYP11A1), 17α-hydroxylase, 17,20-lyase, 3β-HSD. Makes ANDROGENS (androstenedione + testosterone) up to this point',
+  'Theca missing':'AROMATASE — thecal cells CANNOT finish estradiol synthesis. They hand off androgens to granulosa cells',
+  'Theca secretes':'Androstenedione (primary thecal product) + testosterone — diffused into granulosa cells',
+  'Granulosa tropic':'FSH (Gs-coupled receptor → cAMP → aromatase expression)',
+  'Granulosa enzymes':'AROMATASE (CYP19A1) — converts androgen → estrogen. 17β-HSD1 — converts estrone → estradiol',
+  'Granulosa missing':'17α-hydroxylase + 17,20-lyase — so granulosa CANNOT make its own androgens. DEPENDS on theca-derived androgens as aromatase substrate',
+  'Granulosa secretes':'Estradiol, inhibin B (follicular), progesterone (after LH surge, once LH-R upregulated)',
+  'Androstenedione handoff':'Androstenedione (and some T) diffuses across the basement membrane from theca to granulosa. Granulosa aromatizes to estrone → 17β-HSD1 → estradiol',
+  'Late follicular receptor':'Granulosa cells UPREGULATE LH receptors late in the follicular phase (Graafian stage). Only the dominant follicle does this',
+  'Late LH-R importance':'This late LH-R expression is what enables the MID-CYCLE LH SURGE to trigger (1) ovulation via local progesterone + proteolytic enzymes, AND (2) luteinization after ovulation',
+  'Moderate E2 target':'Hypothalamus + pituitary',
+  'Moderate E2 effect':'Negative feedback (↓ GnRH pulses + ↓ LH/FSH secretion)',
+  'Moderate E2 dominant':'Most of the cycle (early and late follicular, and throughout luteal)',
+  'High E2 threshold':'Hypothalamus (AVPV kisspeptin) + pituitary. Threshold: >200 pg/mL for ~48 hours (intensity AND duration matter)',
+  'High E2 effect':'POSITIVE feedback → LH surge (10× baseline) + smaller FSH surge. AVPV kisspeptin burst drives the GnRH burst',
+  'High E2 dominant':'Late follicular phase (days 12-14), preceding ovulation',
+  'Progesterone target':'Hypothalamus + pituitary',
+  'Progesterone effect':'Strong negative feedback (slows GnRH pulse generator → slow, low-amplitude LH pulses). BLOCKS positive feedback at AVPV even if E2 is high → no second surge in luteal phase',
+  'Progesterone dominant':'Luteal phase (from CL)',
+  'Inhibin target':'Pituitary gonadotropes',
+  'Inhibin effect':'Selectively suppresses FSH (not LH)',
+  'Inhibin dominant':'Inhibin B = early follicular (granulosa, helps select dominant follicle). Inhibin A = luteal (CL, prevents new follicle recruitment)',
+  'AVPV kiss':'AVPV = anteroventral periventricular nucleus (within medial POA). STIMULATED by sustained high E2 → positive feedback → LH surge. Apoptosed perinatally in males from local T→E2 conversion → males cannot mount LH surge',
+  'Arcuate kiss':'ARCUATE nucleus. INHIBITED by E2 → mediates negative feedback + tonic GnRH pulse generation. PRESERVED in males — why males retain negative feedback',
+  'KISS1R LOF':'Hypogonadotropic hypogonadism (no puberty). Inability to activate GnRH neurons → low LH/FSH → low gonadal steroids',
+  'KISS1R GOF':'Central precocious puberty — premature activation of GnRH pulse generator → early puberty',
+  'Activators':'Kisspeptin (PRIMARY activator of GnRH neurons). Norepinephrine (stimulates GnRH release)',
+  'Inhibitors':'β-endorphins (runner\'s amenorrhea via stress/exercise); GnIH (gonadotropin-inhibiting hormone, induced by glucocorticoids); dopamine (INDIRECTLY, via suppression of prolactin when dopamine is high — low dopamine = high PRL = GnRH suppression)',
+  'Leptin':'Leptin signals ENERGY AVAILABILITY to kisspeptin neurons. LOW leptin (anorexia, over-training) → LOW kisspeptin → LOW GnRH → hypothalamic amenorrhea. Basis of female athlete triad',
+  'Cortisol inhibition':'Glucocorticoids inhibit every tier: (1) ↓ GnRH from hypothalamus (↑ GnIH), (2) ↓ LH/FSH release from pituitary, (3) ↓ ovarian steroidogenesis. Clinical: FHA, ICU illness, female athlete triad',
+  'Prolactin':'Prolactin INHIBITS GnRH directly. Hyperprolactinemia (prolactinoma, antipsychotics, hypothyroidism) → amenorrhea-galactorrhea. Treatment: DOPAMINE AGONIST (cabergoline, bromocriptine). Surgery reserved for drug resistance or mass effect'
+};
+
+const a3={
+  '20wk':'~6-7 million (PEAK oocyte count in a human female\'s lifetime)',
+  'Birth':'~1-2 million',
+  'Puberty':'~300,000-400,000',
+  'Lifetime':'~400-500 ovulations total across a reproductive lifespan',
+  'Menopause':'~1,000 (below cycling threshold — gland can no longer sustain regular ovulation)',
+  'First arrest':'Prophase I (DIPLOTENE stage). Begins in fetal life (~20 weeks gestation). Resolves only at the LH surge, which completes meiosis I → secondary oocyte + first polar body',
+  'Second arrest':'Metaphase II. Arrests immediately after ovulation. Resolves only at FERTILIZATION, which completes meiosis II → second polar body + haploid egg → zygote',
+  'Aneuploidy age':'Longer meiosis I arrest (decades in older mothers) → cumulative damage → ↑ risk of non-disjunction at meiotic resumption → aneuploidies (trisomy 21 most common, also 18, 13). Declining AMH reflects shrinking antral pool',
+  'Primordial histo':'Oocyte surrounded by a SINGLE LAYER of SQUAMOUS granulosa cells',
+  'Primordial cells':'Minimal activity',
+  'Primordial hormones':'None (essentially silent)',
+  'Primary histo':'CUBOIDAL unilaminar granulosa layer; zona pellucida begins to form around oocyte',
+  'Primary cells':'Granulosa cells ACTIVATED (partly FSH-independent at this stage)',
+  'Primary hormones':'Low estrogen',
+  'Secondary histo':'MULTILAMINAR granulosa layer + THECA forms around follicle',
+  'Secondary cells':'Theca interna + granulosa — now gonadotropin-DEPENDENT',
+  'Secondary hormones':'Low androgens + low E2 (beginning of steroidogenesis)',
+  'Antral histo':'Fluid-filled ANTRUM appears; theca interna (steroidogenic) + theca externa (fibrous) distinguished',
+  'Antral cells':'Mature two-cell unit (theca + granulosa)',
+  'Antral hormones':'Rising E2, inhibin B, androgens — escalating as follicle grows',
+  'Graafian histo':'~20 mm preovulatory follicle; oocyte on cumulus oophorus stalk suspended in antral fluid',
+  'Graafian cells':'LH-responsive granulosa + theca (late follicular LH-R expression on granulosa)',
+  'Graafian hormones':'PEAK E2 + inhibin B; some local progesterone late (primes for ovulation + follicle rupture)',
+  'CL histo':'Luteinized theca + granulosa with LIPID DROPLETS (yellow color → \"luteum\"); vascularized',
+  'CL cells':'Large luteal cells (granulosa-derived) + small luteal cells (theca-derived)',
+  'CL hormones':'PROGESTERONE (dominant), E2, inhibin A',
+  'Albicans histo':'Fibrous scar — remnant of involuted CL',
+  'Albicans cells':'None (connective tissue only)',
+  'Albicans hormones':'None',
+  'FSH rise':'Luteal-phase DROP in inhibin A (from involuted CL) removes the FSH brake → FSH rises → recruits next cohort of antral follicles',
+  'Dominant selection':'Winner secretes rising ESTRADIOL + inhibin B → these suppress FSH → weaker follicles (less FSH-sensitive) lose the FSH they need → undergo ATRESIA. Winner-take-all loop',
+  'Clomiphene letrozole':'Clomiphene (SERM) blocks hypothalamic ER → removes negative feedback → FSH stays HIGH → multiple follicles escape atresia. Letrozole (aromatase inhibitor) lowers E2 → same FSH rise. Explains ↑ DIZYGOTIC TWINS with ovulation induction',
+  'PCOS string':'Relatively LOW FSH + excess theca androgens → multiple follicles arrested at antral stage → NO dominant follicle selected → chronic anovulation → \"string of pearls\" on ultrasound (12+ small antral follicles)',
+  'AMH source':'SMALL ANTRAL granulosa cells (primary + secondary + early antral follicles). Serum AMH correlates with the size of the antral pool',
+  'Low AMH':'(1) Diminished ovarian reserve / primary ovarian insufficiency. (2) Menopause approaching or established. Also: chemo/radiation damage to ovary',
+  'High AMH':'PCOS — lots of arrested small antral follicles (the string-of-pearls population). AMH is high despite anovulation',
+  'AMH IVF':'Used to predict ovarian RESPONSE to stimulation and dose gonadotropins. Also helps with fertility counseling for women considering delayed childbearing',
+  'Luteinization trigger':'LH SURGE triggers it. Granulosa + theca cells HYPERTROPHY, acquire LIPID DROPLETS, become yellow (\"luteum\"). Blood vessels invade the previously avascular follicle → high hormone output',
+  'PEI':'P = Progesterone (DOMINANT). E = Estradiol. I = Inhibin A. Main 3 CL products',
+  'CL lifespan':'~12 days without hCG rescue. Then involutes → corpus albicans → P/E2 fall → endometrium sloughs → MENSES',
+  'hCG rescue':'Trophoblast-secreted β-hCG binds the LH RECEPTOR on the CL (because hCG shares α-subunit with LH + has near-identical β-subunit). Keeps progesterone output sustained. hCG detectable 8-10 days post-ovulation, doubles every 48 h early',
+  'Luteoplacental shift':'~8-10 weeks of gestation. Placental syncytiotrophoblast makes enough progesterone to maintain pregnancy. After this point, OOPHORECTOMY is tolerated without miscarriage. hCG peaks ~10 weeks then declines'
+};
+
+const a4={
+  '1-5 ovarian':'Early follicular',
+  '1-5 uterine':'Menses (endometrial shedding)',
+  '1-5 hormones':'Rising FSH; low everything else (E2, LH, P)',
+  '6-13 ovarian':'Late follicular (dominant follicle develops)',
+  '6-13 uterine':'Proliferative (endometrium re-grows under estrogen)',
+  '6-13 hormones':'Estradiol (rising); FSH declining as E2 + inhibin B rise',
+  '14 ovarian':'OVULATION',
+  '14 uterine':'Transition (from proliferative to secretory)',
+  '14 hormones':'LH SURGE (~10× baseline) + smaller FSH surge. Occurs ~36 h after LH begins rising',
+  '15-28 ovarian':'Luteal phase (CL active)',
+  '15-28 uterine':'Secretory (glandular, pro-implantation, decidualized)',
+  '15-28 hormones':'PROGESTERONE > estradiol. Inhibin A rising, FSH/LH suppressed',
+  '28+ ovarian':'CL involution → corpus albicans',
+  '28+ uterine':'Menses again (shedding as hormones fall)',
+  '28+ hormones':'Progesterone + estradiol FALL. Inhibin A falls → FSH rises for next cycle',
+  'FSH rise trigger':'Loss of inhibin A from involuted CL (luteal → early follicular transition) removes the FSH brake → FSH rises and recruits a new cohort of antral follicles',
+  'Late follicular shift':'Dominant follicle secretes escalating estradiol + inhibin B → suppress FSH (atresia of competitors). Estradiol crosses the surge threshold (~200 pg/mL for ~48 h) → imminent positive feedback',
+  'Proliferative endometrium':'Straight tubular glands; lengthening spiral arteries; mitotic activity; stratum functionalis re-growth driven by estradiol',
+  'LH surge timing':'Surge lasts ~24-48 h. OVULATION occurs ~36 hours after LH begins rising, ~10-12 hours after LH PEAK',
+  'Follicle rupture':'Granulosa cells (now LH-R positive) make LOCAL PROGESTERONE → activates proteolytic enzymes (collagenase, plasminogen activators) → follicle wall weakens. A thin-walled \"stigma\" bulges on surface → ruptures → ovum + cumulus released',
+  'Peak P day':'Day 21-22 (mid-luteal phase). This is ~7 days after ovulation',
+  'Day 21 threshold':'Day-21 serum progesterone >5-10 ng/mL = CONFIRMS an ovulatory cycle',
+  'Secretory histo':'Tortuous + sacculated GLANDS; glycogen-rich cells; SUBNUCLEAR VACUOLES appear days 16-18 (\"early secretory\"); spiral arteries coil; stroma DECIDUALIZES for implantation',
+  'No 2nd surge':'PROGESTERONE BLOCKS positive feedback at the AVPV hypothalamus + pituitary — even though E2 is still high during luteal phase, P prevents a second surge. Ensures one-ovulation-per-cycle',
+  'Menses cause':'No pregnancy → CL lacks sustained LH support → involutes after ~12 days → P + E2 FALL sharply → spiral arteries CONSTRICT → endometrial ischemia + cell death → sloughing + menses. Loss of inhibin A then allows FSH to rise and start next cycle',
+  'Endo estrogen':'Proliferation (stratum functionalis re-growth, gland elongation, spiral artery lengthening)',
+  'Endo progesterone':'Secretory differentiation; decidualization (stromal prep for implantation); glycogen storage',
+  'Myo estrogen':'↑ contractility + ↑ oxytocin receptors (primes uterus)',
+  'Myo progesterone':'↓ contractility (quiescence) — allows implantation and maintains pregnancy',
+  'Mucus estrogen':'Thin, watery, CLEAR; ferning pattern; STRETCHY — sperm-friendly (facilitates fertilization around ovulation)',
+  'Mucus progesterone':'Thick, scant, sticky — sperm-hostile (cervical plug during pregnancy)',
+  'Vagina estrogen':'Proliferation of epithelium; glycogenated; creates acidic pH via Lactobacillus fermentation of glycogen (protects against pathogens)',
+  'Vagina progesterone':'Less proliferative; reduced lactobacilli',
+  'Breast estrogen':'DUCTAL growth',
+  'Breast progesterone':'ALVEOLAR / lobular development (the milk-producing units)',
+  'Bone estrogen':'INHIBITS osteoclasts; closes epiphyses (in both sexes). Loss → osteoporosis',
+  'Bone progesterone':'Minor direct effect on bone',
+  'BBT estrogen':'No significant change',
+  'BBT progesterone':'↑ 0.3-0.5°C after ovulation (progesterone is thermogenic). BASIS of fertility awareness methods',
+  'Na estrogen':'Mild retention (ADH-like effect)',
+  'Na progesterone':'Diuretic (ANTAGONIZES aldosterone at the MR — progesterone binds MR weakly)',
+  'Clotting estrogen':'↑ factors II, VII, IX, X → PROTHROMBOTIC. Basis of OCP VTE risk',
+  'Clotting progesterone':'Minor',
+  'HPG estrogen':'BIPHASIC — negative at low/moderate levels, POSITIVE at sustained high levels (LH surge)',
+  'HPG progesterone':'NEGATIVE only; ALSO BLOCKS positive feedback at AVPV (prevents luteal-phase surge despite high E2)',
+  'hCG detect':'Detectable in serum ~8-10 days post-ovulation (~4 weeks gestational age). Doubles every 48 hours in normal early pregnancy',
+  'Placenta takeover':'~8-10 weeks of gestation (luteoplacental shift). Placental syncytiotrophoblast now makes enough progesterone to maintain pregnancy. After this, oophorectomy is tolerated',
+  'Estriol source':'Fetal adrenal makes DHEA-S → placenta desulfates and aromatizes → ESTRIOL (E3). Requires both fetus and placenta working. Falling estriol in late pregnancy = sign of fetal/placental distress',
+  'SHBG pregnancy':'Driven by high placental ESTROGEN → hepatic SHBG synthesis UP. Buffers steroid bioavailability. Total T + E2 rise, but free fractions stay normal. Similar effect on CBG and TBG',
+  'OCP mechanisms':'(1) Steady moderate E2 + progestin keeps feedback in the NEGATIVE-ONLY zone → no LH surge → no ovulation. (2) Progestin thickens cervical mucus (blocks sperm) + atrophies endometrium (reduces implantation receptivity) — backup mechanisms',
+  'Unopposed estrogen':'Chronic anovulation → no CL → no progesterone. Peripheral aromatization of androgens makes chronic low-level estrone (E1). Without progesterone to oppose it, endometrium proliferates unopposed → hyperplasia → adenocarcinoma. Seen in PCOS, obesity, HRT without progestin, estrogen-secreting tumors'
+};
+
+const a5={
+  'Primary LHFSH':'↑↑ (no negative feedback from absent gonadal steroids)',
+  'Primary E2':'↓ (gonad failed)',
+  'Primary lesion':'Gonad failed — Turner (45,X), POI, chemotherapy/radiation, autoimmune oophoritis, Swyer',
+  'Secondary LHFSH':'↓ or inappropriately normal (brain quiet)',
+  'Secondary E2':'↓ (no gonadotropin stimulation)',
+  'Secondary lesion':'Hypothalamus or pituitary — Kallmann, functional hypothalamic amenorrhea, prolactinoma, Sheehan, pituitary adenoma',
+  'Overprod LHFSH':'Variable',
+  'Overprod E2':'↑ (or wrong hormone excess)',
+  'Overprod lesion':'Ovary/adrenal tumor, PCOS, CAH (adrenal androgens)',
+  'Receptor LHFSH':'↑ LH (loss of AR-mediated feedback)',
+  'Receptor E2':'High but ineffective (high T, high E2 from peripheral aromatization, but ineffective at target)',
+  'Receptor lesion':'End-organ — AIS (AR defect), 5α-RD deficiency (enzyme defect)',
+  'Turner LHFSH':'↑↑ (primary)',
+  'Turner E2':'↓↓',
+  'Turner clue':'Short stature, webbed neck, bicuspid AV / coarctation, streak ovaries, horseshoe kidney, lymphedema at birth',
+  'Swyer LHFSH':'↑ (primary)',
+  'Swyer E2':'↓ E2 AND ↓ T',
+  'Swyer clue':'46,XY female phenotype, streak gonads (Y-bearing), primary amenorrhea. MUST REMOVE gonads (gonadoblastoma risk)',
+  'POI LHFSH':'↑↑ (primary; FSH > 40)',
+  'POI E2':'↓',
+  'POI clue':'Menopausal labs + amenorrhea BEFORE age 40. Workup: karyotype, fragile X premutation, autoimmune screen. HRT until ~51',
+  'Kallmann LHFSH':'↓ (secondary)',
+  'Kallmann E2':'↓ E2 or ↓ T',
+  'Kallmann clue':'Delayed/absent puberty + ANOSMIA (shared embryology — GnRH neurons migrate with olfactory neurons from olfactory placode)',
+  'FHA LHFSH':'↓ (secondary)',
+  'FHA E2':'↓',
+  'FHA clue':'Low BMI, stress, over-training. Low leptin → low kisspeptin → low GnRH. Female athlete triad',
+  'Prolactinoma LHFSH':'↓ (secondary)',
+  'Prolactinoma E2':'↓',
+  'Prolactinoma clue':'Amenorrhea-galactorrhea + bitemporal hemianopia if large. PRL very high. Treat with DOPAMINE AGONIST (cabergoline)',
+  'PCOS LHFSH':'LH:FSH > 2 (fast GnRH pulses)',
+  'PCOS E2':'↑ free T, ↑ estrone (peripheral aromatization)',
+  'PCOS clue':'Hirsutism, anovulation, string of pearls on US. Insulin resistance + obesity. Rotterdam 2 of 3',
+  'CAIS LHFSH':'↑ LH (loss of AR feedback)',
+  'CAIS E2':'↑ T + ↑ E2 (peripheral aromatization)',
+  'CAIS clue':'46,XY phenotypic female, testes inguinal, NO uterus, breasts from aromatization, sparse hair',
+  '5αRD LHFSH':'Normal or ↑ LH',
+  '5αRD E2':'Normal T, ↓ DHT, elevated T:DHT ratio',
+  '5αRD clue':'46,XY raised female at birth; virilizes at puberty (\"guevedoces\")',
+  'CAH LHFSH':'Normal',
+  'CAH E2':'↑ 17-OH-progesterone, ↑ androgens (DHEA, androstenedione, T)',
+  'CAH clue':'46,XX ambiguous external + salt-wasting + normal ovaries/uterus. Newborn screen',
+  'Menopause LHFSH':'↑↑ FSH > LH (inhibin loss + loss of E2 feedback)',
+  'Menopause E2':'↓↓',
+  'Menopause clue':'Age ~51. Hot flashes, atrophic vagina, osteoporosis. Estrone now dominant',
+  'Rotterdam':'2 of 3: (1) Oligo/anovulation (oligomenorrhea or amenorrhea). (2) Clinical or biochemical HYPERANDROGENISM (hirsutism, acne, ↑ free T). (3) POLYCYSTIC OVARIES on ultrasound (≥12 small antral follicles, \"string of pearls\")',
+  'PCOS LH ratio':'Fast GnRH pulses favor LH > FSH release. Also: high LH stimulates thecal androgen production → relatively low FSH means granulosa aromatase underactive → follicles arrest at antral stage → no dominant follicle',
+  'PCOS unopposed E':'Peripheral ADIPOSE TISSUE aromatizes androstenedione → estrone (E1). Chronic anovulation means NO CL = NO PROGESTERONE. Chronic low-level estrogen without progesterone → unopposed estrogen → endometrial hyperplasia → cancer risk',
+  'PCOS insulin':'Hyperinsulinemia stimulates theca androgen production (compound effect with LH) AND lowers hepatic SHBG → more free T. Creates a self-reinforcing loop. Metformin addresses insulin resistance',
+  'PCOS ovulation':'LETROZOLE (aromatase inhibitor) — now first-line. Blocks peripheral aromatization → lower E2 → more FSH → multiple follicles recruited. Clomiphene is the traditional SERM alternative (blocks hypothalamic ER)',
+  'PCOS hirsutism':'SPIRONOLACTONE — AR antagonist (off-target effect). Effective for hirsutism. CAUTION: teratogenic to male fetus → use reliable contraception (combined OCP)',
+  'Earliest perimeno':'Inhibin B falls first (earliest perimenopausal change — declining follicle pool). Then FSH rises (loss of inhibin brake). Eventually ovary can\'t make estradiol → full menopause',
+  'FSH > LH menopause':'Loss of ovarian INHIBIN (which selectively suppresses FSH) adds to the loss of estradiol negative feedback. Both gonadotropins rise, but FSH rises MORE than LH because it lost both brakes',
+  'Menopause estrogen':'Peripheral aromatization of adrenal ANDROSTENEDIONE → ESTRONE (E1) in adipose tissue + bone. Only source after menopause. Obesity → more aromatase → more estrone → ↑ endometrial/breast cancer risk',
+  'HAVOCS':'H — Hot flashes / vasomotor (LH pulses → cutaneous vasodilation). A — Atrophy of vagina → dyspareunia, recurrent UTIs. V — Vaginal dryness (GSM). O — Osteoporosis. C — Coronary artery disease risk. S — Sleep disturbance, mood, cognitive fuzziness',
+  'HRT uterus':'Uterus INTACT → estrogen + progestin (progestin protects endometrium from unopposed estrogen-driven hyperplasia/cancer). Post-HYSTERECTOMY → estrogen alone (no endometrium to protect)',
+  'Timing hypothesis':'HRT risk-benefit most favorable when STARTED <60 years old OR within 10 years of menopause. Starting HRT late (10+ years post-menopause) has increased cardiovascular + stroke risk',
+  'HRT risks':'(1) VTE / stroke (estrogen prothrombotic — ↑ factors II, VII, IX, X). (2) Breast cancer (long-term combined HRT, especially E + synthetic progestin). Also: endometrial cancer if estrogen unopposed in patient with uterus',
+  'POI treatment':'HRT until AVERAGE AGE OF MENOPAUSE (~51) to protect bone + cardiovascular health. Higher doses than standard menopause HRT (these women are young and need more). Fertility counseling (spontaneous conception possible but rare)',
+  'Kallmann symptom':'ANOSMIA (or hyposmia) — GnRH and olfactory neurons share embryologic migration from the olfactory placode. Genes: ANOS1/KAL1, FGFR1, PROK2. Treatment: pulsatile GnRH OR exogenous gonadotropins + sex steroids',
+  'Athlete triad':'Low energy availability + menstrual dysfunction + low bone mineral density. Management: BEHAVIORAL FIRST (restore weight, reduce training, manage stress). HRT/OCP for bone protection if amenorrhea persists. Stress fractures at unusual sites are a red flag',
+  'Prolactinoma rx':'Dopamine agonist — CABERGOLINE (first-line) or bromocriptine. Restores dopamine tone → suppresses prolactin → restores GnRH. Surgery only for drug resistance or acute mass effect (vision loss)',
+  'Hypothyroid menstrual':'↑ TRH (low T4 feedback removal) → TRH also stimulates prolactin release at pituitary → hyperprolactinemia → inhibits GnRH → menstrual irregularities, galactorrhea. Treat by replacing thyroid hormone (levothyroxine)'
+};
+
+function rev(id,obj){
+  const el=document.getElementById(id);
+  el.style.display='block';
+  el.innerHTML='<strong>Answer key:</strong><br><br>'+Object.entries(obj).map(([k,v])=>`<b>${k}:</b> ${v}`).join('<br><br>');
+}
+</script>
+</body></html>
