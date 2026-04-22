@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Reproduction Hub Update Tracker</title>
+<style>
+ :root {
+ -amber-50:#FFFBEB;
+ -amber-100:#FEF3C7;
+ -amber-200:#FDE68A;
+ -amber-500:#F59E0B;
+ -amber-600:#D97706;
+ -amber-700:#B45309;
+ -amber-900:#78350F;
+ -slate-50:#F8FAFC;
+ -slate-100:#F1F5F9;
+ -slate-200:#E2E8F0;
+ -slate-300:#CBD5E1;
+ -slate-500:#64748B;
+ -slate-600:#475569;
+ -slate-700:#334155;
+ -slate-900:#0F172A;
+ -green-100:#DCFCE7;
+ -green-600:#16A34A;
+ -green-700:#15803D;
+ -red-100:#FEE2E2;
+ -red-600:#DC2626;
+ -red-700:#B91C1C;
+ -blue-100:#DBEAFE;
+ -blue-600:#2563EB;
+ -blue-700:#1D4ED8;
+ -yellow-100:#FEF9C3;
+ -yellow-700:#A16207;
+ }
+ * { box-sizing: border-box; }
+ body {
+ margin: 0;
+ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+ Ubuntu, Cantarell, sans-serif;
+ background: linear-gradient(180deg, var(-amber-50) 0%, #fff 280px);
+ color: var(-slate-900);
+ }
+ header {
+ padding: 28px 32px 20px;
+ border-bottom: 1px solid var(-amber-200);
+ background: #fff;
+ }
+ header h1 {
+ margin: 0 0 4px;
+ font-size: 28px;
+ color: var(-amber-900);
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ }
+ header .sub {
+ color: var(-slate-600);
+ font-size: 14px;
+ }
+ header .scanned {
+ color: var(-slate-500);
+ font-size: 12px;
+ margin-top: 6px;
+ }
+ main { padding: 24px 32px 60px; max-width: 1400px; margin: 0 auto; }
+.topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+.topbar .btn-row { display: flex; gap: 10px; align-items: center; }
+.refresh-hint { margin-left: auto; color: var(-slate-500); font-size: 12px; }
+.refresh-hint code { background: var(-slate-100); color: var(-slate-700); padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+.jv-link {
+ padding: 8px 14px;
+ border: 1px solid var(-amber-600);
+ background: #fff;
+ color: var(-amber-700);
+ border-radius: 8px;
+ font-size: 13px;
+ font-weight: 600;
+ text-decoration: none;
+ display: inline-block;
+}
+.jv-link:hover { background: var(-amber-50); }
+.jv-link.active-link { background: var(-amber-600); color: #fff; }
+.jv-link.active-link:hover { background: var(-amber-700); }
+.rerun-btn {
+ padding: 8px 14px;
+ border: 1px solid var(-amber-600);
+ background: var(-amber-600);
+ color: #fff;
+ border-radius: 8px;
+ font-size: 13px;
+ font-weight: 600;
+ cursor: pointer;
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+}
+.rerun-btn:hover:not([disabled]) { background: var(-amber-700); border-color: var(-amber-700); }
+.rerun-btn[disabled] { opacity: 0.65; cursor: wait; }
+.spin { display: inline-block; }
+@keyframes hut-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+.spin.on { animation: hut-spin 0.8s linear infinite; }
+
+ .summary {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+ gap: 12px;
+ margin-bottom: 24px;
+ }
+ .stat {
+ background: #fff;
+ border: 1px solid var(-slate-200);
+ border-radius: 10px;
+ padding: 14px 16px;
+ }
+ .stat .n { font-size: 28px; font-weight: 700; line-height: 1; }
+ .stat .label { font-size: 12px; color: var(-slate-500); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+ .stat.fresh .n { color: var(-green-600); }
+ .stat.stale .n { color: var(-red-600); }
+ .stat.new .n { color: var(-blue-600); }
+ .stat.missing .n { color: var(-yellow-700); }
+
+ .toolbar {
+ display: flex;
+ gap: 10px;
+ align-items: center;
+ margin-bottom: 14px;
+ flex-wrap: wrap;
+ }
+ .toolbar input[type=search] {
+ flex: 1;
+ min-width: 220px;
+ padding: 9px 12px;
+ border: 1px solid var(-slate-300);
+ border-radius: 8px;
+ font-size: 14px;
+ }
+ .rescan-btn {
+ padding: 8px 14px;
+ border: 1px solid var(-amber-600);
+ background: var(-amber-600);
+ color: #fff;
+ border-radius: 8px;
+ cursor: pointer;
+ font-size: 13px;
+ font-weight: 600;
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ }
+ .rescan-btn:hover:not([disabled]) { background: var(-amber-700); border-color: var(-amber-700); }
+ .rescan-btn[disabled] { opacity: 0.6; cursor: wait; }
+ .banner {
+ margin-bottom: 14px;
+ padding: 10px 14px;
+ border-radius: 8px;
+ font-size: 13px;
+ }
+ .banner.info { background: var(-amber-50); border: 1px solid var(-amber-200); color: var(-amber-900); }
+ .banner.ok { background: var(-green-100); border: 1px solid #86EFAC; color: var(-green-700); }
+ .banner.warn { background: var(-yellow-100); border: 1px solid #FDE68A; color: var(-yellow-700); }
+ .banner a { color: inherit; font-weight: 600; }
+ .filter-btn {
+ padding: 8px 14px;
+ border: 1px solid var(-slate-300);
+ background: #fff;
+ color: var(-slate-700);
+ border-radius: 8px;
+ cursor: pointer;
+ font-size: 13px;
+ font-weight: 500;
+ }
+ .filter-btn.active {
+ background: var(-amber-600);
+ color: #fff;
+ border-color: var(-amber-600);
+ }
+
+ table.matrix {
+ width: 100%;
+ border-collapse: collapse;
+ background: #fff;
+ border: 1px solid var(-slate-200);
+ border-radius: 10px;
+ overflow: hidden;
+ font-size: 14px;
+ }
+ table.matrix th, table.matrix td {
+ padding: 10px 12px;
+ text-align: left;
+ border-bottom: 1px solid var(-slate-100);
+ }
+ table.matrix th {
+ background: var(-slate-50);
+ font-weight: 600;
+ color: var(-slate-600);
+ font-size: 12px;
+ text-transform: uppercase;
+ letter-spacing: 0.04em;
+ }
+ table.matrix th.ctr, table.matrix td.ctr { text-align: center; }
+ table.matrix tr.lecture-row { cursor: pointer; }
+ table.matrix tr.lecture-row:hover { background: var(-amber-50); }
+ table.matrix tr.detail-row td {
+ background: var(-slate-50);
+ padding: 14px 22px;
+ border-bottom: 2px solid var(-slate-200);
+ }
+ .lid { font-family: ui-monospace, Menlo, monospace; font-weight: 600; color: var(-amber-700); }
+ .title { color: var(-slate-900); }
+
+ .state-pill {
+ display: inline-block;
+ padding: 3px 9px;
+ border-radius: 999px;
+ font-size: 11px;
+ font-weight: 600;
+ text-transform: uppercase;
+ letter-spacing: 0.04em;
+ }
+ .state-fresh { background: var(-green-100); color: var(-green-700); }
+ .state-stale { background: var(-red-100); color: var(-red-700); }
+ .state-new { background: var(-blue-100); color: var(-blue-700); }
+ .state-missing-sources { background: var(-yellow-100); color: var(-yellow-700); }
+
+ .hub-cell {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ width: 28px; height: 28px;
+ border-radius: 8px;
+ font-size: 13px;
+ font-weight: 600;
+ }
+ .hub-fresh { background: var(-green-100); color: var(-green-700); }
+ .hub-stale { background: var(-red-100); color: var(-red-700); }
+ .hub-gap { background: var(-amber-100); color: var(-amber-700); }
+ .hub-missing { background: var(-slate-100); color: var(-slate-300); }
+
+ .details h3 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(-slate-600); }
+ .details .file-list { margin: 0; padding: 0; list-style: none; }
+ .details .file-list li {
+ font-family: ui-monospace, Menlo, monospace;
+ font-size: 12px;
+ padding: 4px 0;
+ color: var(-slate-700);
+ }
+ .details .file-list .hash { color: var(-slate-400); font-size: 11px; margin-left: 8px; }
+ .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+ .badge-kind {
+ display: inline-block;
+ padding: 1px 6px;
+ margin-right: 6px;
+ background: var(-amber-100);
+ color: var(-amber-700);
+ border-radius: 4px;
+ font-size: 10px;
+ text-transform: uppercase;
+ }
+ .action-hint {
+ margin-top: 12px;
+ padding: 10px 14px;
+ background: #fff;
+ border: 1px dashed var(-amber-200);
+ border-radius: 8px;
+ font-size: 13px;
+ color: var(-slate-700);
+ }
+ .action-hint code {
+ background: var(-slate-900);
+ color: #fff;
+ padding: 2px 6px;
+ border-radius: 4px;
+ font-size: 12px;
+ }
+ .empty {
+ padding: 40px; text-align: center; color: var(-slate-500);
+ background: #fff; border: 1px dashed var(-slate-200); border-radius: 10px;
+ }
+ .gaps {
+ margin-top: 18px;
+ padding: 14px 16px;
+ background: #fff;
+ border: 1px solid var(-amber-200);
+ border-radius: 10px;
+ }
+ .gaps h3 {
+ margin: 0 0 10px;
+ font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em;
+ color: var(-amber-900);
+ }
+ .gap-empty { color: var(-slate-500); font-size: 13px; padding: 4px 0; }
+ .gap-empty.ok { color: var(-green-700); }
+ .gap-block { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(-slate-100); }
+ .gap-block:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+ .gap-heading { font-size: 13px; color: var(-slate-700); margin-bottom: 6px; }
+ .lo-list {
+ margin: 4px 0 0;
+ padding: 0 0 0 6px;
+ list-style: none;
+ font-size: 13px;
+ }
+ .lo-list li {
+ padding: 3px 0;
+ color: var(-slate-700);
+ line-height: 1.4;
+ }
+ .lo-list .lo-dot {
+ display: inline-block;
+ width: 18px;
+ font-weight: 700;
+ }
+ .lo-orphan { color: var(-red-700); }
+ .lo-orphan .lo-dot { color: var(-red-600); }
+ .lo-missing { color: var(-amber-900); }
+ .lo-missing .lo-dot { color: var(-amber-600); }
+ .legend {
+ display: flex; gap: 18px; margin-top: 14px; padding: 10px 14px;
+ background: var(-slate-50); border-radius: 8px;
+ font-size: 12px; color: var(-slate-600);
+ flex-wrap: wrap;
+ }
+ .legend .item { display: inline-flex; align-items: center; gap: 6px; }
+</style>
+</head>
+<body>
+<header>
+ <h1>Reproduction Hub Update Tracker</h1>
+ <div class="sub">Flags which hub pages need rebuilding when lecture sources change.</div>
+ <div class="scanned">Scanned: <span id="scanned-at"></span></div>
+</header>
+<main>
+ <div class="topbar">
+ <div class="btn-row">
+ <button id="rerun-btn" class="rerun-btn" type="button">
+ <span id="rerun-spinner" class="spin" style="display:none;">⟳</span>
+ <span id="rerun-label">Rerun scan</span>
+ </button>
+ <a class="jv-link active-link" href="dashboard.html">Hub Update Tracker</a>
+ <a class="jv-link" href="jv-dashboard.html">JV Tool</a>
+ </div>
+ <div class="refresh-hint">Rerun needs the tracker server running. Start it by double-clicking <code>run.command</code>.</div>
+ </div>
+ <div id="banner"></div>
+ <section class="summary" id="summary"></section>
+
+ <div class="toolbar">
+ <input type="search" id="search" placeholder="Search lectures, titles, file names…" />
+ <button class="filter-btn active" data-filter="all">All</button>
+ <button class="filter-btn" data-filter="needs-update">Needs update</button>
+ <button class="filter-btn" data-filter="stale">Stale only</button>
+ <button class="filter-btn" data-filter="has-gaps">Has LO gaps</button>
+ <button class="filter-btn" data-filter="orphan">Orphan LOs</button>
+ <button class="filter-btn" data-filter="missing">Missing hubs</button>
+ <button class="filter-btn" data-filter="fresh">Fresh only</button>
+ </div>
+
+ <table class="matrix" id="matrix">
+ <thead>
+ <tr>
+ <th style="width:80px;">Lecture</th>
+ <th>Title</th>
+ <th style="width:120px;">State</th>
+ <th class="ctr" style="width:70px;">Lec Guide</th>
+ <th class="ctr" style="width:70px;">Active Recall</th>
+ <th class="ctr" style="width:60px;">Hub 1</th>
+ <th class="ctr" style="width:60px;">Hub 2</th>
+ <th class="ctr" style="width:60px;">Hub 3</th>
+ <th class="ctr" style="width:70px;">Sources</th>
+ </tr>
+ </thead>
+ <tbody id="rows"></tbody>
+ </table>
+
+ <div class="legend">
+ <span class="item"><span class="hub-cell hub-fresh">✓</span> Fresh — built from current sources, all LOs covered</span>
+ <span class="item"><span class="hub-cell hub-stale">!</span> Stale — sources changed since last build</span>
+ <span class="item"><span class="hub-cell hub-gap">N</span> Has gaps — N learning objectives not found on the page</span>
+ <span class="item"><span class="hub-cell hub-missing">—</span> Missing — hub page does not exist yet</span>
+ </div>
+</main>
+
+<script>
+const STATUS = {"scanned_at": "2026-04-22T05:55:59", "endo_root": "/sessions/intelligent-kind-mayer/mnt/repro", "lectures": [{"lecture_id": "rpd01", "title": "IL Urogenital Primer", "sources": [{"path": "Learning Objectives/rpd01_LO_Urogenital-Primer.docx", "sha256": "58f57365ce7ee47b1f0d857635632a2a41630918910035575e16ccff08ca349b", "mtime": "2026-04-12T19:16:02", "mtime_ts": 1776021362.0, "size": 6674, "kind": "lo"}, {"path": "Per Lecture/rpd01_IL-Urogenital-Primer/Urogenital Primer.pdf", "sha256": "7991e495c9ff6bde3109002086f7fd9b9a41b28b51d92ddb593bafd415306c70", "mtime": "2026-04-12T19:08:28", "mtime_ts": 1776020908.0, "size": 2336563, "kind": "pdf"}, {"path": "Per Lecture/rpd02_Urogenital-System/RPD01_041525_Urogenital System I_Uncorrected.pdf", "sha256": "c130b21ddc94e20f8d8881e843399ef5b368f2ed0370a5a82b113c0e1ae9aae1", "mtime": "2026-04-12T19:13:34", "mtime_ts": 1776021214.0, "size": 13892522, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "a008767d7c9e02af02440850154775d6ceb87433ca1b5c821f1d3e7e468a5ab9", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd02", "title": "Urogenital System", "sources": [{"path": "Learning Objectives/rpd02_LO_Urogenital-System-I-II.docx", "sha256": "0d639496e006138cf85358615c75013f1cf56071a5d66a8503f748796090eadf", "mtime": "2026-04-12T19:18:04", "mtime_ts": 1776021484.0, "size": 6715, "kind": "lo"}, {"path": "Per Lecture/rpd02_Urogenital-System/RPD01_041525_Urogenital System I_Uncorrected.pdf", "sha256": "c130b21ddc94e20f8d8881e843399ef5b368f2ed0370a5a82b113c0e1ae9aae1", "mtime": "2026-04-12T19:13:34", "mtime_ts": 1776021214.0, "size": 13892522, "kind": "pdf"}, {"path": "Per Lecture/rpd02_Urogenital-System/RPD02_Urogenital System II_041525_[uncorrected].pdf", "sha256": "eb6a4001b3c20e1a6c46f68eac018361d21ba6b03f8a679b2a02fd75bcea584c", "mtime": "2026-04-12T19:13:36", "mtime_ts": 1776021216.0, "size": 2382411, "kind": "pdf"}, {"path": "Per Lecture/rpd02_Urogenital-System/RPD_Embr_Hankins_Urogenital System 1 2025.pptx.pdf", "sha256": "0272769fca1dfcec98f2d05d19e7004a7965c0112997dfeb03fad8e523f8e3e5", "mtime": "2026-04-12T19:12:04", "mtime_ts": 1776021124.0, "size": 3330971, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": "lecture-guides/rpd02-urogenital-system.html", "mtime": "2026-04-17T05:02:17", "mtime_ts": 1776402137.558606, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": "active-lesson-drills/rpd02_active_recall.html", "mtime": "2026-04-21T05:57:25", "mtime_ts": 1776751045.9877877, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": "testing-drills/rpd02-hub1-urogenital-system.html", "mtime": "2026-04-17T05:22:23", "mtime_ts": 1776403343.8381908, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": "testing-drills/rpd02-hub2-urogenital-system.html", "mtime": "2026-04-17T05:34:23", "mtime_ts": 1776404063.938557, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": "testing-drills/rpd02-hub3-urogenital-system.html", "mtime": "2026-04-17T05:41:05", "mtime_ts": 1776404465.9082985, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "fcd82a1dc690b73821b222054d0edee5a3941f431e061795cdfe1f729a1af1cd", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": [], "los": [], "orphan_los": []}, {"lecture_id": "rpd03", "title": "Female Reproductive System", "sources": [{"path": "Learning Objectives/rpd03_LO_Female-Reproductive-System.docx", "sha256": "e7f9e6e09054461e331fb2ee52e716db4870630443e7a662cbcd795844a73f54", "mtime": "2026-04-12T19:19:22", "mtime_ts": 1776021562.0, "size": 6775, "kind": "lo"}, {"path": "Per Lecture/rpd03_Female-Reproductive-System/Female Reproduction Lecture notes.DOC", "sha256": "844382890bf14e7ed89365835f021548353cad96146e749bdde16dc0119cc46a", "mtime": "2026-04-12T19:08:58", "mtime_ts": 1776020938.0, "size": 10953216, "kind": "lo"}, {"path": "Per Lecture/rpd03_Female-Reproductive-System/Female Reproduction lecture.ppt.pdf", "sha256": "be5080eeaf613b8471813543c4df88da04011c9ec10170bceba5bdd08113f3a5", "mtime": "2026-04-12T19:08:56", "mtime_ts": 1776020936.0, "size": 9119725, "kind": "pdf"}, {"path": "Per Lecture/rpd03_Female-Reproductive-System/Female Reproductive System_041422_Uncorrected .pdf", "sha256": "daddbb453e758a36e23a82bc365dcaae3494b3f54d9a63b778f05fc8e4eab780", "mtime": "2024-05-14T05:27:43", "mtime_ts": 1715664463.912404, "size": 2070672, "kind": "pdf"}, {"path": "Per Lecture/rpd03_Female-Reproductive-System/RPD03_Female Reproductive System_04152025_Uncorrected.pdf", "sha256": "b618a2e405e0f75f50be5430cb6744e03f9bde0d3bcefda84b0cf0d45aef23b4", "mtime": "2026-04-12T19:13:40", "mtime_ts": 1776021220.0, "size": 20920841, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": "lecture-guides/rpd03-female-reproductive-system.html", "mtime": "2026-04-17T05:27:10", "mtime_ts": 1776403630.8812783, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": "active-lesson-drills/rpd03_active_recall.html", "mtime": "2026-04-17T06:39:10", "mtime_ts": 1776407950.9761267, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": "testing-drills/rpd03-hub1-female-reproductive.html", "mtime": "2026-04-17T05:52:36", "mtime_ts": 1776405156.2121398, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": "testing-drills/rpd03-hub2-female-reproductive.html", "mtime": "2026-04-17T06:05:32", "mtime_ts": 1776405932.8924646, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": "testing-drills/rpd03-hub3-female-reproductive.html", "mtime": "2026-04-17T06:12:30", "mtime_ts": 1776406350.599097, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "eb680d8c35be182ed385be2a78f2e5d493618e6892eba2d4166d7af73659ef3c", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": [], "los": [], "orphan_los": []}, {"lecture_id": "rpd04", "title": "Male Reproductive System", "sources": [{"path": "Learning Objectives/rpd04_LO_Male-Reproductive-System.docx", "sha256": "b0de20b8e0a9b1c1fa4c1f7a8300271e1c9aaa5898bc92cb0e4d2c30845ff483", "mtime": "2026-04-12T19:20:48", "mtime_ts": 1776021648.0, "size": 6726, "kind": "lo"}, {"path": "Per Lecture/rpd04_Male-Reproductive-System/Male Reproduction Lecture notes.doc", "sha256": "719062aff35c18bbbc531813ef62e8b34cb1c820b58bc5d4c72ec07677ba6c9d", "mtime": "2026-04-12T19:09:18", "mtime_ts": 1776020958.0, "size": 131543552, "kind": "lo"}, {"path": "Per Lecture/rpd04_Male-Reproductive-System/Male Reproduction Lecture.ppt.pdf", "sha256": "1d0003718b7a89bd9cb66b69ef3fe9b0548684585ccecc925dd895702d0ef7f7", "mtime": "2026-04-12T19:09:02", "mtime_ts": 1776020942.0, "size": 9093432, "kind": "pdf"}, {"path": "Per Lecture/rpd04_Male-Reproductive-System/Male Reproductive System_04142022_uncorrected.pdf", "sha256": "f1daea663b98475416add0bdf735c11e9a8135bbfb7109656120ae2d66e2f804", "mtime": "2024-05-14T05:27:47", "mtime_ts": 1715664467.2550128, "size": 8170427, "kind": "pdf"}, {"path": "Per Lecture/rpd04_Male-Reproductive-System/RPD04_Male Reproduction_041825_uncorrected .pdf", "sha256": "6211b2669537f798edb49051b9e0c9d8a6531d135e1b32616e5d8d2eda58e511", "mtime": "2026-04-12T19:13:40", "mtime_ts": 1776021220.0, "size": 588262, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": "lecture-guides/rpd04-male-reproductive-system.html", "mtime": "2026-04-17T05:47:34", "mtime_ts": 1776404854.1291032, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": "active-lesson-drills/rpd04_active_recall.html", "mtime": "2026-04-17T06:52:14", "mtime_ts": 1776408734.6992998, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": "testing-drills/rpd04-hub1-male-reproductive.html", "mtime": "2026-04-17T06:39:22", "mtime_ts": 1776407962.7273538, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": "testing-drills/rpd04-hub2-male-reproductive.html", "mtime": "2026-04-17T07:01:17", "mtime_ts": 1776409277.768774, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": "testing-drills/rpd04-hub3-male-reproductive.html", "mtime": "2026-04-17T07:00:39", "mtime_ts": 1776409239.978999, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "8932674a09dfb1bc45c1009e35e1b42c0e472e751ec350e7314f81d1d873d8aa", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": [], "los": [], "orphan_los": []}, {"lecture_id": "rpd05", "title": "Endocrinology Ovary Female I II", "sources": [{"path": "Learning Objectives/rpd05-06_LO_Endocrinology-Ovary-Female-Reproductive-I-II.docx", "sha256": "345d467682c5d1ee6a45c4f4ff2fe0bf7a60c9e0aea535df15222e8970ef947c", "mtime": "2026-04-22T05:35:07", "mtime_ts": 1776836107.321601, "size": 17893, "kind": "lo"}, {"path": "Learning Objectives/xxrpd05-06_LO_Endocrinology-Ovary-Female-Reproductive-I-II.docx", "sha256": "cdf9d4c64bf45ddf84d8b8e5dc05a79f2e5476207cfca243290d2b5947ac64eb", "mtime": "2026-04-12T19:24:50", "mtime_ts": 1776021890.0, "size": 19251, "kind": "lo"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/25-26_RPD_Phys_Endocrinology of the Ovary & Female Reproductive Tract (parts 1 & 2)_slides.pptx.pdf", "sha256": "60ba88fa680fe27a688a5013920c4dfe4a1c809f2ecb1137199ffd6a5dc6ac98", "mtime": "2026-04-22T05:35:05", "mtime_ts": 1776836105.677197, "size": 5296631, "kind": "pdf"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/Endocrinology of the Ovary & Female Reproductive Tract II_042222_uncorrected.pdf", "sha256": "065d96c838e7d841268564e1fb76f8e611e0ecd9df7db072d5df7a44bc23e0f2", "mtime": "2024-05-14T05:27:56", "mtime_ts": 1715664476.512268, "size": 872212, "kind": "pdf"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/Endocrinology of the Ovary & Female Reproductive Tract I_042222_uncorrected.pdf", "sha256": "d1896d2b579e60a54ef2c19bfc375a75cdb0250ede9e386d8d5252b689cd85cc", "mtime": "2024-05-14T05:27:55", "mtime_ts": 1715664475.3131564, "size": 3466649, "kind": "pdf"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/RPD05_Endocrinology of Ovary+Female Repro_04242025_uncorrected.pdf", "sha256": "3623361ea684ca60c7f799a9c60d9a40f237d239c2dcf6c563124197790c1e55", "mtime": "2026-04-12T19:13:42", "mtime_ts": 1776021222.0, "size": 3601415, "kind": "pdf"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/RPD06_Endocrinology of Female Reproductive Tract 2_04252025_uncorrected.pdf", "sha256": "555e9f7478401c46bc1a621fa566e5183dd63d557636af842fc362f3acea11ce", "mtime": "2026-04-12T19:13:44", "mtime_ts": 1776021224.0, "size": 1662882, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "36c1060fc6e3355f68e84909a18a0910ac6ec85846ecfa754b8b66150cfa5291", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": ["Describe the hierarchical levels of sexual differentiation, and understand how each level of differentiation controls the next", "Explain what hormones are required (or not required) for the differentiation of morphological sex (female- and male-typical phenotypes)", "Identify the pathways of the hypothalamic-pituitary-gonadal (HPG) axis in females, and explain in detail how negative and positive feedback regulate the HPG axis", "Describe ovarian follicle and corpus luteum development, and identify the endocrine components and hormones secreted for each follicle stage", "Describe the concentrations of LH, FSH, estradiol, progesterone, and inhibin through the ovarian cycle, and explain the physiologic effects of these hormones on target tissues and processes (e.g. ovulation)", "Describe the effects of altered or disordered sex hormone signaling and the associated conditions"], "orphan_los": ["Describe the hierarchical levels of sexual differentiation, and understand how each level of differentiation controls the next", "Explain what hormones are required (or not required) for the differentiation of morphological sex (female- and male-typical phenotypes)", "Identify the pathways of the hypothalamic-pituitary-gonadal (HPG) axis in females, and explain in detail how negative and positive feedback regulate the HPG axis", "Describe ovarian follicle and corpus luteum development, and identify the endocrine components and hormones secreted for each follicle stage", "Describe the concentrations of LH, FSH, estradiol, progesterone, and inhibin through the ovarian cycle, and explain the physiologic effects of these hormones on target tissues and processes (e.g. ovulation)", "Describe the effects of altered or disordered sex hormone signaling and the associated conditions"]}, {"lecture_id": "rpd06", "title": "Endocrinology Ovary Female I II", "sources": [{"path": "Learning Objectives/rpd05-06_LO_Endocrinology-Ovary-Female-Reproductive-I-II.docx", "sha256": "345d467682c5d1ee6a45c4f4ff2fe0bf7a60c9e0aea535df15222e8970ef947c", "mtime": "2026-04-22T05:35:07", "mtime_ts": 1776836107.321601, "size": 17893, "kind": "lo"}, {"path": "Learning Objectives/xxrpd05-06_LO_Endocrinology-Ovary-Female-Reproductive-I-II.docx", "sha256": "cdf9d4c64bf45ddf84d8b8e5dc05a79f2e5476207cfca243290d2b5947ac64eb", "mtime": "2026-04-12T19:24:50", "mtime_ts": 1776021890.0, "size": 19251, "kind": "lo"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/25-26_RPD_Phys_Endocrinology of the Ovary & Female Reproductive Tract (parts 1 & 2)_slides.pptx.pdf", "sha256": "60ba88fa680fe27a688a5013920c4dfe4a1c809f2ecb1137199ffd6a5dc6ac98", "mtime": "2026-04-22T05:35:05", "mtime_ts": 1776836105.677197, "size": 5296631, "kind": "pdf"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/Endocrinology of the Ovary & Female Reproductive Tract II_042222_uncorrected.pdf", "sha256": "065d96c838e7d841268564e1fb76f8e611e0ecd9df7db072d5df7a44bc23e0f2", "mtime": "2024-05-14T05:27:56", "mtime_ts": 1715664476.512268, "size": 872212, "kind": "pdf"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/Endocrinology of the Ovary & Female Reproductive Tract I_042222_uncorrected.pdf", "sha256": "d1896d2b579e60a54ef2c19bfc375a75cdb0250ede9e386d8d5252b689cd85cc", "mtime": "2024-05-14T05:27:55", "mtime_ts": 1715664475.3131564, "size": 3466649, "kind": "pdf"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/RPD05_Endocrinology of Ovary+Female Repro_04242025_uncorrected.pdf", "sha256": "3623361ea684ca60c7f799a9c60d9a40f237d239c2dcf6c563124197790c1e55", "mtime": "2026-04-12T19:13:42", "mtime_ts": 1776021222.0, "size": 3601415, "kind": "pdf"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/RPD06_Endocrinology of Female Reproductive Tract 2_04252025_uncorrected.pdf", "sha256": "555e9f7478401c46bc1a621fa566e5183dd63d557636af842fc362f3acea11ce", "mtime": "2026-04-12T19:13:44", "mtime_ts": 1776021224.0, "size": 1662882, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "36c1060fc6e3355f68e84909a18a0910ac6ec85846ecfa754b8b66150cfa5291", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": ["Describe the hierarchical levels of sexual differentiation, and understand how each level of differentiation controls the next", "Explain what hormones are required (or not required) for the differentiation of morphological sex (female- and male-typical phenotypes)", "Identify the pathways of the hypothalamic-pituitary-gonadal (HPG) axis in females, and explain in detail how negative and positive feedback regulate the HPG axis", "Describe ovarian follicle and corpus luteum development, and identify the endocrine components and hormones secreted for each follicle stage", "Describe the concentrations of LH, FSH, estradiol, progesterone, and inhibin through the ovarian cycle, and explain the physiologic effects of these hormones on target tissues and processes (e.g. ovulation)", "Describe the effects of altered or disordered sex hormone signaling and the associated conditions"], "orphan_los": ["Describe the hierarchical levels of sexual differentiation, and understand how each level of differentiation controls the next", "Explain what hormones are required (or not required) for the differentiation of morphological sex (female- and male-typical phenotypes)", "Identify the pathways of the hypothalamic-pituitary-gonadal (HPG) axis in females, and explain in detail how negative and positive feedback regulate the HPG axis", "Describe ovarian follicle and corpus luteum development, and identify the endocrine components and hormones secreted for each follicle stage", "Describe the concentrations of LH, FSH, estradiol, progesterone, and inhibin through the ovarian cycle, and explain the physiologic effects of these hormones on target tissues and processes (e.g. ovulation)", "Describe the effects of altered or disordered sex hormone signaling and the associated conditions"]}, {"lecture_id": "rpd07", "title": "Pelvic Structure Neurovasculature", "sources": [{"path": "Learning Objectives/rpd07_LO_Pelvic-Structure-Neurovasculature.docx", "sha256": "4dbfa59f8e25efc959f196901a9acc20f4c190d608712f33cb1655d85753558f", "mtime": "2026-04-12T19:23:54", "mtime_ts": 1776021834.0, "size": 6890, "kind": "lo"}, {"path": "Per Lecture/rpd07_Pelvic-Structure-Neurovasculature/RPD_Anat_Orellana_Female Pelvis Handout.pdf", "sha256": "3441ba8312ad03ea82ae6dccc06a7a4a4230bb4443d0b6cd1cef2abee6433e8e", "mtime": "2026-04-12T19:22:38", "mtime_ts": 1776021758.0, "size": 3707555, "kind": "pdf"}, {"path": "Per Lecture/rpd07_Pelvic-Structure-Neurovasculature/RPD_Anat_Orellana_Male Pelvis Handout.pdf", "sha256": "e4e3b9e613a7ff22ca3c2212241d7ebbadfdc16abe1154232e0595517bd27d56", "mtime": "2026-04-12T19:22:40", "mtime_ts": 1776021760.0, "size": 3961325, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "7ccfd8f6ef172e5ed2bdf2cf030605030007ff25bfc5b45ed2bc254b3c50f30e", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd08", "title": "CCS1 Ovary Female Reproductive Tract", "sources": [{"path": "Learning Objectives/rpd08_LO_CCS1-Ovary-Female-Reproductive-Tract.docx", "sha256": "c020df8052bf906cda85c21ae4e7a5237cd594f6c026740223c1a34bdbc569fa", "mtime": "2026-04-12T19:32:48", "mtime_ts": 1776022368.0, "size": 18872, "kind": "lo"}, {"path": "Per Lecture/rpd08_CCS1-Ovary-Female-Reproductive-Tract/RPD_Phys_CCS1 Ovary Fem Reproductive Tract Objectives.docx", "sha256": "c020df8052bf906cda85c21ae4e7a5237cd594f6c026740223c1a34bdbc569fa", "mtime": "2026-04-12T19:32:14", "mtime_ts": 1776022334.0, "size": 18872, "kind": "lo"}, {"path": "Per Lecture/rpd08_CCS1-Ovary-Female-Reproductive-Tract/RPD_CCS 1 Ovary and Female Reproductive Tract Cases.pdf", "sha256": "c12a4f92b9cdeba75068accdd9b6c5c6da0d660be4010cca8a80c14d43e858a9", "mtime": "2026-04-12T19:32:16", "mtime_ts": 1776022336.0, "size": 983732, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "4739f96bdc69f3192d1ad1f29f7203cc15793f166d4813afd6d8a08a35cdd0d8", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd09", "title": "Pelvic Viscera Perineum", "sources": [{"path": "Learning Objectives/rpd09_LO_Pelvic-Viscera-Perineum.docx", "sha256": "ec06e33f5b9f99e61cab2c8f77930a12285a3224c5aee854091a0a9cbd99fa1d", "mtime": "2026-04-12T19:34:02", "mtime_ts": 1776022442.0, "size": 6795, "kind": "lo"}, {"path": "Per Lecture/rpd09_Pelvic-Viscera-Perineum/RPD_Anat_Orellana_Female Pelvis Handout (1).pdf", "sha256": "3441ba8312ad03ea82ae6dccc06a7a4a4230bb4443d0b6cd1cef2abee6433e8e", "mtime": "2026-04-12T19:33:40", "mtime_ts": 1776022420.0, "size": 3707555, "kind": "pdf"}, {"path": "Per Lecture/rpd09_Pelvic-Viscera-Perineum/RPD_Anat_Orellana_Male Pelvis Handout (1).pdf", "sha256": "e4e3b9e613a7ff22ca3c2212241d7ebbadfdc16abe1154232e0595517bd27d56", "mtime": "2026-04-12T19:33:40", "mtime_ts": 1776022420.0, "size": 3961325, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "4548aa0ccd9c3a2180e973744730ad0fdaf81bc8815b3426572aaa8c9e18cf72", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd10", "title": "Sexual Health Development I II", "sources": [{"path": "Learning Objectives/rpd10-11_LO_Sexual-Health-Development-I-II.docx", "sha256": "2d17507929a3796f65cd5b740fb60b5f6384525e81484559f32f35e3d62d6c71", "mtime": "2026-04-12T19:36:10", "mtime_ts": 1776022570.0, "size": 6891, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "3b9ea2c20c3ff52cb7d0a8d74a2af0c4d545d85d0cf3f841dd112d0c0d6fc920", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd11", "title": "Sexual Health Development I II", "sources": [{"path": "Learning Objectives/rpd10-11_LO_Sexual-Health-Development-I-II.docx", "sha256": "2d17507929a3796f65cd5b740fb60b5f6384525e81484559f32f35e3d62d6c71", "mtime": "2026-04-12T19:36:10", "mtime_ts": 1776022570.0, "size": 6891, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "3b9ea2c20c3ff52cb7d0a8d74a2af0c4d545d85d0cf3f841dd112d0c0d6fc920", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd13", "title": "Endocrinology Testes Male Reproductive Tract", "sources": [{"path": "Learning Objectives/rpd13_LO_Endocrinology-Testes-Male-Reproductive-Tract.docx", "sha256": "8e72b3de02cdb2db83d7f4540a69f6e0e6109e3aa71ba3415fa6c348564f7bc1", "mtime": "2026-04-12T19:35:06", "mtime_ts": 1776022506.0, "size": 19062, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "24c785e2f649147785246a60eb1327ac13f8969ffd20b461b55a03c655ebaabb", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd14", "title": "Ovary Testes", "sources": [{"path": "Learning Objectives/rpd14_LO_Ovary-Testes.docx", "sha256": "909f6a7841ed92a72883e74753345446ee4170e817c2139d2178f19b09395cd6", "mtime": "2026-04-12T19:45:58", "mtime_ts": 1776023158.0, "size": 20536, "kind": "lo"}, {"path": "Per Lecture/rpd14_Ovary-Testes/RPD_Path_Disease of ovary and testes_handout.pdf", "sha256": "4a433d267d0ae29c2e7069eeb76caa15141428c5466dcf6bd45afbc8ce3d5aff", "mtime": "2026-04-12T19:45:36", "mtime_ts": 1776023136.0, "size": 1097929, "kind": "pdf"}, {"path": "Per Lecture/rpd14_Ovary-Testes/RPD_Path_Ovary and Testes_objectives.docx", "sha256": "909f6a7841ed92a72883e74753345446ee4170e817c2139d2178f19b09395cd6", "mtime": "2026-04-12T19:45:38", "mtime_ts": 1776023138.0, "size": 20536, "kind": "lo"}, {"path": "Per Lecture/rpd14_Ovary-Testes/[RPD]_[Ovary and Testes Pathology]_[05_17_22]_[uncorrected].pdf", "sha256": "a3e5e57467299dc9e5e3b1d23625bb02c50541e43ecf16c970953216bc42972d", "mtime": "2024-05-14T05:28:34", "mtime_ts": 1715664514.8039165, "size": 5433501, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "a3368e55817b02c1502a352bf3fe873f4d99651e8ffad10a6aa20724b60a808f", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd16", "title": "Contraception", "sources": [{"path": "Learning Objectives/rpd16_LO_Contraception.docx", "sha256": "7afdbc93c3f7a84e58596b3617ca4f45aa675296f7f715f437307858bc4c924b", "mtime": "2026-04-12T19:37:40", "mtime_ts": 1776022660.0, "size": 6829, "kind": "lo"}, {"path": "Per Lecture/rpd16_Contraception/[RPD]_[Contraception]_05_03_22]_[uncorrected].pdf", "sha256": "1c5fa4a17385e72a49922db9f4ea76d7fc2ea0ce96e38ecdc252270d81bb0405", "mtime": "2024-05-14T05:28:05", "mtime_ts": 1715664485.1435833, "size": 1120154, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "5cadc9f59e32a75433aa768c2f69874434bcb548040287988bce5ed8a2d4e5c0", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd17", "title": "fertility infertility", "sources": [{"path": "Learning Objectives/rpd17_LO_fertility-infertility.docx", "sha256": "090a8d449d1fec511ab2f45a283790c386ff12f4039a3955e8dfac085dfc4a2a", "mtime": "2026-04-12T19:38:10", "mtime_ts": 1776022690.0, "size": 19190, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "1f32fc61ab40ccedc3e588809aa44ba1726942ab9a0e5b2f377dbe99c81b6712", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd18", "title": "ovary testes lab", "sources": [{"path": "Learning Objectives/rpd18_LO_ovary-testes-lab.docx", "sha256": "3b8445486641afe3f8c372f7a3b006804f29677e87d61822afda3e03fde65a13", "mtime": "2026-04-12T19:46:24", "mtime_ts": 1776023184.0, "size": 15049, "kind": "lo"}, {"path": "Per Lecture/rpd18_ovary-testes-lab/Ovary and Testes Lab_051822_Uncorrected.pdf", "sha256": "243a3538ad430e0944cf41170e893d32a47aa60d089415a4e363f443f8a40703", "mtime": "2024-05-14T05:28:38", "mtime_ts": 1715664518.7071562, "size": 1234887, "kind": "pdf"}, {"path": "Per Lecture/rpd18_ovary-testes-lab/RPD_Path_Lab Ovary Testes_objectives.docx", "sha256": "3b8445486641afe3f8c372f7a3b006804f29677e87d61822afda3e03fde65a13", "mtime": "2026-04-12T19:46:06", "mtime_ts": 1776023166.0, "size": 15049, "kind": "lo"}, {"path": "Per Lecture/rpd18_ovary-testes-lab/RPD_Path_Lab Ovary and Testes_handout.pdf", "sha256": "de36cdb9314c169c6b7d53724ad2d56253e3f4b9b813a9d7a2a467dfdcce775d", "mtime": "2026-04-12T19:46:04", "mtime_ts": 1776023164.0, "size": 768885, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "caed619de67997533aff486bed94d56f8d0bf9dde5a3a88010f68d3c2b0fc2dd", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd19", "title": "obstetrical placenta", "sources": [{"path": "Learning Objectives/rpd19_LO_obstetrical-placenta.docx", "sha256": "b46bc60afd5fe279593fe79a96e203710e4903045146311b879ffd3d1226352e", "mtime": "2026-04-12T19:39:54", "mtime_ts": 1776022794.0, "size": 17876, "kind": "lo"}, {"path": "Per Lecture/rpd19_obstetrical-placenta/RPD_Path_Zeck_Gestational Disorders_objectives.docx", "sha256": "b46bc60afd5fe279593fe79a96e203710e4903045146311b879ffd3d1226352e", "mtime": "2026-04-12T19:39:26", "mtime_ts": 1776022766.0, "size": 17876, "kind": "lo"}, {"path": "Per Lecture/rpd19_obstetrical-placenta/RPD_Path_Zeck_Gestational and Placental Disorders and Select Disorders of Infancy.pdf", "sha256": "5a0c65c3f13331822cdc01231e08fe214995eed14fa7b2a03a49a705f49a0617", "mtime": "2026-04-12T19:39:26", "mtime_ts": 1776022766.0, "size": 815761, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "db6c72f275a30c8a05d64305549d3d05fcfa7ec51f905121ffcb56a1b25648c1", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd20", "title": "endocrinology pregnancy labor lactation", "sources": [{"path": "Learning Objectives/rpd20_LO_endocrinology-pregnancy-labor-lactation.docx", "sha256": "161dc8467f42b838c0624237fbf3383ad85e56f87a5d04c93a2b4e9f1be7ca26", "mtime": "2026-04-12T19:38:36", "mtime_ts": 1776022716.0, "size": 16783, "kind": "lo"}, {"path": "Per Lecture/rpd00_Module-Orientation/2026 RPD_EMBR_Paper Orientation-2.pdf", "sha256": "33c823043f0c4cccab5727edcfddbf412be5ffafa85de30df08017529179d457", "mtime": "2026-04-12T19:16:24", "mtime_ts": 1776021384.0, "size": 1595305, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "ed23c0ab25aa6d4c00c61190dd759442081845a7611c5472f4bda9cac6235d4c", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd22", "title": "Pregnancy 101", "sources": [{"path": "Learning Objectives/rpd22_LO_Pregnancy-101.docx", "sha256": "ffbe3fd92ce2ac061fa370de5fb486f5c5adccd6bcd025773e8330867744d012", "mtime": "2026-04-12T19:39:02", "mtime_ts": 1776022742.0, "size": 6698, "kind": "lo"}, {"path": "Per Lecture/rpd22_Pregnancy-101/RPD_HS_Pregnancy101_050422_Uncorrected.pdf", "sha256": "3c119597036f7068b4f727ea7a820b7ff6d871befd05f3e60c06dbe3189d102e", "mtime": "2024-05-14T05:28:12", "mtime_ts": 1715664492.276619, "size": 425728, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "063822cc296739f50fefa621da4e10587bb98bc9e376be9189f214edd4f253f0", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd23", "title": "pelvic imaging", "sources": [{"path": "Learning Objectives/rpd23_LO_pelvic-imaging.docx", "sha256": "98ba9c8ad435e22b3642e299c3da3322083b0ef0b260eec9a2ee50e6a83a9772", "mtime": "2026-04-12T19:42:44", "mtime_ts": 1776022964.0, "size": 6985, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "c0ffbf8ada526fdfb37df260a6be3a23bcdf03892038a8542a705573b798c674", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd24", "title": "psychosocial pregnancy postpartum", "sources": [{"path": "Learning Objectives/rpd24_LO_psychosocial-pregnancy-postpartum.docx", "sha256": "9c7c5d81dc0dd780bfd6dd2c670345c3405b5aab6809bbbe7a32dfcc5d7849f9", "mtime": "2026-04-12T19:40:22", "mtime_ts": 1776022822.0, "size": 14707, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "a44255b4c0eea879dfd903e2158338fe7d0435bbed9fc4abef204cce8e22b403", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd25", "title": "menopause", "sources": [{"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/25-26_RPD_Phys_Endocrinology of the Ovary & Female Reproductive Tract (parts 1 & 2)_slides.pptx.pdf", "sha256": "60ba88fa680fe27a688a5013920c4dfe4a1c809f2ecb1137199ffd6a5dc6ac98", "mtime": "2026-04-22T05:35:05", "mtime_ts": 1776836105.677197, "size": 5296631, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "f5f27f803649440388614e64d5eacf2c2f05760d9df5b508065116868420e5f8", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd26", "title": "Breast Diseases", "sources": [{"path": "Learning Objectives/rpd26_LO_Breast-Diseases.docx", "sha256": "aa6cc8f1841d25d37c225acc4cd03325352555ac232df3ddf827863bb6ad5f2c", "mtime": "2026-04-12T19:41:48", "mtime_ts": 1776022908.0, "size": 21960, "kind": "lo"}, {"path": "Per Lecture/rpd05-06_Endocrinology-Ovary-Female-I-II/25-26_RPD_Phys_Endocrinology of the Ovary & Female Reproductive Tract (parts 1 & 2)_slides.pptx.pdf", "sha256": "60ba88fa680fe27a688a5013920c4dfe4a1c809f2ecb1137199ffd6a5dc6ac98", "mtime": "2026-04-22T05:35:05", "mtime_ts": 1776836105.677197, "size": 5296631, "kind": "pdf"}, {"path": "Per Lecture/rpd26_Breast-Diseases/RPD_Path_Disease of the Breast_Handout.pdf", "sha256": "493f9c500573a09b24aa56760051ec67aa5e49aacd54d72c45f237db19ae48bb", "mtime": "2026-04-12T19:41:26", "mtime_ts": 1776022886.0, "size": 1545744, "kind": "pdf"}, {"path": "Per Lecture/rpd26_Breast-Diseases/RPD_Path_Zeck_Breast Disease_obj.docx", "sha256": "aa6cc8f1841d25d37c225acc4cd03325352555ac232df3ddf827863bb6ad5f2c", "mtime": "2026-04-12T19:41:24", "mtime_ts": 1776022884.0, "size": 21960, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "977d66dcf4a72033cf71af76ebe9d8418bb572164cbd4388a39728c1a3a4679d", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd28", "title": "Breast Clinical", "sources": [{"path": "Learning Objectives/rpd28_LO_Breast-Clinical.docx", "sha256": "dae028f4f3f994a4e8cd85b3a9ee0e97f8f5c5859bd7a2eef3b60d909cd88ec9", "mtime": "2026-04-12T19:42:16", "mtime_ts": 1776022936.0, "size": 14971, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "c91c28654c513e38d3076243ac685e0806fd25e64d448d25988307cdb531a6d1", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd32", "title": "Disorders Cervix HPV", "sources": [{"path": "Learning Objectives/rpd32_LO_Disorders-Cervix-HPV.docx", "sha256": "9436fe2acf8a8427639e8b67093e1bc640dde347dfdc08bb89312dccdf813726", "mtime": "2026-04-12T19:43:28", "mtime_ts": 1776023008.0, "size": 14996, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "7c02d23e0a62994293eed70bb9b06eb68a9f35eb387591b1cceda14f4ffe056d", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd33", "title": "Disorders Vulva Uterus", "sources": [{"path": "Learning Objectives/rpd33_LO_Disorders-Vulva-Uterus.docx", "sha256": "f84ba621e5cfaeebd685ac29c2a5c933a8d3d755d57a286ebead67b8293c6732", "mtime": "2026-04-12T19:43:52", "mtime_ts": 1776023032.0, "size": 16120, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "d836c803320ba495e87c4e6faafcde9f7fededb2e73d5ecc0db2aa73c5f00630", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd35", "title": "Breast GYN Lab", "sources": [{"path": "Learning Objectives/rpd35_Breast-GYN-Lab.docx", "sha256": "a87981de1f1347091bc6f0cf4dcf56a3e9607733785ca81fbe8f902b182f7e7c", "mtime": "2026-04-12T19:44:20", "mtime_ts": 1776023060.0, "size": 15068, "kind": "lo"}, {"path": "Per Lecture/rpd35_Breast-GYN-Lab/RPD_Path_Lab Breast GYN_objectives.docx", "sha256": "a87981de1f1347091bc6f0cf4dcf56a3e9607733785ca81fbe8f902b182f7e7c", "mtime": "2026-04-12T19:44:00", "mtime_ts": 1776023040.0, "size": 15068, "kind": "lo"}, {"path": "Per Lecture/rpd35_Breast-GYN-Lab/RPD_Path_Lab GYN and Breast_handout.pdf", "sha256": "e79f84e9af9cf0433156c3cab5e3b05c92fbc25242472260a29682ce490fe28e", "mtime": "2026-04-12T19:44:00", "mtime_ts": 1776023040.0, "size": 1358633, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "a3e009aba6a8a2d7dba1d97bc2a0f6e24af489b458a6226d4e8560c5544ce4b9", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd37", "title": "STI", "sources": [{"path": "Learning Objectives/rpd37_LO_STI.docx", "sha256": "4cde285d38f13ec4a91a30941392045cf52fd09c4f77badd6b46961a1c6d669d", "mtime": "2026-04-12T19:49:32", "mtime_ts": 1776023372.0, "size": 14773, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "89bf8b142cd855dbb8ef59228c0dc29eed2b6ada8ef618f021de40e60a9979aa", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd38", "title": "CCS3 Sexuality Illness Disability", "sources": [{"path": "Learning Objectives/rpd38_LO_CCS3-Sexuality-Illness-Disability.pdf", "sha256": "45a0f70f0b5b4451422d4dc8a5e58565d451bcf2889ec7d55a63a60db87fdf4d", "mtime": "2026-04-12T19:49:36", "mtime_ts": 1776023376.0, "size": 16945, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "a499eb613709115742eaf689d9cd1429a9ae7aef9b345e9bed93ef181cd7f5f1", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd39", "title": "Prostate", "sources": [{"path": "Learning Objectives/rpd39_ LO_Prostate.docx", "sha256": "6b77a29d8471c8cd8412fe64c96e9c500c5ac19bfcd99db650d5cf059ae723f5", "mtime": "2026-04-12T19:49:26", "mtime_ts": 1776023366.0, "size": 16697, "kind": "lo"}, {"path": "Per Lecture/rpd39_ Prostate/RPD_Path_Zeck_Prostate Disease_objectives.docx", "sha256": "6b77a29d8471c8cd8412fe64c96e9c500c5ac19bfcd99db650d5cf059ae723f5", "mtime": "2026-04-12T19:46:50", "mtime_ts": 1776023210.0, "size": 16697, "kind": "lo"}, {"path": "Per Lecture/rpd39_ Prostate/RPD_Path_Zeck_Prostate Pathology_2024.pdf", "sha256": "8255fe83668aa6bd8255228709de3326d932e1ba4b3646e172636b10fce9774e", "mtime": "2026-04-12T19:46:52", "mtime_ts": 1776023212.0, "size": 1028201, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "27a346a0702eadca566e87af057d2fbcf79d17a035446c68d4a56a54c061d634", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd41", "title": "Prostate clinical", "sources": [{"path": "Learning Objectives/rpd41_LO_Prostate-clinical.docx", "sha256": "6c8cfc624d189da139022aecf964ecc277717e622d3275a2bd059b80b55cabd4", "mtime": "2026-04-12T19:50:08", "mtime_ts": 1776023408.0, "size": 15262, "kind": "lo"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "c678f9954c832eacd849d335d35ffa315b4bd21948a83f8f7d72ad9e3e4c1a02", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd42", "title": "Hormone therapy Cancer", "sources": [{"path": "Learning Objectives/rpd42_LO_Hormone-therapy-Cancer.docx", "sha256": "01a0354133b36f51d07286f2d518d31be76deac5b675fc2bc3e98e87b9d717dd", "mtime": "2026-04-12T19:50:40", "mtime_ts": 1776023440.0, "size": 24515, "kind": "lo"}, {"path": "Per Lecture/rpd42_Hormone-therapy-Cancer/RPD_Pharm_Riegel_Hormone Ther Obj-2024-Final.docx", "sha256": "01a0354133b36f51d07286f2d518d31be76deac5b675fc2bc3e98e87b9d717dd", "mtime": "2026-04-12T19:50:12", "mtime_ts": 1776023412.0, "size": 24515, "kind": "lo"}, {"path": "Per Lecture/rpd42_Hormone-therapy-Cancer/RPD_Pharm_Riegel_Hormone Therapy of Cancer Med_Handout_2024_v2.pdf", "sha256": "82c70c45ba65f957a90899a43db9bb27c1480f7a91d468d676759c7d24588c53", "mtime": "2026-04-12T19:50:14", "mtime_ts": 1776023414.0, "size": 1361781, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "a03caea5019940178fe6f0bebfe8adf6d4285ddae380e670f8116ce33c28a54c", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}, {"lecture_id": "rpd43", "title": "LGBTQ I II", "sources": [{"path": "Learning Objectives/rpd43-44_LO_LGBTQ-I-II.docx", "sha256": "e3b5ad42e05759c41ac5a4869cec6b0e3c18c3f196f03123c7a89e52418b51cb", "mtime": "2026-04-12T19:53:52", "mtime_ts": 1776023632.0, "size": 6699, "kind": "lo"}, {"path": "Per Lecture/rpd43-44_LGBTQ-I-II/RPD_Human Sexuality_LGBT Health - 1 Outline.pdf", "sha256": "b69fa73d6562fa220ae5391987617fa20069eb231adffc6b1971421364397183", "mtime": "2026-04-12T19:51:18", "mtime_ts": 1776023478.0, "size": 466283, "kind": "pdf"}, {"path": "Per Lecture/rpd43-44_LGBTQ-I-II/RPD_Human Sexuality_LGBT Health 2024 Part 1 handout.pdf", "sha256": "cc66c3f47cd5126318817053b52a8cb476c3688de2be617965a8d5571e0a3946", "mtime": "2026-04-12T19:50:56", "mtime_ts": 1776023456.0, "size": 5065459, "kind": "pdf"}], "hub_pages": [{"type": "lecture-guide", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "active-recall", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub1", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub2", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}, {"type": "hub3", "path": null, "mtime": null, "mtime_ts": null, "stale_reason": null, "lo_total": 0, "lo_covered": 0, "lo_missing": []}], "current_source_hash": "f37238793e1ec67ce4b615a9641fb7c2ece9d34859f9f398498a11a4cb9b4a3f", "baseline_source_hash": "", "state": "new", "stale_pages": [], "missing_pages": ["lecture-guide", "active-recall", "hub1", "hub2", "hub3"], "los": [], "orphan_los": []}], "summary": {"total_lectures": 33, "fresh": 0, "stale": 0, "new": 33, "missing_sources": 0, "stale_hub_pages": 0, "missing_hub_pages": 150, "total_los": 12, "orphan_los": 12, "hub_pages_with_gaps": 0}, "any_sources_found": true};
+const HUB_ORDER = ["lecture-guide","active-recall","hub1","hub2","hub3"];
+
+function el(tag, attrs = {}, ...children) {
+ const e = document.createElement(tag);
+ for (const [k,v] of Object.entries(attrs)) {
+ if (k === "class") e.className = v;
+ else if (k === "dataset") Object.assign(e.dataset, v);
+ else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+ else e.setAttribute(k, v);
+ }
+ for (const c of children) {
+ if (c == null) continue;
+ e.append(c.nodeType ? c : document.createTextNode(c));
+ }
+ return e;
+}
+
+function renderSummary {
+ const s = STATUS.summary;
+ const box = document.getElementById("summary");
+ box.innerHTML = "";
+ const stats = [
+ ["fresh", "Fresh", s.fresh],
+ ["stale", "Stale (content changed)", s.stale],
+ ["new", "New (unbaselined)", s.new],
+ ["missing", "Missing hub pages", s.missing_hub_pages],
+ ["fresh", "Total LOs tracked", s.total_los],
+ ["stale", "Hub pages with LO gaps", s.hub_pages_with_gaps],
+ ["missing", "Orphan LOs (nowhere covered)", s.orphan_los],
+ ];
+ for (const [cls,label,n] of stats) {
+ box.append(el("div", {class:"stat "+cls},
+ el("div", {class:"n"}, String(n)),
+ el("div", {class:"label"}, label)
+ ));
+ }
+}
+
+function hubCell(hubType, lec) {
+ const hp = lec.hub_pages.find(h => h.type === hubType);
+ if (!hp || !hp.path) {
+ return el("span", {class:"hub-cell hub-missing", title:"missing"}, "—");
+ }
+ const missingCount = (hp.lo_missing || []).length;
+ const stale = !!hp.stale_reason;
+
+ // Determine cell class: stale > gap > fresh
+ let cls = "hub-fresh", label = "✓";
+ const tip = [];
+ if (stale) {
+ cls = "hub-stale";
+ label = "!";
+ tip.push(hp.stale_reason === "hash-changed"
+ ? "stale: source content changed since last build"
+ : "stale: source file is newer than hub page");
+ } else if (missingCount > 0) {
+ cls = "hub-gap";
+ label = String(missingCount);
+ tip.push(`${missingCount} LO${missingCount===1?'':'s'} not covered on this page`);
+ } else if (hp.lo_total > 0) {
+ tip.push(`all ${hp.lo_total} LOs covered`);
+ }
+ tip.push(hp.path);
+ tip.push("updated " + hp.mtime);
+ if (missingCount > 0 && !stale) {
+ // Also show count on a stale cell? no, keep stale as `!`
+ }
+ return el("span", {class:"hub-cell "+cls, title: tip.join("\n")}, label);
+}
+
+function renderRows(filter="all", query="") {
+ const tbody = document.getElementById("rows");
+ tbody.innerHTML = "";
+ const q = query.trim.toLowerCase;
+
+ const visible = STATUS.lectures.filter(lec => {
+ if (q) {
+ const hay = [
+ lec.lecture_id, lec.title, lec.state,
+ ...lec.sources.map(s => s.path),
+ ...lec.hub_pages.map(h => h.path || "")
+ ].join(" ").toLowerCase;
+ if (!hay.includes(q)) return false;
+ }
+ const anyGaps = lec.hub_pages.some(h => h.path && (h.lo_missing||[]).length > 0);
+ const hasOrphans = (lec.orphan_los||[]).length > 0;
+ switch (filter) {
+ case "needs-update":
+ return lec.state === "stale" || lec.state === "new" || lec.missing_pages.length > 0 || anyGaps;
+ case "stale": return lec.state === "stale";
+ case "has-gaps": return anyGaps;
+ case "orphan": return hasOrphans;
+ case "missing": return lec.missing_pages.length > 0;
+ case "fresh": return lec.state === "fresh" && !anyGaps;
+ default: return true;
+ }
+ });
+
+ if (!visible.length) {
+ tbody.append(el("tr", {}, el("td", {colspan:9, class:"empty"}, "No matches.")));
+ return;
+ }
+
+ for (const lec of visible) {
+ const row = el("tr", {class:"lecture-row", dataset:{id: lec.lecture_id}},
+ el("td", {class:"lid"}, lec.lecture_id.toUpperCase),
+ el("td", {class:"title"}, lec.title),
+ el("td", {}, el("span", {class:"state-pill state-"+lec.state}, lec.state.replace("-"," "))),
+ ...HUB_ORDER.map(t => el("td", {class:"ctr"}, hubCell(t, lec))),
+ el("td", {class:"ctr"}, String(lec.sources.length))
+ );
+ row.addEventListener("click", => toggleDetail(row, lec));
+ tbody.append(row);
+ }
+}
+
+function toggleDetail(row, lec) {
+ const next = row.nextElementSibling;
+ if (next && next.classList.contains("detail-row")) {
+ next.remove;
+ return;
+ }
+ // Build the content-gaps block
+ const gapsBlock = renderContentGaps(lec);
+
+ const anyGaps = lec.hub_pages.some(h => h.path && (h.lo_missing||[]).length > 0);
+ const needsRebuild = (lec.state === "stale" || lec.state === "new"
+ || lec.missing_pages.length > 0 || anyGaps);
+
+ const detail = el("tr", {class:"detail-row"},
+ el("td", {colspan:9},
+ el("div", {class:"details grid-2"},
+ el("div", {},
+ el("h3", {}, `Sources (${lec.sources.length})`),
+ el("ul", {class:"file-list"},
+ ...lec.sources.map(s => el("li", {title: s.path},
+ el("span", {class:"badge-kind"}, s.kind),
+ (s.path || "").split("/").pop,
+ el("span", {class:"hash"}, " " + s.sha256.slice(0,10) + "…")
+ ))
+ )
+ ),
+ el("div", {},
+ el("h3", {}, "Hub pages"),
+ el("ul", {class:"file-list"},
+ ...lec.hub_pages.map(h => {
+ const gapCount = (h.lo_missing||[]).length;
+ const statusStr = h.path
+ ? (h.stale_reason
+ ? ` — stale (${h.stale_reason.replace("-"," ")})`
+ : (gapCount > 0
+ ? ` — ${gapCount} LO${gapCount===1?'':'s'} not covered`
+ : (h.lo_total ? ` — all ${h.lo_total} LOs covered` : " — fresh")))
+ : "";
+ const color = h.path
+ ? (h.stale_reason ? "color:var(-red-600)"
+ : (gapCount ? "color:var(-amber-700)"
+ : "color:var(-green-700)"))
+ : "color:var(-slate-400)";
+ return el("li", {},
+ el("span", {class:"badge-kind"}, h.type),
+ h.path || "(missing)",
+ h.mtime ? el("span", {class:"hash"}, " updated " + h.mtime) : null,
+ statusStr ? el("span", {class:"hash", style: color}, statusStr) : null
+ );
+ })
+ )
+ )
+ ),
+ gapsBlock,
+ needsRebuild
+ ? el("div", {class:"action-hint"},
+ el("strong", {}, "Needs attention. "),
+ lec.stale_pages.length ? `Stale: ${lec.stale_pages.join(", ")}. ` : "",
+ lec.missing_pages.length ? `Missing: ${lec.missing_pages.join(", ")}. ` : "",
+ anyGaps ? `Has LO gaps (see above). ` : "",
+ "After rebuilding, mark as current: ",
+ el("code", {}, `python3 scan.py -accept ${lec.lecture_id}`)
+ )
+ : el("div", {class:"action-hint"},
+ el("strong", {}, "Up to date."),
+ " No action needed."
+ )
+ )
+ );
+ row.after(detail);
+}
+
+function renderContentGaps(lec) {
+ const orphans = lec.orphan_los || [];
+ const pagesWithGaps = lec.hub_pages.filter(h => h.path && (h.lo_missing||[]).length > 0);
+
+ if (!lec.los || !lec.los.length) {
+ return el("div", {class:"gaps"},
+ el("h3", {}, "Content gaps"),
+ el("div", {class:"gap-empty"}, "No learning objectives parsed for this lecture (source LO docx missing or unreadable)."));
+ }
+
+ if (!orphans.length && !pagesWithGaps.length) {
+ return el("div", {class:"gaps"},
+ el("h3", {}, `Content coverage (${lec.los.length} LOs)`),
+ el("div", {class:"gap-empty ok"}, `✓ Every LO is covered on at least one hub page.`));
+ }
+
+ const children = [
+ el("h3", {}, `Content gaps (${lec.los.length} LOs total)`)
+ ];
+
+ if (orphans.length) {
+ const list = el("ul", {class:"lo-list"},
+ ...orphans.map(lo => el("li", {class:"lo-orphan"},
+ el("span", {class:"lo-dot"}, "⚠"),
+ lo
+ ))
+ );
+ children.push(
+ el("div", {class:"gap-block"},
+ el("div", {class:"gap-heading"},
+ el("strong", {}, `${orphans.length} LO${orphans.length===1?'':'s'} not reflected on ANY existing hub page`),
+ lec.hub_pages.every(h => !h.path)
+ ? el("span", {class:"hash"}, " (no hub pages exist yet)")
+ : null
+ ),
+ list
+ )
+ );
+ }
+
+ for (const hp of pagesWithGaps) {
+ const list = el("ul", {class:"lo-list"},
+ ...hp.lo_missing.map(m => el("li", {class:"lo-missing"},
+ el("span", {class:"lo-dot"}, "•"),
+ m.lo,
+ el("span", {class:"hash"}, ` (coverage ${Math.round((m.score||0)*100)}%)`)
+ ))
+ );
+ children.push(
+ el("div", {class:"gap-block"},
+ el("div", {class:"gap-heading"},
+ el("span", {class:"badge-kind"}, hp.type),
+ el("strong", {}, `${hp.lo_missing.length} of ${hp.lo_total} LO${hp.lo_total===1?'':'s'} not covered`)
+ ),
+ list
+ )
+ );
+ }
+
+ return el("div", {class:"gaps"}, ...children);
+}
+
+document.getElementById("scanned-at").textContent = STATUS.scanned_at + " · " + STATUS.endo_root;
+
+function showBanner(kind, html) {
+ const b = document.getElementById("banner");
+ if (!b) return;
+ b.className = "banner " + kind;
+ b.innerHTML = html;
+}
+
+const rerunBtn = document.getElementById("rerun-btn");
+const rerunLabel = document.getElementById("rerun-label");
+const rerunSpin = document.getElementById("rerun-spinner");
+
+if (rerunBtn) {
+ rerunBtn.addEventListener("click", async => {
+ if (window.location.protocol === "file:") {
+ showBanner("warn",
+ "The Rerun button needs the tracker server running. Double-click " +
+ "<code>run.command</code> (or run <code>python3 server.py</code>) and open the " +
+ "dashboard at <a href='http://127.0.0.1:8765/dashboard.html'>http://127.0.0.1:8765/dashboard.html</a>."
+ );
+ return;
+ }
+ rerunBtn.disabled = true;
+ rerunLabel.textContent = "Scanning…";
+ rerunSpin.style.display = "inline-block";
+ rerunSpin.classList.add("on");
+ try {
+ const res = await fetch("/api/rescan", { method: "POST" });
+ if (!res.ok) throw new Error("HTTP " + res.status);
+ const data = await res.json;
+ if (!data.ok) throw new Error(data.error || "rescan failed");
+ showBanner("ok", `Scan complete in ${data.duration_sec}s — reloading…`);
+ setTimeout( => window.location.reload, 500);
+ } catch (e) {
+ showBanner("warn",
+ "Rerun failed: " + (e.message || e) +
+ ". Make sure the server is running (double-click <code>run.command</code>)."
+ );
+ rerunBtn.disabled = false;
+ rerunLabel.textContent = "Rerun scan";
+ rerunSpin.style.display = "none";
+ rerunSpin.classList.remove("on");
+ }
+ });
+}
+
+let currentFilter = "all";
+let currentQuery = "";
+
+for (const btn of document.querySelectorAll(".filter-btn")) {
+ btn.addEventListener("click", => {
+ for (const b of document.querySelectorAll(".filter-btn")) b.classList.remove("active");
+ btn.classList.add("active");
+ currentFilter = btn.dataset.filter;
+ renderRows(currentFilter, currentQuery);
+ });
+}
+document.getElementById("search").addEventListener("input", (e) => {
+ currentQuery = e.target.value;
+ renderRows(currentFilter, currentQuery);
+});
+
+renderSummary;
+renderRows;
+</script>
+</body>
+</html>
