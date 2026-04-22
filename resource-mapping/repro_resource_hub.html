@@ -895,7 +895,7 @@ td { font-size: 0.9rem; vertical-align: top; }
     <main class="panel detail-shell" id="detailPane"></main>
   </section>
 
-  <div class="footer-note">Updated April 16, 2026 — now links all 23 lecture study guides, 22 active-recall drills, and 19 lectures × 3 Drill Hubs (Hub #1 · Hub #2 · Hub #3). Last refreshed as new guides, recall drills, and drill hubs came online.</div>
+  <div class="footer-note">Updated April 22, 2026 — currently links 4 lecture study guides, 4 active-recall drills, and 3 lectures × 3 Drill Hubs (Hub #1 · Hub #2 · Hub #3). More will be wired up as new guides, recall drills, and drill hubs come online.</div>
 </div>
 
 <script>
@@ -930,145 +930,33 @@ const GUIDE_BASE = 'https://strettyit10.github.io/Block4-Repro/lecture-guides/';
 const RECALL_BASE = 'https://strettyit10.github.io/Block4-Repro/active-lesson-drills/';
 const HUB_BASE = 'https://strettyit10.github.io/Block4-Repro/testing-drills/';
 
+// Only the classes with an actual lecture-guide file on disk are listed here.
+// Add a new entry when a new guide ships in /lecture-guides/.
 const GUIDE_FILES = {
-  1: 'rpd01-il-urogenital-primer.html',
   2: 'rpd02-urogenital-system.html',
   3: 'rpd03-female-reproductive-system.html',
   4: 'rpd04-male-reproductive-system.html',
-  5: 'rpd05-06-endocrinology-of-the-ovary-female-reproductive-tract-i-.html',
-  6: 'rpd05-06-endocrinology-of-the-ovary-female-reproductive-tract-i-.html',
-  7: 'rpd07-pelvic-structure-neurovasculature.html',
-  8: 'rpd08-ccs-1-ovary-and-female-reproductive-tract.html',
-  9: 'rpd09-pelvic-viscera-perineum.html',
-  10: 'rpd10-11-sexual-health-and-development-across-the-lifespan-i-ii.html',
-  11: 'rpd10-11-sexual-health-and-development-across-the-lifespan-i-ii.html',
-  12: 'rpd12-ga-lab-1-ischioanal-fossa-and-perineum.html',
-  13: 'rpd13-endocrinology-of-testes-and-male-reproductive-tract.html',
-  14: 'rpd14-ovary-and-testes-pathology.html',
-  15: 'rpd15-ga-lab-2-pelvis-viscera-vasculature-sacral-plexus.html',
-  16: 'rpd16-contraception.html',
-  17: 'rpd17-fertility-and-infertility.html',
-  18: 'rpd18-ovary-testes-lab.html',
-  19: 'rpd19-obstetrical-placenta.html',
-  20: 'rpd20-endocrinology-of-pregnancy-labor-and-lactation.html',
-  21: 'rpd21-mandatory-sg-5-guideline-directed-care.html',
-  22: 'rpd22-pregnancy-101.html',
-  23: 'rpd23-pelvic-imaging.html',
-  24: 'rpd24-psychosocial-aspects-of-pregnancy-and-postpartum.html',
-  25: 'rpd25-menopause.html',
-  26: 'rpd26-breast-diseases.html',
-  27: 'rpd27-pe-female-pelvis-and-gyn-exam.html',
-  28: 'rpd28-breast-clinical.html',
-  29: 'rpd29-mandatory-sexual-history-taking.html',
-  30: 'rpd30-pe-breast-exam.html',
-  31: 'rpd31-mandatory-sg-sexual-history-taking.html',
-  32: 'rpd32-disorders-of-the-cervix-hpv.html',
-  33: 'rpd33-disorders-of-the-vulva-and-uterus.html',
-  34: 'rpd34-gyn-case-review.html',
-  35: 'rpd35-breast-gyn-lab.html',
-  36: 'rpd36-male-pelvis-and-gu-exam.html',
-  37: 'rpd37-sexually-transmitted-infections.html',
-  38: 'rpd38-ccs-3-sexuality-illness-and-disability.html',
-  39: 'rpd39-prostate.html',
-  40: 'rpd40-il-sexual-boundary-issues.html',
-  41: 'rpd41-prostate-clinical.html',
-  42: 'rpd42-hormone-therapy-of-cancer.html',
-  43: 'rpd43-44-lgbt-health-i-ii.html',
-  44: 'rpd43-44-lgbt-health-i-ii.html'
+  5: 'rpd05-06-lg.html',
+  6: 'rpd05-06-lg.html'
 };
 
+// Only the classes with an actual active-recall file on disk are listed here.
+// Add a new entry when a new drill ships in /active-lesson-drills/.
 const RECALL_FILES = {
-  1: 'rpd01_active_recall.html',
   2: 'rpd02_active_recall.html',
   3: 'rpd03_active_recall.html',
   4: 'rpd04_active_recall.html',
   5: 'rpd05-06_active_recall.html',
-  6: 'rpd05-06_active_recall.html',
-  7: 'rpd07_active_recall.html',
-  8: 'rpd08_active_recall.html',
-  9: 'rpd09_active_recall.html',
-  10: 'rpd10-11_active_recall.html',
-  11: 'rpd10-11_active_recall.html',
-  12: 'rpd12_active_recall.html',
-  13: 'rpd13_active_recall.html',
-  14: 'rpd14_active_recall.html',
-  15: 'rpd15_active_recall.html',
-  16: 'rpd16_active_recall.html',
-  17: 'rpd17_active_recall.html',
-  18: 'rpd18_active_recall.html',
-  19: 'rpd19_active_recall.html',
-  20: 'rpd20_active_recall.html',
-  21: 'rpd21_active_recall.html',
-  22: 'rpd22_active_recall.html',
-  23: 'rpd23_active_recall.html',
-  24: 'rpd24_active_recall.html',
-  25: 'rpd25_active_recall.html',
-  26: 'rpd26_active_recall.html',
-  27: 'rpd27_active_recall.html',
-  28: 'rpd28_active_recall.html',
-  29: 'rpd29_active_recall.html',
-  30: 'rpd30_active_recall.html',
-  31: 'rpd31_active_recall.html',
-  32: 'rpd32_active_recall.html',
-  33: 'rpd33_active_recall.html',
-  34: 'rpd34_active_recall.html',
-  35: 'rpd35_active_recall.html',
-  36: 'rpd36_active_recall.html',
-  37: 'rpd37_active_recall.html',
-  38: 'rpd38_active_recall.html',
-  39: 'rpd39_active_recall.html',
-  40: 'rpd40_active_recall.html',
-  41: 'rpd41_active_recall.html',
-  42: 'rpd42_active_recall.html',
-  43: 'rpd43-44_active_recall.html',
-  44: 'rpd43-44_active_recall.html'
+  6: 'rpd05-06_active_recall.html'
 };
 
+// Only the classes with actual Drill Hub files on disk are listed here.
+// Add a new entry when a new hub set ships in /testing-drills/.
+// Note: rpd03 / rpd04 hub filenames use "-reproductive" (no trailing "-system").
 const HUB_FILES = {
-  1: { hub1: 'rpd01-hub1-il-urogenital-primer.html', hub2: 'rpd01-hub2-il-urogenital-primer.html', hub3: 'rpd01-hub3-il-urogenital-primer.html' },
-  2: { hub1: 'rpd02-hub1-urogenital-system.html', hub2: 'rpd02-hub2-urogenital-system.html', hub3: 'rpd02-hub3-urogenital-system.html' },
-  3: { hub1: 'rpd03-hub1-female-reproductive-system.html', hub2: 'rpd03-hub2-female-reproductive-system.html', hub3: 'rpd03-hub3-female-reproductive-system.html' },
-  4: { hub1: 'rpd04-hub1-male-reproductive-system.html', hub2: 'rpd04-hub2-male-reproductive-system.html', hub3: 'rpd04-hub3-male-reproductive-system.html' },
-  5: { hub1: 'rpd05-06-hub1-endocrinology-of-the-ovary-female-reproductive-tract-i-.html', hub2: 'rpd05-06-hub2-endocrinology-of-the-ovary-female-reproductive-tract-i-.html', hub3: 'rpd05-06-hub3-endocrinology-of-the-ovary-female-reproductive-tract-i-.html' },
-  6: { hub1: 'rpd05-06-hub1-endocrinology-of-the-ovary-female-reproductive-tract-i-.html', hub2: 'rpd05-06-hub2-endocrinology-of-the-ovary-female-reproductive-tract-i-.html', hub3: 'rpd05-06-hub3-endocrinology-of-the-ovary-female-reproductive-tract-i-.html' },
-  7: { hub1: 'rpd07-hub1-pelvic-structure-neurovasculature.html', hub2: 'rpd07-hub2-pelvic-structure-neurovasculature.html', hub3: 'rpd07-hub3-pelvic-structure-neurovasculature.html' },
-  8: { hub1: 'rpd08-hub1-ccs-1-ovary-and-female-reproductive-tract.html', hub2: 'rpd08-hub2-ccs-1-ovary-and-female-reproductive-tract.html', hub3: 'rpd08-hub3-ccs-1-ovary-and-female-reproductive-tract.html' },
-  9: { hub1: 'rpd09-hub1-pelvic-viscera-perineum.html', hub2: 'rpd09-hub2-pelvic-viscera-perineum.html', hub3: 'rpd09-hub3-pelvic-viscera-perineum.html' },
-  10: { hub1: 'rpd10-11-hub1-sexual-health-and-development-across-the-lifespan-i-ii.html', hub2: 'rpd10-11-hub2-sexual-health-and-development-across-the-lifespan-i-ii.html', hub3: 'rpd10-11-hub3-sexual-health-and-development-across-the-lifespan-i-ii.html' },
-  11: { hub1: 'rpd10-11-hub1-sexual-health-and-development-across-the-lifespan-i-ii.html', hub2: 'rpd10-11-hub2-sexual-health-and-development-across-the-lifespan-i-ii.html', hub3: 'rpd10-11-hub3-sexual-health-and-development-across-the-lifespan-i-ii.html' },
-  12: { hub1: 'rpd12-hub1-ga-lab-1-ischioanal-fossa-and-perineum.html', hub2: 'rpd12-hub2-ga-lab-1-ischioanal-fossa-and-perineum.html', hub3: 'rpd12-hub3-ga-lab-1-ischioanal-fossa-and-perineum.html' },
-  13: { hub1: 'rpd13-hub1-endocrinology-of-testes-and-male-reproductive-tract.html', hub2: 'rpd13-hub2-endocrinology-of-testes-and-male-reproductive-tract.html', hub3: 'rpd13-hub3-endocrinology-of-testes-and-male-reproductive-tract.html' },
-  14: { hub1: 'rpd14-hub1-ovary-and-testes-pathology.html', hub2: 'rpd14-hub2-ovary-and-testes-pathology.html', hub3: 'rpd14-hub3-ovary-and-testes-pathology.html' },
-  15: { hub1: 'rpd15-hub1-ga-lab-2-pelvis-viscera-vasculature-sacral-plexus.html', hub2: 'rpd15-hub2-ga-lab-2-pelvis-viscera-vasculature-sacral-plexus.html', hub3: 'rpd15-hub3-ga-lab-2-pelvis-viscera-vasculature-sacral-plexus.html' },
-  16: { hub1: 'rpd16-hub1-contraception.html', hub2: 'rpd16-hub2-contraception.html', hub3: 'rpd16-hub3-contraception.html' },
-  17: { hub1: 'rpd17-hub1-fertility-and-infertility.html', hub2: 'rpd17-hub2-fertility-and-infertility.html', hub3: 'rpd17-hub3-fertility-and-infertility.html' },
-  18: { hub1: 'rpd18-hub1-ovary-testes-lab.html', hub2: 'rpd18-hub2-ovary-testes-lab.html', hub3: 'rpd18-hub3-ovary-testes-lab.html' },
-  19: { hub1: 'rpd19-hub1-obstetrical-placenta.html', hub2: 'rpd19-hub2-obstetrical-placenta.html', hub3: 'rpd19-hub3-obstetrical-placenta.html' },
-  20: { hub1: 'rpd20-hub1-endocrinology-of-pregnancy-labor-and-lactation.html', hub2: 'rpd20-hub2-endocrinology-of-pregnancy-labor-and-lactation.html', hub3: 'rpd20-hub3-endocrinology-of-pregnancy-labor-and-lactation.html' },
-  21: { hub1: 'rpd21-hub1-mandatory-sg-5-guideline-directed-care.html', hub2: 'rpd21-hub2-mandatory-sg-5-guideline-directed-care.html', hub3: 'rpd21-hub3-mandatory-sg-5-guideline-directed-care.html' },
-  22: { hub1: 'rpd22-hub1-pregnancy-101.html', hub2: 'rpd22-hub2-pregnancy-101.html', hub3: 'rpd22-hub3-pregnancy-101.html' },
-  23: { hub1: 'rpd23-hub1-pelvic-imaging.html', hub2: 'rpd23-hub2-pelvic-imaging.html', hub3: 'rpd23-hub3-pelvic-imaging.html' },
-  24: { hub1: 'rpd24-hub1-psychosocial-aspects-of-pregnancy-and-postpartum.html', hub2: 'rpd24-hub2-psychosocial-aspects-of-pregnancy-and-postpartum.html', hub3: 'rpd24-hub3-psychosocial-aspects-of-pregnancy-and-postpartum.html' },
-  25: { hub1: 'rpd25-hub1-menopause.html', hub2: 'rpd25-hub2-menopause.html', hub3: 'rpd25-hub3-menopause.html' },
-  26: { hub1: 'rpd26-hub1-breast-diseases.html', hub2: 'rpd26-hub2-breast-diseases.html', hub3: 'rpd26-hub3-breast-diseases.html' },
-  27: { hub1: 'rpd27-hub1-pe-female-pelvis-and-gyn-exam.html', hub2: 'rpd27-hub2-pe-female-pelvis-and-gyn-exam.html', hub3: 'rpd27-hub3-pe-female-pelvis-and-gyn-exam.html' },
-  28: { hub1: 'rpd28-hub1-breast-clinical.html', hub2: 'rpd28-hub2-breast-clinical.html', hub3: 'rpd28-hub3-breast-clinical.html' },
-  29: { hub1: 'rpd29-hub1-mandatory-sexual-history-taking.html', hub2: 'rpd29-hub2-mandatory-sexual-history-taking.html', hub3: 'rpd29-hub3-mandatory-sexual-history-taking.html' },
-  30: { hub1: 'rpd30-hub1-pe-breast-exam.html', hub2: 'rpd30-hub2-pe-breast-exam.html', hub3: 'rpd30-hub3-pe-breast-exam.html' },
-  31: { hub1: 'rpd31-hub1-mandatory-sg-sexual-history-taking.html', hub2: 'rpd31-hub2-mandatory-sg-sexual-history-taking.html', hub3: 'rpd31-hub3-mandatory-sg-sexual-history-taking.html' },
-  32: { hub1: 'rpd32-hub1-disorders-of-the-cervix-hpv.html', hub2: 'rpd32-hub2-disorders-of-the-cervix-hpv.html', hub3: 'rpd32-hub3-disorders-of-the-cervix-hpv.html' },
-  33: { hub1: 'rpd33-hub1-disorders-of-the-vulva-and-uterus.html', hub2: 'rpd33-hub2-disorders-of-the-vulva-and-uterus.html', hub3: 'rpd33-hub3-disorders-of-the-vulva-and-uterus.html' },
-  34: { hub1: 'rpd34-hub1-gyn-case-review.html', hub2: 'rpd34-hub2-gyn-case-review.html', hub3: 'rpd34-hub3-gyn-case-review.html' },
-  35: { hub1: 'rpd35-hub1-breast-gyn-lab.html', hub2: 'rpd35-hub2-breast-gyn-lab.html', hub3: 'rpd35-hub3-breast-gyn-lab.html' },
-  36: { hub1: 'rpd36-hub1-male-pelvis-and-gu-exam.html', hub2: 'rpd36-hub2-male-pelvis-and-gu-exam.html', hub3: 'rpd36-hub3-male-pelvis-and-gu-exam.html' },
-  37: { hub1: 'rpd37-hub1-sexually-transmitted-infections.html', hub2: 'rpd37-hub2-sexually-transmitted-infections.html', hub3: 'rpd37-hub3-sexually-transmitted-infections.html' },
-  38: { hub1: 'rpd38-hub1-ccs-3-sexuality-illness-and-disability.html', hub2: 'rpd38-hub2-ccs-3-sexuality-illness-and-disability.html', hub3: 'rpd38-hub3-ccs-3-sexuality-illness-and-disability.html' },
-  39: { hub1: 'rpd39-hub1-prostate.html', hub2: 'rpd39-hub2-prostate.html', hub3: 'rpd39-hub3-prostate.html' },
-  40: { hub1: 'rpd40-hub1-il-sexual-boundary-issues.html', hub2: 'rpd40-hub2-il-sexual-boundary-issues.html', hub3: 'rpd40-hub3-il-sexual-boundary-issues.html' },
-  41: { hub1: 'rpd41-hub1-prostate-clinical.html', hub2: 'rpd41-hub2-prostate-clinical.html', hub3: 'rpd41-hub3-prostate-clinical.html' },
-  42: { hub1: 'rpd42-hub1-hormone-therapy-of-cancer.html', hub2: 'rpd42-hub2-hormone-therapy-of-cancer.html', hub3: 'rpd42-hub3-hormone-therapy-of-cancer.html' },
-  43: { hub1: 'rpd43-44-hub1-lgbt-health-i-ii.html', hub2: 'rpd43-44-hub2-lgbt-health-i-ii.html', hub3: 'rpd43-44-hub3-lgbt-health-i-ii.html' },
-  44: { hub1: 'rpd43-44-hub1-lgbt-health-i-ii.html', hub2: 'rpd43-44-hub2-lgbt-health-i-ii.html', hub3: 'rpd43-44-hub3-lgbt-health-i-ii.html' }
+  2: { hub1: 'rpd02-hub1-urogenital-system.html',   hub2: 'rpd02-hub2-urogenital-system.html',   hub3: 'rpd02-hub3-urogenital-system.html' },
+  3: { hub1: 'rpd03-hub1-female-reproductive.html', hub2: 'rpd03-hub2-female-reproductive.html', hub3: 'rpd03-hub3-female-reproductive.html' },
+  4: { hub1: 'rpd04-hub1-male-reproductive.html',   hub2: 'rpd04-hub2-male-reproductive.html',   hub3: 'rpd04-hub3-male-reproductive.html' }
 };
 
 let activeSubject = 'all';
