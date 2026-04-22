@@ -895,7 +895,7 @@ td { font-size: 0.9rem; vertical-align: top; }
     <main class="panel detail-shell" id="detailPane"></main>
   </section>
 
-  <div class="footer-note">Updated April 22, 2026 — currently links 4 lecture study guides, 4 active-recall drills, and 3 lectures × 3 Drill Hubs (Hub #1 · Hub #2 · Hub #3). More will be wired up as new guides, recall drills, and drill hubs come online.</div>
+  <div class="footer-note">Updated April 22, 2026 — currently links 4 lecture study guides, 4 active-recall drills, and 4 lectures × 3 Drill Hubs (Hub #1 · Hub #2 · Hub #3). More will be wired up as new guides, recall drills, and drill hubs come online.</div>
 </div>
 
 <script>
@@ -953,10 +953,13 @@ const RECALL_FILES = {
 // Only the classes with actual Drill Hub files on disk are listed here.
 // Add a new entry when a new hub set ships in /testing-drills/.
 // Note: rpd03 / rpd04 hub filenames use "-reproductive" (no trailing "-system").
+// Classes 5 and 6 share the combined rpd05-06-hub*-ovary-endocrinology set.
 const HUB_FILES = {
-  2: { hub1: 'rpd02-hub1-urogenital-system.html',   hub2: 'rpd02-hub2-urogenital-system.html',   hub3: 'rpd02-hub3-urogenital-system.html' },
-  3: { hub1: 'rpd03-hub1-female-reproductive.html', hub2: 'rpd03-hub2-female-reproductive.html', hub3: 'rpd03-hub3-female-reproductive.html' },
-  4: { hub1: 'rpd04-hub1-male-reproductive.html',   hub2: 'rpd04-hub2-male-reproductive.html',   hub3: 'rpd04-hub3-male-reproductive.html' }
+  2: { hub1: 'rpd02-hub1-urogenital-system.html',     hub2: 'rpd02-hub2-urogenital-system.html',     hub3: 'rpd02-hub3-urogenital-system.html' },
+  3: { hub1: 'rpd03-hub1-female-reproductive.html',   hub2: 'rpd03-hub2-female-reproductive.html',   hub3: 'rpd03-hub3-female-reproductive.html' },
+  4: { hub1: 'rpd04-hub1-male-reproductive.html',     hub2: 'rpd04-hub2-male-reproductive.html',     hub3: 'rpd04-hub3-male-reproductive.html' },
+  5: { hub1: 'rpd05-06-hub1-ovary-endocrinology.html', hub2: 'rpd05-06-hub2-ovary-endocrinology.html', hub3: 'rpd05-06-hub3-ovary-endocrinology.html' },
+  6: { hub1: 'rpd05-06-hub1-ovary-endocrinology.html', hub2: 'rpd05-06-hub2-ovary-endocrinology.html', hub3: 'rpd05-06-hub3-ovary-endocrinology.html' }
 };
 
 let activeSubject = 'all';
