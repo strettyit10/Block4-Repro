@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPD05-06 Endocrinology of the Ovary — Hub 1 Core Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── BASE ── */
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#F7F5F0;color:#2C2C2C;min-height:100vh;line-height:1.6}
+
+/* ── TOP NAV ── */
+.topnav{background:#8B2242;border-bottom:3px solid #C9A84C;padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.35em;font-weight:700;color:#F2E8CF;letter-spacing:.02em}
+.nav-brand-sub{font-size:.72em;color:#C9A84C;font-weight:500;margin-left:6px;letter-spacing:.04em;text-transform:uppercase}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:rgba(255,255,255,0.7);font-weight:500;padding:6px 14px;border-radius:5px;border:1px solid rgba(255,255,255,0.2);text-decoration:none;transition:all .2s}
+.nav-back:hover{border-color:#C9A84C;color:#C9A84C}
+
+/* ── CONTAINER ── */
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+
+/* ── HEADER ── */
+.header{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#8B2242 0%,#C9A84C 50%,#8B2242 100%)}
+.hub-tag{display:inline-block;background:#8B2242;color:#F2E8CF;font-family:'Source Sans 3',sans-serif;font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:4px 12px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2em;color:#8B2242;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#8B6914;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:4px;padding:4px 10px;font-size:.75em;color:#5A5A5A}
+.source-badge strong{color:#8B2242}
+
+/* ── HUB PROGRESSION ── */
+.hub-prog{background:#FFF;border:1px solid #D6CEB8;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:7px 16px;border-radius:4px;font-size:.82em;font-weight:600}
+.hub-step.current{background:#8B2242;color:#F2E8CF}
+.hub-step.next{background:#F7F5F0;border:1px solid #D6CEB8;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#C9A84C;color:#8B6914}
+.hub-arrow{color:#C9A84C;font-size:1em;font-weight:700}
+.hub-prog-label{font-size:.76em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #D6CEB8;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:1.8em;font-weight:700;color:#8B2242}
+.stat-label{font-size:.68em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #D6CEB8;padding-bottom:0}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.84em;font-weight:600;padding:11px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#8B2242}
+.tab-btn.active{color:#8B2242;border-bottom-color:#C9A84C}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* ── FLASHCARDS ── */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #D6CEB8;border-top:3px solid #8B2242}
+.fc-back{transform:rotateY(180deg);background:#FFFDF5;border:1px solid #C9A84C}
+.fc-label{font-size:.66em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#8B2242;font-weight:700}
+
+/* ── FILL-IN-BLANK ── */
+.fib-list{display:flex;flex-direction:column;gap:16px}
+.fib-card{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:22px;border-left:4px solid #8B2242}
+.fib-num{font-size:.68em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fib-prompt{font-size:.93em;color:#2C2C2C;line-height:1.65;margin-bottom:12px}
+.fib-hint{font-size:.8em;color:#7A7060;font-style:italic;margin-bottom:10px}
+.fib-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fib-input{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:9px 14px;color:#2C2C2C;font-size:.9em;font-family:inherit;min-width:200px;transition:border-color .2s}
+.fib-input:focus{outline:none;border-color:#C9A84C;background:#FFFDF5}
+.fib-input.correct{border-color:#2E7D32;background:#F1F8F2}
+.fib-input.incorrect{border-color:#C62828;background:#FEF5F5}
+.fib-btn{background:#8B2242;border:none;color:#F2E8CF;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:background .2s}
+.fib-btn:hover{background:#A83A58}
+.fib-reveal-btn{background:#FFF;border:1px solid #D6CEB8;color:#7A7060;padding:9px 16px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:all .2s}
+.fib-reveal-btn:hover{border-color:#C9A84C;color:#8B6914}
+.fib-feedback{font-size:.82em;margin-top:8px;padding:7px 12px;border-radius:4px;display:none}
+.fib-feedback.correct{background:#F1F8F2;border:1px solid #A5D6A7;color:#2E7D32;display:block}
+.fib-feedback.incorrect{background:#FEF5F5;border:1px solid #FFCDD2;color:#C62828;display:block}
+
+/* ── ORDERING ── */
+.ordering-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.ordering-intro strong{color:#8B2242}
+.order-drill{background:#FFFFFF;border:1px solid #D6CEB8;border-left:4px solid #C9A84C;border-radius:6px;padding:22px;margin-bottom:20px}
+.drill-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#8B2242;margin-bottom:5px}
+.drill-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;min-height:40px}
+.order-item{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:12px 16px;cursor:grab;font-size:.86em;color:#2C2C2C;line-height:1.4;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none}
+.order-item:active{cursor:grabbing}
+.order-item:hover{border-color:#C9A84C;background:#FFFDF5}
+.order-item.dragging{opacity:.6;border-style:dashed;border-color:#C9A84C}
+.order-item.drag-over{border-color:#C9A84C;background:#FFF8E1;transform:scale(1.01)}
+.order-item .item-grip{color:#C9A84C;font-size:1.1em;flex-shrink:0;margin-top:1px}
+.order-item .item-text{flex:1}
+.order-item.correct-pos{background:#F1F8F2;border-color:#66BB6A}
+.order-item.wrong-pos{background:#FEF5F5;border-color:#EF5350;color:#991b1b}
+.order-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.order-check-btn{background:#8B2242;border:none;color:#F2E8CF;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:background .2s}
+.order-check-btn:hover{background:#A83A58}
+.order-ghost-btn{background:none;border:1px solid #D6CEB8;color:#7A7060;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:all .2s}
+.order-ghost-btn:hover{border-color:#C9A84C;color:#8B6914}
+.order-feedback{font-size:.84em;padding:8px 14px;border-radius:5px;margin-bottom:8px}
+.order-feedback.correct{background:#F1F8F2;border:1px solid #66BB6A;color:#2E7D32}
+.order-feedback.incorrect{background:#FEF5F5;border:1px solid #EF5350;color:#C62828}
+.order-answer{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:5px;padding:14px 18px;font-size:.83em;margin-top:8px;display:none}
+.order-answer ol{padding-left:20px;line-height:1.9}
+.order-answer li{color:#2C2C2C}
+.order-answer li span{color:#8B2242;font-weight:600}
+
+/* ── MATCHING ── */
+.match-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A}
+.match-intro strong{color:#8B2242}
+.match-set{background:#FFFFFF;border:1px solid #D6CEB8;border-left:4px solid #8B2242;border-radius:6px;padding:22px;margin-bottom:20px}
+.match-set-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#8B2242;margin-bottom:4px}
+.match-set-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.match-cols{grid-template-columns:1fr}}
+.match-col-label{font-size:.7em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.match-item{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.match-item:hover:not(.matched-correct):not(.matched-wrong){border-color:#C9A84C!important;background:#FFFDF5!important}
+.match-item.selected{border-color:#8B2242!important;background:#F7E8EE!important;color:#8B2242!important;font-weight:600}
+.match-item.matched-correct{border-color:#66BB6A!important;background:#F1F8F2!important;color:#2E7D32!important;cursor:default}
+.match-item.flash-wrong{animation:flashRed .5s ease forwards}
+@keyframes flashRed{0%{background:#FEF5F5;border-color:#EF5350}100%{background:#F7F5F0;border-color:#D6CEB8}}
+.match-score{margin-top:12px;font-size:.83em;color:#7A7060}
+.match-score .correct-count{color:#2E7D32;font-weight:700}
+.match-reset-btn{background:none;border:1px solid #D6CEB8;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px;transition:all .2s}
+.match-reset-btn:hover{border-color:#C9A84C;color:#8B6914}
+
+/* ── TEST TRAPS ── */
+.trap-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-left:4px solid #C9A84C;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.trap-intro strong{color:#8B2242}
+.trap-card{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #C9A84C}
+.trap-num{font-size:.68em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-family:'Crimson Pro',Georgia,serif;font-size:1em;color:#2C2C2C;line-height:1.55;margin-bottom:16px;background:#FFFDF5;border-radius:5px;padding:16px;border-left:3px solid #C9A84C;font-style:italic}
+.trap-btns{display:flex;gap:10px;margin-bottom:8px}
+.trap-btn{padding:9px 28px;border-radius:5px;border:2px solid;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.trap-btn-true{background:none;border-color:#66BB6A;color:#2E7D32}
+.trap-btn-true:hover:not(:disabled){background:#F1F8F2;border-color:#43A047}
+.trap-btn-false{background:none;border-color:#EF5350;color:#C62828}
+.trap-btn-false:hover:not(:disabled){background:#FEF5F5;border-color:#E53935}
+.trap-btn:disabled{opacity:.5;cursor:not-allowed}
+.trap-btn.sel-correct{background:#F1F8F2;border-color:#43A047;color:#2E7D32}
+.trap-btn.sel-wrong{background:#FEF5F5;border-color:#E53935;color:#C62828}
+.trap-exp{padding:14px 18px;border-radius:5px;font-size:.87em;line-height:1.65;margin-top:4px;display:none}
+.trap-exp.show-c{background:#F1F8F2;border:1px solid #A5D6A7;color:#1B5E20;display:block}
+.trap-exp.show-w{background:#FEF5F5;border:1px solid #FFCDD2;color:#B71C1C;display:block}
+.trap-exp strong{color:#8B2242}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:.95em;font-weight:700;color:#8B2242;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #C9A84C}
+.ref-table{width:100%;border-collapse:collapse;font-size:.84em}
+.ref-table th{background:#8B2242;color:#F2E8CF;font-weight:600;text-align:left;padding:10px 14px;font-size:.88em;letter-spacing:.03em}
+.ref-table td{padding:10px 14px;border-bottom:1px solid #E8E0CD;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+.ref-table tr:nth-child(even) td{background:#FAFAF5}
+.ref-table tr:hover td{background:#FFFDF5}
+.ref-table .key{color:#8B2242;font-weight:600}
+.ref-note{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
+.ref-note strong{color:#8B2242}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #D6CEB8;padding-top:16px;margin-top:32px}
+.footer a{color:#8B2242;text-decoration:none;font-weight:600}
+.footer a:hover{color:#C9A84C;text-decoration:underline}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Block 4 — Repro</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back-btn">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub 1 — Core Concepts</div>
+  <h1>Endocrinology of the Ovary &amp; Female Reproductive Tract <span>Active Drills</span></h1>
+  <div class="subtitle">
+    Flashcards · Fill-in-Blank · Drag-and-Drop Ordering · Matching · Interactive Test Traps<br>
+    Lectures 05–06 · Repro Block · Sexual Differentiation · HPG Axis · Folliculogenesis · Menstrual Cycle · Hormone Disorders
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Primary:</strong> RPD05-06 Lecture Guide (HoyaDocs)</div>
+    <div class="source-badge"><strong>Focus:</strong> Female Reproductive Endocrinology</div>
+    <div class="source-badge"><strong>Review:</strong> Guyton &amp; Hall Ch. 81–82 · FA Ch. 03 Physiology</div>
+    <div class="source-badge"><strong>Topics:</strong> HPG Axis · Two-Cell Model · Folliculogenesis · Cycle Phases · Hypogonadism</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <span class="hub-step current">Hub 1 — Core Concepts</span>
+  <span class="hub-arrow">→</span>
+  <a href="rpd05-06-hub2-ovary-endocrinology.html" class="hub-step next">Hub 2 — Step 1 Extensions</a>
+  <span class="hub-arrow">→</span>
+  <a href="rpd05-06-hub3-ovary-endocrinology.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Fill-in-Blank</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Test Traps</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('fib',this)">Fill-in-Blank</button>
+  <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
+  <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
+</div>
+
+<!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">16</span> cards total</span><span>Ovary Endocrinology</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 1 · 6 Levels of Sexual Differentiation</div><div class="fc-q">Name the six hierarchical levels of sexual differentiation in order. Which one determines all the others?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Genetic (chromosomal) sex</strong> — XX vs XY; the <em>master switch</em> that drives all downstream sex.<br><strong>2. Gonadal sex</strong> — ovary vs testis; controlled by <strong>SRY</strong> on Yp (makes TDF).<br><strong>3. Phenotypic sex</strong> — internal ducts + external genitalia.<br><strong>4. Germ-cell sex</strong> — oocyte vs spermatocyte fate.<br><strong>5. Hormonal sex</strong> — estrogen/progesterone vs testosterone/DHT profile.<br><strong>6. Behavioral/psychological sex</strong> — brain sexual dimorphism.<br><br>Genetic sex sits at the top and determines gonadal sex, which then drives phenotypic and hormonal sex.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 1 · Default vs Induced Pathway</div><div class="fc-q">Female development is often called the "default" pathway. What exactly is defaulted, and which signaling events actively drive male development?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Without <strong>SRY / TDF</strong>, bipotential gonads → ovaries by default. Without <strong>AMH</strong>, paramesonephric (Müllerian) ducts persist → uterus, fallopian tubes, upper vagina. Without <strong>testosterone</strong>, mesonephric (Wolffian) ducts regress.<br><br><strong>Male induction requires:</strong><br>• SRY → testis differentiation<br>• Sertoli cells → <strong>AMH</strong> → regression of Müllerian ducts<br>• Leydig cells → <strong>testosterone</strong> → Wolffian duct retention<br>• Peripheral 5α-reductase → <strong>DHT</strong> → virilization of external genitalia &amp; prostate</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 2 · Testosterone vs DHT vs Estrogen</div><div class="fc-q">Which hormone is required for each: Wolffian duct maintenance, external genital virilization, feminization of external genitalia, and bone epiphyseal fusion in both sexes?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Wolffian ducts</strong> (epididymis, vas deferens, seminal vesicles) → <strong>testosterone</strong>.<br><strong>External male genitalia</strong> (penis, scrotum, prostate) → <strong>DHT</strong> (via 5α-reductase).<br><strong>External female genitalia</strong> → develop in absence of DHT (not actively "feminized" by estrogen).<br><strong>Epiphyseal closure</strong> in <em>both sexes</em> → <strong>estrogen</strong> (even in males, T is aromatized to E2).<br><br><strong>Mnemonic — "Testosterone = internal, DHT = external (DICK)"</strong>: DHT drives Differentiation of external genitalia, the prostate, and post-pubertal hair/acne/balding.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · HPG Pipeline Order</div><div class="fc-q">Trace the HPG axis from hypothalamus to target tissue in a female. Which hormone is pulsatile and which is tonic?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Hypothalamus</strong> → <em>pulsatile</em> <strong>GnRH</strong> (every 60–90 min) → median eminence → portal system →<br><strong>Anterior pituitary gonadotropes</strong> → <strong>LH &amp; FSH</strong> (tonic levels with cycle-dependent surges) →<br><strong>Ovary</strong> → <strong>estradiol</strong> (granulosa, from thecal androgens) &amp; <strong>progesterone</strong> (corpus luteum) → target tissues.<br><br><strong>KEY:</strong> Pulsatile GnRH = physiologic. <em>Continuous</em> GnRH (e.g., leuprolide given continuously) → gonadotrope desensitization → ↓LH/FSH → chemical castration.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Two-Cell, Two-Gonadotropin Model</div><div class="fc-q">Which ovarian cell has which gonadotropin receptor, and which enzyme does each cell provide in estrogen synthesis?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Theca cell</strong> — <strong>LH receptor</strong> → cholesterol → androstenedione / testosterone (has <em>desmolase</em>, 17α-hydroxylase, 17,20-lyase; <strong>lacks aromatase</strong>).<br><strong>Granulosa cell</strong> — <strong>FSH receptor</strong> → aromatizes thecal androgens → <strong>estradiol</strong> (has <em>aromatase</em>; lacks 17α-hydroxylase).<br><br>Androgens must cross from theca → granulosa to be aromatized. At the LH surge, granulosa cells <em>also</em> express LH receptors → shift to progesterone production (luteinization).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 3 · Feedback Switch</div><div class="fc-q">Estradiol normally gives negative feedback, but once a month it gives positive feedback. What are the two conditions for the switch?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">The switch to <strong>positive feedback</strong> requires:<br><strong>1. E2 concentration &gt; ~200 pg/mL</strong> (high threshold)<br><strong>2. Sustained for &gt; ~48 hours</strong> (duration)<br><br>When both are met, estradiol <em>stimulates</em> GnRH/LH release → the <strong>LH surge</strong> → ovulation. At all other times (low or transiently high E2), E2 inhibits GnRH, LH, FSH.<br><br><strong>Progesterone</strong> always gives negative feedback — there is no positive feedback phase for progesterone. This is why the luteal phase shuts down gonadotropins.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Follicle Pool Across Life</div><div class="fc-q">How many oocytes does a female have at 20 weeks gestation, at birth, at puberty, and at menopause? When does meiosis I arrest occur and when does it resume?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Peak: 20 wk gestation</strong> ≈ 6–7 million oogonia.<br><strong>Birth</strong> ≈ 1–2 million primary oocytes (all arrested in <strong>prophase I</strong>).<br><strong>Puberty</strong> ≈ 300–400,000.<br><strong>Menopause</strong> ≈ &lt;1000 (functionally 0).<br><br><strong>Meiosis I arrest</strong> occurs in fetal life at <em>prophase I (diplotene)</em>. It resumes at the <strong>LH surge</strong> just before ovulation (polar body extruded).<br><strong>Meiosis II arrest</strong> occurs at <em>metaphase II</em> after ovulation. Only <strong>fertilization</strong> completes meiosis II.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Follicle Stages in Order</div><div class="fc-q">Starting from primordial follicle, name the 5 stages of follicular development. Which one is FSH-independent and which is FSH-dependent?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Primordial follicle</strong> — single layer flat squamous granulosa, arrested since fetal life. <em>FSH-independent.</em><br><strong>2. Primary follicle</strong> — cuboidal granulosa; zona pellucida appears. <em>FSH-independent.</em><br><strong>3. Secondary (preantral) follicle</strong> — multi-layer granulosa + theca layers form. <em>Starts to become FSH-responsive.</em><br><strong>4. Antral (Graafian) follicle</strong> — fluid-filled antrum; estradiol-secreting. <em>FSH-dependent.</em><br><strong>5. Preovulatory / dominant follicle</strong> — one follicle wins; LH surge → ovulation.<br><br>Post-ovulation → <strong>corpus luteum</strong> → <em>corpus albicans</em> if no pregnancy.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 4 · Corpus Luteum</div><div class="fc-q">What cells form the corpus luteum, what hormones does it secrete, and what rescues it if pregnancy occurs?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">After ovulation, <strong>granulosa-lutein cells</strong> (from granulosa) and <strong>theca-lutein cells</strong> (from theca interna) luteinize under continued LH stimulation.<br><br>CL secretes <strong>progesterone</strong> (dominant), <strong>estradiol</strong>, and <strong>inhibin A</strong>.<br><br>Lifespan without pregnancy = <strong>~14 days</strong> → regresses → corpus albicans.<br><br><strong>Rescue:</strong> if fertilization → implantation day ~7 → trophoblast <strong>hCG</strong> (LH-like) binds CL LH-receptors → CL maintained. By ~8–10 weeks, placenta takes over progesterone production (<em>luteal-placental shift</em>).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 5 · 3 Phases of the Cycle</div><div class="fc-q">Name the three ovarian phases and the two endometrial phases of the 28-day cycle. Which day is ovulation and which hormone drives each phase?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Ovarian:</strong><br>• <em>Follicular</em> (days 1–13) — FSH selects dominant follicle; granulosa-driven <strong>estradiol</strong> rises.<br>• <em>Ovulation</em> (day 14) — LH surge ~36 h before ovulation.<br>• <em>Luteal</em> (days 15–28) — CL dominates; <strong>progesterone</strong> peaks day 21–22.<br><br><strong>Endometrial:</strong><br>• <em>Proliferative</em> (follicular) — estradiol thickens endometrium.<br>• <em>Secretory</em> (luteal) — progesterone induces glandular tortuosity &amp; spiral arteries.<br><br>Luteal phase is <strong>fixed at ~14 days</strong>; cycle length varies due to follicular phase.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 5 · Ovulation Signals</div><div class="fc-q">At ovulation, what body-temperature change occurs, what cervical mucus change is classic, and which hormone underlies each?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Basal body temperature</strong> — <em>rises ~0.5 °C</em> after ovulation (progesterone is thermogenic). Sustained elevation &gt; 16–18 days suggests pregnancy.<br><br><strong>Cervical mucus</strong>:<br>• Pre-ovulatory (estrogen-dominant) — thin, clear, stretchy (<strong>spinnbarkeit</strong>); ferns when dried; pro-sperm.<br>• Post-ovulatory (progesterone-dominant) — thick, tacky, sperm-hostile.<br><br><strong>LH surge</strong> can be detected in urine (OPK strips) ~24–36 h before ovulation.<br>Peak fertility = days 12–14.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 5 · Estrogen vs Progesterone Effects</div><div class="fc-q">Compare estradiol and progesterone effects on: endometrium, cervical mucus, breast, body temp, and uterine smooth muscle.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Estradiol:</strong> proliferates endometrium · thin/stretchy mucus · breast <em>duct</em> growth · no temp change · <em>increases</em> myometrial excitability (↑oxytocin receptors).<br><br><strong>Progesterone:</strong> secretory transformation · thick/tacky mucus · breast <em>alveolar/lobular</em> growth · ↑BBT 0.5 °C · <em>quiets</em> myometrium (maintains pregnancy) · thickens/stabilizes endometrium.<br><br>Withdrawal of <strong>progesterone</strong> at the end of luteal phase → endometrial sloughing → <strong>menses</strong>.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · Primary vs Secondary Hypogonadism</div><div class="fc-q">How do you distinguish primary (ovarian) from secondary (central) hypogonadism using FSH/LH vs estradiol?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Primary (hypergonadotropic hypogonadism):</strong> ovary fails → ↓E2 → loss of negative feedback → <strong>↑↑FSH, ↑LH</strong>. Examples: Turner (45,XO), premature ovarian insufficiency, menopause.<br><br><strong>Secondary (hypogonadotropic hypogonadism):</strong> hypothalamus/pituitary fails → ↓GnRH or ↓FSH/LH → ↓E2 with <strong>low or normal FSH/LH</strong>. Examples: Kallmann syndrome (anosmia + ↓GnRH), hypothalamic amenorrhea (stress/athletes/eating disorders), hyperprolactinemia, pituitary adenoma.<br><br><strong>Rule:</strong> Problem is wherever the hormone <em>isn't</em>.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · Turner Syndrome</div><div class="fc-q">A 14 y/o with short stature, webbed neck, and no breast development has never menstruated. What is the karyotype, the ovarian histology, and the hormone profile?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Karyotype:</strong> <strong>45,XO</strong> (or mosaic 45,XO/46,XX).<br><strong>Ovaries:</strong> <em>streak gonads</em> — accelerated follicular atresia in fetal life; no functional oocytes.<br><strong>Hormones:</strong> ↓↓E2, <strong>↑↑FSH/LH</strong> (primary hypogonadism).<br><strong>Clinical:</strong> primary amenorrhea · short stature (no SHOX) · webbed neck/lymphedema · shield chest · wide-set nipples · bicuspid aortic valve · coarctation · horseshoe kidney.<br><br>Treatment: estrogen replacement at puberty; pregnancy possible only with donor oocyte.</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · Androgen Insensitivity Syndrome</div><div class="fc-q">A 46,XY patient is raised female, presents at puberty with primary amenorrhea, breast development, but absent pubic/axillary hair. Testosterone is elevated. Diagnosis and hormonal explanation?</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Complete Androgen Insensitivity Syndrome (CAIS)</strong> — X-linked mutation in the androgen receptor (AR).<br><br><strong>Mechanism:</strong> 46,XY with functional testes → make testosterone + AMH. <em>AMH regresses Müllerian ducts</em> → no uterus/upper vagina. <em>Testosterone cannot signal</em> → Wolffian ducts regress → external genitalia default to female. Peripheral aromatization of T → E2 → breast development at puberty.<br><br><strong>Labs:</strong> ↑↑T, ↑LH, normal/↑E2. Testes often in inguinal canal — <em>remove after puberty</em> (malignancy risk).<br><strong>Absent pubic/axillary hair</strong> = classic clue (needs androgen signaling).</div></div>
+    </div></div>
+
+    <div class="fc" onclick="flipCard(this)"><div class="fc-inner">
+      <div class="fc-front"><div class="fc-label">LO 6 · PCOS Hormone Pattern</div><div class="fc-q">A 22 y/o with oligomenorrhea, hirsutism, and acne has BMI 32. List the Rotterdam criteria and the classic hormonal/metabolic abnormalities.</div><div class="fc-flip-hint">tap to flip</div></div>
+      <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Rotterdam criteria</strong> — need 2 of 3:<br>1. Oligo/anovulation<br>2. Clinical or biochemical hyperandrogenism<br>3. Polycystic ovaries on ultrasound (≥12 follicles 2–9 mm, "string of pearls")<br><br><strong>Hormonal:</strong> ↑LH, normal/↓FSH → <strong>LH:FSH ratio &gt; 2–3:1</strong>; ↑testosterone, ↑androstenedione, ↓SHBG, ↑ estrone (aromatization in adipose).<br><br><strong>Metabolic:</strong> insulin resistance → hyperinsulinemia → stimulates theca androgen production + ↓SHBG. Associated with obesity, dyslipidemia, endometrial hyperplasia (unopposed estrogen from anovulation).<br><strong>Tx:</strong> OCPs · metformin · letrozole (for fertility) · spironolactone (hirsutism).</div></div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- ══ FILL IN THE BLANK ══════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-fib">
+  <div class="fib-list">
+
+    <div class="fib-card">
+      <div class="fib-num">Question 1 · LO 1 — Sexual Differentiation</div>
+      <div class="fib-prompt">The <strong>SRY gene</strong> on <input type="text" class="fib-input" data-answers="Yp,Y short arm,short arm of Y"> encodes testis-determining factor, which directs the bipotential gonad toward becoming a <input type="text" class="fib-input" data-answers="testis,testes">. In its absence, the gonad defaults to an <input type="text" class="fib-input" data-answers="ovary">.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 2 · LO 2 — Hormone Requirements</div>
+      <div class="fib-prompt">Müllerian (paramesonephric) duct regression in males requires <input type="text" class="fib-input" data-answers="AMH,anti-Müllerian hormone,Müllerian inhibiting substance,MIS"> from Sertoli cells. Wolffian (mesonephric) duct retention requires <input type="text" class="fib-input" data-answers="testosterone,T"> from Leydig cells. Virilization of external genitalia requires <input type="text" class="fib-input" data-answers="DHT,dihydrotestosterone"> produced by the enzyme <input type="text" class="fib-input" data-answers="5-alpha-reductase,5α-reductase,5a-reductase">.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 3 · LO 3 — GnRH Pulsatility</div>
+      <div class="fib-prompt">GnRH is released in pulses every <input type="text" class="fib-input" data-answers="60-90,60–90,90,one to two hours"> minutes. <strong>Continuous</strong> GnRH administration paradoxically causes <input type="text" class="fib-input" data-answers="desensitization,downregulation"> of the GnRH receptor, producing a functional chemical <input type="text" class="fib-input" data-answers="castration">. This is the mechanism of leuprolide in prostate cancer.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 4 · LO 3 — Two-Cell Model</div>
+      <div class="fib-prompt">In the ovarian two-cell model, <input type="text" class="fib-input" data-answers="theca,thecal,theca interna"> cells respond to <input type="text" class="fib-input" data-answers="LH"> and synthesize androstenedione, while <input type="text" class="fib-input" data-answers="granulosa"> cells respond to <input type="text" class="fib-input" data-answers="FSH"> and aromatize androgens into <input type="text" class="fib-input" data-answers="estradiol,E2,estrogen">.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 5 · LO 3 — Feedback Switch</div>
+      <div class="fib-prompt">Estradiol normally exerts <input type="text" class="fib-input" data-answers="negative,negative feedback"> feedback on the HPG axis. However, when estradiol exceeds ~<input type="text" class="fib-input" data-answers="200"> pg/mL for more than ~48 hours, it switches to <input type="text" class="fib-input" data-answers="positive,positive feedback"> feedback, triggering the <input type="text" class="fib-input" data-answers="LH surge,LH,luteinizing hormone surge">.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 6 · LO 4 — Oocyte Numbers</div>
+      <div class="fib-prompt">The peak number of oogonia occurs at <input type="text" class="fib-input" data-answers="20,twenty"> weeks of gestation with approximately <input type="text" class="fib-input" data-answers="6-7 million,6 million,7 million,6–7 million"> cells. At birth there are ~<input type="text" class="fib-input" data-answers="1-2 million,1 million,2 million,1–2 million">, and oocytes remain arrested in <input type="text" class="fib-input" data-answers="prophase I,prophase 1,diplotene of prophase I"> until the LH surge.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 7 · LO 4 — Corpus Luteum Rescue</div>
+      <div class="fib-prompt">Without pregnancy, the corpus luteum involutes after ~<input type="text" class="fib-input" data-answers="14,fourteen"> days to form the corpus <input type="text" class="fib-input" data-answers="albicans">. If pregnancy occurs, <input type="text" class="fib-input" data-answers="hCG,human chorionic gonadotropin"> from trophoblasts binds CL LH receptors and maintains progesterone production until the <input type="text" class="fib-input" data-answers="placenta,luteal-placental shift"> takes over at ~8–10 weeks.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 8 · LO 5 — Cycle Hormone Peaks</div>
+      <div class="fib-prompt">In a standard 28-day cycle, estradiol peaks just before ovulation on day <input type="text" class="fib-input" data-answers="13,12-13,12"> driving the LH surge. Progesterone peaks at day <input type="text" class="fib-input" data-answers="21,21-22,mid-luteal">, mirrored by <input type="text" class="fib-input" data-answers="inhibin A"> from the corpus luteum. The luteal phase has a fixed length of <input type="text" class="fib-input" data-answers="14,fourteen"> days.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 9 · LO 6 — Kallmann Syndrome</div>
+      <div class="fib-prompt">Kallmann syndrome is defective migration of <input type="text" class="fib-input" data-answers="GnRH,GnRH neurons"> neurons from the olfactory placode to the hypothalamus. Patients present with delayed puberty and <input type="text" class="fib-input" data-answers="anosmia,hyposmia">. Labs show <strong>low</strong> FSH/LH and low estradiol — a pattern called <input type="text" class="fib-input" data-answers="hypogonadotropic hypogonadism,secondary hypogonadism"> hypogonadism.</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">Question 10 · LO 6 — 5α-Reductase Deficiency</div>
+      <div class="fib-prompt">A 46,XY neonate with 5α-reductase deficiency has normal testosterone but deficient <input type="text" class="fib-input" data-answers="DHT,dihydrotestosterone">. Internal ducts are <input type="text" class="fib-input" data-answers="male,masculinized,normal male"> (T-driven) but external genitalia appear <input type="text" class="fib-input" data-answers="female,ambiguous,feminized">. At puberty, rising testosterone causes virilization — classically described as "<input type="text" class="fib-input" data-answers="penis at 12,guevedoces">."</div>
+      <div class="fib-row"><button class="fib-btn" onclick="checkFib(this)">Check</button><button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button></div>
+      <div class="fib-feedback"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ORDERING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-ordering">
+  <div class="ordering-intro"><strong>Drag the tiles</strong> to arrange each sequence in the correct physiologic order, then click Check.</div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 1 · LO 4 — Follicle Maturation Sequence</div>
+    <div class="drill-hint">Arrange from earliest (fetal life) to post-ovulatory.</div>
+    <div class="order-list" id="ord1" ondragover="event.preventDefault()" ondrop="dropItem(event,'ord1')">
+      <div class="order-item" draggable="true" data-pos="1" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord1')"><span class="item-grip">⋮⋮</span><span class="item-text">Primordial follicle (single layer flat granulosa, arrested prophase I)</span></div>
+      <div class="order-item" draggable="true" data-pos="3" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord1')"><span class="item-grip">⋮⋮</span><span class="item-text">Secondary (preantral) follicle — theca appears</span></div>
+      <div class="order-item" draggable="true" data-pos="5" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord1')"><span class="item-grip">⋮⋮</span><span class="item-text">Preovulatory / dominant Graafian follicle</span></div>
+      <div class="order-item" draggable="true" data-pos="2" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord1')"><span class="item-grip">⋮⋮</span><span class="item-text">Primary follicle (cuboidal granulosa + zona pellucida)</span></div>
+      <div class="order-item" draggable="true" data-pos="6" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord1')"><span class="item-grip">⋮⋮</span><span class="item-text">Corpus luteum → corpus albicans</span></div>
+      <div class="order-item" draggable="true" data-pos="4" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord1')"><span class="item-grip">⋮⋮</span><span class="item-text">Early antral follicle — fluid-filled antrum</span></div>
+    </div>
+    <div class="order-actions"><button class="order-check-btn" onclick="checkOrder('ord1','ord1-fb')">Check Order</button><button class="order-ghost-btn" onclick="showOrderAnswer('ord1-ans')">Show Answer</button></div>
+    <div class="order-feedback" id="ord1-fb"></div>
+    <div class="order-answer" id="ord1-ans"><ol><li><span>Primordial:</span> flat granulosa, FSH-independent</li><li><span>Primary:</span> cuboidal granulosa, zona pellucida</li><li><span>Secondary:</span> theca layers form, pre-antral</li><li><span>Antral:</span> FSH-dependent, antrum forms</li><li><span>Graafian:</span> dominant follicle, estradiol-dominant</li><li><span>Corpus luteum → albicans</span> if no pregnancy</li></ol></div>
+  </div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 2 · LO 5 — The 28-Day Hormone Cycle</div>
+    <div class="drill-hint">Arrange the cycle events in chronological order from day 1.</div>
+    <div class="order-list" id="ord2" ondragover="event.preventDefault()" ondrop="dropItem(event,'ord2')">
+      <div class="order-item" draggable="true" data-pos="4" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord2')"><span class="item-grip">⋮⋮</span><span class="item-text">LH surge triggers ovulation (day 14)</span></div>
+      <div class="order-item" draggable="true" data-pos="1" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord2')"><span class="item-grip">⋮⋮</span><span class="item-text">Menses (days 1–5) — progesterone withdrawal</span></div>
+      <div class="order-item" draggable="true" data-pos="6" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord2')"><span class="item-grip">⋮⋮</span><span class="item-text">Progesterone peak mid-luteal (day 21–22)</span></div>
+      <div class="order-item" draggable="true" data-pos="3" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord2')"><span class="item-grip">⋮⋮</span><span class="item-text">Estradiol peak just before ovulation (day 13)</span></div>
+      <div class="order-item" draggable="true" data-pos="2" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord2')"><span class="item-grip">⋮⋮</span><span class="item-text">FSH rises and recruits antral follicle cohort (days 1–7)</span></div>
+      <div class="order-item" draggable="true" data-pos="5" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord2')"><span class="item-grip">⋮⋮</span><span class="item-text">Corpus luteum forms &amp; secretes progesterone (days 15–20)</span></div>
+    </div>
+    <div class="order-actions"><button class="order-check-btn" onclick="checkOrder('ord2','ord2-fb')">Check Order</button><button class="order-ghost-btn" onclick="showOrderAnswer('ord2-ans')">Show Answer</button></div>
+    <div class="order-feedback" id="ord2-fb"></div>
+    <div class="order-answer" id="ord2-ans"><ol><li><span>Menses</span> — progesterone withdrawal triggers shedding</li><li><span>FSH rise</span> — follicular cohort recruited</li><li><span>Estradiol peak</span> — dominant follicle, &gt;200 pg/mL</li><li><span>LH surge</span> — positive feedback, ovulation ~day 14</li><li><span>CL forms</span> — progesterone rises</li><li><span>Progesterone peak</span> — day 21; then CL regresses → menses</li></ol></div>
+  </div>
+
+  <div class="order-drill">
+    <div class="drill-title">Drill 3 · LO 1 — Embryonic Sexual Differentiation Cascade</div>
+    <div class="drill-hint">Order from earliest (gestational weeks) to latest (pubertal).</div>
+    <div class="order-list" id="ord3" ondragover="event.preventDefault()" ondrop="dropItem(event,'ord3')">
+      <div class="order-item" draggable="true" data-pos="4" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord3')"><span class="item-grip">⋮⋮</span><span class="item-text">DHT virilizes external genitalia (8–12 wk)</span></div>
+      <div class="order-item" draggable="true" data-pos="1" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord3')"><span class="item-grip">⋮⋮</span><span class="item-text">Fertilization determines chromosomal sex (XX vs XY)</span></div>
+      <div class="order-item" draggable="true" data-pos="5" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord3')"><span class="item-grip">⋮⋮</span><span class="item-text">HPG axis reactivates at puberty, secondary sex characteristics</span></div>
+      <div class="order-item" draggable="true" data-pos="2" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord3')"><span class="item-grip">⋮⋮</span><span class="item-text">SRY expressed (~6 wk) → testis determination from bipotential gonad</span></div>
+      <div class="order-item" draggable="true" data-pos="3" ondragstart="dragStart(event)" ondragover="this.classList.add('drag-over');event.preventDefault()" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'ord3')"><span class="item-grip">⋮⋮</span><span class="item-text">Sertoli→AMH (Müllerian regression) · Leydig→T (Wolffian retention) ~7–10 wk</span></div>
+    </div>
+    <div class="order-actions"><button class="order-check-btn" onclick="checkOrder('ord3','ord3-fb')">Check Order</button><button class="order-ghost-btn" onclick="showOrderAnswer('ord3-ans')">Show Answer</button></div>
+    <div class="order-feedback" id="ord3-fb"></div>
+    <div class="order-answer" id="ord3-ans"><ol><li><span>Fertilization:</span> XX vs XY set</li><li><span>SRY at ~6 wk:</span> gonad → testis</li><li><span>Sertoli AMH + Leydig T</span> at 7–10 wk shape ducts</li><li><span>DHT virilization</span> of external genitalia at 8–12 wk</li><li><span>Puberty:</span> HPG reactivates, adult phenotype</li></ol></div>
+  </div>
+</div>
+
+<!-- ══ MATCHING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-matching">
+  <div class="match-intro"><strong>Click a term on the left, then click its best match on the right.</strong> Correct pairs lock in green; wrong pairs flash red.</div>
+
+  <div class="match-set">
+    <div class="match-set-title">Drill 1 · LO 2 — Hormone ↔ Role in Sexual Differentiation</div>
+    <div class="match-set-hint">Match each hormone or enzyme to its function in fetal development.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Hormone / Enzyme</div>
+        <div class="match-item" data-pair="m1a" onclick="selectMatch(this,'m1')">Testosterone</div>
+        <div class="match-item" data-pair="m1b" onclick="selectMatch(this,'m1')">DHT</div>
+        <div class="match-item" data-pair="m1c" onclick="selectMatch(this,'m1')">AMH (MIS)</div>
+        <div class="match-item" data-pair="m1d" onclick="selectMatch(this,'m1')">5α-reductase</div>
+        <div class="match-item" data-pair="m1e" onclick="selectMatch(this,'m1')">Aromatase</div>
+      </div>
+      <div>
+        <div class="match-col-label">Function</div>
+        <div class="match-item" data-pair="m1c" onclick="selectMatch(this,'m1')">Sertoli-cell hormone — regresses Müllerian ducts</div>
+        <div class="match-item" data-pair="m1a" onclick="selectMatch(this,'m1')">Leydig-cell hormone — maintains Wolffian ducts</div>
+        <div class="match-item" data-pair="m1e" onclick="selectMatch(this,'m1')">Converts androgens → estrogens in granulosa &amp; adipose</div>
+        <div class="match-item" data-pair="m1b" onclick="selectMatch(this,'m1')">Virilizes external genitalia; needed for prostate</div>
+        <div class="match-item" data-pair="m1d" onclick="selectMatch(this,'m1')">Converts testosterone → DHT peripherally</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="m1-score">0</span> / 5</div>
+    <button class="match-reset-btn" onclick="resetMatch('m1')">Reset</button>
+  </div>
+
+  <div class="match-set">
+    <div class="match-set-title">Drill 2 · LO 3/5 — Cycle Phase ↔ Dominant Hormone &amp; Event</div>
+    <div class="match-set-hint">Match each menstrual cycle phase to its hallmark feature.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Phase</div>
+        <div class="match-item" data-pair="m2a" onclick="selectMatch(this,'m2')">Early follicular (days 1–5)</div>
+        <div class="match-item" data-pair="m2b" onclick="selectMatch(this,'m2')">Late follicular (days 10–13)</div>
+        <div class="match-item" data-pair="m2c" onclick="selectMatch(this,'m2')">Ovulation (day 14)</div>
+        <div class="match-item" data-pair="m2d" onclick="selectMatch(this,'m2')">Mid-luteal (days 20–22)</div>
+        <div class="match-item" data-pair="m2e" onclick="selectMatch(this,'m2')">Late luteal (days 26–28)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Dominant Hormone &amp; Event</div>
+        <div class="match-item" data-pair="m2c" onclick="selectMatch(this,'m2')">LH surge 36 h prior; meiosis I resumes</div>
+        <div class="match-item" data-pair="m2a" onclick="selectMatch(this,'m2')">FSH rises; recruits antral follicle cohort</div>
+        <div class="match-item" data-pair="m2e" onclick="selectMatch(this,'m2')">CL regression → progesterone crash → menses</div>
+        <div class="match-item" data-pair="m2b" onclick="selectMatch(this,'m2')">Estradiol peak &gt;200 pg/mL → positive feedback</div>
+        <div class="match-item" data-pair="m2d" onclick="selectMatch(this,'m2')">Progesterone peak; secretory endometrium</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="m2-score">0</span> / 5</div>
+    <button class="match-reset-btn" onclick="resetMatch('m2')">Reset</button>
+  </div>
+
+  <div class="match-set">
+    <div class="match-set-title">Drill 3 · LO 6 — Disorder ↔ Karyotype ↔ FSH/LH Pattern</div>
+    <div class="match-set-hint">Match each disorder with its characteristic hormonal picture.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Disorder</div>
+        <div class="match-item" data-pair="m3a" onclick="selectMatch(this,'m3')">Turner syndrome (45,XO)</div>
+        <div class="match-item" data-pair="m3b" onclick="selectMatch(this,'m3')">Kallmann syndrome</div>
+        <div class="match-item" data-pair="m3c" onclick="selectMatch(this,'m3')">Complete androgen insensitivity (46,XY)</div>
+        <div class="match-item" data-pair="m3d" onclick="selectMatch(this,'m3')">PCOS</div>
+        <div class="match-item" data-pair="m3e" onclick="selectMatch(this,'m3')">Hypothalamic amenorrhea (athlete)</div>
+      </div>
+      <div>
+        <div class="match-col-label">FSH/LH/E2 Pattern</div>
+        <div class="match-item" data-pair="m3c" onclick="selectMatch(this,'m3')">↑↑T, ↑LH, normal/↑E2 — AR mutation</div>
+        <div class="match-item" data-pair="m3a" onclick="selectMatch(this,'m3')">↓E2, ↑↑FSH/LH — primary (streak gonads)</div>
+        <div class="match-item" data-pair="m3d" onclick="selectMatch(this,'m3')">LH:FSH &gt; 2:1; ↑androgens; anovulation</div>
+        <div class="match-item" data-pair="m3b" onclick="selectMatch(this,'m3')">↓GnRH → low LH/FSH; anosmia</div>
+        <div class="match-item" data-pair="m3e" onclick="selectMatch(this,'m3')">Low-energy availability → ↓GnRH pulse, low LH/FSH/E2</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="m3-score">0</span> / 5</div>
+    <button class="match-reset-btn" onclick="resetMatch('m3')">Reset</button>
+  </div>
+</div>
+
+<!-- ══ TEST TRAPS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-traps">
+  <div class="trap-intro"><strong>Step 1 traps.</strong> Read each statement carefully — each one reverses or distorts a common misconception. Choose TRUE or FALSE.</div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 · LO 1 — SRY Source</div>
+    <div class="trap-statement">"The SRY gene is located on the long arm of the Y chromosome (Yq)."</div>
+    <div class="trap-btns"><button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button><button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button></div>
+    <div class="trap-exp"><strong>FALSE.</strong> SRY is on the <em>short arm</em> of Y (<strong>Yp11.3</strong>). Translocation of SRY to an X chromosome during aberrant meiosis causes 46,XX sex-reversed males (de la Chapelle syndrome). Remember: <em>Short</em> arm → <em>SRY</em>.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 · LO 2 — "Female is Active Estrogen-Driven"</div>
+    <div class="trap-statement">"Normal female external genitalia development requires estradiol signaling from the fetal ovary."</div>
+    <div class="trap-btns"><button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button><button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button></div>
+    <div class="trap-exp"><strong>FALSE.</strong> Female external genitalia develop in the <strong>absence of androgens</strong>, not because of estrogens. This is why 46,XY CAIS (AR mutation) patients still have normal female-appearing external genitalia despite XY karyotype. Fetal estrogen is not required; the <em>default pathway</em> is female.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 · LO 3 — Continuous vs Pulsatile GnRH</div>
+    <div class="trap-statement">"Continuous GnRH administration would be expected to stimulate LH/FSH release and induce ovulation."</div>
+    <div class="trap-btns"><button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button><button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button></div>
+    <div class="trap-exp"><strong>FALSE.</strong> GnRH must be <strong>pulsatile</strong> (every ~60–90 min). Continuous GnRH (e.g., leuprolide depot) <em>desensitizes</em> gonadotropes and <strong>suppresses</strong> LH/FSH — used as chemical castration in prostate cancer, endometriosis, and central precocious puberty. Pulsatile leuprolide, by contrast, induces ovulation.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 · LO 3 — Aromatase Location</div>
+    <div class="trap-statement">"Theca cells express aromatase and directly synthesize estradiol from cholesterol."</div>
+    <div class="trap-btns"><button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button><button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button></div>
+    <div class="trap-exp"><strong>FALSE.</strong> <em>Granulosa</em> cells have <strong>aromatase</strong> (FSH-driven). Theca cells have desmolase + 17α-hydroxylase + 17,20-lyase (LH-driven) and supply <strong>androstenedione</strong> to granulosa. This is the <strong>two-cell, two-gonadotropin</strong> model. At the LH surge, granulosa acquire LH receptors and luteinize.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 · LO 3 — Progesterone Feedback</div>
+    <div class="trap-statement">"Sustained high progesterone during the luteal phase exerts positive feedback that primes the next LH surge."</div>
+    <div class="trap-btns"><button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button><button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button></div>
+    <div class="trap-exp"><strong>FALSE.</strong> Progesterone exerts <strong>only negative feedback</strong> on the HPG axis. High luteal progesterone <em>suppresses</em> GnRH pulse frequency, which is exactly why another dominant follicle can't mature during the luteal phase — and why continuous-progestin contraception prevents ovulation. Only <em>estradiol</em> switches to positive feedback.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 · LO 4 — Oocyte Meiosis Completion</div>
+    <div class="trap-statement">"The secondary oocyte released at ovulation has already completed meiosis II."</div>
+    <div class="trap-btns"><button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button><button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button></div>
+    <div class="trap-exp"><strong>FALSE.</strong> At ovulation, the oocyte has completed <em>meiosis I</em> (first polar body extruded) and is arrested in <strong>metaphase II</strong>. Meiosis II only completes when sperm <em>penetrates</em> (fertilization) — this is when the second polar body forms. An unfertilized oocyte degenerates in metaphase II.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 · LO 5 — Luteal Phase Length</div>
+    <div class="trap-statement">"In irregular cycles, variation in cycle length is due to variation in the luteal phase."</div>
+    <div class="trap-btns"><button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button><button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button></div>
+    <div class="trap-exp"><strong>FALSE.</strong> The <strong>luteal phase is fixed at ~14 days</strong> (corpus luteum lifespan). Variability in cycle length comes from the <em>follicular phase</em>. That's why you count backwards from the next expected menses to estimate ovulation (e.g., a 35-day cycle → ovulation day 21, not day 14).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 08 · LO 6 — CAIS and Pubic Hair</div>
+    <div class="trap-statement">"A 17-year-old with complete androgen insensitivity syndrome presents with well-developed pubic and axillary hair despite primary amenorrhea."</div>
+    <div class="trap-btns"><button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button><button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button></div>
+    <div class="trap-exp"><strong>FALSE.</strong> In CAIS, androgen receptors don't work, so <strong>pubic and axillary hair are absent or scant</strong>. Breast development <em>is</em> present (from peripheral T → E2 aromatization). Classic triad: 46,XY · primary amenorrhea · breast dev but absent sexual hair · blind-ended vagina, no uterus.</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-reference">
+
+  <div class="ref-section">
+    <div class="ref-title">Table 1 · The 6 Levels of Sexual Differentiation</div>
+    <table class="ref-table">
+      <thead><tr><th>Level</th><th>Determined by</th><th>Female</th><th>Male</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Genetic (chromosomal)</td><td>Sperm (X vs Y)</td><td>46,XX</td><td>46,XY</td></tr>
+        <tr><td class="key">Gonadal</td><td>SRY (Yp11.3)</td><td>Ovary (default)</td><td>Testis (SRY → TDF)</td></tr>
+        <tr><td class="key">Phenotypic — internal</td><td>AMH &amp; T</td><td>Müllerian ducts persist → uterus, fallopian tubes, upper vagina</td><td>Wolffian ducts retained → epididymis, vas, seminal vesicles</td></tr>
+        <tr><td class="key">Phenotypic — external</td><td>DHT (5α-reductase)</td><td>Clitoris, labia, lower vagina (default)</td><td>Penis, scrotum, prostate (DHT-driven)</td></tr>
+        <tr><td class="key">Germ cell</td><td>Gonadal environment</td><td>Oocyte (meiosis I arrest fetal)</td><td>Spermatocyte (meiosis starts at puberty)</td></tr>
+        <tr><td class="key">Hormonal</td><td>HPG axis at puberty</td><td>E2, P, inhibin B</td><td>T, DHT, inhibin B</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Table 2 · The Two-Cell, Two-Gonadotropin Model</div>
+    <table class="ref-table">
+      <thead><tr><th>Cell</th><th>Receptor</th><th>Key Enzymes</th><th>Product</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Theca interna</td><td>LH-R</td><td>Desmolase (CYP11A1), 17α-hydroxylase, 17,20-lyase — <em>no aromatase</em></td><td>Androstenedione → testosterone (diffuses to granulosa)</td></tr>
+        <tr><td class="key">Granulosa</td><td>FSH-R (+ LH-R late follicular)</td><td><strong>Aromatase</strong> (CYP19) — <em>no 17α-hydroxylase</em></td><td>Estradiol; inhibin B (follicular), inhibin A (luteal)</td></tr>
+        <tr><td class="key">Corpus luteum (lutein cells)</td><td>LH-R / hCG-R</td><td>Steroidogenic cascade → progesterone</td><td>Progesterone &gt;&gt; estradiol &gt; inhibin A</td></tr>
+      </tbody>
+    </table>
+    <div class="ref-note"><strong>Clinical anchor:</strong> Aromatase inhibitors (letrozole, anastrozole) block granulosa estrogen synthesis — used in estrogen-receptor+ breast cancer and for ovulation induction in PCOS.</div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Table 3 · HPG Feedback Rules — Female</div>
+    <table class="ref-table">
+      <thead><tr><th>State</th><th>Estradiol</th><th>Progesterone</th><th>Inhibin</th><th>Net Effect</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Early follicular</td><td>Low → <strong>negative</strong> feedback</td><td>Low</td><td>Inhibin B suppresses FSH</td><td>↓LH/FSH; FSH slowly rises</td></tr>
+        <tr><td class="key">Late follicular (&gt;200 pg/mL ×48 h)</td><td><strong>Positive</strong> feedback</td><td>Low</td><td>Low</td><td><strong>LH surge</strong> → ovulation</td></tr>
+        <tr><td class="key">Luteal</td><td>Mod/negative</td><td>High → <strong>negative</strong></td><td>Inhibin A high</td><td>↓LH/FSH — no new follicles</td></tr>
+        <tr><td class="key">Late luteal (CL regress)</td><td>Low</td><td>Low</td><td>Low</td><td>FSH rises → new cycle</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Table 4 · Folliculogenesis Stages</div>
+    <table class="ref-table">
+      <thead><tr><th>Stage</th><th>Granulosa</th><th>Theca</th><th>FSH/LH</th><th>Timing</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Primordial</td><td>Flat squamous, 1 layer</td><td>—</td><td>FSH-independent</td><td>Present since fetal life</td></tr>
+        <tr><td class="key">Primary</td><td>Cuboidal + zona pellucida</td><td>None yet</td><td>FSH-independent</td><td>~months</td></tr>
+        <tr><td class="key">Secondary (preantral)</td><td>Multiple layers</td><td>Theca interna + externa</td><td>Early FSH response</td><td>~2–3 months prior</td></tr>
+        <tr><td class="key">Antral (tertiary)</td><td>Fluid-filled antrum; aromatase active</td><td>LH-driven androgen supply</td><td>FSH-dependent</td><td>Final 2 weeks of cycle</td></tr>
+        <tr><td class="key">Preovulatory (Graafian)</td><td>Granulosa now also LH-R</td><td>Active</td><td>LH surge → ovulation</td><td>Day 13–14</td></tr>
+        <tr><td class="key">Corpus luteum</td><td>Lutein granulosa</td><td>Lutein theca</td><td>LH/hCG maintains</td><td>Days 15–28</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Table 5 · Differential of Amenorrhea by FSH/LH Pattern</div>
+    <table class="ref-table">
+      <thead><tr><th>Pattern</th><th>FSH</th><th>LH</th><th>E2</th><th>Classic Causes</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Hypergonadotropic hypogonadism (primary / ovarian)</td><td>↑↑</td><td>↑</td><td>↓</td><td>Turner 45,XO; POI; autoimmune oophoritis; chemo/rads; menopause</td></tr>
+        <tr><td class="key">Hypogonadotropic hypogonadism (secondary / central)</td><td>↓ or nl</td><td>↓ or nl</td><td>↓</td><td>Kallmann (anosmia); hypothalamic amenorrhea (athletes, anorexia, stress); hyperprolactinemia; pituitary adenoma; Sheehan</td></tr>
+        <tr><td class="key">Eugonadal anovulation</td><td>nl</td><td>↑ or nl</td><td>nl</td><td>PCOS (LH:FSH &gt; 2:1); thyroid; Cushing; late-onset CAH</td></tr>
+        <tr><td class="key">AR defect</td><td>nl/↑</td><td>↑</td><td>nl/↑</td><td>Complete androgen insensitivity (46,XY)</td></tr>
+        <tr><td class="key">Outflow obstruction</td><td>nl</td><td>nl</td><td>nl</td><td>Müllerian agenesis (Mayer-Rokitansky); imperforate hymen; Asherman</td></tr>
+      </tbody>
+    </table>
+    <div class="ref-note"><strong>First-line workup for secondary amenorrhea:</strong> β-hCG → TSH → prolactin → FSH. Then progesterone challenge (positive withdrawal bleed = anovulation with adequate estrogen = PCOS pattern).</div>
+  </div>
+
+</div>
+
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; RPD04 Hub 1 — Core Concepts &nbsp;·&nbsp; HoyaDocs Repro Block
+</div>
+
+</div><!-- /container -->
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+window.addEventListener('load',function(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+});
+// Tab switching
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+
+// FIB check
+function checkFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  const fb=card.querySelector('.fib-feedback');
+  let allCorrect=true;
+  inputs.forEach(inp=>{
+    const val=inp.value.trim().toLowerCase();
+    const accepted=inp.dataset.answers.split(',').map(a=>a.trim().toLowerCase());
+    if(accepted.some(a=>val.includes(a)||a.includes(val)&&val.length>2)){
+      inp.classList.remove('incorrect');inp.classList.add('correct');
+    } else {
+      inp.classList.remove('correct');inp.classList.add('incorrect');allCorrect=false;
+    }
+  });
+  fb.className='fib-feedback '+(allCorrect?'correct':'incorrect');
+  fb.textContent=allCorrect?'✓ Correct!':'✗ Not quite — use Reveal to see the answer.';
+}
+function revealFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  inputs.forEach(inp=>{
+    const ans=inp.dataset.answers.split(',')[0];
+    inp.value=ans;inp.classList.add('correct');inp.classList.remove('incorrect');
+  });
+  const fb=card.querySelector('.fib-feedback');
+  fb.className='fib-feedback correct';fb.textContent='Answer revealed.';
+}
+
+// Drag-and-Drop Ordering
+let dragSrc=null;
+function dragStart(e){dragSrc=e.currentTarget;e.dataTransfer.effectAllowed='move';}
+function dropOnItem(e,listId){
+  e.preventDefault();e.stopPropagation();
+  const target=e.currentTarget;target.classList.remove('drag-over');
+  if(!dragSrc||dragSrc===target)return;
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  const srcIdx=items.indexOf(dragSrc);
+  const tgtIdx=items.indexOf(target);
+  if(srcIdx<tgtIdx)list.insertBefore(dragSrc,target.nextSibling);
+  else list.insertBefore(dragSrc,target);
+}
+function dropItem(e,listId){e.preventDefault();}
+function checkOrder(listId,fbId){
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  let correct=0;
+  items.forEach((item,idx)=>{
+    item.classList.remove('correct-pos','wrong-pos');
+    if(parseInt(item.dataset.pos)===idx+1){item.classList.add('correct-pos');correct++;}
+    else item.classList.add('wrong-pos');
+  });
+  const fb=document.getElementById(fbId);
+  fb.className='order-feedback '+(correct===items.length?'correct':'incorrect');
+  fb.textContent=correct===items.length?`✓ Perfect! All ${items.length} items in the correct order.`:`${correct}/${items.length} correct — keep trying or show the answer.`;
+}
+function showOrderAnswer(id){
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+// Matching
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,score:0};
+  const state=matchState[setId];
+  if(state.selected===null){
+    document.querySelectorAll(`[onclick*="${setId}"].selected`).forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');state.selected=el;
+  } else {
+    const prev=state.selected;
+    if(prev===el){el.classList.remove('selected');state.selected=null;return;}
+    if(prev.dataset.pair===el.dataset.pair){
+      prev.classList.remove('selected');prev.classList.add('matched-correct');
+      el.classList.add('matched-correct');state.selected=null;state.score++;
+      document.getElementById(setId+'-score').textContent=state.score;
+    } else {
+      [prev,el].forEach(e=>{e.classList.remove('selected');e.classList.add('flash-wrong');setTimeout(()=>e.classList.remove('flash-wrong'),500);});
+      state.selected=null;
+    }
+  }
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,score:0};
+  document.querySelectorAll(`[onclick*="${setId}"]`).forEach(e=>{e.classList.remove('matched-correct','selected','flash-wrong');});
+  document.getElementById(setId+'-score').textContent='0';
+}
+
+// Test Traps
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  const userSaidTrue=btn.classList.contains('trap-btn-true');
+  const isCorrect=(userSaidTrue===correct);
+  btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+
+/* ── THEME TOGGLE ── */
+
+
+</script>
+</body>
+</html>
