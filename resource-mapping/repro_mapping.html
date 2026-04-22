@@ -1347,58 +1347,46 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ── HOME PAGE OVERRIDES ─────────────────────────── */
-// Navigate to hub when a lecture is selected from the coverage matrix.
-// Keep this bulletproof — no dependency on DATA (which lives in a different
-// <script> tag and may not be reachable from this function's scope).
-// The resource hub resolves the lecture from ?lecture=<index> on its own.
-window.selectLecture = function (idx) {
-  try {
-    var params = new URLSearchParams();
-    params.set('lecture', String(idx));
-    if (typeof DATA !== 'undefined' && DATA[idx] && DATA[idx].class != null) {
-      params.set('class', String(DATA[idx].class));
-    }
-    window.location.href = './repro_resource_hub.html?' + params.toString();
-  } catch (e) {
-    // Last-ditch fallback — still navigate even if something unexpected happens.
-    window.location.href = './repro_resource_hub.html?lecture=' + encodeURIComponent(idx);
+/* ── HOME PAGE: lecture row → resource hub navigation ─
+   Uses a document-level CAPTURE-phase click listener so it runs BEFORE any
+   inline onclick="selectLecture(N)" on the table cells. This bypasses the
+   legacy selectLecture() function (which assumes the detail-panel layout
+   from the resource hub) and sends the user straight to the hub page with
+   the correct ?lecture=<index> param. Works for clicks anywhere on the
+   row except on a colored pip (which opens its own tooltip instead). */
+document.addEventListener('click', function (e) {
+  var t = e.target;
+  if (!t || !t.closest) return;
+  var row = t.closest('tr.cov-lec-row');
+  if (!row) return;
+  // Let pip clicks through to their own tooltip handlers.
+  if (t.closest('.cov-pip')) return;
+  // Pull the lecture index from whatever cell in the row carries it.
+  var idx = null;
+  var cellWithHandler = row.querySelector('[onclick*="selectLecture("]');
+  if (cellWithHandler) {
+    var m = (cellWithHandler.getAttribute('onclick') || '').match(/selectLecture\((\d+)\)/);
+    if (m) idx = Number(m[1]);
   }
-};
-function selectLecture(idx) { return window.selectLecture(idx); }
+  if (idx == null) return;
+  e.preventDefault();
+  e.stopPropagation();
+  // Pass class too if we can see the DATA array from this scope.
+  var qs = 'lecture=' + encodeURIComponent(idx);
+  try {
+    if (typeof DATA !== 'undefined' && DATA[idx] && DATA[idx].class != null) {
+      qs += '&class=' + encodeURIComponent(DATA[idx].class);
+    }
+  } catch (_) { /* ignore — lecture= alone is enough */ }
+  window.location.href = './repro_resource_hub.html?' + qs;
+}, true); // useCapture: true → fires before any inline onclick
 
-// Make entire lecture row clickable (not just the lecture-name cell).
-// Pip clicks already call e.stopPropagation() in showCovTip, so those
-// still open the tooltip instead of navigating.
-function wireLectureRowClicks() {
-  document.querySelectorAll('tr.cov-lec-row').forEach(function(tr) {
-    if (tr.dataset.rowClickWired) return;
-    var firstCell = tr.querySelector('td');
-    if (!firstCell) return;
-    var m = (firstCell.getAttribute('onclick') || '').match(/selectLecture\((\d+)\)/);
-    if (!m) return;
-    var idx = Number(m[1]);
+// Give every lecture row a pointer cursor so it LOOKS clickable.
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('tr.cov-lec-row').forEach(function (tr) {
     tr.style.cursor = 'pointer';
-    tr.addEventListener('click', function(e) {
-      // Don't fire if a pip inside the row was clicked (showCovTip will stopPropagation,
-      // but this is a belt-and-suspenders guard in case a pip is missing it).
-      if (e.target.closest('.cov-pip')) return;
-      selectLecture(idx);
-    });
-    tr.dataset.rowClickWired = '1';
   });
-}
-document.addEventListener('DOMContentLoaded', wireLectureRowClicks);
-// Also re-wire after render() repopulates #homeContent
-(function(){
-  var origRender = typeof render === 'function' ? render : null;
-  window.render = function() {
-    if (origRender) origRender.apply(this, arguments);
-    wireLectureRowClicks();
-  };
-})();
-// Also override showCovTip's button to use the navigation version
-// (already handled since selectLecture is overridden above)
+});
 
 // Override render: on the home page just populate #homeContent
 function render() {
@@ -1435,7 +1423,16 @@ function showCovTip(e, resName, chapter, idx) {
   document.getElementById('covTipRes').textContent = resName;
   document.getElementById('covTipChapter').textContent = chapter;
   const btn = document.getElementById('covTipBtn');
-  btn.onclick = function() { closeCovTip(); selectLecture(idx); };
+  btn.onclick = function() {
+    closeCovTip();
+    var qs = 'lecture=' + encodeURIComponent(idx);
+    try {
+      if (typeof DATA !== 'undefined' && DATA[idx] && DATA[idx].class != null) {
+        qs += '&class=' + encodeURIComponent(DATA[idx].class);
+      }
+    } catch (_) {}
+    window.location.href = './repro_resource_hub.html?' + qs;
+  };
   const x = Math.min(e.clientX + 12, window.innerWidth - 300);
   const y = Math.min(e.clientY + 12, window.innerHeight - 150);
   tip.style.left = x + 'px';
