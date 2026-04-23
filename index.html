@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HoyaDocs | Repro Study Hub</title>
 
+  <!-- Prevents flash of wrong theme on load -->
   <script>(function(){const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,11 +15,14 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ══════════════════════════════════════
+       DESIGN TOKENS — light mode defaults
+    ══════════════════════════════════════ */
     :root {
       --sb:         #1c0810;
       --sb-hover:   rgba(255,255,255,0.07);
       --sb-line:    rgba(255,255,255,0.09);
-      --bg:         #fffafc;
+      --bg:         #fef5f7;
       --surface:    #ffffff;
       --ink:        #0f172a;
       --ink-2:      #334155;
@@ -26,81 +30,189 @@
       --rule:       #e2e8f0;
       --card-sh:    0 1px 3px rgba(0,0,0,0.05);
       --bc-blue-bg: #eef4ff; --bc-blue-br: #c7d9f5; --bc-blue-tx: #1f4b99;
-      --bc-grn-bg:  #edfdf4; --bc-grn-br:  #a7f3c9; --bc-grn-tx:  #166534;
+      --bc-grn-bg:  #fff1f2; --bc-grn-br:  #fda4af; --bc-grn-tx:  #9f1239;
       --bc-ros-bg:  #fff1f2; --bc-ros-br:  #fda4af; --bc-ros-tx:  #9f1239;
       --bc-pur-bg:  #f5f0ff; --bc-pur-br:  #d8b4fe; --bc-pur-tx:  #6d28d9;
       --hero-em:    #9f1239;
+      --accent:     #881337;
     }
 
+    /* ── DARK MODE ── */
     [data-theme="dark"] {
-      --bg:         #2b1018;
-      --surface:    #3a1622;
+      --bg:         #1c0810;
+      --surface:    #2d0f1a;
       --ink:        #f1f5f9;
       --ink-2:      #cbd5e1;
       --ink-3:      #94a3b8;
-      --rule:       #4a1d2a;
+      --rule:       #5b1730;
       --card-sh:    0 1px 3px rgba(0,0,0,0.4);
       --bc-blue-bg: #1a2744; --bc-blue-br: #2d4a8a; --bc-blue-tx: #6ba3e8;
-      --bc-grn-bg:  #0a2218; --bc-grn-br:  #1a5c35; --bc-grn-tx:  #5dbf87;
-      --bc-ros-bg:  #250a12; --bc-ros-br:  #6b1a2e; --bc-ros-tx:  #e06b8a;
+      --bc-grn-bg:  #250a12; --bc-grn-br:  #5b1730; --bc-grn-tx:  #fb7185;
+      --bc-ros-bg:  #250a12; --bc-ros-br:  #5b1730; --bc-ros-tx:  #fb7185;
       --bc-pur-bg:  #1a1033; --bc-pur-br:  #4c1d95; --bc-pur-tx:  #a78bfa;
       --hero-em:    #fb7185;
     }
 
     html, body { height: 100%; }
-    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; transition: background 0.2s, color 0.2s; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      transition: background 0.2s, color 0.2s;
+    }
+
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; }
 
+    /* ══════════════════════════════════════
+       LAYOUT SHELL
+    ══════════════════════════════════════ */
     .shell { display: flex; min-height: 100vh; }
 
-    .sidebar { width: 232px; flex-shrink: 0; background: var(--sb); position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; padding: 28px 18px 24px; overflow-y: auto; transition: background 0.2s; }
-    .sb-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-    .sb-name { font-size: 1.35rem; font-weight: 900; color: #fff; letter-spacing: -0.01em; flex: 1; text-shadow: 0 1px 8px rgba(0,0,0,0.25); }
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .sidebar {
+      width: 232px; flex-shrink: 0;
+      background: var(--sb);
+      position: sticky; top: 0; height: 100vh;
+      display: flex; flex-direction: column;
+      padding: 28px 18px 24px;
+      overflow-y: auto;
+      transition: background 0.2s;
+    }
 
-    .sb-block { font-size: 0.82rem; font-weight: 600; color: #ffffff; margin-bottom: 4px; padding-left: 2px; }
+    .sb-brand {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 6px;
+    }
 
-    .sb-text-link { display: inline-block; font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.60); text-decoration: underline; text-underline-offset: 2px; padding-left: 2px; margin-bottom: 22px; transition: color 0.13s; }
+    .sb-crest { display: none; }
+
+    .sb-name {
+      font-size: 1.2rem; font-weight: 900; color: #fff;
+      letter-spacing: -0.01em; flex: 1;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.25);
+    }
+
+    .sb-block {
+      font-size: 0.74rem; font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px; padding-left: 2px;
+    }
+
+    .sb-text-link {
+      display: inline-block; font-size: 0.70rem; font-weight: 500;
+      color: rgba(255,255,255,0.60); text-decoration: underline;
+      text-underline-offset: 2px; padding-left: 2px; margin-bottom: 20px;
+      transition: color 0.13s;
+    }
     .sb-text-link:hover { color: #fff; }
 
-    .sb-section-label { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; margin-bottom: 8px; padding: 0 8px; }
-    .sb-nav { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
-    .sb-link { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 8px; font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.60); transition: background 0.13s, color 0.13s; }
+    .sb-section-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 8px; padding: 0 8px;
+    }
+
+    .sb-nav { display: flex; flex-direction: column; gap: 2px; margin-bottom: 18px; }
+
+    .sb-link {
+      display: flex; align-items: center; gap: 9px;
+      padding: 7px 10px; border-radius: 8px;
+      font-size: 0.74rem; font-weight: 500;
+      line-height: 1.3;
+      color: rgba(255,255,255,0.60);
+      transition: background 0.13s, color 0.13s;
+    }
     .sb-link:hover { background: var(--sb-hover); color: rgba(255,255,255,0.92); }
-    .sb-link-icon { width: 22px; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 0.82rem; flex-shrink: 0; }
+    .sb-link-disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; font-style: italic; }
+    .mobile-nav-item-disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; font-style: italic; }
+
+    .sb-link-icon {
+      width: 20px; height: 20px; border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.74rem; flex-shrink: 0;
+    }
+    .sb-icon-blue  { background: rgba(99,140,220,0.32); }
     .sb-icon-green { background: rgba(74,180,120,0.32); }
     .sb-icon-rose  { background: rgba(220,90,110,0.32); }
+    .sb-icon-teal  { background: rgba(20,184,166,0.32); }
     .sb-icon-amber { background: rgba(245,158,11,0.32); }
-    .sb-icon-gold  { background: rgba(250,204,21,0.32); }
-
-    .sb-link.sb-link-highlight { background: rgba(250,204,21,0.10); border: 1px solid rgba(250,204,21,0.25); font-size: 0.74rem; line-height: 1.25; padding: 7px 9px; }
-    .sb-link.sb-link-highlight:hover { background: rgba(250,204,21,0.18); color: rgba(255,255,255,0.92); }
-
-    .sb-link.sb-link-disabled { opacity: 0.45; cursor: default; pointer-events: none; color: rgba(255,255,255,0.55); }
+    .sb-icon-qref  { background: rgba(139,92,246,0.32); }
 
     .sb-rule { height: 1px; background: var(--sb-line); margin: 4px 0 18px; }
     .sb-spacer { flex: 1; }
-    .sb-ext-label { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; margin-bottom: 8px; padding: 0 8px; }
-    .sb-ext-link { display: flex; align-items: center; justify-content: space-between; padding: 9px 10px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.10); margin-bottom: 6px; transition: background 0.13s, color 0.13s, border-color 0.13s; }
+
+    .sb-ext-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 8px; padding: 0 8px;
+    }
+
+    .sb-link.sb-link-highlight {
+      background: rgba(250,204,21,0.10);
+      border: 1px solid rgba(250,204,21,0.25);
+      font-size: 0.70rem; line-height: 1.25; padding: 7px 9px;
+    }
+    .sb-link.sb-link-highlight:hover { background: rgba(250,204,21,0.18); color: rgba(255,255,255,0.92); }
+    .sb-icon-gold { background: rgba(250,204,21,0.32); }
+
+    .sb-ext-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 10px; border-radius: 8px;
+      font-size: 0.74rem; font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.10);
+      margin-bottom: 6px;
+      transition: background 0.13s, color 0.13s, border-color 0.13s;
+    }
     .sb-ext-link:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.20); }
     .sb-ext-link:last-child { margin-bottom: 0; }
     .sb-ext-arrow { opacity: 0.5; font-size: 0.75rem; }
 
+    /* ══════════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════════ */
     .main { flex: 1; min-width: 0; background: var(--bg); transition: background 0.2s; }
-    .main-inner { max-width: 1400px; padding: 52px 48px 80px; }
 
+    .main-inner { max-width: none; padding: 40px 48px 80px; }
+
+    /* ── HERO ── */
     .hero { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
-    .hero-title { font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 900; letter-spacing: -0.045em; color: var(--ink); line-height: 0.98; margin-bottom: 20px; }
-    .hero-title em { font-style: normal; color: var(--hero-em); }
-    .hero-sub { font-size: 0.97rem; color: var(--ink-2); line-height: 1.7; margin-bottom: 6px; }
 
+    .hero-eyebrow {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 900; letter-spacing: -0.045em;
+      color: var(--ink); line-height: 0.98; margin-bottom: 20px;
+    }
+
+    .hero-title em { font-style: normal; color: var(--hero-em); }
+
+    .hero-sub {
+      font-size: 0.97rem; color: var(--ink-2);
+      line-height: 1.7; margin-bottom: 18px;
+    }
+
+    /* Where Do I Find What? collapsible */
     .find-what { background: transparent; border: none; border-radius: 0; box-shadow: none; margin: 0 0 22px; }
     .find-what > summary { list-style: none; cursor: pointer; padding: 0; display: inline-flex; align-items: center; gap: 6px; font-size: 0.97rem; font-weight: 600; color: var(--ink-2); line-height: 1.7; user-select: none; }
     .find-what > summary:hover { color: var(--ink); }
     .find-what > summary::-webkit-details-marker { display: none; }
     .find-what-chevron { display: inline-block; transition: transform 0.18s ease; color: var(--hero-em); font-size: 0.9rem; line-height: 1; }
     .find-what[open] .find-what-chevron { transform: rotate(90deg); }
-    .find-what-body { padding: 12px 0 8px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; border-top: 1px solid var(--rule); }
+    .find-what-body { padding: 12px 0 8px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; border-top: 1px solid var(--rule); }
     .find-what-footer { padding: 10px 0 0; font-size: 0.82rem; color: var(--ink-2); border-top: 1px dashed var(--rule); margin-top: 4px; }
     .find-what-footer a { color: var(--hero-em); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 2px; }
     .find-what-footer a:hover { color: var(--ink); }
@@ -111,35 +223,157 @@
     .find-what-note { color: var(--ink-3); font-size: 0.74rem; font-style: italic; }
     @media (max-width: 720px) { .find-what-body { grid-template-columns: 1fr; gap: 16px; } }
 
-    .feedback-fab { position: fixed; top: 16px; right: 20px; z-index: 500; display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; background: var(--hero-em); color: #fff; font-size: 0.78rem; font-weight: 700; box-shadow: 0 2px 10px rgba(0,0,0,0.18); transition: opacity 0.15s, transform 0.15s; text-decoration: none; }
+    /* ── FEEDBACK BUTTON (fixed top-right) ── */
+    .feedback-fab {
+      position: fixed; top: 16px; right: 20px; z-index: 500;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 20px;
+      background: var(--hero-em); color: #fff;
+      font-size: 0.78rem; font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+      transition: opacity 0.15s, transform 0.15s;
+      text-decoration: none;
+    }
     .feedback-fab:hover { opacity: 0.88; transform: translateY(-1px); }
 
-    .hero-jump { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 6px; }
-    @media (max-width: 1100px) { .hero-jump { grid-template-columns: repeat(2, 1fr); } }
-    .hero-jump-btn { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 14px; border-radius: 10px; background: var(--surface); border: 1px solid var(--rule); font-size: 0.82rem; font-weight: 700; color: var(--ink-2); box-shadow: var(--card-sh); transition: border-color 0.15s, color 0.15s, transform 0.15s, background 0.15s; text-align: center; line-height: 1.2; }
-    .hero-jump-btn:hover { border-color: var(--hero-em); color: var(--hero-em); transform: translateY(-1px); }
-    .hero-jump-icon { font-size: 1rem; line-height: 1; }
-    @media (max-width: 680px) { .hero-jump { grid-template-columns: 1fr; } .hero-jump-btn { padding: 8px 12px; font-size: 0.78rem; } }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
 
+    /* ── HERO TOP GRID (Where Do I Find + Calendar/Checklist column) ── */
+    .hero-top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+    .hero-side-col { display: flex; flex-direction: column; gap: 12px; }
+    .hero-side-col .bcard { margin: 0; }
+    .hero-top-grid .find-what { margin: 0; }
+    .hero-top-grid .find-what-body { grid-template-columns: 1fr; gap: 14px; }
+    @media (max-width: 720px) {
+      .hero-top-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── HERO JUMP / FILTER BUTTONS ── */
+    .hero-filter {
+      margin-top: 18px; padding-top: 18px;
+      border-top: 1px solid var(--rule);
+    }
+    .hero-filter-label {
+      font-size: 0.85rem; font-weight: 900;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .hero-jump {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .hero-jump-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 7px 11px; border-radius: 8px;
+      background: var(--surface); border: 1px solid var(--rule);
+      font-size: 0.76rem; font-weight: 700; color: var(--ink-2);
+      box-shadow: var(--card-sh);
+      transition: border-color 0.15s, color 0.15s, transform 0.15s, background 0.15s;
+      text-align: center; line-height: 1.2;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .hero-jump-btn:hover {
+      border-color: var(--hero-em); color: var(--hero-em);
+      transform: translateY(-1px);
+    }
+    .hero-jump-btn.active,
+    .hero-jump-btn.active:hover {
+      background: var(--hero-em);
+      color: #fff;
+      border-color: var(--hero-em);
+      transform: none;
+    }
+    .hero-jump-icon { font-size: 0.95rem; line-height: 1; }
+    @media (max-width: 680px) {
+      .hero-jump-btn { padding: 6px 10px; font-size: 0.72rem; }
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--rule);
+      font-size: 0.78rem; font-weight: 600; color: var(--ink-2);
+      box-shadow: var(--card-sh);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    /* ── SECTION DIVIDER ── */
     .section-divider { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-    .section-divider-text { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); white-space: nowrap; }
-    .section-divider-line { flex: 1; height: 1px; background: var(--hero-em); }
+
+    .section-divider-text {
+      font-size: 1.25rem; font-weight: 800;
+      letter-spacing: -0.02em; color: var(--ink); white-space: nowrap;
+    }
+
+    .section-divider-line { flex: 1; height: 1px; background: #be123c; }
+
     .section-block { margin-bottom: 36px; }
 
-    .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    /* ══════════════════════════════════════
+       BENTO STUDY TOOL CARDS
+    ══════════════════════════════════════ */
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
     .bento-3 { grid-template-columns: repeat(3, 1fr); }
 
-    .bcard { border-radius: 14px; padding: 16px; display: flex; flex-direction: column; border: 1px solid transparent; transition: transform 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; }
+    .bcard {
+      border-radius: 14px; padding: 16px;
+      display: flex; flex-direction: column;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative; overflow: hidden;
+    }
     .bcard:hover { transform: translateY(-2px); }
-    .bcard-watermark { position: absolute; bottom: -10px; right: -6px; font-size: 4.8rem; opacity: 0.06; pointer-events: none; user-select: none; line-height: 1; }
+
+    .bcard-watermark {
+      position: absolute; bottom: -10px; right: -6px;
+      font-size: 4.8rem; opacity: 0.06;
+      pointer-events: none; user-select: none; line-height: 1;
+    }
+
     .bcard-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .bcard-icon { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; background: rgba(255,255,255,0.75); box-shadow: 0 2px 8px rgba(0,0,0,0.10); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+
+    .bcard-icon {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.75);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .bcard-feature .bcard-icon { width: 42px; height: 42px; font-size: 1.3rem; }
+
     .bcard-header-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-    .bcard-label { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; opacity: 0.65; }
-    .bcard h3 { font-size: 0.92rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin: 0; line-height: 1.2; }
-    .bcard p { font-size: 0.76rem; color: var(--ink-2); line-height: 1.5; flex: 1; margin-bottom: 12px; }
-    .bcard-wip { font-size: 0.88rem; font-weight: 700; letter-spacing: 0.02em; flex: 1; display: flex; align-items: center; margin-bottom: 12px; }
-    .bcard-cta { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 700; transition: gap 0.14s; align-self: flex-start; }
+
+    .bcard-label {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase; opacity: 0.65;
+    }
+
+    .bcard h3 {
+      font-size: 0.92rem; font-weight: 800;
+      letter-spacing: -0.02em; color: var(--ink); margin: 0; line-height: 1.2;
+    }
+    .bcard-feature h3 { font-size: 1rem; }
+
+    .bcard p {
+      font-size: 0.76rem; color: var(--ink-2);
+      line-height: 1.5; flex: 1; margin-bottom: 12px;
+    }
+
+    .bcard-cta {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.72rem; font-weight: 700;
+      transition: gap 0.14s; align-self: flex-start;
+    }
     .bcard:hover .bcard-cta { gap: 10px; }
 
     .bc-blue  { background: var(--bc-blue-bg); border-color: var(--bc-blue-br); }
@@ -150,56 +384,200 @@
     .bc-green:hover { box-shadow: 0 12px 40px rgba(22,101,52,0.14), 0 3px 10px rgba(22,101,52,0.07); }
     .bc-green .bcard-cta, .bc-green .bcard-label { color: var(--bc-grn-tx); }
 
+    /* Exam / soft accent cards */
+    .bc-rose  { background: var(--bc-ros-bg); border-color: var(--bc-ros-br); }
+    .bc-rose:hover  {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 3px 10px rgba(0,0,0,0.04);
+    }
+    .bc-rose .bcard-label {
+      color: #6b1a2e;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      opacity: 1;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+    .bc-rose .bcard-cta {
+      color: #6b1a2e;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+    .bc-rose h3 { color: #6b1a2e; }
+    .bc-rose p  { color: #6b1a2e; opacity: 0.82; }
+
     .bc-purple { background: var(--bc-pur-bg); border-color: var(--bc-pur-br); }
     .bc-purple:hover { box-shadow: 0 12px 40px rgba(109,40,217,0.14), 0 3px 10px rgba(109,40,217,0.07); }
     .bc-purple .bcard-cta, .bc-purple .bcard-label { color: var(--bc-pur-tx); }
 
-    .bc-dark { background: #14532d; border-color: #166534; color: #f1f5f9; }
-    .bc-dark:hover { box-shadow: 0 12px 40px rgba(20,83,45,0.35), 0 3px 10px rgba(20,83,45,0.2); }
-    .bc-dark h3 { color: #f1f5f9; }
-    .bc-dark p  { color: #dcfce7; }
-    .bc-dark .bcard-label { color: #86efac; }
-    .bc-dark .bcard-cta   { color: #fef08a; }
-    .bc-dark .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dkpurple { background: #4c1d95; border-color: #6d28d9; color: #f1f5f9; }
+    .bc-dkpurple:hover { box-shadow: 0 12px 40px rgba(76,29,149,0.35), 0 3px 10px rgba(76,29,149,0.2); }
+    .bc-dkpurple h3 { color: #f1f5f9; }
+    .bc-dkpurple p  { color: #e9d5ff; }
+    .bc-dkpurple .bcard-label { color: #c4b5fd; }
+    .bc-dkpurple .bcard-cta   { color: #4ade80; }
+    .bc-dkpurple .bcard-icon  { background: rgba(255,255,255,0.18); }
+    .bc-dkpurple .bcard-watermark { color: #fff; }
+
+    .bc-dark { background: #9f1239; border-color: #881337; color: #f1f5f9; }
+    .bc-dark:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.25), 0 3px 10px rgba(0,0,0,0.15); }
+    .bc-dark h3 { color: #fff; }
+    .bc-dark p  { color: #ffe4e6; }
+    .bc-dark .bcard-label { color: #fda4af; }
+    .bc-dark .bcard-cta   { color: #fb7185; }
+    .bc-dark .bcard-icon  { background: rgba(255,255,255,0.22); }
     .bc-dark .bcard-watermark { color: #fff; }
 
-    /* Filled maroon — pink-hub equivalent of bc-dark */
-    .bc-maroon { background: #881337; border-color: #9f1239; color: #fff1f2; }
-    .bc-maroon:hover { box-shadow: 0 12px 40px rgba(136,19,55,0.35), 0 3px 10px rgba(136,19,55,0.20); }
-    .bc-maroon h3 { color: #fff1f2; }
-    .bc-maroon p  { color: #fecdd3; }
-    .bc-maroon .bcard-label { color: #fda4af; }
-    .bc-maroon .bcard-cta   { color: #fef08a; }
-    .bc-maroon .bcard-icon  { background: rgba(255,255,255,0.18); }
-    .bc-maroon .bcard-watermark { color: #fff; }
+    /* ══════════════════════════════════════
+       UTILITY ROWS
+    ══════════════════════════════════════ */
+    .util-list {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 16px; overflow: hidden; box-shadow: var(--card-sh);
+      transition: background 0.2s, border-color 0.2s;
+    }
 
-    .bc-anatomy { background: var(--bc-ros-bg); border: 2px solid var(--bc-ros-tx); }
-    .bc-anatomy:hover { box-shadow: 0 12px 40px rgba(159,18,57,0.18), 0 3px 10px rgba(159,18,57,0.10); }
-    .bc-anatomy .bcard-cta, .bc-anatomy .bcard-label { color: var(--bc-ros-tx); }
+    .util-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; transition: background 0.14s;
+    }
+    .util-row:not(:last-child) { border-bottom: 1px solid var(--rule); }
+    .util-row:hover { background: color-mix(in srgb, var(--bg) 60%, var(--surface)); }
 
-    .mini-link-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; text-decoration: none; transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s, background 0.15s; box-shadow: var(--card-sh); }
-    .mini-link-card:hover { border-color: var(--ink-3); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04); }
-    .mlc-icon { flex-shrink: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; background: var(--bc-grn-bg); border: 1px solid var(--bc-grn-br); border-radius: 8px; }
-    .mlc-body { flex: 1; min-width: 0; }
-    .mlc-title { font-size: 0.84rem; font-weight: 700; color: var(--ink); line-height: 1.25; }
-    .mlc-desc { font-size: 0.7rem; color: var(--ink-3); margin-top: 2px; line-height: 1.3; }
-    .mlc-arrow { flex-shrink: 0; font-size: 1rem; font-weight: 700; color: var(--bc-grn-tx); }
-    .mini-link-card.mlc-themed { background: var(--bc-grn-bg); border-color: var(--bc-grn-br); }
-    .mini-link-card.mlc-themed:hover { border-color: var(--bc-grn-tx); }
-    .mini-link-card.mlc-themed .mlc-icon { background: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.55); }
-    .mini-link-card.mlc-themed .mlc-title { color: var(--bc-grn-tx); }
-    .mini-link-card.mlc-slim { padding: 7px 10px; gap: 8px; border-radius: 9px; }
-    .mini-link-card.mlc-slim .mlc-icon { width: 24px; height: 24px; font-size: 0.82rem; border-radius: 6px; }
-    .mini-link-card.mlc-slim .mlc-title { font-size: 0.78rem; line-height: 1.2; }
-    .mini-link-card.mlc-slim .mlc-desc { font-size: 0.65rem; margin-top: 1px; line-height: 1.2; }
-    .mini-link-card.mlc-slim .mlc-arrow { font-size: 0.85rem; }
+    .util-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .ui-teal   { background: #ccfbf1; }
+    .ui-amber  { background: #fef3c7; }
+    .ui-purple { background: #ede9fe; }
 
-    .lec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: stretch; }
-    .lec-col { display: flex; flex-direction: column; gap: 12px; }
-    .lec-col-left .lec-today { flex: 1 1 auto; display: flex; flex-direction: column; }
-    .lec-col-right > * { flex: 1 1 auto; }
-    @media (max-width: 680px) { .lec-grid { grid-template-columns: 1fr; } }
+    .util-text { flex: 1; }
+    .util-text strong { display: block; font-size: 0.93rem; font-weight: 700; color: var(--ink); }
+    .util-text span   { font-size: 0.8rem; color: var(--ink-3); }
 
+    .util-arrow { font-size: 0.85rem; font-weight: 700; color: var(--ink-3); transition: transform 0.14s; }
+    .util-row:hover .util-arrow { transform: translateX(4px); color: var(--ink); }
+
+    /* ══════════════════════════════════════
+       WORKFLOW
+    ══════════════════════════════════════ */
+    .workflow-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+
+    .wf-item { padding: 0 22px; border-right: 1px solid var(--rule); }
+    .wf-item:first-child { padding-left: 0; }
+    .wf-item:last-child  { border-right: none; padding-right: 0; }
+
+    .wf-num { font-size: 2.4rem; font-weight: 900; letter-spacing: -0.06em; color: var(--rule); line-height: 1; margin-bottom: 10px; transition: color 0.2s; }
+    .wf-title { font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; letter-spacing: -0.01em; }
+    .wf-desc  { font-size: 0.76rem; color: var(--ink-3); line-height: 1.55; }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    .footer {
+      border-top: 1px solid var(--rule); padding-top: 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; font-size: 0.8rem; color: var(--ink-3);
+    }
+    .footer strong { color: var(--ink-2); font-weight: 600; }
+
+    /* ══════════════════════════════════════
+       MOBILE BOTTOM NAV
+    ══════════════════════════════════════ */
+    .mobile-nav {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      background: var(--surface);
+      border-top: 1px solid var(--rule);
+      padding: 6px 8px max(8px, env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.10);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .mobile-nav-group { padding: 4px 2px; }
+    .mobile-nav-group + .mobile-nav-group {
+      border-top: 1px solid var(--rule);
+      margin-top: 2px; padding-top: 6px;
+    }
+    .mobile-nav-label {
+      font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--ink-3); padding: 0 6px 4px;
+    }
+
+    .mobile-nav-items { display: flex; justify-content: space-around; gap: 4px; }
+
+    .mobile-nav-item {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 4px 6px; color: var(--ink-3);
+      font-size: 0.58rem; font-weight: 600; letter-spacing: 0.02em;
+      text-align: center; line-height: 1.15;
+      transition: color 0.13s;
+    }
+    .mobile-nav-item:hover { color: #be123c; }
+
+    .mobile-nav-icon { font-size: 1.2rem; line-height: 1; }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .shell { flex-direction: column; }
+
+      .sidebar {
+        width: 100%; height: auto; position: sticky; top: 0; z-index: 400;
+        flex-direction: row; align-items: center;
+        padding: 12px 18px; gap: 12px; flex-wrap: nowrap;
+      }
+      .sb-brand   { margin-bottom: 0; flex: 1; }
+      .sb-block   { display: none; }
+      .sb-rule    { display: none; }
+      .sb-section-label { display: none; }
+      .sb-spacer  { display: none; }
+      .sb-ext-label { display: none; }
+      .sb-nav     { display: none; }
+      /* Hide quick-access links from top bar on mobile — accessed via bottom nav */
+      .sb-ext-link { display: none; }
+
+      .main-inner { padding: 24px 18px 160px; }
+
+      /* Move feedback FAB above mobile nav */
+      .feedback-fab { top: auto; bottom: 140px; right: 16px; font-size: 0.74rem; padding: 6px 12px; }
+
+      .mobile-nav { display: flex; }
+    }
+
+    @media (max-width: 900px) {
+      .bento-3 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .bento, .bento-3 { grid-template-columns: 1fr; }
+      .bcard-feature { grid-row: span 1; }
+
+      /* Give Today's Lectures a bounded height when stacked */
+      .today-lec-scroll { max-height: 260px; }
+
+      /* Slightly more compact cards */
+      .bcard { padding: 14px; border-radius: 12px; }
+      .bcard h3 { font-size: 0.9rem; }
+      .bcard-icon { width: 32px; height: 32px; font-size: 1rem; }
+
+      .workflow-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .wf-item { padding: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+      .wf-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+      .hero-title { font-size: 2.4rem; }
+      .section-divider-text { font-size: 1.1rem; }
+      .footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+      /* Larger touch targets for util rows */
+      .util-row { padding: 18px 16px; }
+    }
+    /* ══════════════════════════════════════
+       TODAY'S LECTURES CARD
+    ══════════════════════════════════════ */
     .today-lec-scroll { flex: 1; overflow-y: auto; }
     .lec-row { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--rule); line-height: 1.35; }
     .lec-row:last-child { border-bottom: none; padding-bottom: 0; }
@@ -212,62 +590,92 @@
     .lec-tag { display: inline-block; padding: 1px 5px; border-radius: 4px; font-size: 0.66rem; font-weight: 700; margin-right: 4px; }
     .lec-none { font-size: 0.82rem; color: var(--ink-3); font-style: italic; padding: 4px 0; }
 
-    .footer { border-top: 1px solid var(--rule); padding-top: 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 0.8rem; color: var(--ink-3); }
-    .footer strong { color: var(--ink-2); font-weight: 600; }
-
-    .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 500; background: var(--surface); border-top: 1px solid var(--rule); padding: 6px 8px max(8px, env(safe-area-inset-bottom)); box-shadow: 0 -4px 20px rgba(0,0,0,0.10); }
-    .mobile-nav-group { padding: 4px 2px; }
-    .mobile-nav-group + .mobile-nav-group { border-top: 1px solid var(--rule); margin-top: 2px; padding-top: 6px; }
-    .mobile-nav-label { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.10em; text-transform: uppercase; color: var(--ink-3); padding: 0 6px 4px; }
-    .mobile-nav-items { display: flex; justify-content: space-around; gap: 4px; }
-    .mobile-nav-item { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 4px 6px; color: var(--ink-3); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.02em; text-align: center; line-height: 1.15; }
-    .mobile-nav-item:hover { color: var(--hero-em); }
-    .mobile-nav-icon { font-size: 1.2rem; line-height: 1; }
-
-    @media (max-width: 960px) {
-      .shell { flex-direction: column; }
-      .sidebar { width: 100%; height: auto; position: sticky; top: 0; z-index: 400; flex-direction: row; align-items: center; padding: 12px 18px; gap: 12px; flex-wrap: nowrap; }
-      .sb-brand { margin-bottom: 0; flex: 1; }
-      .sb-block, .sb-text-link, .sb-rule, .sb-section-label, .sb-spacer, .sb-ext-label, .sb-nav, .sb-ext-link { display: none; }
-      .main-inner { padding: 24px 18px 160px; }
-      .feedback-fab { top: auto; bottom: 140px; right: 16px; font-size: 0.74rem; padding: 6px 12px; }
-      .mobile-nav { display: flex; }
+    /* ══════════════════════════════════════
+       MINI CHECKLIST LINK CARD
+    ══════════════════════════════════════ */
+    .mini-link-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      text-decoration: none;
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s, background 0.15s;
+      box-shadow: var(--card-sh);
     }
-    @media (max-width: 900px) { .bento-3 { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 680px) {
-      .bento, .bento-3 { grid-template-columns: 1fr; }
-      .bcard { padding: 14px; border-radius: 12px; }
-      .hero-title { font-size: 2.4rem; }
-      .section-divider-text { font-size: 1.1rem; }
-      .footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .mini-link-card:hover {
+      border-color: var(--ink-3);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
     }
+    .mlc-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.05rem;
+      background: var(--bc-grn-bg);
+      border: 1px solid var(--bc-grn-br);
+      border-radius: 8px;
+    }
+    .mlc-body { flex: 1; min-width: 0; }
+    .mlc-title {
+      font-size: 0.84rem; font-weight: 700; color: var(--ink);
+      line-height: 1.25;
+    }
+    .mlc-desc {
+      font-size: 0.7rem; color: var(--ink-3);
+      margin-top: 2px; line-height: 1.3;
+    }
+    .mlc-arrow {
+      flex-shrink: 0; font-size: 1rem; font-weight: 700;
+      color: var(--bc-grn-tx);
+    }
+
+    /* Themed mini variant — accent-tinted with deep outline */
+    .mini-link-card.mlc-themed {
+      background: #ffe4e6;
+      border-color: #6b1a2e;
+      border-width: 1px;
+    }
+    .mini-link-card.mlc-themed:hover { border-color: #881337; background: #fecaca; }
+    .mini-link-card.mlc-themed .mlc-icon {
+      background: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,0.55);
+    }
+    .mini-link-card.mlc-themed .mlc-title { color: #6b1a2e; }
+    .mini-link-card.mlc-themed .mlc-arrow { color: #6b1a2e; }
+
+    /* "Coming Soon" placeholder — dimmed, non-interactive */
+    .mini-link-card.mlc-coming-soon {
+      opacity: 0.55;
+      cursor: default;
+      pointer-events: none;
+    }
+
   </style>
 </head>
 <body>
 <div class="shell">
 
+  <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
     <div class="sb-brand">
-      <a href="https://hoyadocs.com/" class="sb-name">HoyaDocs↗</a>
+      <a href="https://hoyadocs.com/" class="sb-name">HoyaDocs</a>
     </div>
-    <div class="sb-block">Block 4 · Repro</div>
+    <div class="sb-block">Block 4 - Repro</div>
     <a class="sb-text-link" href="https://hoyadocs.com/">Return to Home Page</a>
 
     <div class="sb-rule"></div>
 
-    <div class="sb-section-label">Mapping Files</div>
+    <div class="sb-section-label">Resource Mapping Files</div>
     <nav class="sb-nav">
-      <a class="sb-link" href="https://docs.google.com/spreadsheets/d/1iKT6BxPEcrVOFnnVmOoIC7GjRkJfnoFkPkksKhp-Xo8/edit?usp=sharing" target="_blank" rel="noopener">
-        <span class="sb-link-icon sb-icon-rose">📋</span>
-        Repro Lecture Check List
+      <a class="sb-link" href="./rpd_Resource_Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-amber">📊</span>
+        3rd Party Resource Mapping (xlsx)
       </a>
-      <a class="sb-link sb-link-highlight" href="./resource-mapping/Repro_Resource_Mapping.xlsx">
-        <span class="sb-link-icon sb-icon-gold">⭐</span>
-        3rd Party Resource Mapping
-      </a>
-      <a class="sb-link sb-link-highlight" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
-        <span class="sb-link-icon sb-icon-gold">⭐</span>
-        UWorld QID Mapping
+      <a class="sb-link" href="./rpd-UWorld-QID-Mapping.xlsx">
+        <span class="sb-link-icon sb-icon-amber">📊</span>
+        UWorld QID Mapping (xlsx)
       </a>
     </nav>
 
@@ -275,104 +683,87 @@
 
     <div class="sb-section-label">Tools</div>
     <nav class="sb-nav">
-      <a class="sb-link" href="./anki_package_parser_v10.html">
-        <span class="sb-link-icon sb-icon-amber">🃏</span>
-        Anki Package Parser
+      <a class="sb-link" href="https://docs.google.com/spreadsheets/d/1iKT6BxPEcrVOFnnVmOoIC7GjRkJfnoFkPkksKhp-Xo8/edit?usp=sharing" target="_blank" rel="noopener">
+        <span class="sb-link-icon sb-icon-amber">📋</span>
+        Repro Lecture Check List
       </a>
-      <a class="sb-link sb-link-disabled" aria-disabled="true">
-        <span class="sb-link-icon sb-icon-amber">🛠</span>
-        WIP: Custom 3rd Party Resource Mapping
-      </a>
-      <a class="sb-link sb-link-disabled" aria-disabled="true">
-        <span class="sb-link-icon sb-icon-rose">🛠</span>
-        WIP: HoyaDocs Audit
+    </nav>
+
+    <div class="sb-rule"></div>
+
+    <div class="sb-section-label">HoyaDocs Info</div>
+    <nav class="sb-nav">
+      <a class="sb-link" href="https://hoyadocs.com/hoyadocs-101" target="_blank" rel="noopener">
+        <span class="sb-link-icon sb-icon-blue">ℹ️</span>
+        HoyaDocs 101
       </a>
     </nav>
 
     <div class="sb-spacer"></div>
 
     <div class="sb-ext-label">Quick Access</div>
-    <a class="sb-ext-link" href="https://drive.google.com/" target="_blank" rel="noopener">
-      <span>Class Google Drive</span><span class="sb-ext-arrow">↗</span>
-    </a>
     <a class="sb-ext-link" href="https://www.uworld.com/" target="_blank" rel="noopener">
       <span>UWorld</span><span class="sb-ext-arrow">↗</span>
     </a>
+    <a class="sb-ext-link" href="https://drive.google.com/" target="_blank" rel="noopener">
+      <span>Class Drive</span><span class="sb-ext-arrow">↗</span>
+    </a>
     <a class="sb-ext-link" href="https://docs.google.com/spreadsheets/d/14WyUf7nLK21R5drauE0qpBrFZ-gNnyo6d4O1ymhvj4Y/edit?usp=sharing" target="_blank" rel="noopener">
-      <span>HoyaDocs WIP List</span><span class="sb-ext-arrow">↗</span>
+      <span>HoyaDocs Work In Progress</span><span class="sb-ext-arrow">↗</span>
     </a>
   </aside>
 
+  <!-- ══ MAIN ══ -->
   <main class="main">
     <div class="main-inner">
 
+      <!-- HERO -->
       <section class="hero" id="hero">
         <h1 class="hero-title">Repro <em>Study Hub.</em></h1>
-        <p class="hero-sub"><strong>In-house exam prep and USMLE Step 1 review</strong></p>
+        <p class="hero-sub"><strong>In-house exam prep and USMLE Step 1 review — all your tools in one place.</strong></p>
 
-        <details class="find-what" open>
-          <summary>
-            <span class="find-what-chevron">▸</span>
-            <span><em>Where Do I Find What?</em></span>
-          </summary>
-          <div class="find-what-body">
-            <div class="find-what-group">
-              <h4>Practice Problems</h4>
-              <ul>
-                <li>Lecture Study Guides <span class="find-what-note">(MCQ and Q&amp;A; LO focus)</span></li>
-                <li>Active Drills <span class="find-what-note">(LO &amp; USMLE focus)</span></li>
-                <li>Board-Style Practice <span class="find-what-note">(sample USMLE qs)</span></li>
-              </ul>
+        <div class="hero-top-grid">
+          <details class="find-what" open>
+            <summary>
+              <span class="find-what-chevron">▸</span>
+              <span><em>Where Do I Find What?</em></span>
+            </summary>
+            <div class="find-what-body">
+              <div class="find-what-group">
+                <h4>Practice Problems</h4>
+                <ul>
+                  <li>Lecture Study Guide Hub <span class="find-what-note">(MCQ and Q&amp;A; LO focus)</span></li>
+                  <li>Recall Drills <span class="find-what-note">(fib; LO focus)</span></li>
+                  <li>Active Drill Hub <span class="find-what-note">(LO &amp; USMLE focus)</span></li>
+                  <li>Question Banks <span class="find-what-note">(sample USMLE qs)</span></li>
+                </ul>
+              </div>
+              <div class="find-what-group">
+                <h4>3rd Party &amp; UWorld QID Mapping</h4>
+                <ul>
+                  <li>Resource Mapping Hub <span class="find-what-note">(Lecture Specific)</span></li>
+                  <li>Resource Explorer</li>
+                  <li>UWorld QID Mapping <span class="find-what-note">(Excel file)</span></li>
+                  <li>3rd Party Resource Mapping <span class="find-what-note">(Excel file)</span></li>
+                </ul>
+              </div>
             </div>
-            <div class="find-what-group">
-              <h4>Resource &amp; UWorld QID Mapping</h4>
-              <ul>
-                <li>3rd Party Resources <span class="find-what-note">(Lecture Specific)</span></li>
-                <li>Resource Explorer</li>
-                <li>UWorld QID Mapping <span class="find-what-note">(Excel file)</span></li>
-                <li>3rd Party Resource Mapping <span class="find-what-note">(Excel file)</span></li>
-              </ul>
+            <div class="find-what-footer">
+              Still have questions? Visit <a href="https://hoyadocs.com/hoyadocs-101" target="_blank" rel="noopener"><strong>HoyaDocs 101</strong></a>
             </div>
-            <div class="find-what-group">
-              <h4>HY Information</h4>
-              <ul>
-                <li>Lecture Study Guides <span class="find-what-note">(LO focus)</span></li>
-                <li>Atlases <span class="find-what-note">(Subject / Disease Focus)</span></li>
-              </ul>
-            </div>
-          </div>
-          <div class="find-what-footer">
-            Still have questions? Visit <a href="https://hoyadocs.com/hoyadocs-101" target="_blank" rel="noopener"><strong>HoyaDocs 101</strong></a>
-          </div>
-        </details>
+          </details>
 
-        <div class="hero-jump">
-          <a class="hero-jump-btn" href="#lecture-tools"><span class="hero-jump-icon">📘</span>Lecture Study Tools</a>
-          <a class="hero-jump-btn" href="#anatomy-tools"><span class="hero-jump-icon">🫁</span>Anatomy Study Tools</a>
-          <a class="hero-jump-btn" href="#mapping-tools"><span class="hero-jump-icon">🗂</span>3rd Party × Lecture Mapping</a>
-          <a class="hero-jump-btn" href="#exam-tools"><span class="hero-jump-icon">🩺</span>HY Atlas &amp; Databases</a>
-        </div>
-      </section>
-
-      <div class="section-block" id="lecture-tools">
-        <div class="section-divider">
-          <span class="section-divider-text">Lecture Study Tools</span>
-          <div class="section-divider-line"></div>
-        </div>
-        <div class="lec-grid">
-
-          <div class="lec-col lec-col-left">
-
-            <a class="mini-link-card mlc-themed mlc-slim lec-check" href="https://docs.google.com/spreadsheets/d/1iKT6BxPEcrVOFnnVmOoIC7GjRkJfnoFkPkksKhp-Xo8/edit?usp=sharing" target="_blank" rel="noopener" style="background: var(--surface); border: 1px solid var(--rule);">
-              <span class="mlc-icon" style="background: var(--bc-ros-bg); border-color: var(--bc-ros-br);">📋</span>
+          <div class="hero-side-col">
+            <a class="mini-link-card mlc-themed" href="https://docs.google.com/spreadsheets/d/1iKT6BxPEcrVOFnnVmOoIC7GjRkJfnoFkPkksKhp-Xo8/edit?usp=sharing" target="_blank" rel="noopener">
+              <span class="mlc-icon">📋</span>
               <div class="mlc-body">
-                <div class="mlc-title" style="color: var(--bc-ros-tx);">Repro Lecture Check List</div>
+                <div class="mlc-title">Repro Lecture Check List</div>
                 <div class="mlc-desc">Open Google Sheet</div>
               </div>
-              <span class="mlc-arrow" style="color: var(--bc-ros-tx);">→</span>
+              <span class="mlc-arrow">→</span>
             </a>
 
-            <div class="bcard lec-today" style="background: var(--surface); border: 1px solid var(--rule);">
+            <div class="bcard bc-blue">
               <span class="bcard-watermark">📅</span>
               <div class="bcard-header">
                 <div class="bcard-icon">📅</div>
@@ -385,101 +776,68 @@
                 <div class="lec-none">Loading…</div>
               </div>
             </div>
-
           </div>
-
-          <div class="lec-col lec-col-right">
-
-            <a class="bcard bc-rose lec-study" href="./lecture-guides/index.html" style="border: 3px solid #9f1239;">
-              <span class="bcard-watermark">📖</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">📖</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 01</span>
-                  <h3>Lecture Study Guides</h3>
-                </div>
-              </div>
-              <p>Per-lecture learning objective organized guides with MCQ.</p>
-              <span class="bcard-cta">Open guide →</span>
-            </a>
-
-            <a class="bcard bc-maroon lec-drills" href="https://strettyit10.github.io/Block4-Repro/active-recall-hub.html" target="_blank" rel="noopener">
-              <span class="bcard-watermark">🎯</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">🎯</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 02</span>
-                  <h3>Active Drills</h3>
-                </div>
-              </div>
-              <p>Gamified practice for vignettes, trap questions, mechanisms, and drug facts.</p>
-              <span class="bcard-cta">Launch drills →</span>
-            </a>
-
-            <a class="bcard bc-maroon lec-board" href="https://strettyit10.github.io/Block4-Repro/QuestionBank.html" target="_blank" rel="noopener">
-              <span class="bcard-watermark">🩺</span>
-              <div class="bcard-header">
-                <div class="bcard-icon">🩺</div>
-                <div class="bcard-header-text">
-                  <span class="bcard-label">Lecture · 03</span>
-                  <h3>Board-Style Practice</h3>
-                </div>
-              </div>
-              <p>Exam-oriented question sets and external QBank links organized in one place.</p>
-              <span class="bcard-cta">Practice questions →</span>
-            </a>
-
-          </div>
-
         </div>
-      </div>
 
-      <div class="section-block" id="anatomy-tools">
+        <div class="hero-filter">
+          <div class="hero-filter-label">Select filter</div>
+          <div class="hero-jump">
+            <button class="hero-jump-btn filter-btn active" data-filter="all" type="button"><span class="hero-jump-icon">✨</span>All</button>
+            <button class="hero-jump-btn filter-btn" data-filter="lecture-tools" type="button"><span class="hero-jump-icon">📘</span>Lecture Study Tools</button>
+            <button class="hero-jump-btn filter-btn" data-filter="mapping-tools" type="button"><span class="hero-jump-icon">🗂</span>3rd Party × Lecture Mapping</button>
+            <button class="hero-jump-btn filter-btn" data-filter="exam-tools" type="button"><span class="hero-jump-icon">🩺</span>Atlases</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- LECTURE STUDY TOOLS -->
+      <div class="section-block" id="lecture-tools">
         <div class="section-divider">
-          <span class="section-divider-text">Anatomy Study Tools</span>
+          <span class="section-divider-text">Lecture Study Tools</span>
           <div class="section-divider-line"></div>
         </div>
         <div class="bento bento-3">
 
-          <a class="bcard bc-anatomy" href="#" style="border-width: 3px;">
-            <span class="bcard-watermark">🫁</span>
+          <a class="bcard bc-green" href="./lecture-guides/index.html">
+            <span class="bcard-watermark">📖</span>
             <div class="bcard-header">
-              <div class="bcard-icon">🫁</div>
+              <div class="bcard-icon">📖</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Anatomy · 01</span>
-                <h3>Lab Guides: Repro Anatomy</h3>
+                <span class="bcard-label">Lecture · 01</span>
+                <h3>Lecture Study Guides</h3>
               </div>
             </div>
-            <div class="bcard-wip">WIP - Coming Soon</div>
+            <span class="bcard-cta">Open guide →</span>
           </a>
 
-          <a class="bcard bc-anatomy" href="#">
-            <span class="bcard-watermark">🃏</span>
+          <a class="bcard bc-dark" href="./active-recall-hub.html">
+            <span class="bcard-watermark">🎯</span>
             <div class="bcard-header">
-              <div class="bcard-icon">🃏</div>
+              <div class="bcard-icon">🎯</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Anatomy · 02</span>
-                <h3>Active Drills: Repro Anatomy</h3>
+                <span class="bcard-label">Lecture · 02</span>
+                <h3>Active Drills Hub</h3>
               </div>
             </div>
-            <div class="bcard-wip">WIP - Coming Soon</div>
+            <span class="bcard-cta">Launch drills →</span>
           </a>
 
-          <a class="bcard bc-anatomy" href="#" style="border-width: 1px;">
-            <span class="bcard-watermark">📋</span>
+          <a class="bcard bc-dark" href="https://strettyit10.github.io/Block4-Repro/QuestionBank.html">
+            <span class="bcard-watermark">🩺</span>
             <div class="bcard-header">
-              <div class="bcard-icon">📋</div>
+              <div class="bcard-icon">🩺</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Anatomy · 03</span>
-                <h3>Atlas: Repro Anatomy Structures List</h3>
+                <span class="bcard-label">Lecture · 03</span>
+                <h3>Board-Style Practice</h3>
               </div>
             </div>
-            <div class="bcard-wip">WIP - Coming Soon</div>
+            <span class="bcard-cta">Practice questions →</span>
           </a>
 
         </div>
       </div>
 
+      <!-- 3RD PARTY × LECTURE MAPPING -->
       <div class="section-block" id="mapping-tools">
         <div class="section-divider">
           <span class="section-divider-text">3rd Party × Lecture Mapping</span>
@@ -487,96 +845,93 @@
         </div>
         <div class="bento bento-3">
 
-          <a class="bcard bc-purple" href="./resource-mapping/repro_mapping.html">
-            <span class="bcard-watermark">🗂</span>
-            <div class="bcard-header">
-              <div class="bcard-icon">🗂</div>
-              <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 01</span>
-                <h3>Overview: 3rd Party Resources × In House Lectures</h3>
-              </div>
-            </div>
-            <p>3rd party resources mapped to each lecture — BnB, Bootcamp, Pathoma, Physeo, and Sketchy.</p>
-            <span class="bcard-cta">Open section →</span>
-          </a>
-
-          <a class="bcard bc-purple" href="./resource-mapping/repro_resource_hub.html">
+          <a class="bcard bc-purple" href="./resource-mapping/rpd_resource-hub.html">
             <span class="bcard-watermark">🔗</span>
             <div class="bcard-header">
               <div class="bcard-icon">🔗</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 02</span>
-                <h3>Lecture Specific: 3rd Party Resources</h3>
+                <span class="bcard-label">Mapping · 01</span>
+                <h3>Resource Mapping Hub</h3>
               </div>
             </div>
-            <p>Per-lecture study guides, practice questions, UWorld QIDs, and Anki cards.</p>
             <span class="bcard-cta">Open section →</span>
           </a>
 
-          <a class="bcard bc-purple" href="./resource-explorer.html">
+          <a class="bcard bc-purple" href="./resource-mapping/rpd_resource-explorer.html">
             <span class="bcard-watermark">🔍</span>
             <div class="bcard-header">
               <div class="bcard-icon">🔍</div>
               <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 03</span>
-                <h3>Resource Explorer</h3>
+                <span class="bcard-label">Mapping · 02</span>
+                <h3>Extended Resource Explorer</h3>
               </div>
             </div>
-            <p>Pick your resources and explore mapped tags, card counts, and watch times — with Excel export.</p>
             <span class="bcard-cta">Open explorer →</span>
           </a>
 
-          <a class="bcard bc-purple" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
+          <a class="bcard bc-dkpurple" href="./rpd-UWorld-QID-Mapping.xlsx">
+            <span class="bcard-watermark">📊</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">📊</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Mapping · 03</span>
+                <h3>UWorld QID x In House Lecture (xlsx)</h3>
+              </div>
+            </div>
+            <span class="bcard-cta">Download xlsx →</span>
+          </a>
+
+          <a class="bcard bc-dkpurple" href="./rpd_Resource_Mapping.xlsx">
             <span class="bcard-watermark">📊</span>
             <div class="bcard-header">
               <div class="bcard-icon">📊</div>
               <div class="bcard-header-text">
                 <span class="bcard-label">Mapping · 04</span>
-                <h3>UWorld QID Mapping</h3>
+                <h3>3rd Party Resource x In House Lecture (xlsx)</h3>
               </div>
             </div>
-            <p>Spreadsheet of UWorld QIDs mapped to each Repro lecture for targeted review.</p>
-            <span class="bcard-cta">Download xlsx →</span>
-          </a>
-
-          <a class="bcard bc-purple" href="./resource-mapping/Repro_Resource_Mapping.xlsx">
-            <span class="bcard-watermark">📑</span>
-            <div class="bcard-header">
-              <div class="bcard-icon">📑</div>
-              <div class="bcard-header-text">
-                <span class="bcard-label">Mapping · 05</span>
-                <h3>Resource Mapping</h3>
-              </div>
-            </div>
-            <p>Master spreadsheet of all 3rd party resources mapped to lectures.</p>
             <span class="bcard-cta">Download xlsx →</span>
           </a>
 
         </div>
       </div>
 
+      <!-- ATLASES -->
       <div class="section-block" id="exam-tools">
         <div class="section-divider">
-          <span class="section-divider-text">HY Atlas &amp; Databases</span>
+          <span class="section-divider-text">Atlases</span>
           <div class="section-divider-line"></div>
         </div>
         <div class="bento bento-3">
 
           <a class="bcard bc-blue" href="#">
-            <span class="bcard-watermark">☣️</span>
+            <span class="bcard-watermark">📘</span>
             <div class="bcard-header">
-              <div class="bcard-icon">☣️</div>
+              <div class="bcard-icon">📘</div>
               <div class="bcard-header-text">
                 <span class="bcard-label">Exam · 01</span>
-                <h3>Atlas: Repro Pathology</h3>
+                <h3>Coming Soon! Subject Based HY Study Guides</h3>
               </div>
             </div>
-            <div class="bcard-wip">WIP - Coming Soon</div>
+            <span class="bcard-cta">Coming soon →</span>
+          </a>
+
+          <a class="bcard bc-blue" href="#">
+            <span class="bcard-watermark">🧬</span>
+            <div class="bcard-header">
+              <div class="bcard-icon">🧬</div>
+              <div class="bcard-header-text">
+                <span class="bcard-label">Exam · 02</span>
+                <h3>Coming Soon! Databases</h3>
+              </div>
+            </div>
+            <span class="bcard-cta">Coming soon →</span>
           </a>
 
         </div>
       </div>
 
+      <!-- FOOTER -->
       <footer class="footer">
         <span>Built as a shared entry point for HoyaDocs Repro resources.</span>
         <span><strong>Last updated: <span id="last-updated">—</span> · <span id="build-version">—</span></strong></span>
@@ -587,68 +942,99 @@
 
 </div>
 
+<!-- ══ MOBILE BOTTOM NAV ══ -->
 <nav class="mobile-nav">
+
   <div class="mobile-nav-group">
-    <div class="mobile-nav-label">Mapping Files</div>
+    <div class="mobile-nav-label">Resource Mapping Files</div>
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="./rpd_Resource_Mapping.xlsx">
+        <span class="mobile-nav-icon">📊</span>3rd Party Map (xlsx)
+      </a>
+      <a class="mobile-nav-item" href="./rpd-UWorld-QID-Mapping.xlsx">
+        <span class="mobile-nav-icon">📊</span>UWorld QIDs (xlsx)
+      </a>
+    </div>
+  </div>
+
+  <div class="mobile-nav-group">
+    <div class="mobile-nav-label">Tools</div>
     <div class="mobile-nav-items">
       <a class="mobile-nav-item" href="https://docs.google.com/spreadsheets/d/1iKT6BxPEcrVOFnnVmOoIC7GjRkJfnoFkPkksKhp-Xo8/edit?usp=sharing" target="_blank" rel="noopener">
         <span class="mobile-nav-icon">📋</span>Repro Check List
       </a>
-      <a class="mobile-nav-item" href="./resource-mapping/Repro_Resource_Mapping.xlsx">
-        <span class="mobile-nav-icon">⭐</span>3rd Party Map
-      </a>
-      <a class="mobile-nav-item" href="./resource-mapping/HoyaDocs-UWorld-QID-Mapping.xlsx">
-        <span class="mobile-nav-icon">⭐</span>UWorld QIDs
-      </a>
     </div>
   </div>
+
   <div class="mobile-nav-group">
-    <div class="mobile-nav-label">Tools</div>
+    <div class="mobile-nav-label">HoyaDocs Info</div>
     <div class="mobile-nav-items">
-      <a class="mobile-nav-item" href="./anki_package_parser_v10.html">
-        <span class="mobile-nav-icon">🃏</span>Anki Parser
+      <a class="mobile-nav-item" href="https://hoyadocs.com/hoyadocs-101" target="_blank" rel="noopener">
+        <span class="mobile-nav-icon">ℹ️</span>HoyaDocs 101
       </a>
     </div>
   </div>
+
 </nav>
 
 <script>
-  const REPRO_LECTURES = [{"d":"2026-04-08","title":"IL Urogenital Primer","lecturer":"","start":"18:00","end":"18:30","course":"Embr","location":"","link":""},{"d":"2026-04-10","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-04-13","title":"MANDATORY Module Orientation","lecturer":"","start":"09:00","end":"10:00","course":"Embr-HS","location":"","link":""},{"d":"2026-04-13","title":"Urogenital System","lecturer":"","start":"10:00","end":"11:30","course":"Embr","location":"","link":""},{"d":"2026-04-15","title":"IL Urogenital Primer - Quiz DUE at 11:59PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-04-16","title":"Female Reproductive System","lecturer":"","start":"11:00","end":"12:00","course":"Hist","location":"","link":""},{"d":"2026-04-17","title":"Male Reproductive System","lecturer":"","start":"10:00","end":"11:00","course":"Hist","location":"","link":""},{"d":"2026-04-17","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-04-19","title":"SDL Worksheet DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-04-23","title":"Endocrinology of the Ovary & Female Reproductive Tract I","lecturer":"","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-04-23","title":"Endocrinology of the Ovary & Female Reproductive Tract II","lecturer":"","start":"11:00","end":"12:00","course":"Phys","location":"","link":""},{"d":"2026-04-23","title":"Embryology Paper Library Consultation Feedback Received by 11:59PM","lecturer":"","start":"14:00","end":"16:00","course":"Embr","location":"","link":""},{"d":"2026-04-24","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-04-28","title":"Pelvic Structure & Neurovasculature","lecturer":"","start":"11:00","end":"12:00","course":"Anat","location":"","link":""},{"d":"2026-04-29","title":"CCS 1: Ovary and Female Reproductive Tract","lecturer":"","start":"10:00","end":"11:00","course":"Phys-Bioch","location":"","link":""},{"d":"2026-04-29","title":"Pelvic Viscera & Perineum","lecturer":"","start":"11:00","end":"12:00","course":"Anat","location":"","link":""},{"d":"2026-04-30","title":"Sexual Health and Development Across the Lifespan I","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-04-30","title":"Sexual Health and Development Across the Lifespan II","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-04-30","title":"GA Lab #1 - Ischioanal Fossa and Perineum","lecturer":"","start":"13:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-01","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-04","title":"Endocrinology of Testes and Male Reproductive Tract","lecturer":"","start":"09:00","end":"10:00","course":"Phys-Bioch","location":"","link":""},{"d":"2026-05-04","title":"Ovary and Testes","lecturer":"","start":"10:00","end":"11:30","course":"Path","location":"","link":""},{"d":"2026-05-04","title":"GA Lab #2 - Pelvis: Viscera, Vasculature, Sacral Plexus","lecturer":"","start":"13:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-05","title":"Contraception","lecturer":"","start":"09:00","end":"10:30","course":"HS","location":"","link":""},{"d":"2026-05-05","title":"Fertility and Infertility","lecturer":"","start":"10:30","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-05-05","title":"Embryology Paper DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-06","title":"Ovary/Testes Lab","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-06","title":"Obstetrical/Placenta","lecturer":"","start":"10:00","end":"11:00","course":"Path","location":"","link":""},{"d":"2026-05-06","title":"Endocrinology of Pregnancy, Labor and Lactation","lecturer":"","start":"11:00","end":"12:00","course":"Bioch","location":"","link":""},{"d":"2026-05-06","title":"MANDATORY SG 5: Guideline","lecturer":"","start":"13:00","end":"14:15","course":"EBM","location":"","link":""},{"d":"2026-05-06","title":"Optional RPD/GA Review","lecturer":"","start":"15:00","end":"16:00","course":"Anat","location":"","link":""},{"d":"2026-05-07","title":"Pregnancy 101","lecturer":"","start":"09:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-07","title":"Pelvic Imaging","lecturer":"","start":"11:00","end":"12:00","course":"DRT","location":"","link":""},{"d":"2026-05-07","title":"Optional RPD/GA Practice Questions Review","lecturer":"","start":"15:00","end":"16:30","course":"Anat","location":"","link":""},{"d":"2026-05-08","title":"Psychosocial Aspects of Pregnancy and Postpartum","lecturer":"","start":"09:00","end":"10:00","course":"HS","location":"","link":""},{"d":"2026-05-08","title":"Menopause","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-08","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-08","title":"Optional RPD GA Practical Review (Snowball)","lecturer":"","start":"13:00","end":"14:30","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"GA Written Exam","lecturer":"","start":"09:00","end":"09:30","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"GA Practical Exam","lecturer":"","start":"09:40","end":"15:40","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"MANDATORY GA Lab Clean Up","lecturer":"","start":"16:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-12","title":"Embryology Paper Critique DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-12","title":"Breast Diseases","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-12","title":"PE - Female Pelvis and GYN Exam","lecturer":"","start":"13:00","end":"14:30","course":"CP","location":"","link":""},{"d":"2026-05-13","title":"Breast Clinical","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-13","title":"MANDATORY Sexual History Taking","lecturer":"","start":"11:30","end":"12:30","course":"HS","location":"","link":""},{"d":"2026-05-13","title":"MANDATORY Panel - Ethical Issues in Reproduction and Beginning of Life","lecturer":"","start":"13:30","end":"15:30","course":"Ethics","location":"","link":""},{"d":"2026-05-13","title":"Group A - Educational Case Review - DCIS","lecturer":"","start":"16:00","end":"17:00","course":"Path","location":"","link":""},{"d":"2026-05-14","title":"PE - Breast Exam","lecturer":"","start":"11:30","end":"12:00","course":"CP","location":"","link":""},{"d":"2026-05-14","title":"MANDATORY SG Sexual History Taking","lecturer":"","start":"13:00","end":"14:30","course":"HS","location":"","link":""},{"d":"2026-05-14","title":"Group B - Educational Case Review - DCIS","lecturer":"","start":"16:00","end":"17:00","course":"Path","location":"","link":""},{"d":"2026-05-15","title":"Embryology Paper Peer Evals and Optional Rebuttal DUE by 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-15","title":"Disorders of the Cervix/HPV","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-15","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-15","title":"Optional GI & RPD GA Written Post-Exam Review","lecturer":"","start":"12:00","end":"12:30","course":"N/A","location":"","link":""},{"d":"2026-05-18","title":"Disorders of the Vulva and Uterus","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-18","title":"GYN: Case Review","lecturer":"","start":"10:00","end":"11:00","course":"Path","location":"","link":""},{"d":"2026-05-18","title":"Breast/GYN Lab","lecturer":"","start":"11:00","end":"12:00","course":"Path","location":"","link":""},{"d":"2026-05-20","title":"Male Pelvis and GU Exam","lecturer":"","start":"09:00","end":"10:00","course":"CP","location":"","link":""},{"d":"2026-05-21","title":"Sexually Transmitted Infections","lecturer":"","start":"09:00","end":"10:00","course":"Micro","location":"","link":""},{"d":"2026-05-21","title":"CCS3: Sexuality, Illness and Disability","lecturer":"","start":"10:00","end":"11:30","course":"HS","location":"","link":""},{"d":"2026-05-22","title":"Prostate","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-22","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-22","title":"IL Sexual Boundary Issue","lecturer":"","start":"14:00","end":"15:00","course":"HS","location":"","link":""},{"d":"2026-05-25","title":"Sexual Boundary Issues IL and Quiz due 11:59pm","lecturer":"","start":"","end":"23:59","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Prostate Clinical","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-26","title":"Hormone Therapy of Cancer","lecturer":"","start":"10:00","end":"11:00","course":"Pharm","location":"","link":""},{"d":"2026-05-26","title":"LGBT Health I","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Intimate Partner Violence & Sexual Trauma","lecturer":"","start":"13:30","end":"14:30","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"MANDATORY Rape Survivor Patient Panel","lecturer":"","start":"14:30","end":"15:30","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Gross Image Assignment DUE 11:59pm","lecturer":"","start":"","end":"23:59","course":"Path","location":"","link":""},{"d":"2026-05-27","title":"LGBT Health II","lecturer":"","start":"09:00","end":"10:00","course":"HS","location":"","link":""},{"d":"2026-05-27","title":"MANDATORY SG LGBT Cases","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-27","title":"MANDATORY LGBT Panel Discussion","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-06-08","title":"RPD Exam 1","lecturer":"","start":"09:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-06-11","title":"RPD Exam 2","lecturer":"","start":"09:00","end":"12:00","course":"N/A","location":"","link":""}];
+  // ── Today's Repro Lectures ──
+  // Source: block-specific lecture schedule (see *_lectures.json in hub-index-template)
+  const LECTURES = [{"d":"2026-04-08","title":"IL Urogenital Primer","lecturer":"","start":"18:00","end":"18:30","course":"Embr","location":"","link":""},{"d":"2026-04-10","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-04-13","title":"MANDATORY Module Orientation","lecturer":"","start":"09:00","end":"10:00","course":"Embr-HS","location":"","link":""},{"d":"2026-04-13","title":"Urogenital System","lecturer":"","start":"10:00","end":"11:30","course":"Embr","location":"","link":""},{"d":"2026-04-15","title":"IL Urogenital Primer - Quiz DUE at 11:59PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-04-16","title":"Female Reproductive System","lecturer":"","start":"11:00","end":"12:00","course":"Hist","location":"","link":""},{"d":"2026-04-17","title":"Male Reproductive System","lecturer":"","start":"10:00","end":"11:00","course":"Hist","location":"","link":""},{"d":"2026-04-17","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-04-19","title":"SDL Worksheet DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-04-23","title":"Endocrinology of the Ovary & Female Reproductive Tract I","lecturer":"","start":"10:00","end":"11:00","course":"Phys","location":"","link":""},{"d":"2026-04-23","title":"Endocrinology of the Ovary & Female Reproductive Tract II","lecturer":"","start":"11:00","end":"12:00","course":"Phys","location":"","link":""},{"d":"2026-04-23","title":"Embryology Paper Library Consultation Feedback Received by 11:59PM","lecturer":"","start":"14:00","end":"16:00","course":"Embr","location":"","link":""},{"d":"2026-04-24","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-04-28","title":"Pelvic Structure & Neurovasculature","lecturer":"","start":"11:00","end":"12:00","course":"Anat","location":"","link":""},{"d":"2026-04-29","title":"CCS 1: Ovary and Female Reproductive Tract","lecturer":"","start":"10:00","end":"11:00","course":"Phys-Bioch","location":"","link":""},{"d":"2026-04-29","title":"Pelvic Viscera & Perineum","lecturer":"","start":"11:00","end":"12:00","course":"Anat","location":"","link":""},{"d":"2026-04-30","title":"Sexual Health and Development Across the Lifespan I","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-04-30","title":"Sexual Health and Development Across the Lifespan II","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-04-30","title":"GA Lab #1 - Ischioanal Fossa and Perineum","lecturer":"","start":"13:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-01","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-04","title":"Endocrinology of Testes and Male Reproductive Tract","lecturer":"","start":"09:00","end":"10:00","course":"Phys-Bioch","location":"","link":""},{"d":"2026-05-04","title":"Ovary and Testes","lecturer":"","start":"10:00","end":"11:30","course":"Path","location":"","link":""},{"d":"2026-05-04","title":"GA Lab #2 - Pelvis: Viscera, Vasculature, Sacral Plexus","lecturer":"","start":"13:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-05","title":"Contraception","lecturer":"","start":"09:00","end":"10:30","course":"HS","location":"","link":""},{"d":"2026-05-05","title":"Fertility and Infertility","lecturer":"","start":"10:30","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-05-05","title":"Embryology Paper DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-06","title":"Ovary/Testes Lab","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-06","title":"Obstetrical/Placenta","lecturer":"","start":"10:00","end":"11:00","course":"Path","location":"","link":""},{"d":"2026-05-06","title":"Endocrinology of Pregnancy, Labor and Lactation","lecturer":"","start":"11:00","end":"12:00","course":"Bioch","location":"","link":""},{"d":"2026-05-06","title":"MANDATORY SG 5: Guideline","lecturer":"","start":"13:00","end":"14:15","course":"EBM","location":"","link":""},{"d":"2026-05-06","title":"Optional RPD/GA Review","lecturer":"","start":"15:00","end":"16:00","course":"Anat","location":"","link":""},{"d":"2026-05-07","title":"Pregnancy 101","lecturer":"","start":"09:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-07","title":"Pelvic Imaging","lecturer":"","start":"11:00","end":"12:00","course":"DRT","location":"","link":""},{"d":"2026-05-07","title":"Optional RPD/GA Practice Questions Review","lecturer":"","start":"15:00","end":"16:30","course":"Anat","location":"","link":""},{"d":"2026-05-08","title":"Psychosocial Aspects of Pregnancy and Postpartum","lecturer":"","start":"09:00","end":"10:00","course":"HS","location":"","link":""},{"d":"2026-05-08","title":"Menopause","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-08","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-08","title":"Optional RPD GA Practical Review (Snowball)","lecturer":"","start":"13:00","end":"14:30","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"GA Written Exam","lecturer":"","start":"09:00","end":"09:30","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"GA Practical Exam","lecturer":"","start":"09:40","end":"15:40","course":"Anat","location":"","link":""},{"d":"2026-05-11","title":"MANDATORY GA Lab Clean Up","lecturer":"","start":"16:00","end":"17:00","course":"Anat","location":"","link":""},{"d":"2026-05-12","title":"Embryology Paper Critique DUE at 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-12","title":"Breast Diseases","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-12","title":"PE - Female Pelvis and GYN Exam","lecturer":"","start":"13:00","end":"14:30","course":"CP","location":"","link":""},{"d":"2026-05-13","title":"Breast Clinical","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-13","title":"MANDATORY Sexual History Taking","lecturer":"","start":"11:30","end":"12:30","course":"HS","location":"","link":""},{"d":"2026-05-13","title":"MANDATORY Panel - Ethical Issues in Reproduction and Beginning of Life","lecturer":"","start":"13:30","end":"15:30","course":"Ethics","location":"","link":""},{"d":"2026-05-13","title":"Group A - Educational Case Review - DCIS","lecturer":"","start":"16:00","end":"17:00","course":"Path","location":"","link":""},{"d":"2026-05-14","title":"PE - Breast Exam","lecturer":"","start":"11:30","end":"12:00","course":"CP","location":"","link":""},{"d":"2026-05-14","title":"MANDATORY SG Sexual History Taking","lecturer":"","start":"13:00","end":"14:30","course":"HS","location":"","link":""},{"d":"2026-05-14","title":"Group B - Educational Case Review - DCIS","lecturer":"","start":"16:00","end":"17:00","course":"Path","location":"","link":""},{"d":"2026-05-15","title":"Embryology Paper Peer Evals and Optional Rebuttal DUE by 11:59 PM","lecturer":"","start":"","end":"23:59","course":"Embr","location":"","link":""},{"d":"2026-05-15","title":"Disorders of the Cervix/HPV","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-15","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-15","title":"Optional GI & RPD GA Written Post-Exam Review","lecturer":"","start":"12:00","end":"12:30","course":"N/A","location":"","link":""},{"d":"2026-05-18","title":"Disorders of the Vulva and Uterus","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-18","title":"GYN: Case Review","lecturer":"","start":"10:00","end":"11:00","course":"Path","location":"","link":""},{"d":"2026-05-18","title":"Breast/GYN Lab","lecturer":"","start":"11:00","end":"12:00","course":"Path","location":"","link":""},{"d":"2026-05-20","title":"Male Pelvis and GU Exam","lecturer":"","start":"09:00","end":"10:00","course":"CP","location":"","link":""},{"d":"2026-05-21","title":"Sexually Transmitted Infections","lecturer":"","start":"09:00","end":"10:00","course":"Micro","location":"","link":""},{"d":"2026-05-21","title":"CCS3: Sexuality, Illness and Disability","lecturer":"","start":"10:00","end":"11:30","course":"HS","location":"","link":""},{"d":"2026-05-22","title":"Prostate","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-22","title":"MANDATORY Foundational Rounds","lecturer":"","start":"11:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-05-22","title":"IL Sexual Boundary Issue","lecturer":"","start":"14:00","end":"15:00","course":"HS","location":"","link":""},{"d":"2026-05-25","title":"Sexual Boundary Issues IL and Quiz due 11:59pm","lecturer":"","start":"","end":"23:59","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Prostate Clinical","lecturer":"","start":"09:00","end":"10:00","course":"Path","location":"","link":""},{"d":"2026-05-26","title":"Hormone Therapy of Cancer","lecturer":"","start":"10:00","end":"11:00","course":"Pharm","location":"","link":""},{"d":"2026-05-26","title":"LGBT Health I","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Intimate Partner Violence & Sexual Trauma","lecturer":"","start":"13:30","end":"14:30","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"MANDATORY Rape Survivor Patient Panel","lecturer":"","start":"14:30","end":"15:30","course":"HS","location":"","link":""},{"d":"2026-05-26","title":"Gross Image Assignment DUE 11:59pm","lecturer":"","start":"","end":"23:59","course":"Path","location":"","link":""},{"d":"2026-05-27","title":"LGBT Health II","lecturer":"","start":"09:00","end":"10:00","course":"HS","location":"","link":""},{"d":"2026-05-27","title":"MANDATORY SG LGBT Cases","lecturer":"","start":"10:00","end":"11:00","course":"HS","location":"","link":""},{"d":"2026-05-27","title":"MANDATORY LGBT Panel Discussion","lecturer":"","start":"11:00","end":"12:00","course":"HS","location":"","link":""},{"d":"2026-06-08","title":"RPD Exam 1","lecturer":"","start":"09:00","end":"12:00","course":"N/A","location":"","link":""},{"d":"2026-06-11","title":"RPD Exam 2","lecturer":"","start":"09:00","end":"12:00","course":"N/A","location":"","link":""}];
 
   const COURSE_TAG = {
-    'Phys':       ['#dbeafe','#1e40af'], 'Anat':    ['#dcfce7','#166534'],
-    'Path':       ['#ffe4e6','#9f1239'], 'Pharm':   ['#d1fae5','#065f46'],
-    'Embr':       ['#ede9fe','#5b21b6'], 'Embr-HS': ['#ede9fe','#5b21b6'],
-    'Hist':       ['#f3e8ff','#6b21a8'], 'Micro':   ['#fef3c7','#92400e'],
-    'DRT':        ['#dbeafe','#1e3a8a'], 'Ethics':  ['#fce7f3','#9d174d'],
-    'CP':         ['#e0f2fe','#0369a1'], 'HS':      ['#fce7f3','#be185d'],
-    'Bioch':      ['#fef3c7','#92400e'], 'Phys-Bioch': ['#dbeafe','#1e40af'],
-    'EBM':        ['#e0e7ff','#3730a3'], 'N/A':     ['#f1f5f9','#64748b'],
+    'Phys':       ['#dbeafe','#1e40af'], 'Anat':       ['#dcfce7','#854d0e'],
+    'Path':       ['#ffe4e6','#CA8A04'], 'Pharm':      ['#d1fae5','#065f46'],
+    'Embr':       ['#ede9fe','#5b21b6'], 'Embr-HS':    ['#ede9fe','#5b21b6'],
+    'Hist':       ['#f3e8ff','#6b21a8'], 'Micro':      ['#fef3c7','#92400e'],
+    'DRT':        ['#dbeafe','#1e3a8a'], 'Ethics':     ['#fce7f3','#9d174d'],
+    'CP':         ['#e0f2fe','#0369a1'], 'HS':         ['#ffe4e6','#CA8A04'],
+    'EBM':        ['#fef3c7','#92400e'], 'Bioch':      ['#d1fae5','#065f46'],
+    'Biochem':    ['#d1fae5','#065f46'],
+    'Phys-Bioch': ['#dbeafe','#1e40af'],
+    'N/A':        ['#f1f5f9','#64748b'],
   };
 
   function renderTodayLectures() {
     const now = new Date();
     const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
+    const mm   = String(now.getMonth() + 1).padStart(2, '0');
+    const dd   = String(now.getDate()).padStart(2, '0');
     const todayStr = `${yyyy}-${mm}-${dd}`;
+
     const lbl = document.getElementById('today-date-lbl');
     if (lbl) lbl.textContent = now.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+
     const list = document.getElementById('today-lec-list');
     if (!list) return;
-    const rows = REPRO_LECTURES.filter(l => l.d === todayStr);
-    if (!rows.length) { list.innerHTML = '<div class="lec-none">No lectures scheduled today.</div>'; return; }
+
+    const rows = LECTURES.filter(l => l.d === todayStr);
+    if (!rows.length) {
+      list.innerHTML = '<div class="lec-none">No lectures scheduled today.</div>';
+      return;
+    }
+
     list.innerHTML = rows.map(l => {
       const [bg, tx] = COURSE_TAG[l.course] || COURSE_TAG['N/A'];
-      const name = l.link ? `<a href="${l.link}" target="_blank" rel="noopener">${l.title}</a>` : l.title;
+      const name = l.link
+        ? `<a href="${l.link}" target="_blank" rel="noopener">${l.title}</a>`
+        : l.title;
       const who = (l.lecturer && l.lecturer !== 'N/A') ? `Dr. ${l.lecturer}` : '';
       const loc = l.location && l.location !== 'N/A' ? `· ${l.location}` : '';
-      return `<div class="lec-row"><div class="lec-time">${l.start}</div><div class="lec-info"><div class="lec-name">${name}</div><div class="lec-sub"><span class="lec-tag" style="background:${bg};color:${tx}">${l.course}</span>${who} ${loc}</div></div></div>`;
+      return `<div class="lec-row">
+        <div class="lec-time">${l.start}</div>
+        <div class="lec-info">
+          <div class="lec-name">${name}</div>
+          <div class="lec-sub"><span class="lec-tag" style="background:${bg};color:${tx}">${l.course}</span>${who} ${loc}</div>
+        </div>
+      </div>`;
     }).join('');
   }
+
   document.addEventListener('DOMContentLoaded', renderTodayLectures);
 
-  const BUILD_VERSION = 'v2.4';
+  // Footer build meta
+  const BUILD_VERSION = 'v1.1';
   function renderBuildMeta() {
     const versionEl = document.getElementById('build-version');
     const dateEl = document.getElementById('last-updated');
@@ -659,9 +1045,37 @@
     }
   }
   document.addEventListener('DOMContentLoaded', renderBuildMeta);
+
+  // ── Section Filter Buttons ──
+  function initSectionFilter() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const sections = document.querySelectorAll('.main-inner .section-block');
+    if (!buttons.length || !sections.length) return;
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        sections.forEach(section => {
+          if (filter === 'all' || section.id === filter) {
+            section.style.display = '';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initSectionFilter);
+
 </script>
 
-<a class="feedback-fab" href="https://forms.gle/382rWjcPXC1beo8G8" target="_blank" rel="noopener">💬 Feedback</a>
+<!-- Feedback button fixed top-right -->
+<a class="feedback-fab" href="https://forms.gle/382rWjcPXC1beo8G8" target="_blank" rel="noopener">
+  💬 Feedback
+</a>
 
 </body>
 </html>
