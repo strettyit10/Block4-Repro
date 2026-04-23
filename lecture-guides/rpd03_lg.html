@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 03: Female Reproductive System — HoyaDocs Repro Block</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            color: #1f2937;
+            line-height: 1.6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0;
+            width: 220px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 20px 0 140px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+        .sidebar-header {
+            padding: 0 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px;
+        }
+        .sidebar-header h2 {
+            font-size: 14px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        .sidebar-header p { font-size: 12px; opacity: 0.8; margin: 0; }
+        .sidebar-nav { padding: 0 15px; }
+        .sidebar-link {
+            display: block; padding: 10px 12px;
+            background: #1e293b; color: #cbd5e1;
+            border-left: 3px solid transparent; border-radius: 4px;
+            cursor: pointer; font-size: 13px;
+            transition: all 0.2s ease; text-decoration: none; margin-bottom: 6px;
+        }
+        .sidebar-link:hover { background: #334155; border-left-color: #2563eb; color: #f1f5f9; }
+        .sidebar-link.active { background: #1e293b; border-left-color: #2563eb; color: #2563eb; font-weight: 600; }
+        .sidebar-divider { height: 1px; background: #334155; margin: 12px 0; }
+
+        /* ── Sidebar Footer ── */
+        .sidebar-footer {
+            position: fixed; bottom: 0; left: 0; width: 220px;
+            padding: 10px 15px 12px;
+            background: linear-gradient(to top, #0f172a 60%, transparent);
+            z-index: 102;
+        }
+        .export-actions { display: flex; gap: 6px; margin-bottom: 8px; }
+        .export-btn {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; gap: 3px; padding: 7px 6px;
+            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 6px; color: #cbd5e1; font-size: 10.5px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease; font-family: inherit; line-height: 1.2;
+        }
+        .export-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #f1f5f9; }
+        .export-btn .btn-icon { font-size: 16px; line-height: 1; }
+        .hub-return-btn {
+            display: flex; align-items: center; gap: 7px;
+            width: 100%; padding: 9px 12px;
+            background: rgba(37,99,235,0.18); border: 1px solid rgba(96,165,250,0.35);
+            border-radius: 6px; color: #93c5fd; font-size: 12px; font-weight: 600;
+            text-decoration: none; transition: all 0.2s ease; cursor: pointer;
+        }
+        .hub-return-btn:hover { background: rgba(37,99,235,0.32); border-color: rgba(96,165,250,0.7); color: #dbeafe; }
+        .hub-return-btn .btn-arrow { font-size: 14px; line-height: 1; }
+
+        /* ── Print CSS ── */
+        @media print {
+            .sidebar, .sidebar-footer { display: none !important; }
+            body { display: block !important; overflow: visible !important; height: auto !important; background: white !important; }
+            .main { margin-left: 0 !important; height: auto !important; overflow: visible !important; max-width: 100% !important; padding: 20px !important; }
+            .lo-section { display: block !important; box-shadow: none !important; border: 1px solid #e2e8f0; margin-bottom: 30px; page-break-before: always; }
+            .lo-section:first-child { page-break-before: auto; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body { display: block !important; }
+            .section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron { display: none !important; }
+            .header { page-break-after: avoid; }
+            a { color: inherit; text-decoration: none; }
+        }
+
+        /* ── Main Content Area ── */
+        .main { margin-left: 220px; flex: 1; padding: 40px; max-width: 1000px; overflow-y: auto; height: 100vh; }
+        .header { margin-bottom: 40px; }
+        .header h1 { font-size: 32px; font-weight: 700; margin-bottom: 10px; color: #0f172a; }
+        .header p { font-size: 16px; color: #475569; margin: 0; }
+
+        /* ── LO Sections ── */
+        .lo-section { display: none; background: white; border-radius: 8px; padding: 28px 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); animation: fadeIn 0.3s ease; }
+        .lo-section.active { display: block; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        .lo-title { font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 5px; }
+        .lo-subtitle { font-size: 13px; color: #64748b; margin-bottom: 20px; font-weight: 500; }
+
+        /* ── Content Typography ── */
+        .lo-content h3 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin: 24px 0 10px; padding: 6px 10px; border-left: 3px solid #2563eb; background: transparent; }
+        .lo-content h4 { font-size: 14.5px; font-weight: 700; color: #1e3a5f; background: #dbeafe; border-radius: 4px; padding: 6px 12px; margin: 18px 0 8px; }
+        .lo-content h5 { font-size: 13px; font-weight: 700; color: #1e293b; margin: 12px 0 4px; }
+        .lo-content p { font-size: 14px; line-height: 1.7; color: #1e293b; margin-bottom: 10px; }
+        .lo-content ul { margin-left: 22px; margin-bottom: 12px; }
+        .lo-content ol { margin-left: 22px; margin-bottom: 12px; }
+        .lo-content li { font-size: 14px; line-height: 1.7; color: #1e293b; margin-bottom: 6px; }
+
+        /* ── Tables ── */
+        .lo-content table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 13px; }
+        .lo-content table thead tr { background: #1e3a5f; color: white; }
+        .lo-content table th { padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.3px; color: white; }
+        .lo-content table td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; color: #1e293b; vertical-align: top; }
+        .lo-content table tbody tr:nth-child(even) { background: #eff6ff; }
+        .lo-content table tbody tr:hover { background: #dbeafe; }
+
+        /* ── Section Rule ── */
+        .section-rule { border: none; border-top: 1px solid #e2e8f0; margin: 22px 0; }
+
+        /* ── Flow Arrow Diagram ── */
+        .flow-diagram { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px 18px; margin: 12px 0 18px; font-size: 13px; line-height: 1.85; color: #1e293b; }
+        .flow-diagram strong { color: #1e3a5f; }
+        .flow-arrow { color: #2563eb; font-weight: 700; margin: 0 4px; }
+
+        /* ── Callout Boxes ── */
+        .exam-trap { background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .exam-trap .trap-header { font-weight: 700; color: #b91c1c; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .exam-trap ul { margin-left: 18px; margin-top: 6px; }
+        .exam-trap li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .exam-trap p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+        .exam-trap strong { color: #991b1b; }
+
+        .hy-box { background-color: #fefce8; border-left: 4px solid #ca8a04; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .hy-box strong { color: #a16207; font-weight: 700; font-size: 13px; }
+        .hy-box ul { margin-left: 18px; margin-top: 6px; }
+        .hy-box li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+
+        .mnemonic { background-color: #fff7ed; border-left: 4px solid #ea580c; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .mnemonic .mnemonic-header { font-weight: 700; color: #c2410c; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .mnemonic strong { color: #c2410c; font-size: 13px; }
+        .mnemonic ul { margin-left: 18px; margin-top: 6px; }
+        .mnemonic li { font-size: 13px; margin-bottom: 5px; color: #431407; line-height: 1.5; }
+
+        .usmle-summary { background: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 16px; margin: 16px 0; border-radius: 4px; }
+        .usmle-header { font-weight: 700; color: #1e40af; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .usmle-summary ul { margin-left: 18px; margin-top: 6px; }
+        .usmle-summary li { font-size: 13px; margin-bottom: 6px; color: #1f2937; line-height: 1.6; }
+        .usmle-summary p { font-size: 13px; color: #1f2937; line-height: 1.6; margin-top: 6px; }
+
+        /* ── Collapsible h3 ── */
+        .collapsible-h3 { cursor: pointer; user-select: none; }
+        .collapsible-h3:hover { color: #1e3a8a; }
+        h3.collapsible-h3 { font-size: 15px; font-weight: 700; color: #1e3a5f; margin: 24px 0 10px; padding: 6px 10px; border-left: 3px solid #2563eb; cursor: pointer; user-select: none; }
+        .section-chevron { display: inline-block; font-size: 12px; color: #2563eb; transition: transform 0.2s ease; margin-right: 6px; }
+        .collapsible-h3.collapsed .section-chevron { transform: rotate(-90deg); }
+        .section-body { padding-left: 16px; margin-left: 4px; }
+        .section-body.collapsed { display: none; }
+
+        .h4-body { padding-left: 14px; margin-left: 4px; margin-bottom: 6px; }
+
+        .trap-header { cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .trap-chevron { font-size: 11px; font-weight: 400; color: #b91c1c; transition: transform 0.2s ease; margin-left: 8px; flex-shrink: 0; }
+        .trap-header.collapsed .trap-chevron { transform: rotate(-90deg); }
+        .trap-body.collapsed { display: none; }
+
+        .h5-subheading { font-size: 13px; font-weight: 700; color: #1e3a5f; background: #eff6ff; border-left: 2px solid #93c5fd; border-radius: 3px; padding: 4px 10px; margin: 14px 0 6px; cursor: pointer; user-select: none; }
+        .h5-subheading:hover { background: #dbeafe; }
+        .h5-subheading .h5-chevron { display: inline-block; font-size: 10px; color: #2563eb; transition: transform 0.2s ease; margin-right: 5px; }
+        .h5-subheading.collapsed .h5-chevron { transform: rotate(-90deg); }
+        .h5-body { padding-left: 18px; margin-left: 4px; margin-bottom: 8px; }
+        .h5-body.collapsed { display: none; }
+
+        .mnemonic-toggle-header { cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .mnemonic-toggle-header .mnemonic-chevron { font-size: 11px; color: #c2410c; transition: transform 0.2s ease; margin-left: 8px; flex-shrink: 0; }
+        .mnemonic-toggle-header.collapsed .mnemonic-chevron { transform: rotate(-90deg); }
+        .mnemonic-body.collapsed { display: none; }
+
+        /* ── Expand/Collapse All ── */
+        .lo-controls { display: flex; gap: 8px; margin-bottom: 16px; }
+        .lo-controls button { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 4px; border: 1px solid #2563eb; cursor: pointer; background: white; color: #2563eb; transition: all 0.15s ease; }
+        .lo-controls button:hover { background: #2563eb; color: white; }
+
+        /* ── In-page TOC — neutral gray ── */
+        .lo-toc { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; font-size: 13px; }
+        .lo-toc-title { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #64748b; margin-bottom: 8px; }
+        .lo-toc ol { margin: 0; padding-left: 20px; }
+        .lo-toc li { margin-bottom: 5px; }
+        .lo-toc a { color: #2563eb; text-decoration: none; font-weight: 500; }
+        .lo-toc a:hover { text-decoration: underline; color: #1d4ed8; }
+
+        /* ── LOs Covered — neutral gray with blue left border ── */
+        .lo-covered { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #2563eb; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; }
+        .lo-covered-title { font-weight: 700; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+        .lo-covered ul { margin: 0; padding-left: 18px; }
+        .lo-covered li { margin-bottom: 3px; color: #1e293b; line-height: 1.5; }
+        .lo-covered li strong { color: #1e3a5f; }
+
+        /* ── Practice Questions ── */
+        .practice-question { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 3px solid #2563eb; padding: 16px; margin: 14px 0; border-radius: 6px; }
+        .practice-question h4 { background: none !important; padding: 0 !important; border-radius: 0 !important; margin: 4px 0 8px !important; color: #1d4ed8; font-size: 14.5px; font-weight: 700; }
+        .practice-question p { font-size: 13px; }
+        .practice-question .option { color: #475569; font-style: italic; margin-bottom: 4px; font-size: 13px; }
+        .reveal-btn { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 4px; border: 1px solid #2563eb; cursor: pointer; background: white; color: #2563eb; transition: all 0.15s ease; margin-top: 8px; }
+        .reveal-btn:hover { background: #2563eb; color: white; }
+        .answer { display: none; margin-top: 12px; background: #f0fdf4; border-left: 3px solid #16a34a; padding: 12px; border-radius: 4px; font-size: 13px; line-height: 1.7; color: #1f2937; }
+        .answer.show { display: block; }
+        .answer strong { color: #14532d; }
+
+        /* ── Testing Your Understanding ── */
+        .tyu-section { margin: 24px 0; border-top: 1px solid #e2e8f0; padding-top: 18px; }
+        .tyu-section > h4 { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 14px; background: none; padding: 0; }
+        .tyu-section .practice-question h4 { background: none !important; padding: 0 !important; }
+
+        /* ══ Mobile Responsive ══ */
+        .sidebar { transition: transform 0.25s ease; }
+        .hamburger-btn {
+            display: none;
+            position: fixed; top: 12px; left: 12px; z-index: 200;
+            background: #1e293b; border: none; border-radius: 6px;
+            padding: 8px 11px; cursor: pointer; color: white; font-size: 20px;
+            line-height: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+        }
+        .hamburger-btn:hover { background: #334155; }
+        .sidebar-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.45); z-index: 99;
+        }
+        .sidebar-overlay.open { display: block; }
+        @media (max-width: 768px) {
+            .hamburger-btn { display: block; }
+            .sidebar {
+                transform: translateX(-240px);
+                z-index: 150;
+            }
+            .sidebar.mob-open { transform: translateX(0); }
+            .main {
+                margin-left: 0 !important;
+                padding: 60px 16px 30px 16px !important;
+                max-width: 100% !important;
+            }
+            .header h1 { font-size: 22px !important; }
+            .header p  { font-size: 14px !important; }
+            .lo-section { padding: 20px 16px !important; }
+            .lo-content table {
+                display: block; overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                font-size: 12px !important;
+            }
+            .lo-toc ol { padding-left: 14px; }
+            .export-actions { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+            div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+            .main { padding: 55px 12px 24px 12px !important; }
+            .lo-acc-header { flex-wrap: wrap; gap: 6px !important; }
+        }
+    </style>
+</head>
+<body>
+<button class="hamburger-btn" onclick="toggleMobileSidebar()" aria-label="Open menu">&#9776;</button>
+<div class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <a href="https://strettyit10.github.io/Block4-Repro/"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-block; margin-bottom:8px; font-size:17px; font-weight:700;
+                  color:#60a5fa; text-decoration:none; letter-spacing:0.5px;
+                  border-bottom:1px solid rgba(96,165,250,0.35); padding-bottom:1px;"
+           onmouseover="this.style.color='#93c5fd'"
+           onmouseout="this.style.color='#60a5fa'">HoyaDocs &#8599;</a>
+        <h2>Lecture 03</h2>
+        <p>Female Reproductive System</p>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#overview" class="sidebar-link active" onclick="switchLO(event,'overview')">📋 Lecture Overview</a>
+        <div class="sidebar-divider"></div>
+        <a href="#lo1" class="sidebar-link" onclick="switchLO(event,'lo1')">🥚 Ovarian Follicles</a>
+        <a href="#lo2" class="sidebar-link" onclick="switchLO(event,'lo2')">🎺 Oviduct (Fallopian Tube)</a>
+        <a href="#lo3" class="sidebar-link" onclick="switchLO(event,'lo3')">🩸 Uterus &amp; Menstrual Cycle</a>
+        <a href="#lo4" class="sidebar-link" onclick="switchLO(event,'lo4')">🌸 Cervix, Vagina &amp; Breast</a>
+        <div class="sidebar-divider"></div>
+        <a href="#practice" class="sidebar-link" onclick="switchLO(event,'practice')">📝 Practice Questions</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="export-actions">
+            <button class="export-btn" onclick="printAll(this)" title="Save as PDF">
+                <span class="btn-icon">🖨️</span>Print PDF
+            </button>
+            <button class="export-btn" onclick="downloadWord(this)" title="Download as Word document">
+                <span class="btn-icon">📄</span>Word Doc
+            </button>
+        </div>
+        <a href="https://strettyit10.github.io/Block4-Repro/resource-mapping/rpd_resource-hub.html"
+           class="hub-return-btn" target="_blank" rel="noopener noreferrer">
+            <span class="btn-arrow">&#8592;</span> Study Hub Resources
+        </a>
+    </div>
+</aside>
+
+<main class="main">
+    <div class="header">
+        <h1>Lecture 03: Female Reproductive System</h1>
+        <p>HoyaDocs — Repro Block | USMLE Step 1 Preparation</p>
+    </div>
+
+    <section class="lo-section active" id="overview">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">Lecture 03 — Overview</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Female Reproductive System · HoyaDocs Repro Block</p>
+        <div class="lo-content">
+
+            <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:0 0 12px; padding:6px 10px; border-left:3px solid #2563eb;">Page Summaries</h3>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px;">
+                <div style="background:#dbeafe; border:1px solid #93c5fd; border-radius:8px; padding:16px;">
+                    <div style="font-weight:700; color:#1e3a5f; margin-bottom:6px; font-size:14px;">🥚 Ovarian Follicles</div>
+                    <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">
+                        Ovary zones · Primordial → Primary → Secondary → Graafian · Two-cell theory · Ovulation · Corpus luteum → Corpus albicans<br>
+                        <em style="color:#475569;">Practice Qs: 1–3</em>
+                    </div>
+                </div>
+                <div style="background:#dcfce7; border:1px solid #86efac; border-radius:8px; padding:16px;">
+                    <div style="font-weight:700; color:#14532d; margin-bottom:6px; font-size:14px;">🎺 Oviduct</div>
+                    <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">
+                        Four regions (infundibulum · ampulla · isthmus · interstitial) · Mucosa/muscularis/serosa · Ciliated &amp; peg cells · Ectopic pregnancy<br>
+                        <em style="color:#475569;">Practice Qs: 4–6</em>
+                    </div>
+                </div>
+                <div style="background:#f3e8ff; border:1px solid #d8b4fe; border-radius:8px; padding:16px;">
+                    <div style="font-weight:700; color:#581c87; margin-bottom:6px; font-size:14px;">🩸 Uterus &amp; Menstrual Cycle</div>
+                    <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">
+                        Endo/myo/perimetrium · Functionalis vs. basalis · HPO axis · Menses · Proliferative · Secretory · Luteal-placental shift<br>
+                        <em style="color:#475569;">Practice Qs: 7–10</em>
+                    </div>
+                </div>
+                <div style="background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:16px;">
+                    <div style="font-weight:700; color:#78350f; margin-bottom:6px; font-size:14px;">🌸 Cervix, Vagina &amp; Breast</div>
+                    <div style="font-size:12.5px; color:#1e293b; line-height:1.7;">
+                        Ecto/endocervix + transformation zone · Vaginal pH · External genitalia · Bartholin &amp; Skene glands · Mammary TDLU · Prolactin/oxytocin<br>
+                        <em style="color:#475569;">Practice Qs: 11–14</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lo-controls" style="margin-top:24px;">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <h3 style="font-size:16px; font-weight:700; color:#1e3a5f; margin:24px 0 12px; padding:6px 10px; border-left:3px solid #2563eb;">Official Learning Objectives Map</h3>
+
+            <!-- Official LO 1 -->
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">1</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the structure and function of the different follicles in the ovary</span>
+                    <span style="background:#dbeafe; color:#1e40af; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Follicles</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                            <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;">
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('f-ovary-structure')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Gross Organization of the Ovary</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('f-primordial')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Primordial Follicle</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('f-primary')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Primary Follicles (Uni/Multilaminar)</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('f-secondary')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Secondary (Antral) Follicle &amp; Two-Cell Theory</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('f-graafian')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Graafian Follicle</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('f-ovulation')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Ovulation &amp; Meiotic Arrest</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo1');setTimeout(()=>document.getElementById('f-cl')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Corpus Luteum &amp; Corpus Albicans</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                            <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q1, Q2, Q3</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Official LO 2 -->
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">2</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the different components of the oviduct</span>
+                    <span style="background:#dcfce7; color:#14532d; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Oviduct</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                            <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;">
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('o-overview')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Four Regions (Infundibulum → Pars Interstitialis)</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('o-histology')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Histologic Layers &amp; Cell Types</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('o-function')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Gamete &amp; Embryo Transport</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo2');setTimeout(()=>document.getElementById('o-clinical')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Ectopic Pregnancy · PID · Hydrosalpinx</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                            <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q4, Q5, Q6</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Official LO 3 -->
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">3</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the structure of the uterus and understand the integration of pituitary hormones and follicular development as they pertain to the menstrual cycle</span>
+                    <span style="background:#f3e8ff; color:#581c87; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Uterus &amp; Cycle</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                            <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;">
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('u-layers')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Uterine Wall — Three Layers</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('u-endometrium')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Endometrium — Functionalis &amp; Basalis</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('u-hpo')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">HPO Axis &amp; Feedback Rules</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('u-cycle')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Menses · Proliferative · Secretory</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('u-pregnancy')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">hCG Rescue &amp; Luteal-Placental Shift</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo3');setTimeout(()=>document.getElementById('u-summary')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Integrated Cycle Summary</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                            <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q7, Q8, Q9, Q10</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Official LO 4 -->
+            <div class="lo-accordion-item" style="border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px; overflow:hidden;">
+                <div class="lo-acc-header" onclick="this.classList.toggle('open');var d=this.nextElementSibling;d.style.display=d.style.display==='block'?'none':'block';"
+                     style="display:flex; align-items:center; gap:12px; padding:12px 14px; cursor:pointer; background:#f8fafc; user-select:none;">
+                    <span style="min-width:28px; height:28px; background:#1e3a5f; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0;">4</span>
+                    <span style="flex:1; font-size:13.5px; font-weight:600; color:#1e293b; line-height:1.4;">Know the structure and function of the vagina, vestibular glands, external genitalia and mammary glands</span>
+                    <span style="background:#fef3c7; color:#78350f; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:10px; white-space:nowrap; flex-shrink:0;">Vulva &amp; Breast</span>
+                    <span class="acc-chevron" style="color:#64748b; font-size:11px; flex-shrink:0;">&#9660;</span>
+                </div>
+                <div style="display:none; padding:14px 16px 14px 54px; background:white; border-top:1px solid #e2e8f0;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Section / Subheading</div>
+                            <ul style="margin:0; padding-left:16px; font-size:13px; line-height:1.8;">
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('c-cervix')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Cervix &amp; Transformation Zone</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('c-vagina')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Vagina — Layers &amp; Glycogen/pH</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('c-external')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">External Genitalia</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('c-glands')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Bartholin &amp; Skene Glands</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('c-breast')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Mammary Glands — TDLU &amp; Lactation</a></li>
+                                <li><a href="#" onclick="switchLO(event,'lo4');setTimeout(()=>document.getElementById('c-homologues')?.scrollIntoView({behavior:'smooth'}),80);return false;" style="color:#1e3a5f;text-decoration:none;">Male/Female Homologues</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#64748b; margin-bottom:6px;">Practice Questions</div>
+                            <div style="font-size:13px;"><a href="#" onclick="switchLO(event,'practice');return false;" style="color:#7c3aed;font-weight:700;text-decoration:none;">Q11, Q12, Q13, Q14</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="lo-section" id="lo1">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 1 — Ovarian Follicles</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Folliculogenesis · Two-Cell Theory · Corpus Luteum · HoyaDocs Repro Block</p>
+
+        <div class="lo-content">
+
+            <div class="lo-covered">
+                <div class="lo-covered-title">Learning Objectives Covered</div>
+                <ul>
+                    <li><strong>LO 1:</strong> Know the structure and function of the different follicles in the ovary</li>
+                </ul>
+            </div>
+
+            <div class="lo-controls">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <div class="lo-toc">
+                <div class="lo-toc-title">On This Page</div>
+                <ol>
+                    <li><a href="#f-ovary-structure">Gross Organization of the Ovary</a></li>
+                    <li><a href="#f-primordial">Primordial Follicle (Dormant Pool)</a></li>
+                    <li><a href="#f-primary">Unilaminar &amp; Multilaminar Primary Follicles</a></li>
+                    <li><a href="#f-secondary">Secondary (Antral) Follicle</a></li>
+                    <li><a href="#f-two-cell">&nbsp;&nbsp;↳ Two-Cell / Two-Gonadotropin Theory</a></li>
+                    <li><a href="#f-graafian">Graafian (Mature/Tertiary) Follicle</a></li>
+                    <li><a href="#f-ovulation">Ovulation &amp; Meiotic Arrest Release</a></li>
+                    <li><a href="#f-cl">Corpus Luteum &amp; Corpus Albicans</a></li>
+                    <li><a href="#f-summary">Summary Table — All Follicle Stages</a></li>
+                </ol>
+            </div>
+
+            <!-- SECTION — OVARY STRUCTURE -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="f-ovary-structure"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🫐 Gross Organization of the Ovary
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The ovary is both a primary sex organ (gonad) and a mixed endocrine-exocrine gland. It makes and releases <strong>oocytes</strong> (exocrine) and secretes <strong>estrogen and progesterone</strong> (endocrine).</p>
+
+                <h4>🔬 Three Histologic Zones</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Zone</th><th>Histology</th><th>Clinical / HY point</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Germinal epithelium</strong> (surface)</td><td>Simple cuboidal covering; overlies <strong>tunica albuginea</strong> (dense CT capsule)</td><td><strong>Most ovarian cancers arise from germinal (surface) epithelium</strong> — so "epithelial ovarian cancer" is the dominant subtype (serous carcinoma most common)</td></tr>
+                            <tr><td><strong>Cortex</strong></td><td>Connective-tissue stroma housing <strong>follicles</strong> at every stage of development</td><td>Site of folliculogenesis, corpus luteum, corpus albicans scars</td></tr>
+                            <tr><td><strong>Medulla</strong></td><td>Loose CT with blood vessels, lymphatics, nerves</td><td>No follicles here — tumors in the medulla are usually stromal/germ-cell rather than epithelial</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Two Exam Buzzphrases:</strong>
+                        <ul>
+                            <li>"Mass arising from <strong>surface epithelium</strong>" → <strong>epithelial ovarian cancer</strong> (serous, mucinous, endometrioid, clear-cell).</li>
+                            <li>All oocytes are born with you — no new oocytes form after birth; you lose them from ~7 million at 20 weeks gestation, to ~1–2 million at birth, to ~400,000 at puberty, to zero at menopause.</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="section-rule">
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: "Germ cells originate in the ovary" <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>FALSE.</strong> <strong>Primordial germ cells (PGCs)</strong> originate in the endoderm of the yolk sac wall, then migrate along the hindgut dorsal mesentery to seed the genital ridge at week 5. They are not ovarian in origin — this is why <strong>extragonadal germ-cell tumors</strong> can arise along the midline (retroperitoneum, mediastinum, sacrococcyx).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — PRIMORDIAL -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="f-primordial"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 💤 Primordial Follicle — The Lifetime Dormant Pool
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Every oocyte a woman will ever have is stored as a primordial follicle. These follicles are <strong>arrested in prophase I of meiosis</strong> and remain dormant until recruited — some for 40+ years.</p>
+
+                <h4>📘 Structure &amp; State</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Oocyte:</strong> primary oocyte, frozen in <strong>prophase I (diplotene)</strong> of meiosis since fetal life</li>
+                        <li><strong>Follicular cells:</strong> a single layer of <strong>squamous</strong> (flat) cells surrounding the oocyte</li>
+                        <li><strong>Location:</strong> outer cortex, just beneath the tunica albuginea</li>
+                        <li><strong>At birth:</strong> ALL ovarian follicles are at this stage</li>
+                        <li><strong>FSH receptors:</strong> not yet expressed — these cells are not responsive to gonadotropins</li>
+                    </ul>
+
+                    <div class="flow-diagram">
+                        <strong>Fetal life</strong> <span class="flow-arrow">→</span> ~7 million oogonia at 20 weeks<br>
+                        <span class="flow-arrow">↓</span> atresia<br>
+                        <strong>Birth:</strong> ~1–2 million primary oocytes, all in primordial follicles<br>
+                        <span class="flow-arrow">↓</span> continuous atresia (even pre-puberty)<br>
+                        <strong>Puberty:</strong> ~400,000 remaining<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Menopause:</strong> ~0 follicles remaining
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — PRIMARY -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="f-primary"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🧱 Primary Follicle — Unilaminar &amp; Multilaminar Stages
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ At puberty, <strong>FSH</strong> from the anterior pituitary recruits a cohort of primordial follicles every cycle (~15–20). The flat follicular cells become cuboidal/columnar <strong>granulosa cells</strong> — this is the moment the follicle enters active development.</p>
+
+                <h4>🟦 Unilaminar Primary Follicle</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Primary oocyte still arrested in prophase I</li>
+                        <li>Single layer of <strong>cuboidal granulosa cells</strong> (upregulated FSH receptors)</li>
+                        <li>Surrounded by a distinct <strong>basal lamina</strong> (basement membrane)</li>
+                        <li>FSH-responsive: granulosa cells begin proliferating</li>
+                    </ul>
+                </div>
+
+                <h4>🟦🟦 Multilaminar Primary Follicle</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Granulosa cells</strong> undergo hyperplasia &amp; hypertrophy → multiple layers</li>
+                        <li><strong>Zona pellucida</strong> forms — a glycoprotein coat between the oocyte and granulosa cells; composed of <strong>ZP1, ZP2, ZP3</strong>, synthesized cooperatively by both oocyte and granulosa cells
+                            <ul>
+                                <li><strong>ZP3</strong> is the sperm receptor — mutations here cause fertilization failure</li>
+                            </ul>
+                        </li>
+                        <li>Stromal cells outside the basal lamina begin differentiating into <strong>theca interna</strong> — the steroidogenic cell layer</li>
+                        <li>Oocyte-granulosa communication via <strong>gap junctions</strong> across microvilli that traverse the zona pellucida</li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Zona pellucida components:</strong>
+                        <ul>
+                            <li><strong>ZP3 = sperm-binding receptor</strong>. Key role in the acrosome reaction.</li>
+                            <li><strong>Cortical reaction</strong> after fertilization modifies ZP2/3 → block to polyspermy ("zona block").</li>
+                        </ul>
+                    </div>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: "FSH Acts on the Oocyte" <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>FSH receptors are on <strong>granulosa cells</strong>, NOT the oocyte. The oocyte never directly sees FSH.</li>
+                            <li>Follicular recruitment is really "granulosa-cell proliferation driven by FSH."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — SECONDARY -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="f-secondary"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 💧 Secondary (Antral) Follicle — Two Thecas, One Antrum
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The secondary follicle is defined by the appearance of a fluid-filled <strong>antrum</strong> containing <strong>liquor folliculi</strong> (hyaluronic-acid rich) and <strong>oocyte meiosis inhibitor (OMI)</strong>. This is the stage of dominant-follicle selection.</p>
+
+                <h4>🔷 Key Features</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Antrum</strong> (fluid cavity) forms from coalescence of small vacuoles (Call–Exner bodies) among granulosa cells</li>
+                        <li><strong>Liquor folliculi</strong> — hyaluronic-acid-rich fluid; contains estrogens, androgens, and <strong>OMI</strong> (keeps oocyte arrested in prophase I)</li>
+                        <li><strong>Theca interna</strong> — differentiated steroidogenic cells outside the basal lamina
+                            <ul>
+                                <li>Express <strong>LH receptors</strong></li>
+                                <li>Convert cholesterol → <strong>androstenedione</strong> (using desmolase + 17α-hydroxylase)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Theca externa</strong> — outer fibrous connective-tissue layer; no hormone production</li>
+                    </ul>
+                </div>
+
+                <h4 id="f-two-cell">⚡ Two-Cell, Two-Gonadotropin Theory</h4>
+                <div class="h4-body">
+                    <p>Estrogen synthesis requires a cooperative relay between theca and granulosa cells — neither cell type can make estrogen alone. This is the high-yield heart of the lecture:</p>
+
+                    <div class="flow-diagram">
+                        <strong>Theca interna</strong> (LH-responsive)<br>
+                        cholesterol <span class="flow-arrow">→</span> desmolase <span class="flow-arrow">→</span> pregnenolone <span class="flow-arrow">→</span> 17α-OH → <strong>androstenedione</strong><br>
+                        <span class="flow-arrow">↓ diffuses across basal lamina</span><br>
+                        <strong>Granulosa cells</strong> (FSH-responsive)<br>
+                        androstenedione <span class="flow-arrow">→</span> <strong>aromatase (CYP19)</strong> <span class="flow-arrow">→</span> <strong>estradiol</strong>
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Mnemonic: "Theca gives LH-androgen, Granulosa gives FSH-estrogen"</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>T</strong>heca <span class="flow-arrow">→</span> <strong>T</strong>estosterone precursor (androstenedione), driven by <strong>L</strong>H (two "T" cells, "L" for LH)</li>
+                                <li><strong>G</strong>ranulosa <span class="flow-arrow">→</span> <strong>E</strong>stradiol, driven by <strong>F</strong>SH (FSH + aromatase)</li>
+                                <li>Aromatase is a drug target: <strong>anastrozole, letrozole, exemestane</strong> all block it to reduce estrogen (breast cancer Rx, ovulation induction).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hy-box">
+                        <strong>⚡ Clinical Tie-Ins:</strong>
+                        <ul>
+                            <li><strong>Granulosa-cell tumor</strong> (sex-cord stromal tumor): oversecretes <strong>estrogen</strong> → postmenopausal bleeding, endometrial hyperplasia, <em>precocious puberty</em> in girls; classic histology shows <strong>Call–Exner bodies</strong>.</li>
+                            <li><strong>Theca-cell tumor</strong> (thecoma / Sertoli-Leydig analog): can oversecrete <strong>androgens</strong> → <em>virilization</em>.</li>
+                            <li><strong>PCOS:</strong> ↑ LH:FSH ratio → excess theca androgens, insufficient aromatization → hyperandrogenism + anovulation.</li>
+                            <li><strong>Aromatase deficiency</strong> in pregnancy → maternal AND fetal virilization (fetal androgens can't be converted to estrogens in placenta).</li>
+                        </ul>
+                    </div>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Who Has Which Receptor? <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>Granulosa cells:</strong> FSH receptors (always); LH receptors only <em>after</em> the LH surge / luteinization.</li>
+                            <li><strong>Theca interna:</strong> LH receptors (always).</li>
+                            <li>Common trap: assuming granulosa have LH receptors from the start. They only acquire LH responsiveness once FSH + estradiol induce them — enabling the LH surge to trigger ovulation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — GRAAFIAN -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="f-graafian"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🏆 Graafian (Mature / Tertiary) Follicle
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ By mid-cycle, ONE follicle from the recruited cohort emerges as dominant. It has the largest antrum, the highest FSH-receptor density, the highest aromatase activity, and makes the most estradiol. All others undergo atresia.</p>
+
+                <h4>🔍 Key Histologic Structures</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Eccentrically-located oocyte</strong> — pushed to one side of the enlarged antrum</li>
+                        <li><strong>Cumulus oophorus</strong> — a mound of granulosa cells that anchors the oocyte to the follicular wall via a pedicle</li>
+                        <li><strong>Corona radiata</strong> — innermost single layer of granulosa cells directly adjacent to the oocyte; <strong>released with the oocyte at ovulation</strong></li>
+                        <li><strong>Zona pellucida</strong> — still present between oocyte and corona radiata</li>
+                        <li><strong>Antrum</strong> — markedly enlarged, filled with liquor folliculi</li>
+                        <li><strong>Theca interna + externa</strong> — maintained around the basal lamina</li>
+                    </ul>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Layers Outside → In (at ovulation)</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <p>From ovary to oocyte plasma membrane:</p>
+                            <ul>
+                                <li>Theca externa → Theca interna → Basal lamina → Granulosa (membrana granulosa) → Antrum → Cumulus oophorus → Corona radiata → Zona pellucida → Oocyte membrane</li>
+                                <li>At ovulation, sperm must burrow through <strong>corona radiata</strong> (with hyaluronidase) and <strong>zona pellucida</strong> (via acrosomal enzymes binding ZP3).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — OVULATION -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="f-ovulation"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 💥 Ovulation &amp; Release of Meiotic Arrest
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Rising estradiol (from the dominant Graafian follicle) switches hypothalamic feedback from negative to <strong>positive</strong>, triggering the <strong>LH surge</strong>. LH breaks through OMI, resumes meiosis I, and drives follicular rupture.</p>
+
+                <h4>🧭 Sequence of Events Around Ovulation</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        Rising estradiol (&gt;200 pg/mL for ≥48 h) <span class="flow-arrow">→</span> <strong>positive feedback</strong> on anterior pituitary<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>LH surge</strong> (massive release ~24 h before ovulation)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        LH overrides OMI → oocyte completes <strong>meiosis I</strong> → becomes a <strong>secondary oocyte</strong> + first polar body<br>
+                        <span class="flow-arrow">↓</span><br>
+                        Secondary oocyte immediately enters meiosis II → arrests again at <strong>metaphase II</strong><br>
+                        <span class="flow-arrow">↓</span><br>
+                        Follicular wall thins, collagenases digest tunica albuginea → <strong>rupture @ ~day 14</strong><br>
+                        <span class="flow-arrow">↓</span><br>
+                        Oocyte + <strong>corona radiata</strong> released into peritoneal cavity; swept up by fimbriae of the oviduct
+                    </div>
+
+                    <div class="hy-box">
+                        <strong>⚡ Meiosis Stops &amp; Starts:</strong>
+                        <ul>
+                            <li>Primordial follicle <span class="flow-arrow">→</span> arrest in <strong>prophase I</strong> since fetal life</li>
+                            <li>LH surge <span class="flow-arrow">→</span> completes <strong>meiosis I</strong> (~hours before ovulation)</li>
+                            <li>Secondary oocyte <span class="flow-arrow">→</span> arrest in <strong>metaphase II</strong> at ovulation</li>
+                            <li><strong>Meiosis II completes only if fertilization occurs</strong> (sperm entry releases arrest)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Signs of Ovulation (Clinical)</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>Mittelschmerz</strong> — unilateral lower abdominal pain at mid-cycle from peritoneal irritation by follicular fluid/blood.</li>
+                                <li><strong>Basal body temp</strong> rises by ~0.5°F post-ovulation (progesterone thermogenic effect).</li>
+                                <li>Cervical mucus becomes thin, stretchy ("spinnbarkeit") — estrogen effect facilitating sperm transit.</li>
+                                <li>Urine LH kits detect the surge — positive test predicts ovulation in ~24–36 h.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: "Ovulation Releases a Mature Egg Ready for Fertilization" <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>The oocyte ovulated is a <strong>secondary oocyte arrested in metaphase II</strong> — it is NOT a fully mature haploid egg (n) until sperm triggers completion of meiosis II.</li>
+                            <li>This is why in vitro oocytes for IVF are typically described as "M-II arrested."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — CORPUS LUTEUM -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="f-cl"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🌕 Corpus Luteum &amp; Corpus Albicans
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ After ovulation, the ruptured follicle transforms into the <strong>corpus luteum</strong> ("yellow body") — a temporary endocrine gland that primarily secretes <strong>progesterone</strong> to support a potential pregnancy.</p>
+
+                <h4>🟡 Corpus Luteum — The Post-Ovulation Endocrine Gland</h4>
+                <div class="h4-body">
+                    <p>Luteinization is the key transformation — granulosa and theca cells enlarge, lipidize (hence yellow), and switch their hormone output:</p>
+                    <table>
+                        <thead>
+                            <tr><th>Original cell</th><th>Luteal descendant</th><th>Primary hormone output</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Granulosa (FSH + aromatase → estradiol)</td><td><strong>Granulosa-lutein cells</strong></td><td><strong>Progesterone</strong> (+ some estradiol)</td></tr>
+                            <tr><td>Theca interna (LH → androstenedione)</td><td><strong>Theca-lutein cells</strong></td><td><strong>Estradiol</strong> (via granulosa aromatase crosstalk) + androgens</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ High-Yield — Corpus Luteum Life Cycle:</strong>
+                        <ul>
+                            <li><strong>Maintenance requires LH</strong> (or hCG if pregnant).</li>
+                            <li>If <strong>no fertilization</strong> → LH drops due to progesterone negative feedback → corpus luteum degenerates by day 24–28 → <strong>corpus albicans</strong> (white CT scar) forms.</li>
+                            <li>If <strong>fertilization occurs</strong> → syncytiotrophoblast releases <strong>hCG</strong> (mimics LH) → rescues corpus luteum → progesterone production continues until ~weeks 8–10.</li>
+                            <li><strong>Luteal–placental shift</strong> ≈ week 8–10: placenta takes over progesterone production; corpus luteum regresses. Progesterone supplementation may be needed if shift occurs late.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>⚪ Corpus Albicans</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>White fibrous scar in the ovarian cortex — remnant of an involuted corpus luteum</li>
+                        <li>Autolysis of luteal cells + invasion by fibroblasts → dense collagenous tissue</li>
+                        <li>Multiple corpora albicantes accumulate with age and are visible on histology / ultrasound of the ovary</li>
+                    </ul>
+                </div>
+                <hr class="section-rule">
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Theca-Lutein Cysts in Molar Pregnancy <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>Very high hCG (as in <strong>complete hydatidiform mole</strong>, <strong>choriocarcinoma</strong>, or multiple gestations) causes <strong>bilateral theca-lutein cysts</strong> — large ovaries filled with fluid-filled follicles.</li>
+                            <li>They regress once hCG drops to normal. Key stem finding: "bilaterally enlarged cystic ovaries" + elevated β-hCG.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — SUMMARY TABLE -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="f-summary"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 📊 Master Follicle Stage Summary
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ One table that ties every follicular stage to its histology, meiotic state, hormones, and clinical hooks.</p>
+
+                <h4>All Stages at a Glance</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Stage</th><th>Follicular cell morphology</th><th>Oocyte meiotic state</th><th>Key feature / hormones</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Primordial</td><td>Squamous, single layer</td><td>Prophase I (since fetal life)</td><td>Dormant; no FSH receptors; present from birth</td></tr>
+                            <tr><td>Unilaminar Primary</td><td>Cuboidal/columnar (granulosa), single layer</td><td>Prophase I</td><td>FSH receptors upregulated; zona pellucida absent</td></tr>
+                            <tr><td>Multilaminar Primary</td><td>Multiple layers of granulosa; theca interna begins</td><td>Prophase I</td><td><strong>Zona pellucida forms</strong></td></tr>
+                            <tr><td>Secondary / Antral</td><td>Multi-layer granulosa + antrum + theca interna/externa</td><td>Prophase I (OMI maintains)</td><td><strong>Two-cell theory</strong>: theca makes androgens, granulosa aromatizes → estradiol</td></tr>
+                            <tr><td>Graafian / Tertiary</td><td>Eccentric oocyte, cumulus oophorus, corona radiata, large antrum</td><td>Prophase I (still)</td><td>Dominant follicle; maximum estradiol</td></tr>
+                            <tr><td>Ovulation (~day 14)</td><td>Ruptured follicle wall</td><td>Completes meiosis I → <strong>metaphase II arrest</strong></td><td>LH surge; releases oocyte + corona radiata</td></tr>
+                            <tr><td>Corpus luteum</td><td>Granulosa-lutein + theca-lutein cells; yellow-pigmented</td><td>—</td><td>Primarily <strong>progesterone</strong>; maintained by LH → hCG if pregnant</td></tr>
+                            <tr><td>Corpus albicans</td><td>White fibrous scar</td><td>—</td><td>Degenerated corpus luteum; permanent mark in cortex</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="usmle-summary">
+                        <div class="usmle-header">📚 Step 1 Summary</div>
+                        <ul>
+                            <li>Primordial → Primary (uni → multi) → Secondary (antrum + theca) → Graafian → ovulation → Corpus luteum → Corpus albicans.</li>
+                            <li><strong>Two-cell theory:</strong> LH on theca → androstenedione; FSH on granulosa → aromatase → estradiol.</li>
+                            <li>Oocyte meiotic arrests: Prophase I (birth → LH surge), Metaphase II (ovulation → fertilization).</li>
+                            <li>Corpus luteum makes PROGESTERONE; rescued by hCG if pregnancy occurs.</li>
+                            <li>Epithelial ovarian cancers arise from surface (germinal) epithelium — most common ovarian malignancy.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYU -->
+            <div class="tyu-section">
+                <h4 id="tyu-lo1">🧠 Testing Your Understanding!</h4>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 1, Question 1</h4>
+                    <p>A 29-year-old woman undergoing workup for infertility is found to have a homozygous loss-of-function mutation in the aromatase gene (CYP19A1). Predict the hormonal, follicular, and clinical consequences of this defect, and explain why both the patient AND her mother experienced virilization during the patient's prenatal life.</p>
+                    <p class="option"><em>Consider: two-cell theory, theca-to-granulosa relay, placental aromatase, maternal-fetal hormone crosstalk</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Aromatase deficiency blocks conversion of androgens to estrogens in granulosa cells — and in the placenta during pregnancy.</strong>
+                        <p style="margin-top:10px;">In the ovary, granulosa cells cannot convert theca-derived androstenedione to estradiol → <strong>low estradiol, elevated androgens</strong> in the follicle. Consequences: (1) <strong>failure of follicular maturation</strong> because estrogen is required for granulosa-cell proliferation and LH receptor upregulation → anovulation and infertility; (2) no positive estradiol feedback → <strong>no LH surge</strong>; (3) high FSH (no negative feedback); (4) <strong>ovarian cysts</strong> from chronic stimulation. During fetal life, placental aromatase normally converts <strong>fetal adrenal androgens (DHEA-S → T)</strong> to estrogens; without it, androgens cross back to the mother → <strong>maternal virilization during pregnancy</strong> that resolves post-partum, and <strong>46,XX virilization of the fetus</strong>. At puberty: delayed secondary sex characteristics, tall stature (estrogen closes growth plates), and osteoporosis risk. Consider: why would treatment include low-dose estrogen replacement? (To close growth plates, develop secondary sex characteristics, and prevent osteoporosis.)</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 1, Question 2</h4>
+                    <p>A pathologist reviews an ovarian biopsy from a postmenopausal woman with new-onset vaginal bleeding. Microscopy shows solid and tubular arrangements of neoplastic cells with scattered <em>Call–Exner bodies</em> (small rosettes of cells around eosinophilic fluid). Identify the tumor, explain the hormone it most likely secretes, and predict the endometrial finding.</p>
+                    <p class="option"><em>Consider: granulosa-cell embryology, Call–Exner bodies, estrogen-driven endometrial pathology</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Adult granulosa-cell tumor (sex-cord stromal tumor) secreting estrogen → endometrial hyperplasia → bleeding.</strong>
+                        <p style="margin-top:10px;">Granulosa cells are the FSH-responsive / aromatase-containing cells of the follicle; tumors retain their <strong>estrogen-producing</strong> capacity. <strong>Call–Exner bodies</strong> — small follicle-like rosettes of granulosa cells around eosinophilic, Call-Exner fluid — are pathognomonic on histology. Postmenopausally, estrogen secretion causes <strong>endometrial hyperplasia</strong> and, with time, ↑ risk of <strong>endometrial adenocarcinoma</strong>; bleeding is the presenting sign. In children, granulosa-cell tumors cause <strong>precocious puberty</strong>. Treatment: surgical resection; long-term surveillance for late recurrence. Consider: how would a theca-cell (thecoma) or Sertoli-Leydig tumor differ? (Thecoma also makes estrogen but without Call-Exner bodies; Sertoli-Leydig tumors typically cause virilization via androgens.)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="lo-section" id="lo2">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 2 — Oviduct (Fallopian Tube)</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Four Regions · Mucosa/Muscularis/Serosa · Ectopic Pregnancy · HoyaDocs Repro Block</p>
+
+        <div class="lo-content">
+
+            <div class="lo-covered">
+                <div class="lo-covered-title">Learning Objectives Covered</div>
+                <ul>
+                    <li><strong>LO 2:</strong> Know the different components of the oviduct</li>
+                </ul>
+            </div>
+
+            <div class="lo-controls">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <div class="lo-toc">
+                <div class="lo-toc-title">On This Page</div>
+                <ol>
+                    <li><a href="#o-overview">Overview &amp; Four Regions</a></li>
+                    <li><a href="#o-histology">Histologic Layers (Mucosa · Muscularis · Serosa)</a></li>
+                    <li><a href="#o-cells">&nbsp;&nbsp;↳ Ciliated vs. Peg (Secretory) Cells</a></li>
+                    <li><a href="#o-function">Function — Gamete &amp; Embryo Transport</a></li>
+                    <li><a href="#o-clinical">Clinical Correlates — Ectopic Pregnancy, PID, Salpingitis</a></li>
+                </ol>
+            </div>
+
+            <!-- SECTION — OVERVIEW / REGIONS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="o-overview"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🎺 Overview — Four Regions of the Oviduct
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The fallopian tubes (oviducts / uterine tubes) are paired muscular tubes that capture the ovulated oocyte, host fertilization, and transport the early embryo to the uterus. They are divided into <strong>four anatomic segments</strong> — from ovary to uterus.</p>
+
+                <h4>📐 Four Segments (Lateral → Medial)</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        <strong>Ovary</strong> <span class="flow-arrow">→</span> <strong>Infundibulum</strong> (with <strong>fimbriae</strong>) <span class="flow-arrow">→</span> <strong>Ampulla</strong> (widest segment) <span class="flow-arrow">→</span> <strong>Isthmus</strong> (narrowest) <span class="flow-arrow">→</span> <strong>Intramural (pars interstitialis)</strong> <span class="flow-arrow">→</span> <strong>Uterus</strong>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr><th>Segment</th><th>Shape / Feature</th><th>Clinical / HY point</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Infundibulum</strong></td><td>Trumpet-shaped opening into peritoneum; fringed by <strong>fimbriae</strong></td><td>Fimbriae "sweep" the ovulated oocyte into the tube via ciliary currents</td></tr>
+                            <tr><td><strong>Ampulla</strong></td><td>Longest, most dilated segment; complex mucosal folds (highly convoluted)</td><td><strong>Site of fertilization</strong> (~99% of the time); <strong>most common site of ectopic pregnancy</strong> (~70–80%)</td></tr>
+                            <tr><td><strong>Isthmus</strong></td><td>Shortest, narrowest segment just before entering the uterus</td><td>Thick muscular wall; common site of <strong>tubal ligation</strong> (sterilization)</td></tr>
+                            <tr><td><strong>Pars interstitialis</strong> (intramural)</td><td>Segment that traverses the uterine wall (myometrium)</td><td>Interstitial ectopic pregnancy is rare but <strong>catastrophic</strong> — high risk of hemorrhage</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Mnemonic: "I Am Ignored Inside" (IAII)</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <p>Segments from lateral (ovary side) to medial (uterus side):</p>
+                            <ul>
+                                <li><strong>I</strong>nfundibulum</li>
+                                <li><strong>A</strong>mpulla (fertilization + ectopic site)</li>
+                                <li><strong>I</strong>sthmus (tubal ligation site)</li>
+                                <li><strong>I</strong>ntramural / pars interstitialis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — HISTOLOGY -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="o-histology"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🔬 Histologic Layers — Mucosa · Muscularis · Serosa
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Like most tubular organs, the oviduct has three layers from lumen outward: <strong>mucosa, muscularis, serosa</strong>. The mucosa is highly folded (especially in the ampulla) and lined by a characteristic <strong>two-cell epithelium</strong>.</p>
+
+                <h4>🔹 Mucosa</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Epithelium:</strong> simple columnar</li>
+                        <li>Two epithelial cell types (see below)</li>
+                        <li>Mucosal folds (plicae) are most prominent in the ampulla — this is why the ampulla looks "labyrinthine" on histology</li>
+                        <li>Underlying <strong>lamina propria</strong> is loose CT (no submucosa)</li>
+                        <li><strong>Transudative fluid accumulation</strong> (cervical/tubal fluid) prepares the environment for fertilization</li>
+                    </ul>
+                </div>
+
+                <h4 id="o-cells">🔬 Ciliated Cells vs. Peg (Secretory) Cells</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Cell type</th><th>Function</th><th>Regulation</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Ciliated cells</strong></td><td>Beat cilia toward the uterus → <strong>move the oocyte/embryo</strong> medially; create currents that carry fimbriae-swept oocyte</td><td><strong>Estrogen-dependent</strong> — most active at ovulation; cilia density peaks mid-cycle</td></tr>
+                            <tr><td><strong>Peg (non-ciliated / secretory) cells</strong></td><td>Secrete tubal fluid (glycoproteins, nutrients) that <strong>nourishes the oocyte/early embryo</strong>, supports sperm capacitation</td><td><strong>Estrogen-dependent</strong>; peg cells appear "stripped" of organelles at apical surface</td></tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li>Both cell types are <strong>estrogen-responsive</strong> — estrogen drives cilia growth and secretory activity.</li>
+                        <li>Progesterone (luteal phase) decreases ciliary activity and reduces estrogen-receptor expression.</li>
+                    </ul>
+                </div>
+
+                <h4>💪 Muscularis</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Two smooth-muscle layers:
+                            <ul>
+                                <li><strong>Inner circular</strong></li>
+                                <li><strong>Outer longitudinal</strong></li>
+                            </ul>
+                        </li>
+                        <li>Peristaltic contractions work <em>with</em> ciliary action to propel the oocyte/embryo medially</li>
+                        <li>The isthmus has the <strong>thickest</strong> muscularis — site of choice for tubal ligation</li>
+                    </ul>
+                </div>
+
+                <h4>🛡️ Serosa</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Outer layer of loose connective tissue + mesothelial surface (visceral peritoneum)</li>
+                        <li>Continuous with the <strong>broad ligament</strong> (mesosalpinx) — so the oviducts are intra-peritoneal</li>
+                    </ul>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: "Tube Cells Make Ova" <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>FALSE — ciliated and peg cells are <strong>somatic epithelial cells</strong>. They never produce oocytes. Oocytes are made in the ovary from fetal-era germ cells only.</li>
+                            <li>Counterintuitive corollary: most tubal cancers are epithelial (not germ-cell) — <strong>high-grade serous carcinoma</strong> often originates in the <em>fimbrial</em> epithelium and spreads to the ovary. This is why risk-reducing salpingo-oophorectomy (RRSO) in BRCA carriers removes <strong>both</strong> structures.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — FUNCTION -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="o-function"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🔄 Function — Gamete Pickup, Fertilization, &amp; Embryo Transit
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The oviduct is the stage for three critical events: <strong>(1) fimbrial pickup of the oocyte, (2) fertilization in the ampulla, (3) cilia-driven transport of the early embryo to the uterus for implantation.</strong></p>
+
+                <h4>⏱️ Timeline from Ovulation to Implantation</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        <strong>Hour 0 (ovulation):</strong> fimbriae sweep over the ovarian surface; cilia create current that draws oocyte + corona radiata into the infundibulum<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Hour 0–24 (ampulla):</strong> if sperm are present (must have capacitated in female tract), <strong>fertilization</strong> occurs — sperm penetrates corona radiata → binds ZP3 → acrosome reaction → zona pellucida penetration → membrane fusion → cortical reaction (polyspermy block) → meiosis II completed → zygote formed<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Days 1–4 (cleavage):</strong> embryo undergoes cleavage divisions (2-cell → 4-cell → 8-cell → morula) while being propelled toward the uterus by cilia + peristalsis<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Day 4–5:</strong> morula enters the uterus, becomes <strong>blastocyst</strong><br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Day 6–7:</strong> <strong>implantation</strong> in decidualized endometrium
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION — CLINICAL -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="o-clinical"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🚑 Clinical Correlates — Ectopic, Salpingitis, Hydrosalpinx
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Tubal pathology is among the highest-yield topics on Step 1 — especially <strong>ectopic pregnancy</strong> and <strong>PID-related infertility</strong>. A damaged oviduct = impaired embryo transport = ectopic implantation risk.</p>
+
+                <h4>🚨 Ectopic Pregnancy</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Definition:</strong> implantation of an embryo outside the uterine cavity (~98% tubal; most commonly <strong>ampullary</strong>)</li>
+                        <li><strong>Presentation:</strong> amenorrhea + pelvic pain + vaginal bleeding; may present with rupture → hemodynamic instability + peritoneal signs</li>
+                        <li><strong>Labs:</strong> <strong>positive β-hCG</strong> but rising abnormally (failure to double every 48 h); lower than expected for gestational age</li>
+                        <li><strong>Imaging:</strong> transvaginal US shows empty uterus or "pseudogestational sac"; adnexal mass with "ring of fire" Doppler; possible free fluid (blood) in cul-de-sac</li>
+                        <li><strong>Risk factors:</strong> prior PID/salpingitis (most common), prior ectopic, prior tubal surgery, endometriosis, IUD use, smoking, ART/IVF</li>
+                        <li><strong>Management:</strong>
+                            <ul>
+                                <li>Stable + early (&lt;3.5 cm, β-hCG &lt; 5,000) → <strong>methotrexate</strong> (folate antagonist arrests trophoblast proliferation)</li>
+                                <li>Unstable / ruptured → <strong>surgical salpingectomy</strong></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ High-Yield Ectopic Facts:</strong>
+                        <ul>
+                            <li>Most common location = <strong>ampulla</strong> (70–80%).</li>
+                            <li>Most dangerous (high rupture + hemorrhage) = <strong>interstitial / pars interstitialis</strong>.</li>
+                            <li>Biggest modifiable risk factor = <strong>history of PID</strong> (Chlamydia/gonorrhea → scar/tubal dysfunction).</li>
+                            <li>Always rule out in any reproductive-age woman with abdominal pain + β-hCG positive.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>🦠 Salpingitis &amp; PID</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Pelvic Inflammatory Disease (PID)</strong> = ascending infection of the uterus, oviducts, and/or ovaries; most often caused by <strong>Chlamydia trachomatis</strong> and <strong>Neisseria gonorrhoeae</strong>.</li>
+                        <li><strong>Fitz-Hugh-Curtis syndrome</strong> — perihepatic inflammation ("violin-string adhesions") from ascending PID; classic RUQ pain mimicking cholecystitis.</li>
+                        <li><strong>Consequences:</strong> scarring of the tubal lining → impaired ciliary function → <strong>infertility</strong>, <strong>ectopic pregnancy</strong>, <strong>hydrosalpinx</strong> (tube distended by fluid), <strong>tubo-ovarian abscess (TOA)</strong>.</li>
+                        <li><strong>Treatment:</strong> broad-spectrum antibiotics (e.g., ceftriaxone + doxycycline ± metronidazole).</li>
+                    </ul>
+                </div>
+
+                <h4>💧 Hydrosalpinx</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Distal (fimbrial) blockage → fluid accumulates in the tube → "sausage-shaped" dilated tube on US/MRI</li>
+                        <li>Classic sequela of chronic PID or prior tubal surgery</li>
+                        <li>Severely reduces IVF success rates (inflammatory fluid leaks back into the uterus and impairs implantation) → salpingectomy is often recommended before IVF</li>
+                    </ul>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Abdominal Pregnancy Is Not Tubal <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>Abdominal pregnancy (~1% of ectopics) implants on peritoneal surfaces — bowel, omentum, pelvic sidewall. High mortality and hemorrhage risk.</li>
+                            <li>Ovarian pregnancy (implantation on ovary) is also rare but possible.</li>
+                            <li>These are NOT "tubal" ectopics but fall under the broader ectopic umbrella.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYU -->
+            <div class="tyu-section">
+                <h4 id="tyu-lo2">🧠 Testing Your Understanding!</h4>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 2, Question 1</h4>
+                    <p>A 24-year-old woman with a history of two prior episodes of gonococcal cervicitis presents to the ED with acute unilateral pelvic pain and a positive urine β-hCG. Transvaginal ultrasound shows an empty uterus and a 2-cm adnexal mass with surrounding free fluid. Trace the pathophysiology from the original infection to the current presentation, and name the most likely tubal sub-site of the abnormal implantation.</p>
+                    <p class="option"><em>Consider: PID → tubal scarring → impaired ciliary function; segments of the oviduct and their roles in transport; common ectopic sites</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Ampullary ectopic pregnancy from chronic salpingitis → impaired embryo transport.</strong>
+                        <p style="margin-top:10px;">Prior gonococcal/chlamydial cervicitis ascends to cause <strong>salpingitis → PID</strong>. Inflammation damages the <strong>ciliated epithelium</strong> and causes intraluminal scarring / adhesions, which impairs peristaltic and ciliary transport. A fertilized embryo moving from the ovary through the tube becomes "stuck" in the convoluted <strong>ampulla</strong> (the widest segment with the most mucosal folds — and by far the most common ectopic site, 70–80%). The embryo implants into thin tubal wall; β-hCG rises but abnormally; the mass grows until it either regresses, is surgically/medically treated, or ruptures with life-threatening hemorrhage. Management here (stable, β-hCG presumably low, early): <strong>methotrexate</strong>. Unstable or rupturing: <strong>salpingectomy</strong>. Consider: why would <em>interstitial</em> (pars interstitialis) ectopics be more catastrophic? (Thick myometrium disguises the growth; rupture causes massive hemorrhage from uterine vessels.)</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 2, Question 2</h4>
+                    <p>A researcher is studying the epithelial cells of the fallopian tube. Using fluorescent microscopy, she labels one cell type that shows dense apical cilia. She then observes the cell's response to estrogen and progesterone. Predict the morphologic and functional changes that occur across the menstrual cycle.</p>
+                    <p class="option"><em>Consider: estrogen-dependent ciliation, peg-cell secretion, luteal-phase changes</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Estrogen drives ciliation and secretory activity (peak at ovulation); progesterone suppresses them in the luteal phase.</strong>
+                        <p style="margin-top:10px;">The tubal epithelium alternates between a <strong>follicular (estrogenic) phenotype</strong> and a <strong>luteal (progestational) phenotype</strong>. During the follicular phase, rising estradiol <strong>induces cilia growth, increases ciliary beat frequency, and stimulates peg-cell secretory activity</strong> — peaking around ovulation to facilitate oocyte pickup and early embryo transport. In the luteal phase, progesterone from the corpus luteum <strong>down-regulates estrogen receptors</strong>, causing deciliation and decreased secretion (prepares the uterus, not the tube, for implantation). These changes parallel the functional shift from "transport" to "pregnancy maintenance." Consider: if a patient has anovulation and chronic unopposed estrogen, how would the tubal epithelium appear? (Persistently "ovulation-like" — hyperciliated and hypersecretory.)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="lo-section" id="lo3">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 3 — Uterus &amp; Menstrual Cycle</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Uterine Histology · HPO Axis · Follicular / Luteal Phases · HoyaDocs Repro Block</p>
+
+        <div class="lo-content">
+
+            <div class="lo-covered">
+                <div class="lo-covered-title">Learning Objectives Covered</div>
+                <ul>
+                    <li><strong>LO 3:</strong> Know the structure of the uterus and understand the integration of pituitary hormones and follicular development as they pertain to the menstrual cycle</li>
+                </ul>
+            </div>
+
+            <div class="lo-controls">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <div class="lo-toc">
+                <div class="lo-toc-title">On This Page</div>
+                <ol>
+                    <li><a href="#u-layers">Uterine Wall — Endometrium, Myometrium, Perimetrium</a></li>
+                    <li><a href="#u-endometrium">Endometrium — Functionalis &amp; Basalis</a></li>
+                    <li><a href="#u-hpo">Hypothalamic-Pituitary-Ovarian Axis</a></li>
+                    <li><a href="#u-cycle">Menstrual Cycle — Three Phases</a></li>
+                    <li><a href="#u-menses">&nbsp;&nbsp;↳ Menses (Days 0–5)</a></li>
+                    <li><a href="#u-prolif">&nbsp;&nbsp;↳ Proliferative / Follicular (Days 6–14)</a></li>
+                    <li><a href="#u-secretory">&nbsp;&nbsp;↳ Secretory / Luteal (Days 15–28)</a></li>
+                    <li><a href="#u-pregnancy">If Fertilization Occurs — hCG Rescue</a></li>
+                    <li><a href="#u-summary">Integrated Cycle Table</a></li>
+                </ol>
+            </div>
+
+            <!-- UTERINE LAYERS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-layers"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🧱 Uterine Wall — Three Layers
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The uterine wall has three layers — a hormonally-responsive inner lining, a thick muscular middle, and a peritoneal outer covering. Each has distinct structure and pathology.</p>
+
+                <h4>📘 Overview Table</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Layer</th><th>Histology</th><th>Clinical / HY</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Endometrium</strong> (innermost)</td><td>Simple columnar epithelium (ciliated + secretory); lamina propria with simple tubular glands</td><td>Cyclically sloughs; hyperplasia/carcinoma arise here; endometriosis = ectopic endometrium outside uterus</td></tr>
+                            <tr><td><strong>Myometrium</strong> (middle)</td><td><strong>Thickest layer</strong>; smooth muscle cells + connective tissue</td><td>Hypertrophy + hyperplasia during pregnancy; <strong>leiomyomas (fibroids)</strong> arise here — most common uterine tumor</td></tr>
+                            <tr><td><strong>Perimetrium</strong> (outermost)</td><td>Connective tissue + mesothelium; continuous with the <strong>broad ligament</strong></td><td>Covers the fundus and most of the body; cervix is retroperitoneal</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ENDOMETRIUM -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-endometrium"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🟦 Endometrium — Functionalis &amp; Basalis
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The endometrium splits into two functional layers: the <strong>functionalis</strong> (shed every cycle) and the <strong>basalis</strong> (retained and regenerates the functionalis).</p>
+
+                <h4>Two Zones</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Layer</th><th>Blood supply</th><th>Fate in the cycle</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Functionalis</strong> (superficial)</td><td><strong>Spiral arteries</strong> (hormone-sensitive, spasm under progesterone withdrawal)</td><td>Proliferates under estrogen, secretes under progesterone, <strong>sheds at menstruation</strong></td></tr>
+                            <tr><td><strong>Basalis</strong> (deep, adjacent to myometrium)</td><td><strong>Straight arteries</strong> (not hormone-sensitive)</td><td><strong>Never sheds</strong>; regenerates the functionalis after each menses</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Asherman Syndrome:</strong>
+                        <ul>
+                            <li>Overly aggressive D&amp;C or endometritis damages the <strong>basalis</strong> → fibrous adhesions form → no regeneration of functionalis → <strong>secondary amenorrhea + infertility</strong>.</li>
+                            <li>Treatment: hysteroscopic lysis of adhesions + estrogen replacement to stimulate regrowth.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Functionalis vs. Basalis</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>F</strong>unctionalis = <strong>F</strong>alls (sheds each month) — <strong>S</strong>piral arteries.</li>
+                                <li><strong>B</strong>asalis = <strong>B</strong>asement / stays put — <strong>S</strong>traight arteries.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HPO AXIS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-hpo"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🧠 Hypothalamic-Pituitary-Ovarian (HPO) Axis
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The menstrual cycle is driven by a cascade: hypothalamus → pituitary → ovary → uterus. Every feedback loop in this system is tested on Step 1.</p>
+
+                <h4>🧬 Cascade Overview</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        <strong>Hypothalamus:</strong> pulsatile <strong>GnRH</strong> every ~90 minutes<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Anterior pituitary:</strong> releases <strong>FSH</strong> (recruits follicles, aromatase in granulosa) + <strong>LH</strong> (androgen synthesis in theca; triggers ovulation; maintains corpus luteum)<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Ovary (follicle):</strong> makes <strong>estradiol</strong> (+ inhibin B) during follicular phase<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Ovary (corpus luteum):</strong> makes <strong>progesterone</strong> + estradiol + inhibin A during luteal phase<br>
+                        <span class="flow-arrow">↓</span><br>
+                        <strong>Uterus / cervix / vagina:</strong> responds with proliferation, secretion, or shedding
+                    </div>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Feedback Rules:</strong>
+                        <ul>
+                            <li><strong>Low estrogen</strong> → <strong>negative feedback</strong> on hypothalamus/pituitary (most of the cycle)</li>
+                            <li><strong>Sustained high estrogen</strong> (&gt;200 pg/mL for ≥48 h) → <strong>POSITIVE feedback</strong> → <strong>LH surge</strong> → ovulation (the single most important exception to "estrogen is inhibitory")</li>
+                            <li><strong>Progesterone</strong> → always negative feedback; slows GnRH pulse frequency (luteal phase)</li>
+                            <li><strong>Inhibin B</strong> (granulosa, follicular phase) → selectively inhibits FSH</li>
+                            <li><strong>Inhibin A</strong> (corpus luteum, luteal phase) → also inhibits FSH</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 GnRH Pulsatility — Frequency Determines Output</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>Fast pulses (~60 min)</strong> → favor LH (follicular phase end; LH surge).</li>
+                                <li><strong>Slow pulses (~180 min)</strong> → favor FSH (early follicular; progesterone slows pulses in luteal phase).</li>
+                                <li><strong>Continuous (non-pulsatile) GnRH</strong> → desensitizes the pituitary → <em>shuts down</em> LH/FSH. This is the mechanism for GnRH agonists (leuprolide) in prostate cancer, endometriosis, precocious puberty.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: "Leuprolide Stimulates Ovulation" <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>A single dose of leuprolide (GnRH agonist) causes an <strong>initial flare</strong> (↑ LH/FSH). <strong>Continuous</strong> administration desensitizes pituitary GnRH receptors → <strong>suppression</strong> of LH/FSH → hypogonadism.</li>
+                            <li>Used in: prostate cancer, endometriosis, central precocious puberty, uterine fibroids, IVF (to prevent premature LH surge).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CYCLE OVERVIEW -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-cycle"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 📆 The Menstrual Cycle — Three Phases
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ A typical 28-day cycle has three endometrial phases (menses, proliferative, secretory) synchronized with two ovarian phases (follicular, luteal). By convention, day 1 = first day of menses.</p>
+
+                <h4 id="u-menses">🩸 Menses (Days 0–5)</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Driven by <strong>progesterone withdrawal</strong> after corpus luteum regression</li>
+                        <li>Spiral arteries constrict → ischemic necrosis of the <strong>functionalis</strong> → sheds as menstrual effluent (blood + tissue + endometrial glands)</li>
+                        <li>Low estrogen and progesterone <strong>remove negative feedback</strong> on the hypothalamus → FSH/LH rise → new cohort of primordial follicles recruited</li>
+                        <li>Average blood loss: ~30–40 mL; &gt;80 mL = menorrhagia</li>
+                    </ul>
+                </div>
+
+                <h4 id="u-prolif">🌱 Proliferative / Follicular Phase (Days 6–14)</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Ovary: FSH recruits cohort → a <strong>dominant follicle</strong> emerges → secretes rising <strong>estradiol</strong></li>
+                        <li>Estrogen stimulates the endometrial basalis to regenerate a new functionalis:
+                            <ul>
+                                <li><strong>Thickness doubles or triples</strong> (from ~1 mm post-menses to ~5 mm)</li>
+                                <li>Glands are <strong>straight, tubular, non-secretory</strong></li>
+                                <li>Stromal cells proliferate; lots of mitoses</li>
+                            </ul>
+                        </li>
+                        <li>Cervical mucus becomes <strong>thin, watery, alkaline</strong> with "ferning" pattern — facilitates sperm transit</li>
+                        <li>Vaginal epithelium: estrogen promotes glycogen deposition in superficial cells (fed to lactobacilli → lactic acid → low pH)</li>
+                        <li>End of phase: sustained estrogen → <strong>LH surge</strong> → <strong>ovulation @ ~day 14</strong></li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Proliferative Features:</strong>
+                        <ul>
+                            <li>Histology: straight, thin, <strong>non-coiled</strong> glands; stroma is mitotically active.</li>
+                            <li>Most variable phase — if the cycle is short or long, the variation is in the follicular phase. <strong>Luteal phase is constant at ~14 days.</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4 id="u-secretory">🔄 Secretory / Luteal Phase (Days 15–28)</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Ovary: post-ovulatory corpus luteum secretes <strong>progesterone + estradiol</strong></li>
+                        <li>Endometrium responds to progesterone:
+                            <ul>
+                                <li>Glands become <strong>coiled, convoluted, "saw-tooth"</strong> appearance</li>
+                                <li>Glands secrete glycogen-rich nutritive fluid for a potential embryo</li>
+                                <li><strong>Spiral arteries lengthen and coil</strong></li>
+                                <li>Stromal decidualization begins (decidual reaction prepares for implantation)</li>
+                            </ul>
+                        </li>
+                        <li>Cervical mucus becomes <strong>thick and scanty</strong> (progesterone effect) → impedes further sperm entry</li>
+                        <li>Basal body temperature rises ~0.5°F (progesterone thermogenic)</li>
+                        <li>If no pregnancy: corpus luteum degenerates (no LH support) → progesterone drops → spiral arteries spasm → ischemic necrosis → menses starts</li>
+                    </ul>
+                </div>
+
+                <h4 id="u-pregnancy">🤰 If Fertilization Occurs — hCG Rescue</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li>Implantation (~day 21–22) → syncytiotrophoblast begins secreting <strong>β-hCG</strong></li>
+                        <li>hCG mimics LH → rescues the corpus luteum → continued progesterone production maintains the decidualized endometrium</li>
+                        <li>Progesterone <strong>inhibits further ovulation</strong> (continuous negative feedback) and relaxes the myometrium (prevents contractions)</li>
+                        <li>Around <strong>weeks 8–10</strong>, the placenta takes over progesterone production (<strong>luteal–placental shift</strong>)</li>
+                        <li>Corpus luteum eventually regresses to corpus albicans by ~week 12</li>
+                    </ul>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Why the Luteal–Placental Shift Matters:</strong>
+                        <ul>
+                            <li>Before week 8: bilateral oophorectomy → loses progesterone → miscarriage.</li>
+                            <li>After week 10: placenta fully supplies progesterone → oophorectomy is tolerated.</li>
+                            <li>Progesterone supplementation ("17-OH progesterone caproate" or vaginal progesterone) is given in ART and in some patients with prior preterm birth.</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="section-rule">
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: "Ovulation is at Day 14 in Every Cycle" <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>Ovulation is <strong>always ~14 days BEFORE the next menses</strong> — the luteal phase is fixed at ~14 days.</li>
+                            <li>In a 32-day cycle, ovulation occurs around <strong>day 18</strong>, not day 14.</li>
+                            <li>This matters for fertility counseling and natural family planning.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUMMARY TABLE -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="u-summary"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 📊 Integrated Menstrual Cycle Summary
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ One chart to tie together ovarian stage, endometrial histology, hormone levels, and cervical changes.</p>
+
+                <h4>Four Columns, Four Phases</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Phase / days</th><th>Dominant hormones</th><th>Ovarian event</th><th>Endometrial appearance</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Menses</strong> (0–5)</td><td>Low E + low P</td><td>Corpus luteum regression; new cohort recruited</td><td>Functionalis shedding; basalis intact</td></tr>
+                            <tr><td><strong>Proliferative</strong> (6–14)</td><td>Rising E (from dominant follicle); low P</td><td>Follicular selection &amp; maturation</td><td>Thin → thick; <strong>straight glands</strong>, proliferating stroma</td></tr>
+                            <tr><td><strong>Ovulation</strong> (~14)</td><td>E peak → <strong>LH surge</strong></td><td>Graafian follicle ruptures; oocyte released (metaphase II)</td><td>Endometrium stable, glands still straight</td></tr>
+                            <tr><td><strong>Secretory</strong> (15–28)</td><td>P dominant (from corpus luteum) + some E</td><td>Corpus luteum active; regresses if no hCG</td><td><strong>Coiled "saw-tooth" glands</strong>, spiral arteries, decidualized stroma</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="usmle-summary">
+                        <div class="usmle-header">📚 Step 1 Summary</div>
+                        <ul>
+                            <li>Ovarian follicular = uterine proliferative = estrogen-dominant.</li>
+                            <li>Ovarian luteal = uterine secretory = progesterone-dominant.</li>
+                            <li>LH surge = rupture of dominant follicle; triggered by sustained estradiol positive feedback.</li>
+                            <li>Endometrial histology mirrors phase: straight glands (proliferative) → coiled glands (secretory) → shed (menses).</li>
+                            <li>Progesterone withdrawal triggers menses. hCG rescues the corpus luteum if implantation occurs.</li>
+                            <li>Luteal phase is always ~14 days; follicular phase varies (accounts for cycle-length variability).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYU -->
+            <div class="tyu-section">
+                <h4 id="tyu-lo3">🧠 Testing Your Understanding!</h4>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 3, Question 1</h4>
+                    <p>A 27-year-old patient undergoing IVF is given a GnRH agonist daily for 2 weeks prior to her egg-retrieval cycle to prevent a premature LH surge. Explain — at the receptor and cellular level — how a GnRH agonist paradoxically suppresses LH/FSH when endogenous GnRH stimulates it.</p>
+                    <p class="option"><em>Consider: GnRH pulsatility, receptor desensitization, initial flare effect</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Continuous (non-pulsatile) GnRH receptor stimulation downregulates pituitary gonadotrophs → LH and FSH suppression.</strong>
+                        <p style="margin-top:10px;">Physiologic GnRH is <strong>pulsatile</strong> (~every 90 minutes); the gonadotroph's GnRH receptor cycles through binding, signaling, internalization, and resensitization. When a long-acting GnRH agonist (<strong>leuprolide, goserelin</strong>) provides constant receptor occupation, there is an <strong>initial flare</strong> (24–72 h of ↑ LH/FSH), followed by <strong>receptor down-regulation, internalization, and uncoupling from signaling pathways</strong>. After 1–2 weeks, LH and FSH fall to nearly undetectable levels, producing a "medical castration" state. In IVF, this prevents the endogenous LH surge from triggering ovulation prematurely during controlled ovarian stimulation. Clinical uses include: prostate cancer (androgen suppression), endometriosis, uterine fibroids, precocious puberty, and transgender care. Consider: how does a <strong>GnRH antagonist</strong> (e.g., ganirelix, degarelix) differ? (Immediate competitive blockade — no flare — also used in IVF.)</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 3, Question 2</h4>
+                    <p>A 22-year-old woman presents with 6 months of amenorrhea following a dilatation and curettage for retained products of conception. She has normal FSH, LH, estradiol, and progesterone on blood work, and a progesterone challenge test fails to induce withdrawal bleeding. Name the diagnosis, explain the pathology, and describe the histologic reason for the amenorrhea.</p>
+                    <p class="option"><em>Consider: functionalis vs. basalis, basal arteries, endometrial regeneration</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Asherman syndrome — intrauterine adhesions from damage to the basalis.</strong>
+                        <p style="margin-top:10px;">Overly aggressive curettage can strip or scar the <strong>basalis</strong> — the non-shedding deep layer supplied by straight arteries and responsible for regenerating the functionalis each cycle. Without an intact basalis, the functionalis cannot be rebuilt, so estrogen and progesterone <em>can't</em> create a new shedding layer — leading to <strong>secondary amenorrhea</strong> despite a normal hormonal axis. Diagnostic: a progesterone withdrawal test fails (no layer to shed); hysterosalpingography or hysteroscopy shows intrauterine synechiae. Treatment: <strong>hysteroscopic lysis of adhesions + estrogen therapy</strong> to promote regrowth; some clinicians place an IUD or balloon stent to prevent re-adhesion. Fertility can often be restored. Consider: why is progesterone alone insufficient to induce bleeding here? (No endometrial substrate — the basalis is scarred, so there are no spiral arteries or functionalis to respond.)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="lo-section" id="lo4">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">LO 4 — Cervix, Vagina, External Genitalia &amp; Mammary Glands</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Transformation Zone · Vestibular Glands · Breast Histology · HoyaDocs Repro Block</p>
+
+        <div class="lo-content">
+
+            <div class="lo-covered">
+                <div class="lo-covered-title">Learning Objectives Covered</div>
+                <ul>
+                    <li><strong>LO 4:</strong> Know the structure and function of the vagina, vestibular glands, external genitalia, and mammary glands</li>
+                </ul>
+            </div>
+
+            <div class="lo-controls">
+                <button onclick="expandAll()">Expand All</button>
+                <button onclick="collapseAll()">Collapse All</button>
+            </div>
+
+            <div class="lo-toc">
+                <div class="lo-toc-title">On This Page</div>
+                <ol>
+                    <li><a href="#c-cervix">Cervix &amp; Transformation Zone</a></li>
+                    <li><a href="#c-vagina">Vagina — Three Layers + Epithelium</a></li>
+                    <li><a href="#c-external">External Genitalia (Clitoris, Labia, Vestibule)</a></li>
+                    <li><a href="#c-glands">Vestibular Glands — Bartholin &amp; Skene</a></li>
+                    <li><a href="#c-breast">Mammary Glands — Structure &amp; Clinical</a></li>
+                    <li><a href="#c-homologues">Male/Female Analogous Structures Summary</a></li>
+                </ol>
+            </div>
+
+            <!-- CERVIX -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="c-cervix"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🧠 Cervix &amp; the Transformation Zone
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The cervix is a narrow canal connecting the uterine body to the vagina. It has <strong>two different epithelia</strong> that meet at the <strong>squamocolumnar junction</strong> — the site where almost all cervical cancers originate.</p>
+
+                <h4>🔬 Two Epithelia, Two Regions</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Region</th><th>Epithelium</th><th>Function / Clinical</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Ectocervix</strong> (portio vaginalis)</td><td><strong>Stratified squamous non-keratinized</strong></td><td>Withstands mechanical stress of intercourse &amp; childbirth; hormonally responsive (like vagina)</td></tr>
+                            <tr><td><strong>Endocervix</strong></td><td><strong>Simple columnar</strong>, mucus-producing</td><td>Secretes cervical mucus (thin/watery at ovulation, thick in luteal phase)</td></tr>
+                            <tr><td><strong>Transformation zone</strong> (TZ)</td><td>Interface — dynamic squamous metaplasia over columnar epithelium</td><td><strong>Nearly all cervical dysplasias/carcinomas arise here</strong>; target for Pap smear sampling &amp; colposcopy biopsies</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — HPV &amp; Cervical Cancer:</strong>
+                        <ul>
+                            <li><strong>HPV 16 + 18</strong> cause ~70% of cervical cancers. Persistent infection → <strong>E6 (degrades p53)</strong> and <strong>E7 (inactivates Rb)</strong> → loss of cell-cycle control → dysplasia → carcinoma in TZ.</li>
+                            <li>Screening: <strong>Pap smear</strong> for cervical cytology (± HPV co-testing); abnormal result → colposcopy + biopsy of the TZ.</li>
+                            <li>Vaccination: <strong>Gardasil 9</strong> (nonavalent) covers HPV 6, 11, 16, 18, 31, 33, 45, 52, 58 — recommended at age 9–26.</li>
+                            <li>Koilocytes (HPV-infected cells with perinuclear halo) are the pathognomonic cytologic finding.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Ectocervix vs. Endocervix (quick tag)</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>Ecto</strong> = outside = <strong>E</strong>xposed to friction = <strong>S</strong>tratified <strong>S</strong>quamous</li>
+                                <li><strong>Endo</strong> = inside = <strong>S</strong>implE <strong>C</strong>olumnar (mucus)</li>
+                                <li>The squamocolumnar junction migrates with age &amp; hormonal status. In reproductive-age women, more columnar epithelium is exposed on the ectocervix (ectropion) → more dysplasia risk → heightened screening.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="section-rule">
+                </div>
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Cervical Mucus Pattern <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>Estrogen</strong> (peri-ovulatory) → mucus is <strong>thin, watery, alkaline, elastic (spinnbarkeit)</strong>; ferning on slide → <em>welcomes sperm</em>.</li>
+                            <li><strong>Progesterone</strong> (luteal, pregnancy) → mucus is <strong>thick, scanty, acidic</strong> → <em>blocks sperm + microbes</em>. This is the mechanism of progestin-only contraceptives like the Mirena IUD and Depo-Provera.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VAGINA -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="c-vagina"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🧬 Vagina — Three Layers + Epithelium
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The vagina is a fibromuscular tube lined by <strong>stratified squamous non-keratinized</strong> epithelium, with no glands of its own. It self-lubricates via transudation from underlying vessels + cervical mucus + vestibular secretions.</p>
+
+                <h4>🧱 Three-Layer Wall</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Layer</th><th>Composition</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Mucosa</strong></td><td>Stratified squamous non-keratinized epithelium (like ectocervix); lamina propria with many elastic fibers, BUT <strong>no glands</strong></td></tr>
+                            <tr><td><strong>Muscularis</strong></td><td>Smooth muscle — inner circular + outer longitudinal</td></tr>
+                            <tr><td><strong>Adventitia / Serosa</strong></td><td>Outer dense CT + elastic fibers; anchors vagina to surrounding pelvic structures</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>💚 Glycogen, Lactobacilli, &amp; Low pH</h4>
+                <div class="h4-body">
+                    <div class="flow-diagram">
+                        Estrogen <span class="flow-arrow">→</span> glycogen accumulation in <strong>superficial squamous cells</strong><br>
+                        <span class="flow-arrow">↓</span><br>
+                        Cells shed into vaginal lumen <span class="flow-arrow">→</span> glycogen fermented by <strong>Lactobacillus species (Döderlein bacilli)</strong><br>
+                        <span class="flow-arrow">↓</span><br>
+                        Lactic acid production <span class="flow-arrow">→</span> <strong>vaginal pH ~3.8–4.5</strong> — antimicrobial barrier
+                    </div>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Why Postmenopausal and Prepubertal Girls Get Infections Easily:</strong>
+                        <ul>
+                            <li>Low estrogen → thin epithelium, minimal glycogen → <strong>no lactobacilli dominance</strong> → pH rises → susceptibility to <em>bacterial vaginosis</em>, <em>Candida</em>, and atrophic vaginitis.</li>
+                            <li>Treatment of atrophic vaginitis: topical estrogen.</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="section-rule">
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: "Vaginal Glands Produce Lubrication" <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li>FALSE. The vaginal wall has <strong>no glands</strong>. Lubrication = <strong>transudation</strong> through the vaginal wall + mucus from the <strong>cervix</strong> and secretions from <strong>Bartholin's / Skene's glands</strong> during arousal.</li>
+                            <li>Adenocarcinoma of the vagina is very rare because there are no glands to transform — except in clear-cell adenocarcinoma after in-utero DES exposure.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXTERNAL GENITALIA -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="c-external"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🌸 External Genitalia — Clitoris, Labia, Vestibule
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The external genitalia (vulva) include the mons pubis, labia majora, labia minora, clitoris, vestibule, urethral and vaginal openings. Each has distinct histology — and distinct embryologic origin (see repro embryology lecture).</p>
+
+                <h4>🌸 Structure</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Structure</th><th>Epithelium / contents</th><th>Homologue (male)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Clitoris</strong></td><td>Keratinized stratified squamous over erectile tissue (two corpora cavernosa), sensory nerves, NO erectile corpus spongiosum</td><td>Glans + corpora cavernosa of the penis</td></tr>
+                            <tr><td><strong>Labia minora</strong></td><td>Core of spongy CT (no adipose); covered by <strong>keratinized stratified squamous</strong>; few sebaceous glands; no hair</td><td>Ventral surface of the penis (unfused urogenital folds)</td></tr>
+                            <tr><td><strong>Labia majora</strong></td><td><strong>Skin + adipose tissue + smooth muscle (dartos)</strong>; covered by keratinized stratified squamous; <strong>hair, sebaceous, sweat glands</strong> on outer surface</td><td>Scrotum (unfused labioscrotal swellings)</td></tr>
+                            <tr><td><strong>Vestibule</strong></td><td>Non-keratinized (inside labia minora); surrounds openings of urethra and vagina</td><td>Urogenital sinus derivative (both sexes)</td></tr>
+                            <tr><td><strong>Urethra</strong> (female)</td><td><strong>Pseudostratified columnar</strong> proximally; stratified squamous near meatus</td><td>Membranous + penile urethra (male)</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ HY — Keratinization Pattern Summary:</strong>
+                        <ul>
+                            <li>Keratinized stratified squamous: <strong>labia majora, labia minora, clitoris surface</strong>.</li>
+                            <li>Non-keratinized stratified squamous: <strong>vestibule, vagina, ectocervix</strong>.</li>
+                            <li>The pattern shifts from outside (skin-like, keratinized) to inside (mucosal, non-keratinized).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VESTIBULAR GLANDS -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="c-glands"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 💧 Vestibular Glands — Bartholin &amp; Skene
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Two paired sets of exocrine glands flanking the vaginal vestibule produce lubricating secretions during arousal. Each has a male homologue and a classic clinical correlate.</p>
+
+                <h4>🟡 Bartholin's Glands (Greater Vestibular Glands)</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Location:</strong> 4 and 8 o'clock positions, posterolateral to the vaginal opening</li>
+                        <li><strong>Epithelium:</strong> <strong>simple columnar</strong> (mucus-secreting)</li>
+                        <li><strong>Secretion:</strong> mucus, discharged through a duct to the vestibule during arousal → lubrication</li>
+                        <li><strong>Male homologue:</strong> <strong>bulbourethral (Cowper's) glands</strong></li>
+                        <li><strong>Clinical:</strong>
+                            <ul>
+                                <li><strong>Bartholin cyst</strong> — duct obstruction → painless cystic swelling; incision &amp; drainage or Word catheter if symptomatic</li>
+                                <li><strong>Bartholin abscess</strong> — polymicrobial infection (GC, Chlamydia, skin flora) → painful, erythematous, fluctuant mass; drainage + antibiotics</li>
+                                <li><strong>Bartholin carcinoma</strong> — rare; consider in postmenopausal patient with a persistent Bartholin mass</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h4>🟢 Skene's Glands (Paraurethral / Lesser Vestibular Glands)</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>Location:</strong> alongside the distal female urethra</li>
+                        <li><strong>Epithelium:</strong> <strong>pseudostratified or simple columnar</strong></li>
+                        <li><strong>Secretion:</strong> lubricating fluid (believed to be the source of "female ejaculate")</li>
+                        <li><strong>Male homologue:</strong> <strong>prostate gland</strong></li>
+                        <li><strong>Clinical:</strong> Skene's duct cysts; source of some periurethral abscesses; adenocarcinoma is exceedingly rare</li>
+                    </ul>
+
+                    <div class="mnemonic">
+                        <div class="mnemonic-toggle-header collapsed" onclick="toggleMnemonic(this)">
+                            <div class="mnemonic-header">🧠 Male/Female Homologues (Glands)</div>
+                            <span class="mnemonic-chevron">&#9660;</span>
+                        </div>
+                        <div class="mnemonic-body collapsed">
+                            <ul>
+                                <li><strong>Bartholin</strong> ↔ <strong>Bulbourethral (Cowper's)</strong></li>
+                                <li><strong>Skene</strong> ↔ <strong>Prostate</strong> ("<strong>S</strong>kene = <strong>S</strong>hadow of the prostate")</li>
+                                <li>Both pairs develop from the urogenital sinus.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BREAST -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="c-breast"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> 🌷 Mammary Glands — Structure &amp; Clinical
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ The breast is a modified apocrine sweat gland. It is NOT a genital organ, but it is hormonally controlled and included here because it dramatically remodels during puberty, menstrual cycle, pregnancy, lactation, and menopause.</p>
+
+                <h4>🧱 Structural Organization</h4>
+                <div class="h4-body">
+                    <ul>
+                        <li><strong>15–20 lobes</strong> of <strong>tubuloalveolar glands</strong>, separated by fibrous CT (Cooper's ligaments) and adipose tissue</li>
+                        <li>Each lobe drains via a <strong>lactiferous duct</strong> through a dilation (lactiferous sinus) to the nipple</li>
+                        <li>Each <strong>terminal duct lobular unit (TDLU)</strong> is the functional unit: terminal ductule + lobule (acini) — <strong>most breast cancers arise here</strong></li>
+                        <li>Ducts are lined by:
+                            <ul>
+                                <li>Inner luminal (epithelial) cells — secretory</li>
+                                <li>Outer <strong>myoepithelial cells</strong> — contractile; eject milk during letdown; important in distinguishing benign from invasive cancer (invasive carcinoma lacks myoepithelial layer)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h4>🍼 Hormonal Remodeling Across the Lifecycle</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Phase</th><th>Dominant hormones</th><th>Breast change</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Puberty</td><td>Estrogen</td><td>Duct elongation &amp; branching; adipose deposition</td></tr>
+                            <tr><td>Luteal phase</td><td>Progesterone + estrogen</td><td>Transient lobuloalveolar growth; tenderness</td></tr>
+                            <tr><td>Pregnancy</td><td>Estrogen, progesterone, prolactin, hPL</td><td>Major lobuloalveolar proliferation; colostrum synthesis near term</td></tr>
+                            <tr><td>Postpartum</td><td><strong>Prolactin</strong> (synthesis) + <strong>oxytocin</strong> (letdown)</td><td>Milk production &amp; ejection; infant suckling → nipple stimulation → oxytocin</td></tr>
+                            <tr><td>Menopause</td><td>Low estrogen</td><td>Involution of glands; replacement by adipose tissue</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="hy-box">
+                        <strong>⚡ High-Yield Breast Facts:</strong>
+                        <ul>
+                            <li><strong>Prolactin</strong> (anterior pituitary) stimulates milk <em>synthesis</em>. Dopamine inhibits prolactin — so dopamine antagonists (antipsychotics) cause galactorrhea.</li>
+                            <li><strong>Oxytocin</strong> (posterior pituitary) drives milk <em>ejection</em> via myoepithelial contraction ("let-down reflex"). Suckling → afferent signal → PVN/SON → oxytocin release.</li>
+                            <li>Estrogen &amp; progesterone from the placenta <em>inhibit</em> prolactin action on the breast during pregnancy; after delivery, placental hormones drop → prolactin unopposed → lactogenesis.</li>
+                            <li><strong>Breast cancer</strong> is the most commonly diagnosed malignancy in US women. Most arise from the <strong>TDLU</strong> (invasive ductal carcinoma is the most common histologic type).</li>
+                            <li><strong>BRCA1/BRCA2</strong> mutations → markedly elevated risk of breast + ovarian cancer; manage with enhanced screening or risk-reducing mastectomy / salpingo-oophorectomy.</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="section-rule">
+
+                <div class="exam-trap">
+                    <div class="trap-header collapsed" onclick="toggleTrap(this)">
+                        ⚠️ TRAP: Invasive vs. In-Situ Carcinoma on Histology <span class="trap-chevron">&#9660;</span>
+                    </div>
+                    <div class="trap-body collapsed">
+                        <ul>
+                            <li><strong>Ductal carcinoma in situ (DCIS):</strong> tumor cells are confined within the basement membrane; <strong>myoepithelial cells are preserved</strong>.</li>
+                            <li><strong>Invasive ductal carcinoma:</strong> cells breach the basement membrane; <strong>myoepithelial layer is absent</strong>.</li>
+                            <li>Myoepithelial markers (p63, calponin, SMA) are the pathologist's go-to to distinguish these on biopsy.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOMOLOGUES -->
+            <h3 class="collapsible-h3 collapsed" onclick="toggleSection(this)"
+                id="c-homologues"
+                style="font-size:16px; font-weight:700; margin-top:25px; margin-bottom:12px;">
+                <span class="section-chevron">&#9660;</span> ⚖️ Male/Female Analogous Structures
+            </h3>
+            <div class="section-body collapsed">
+                <p style="font-weight:600; color:#1e293b; margin-bottom:10px;">⭐ Understanding male-female analogs reinforces embryology and helps predict where analogous pathology can occur.</p>
+
+                <h4>Homologues Cheat Sheet</h4>
+                <div class="h4-body">
+                    <table>
+                        <thead>
+                            <tr><th>Female</th><th>Male</th><th>Common origin</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Ovary</td><td>Testis</td><td>Gonadal ridge</td></tr>
+                            <tr><td>Clitoris</td><td>Glans + shaft of penis</td><td>Genital tubercle</td></tr>
+                            <tr><td>Labia minora</td><td>Ventral penile shaft</td><td>Urogenital folds</td></tr>
+                            <tr><td>Labia majora</td><td>Scrotum</td><td>Labioscrotal swellings</td></tr>
+                            <tr><td>Bartholin's gland</td><td>Bulbourethral (Cowper's) gland</td><td>Urogenital sinus</td></tr>
+                            <tr><td>Skene's gland</td><td>Prostate gland</td><td>Urogenital sinus</td></tr>
+                            <tr><td>Round ligament of uterus</td><td>Gubernaculum testis</td><td>Gubernaculum</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="usmle-summary">
+                        <div class="usmle-header">📚 Step 1 Summary</div>
+                        <ul>
+                            <li>Ectocervix + vagina = non-keratinized stratified squamous (no glands in vagina).</li>
+                            <li>Endocervix = simple columnar (mucus).</li>
+                            <li>Transformation zone = squamo-columnar junction = HPV-driven dysplasia/cancer site.</li>
+                            <li>Labia majora &amp; minora have keratinized squamous surfaces; the vestibule is non-keratinized.</li>
+                            <li>Bartholin = Cowper's; Skene = prostate.</li>
+                            <li>Breast = modified apocrine gland; TDLU = site of origin for most carcinomas; prolactin (synthesis) + oxytocin (ejection) control lactation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TYU -->
+            <div class="tyu-section">
+                <h4 id="tyu-lo4">🧠 Testing Your Understanding!</h4>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 4, Question 1</h4>
+                    <p>A 54-year-old postmenopausal patient presents with recurrent vaginal itching, burning, and dyspareunia. On exam, the vaginal epithelium is thin, pale, and friable with petechiae. Vaginal pH is 6.5. Explain the underlying histologic and microbiologic changes, and propose a physiologically-based treatment.</p>
+                    <p class="option"><em>Consider: estrogen's role in vaginal epithelium, glycogen, lactobacilli, and pH</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Atrophic vaginitis from estrogen deficiency → treat with topical (vaginal) estrogen.</strong>
+                        <p style="margin-top:10px;">In reproductive years, estrogen drives <strong>glycogen accumulation</strong> in superficial squamous cells of the vagina. When these cells desquamate, lactobacilli ferment the glycogen into <strong>lactic acid</strong>, maintaining a protective vaginal pH of 3.8–4.5. After menopause, <strong>estrogen withdrawal</strong> → thin, atrophic epithelium with minimal glycogen → <strong>loss of lactobacilli dominance</strong> → pH rises (often &gt; 5) → increased susceptibility to bacterial vaginosis, candidiasis, UTI, and mechanical trauma during intercourse (friable mucosa). Treatment: <strong>topical vaginal estrogen</strong> (cream, tablet, or ring) restores glycogen, re-establishes lactobacilli, lowers pH, and thickens the epithelium. Topical delivery minimizes systemic absorption, which is preferred over oral estrogen for localized symptoms. Consider: why might this patient also have stress urinary incontinence? (Estrogen supports urethral and bladder-neck tissue; its withdrawal weakens these structures.)</p>
+                    </div>
+                </div>
+                <div class="practice-question">
+                    <h4>Testing Your Understanding — LO 4, Question 2</h4>
+                    <p>A new mother is breastfeeding and experiences painful engorgement. When her infant begins to suckle, she feels a rush of warmth and her milk begins to flow. Name the two pituitary hormones involved, describe their specific actions on breast tissue, and explain the physiology of the let-down reflex.</p>
+                    <p class="option"><em>Consider: anterior vs. posterior pituitary, alveolar secretion, myoepithelial contraction, neuroendocrine reflex</em></p>
+                    <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                    <div class="answer">
+                        <strong>✓ Answer: Prolactin (anterior pituitary) drives milk synthesis; oxytocin (posterior pituitary) drives ejection via myoepithelial contraction.</strong>
+                        <p style="margin-top:10px;">Milk production requires two distinct pituitary hormones acting on different targets in the mammary gland: (1) <strong>Prolactin</strong> from the anterior pituitary acts on <strong>luminal secretory epithelium</strong> of the alveoli to synthesize milk proteins, lipids, and lactose. Dopamine tonically inhibits prolactin; suckling suppresses dopamine → prolactin rises. (2) <strong>Oxytocin</strong> from the posterior pituitary acts on <strong>myoepithelial cells</strong> wrapped around alveoli and ducts → contraction → milk ejection ("let-down"). The let-down reflex is a neuroendocrine arc: infant suckling → afferent signal via nerves → paraventricular &amp; supraoptic nuclei → posterior pituitary → <strong>oxytocin</strong> release into blood. Oxytocin also causes postpartum uterine contractions (involution of the uterus and reduced bleeding). Consider: why might a patient with a prolactin-secreting pituitary adenoma experience galactorrhea AND amenorrhea? (Prolactin suppresses GnRH → hypogonadotropic hypogonadism → anovulation.)</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
+    <section class="practice-section lo-section" id="practice">
+        <h2 class="lo-title" style="color:#1e3a5f; font-size:22px; margin-bottom:6px;">Practice Questions</h2>
+        <p class="lo-subtitle" style="margin-bottom:28px;">Lecture 03 — Female Reproductive System · HoyaDocs Repro Block</p>
+        <div class="lo-content">
+
+            <!-- LO 1 — OVARIAN FOLLICLES -->
+            <h4 style="color:#7c3aed; font-size:15px; margin-bottom:4px; margin-top:20px; background:none; padding:0;">LO 1 — Ovarian Follicles (Q1–Q3)</h4>
+
+            <div class="practice-question">
+                <h4>Question 1</h4>
+                <p>A 28-year-old woman is evaluated for infertility and oligomenorrhea. Labs show LH 22 mIU/mL, FSH 6 mIU/mL (LH:FSH ratio &gt; 3), elevated testosterone, and mildly elevated free androgens. Pelvic ultrasound shows bilateral enlarged ovaries with multiple small antral follicles arranged peripherally. Which of the following best explains the hormonal and follicular findings?</p>
+                <p class="option">A. Primary ovarian insufficiency with elevated FSH</p>
+                <p class="option">B. Hyperprolactinemia suppressing GnRH</p>
+                <p class="option">C. Elevated LH:FSH ratio driving theca androgen production with insufficient granulosa aromatization</p>
+                <p class="option">D. Congenital adrenal hyperplasia (21-hydroxylase deficiency)</p>
+                <p class="option">E. Granulosa-cell tumor secreting estrogen</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — Polycystic ovary syndrome (PCOS).</strong>
+                    <p style="margin-top:10px;">PCOS features a distortion of the two-cell theory. <strong>Elevated LH</strong> overstimulates theca cells to produce excess <strong>androstenedione/testosterone</strong>, but <strong>relatively low FSH</strong> means granulosa cells have inadequate <strong>aromatase</strong> activity → androgens are not converted to estradiol effectively. Result: <strong>hyperandrogenism (hirsutism, acne), anovulation</strong>, and multiple arrested antral follicles (the "string of pearls" US appearance). A (POI) would show ↑↑ FSH. B (prolactinoma) would suppress LH. D (CAH) would show ↑ 17-OH progesterone. E (granulosa tumor) would show elevated estradiol and a unilateral mass.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 2</h4>
+                <p>A researcher observes developing ovarian follicles under a light microscope. In one follicle, the primary oocyte is surrounded by a clear glycoprotein layer, several layers of granulosa cells, and outer stromal cells that have begun to organize into a distinct inner secretory layer. No fluid-filled cavity is yet visible. Which follicular stage is depicted?</p>
+                <p class="option">A. Primordial follicle</p>
+                <p class="option">B. Unilaminar primary follicle</p>
+                <p class="option">C. Multilaminar primary follicle</p>
+                <p class="option">D. Secondary (antral) follicle</p>
+                <p class="option">E. Graafian follicle</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — Multilaminar primary follicle.</strong>
+                    <p style="margin-top:10px;">Three key features confirm the stage: (1) a <strong>zona pellucida</strong> has formed (the clear glycoprotein layer) — this first appears at the multilaminar primary stage; (2) <strong>multiple layers of granulosa cells</strong> (vs. single layer in unilaminar primary); (3) <strong>theca interna differentiation has begun</strong> (stromal cells forming a secretory layer). Critically, <strong>no antrum is visible yet</strong> — that defines the next stage (secondary/antral follicle). A (primordial) has single squamous follicular cells and no zona pellucida. B (unilaminar primary) has only one layer of granulosa and developing zona pellucida. D (antral) requires a fluid cavity. E (Graafian) has an eccentric oocyte, cumulus oophorus, and a very large antrum.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 3</h4>
+                <p>A woman with amenorrhea of 10 weeks is confirmed pregnant with β-hCG of 45,000 mIU/mL. She undergoes bilateral oophorectomy during the 10th week for a non-pregnancy-related emergency. Which of the following best describes why her pregnancy continues normally?</p>
+                <p class="option">A. The placenta has already taken over progesterone production (luteal-placental shift)</p>
+                <p class="option">B. hCG directly maintains the endometrium independent of the ovaries</p>
+                <p class="option">C. The corpus luteum produces most of the estrogen</p>
+                <p class="option">D. FSH maintains endometrial thickness</p>
+                <p class="option">E. The fetal adrenal produces progesterone in sufficient amounts</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: A — Luteal-placental shift occurs around weeks 8–10, with the placenta assuming progesterone production.</strong>
+                    <p style="margin-top:10px;">In the first ~8 weeks of pregnancy, the <strong>corpus luteum</strong> is the main source of progesterone, maintained by β-hCG (which mimics LH). Between <strong>weeks 8 and 10</strong>, the <strong>placenta takes over</strong> progesterone production — this is the <strong>luteal-placental shift</strong>. After this point, the corpus luteum (and thus the ovaries) becomes dispensable for pregnancy maintenance. In this case, at 10 weeks, oophorectomy is well-tolerated because the placenta is already the dominant source. B is incorrect — hCG acts on the ovary, not directly on the endometrium. C is wrong in the mature placental period. D — FSH has no role here; it's suppressed. E — fetal adrenal produces steroid precursors, not substantive progesterone at this stage.</p>
+                </div>
+            </div>
+
+            <!-- LO 2 — OVIDUCT -->
+            <h4 style="color:#7c3aed; font-size:15px; margin-bottom:4px; margin-top:28px; background:none; padding:0;">LO 2 — Oviduct / Fallopian Tube (Q4–Q6)</h4>
+
+            <div class="practice-question">
+                <h4>Question 4</h4>
+                <p>A 22-year-old woman presents to the ED with 6 hours of severe left lower quadrant pain, one episode of vomiting, and vaginal spotting. Urine β-hCG is positive at 3,200 mIU/mL. Transvaginal ultrasound shows no intrauterine gestation and a 2.5-cm complex mass in the left adnexa with surrounding free pelvic fluid. Which section of the oviduct is the most likely site of implantation?</p>
+                <p class="option">A. Fimbriae</p>
+                <p class="option">B. Infundibulum</p>
+                <p class="option">C. Ampulla</p>
+                <p class="option">D. Isthmus</p>
+                <p class="option">E. Pars interstitialis</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — Ampulla, the most common site of ectopic pregnancy (~70–80%).</strong>
+                    <p style="margin-top:10px;">The ampulla is the longest, widest section of the fallopian tube with highly folded mucosa — both the <strong>normal site of fertilization</strong> and by far the most common location for ectopic implantation. Scarring from prior PID, endometriosis, or tubal surgery impairs the ciliary and peristaltic transport → embryo gets stuck in the convoluted mucosa and implants. B (infundibulum) and A (fimbriae) are much less common. D (isthmus) is second-most common. E (pars interstitialis) is rare but the most <strong>dangerous</strong> due to catastrophic hemorrhage when it ruptures.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 5</h4>
+                <p>A gynecologist performs a tubal ligation for permanent contraception by applying clips to the narrowest, most muscular segment of the fallopian tube just before it enters the uterus. Which segment is clipped?</p>
+                <p class="option">A. Infundibulum</p>
+                <p class="option">B. Ampulla</p>
+                <p class="option">C. Isthmus</p>
+                <p class="option">D. Pars interstitialis</p>
+                <p class="option">E. Fimbriae</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — Isthmus, the preferred site of tubal ligation.</strong>
+                    <p style="margin-top:10px;">The <strong>isthmus</strong> is the <strong>shortest and narrowest</strong> segment of the fallopian tube (just before it enters the uterus) with the <strong>thickest muscular wall</strong>. These features make it the ideal site for clips or rings in tubal ligation — occlusion is reliable, and the sturdy wall holds the ligation well. Ampullary occlusion is avoided because of its wider lumen and mucosal folds. Fimbrial surgery (salpingectomy of fimbriae) is another contraceptive option, especially given recent evidence that high-grade serous ovarian cancers often arise there.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 6</h4>
+                <p>An investigator labels the two epithelial cell types of the fallopian tube. Estrogen administration causes cell type A to grow more apical cilia and cell type B to increase secretion of tubal fluid. Progesterone dampens both. Which statements about cell types A and B are correct?</p>
+                <p class="option">A. Cell A is a ciliated cell; cell B is a peg (non-ciliated secretory) cell — both are estrogen-dependent</p>
+                <p class="option">A. Cell A is a goblet cell; cell B is a ciliated cell — both are progesterone-dependent</p>
+                <p class="option">C. Cell A is a ciliated cell; cell B is a paneth cell — both are independent of steroid hormones</p>
+                <p class="option">D. Cell A is a neuroendocrine cell; cell B is a mucus cell — both are androgen-dependent</p>
+                <p class="option">E. Cell A is a Sertoli cell; cell B is a Leydig cell</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: A — Ciliated cells and peg (non-ciliated secretory) cells are the two epithelial cell types of the oviduct, both estrogen-dependent.</strong>
+                    <p style="margin-top:10px;">The simple columnar epithelium of the fallopian tube has exactly two cell types: (1) <strong>ciliated cells</strong> with apical cilia that beat toward the uterus to propel the oocyte/embryo; (2) <strong>peg cells (non-ciliated secretory)</strong> that secrete tubal fluid rich in glycoproteins and nutrients for the oocyte, sperm capacitation, and early embryo. Both are <strong>estrogen-responsive</strong> — cilia and secretion peak at ovulation. Progesterone (luteal phase) causes deciliation and reduced secretion. B (goblet) is intestinal/respiratory. C (paneth) is intestinal. D (neuroendocrine) is incorrect. E (Sertoli/Leydig) are testicular.</p>
+                </div>
+            </div>
+
+            <!-- LO 3 — UTERUS & CYCLE -->
+            <h4 style="color:#7c3aed; font-size:15px; margin-bottom:4px; margin-top:28px; background:none; padding:0;">LO 3 — Uterus &amp; Menstrual Cycle (Q7–Q10)</h4>
+
+            <div class="practice-question">
+                <h4>Question 7</h4>
+                <p>A 25-year-old woman tracks her menstrual cycle and consistently has a 35-day cycle. She wants to know when she ovulates. Based on the physiology of the luteal phase, on approximately which day of her cycle does ovulation most likely occur?</p>
+                <p class="option">A. Day 14</p>
+                <p class="option">B. Day 17</p>
+                <p class="option">C. Day 21</p>
+                <p class="option">D. Day 28</p>
+                <p class="option">E. Day 35</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: C — Day 21 (35-day cycle minus 14-day luteal phase).</strong>
+                    <p style="margin-top:10px;">The <strong>luteal phase is essentially fixed at ~14 days</strong> — the corpus luteum's lifespan is programmed unless rescued by hCG. Cycle-length variation comes from the <strong>follicular phase</strong>. Therefore, <strong>ovulation = (cycle length) − 14</strong>. For a 35-day cycle: 35 − 14 = <strong>day 21</strong>. Day 14 (A) applies only to the canonical 28-day cycle. This rule is critical for fertility counseling and natural family planning — a common patient question.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 8</h4>
+                <p>A 34-year-old woman undergoes an endometrial biopsy on cycle day 24. Histology shows elongated, tortuous glands with a "saw-toothed" appearance, coiled spiral arteries, and prominent stromal edema. Which of the following ovarian and hormonal states is consistent with these histologic findings?</p>
+                <p class="option">A. Dominant follicle actively producing estradiol; progesterone low</p>
+                <p class="option">B. Corpus luteum producing progesterone (and some estradiol)</p>
+                <p class="option">C. Primordial follicle pool with low hormone production</p>
+                <p class="option">D. Corpus albicans scar with no hormonal output</p>
+                <p class="option">E. Atretic follicles with anovulation and absent hormone production</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Active corpus luteum secreting progesterone (secretory/luteal phase endometrium).</strong>
+                    <p style="margin-top:10px;">The histologic features described — <strong>coiled "saw-tooth" glands</strong>, <strong>spiral arteries</strong>, and <strong>stromal edema/decidualization</strong> — are pathognomonic of the <strong>secretory (luteal) phase</strong>, driven by <strong>progesterone</strong> from the corpus luteum. Day 24 is firmly in the luteal phase of a 28-day cycle. A (proliferative) would show <strong>straight tubular glands</strong> and mitotically active stroma. C, D, and E all describe low-hormone states that do not produce the secretory transformation.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 9</h4>
+                <p>A 45-year-old woman with uterine fibroids is started on monthly leuprolide injections to shrink the fibroids before surgery. Three days after her first dose, she reports worsening pelvic pain and heavy bleeding. By week 2, her bleeding has stopped. Which mechanism explains the transient worsening followed by suppression?</p>
+                <p class="option">A. Initial GnRH-receptor flare followed by receptor downregulation and gonadotropin suppression</p>
+                <p class="option">B. Direct toxicity of leuprolide on uterine smooth muscle</p>
+                <p class="option">C. Competitive antagonism of the androgen receptor</p>
+                <p class="option">D. Inhibition of aromatase leading to estrogen depletion</p>
+                <p class="option">E. Blockade of LH receptors on the corpus luteum</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: A — Leuprolide is a GnRH agonist: initial "flare" (↑ LH/FSH) followed by receptor desensitization and gonadotropin suppression.</strong>
+                    <p style="margin-top:10px;">Physiologic GnRH is <strong>pulsatile</strong>; constant receptor stimulation causes <strong>internalization and uncoupling</strong> of gonadotroph GnRH receptors. For the first 1–2 weeks of leuprolide therapy, there is a paradoxical <strong>flare</strong> (↑ LH/FSH, ↑ estradiol) before receptor desensitization suppresses gonadotropin release and creates a hypoestrogenic state. The hypoestrogenic environment shrinks estrogen-dependent fibroids. Clinical pearl: to prevent the flare in prostate cancer treatment, patients are co-treated with an androgen-receptor antagonist (flutamide, bicalutamide) for the first month.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 10</h4>
+                <p>A 30-year-old woman has had amenorrhea for 6 months following a D&amp;C for retained products of conception 1 year ago. Her serum FSH, LH, and estradiol are normal. After a progestin challenge (oral medroxyprogesterone acetate), she does not have withdrawal bleeding. Hysterosalpingography shows filling defects consistent with intrauterine adhesions. Which endometrial layer is most directly affected?</p>
+                <p class="option">A. Myometrium</p>
+                <p class="option">B. Perimetrium</p>
+                <p class="option">C. Functionalis of the endometrium</p>
+                <p class="option">D. Basalis of the endometrium</p>
+                <p class="option">E. Cervical transformation zone</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: D — Damage to the basalis (Asherman syndrome).</strong>
+                    <p style="margin-top:10px;">The <strong>basalis</strong> is the deep, non-shedding endometrial layer supplied by straight arteries. It regenerates the functionalis after every menses. Aggressive instrumentation (D&amp;C, especially postpartum for retained POC) or severe endometritis can strip or scar the basalis → intrauterine adhesions (<strong>Asherman syndrome</strong>). Without a functional basalis, no new functionalis is formed — so progestin withdrawal cannot induce bleeding despite normal hormones. Treatment: <strong>hysteroscopic lysis of adhesions + estrogen therapy</strong> to promote basalis regrowth.</p>
+                </div>
+            </div>
+
+            <!-- LO 4 — CERVIX, VAGINA, EXTERNAL GENITALIA, BREAST -->
+            <h4 style="color:#7c3aed; font-size:15px; margin-bottom:4px; margin-top:28px; background:none; padding:0;">LO 4 — Cervix, Vagina, External Genitalia &amp; Breast (Q11–Q14)</h4>
+
+            <div class="practice-question">
+                <h4>Question 11</h4>
+                <p>A 38-year-old woman has an abnormal Pap smear showing high-grade squamous intraepithelial lesion (HSIL). Colposcopy with biopsy of the transformation zone confirms CIN III with extensive koilocytic change. PCR identifies HPV type 16. Which viral proteins drive the malignant transformation, and what cellular pathways do they disable?</p>
+                <p class="option">A. E1 and E2 — inactivate telomerase</p>
+                <p class="option">B. E6 and E7 — E6 degrades p53 and E7 inactivates Rb</p>
+                <p class="option">C. L1 and L2 — capsid proteins that drive replication</p>
+                <p class="option">D. Tax protein — activates NF-κB</p>
+                <p class="option">E. HBx — disrupts cell cycle via p21</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — HPV E6 degrades p53; E7 inactivates Rb → loss of cell-cycle checkpoints.</strong>
+                    <p style="margin-top:10px;">High-risk HPV types (16, 18, 31, 33, 45, etc.) produce two oncoproteins that disable core tumor-suppressor pathways: <strong>E6</strong> promotes <strong>ubiquitin-mediated degradation of p53</strong> (the G1/S DNA-damage checkpoint) and <strong>E7</strong> <strong>binds and inactivates Rb</strong> (releasing E2F → unopposed cell-cycle progression). Together they produce uncontrolled proliferation in the <strong>transformation zone</strong> where immature squamous metaplastic cells are most susceptible. This drives dysplasia → CIN → invasive cervical cancer. L1/L2 are capsid proteins (basis for Gardasil vaccine). Tax is from HTLV-1 (ATLL). HBx is from HBV (hepatocellular carcinoma).</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 12</h4>
+                <p>An 18-year-old woman presents with a painful, tender swelling at the 4 o'clock position posterolateral to the vaginal introitus. There is overlying erythema and induration. Gram stain of expressed fluid grows gram-negative diplococci. The abscess is located in a gland that is the female homologue of which male structure?</p>
+                <p class="option">A. Prostate</p>
+                <p class="option">B. Bulbourethral (Cowper's) gland</p>
+                <p class="option">C. Seminal vesicle</p>
+                <p class="option">D. Epididymis</p>
+                <p class="option">E. Glans penis</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Bartholin's gland abscess; Bartholin's is the homologue of the male bulbourethral (Cowper's) gland.</strong>
+                    <p style="margin-top:10px;">Bartholin's glands sit at the <strong>4 and 8 o'clock</strong> positions posterolateral to the vaginal introitus and drain via a duct into the vestibule. An abscess typically presents as a painful, tender, fluctuant mass with erythema. Causative organisms include <em>Neisseria gonorrhoeae</em>, <em>Chlamydia trachomatis</em>, and mixed aerobic/anaerobic flora. Treatment is <strong>incision and drainage</strong> (often with Word catheter) plus antibiotics. Male homologue: <strong>bulbourethral (Cowper's) gland</strong> — both arise from the urogenital sinus and produce lubricating mucus during arousal. Prostate (A) is the male homologue of Skene's glands, NOT Bartholin's.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 13</h4>
+                <p>A 25-year-old woman in her third day postpartum begins breastfeeding her newborn. When her infant latches and begins suckling, she experiences uterine cramping and a rush of milk from both breasts. Which hormone is primarily responsible for the milk ejection and uterine cramping, and where is it released?</p>
+                <p class="option">A. Prolactin — anterior pituitary</p>
+                <p class="option">B. Oxytocin — posterior pituitary</p>
+                <p class="option">C. FSH — anterior pituitary</p>
+                <p class="option">D. Estradiol — ovaries</p>
+                <p class="option">E. Dopamine — hypothalamus</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Oxytocin from the posterior pituitary.</strong>
+                    <p style="margin-top:10px;">Suckling triggers the <strong>let-down reflex</strong>: sensory afferents from the nipple → hypothalamic <strong>paraventricular (PVN) and supraoptic (SON) nuclei</strong> → <strong>oxytocin</strong> release from the posterior pituitary. Oxytocin acts on <strong>myoepithelial cells</strong> around breast alveoli → milk ejection, and on <strong>uterine smooth muscle</strong> → contraction (involution of the uterus post-partum, decreased bleeding, and the characteristic breastfeeding cramps). <strong>Prolactin</strong> (A) — made in response to the same suckling cue, but its role is <strong>milk synthesis</strong>, not ejection. Dopamine (E) inhibits prolactin release; FSH (C) and estradiol (D) are not involved in lactation mechanics.</p>
+                </div>
+            </div>
+
+            <div class="practice-question">
+                <h4>Question 14</h4>
+                <p>A pathologist examines a needle biopsy from a suspicious breast mass. Low-power microscopy shows malignant epithelial cells confined within a duct-like space; surrounding the cells are spindle-shaped cells that stain positive for p63 and smooth muscle actin. High-power views show no evidence of basement membrane invasion. Which best classifies this lesion?</p>
+                <p class="option">A. Invasive ductal carcinoma</p>
+                <p class="option">B. Ductal carcinoma in situ (DCIS)</p>
+                <p class="option">C. Lobular carcinoma in situ (LCIS)</p>
+                <p class="option">D. Fibroadenoma</p>
+                <p class="option">E. Paget disease of the breast</p>
+                <button class="reveal-btn" onclick="toggleAnswer(this)">Reveal Answer</button>
+                <div class="answer">
+                    <strong>✓ Correct: B — Ductal carcinoma in situ (DCIS): malignant cells within the duct, intact myoepithelial layer, no invasion through basement membrane.</strong>
+                    <p style="margin-top:10px;">The key histologic feature distinguishing in-situ from invasive carcinoma is the <strong>preserved myoepithelial layer</strong> (positive for p63, SMA, calponin) surrounding the neoplastic duct. DCIS is confined to the ducts and has not breached the basement membrane — it is a non-obligate precursor to invasive ductal carcinoma. A would lack the myoepithelial layer. C (LCIS) would show loss of E-cadherin and non-cohesive cells in lobules. D (fibroadenoma) is a benign biphasic tumor with stromal proliferation. E (Paget disease) shows intraepithelial malignant cells in the nipple skin, often with underlying DCIS or invasive cancer. Management of DCIS: wide local excision ± radiation; some estrogen-receptor-positive cases also get endocrine therapy.</p>
+                </div>
+            </div>
+
+        </div>
+</section>
+
+</main>
+
+<script>
+    function switchLO(event, loId) {
+        event.preventDefault();
+        document.querySelectorAll('.lo-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        const section = document.getElementById(loId);
+        if (section) section.classList.add('active');
+        let link = event.target;
+        while (link && !link.classList.contains('sidebar-link')) link = link.parentElement;
+        if (link) link.classList.add('active');
+        const mainEl = document.querySelector('.main');
+        if (mainEl) mainEl.scrollTop = 0;
+    }
+
+    function toggleAnswer(btn) {
+        const answer = btn.nextElementSibling;
+        const isShowing = answer.classList.contains('show');
+        answer.classList.toggle('show');
+        btn.textContent = isShowing ? 'Reveal Answer' : 'Hide Answer';
+    }
+
+    function toggleSection(h3El) {
+        h3El.classList.toggle('collapsed');
+        const body = h3El.nextElementSibling;
+        if (body && body.classList.contains('section-body')) body.classList.toggle('collapsed');
+    }
+    function toggleTrap(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('trap-body')) body.classList.toggle('collapsed');
+    }
+    function toggleH5(h5El) {
+        h5El.classList.toggle('collapsed');
+        const body = h5El.nextElementSibling;
+        if (body && body.classList.contains('h5-body')) body.classList.toggle('collapsed');
+    }
+    function toggleMnemonic(headerEl) {
+        headerEl.classList.toggle('collapsed');
+        const body = headerEl.nextElementSibling;
+        if (body && body.classList.contains('mnemonic-body')) body.classList.toggle('collapsed');
+    }
+
+    function expandAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .h5-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .h5-subheading').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .mnemonic-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .mnemonic-toggle-header').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .trap-body').forEach(el => el.classList.remove('collapsed'));
+        document.querySelectorAll('.lo-section.active .trap-header').forEach(el => el.classList.remove('collapsed'));
+    }
+    function collapseAll() {
+        document.querySelectorAll('.lo-section.active .section-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .collapsible-h3').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .h5-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .h5-subheading').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .mnemonic-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .mnemonic-toggle-header').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .trap-body').forEach(el => el.classList.add('collapsed'));
+        document.querySelectorAll('.lo-section.active .trap-header').forEach(el => el.classList.add('collapsed'));
+    }
+
+    function buildExportDoc(forPrint) {
+        const collapsedEls = Array.from(document.querySelectorAll('.collapsed'));
+        const hiddenSections = Array.from(document.querySelectorAll('.lo-section:not(.active)'));
+        hiddenSections.forEach(s => s.style.display = 'block');
+        collapsedEls.forEach(el => el.classList.remove('collapsed'));
+
+        const clone = document.querySelector('.main').cloneNode(true);
+
+        hiddenSections.forEach(s => s.style.display = '');
+        collapsedEls.forEach(el => el.classList.add('collapsed'));
+
+        clone.querySelectorAll(
+            '.section-chevron, .h5-chevron, .mnemonic-chevron, .trap-chevron, ' +
+            '.export-actions, .sidebar-footer, .hub-return-btn, button'
+        ).forEach(el => el.remove());
+
+        const pageCSS = Array.from(document.querySelectorAll('style')).map(s => s.textContent).join('\n');
+
+        const overrideCSS = `
+            * { box-sizing: border-box; }
+            body { display:block !important; overflow:visible !important; height:auto !important; background:white !important; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Calibri,sans-serif; }
+            .main { margin-left:0 !important; height:auto !important; overflow:visible !important; max-width:100% !important; padding:24px 32px !important; }
+            .lo-section { display:block !important; box-shadow:none !important; animation:none !important; ${forPrint ? 'page-break-before:always;' : ''} }
+            .lo-section:first-child { page-break-before:auto !important; }
+            .section-body, .h4-body, .h5-body, .mnemonic-body, .trap-body { display:block !important; }
+            .answer { display:block !important; }
+            .collapsible-h3.collapsed .section-chevron,
+            .h5-subheading.collapsed .h5-chevron,
+            .mnemonic-toggle-header.collapsed .mnemonic-chevron,
+            .trap-header.collapsed .trap-chevron { transform:none !important; }
+            ${forPrint ? '@media print { .main { padding:0 !important; } }' : ''}
+        `;
+
+        const ns = forPrint ? '' :
+            `xmlns:o='urn:schemas-microsoft-com:office:office'
+             xmlns:w='urn:schemas-microsoft-com:office:word'
+             xmlns='http://www.w3.org/TR/REC-html40'`;
+
+        return `<!DOCTYPE html>
+<html ${ns}>
+<head>
+    <meta charset="UTF-8">
+    <title>Lecture 03: Female Reproductive System — HoyaDocs Repro Block</title>
+    <style>${pageCSS}</style>
+    <style>${overrideCSS}</style>
+</head>
+<body>
+${clone.outerHTML}
+</body>
+</html>`;
+    }
+
+    function printAll(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Opening…';
+        btn.disabled = true;
+        const html = buildExportDoc(true);
+        const win = window.open('', '_blank', 'width=960,height=750,scrollbars=yes');
+        if (!win) {
+            alert('Pop-ups are blocked. Please allow pop-ups for this page, then try again.');
+            btn.innerHTML = origHTML; btn.disabled = false; return;
+        }
+        win.document.open(); win.document.write(html); win.document.close();
+        win.onload = function() { setTimeout(() => { win.focus(); win.print(); }, 1800); };
+        btn.innerHTML = origHTML; btn.disabled = false;
+    }
+
+    function downloadWord(btn) {
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '<span class="btn-icon">⏳</span>Building…';
+        btn.disabled = true;
+        const html = buildExportDoc(false);
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'rpd03-female-reproductive-system.doc';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        btn.innerHTML = origHTML; btn.disabled = false;
+    }
+
+    function toggleMobileSidebar() {
+        document.querySelector('.sidebar').classList.toggle('mob-open');
+        document.querySelector('.sidebar-overlay').classList.toggle('open');
+    }
+    document.querySelectorAll('.sidebar-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                document.querySelector('.sidebar').classList.remove('mob-open');
+                document.querySelector('.sidebar-overlay').classList.remove('open');
+            }
+        });
+    });
+</script>
+</body>
+</html>
