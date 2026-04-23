@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPD03 Hub #3 · Female Reproductive System — USMLE Step 1 MCQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── BASE ── */
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#F4F3EF;color:#2C2C2C;min-height:100vh;line-height:1.6}
+
+/* ── TOP NAV ── */
+.topnav{background:#2B2B2B;border-bottom:3px solid #D4A84C;padding:0 28px;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;flex-direction:column;justify-content:center;gap:1px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.55em;font-weight:700;color:#F2EDDF;letter-spacing:.02em;line-height:1.2}
+.nav-brand-sub{font-size:.85em;color:#D4A84C;font-weight:500;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:#fff;font-weight:600;padding:6px 14px;border-radius:5px;border:1px solid #D4A84C;background:#D4A84C;text-decoration:none;transition:all .2s}
+.nav-back:hover{background:#BF9540;border-color:#BF9540}
+
+/* ── CONTAINER ── */
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+
+/* ── HEADER ── */
+.header{background:#FFFFFF;border:1px solid #D2CDC4;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#2B2B2B 0%,#D4A84C 50%,#2B2B2B 100%)}
+.hub-tag{display:inline-block;background:#2B2B2B;color:#F2EDDF;font-family:'Source Sans 3',sans-serif;font-size:.82em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:5px 14px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2.3em;color:#2B2B2B;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#8B6914;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#F4F3EF;border:1px solid #D2CDC4;border-radius:4px;padding:5px 12px;font-size:.88em;color:#5A5A5A}
+.source-badge strong{color:#2B2B2B}
+
+/* ── HUB PROGRESSION ── */
+.hub-prog{background:#FFF;border:1px solid #D2CDC4;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:8px 18px;border-radius:4px;font-size:.92em;font-weight:600}
+.hub-step.done{background:#2B2B2B;border:1px solid #2B2B2B;color:#F2EDDF;text-decoration:none;transition:all .2s;font-weight:600}
+.hub-step.done:hover{background:#3A3A3A;border-color:#3A3A3A;color:#fff}
+.hub-step.current{background:#2B2B2B;color:#D4A84C;border:1px solid #D4A84C}
+.hub-step.next{background:#F4F3EF;border:1px solid #D2CDC4;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#D4A84C;color:#8B6914}
+.hub-arrow{color:#D4A84C;font-size:1.1em;font-weight:700}
+.hub-prog-label{font-size:.88em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #D2CDC4;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:2.1em;font-weight:700;color:#2B2B2B}
+.stat-label{font-size:.8em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #D2CDC4;padding-bottom:0}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.96em;font-weight:600;padding:12px 20px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#2B2B2B}
+.tab-btn.active{color:#2B2B2B;border-bottom-color:#D4A84C}
+.tab-content{display:none;animation:fi .25s ease}
+.tab-content.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sec{font-size:.78em;font-weight:700;color:#2B2B2B;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #D2CDC4}
+
+/* ── EXAM HEADER ── */
+.exam-header{background:#2B2B2B;color:#F2EDDF;border-radius:6px;padding:16px 22px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.exam-header-left{display:flex;flex-direction:column;gap:2px}
+.exam-header-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.15em;font-weight:700;color:#D4A84C}
+.exam-header-sub{font-size:.82em;color:rgba(255,255,255,0.7)}
+.exam-timer{display:flex;align-items:center;gap:8px;background:rgba(212,168,76,0.15);border:1px solid rgba(212,168,76,0.4);border-radius:5px;padding:8px 16px}
+.timer-icon{font-size:1.1em}
+.timer-display{font-family:'Source Sans 3',monospace;font-size:1.1em;font-weight:700;color:#D4A84C;letter-spacing:.05em}
+.timer-label{font-size:.72em;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.08em}
+.exam-controls{display:flex;gap:8px}
+.exam-ctrl-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#F2EDDF;padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;transition:all .2s}
+.exam-ctrl-btn:hover{background:rgba(212,168,76,0.2);border-color:#D4A84C;color:#D4A84C}
+
+/* ── VIGNETTE MCQ (STEP 1 STYLE) ── */
+.vig-item{background:#FFFFFF;border:1px solid #D2CDC4;border-radius:6px;padding:22px;margin-bottom:18px}
+.vig-num{font-size:.68em;font-weight:700;color:#D4A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.vig-stem{font-size:.93em;color:#2C2C2C;line-height:1.7;margin-bottom:14px;background:#EDEAE3;padding:14px;border-radius:6px;border-left:3px solid #D4A84C}
+.vig-stem strong{color:#2B2B2B}
+.vig-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.vig-opt{background:#F4F3EF;border:1px solid #D2CDC4;border-radius:5px;padding:10px 14px;cursor:pointer;font-size:.88em;color:#2C2C2C;transition:all .18s;display:flex;align-items:flex-start;gap:10px}
+.vig-opt:hover:not(.locked){border-color:#D4A84C;background:#EDEAE3}
+.vig-opt.correct{background:#F1F8F2;border-color:#2E7D32;color:#1B5E20}
+.vig-opt.correct .vig-opt-letter{color:#2E7D32}
+.vig-opt.wrong{background:#FEF5F5;border-color:#C62828;color:#B71C1C}
+.vig-opt.wrong .vig-opt-letter{color:#C62828}
+.vig-opt.locked{cursor:default}
+.vig-opt-letter{font-weight:700;color:#2B2B2B;flex-shrink:0;width:18px}
+.vig-exp{background:#EDEAE3;border-left:3px solid #D4A84C;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none;margin-top:12px}
+.vig-exp.show{display:block}
+.vig-exp strong{color:#2B2B2B}
+.vig-buzzword{color:#8B6914;font-weight:600}
+
+/* ── INTRO BOXES ── */
+.exam-intro{background:#EDEAE3;border:1px solid #D2CDC4;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.exam-intro strong{color:#2B2B2B}
+
+/* ── SCORE DASHBOARD ── */
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.score-card{background:#FFF;border:1px solid #D2CDC4;border-radius:6px;padding:20px;text-align:center}
+.score-card-num{font-family:'Crimson Pro',Georgia,serif;font-size:2.6em;font-weight:700;color:#2B2B2B;line-height:1.1}
+.score-card-num .pct{font-size:.5em;color:#D4A84C;font-weight:600}
+.score-card-label{font-size:.82em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;font-weight:600}
+.score-bar-wrap{background:#EDEAE3;border-radius:20px;height:10px;margin-top:10px;overflow:hidden}
+.score-bar{background:linear-gradient(90deg,#D4A84C,#8B6914);height:100%;border-radius:20px;transition:width .6s ease}
+.score-breakdown{background:#FFF;border:1px solid #D2CDC4;border-radius:6px;padding:20px;margin-bottom:20px}
+.score-breakdown-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#2B2B2B;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid #D4A84C}
+.score-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #EDEAE3;font-size:.88em}
+.score-row:last-child{border-bottom:none}
+.score-row-label{color:#5A5A5A}
+.score-row-val{font-weight:700;color:#2B2B2B}
+.score-row-val.correct{color:#2E7D32}
+.score-row-val.wrong{color:#C62828}
+.score-reset-btn{background:#2B2B2B;border:none;color:#D4A84C;padding:10px 20px;border-radius:5px;cursor:pointer;font-weight:600;font-size:.88em;font-family:inherit;transition:all .2s;margin-top:10px}
+.score-reset-btn:hover{background:#3A3A3A}
+
+/* ── TABLES ── */
+table{border-collapse:collapse;width:100%}
+table th{background:#2B2B2B;color:#F2EDDF;font-weight:600;text-align:left;padding:10px 14px;font-size:.84em;letter-spacing:.03em}
+table td{padding:10px 14px;border-bottom:1px solid #D2CDC4;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+table tr:nth-child(even) td{background:#FAF9F5}
+table tr:hover td{background:#EDEAE3}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #D2CDC4;padding-top:16px;margin-top:32px}
+.footer a{color:#2B2B2B;text-decoration:none;font-weight:600}
+.footer a:hover{color:#D4A84C;text-decoration:underline}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .container{padding:14px}
+  .header{padding:18px 16px}
+  .header h1{font-size:1.5em}
+  .hub-prog{flex-direction:column;gap:6px;align-items:flex-start}
+  .hub-arrow{display:none}
+  .tab-btn{font-size:.78em;padding:8px 12px}
+  .exam-header{flex-direction:column;align-items:flex-start}
+  .score-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Block 4 — Repro</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub #3 — USMLE Step 1 MCQ</div>
+  <h1>Female Reproductive System <span>Step 1 Practice Exam</span></h1>
+  <div class="subtitle">
+    Full-length USMLE Step 1-style vignettes · Timed exam blocks · Integrated score tracking<br>
+    Lecture 03 · Repro Block · Female Reproductive Histology &amp; Menstrual Cycle
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Lecturer:</strong> Histology</div>
+    <div class="source-badge"><strong>Step 1:</strong> First Aid Repro — Histology + Physiology + Pathology</div>
+    <div class="source-badge"><strong>Topics:</strong> Follicular Histology, Menstrual Cycle, Gyn Pathology, Repro Pharmacology</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <a href="rpd03_hub1.html" class="hub-step done">Hub 1 ✓</a>
+  <span class="hub-arrow">→</span>
+  <a href="rpd03_hub2.html" class="hub-step done">Hub 2 ✓</a>
+  <span class="hub-arrow">→</span>
+  <span class="hub-step current">Hub 3 — USMLE Step 1 MCQ</span>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">15</div><div class="stat-label">Questions</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Exam Blocks</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Core LOs</div></div>
+  <div class="stat-card"><div class="stat-num" id="global-score">—</div><div class="stat-label">Your Score</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('block1',this)">Block 1</button>
+  <button class="tab-btn" onclick="switchTab('block2',this)">Block 2</button>
+  <button class="tab-btn" onclick="switchTab('block3',this)">Block 3</button>
+  <button class="tab-btn" onclick="switchTab('score',this)">Score Report</button>
+</div>
+
+<!-- ══ BLOCK 1: OVARIAN & FOLLICULAR HISTOLOGY ═════════════════════════════ -->
+<div class="tab-content active" id="tab-block1">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">Block 1 — Ovarian &amp; Follicular Histology</div>
+      <div class="exam-header-sub">5 questions · Follicle stages, hormones, 2-cell model, corpus luteum</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-b1">07:30</div>
+        <div class="timer-label">Block Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('b1')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('b1',450)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. Review your answers at the end of the block before proceeding.</div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 1 of 5 — Oocyte Meiotic Arrest</div>
+    <div class="vig-stem">
+      A 28-year-old woman undergoing IVF evaluation has her pre-ovulatory follicle aspirated after hCG trigger administration. The retrieved oocyte is examined under the microscope; chromatin analysis reveals the oocyte has completed meiosis I and arrested again. Which stage of meiosis is the oocyte currently in, and what intracellular factor maintains this arrest until fertilization?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Prophase I; maintained by oocyte meiosis inhibitor (OMI) in follicular fluid</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Anaphase I; maintained by cyclin B degradation</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Metaphase II; maintained by cytostatic factor (CSF) / high MPF activity</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Telophase II; maintained by nuclear envelope reformation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Interphase; awaiting DNA replication after fertilization</div>
+    </div>
+    <div class="vig-exp"><strong>C — Metaphase II (maintained by CSF/MPF).</strong> The complete meiotic sequence: <span class="vig-buzzword">Prophase I arrest at birth</span> → follicular recruitment at puberty → transition to <span class="vig-buzzword">Prophase II arrest in antral follicle (OMI-mediated)</span> → <span class="vig-buzzword">LH surge overrides OMI</span> → meiosis resumes → completes meiosis I → <span class="vig-buzzword">arrests at metaphase II</span>. Metaphase II arrest is maintained by cytostatic factor (CSF) keeping maturation-promoting factor (MPF) active. Only fertilization (calcium influx) can break metaphase II arrest → completion of meiosis II. OMI (A) arrests at prophase II earlier in development, not metaphase II.</div>
+  </div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 2 of 5 — 2-Cell Model of Steroidogenesis</div>
+    <div class="vig-stem">
+      A researcher isolates cells from a human pre-ovulatory Graafian follicle and cultures them with different hormones. Group 1 (theca interna cells) + LH produces compound X. When compound X is transferred to Group 2 (granulosa cells) + FSH, it is converted to estrogen. Which enzyme in Group 2 is responsible for this conversion, and what is compound X?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>5α-reductase; compound X is testosterone</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Aromatase (CYP19); compound X is androstenedione</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>21-hydroxylase; compound X is 17-OH-progesterone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Desmolase; compound X is cholesterol</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>11β-hydroxylase; compound X is 11-deoxycorticosterone</div>
+    </div>
+    <div class="vig-exp"><strong>B — Aromatase; compound X is androstenedione.</strong> This is the classic <span class="vig-buzzword">2-cell 2-gonadotropin model</span>: <span class="vig-buzzword">LH stimulates THECA interna cells</span> to produce <strong>androstenedione</strong> (from cholesterol via 17α-hydroxylase + 17,20-lyase; theca cells LACK aromatase). Androstenedione diffuses into <span class="vig-buzzword">GRANULOSA cells, where FSH-induced aromatase (CYP19)</span> converts it to estrogen (estradiol). Granulosa cells lack the androgen-producing enzymes. This cross-talk is essential — neither cell can make estrogen alone. <strong>Clinical relevance:</strong> Aromatase inhibitors (letrozole, anastrozole) block granulosa conversion — used for ovulation induction in PCOS and postmenopausal ER+ breast cancer.</div>
+  </div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 3 of 5 — Corpus Luteum Hormone Switch</div>
+    <div class="vig-stem">
+      A 29-year-old woman's day-22 endometrial biopsy shows coiled, tortuous glands filled with glycogen-rich secretions. Her ovaries contain a large corpus luteum. The pathologist comments that granulosa lutein cells have taken on a NEW steroidogenic function distinct from their pre-ovulation role. Which of the following best describes this change?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Granulosa cells continue producing estrogen; theca lutein cells now make progesterone</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Granulosa lutein cells now produce progesterone; theca lutein cells now produce estrogen</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Granulosa lutein cells stop all steroidogenesis; the oocyte itself secretes hormones</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Both granulosa and theca lutein cells now produce only androgens</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Granulosa lutein cells now produce cortisol under LH stimulation</div>
+    </div>
+    <div class="vig-exp"><strong>B — Progesterone from granulosa lutein; estrogen from theca lutein.</strong> After ovulation, the residual granulosa + theca cells "luteinize" and their hormone outputs <span class="vig-buzzword">swap</span>. <span class="vig-buzzword">Granulosa lutein cells → progesterone (dominant)</span>; <span class="vig-buzzword">theca lutein cells → estrogen</span>. This is the reverse of the pre-ovulation 2-cell model. Progesterone drives the <span class="vig-buzzword">secretory phase endometrium</span>: glands become coiled/tortuous, spiral arteries elongate, glycogen-rich secretions for potential implantation. If pregnancy occurs, hCG (LH-like) from the syncytiotrophoblast rescues the CL. If not, the CL regresses → corpus albicans, P/E drop → menses.</div>
+  </div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 4 of 5 — LH Surge Physiology</div>
+    <div class="vig-stem">
+      A medical student reviewing the menstrual cycle notes that estrogen from the dominant follicle exerts negative feedback on the hypothalamus throughout the early follicular phase. Yet at mid-cycle, estrogen suddenly triggers a massive LH surge instead of inhibiting it. Which of the following best explains this apparently paradoxical switch?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Inhibin B from granulosa cells temporarily blocks the negative feedback loop</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Rising progesterone from the corpus luteum removes estrogen's feedback</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Sustained high estrogen above a critical threshold switches to positive feedback on the hypothalamus and pituitary</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>FSH directly stimulates LH secretion at mid-cycle</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>GnRH receptors on pituitary gonadotrophs downregulate</div>
+    </div>
+    <div class="vig-exp"><strong>C — Estrogen threshold → positive feedback.</strong> Most of the menstrual cycle, estrogen exerts <span class="vig-buzzword">negative feedback</span> on GnRH/LH/FSH. However, when estrogen reaches a <span class="vig-buzzword">sustained high level</span> (typically &gt;200 pg/mL for ~50 hours) from the dominant Graafian follicle, it paradoxically <span class="vig-buzzword">SWITCHES to POSITIVE feedback</span> on the hypothalamus (↑ GnRH pulse frequency) and pituitary (↑ responsiveness) → the <strong>LH surge</strong>. This is the rising estrogen of Graafian follicle → LH surge → ovulation. Pharmacologically, <strong>clomiphene</strong> (SERM that blocks hypothalamic estrogen receptors) removes the estrogen signal → hypothalamus "senses" low estrogen → ↑ GnRH pulses → ↑ FSH → ovulation induction in PCOS.</div>
+  </div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 5 of 5 — Follicular Identification</div>
+    <div class="vig-stem">
+      An ovarian histology slide shows a follicle with an eccentrically located oocyte surrounded by a thin ring of granulosa cells, connected to the main follicular wall by a thicker stalk of granulosa cells. A large fluid-filled space dominates the center of the follicle. Well-defined theca interna and theca externa layers are visible at the periphery. Which structure directly surrounding the oocyte travels with it at ovulation?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Theca interna cells</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Zona pellucida alone (no cells)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Corona radiata — innermost layer of granulosa cells</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Cumulus oophorus — the stalk of granulosa cells</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Basal lamina of the granulosa layer</div>
+    </div>
+    <div class="vig-exp"><strong>C — Corona radiata.</strong> This describes a <span class="vig-buzzword">Graafian (tertiary) follicle</span> — the dominant pre-ovulatory follicle. Structures: <strong>antrum</strong> (large fluid-filled space), <strong>cumulus oophorus</strong> (granulosa stalk anchoring oocyte to follicle wall), <strong>corona radiata</strong> (innermost single layer of granulosa cells tightly surrounding the oocyte), zona pellucida (glycoprotein coat inside corona radiata), theca interna + externa (outside granulosa). At ovulation, the <span class="vig-buzzword">oocyte + zona pellucida + corona radiata</span> are released together — the corona radiata must be "drilled through" by sperm (acrosome reaction) to access the zona pellucida and then the oocyte. Cumulus (D) anchors to the follicle wall; it does NOT travel with the oocyte.</div>
+  </div>
+</div>
+
+<!-- ══ BLOCK 2: MENSTRUAL CYCLE & UTERUS ═══════════════════════════════════ -->
+<div class="tab-content" id="tab-block2">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">Block 2 — Menstrual Cycle &amp; Uterus</div>
+      <div class="exam-header-sub">5 questions · Menstrual cycle, uterine pathology, cervix</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-b2">07:30</div>
+        <div class="timer-label">Block Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('b2')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('b2',450)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. Review your answers at the end of the block before proceeding.</div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 6 of 15 — Endometrial Histology</div>
+    <div class="vig-stem">
+      A 34-year-old woman undergoing workup for infertility has an endometrial biopsy on day 22 of her menstrual cycle. Histology demonstrates <strong>coiled, tortuous glands with vacuolated cells</strong>, prominent spiral arteries extending close to the surface, and edematous stroma. Serum progesterone at the time of biopsy is 15 ng/mL. Which of the following best describes the endocrine state responsible for these findings?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Early follicular phase; FSH-dominant, low estrogen</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Mid-follicular phase; rising estrogen from developing follicles</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Mid-cycle; LH surge from estrogen positive feedback</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Mid-secretory phase; corpus luteum producing progesterone + estrogen</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Late secretory / ischemic; degenerating CL, falling hormones</div>
+    </div>
+    <div class="vig-exp"><strong>D — Mid-secretory (luteal) phase.</strong> Day 22 is mid-luteal. <span class="vig-buzzword">Coiled/tortuous glands + prominent spiral arteries + stromal edema + serum progesterone ~15 ng/mL</span> = classic secretory phase signature driven by <strong>corpus luteum progesterone</strong>. The secretory phase readies the endometrium for implantation (~day 21–24 = "implantation window"). Contrast: proliferative phase shows <strong>straight tubular glands</strong> (not coiled) driven by estrogen. Late secretory / ischemic phase shows gland breakdown and spiral artery vasospasm as progesterone falls. Progesterone levels &gt; 3–5 ng/mL confirm ovulation has occurred.</div>
+  </div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 7 of 15 — Asherman Syndrome</div>
+    <div class="vig-stem">
+      A 32-year-old G3P3 woman had a dilation and curettage (D&amp;C) after a miscarriage 6 months ago. She has now developed <strong>secondary amenorrhea</strong> and inability to conceive. Hysteroscopy reveals <strong>intrauterine adhesions and scarring</strong>. Which of the following anatomic structures was most likely destroyed during her procedure, preventing normal endometrial regeneration?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Functionalis layer of the endometrium</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Basalis layer of the endometrium</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Myometrium</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Perimetrium</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Muscularis mucosae</div>
+    </div>
+    <div class="vig-exp"><strong>B — Basalis layer.</strong> This is <span class="vig-buzzword">Asherman syndrome</span> — intrauterine adhesions from trauma (D&amp;C, infection, retained products of conception). The <strong>basalis</strong> is the deep layer of the endometrium that <span class="vig-buzzword">serves as the stem cell source for regenerating the functionalis</span> each cycle. Supplied by straight arteries (not hormone-responsive). Destruction of the basalis → cannot regenerate functionalis → amenorrhea/hypomenorrhea + infertility. The functionalis (A) is what normally sheds with menses; its destruction doesn't cause Asherman because it would normally regrow. Tx: hysteroscopic adhesiolysis.</div>
+  </div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 8 of 15 — Cervical Cancer Mechanism</div>
+    <div class="vig-stem">
+      A 42-year-old woman has a Pap smear showing high-grade squamous intraepithelial lesion (HSIL). HPV testing is positive for HPV-16. Colposcopy with biopsy at the squamocolumnar junction confirms CIN III with carcinoma in situ. Which of the following molecular mechanisms best explains the loss of cell cycle control in her lesion?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>HPV E1 protein induces DNA hypermethylation of tumor suppressors</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>HPV E6 promotes p53 degradation; HPV E7 inhibits Rb protein</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>HPV capsid proteins L1/L2 directly bind to DNA polymerase</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>HPV induces chromosomal translocation activating MYC oncogene</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>HPV activates PI3K/AKT/mTOR signaling via receptor tyrosine kinase mutations</div>
+    </div>
+    <div class="vig-exp"><strong>B — E6 degrades p53; E7 inhibits Rb.</strong> High-risk HPV types (16, 18, 31, 33, 45) encode two critical oncoproteins: <span class="vig-buzzword">E6 binds and promotes ubiquitin-mediated degradation of p53</span> — losing the G1 DNA-damage checkpoint. <span class="vig-buzzword">E7 binds Rb</span>, displacing E2F transcription factors → unchecked G1/S progression. Loss of both tumor suppressors allows uncontrolled proliferation → CIN progression → invasive SCC. Location: <span class="vig-buzzword">transformation zone</span> (squamocolumnar junction). L1 (C) is the capsid protein used to make Gardasil vaccine (L1-based VLPs). Prevention: Gardasil 9 (9–45 yo).</div>
+  </div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 9 of 15 — Adenomyosis</div>
+    <div class="vig-stem">
+      A 45-year-old G4P4 woman presents with progressively worsening heavy, painful menstrual periods over the past 2 years. Pelvic exam shows a <strong>diffusely enlarged, globular, boggy, and tender uterus</strong>. Pelvic MRI demonstrates thickening of the <strong>junctional zone</strong> with small cystic foci within the myometrium. Which of the following best describes the pathophysiology of her condition?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Endometrial tissue outside the uterus (ovaries, peritoneum)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Endometrial glands and stroma within the myometrium</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Benign smooth muscle tumors arising from myometrium</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Malignant proliferation of endometrial glands</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Chronic infection with endomyometritis</div>
+    </div>
+    <div class="vig-exp"><strong>B — Endometrial tissue within myometrium (adenomyosis).</strong> Buzzwords: <span class="vig-buzzword">multiparous woman ~ 40s</span>, <span class="vig-buzzword">heavy painful menses</span>, <span class="vig-buzzword">globular/boggy/tender uterus</span>, <span class="vig-buzzword">thickened junctional zone on MRI</span>. <strong>Adenomyosis</strong> = endometrial glands + stroma trapped WITHIN the myometrium (contrast to endometriosis = ectopic endometrium OUTSIDE uterus). These ectopic foci bleed with each menstrual cycle, causing dysmenorrhea and uterine enlargement. Definitive dx is post-hysterectomy histology. Fibroids (C) would give an <em>irregularly</em> enlarged uterus. Endometrial cancer (D) presents with postmenopausal bleeding. Tx: OCPs, IUD, hysterectomy (definitive).</div>
+  </div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 10 of 15 — Endometrial Cancer</div>
+    <div class="vig-stem">
+      A 62-year-old obese postmenopausal woman (BMI 36) with diabetes, hypertension, and nulliparity presents with 2 months of intermittent vaginal bleeding. Her last menstrual period was at age 54. She has taken tamoxifen for 4 years for ER+ breast cancer. Endometrial biopsy reveals <strong>well-differentiated endometrioid adenocarcinoma</strong>. Which of the following is the most important underlying mechanism for her endometrial cancer risk?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Direct mutagenic effect of insulin on endometrial DNA</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Chronic unopposed estrogen exposure from multiple sources (adipose aromatization, nulliparity, tamoxifen's uterine agonism)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Age-related accumulation of somatic p53 mutations as in Type II cancer</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Microsatellite instability from Lynch syndrome (MLH1 germline)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>HPV infection of the endometrium</div>
+    </div>
+    <div class="vig-exp"><strong>B — Chronic unopposed estrogen.</strong> Type I endometrial cancer (80%, endometrioid) is <strong>estrogen-driven</strong>, preceded by endometrial hyperplasia. Risk factors all share unopposed estrogen exposure: <span class="vig-buzzword">obesity</span> (peripheral aromatization of androstenedione → estrone in adipose), <span class="vig-buzzword">nulliparity</span> (more ovulatory cycles + unopposed proliferative stimulation), <span class="vig-buzzword">late menopause/early menarche</span>, <span class="vig-buzzword">PCOS</span> (anovulation), <span class="vig-buzzword">estrogen-only HRT</span>, <span class="vig-buzzword">tamoxifen</span> (uterine agonist while breast antagonist). Postmenopausal bleeding requires endometrial biopsy. Type II (C — serous/clear cell, p53-driven) is non-estrogen, worse prognosis. Lynch syndrome (D) is hereditary, usually earlier onset.</div>
+  </div>
+</div>
+
+<!-- ══ BLOCK 3: GYN PATHOLOGY & CLINICAL CORRELATES ═══════════════════════ -->
+<div class="tab-content" id="tab-block3">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">Block 3 — Gyn Pathology &amp; Clinical Correlates</div>
+      <div class="exam-header-sub">5 questions · PCOS, endometriosis, ovarian CA, ectopic pregnancy, breast CA</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-b3">07:30</div>
+        <div class="timer-label">Block Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('b3')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('b3',450)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. These questions integrate multiple concepts from female reproductive pathology.</div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 11 of 15 — PCOS &amp; Ovulation Induction</div>
+    <div class="vig-stem">
+      A 26-year-old woman with a BMI of 31 presents with 18 months of secondary infertility. Her cycles are 45–60 days. She has moderate facial hirsutism. Labs: LH 18, FSH 5 mIU/mL; testosterone 82 ng/dL (elevated); fasting insulin elevated with HOMA-IR 4.2. Pelvic US shows bilateral ovaries with 15+ subcapsular follicles (2–9 mm). Which first-line agent is most effective for ovulation induction in this patient, and by what mechanism?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Clomiphene citrate — SERM antagonist at hypothalamus → ↑ FSH</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Letrozole — aromatase inhibitor → ↓ estrogen → ↑ FSH; superior live birth rates vs clomiphene in PCOS</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Exogenous LH injections to simulate an LH surge</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Progesterone suppositories to induce ovulation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Combined OCP — suppresses the HPO axis to "reset" ovulation</div>
+    </div>
+    <div class="vig-exp"><strong>B — Letrozole (aromatase inhibitor).</strong> This is classic PCOS (<span class="vig-buzzword">obese + oligomenorrhea + hirsutism + LH:FSH &gt; 3 + insulin resistance + string of pearls</span>). Recent RCTs (PPCOS II, Legro et al.) showed <span class="vig-buzzword">letrozole is SUPERIOR to clomiphene for live birth rates in PCOS</span>, making it first-line for ovulation induction. <strong>Mechanism:</strong> aromatase inhibitor → blocks peripheral + granulosa estrogen synthesis → removes negative feedback → ↑ FSH → follicle recruitment → ovulation. <strong>Clomiphene (A)</strong> is also effective but second-line in PCOS. Also key: weight loss is first intervention; add metformin for insulin resistance. OCPs (E) <em>suppress</em> ovulation — opposite of what's needed.</div>
+  </div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 12 of 15 — Ectopic Pregnancy</div>
+    <div class="vig-stem">
+      A 24-year-old G1P0 woman presents to the ED with 2 hours of <strong>severe right lower quadrant pain</strong> and <strong>scant vaginal bleeding</strong>. Her last menstrual period was 7 weeks ago. She has tachycardia (HR 118), BP 90/60, and diffuse abdominal tenderness with rebound. Urine β-hCG is positive; serum β-hCG is 2,200 mIU/mL but rose only 20% over 48 hours. Transvaginal US shows <strong>no intrauterine pregnancy</strong> but demonstrates a complex adnexal mass with free fluid in the cul-de-sac. Which anatomic structure has most likely been involved?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Uterine fundus</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Endocervical canal</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Ovarian cortex</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">D</span>Fallopian tube ampulla</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Abdominal peritoneum</div>
+    </div>
+    <div class="vig-exp"><strong>D — Fallopian tube ampulla.</strong> Classic <span class="vig-buzzword">ruptured ectopic pregnancy</span>: amenorrhea + unilateral pain + bleeding + hemodynamic instability + β-hCG not doubling + no IUP + complex adnexal mass + free fluid. The <span class="vig-buzzword">ampulla is the most common site (&gt;70%) of ectopic pregnancy</span> — same place where normal fertilization occurs. Risk factors: prior PID, tubal surgery, IUD, endometriosis, smoking. Order of frequency: <span class="vig-buzzword">Ampulla &gt; isthmus &gt; fimbria &gt; ovary &gt; abdomen &gt; cervix</span>. <strong>Management:</strong> unstable → surgery (salpingectomy/salpingostomy); stable with low β-hCG and no rupture → methotrexate (folate antagonist blocks trophoblast proliferation). Ruptured ectopic → surgical emergency + blood products.</div>
+  </div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 13 of 15 — Invasive Lobular Breast Cancer</div>
+    <div class="vig-stem">
+      A 49-year-old woman has a screening mammogram showing subtle architectural distortion in the left breast. Biopsy reveals tumor cells infiltrating the stroma in a <strong>single-file pattern</strong>. Immunohistochemistry demonstrates <strong>absent E-cadherin</strong>, ER positive, PR positive, HER2 negative. MRI reveals a similar-appearing contralateral lesion. Which gene is most likely mutated, and what is the tumor's predicted response to endocrine therapy?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>BRCA1; poor response to tamoxifen (triple-negative)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>TP53; responds well to trastuzumab (HER2-targeted)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>CDH1 (E-cadherin); responds to endocrine therapy (tamoxifen pre- / aromatase inhibitor postmenopausal)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>ERBB2 (HER2) amplification; responds to trastuzumab</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>PTEN; responds to PI3K inhibitors</div>
+    </div>
+    <div class="vig-exp"><strong>C — CDH1 (E-cadherin); responsive to endocrine therapy.</strong> The <span class="vig-buzzword">single-file ("Indian file") infiltration</span> pattern + <span class="vig-buzzword">loss of E-cadherin</span> + frequent bilaterality are pathognomonic for <span class="vig-buzzword">invasive lobular carcinoma</span>. <strong>E-cadherin</strong> (encoded by CDH1 gene) normally maintains epithelial cell-cell adhesion — loss allows single-cell dispersion. Hereditary CDH1 mutations cause <strong>hereditary diffuse gastric cancer + lobular breast cancer</strong> syndrome. Since this tumor is <strong>ER+/PR+</strong>, it responds well to endocrine therapy: <span class="vig-buzzword">tamoxifen (SERM) premenopausal</span> or <span class="vig-buzzword">aromatase inhibitors (anastrozole, letrozole) postmenopausal</span>. HER2-negative → trastuzumab not indicated (D wrong). Contrast: invasive <em>ductal</em> carcinoma forms stellate/spiculated mass with retraction — not single-file.</div>
+  </div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 14 of 15 — Ovarian CA + Psammoma Bodies</div>
+    <div class="vig-stem">
+      A 58-year-old woman with a BRCA1 mutation (diagnosed after her sister's ovarian cancer) opts for prophylactic bilateral salpingo-oophorectomy at age 55. Pathology reveals a 1.8-cm tumor in the right ovary; histologic sections show papillary projections with <strong>concentric laminated calcifications</strong> within the tumor cells. Which of the following ovarian tumor types is most likely, and from what cell layer does it arise?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Granulosa cell tumor from follicular cells — produces estrogen</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Dysgerminoma from primordial germ cells — ↑ LDH</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Serous cystadenocarcinoma from germinal (surface) epithelium</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Mature teratoma (dermoid cyst) from totipotent germ cells</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Krukenberg tumor from gastric metastasis — signet ring cells</div>
+    </div>
+    <div class="vig-exp"><strong>C — Serous cystadenocarcinoma from germinal (surface) epithelium.</strong> <span class="vig-buzzword">Psammoma bodies</span> (concentric laminated calcifications) are highly associated with: <span class="vig-buzzword">PSaMMoma mnemonic</span> — <strong>P</strong>apillary thyroid CA, <strong>S</strong>erous ovarian cystadenoCA, <strong>M</strong>eningioma, <strong>M</strong>esothelioma. Most ovarian cancers (65–70%) arise from the <span class="vig-buzzword">germinal (surface) epithelium</span> — and serous cystadenocarcinoma is the most common subtype. <span class="vig-buzzword">BRCA1/BRCA2 mutations</span> increase risk of high-grade serous ovarian CA (and breast CA) because BRCA proteins perform <strong>homologous recombination DNA repair</strong>. Risk-reducing salpingo-oophorectomy is recommended at 35–40. Other ovarian tumor origins: sex cord-stromal (granulosa — Call-Exner bodies, estrogen-producing), germ cell (dysgerminoma, teratoma), metastasis (Krukenberg, bilateral signet ring).</div>
+  </div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 15 of 15 — Comprehensive Menopause/HRT</div>
+    <div class="vig-stem">
+      A 52-year-old woman presents with 18 months of hot flashes, night sweats, and vaginal dryness causing dyspareunia. Her last menstrual period was 16 months ago. She has no personal or family history of breast/ovarian/endometrial cancer, VTE, CAD, or stroke. Her uterus is intact. She wishes to start HRT for symptom relief. Which of the following represents the MOST APPROPRIATE hormonal regimen AND the physiologic rationale?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Estrogen alone (oral); progesterone is unnecessary since she's postmenopausal</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Combined estrogen + progestin; progestin protects the intact endometrium from estrogen-driven hyperplasia/cancer</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Progesterone-only regimen; sufficient for vasomotor symptoms</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Clomiphene citrate to restart ovulation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Testosterone + estrogen; testosterone boosts libido</div>
+    </div>
+    <div class="vig-exp"><strong>B — Combined estrogen + progestin.</strong> This is classic menopause (12+ months amenorrhea + vasomotor symptoms + vaginal atrophy). HRT relieves symptoms and preserves bone/skin/brain in appropriately selected patients. <span class="vig-buzzword">The key rule: if a uterus is present, progestin MUST be added to estrogen</span>. Unopposed estrogen → chronic stimulation of the endometrium → endometrial hyperplasia → type I endometrial adenocarcinoma. Progestin counteracts by preventing uncontrolled proliferation (and induces decidualization → regular withdrawal bleeding on cyclic regimens). <strong>Estrogen-only HRT</strong> is only appropriate for women who have had a hysterectomy (A wrong — the vignette specifies intact uterus). Progesterone alone (C) doesn't treat hot flashes effectively. Clomiphene (D) can't restart ovulation after ovarian follicles are depleted. WHI data informed risks: HRT CI in breast CA hx, VTE, active liver disease, unexplained vaginal bleeding, CAD/stroke history.</div>
+  </div>
+</div>
+
+<!-- ══ SCORE REPORT ══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-score">
+  <div class="sec">Performance Dashboard</div>
+
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-card-num" id="sc-total">— <span class="pct"></span></div>
+      <div class="score-card-label">Total Score</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-total" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-b1">— <span class="pct"></span></div>
+      <div class="score-card-label">Block 1</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-b1" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-b2">— <span class="pct"></span></div>
+      <div class="score-card-label">Block 2</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-b2" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-b3">— <span class="pct"></span></div>
+      <div class="score-card-label">Block 3</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-b3" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="score-breakdown">
+    <div class="score-breakdown-title">Question-by-Question Breakdown</div>
+    <div id="q-breakdown">
+      <div class="exam-intro" style="text-align:center">Answer questions in the Exam Blocks to see your breakdown here.</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:16px">
+    <button class="score-reset-btn" onclick="resetAllScores()">Reset All Scores</button>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp;
+  RPD03 Hub #3 — USMLE Step 1 MCQ &nbsp;·&nbsp; HoyaDocs Repro Block
+</div>
+
+</div>
+
+<script>
+// ── TAB SWITCHING ──
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='score') updateScoreReport();
+}
+
+// ── VIGNETTE MCQ ──
+var answers={};
+function answerVig(opt,correct){
+  var item=opt.closest('.vig-item');
+  if(item.querySelector('.locked'))return;
+  item.querySelectorAll('.vig-opt').forEach(function(o){o.classList.add('locked');o.onclick=null;});
+  opt.classList.add(correct?'correct':'wrong');
+  if(!correct){
+    item.querySelectorAll('.vig-opt').forEach(function(o){
+      var fn=o.getAttribute('onclick');
+      if(fn&&fn.includes('true'))o.classList.add('correct');
+    });
+  }
+  item.querySelector('.vig-exp').classList.add('show');
+  var allVigs=document.querySelectorAll('.vig-item');
+  allVigs.forEach(function(v,i){
+    if(v===item) answers[i]={correct:correct,block:item.getAttribute('data-block')};
+  });
+  updateGlobalScore();
+}
+
+function updateGlobalScore(){
+  var total=Object.keys(answers).length;
+  var right=0;
+  for(var k in answers) if(answers[k].correct) right++;
+  var el=document.getElementById('global-score');
+  if(total>0) el.textContent=right+'/'+total;
+}
+
+// ── SCORE REPORT ──
+function updateScoreReport(){
+  var blocks={b1:{right:0,total:0,max:5},b2:{right:0,total:0,max:5},b3:{right:0,total:0,max:5}};
+  var totalRight=0,totalAnswered=0;
+  for(var k in answers){
+    var a=answers[k];
+    var b=a.block;
+    if(blocks[b]!==undefined){
+      blocks[b].total++;
+      if(a.correct){blocks[b].right++;totalRight++;}
+      totalAnswered++;
+    }
+  }
+  function setCard(id,barId,right,total,max){
+    var el=document.getElementById(id);
+    var bar=document.getElementById(barId);
+    if(total===0){el.innerHTML='— <span class="pct"></span>';bar.style.width='0%';return;}
+    var pct=Math.round((right/max)*100);
+    el.innerHTML=right+'/'+max+' <span class="pct">'+pct+'%</span>';
+    bar.style.width=pct+'%';
+  }
+  var totalMax=15;
+  var totalPct=totalAnswered>0?Math.round((totalRight/totalMax)*100):0;
+  var scTotal=document.getElementById('sc-total');
+  var barTotal=document.getElementById('bar-total');
+  if(totalAnswered===0){scTotal.innerHTML='— <span class="pct"></span>';barTotal.style.width='0%';}
+  else{scTotal.innerHTML=totalRight+'/'+totalMax+' <span class="pct">'+totalPct+'%</span>';barTotal.style.width=totalPct+'%';}
+  setCard('sc-b1','bar-b1',blocks.b1.right,blocks.b1.total,5);
+  setCard('sc-b2','bar-b2',blocks.b2.right,blocks.b2.total,5);
+  setCard('sc-b3','bar-b3',blocks.b3.right,blocks.b3.total,5);
+  var bd=document.getElementById('q-breakdown');
+  if(totalAnswered===0){bd.innerHTML='<div class="exam-intro" style="text-align:center">Answer questions in the Exam Blocks to see your breakdown here.</div>';return;}
+  var html='';
+  var allVigs=document.querySelectorAll('.vig-item');
+  allVigs.forEach(function(v,i){
+    var num=i+1;
+    var label=v.querySelector('.vig-num').textContent;
+    if(answers[i]!==undefined){
+      var cls=answers[i].correct?'correct':'wrong';
+      var icon=answers[i].correct?'✓':'✗';
+      html+='<div class="score-row"><span class="score-row-label">Q'+num+' — '+label.split('·').pop().trim()+'</span><span class="score-row-val '+cls+'">'+icon+'</span></div>';
+    } else {
+      html+='<div class="score-row"><span class="score-row-label">Q'+num+' — '+label.split('·').pop().trim()+'</span><span class="score-row-val" style="color:#7A7060">—</span></div>';
+    }
+  });
+  bd.innerHTML=html;
+}
+
+function resetAllScores(){location.reload();}
+
+// ── BLOCK TIMERS ──
+var timers={};
+function initTimer(id,seconds){
+  timers[id]={total:seconds,remaining:seconds,running:false,interval:null};
+  renderTimer(id);
+}
+function renderTimer(id){
+  var t=timers[id];
+  var m=Math.floor(t.remaining/60);
+  var s=t.remaining%60;
+  document.getElementById('timer-'+id).textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+}
+function toggleTimer(id){
+  var t=timers[id];
+  if(t.running){clearInterval(t.interval);t.running=false;}
+  else{t.running=true;t.interval=setInterval(function(){
+    if(t.remaining>0){t.remaining--;renderTimer(id);}
+    else{clearInterval(t.interval);t.running=false;document.getElementById('timer-'+id).textContent='00:00';}
+  },1000);}
+}
+function resetTimer(id,seconds){
+  var t=timers[id];
+  if(t.interval) clearInterval(t.interval);
+  t.remaining=seconds;t.running=false;
+  renderTimer(id);
+}
+
+// ── INIT ──
+window.addEventListener('load',function(){
+  initTimer('b1',450);
+  initTimer('b2',450);
+  initTimer('b3',450);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPD03 Female Reproductive System — Hub 1 Core Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── BASE ── */
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#F7F5F0;color:#2C2C2C;min-height:100vh;line-height:1.6}
+
+/* ── TOP NAV ── */
+.topnav{background:#8B2242;border-bottom:3px solid #C9A84C;padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.35em;font-weight:700;color:#F2E8CF;letter-spacing:.02em}
+.nav-brand-sub{font-size:.72em;color:#C9A84C;font-weight:500;margin-left:6px;letter-spacing:.04em;text-transform:uppercase}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:rgba(255,255,255,0.7);font-weight:500;padding:6px 14px;border-radius:5px;border:1px solid rgba(255,255,255,0.2);text-decoration:none;transition:all .2s}
+.nav-back:hover{border-color:#C9A84C;color:#C9A84C}
+
+/* ── CONTAINER ── */
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+
+/* ── HEADER ── */
+.header{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#8B2242 0%,#C9A84C 50%,#8B2242 100%)}
+.hub-tag{display:inline-block;background:#8B2242;color:#F2E8CF;font-family:'Source Sans 3',sans-serif;font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:4px 12px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2em;color:#8B2242;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#8B6914;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:4px;padding:4px 10px;font-size:.75em;color:#5A5A5A}
+.source-badge strong{color:#8B2242}
+
+/* ── HUB PROGRESSION ── */
+.hub-prog{background:#FFF;border:1px solid #D6CEB8;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:7px 16px;border-radius:4px;font-size:.82em;font-weight:600}
+.hub-step.current{background:#8B2242;color:#F2E8CF}
+.hub-step.next{background:#F7F5F0;border:1px solid #D6CEB8;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#C9A84C;color:#8B6914}
+.hub-arrow{color:#C9A84C;font-size:1em;font-weight:700}
+.hub-prog-label{font-size:.76em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #D6CEB8;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:1.8em;font-weight:700;color:#8B2242}
+.stat-label{font-size:.68em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #D6CEB8;padding-bottom:0}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.84em;font-weight:600;padding:11px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#8B2242}
+.tab-btn.active{color:#8B2242;border-bottom-color:#C9A84C}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* ── FLASHCARDS ── */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #D6CEB8;border-top:3px solid #8B2242}
+.fc-back{transform:rotateY(180deg);background:#FFFDF5;border:1px solid #C9A84C}
+.fc-label{font-size:.66em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#8B2242;font-weight:700}
+
+/* ── FILL-IN-BLANK ── */
+.fib-list{display:flex;flex-direction:column;gap:16px}
+.fib-card{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:22px;border-left:4px solid #8B2242}
+.fib-num{font-size:.68em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fib-prompt{font-size:.93em;color:#2C2C2C;line-height:1.65;margin-bottom:12px}
+.fib-hint{font-size:.8em;color:#7A7060;font-style:italic;margin-bottom:10px}
+.fib-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fib-input{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:9px 14px;color:#2C2C2C;font-size:.9em;font-family:inherit;min-width:200px;transition:border-color .2s}
+.fib-input:focus{outline:none;border-color:#C9A84C;background:#FFFDF5}
+.fib-input.correct{border-color:#2E7D32;background:#F1F8F2}
+.fib-input.incorrect{border-color:#C62828;background:#FEF5F5}
+.fib-btn{background:#8B2242;border:none;color:#F2E8CF;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:background .2s}
+.fib-btn:hover{background:#A83A58}
+.fib-reveal-btn{background:#FFF;border:1px solid #D6CEB8;color:#7A7060;padding:9px 16px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:all .2s}
+.fib-reveal-btn:hover{border-color:#C9A84C;color:#8B6914}
+.fib-feedback{font-size:.82em;margin-top:8px;padding:7px 12px;border-radius:4px;display:none}
+.fib-feedback.correct{background:#F1F8F2;border:1px solid #A5D6A7;color:#2E7D32;display:block}
+.fib-feedback.incorrect{background:#FEF5F5;border:1px solid #FFCDD2;color:#C62828;display:block}
+
+/* ── ORDERING ── */
+.ordering-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.ordering-intro strong{color:#8B2242}
+.order-drill{background:#FFFFFF;border:1px solid #D6CEB8;border-left:4px solid #C9A84C;border-radius:6px;padding:22px;margin-bottom:20px}
+.drill-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#8B2242;margin-bottom:5px}
+.drill-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;min-height:40px}
+.order-item{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:12px 16px;cursor:grab;font-size:.86em;color:#2C2C2C;line-height:1.4;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none}
+.order-item:active{cursor:grabbing}
+.order-item:hover{border-color:#C9A84C;background:#FFFDF5}
+.order-item.dragging{opacity:.6;border-style:dashed;border-color:#C9A84C}
+.order-item.drag-over{border-color:#C9A84C;background:#FFF8E1;transform:scale(1.01)}
+.order-item .item-grip{color:#C9A84C;font-size:1.1em;flex-shrink:0;margin-top:1px}
+.order-item .item-text{flex:1}
+.order-item.correct-pos{background:#F1F8F2;border-color:#66BB6A}
+.order-item.wrong-pos{background:#FEF5F5;border-color:#EF5350;color:#991b1b}
+.order-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.order-check-btn{background:#8B2242;border:none;color:#F2E8CF;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:background .2s}
+.order-check-btn:hover{background:#A83A58}
+.order-ghost-btn{background:none;border:1px solid #D6CEB8;color:#7A7060;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:all .2s}
+.order-ghost-btn:hover{border-color:#C9A84C;color:#8B6914}
+.order-feedback{font-size:.84em;padding:8px 14px;border-radius:5px;margin-bottom:8px}
+.order-feedback.correct{background:#F1F8F2;border:1px solid #66BB6A;color:#2E7D32}
+.order-feedback.incorrect{background:#FEF5F5;border:1px solid #EF5350;color:#C62828}
+.order-answer{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:5px;padding:14px 18px;font-size:.83em;margin-top:8px;display:none}
+.order-answer ol{padding-left:20px;line-height:1.9}
+.order-answer li{color:#2C2C2C}
+.order-answer li span{color:#8B2242;font-weight:600}
+
+/* ── MATCHING ── */
+.match-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A}
+.match-intro strong{color:#8B2242}
+.match-set{background:#FFFFFF;border:1px solid #D6CEB8;border-left:4px solid #8B2242;border-radius:6px;padding:22px;margin-bottom:20px}
+.match-set-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#8B2242;margin-bottom:4px}
+.match-set-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.match-cols{grid-template-columns:1fr}}
+.match-col-label{font-size:.7em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.match-item{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.match-item:hover:not(.matched-correct):not(.matched-wrong){border-color:#C9A84C!important;background:#FFFDF5!important}
+.match-item.selected{border-color:#8B2242!important;background:#F7E8EE!important;color:#8B2242!important;font-weight:600}
+.match-item.matched-correct{border-color:#66BB6A!important;background:#F1F8F2!important;color:#2E7D32!important;cursor:default}
+.match-item.flash-wrong{animation:flashRed .5s ease forwards}
+@keyframes flashRed{0%{background:#FEF5F5;border-color:#EF5350}100%{background:#F7F5F0;border-color:#D6CEB8}}
+.match-score{margin-top:12px;font-size:.83em;color:#7A7060}
+.match-score .correct-count{color:#2E7D32;font-weight:700}
+.match-reset-btn{background:none;border:1px solid #D6CEB8;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px;transition:all .2s}
+.match-reset-btn:hover{border-color:#C9A84C;color:#8B6914}
+
+/* ── TEST TRAPS ── */
+.trap-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-left:4px solid #C9A84C;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.trap-intro strong{color:#8B2242}
+.trap-card{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #C9A84C}
+.trap-num{font-size:.68em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-family:'Crimson Pro',Georgia,serif;font-size:1em;color:#2C2C2C;line-height:1.55;margin-bottom:16px;background:#FFFDF5;border-radius:5px;padding:16px;border-left:3px solid #C9A84C;font-style:italic}
+.trap-btns{display:flex;gap:10px;margin-bottom:8px}
+.trap-btn{padding:9px 28px;border-radius:5px;border:2px solid;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.trap-btn-true{background:none;border-color:#66BB6A;color:#2E7D32}
+.trap-btn-true:hover:not(:disabled){background:#F1F8F2;border-color:#43A047}
+.trap-btn-false{background:none;border-color:#EF5350;color:#C62828}
+.trap-btn-false:hover:not(:disabled){background:#FEF5F5;border-color:#E53935}
+.trap-btn:disabled{opacity:.5;cursor:not-allowed}
+.trap-btn.sel-correct{background:#F1F8F2;border-color:#43A047;color:#2E7D32}
+.trap-btn.sel-wrong{background:#FEF5F5;border-color:#E53935;color:#C62828}
+.trap-exp{padding:14px 18px;border-radius:5px;font-size:.87em;line-height:1.65;margin-top:4px;display:none}
+.trap-exp.show-c{background:#F1F8F2;border:1px solid #A5D6A7;color:#1B5E20;display:block}
+.trap-exp.show-w{background:#FEF5F5;border:1px solid #FFCDD2;color:#B71C1C;display:block}
+.trap-exp strong{color:#8B2242}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:.95em;font-weight:700;color:#8B2242;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #C9A84C}
+.ref-table{width:100%;border-collapse:collapse;font-size:.84em}
+.ref-table th{background:#8B2242;color:#F2E8CF;font-weight:600;text-align:left;padding:10px 14px;font-size:.88em;letter-spacing:.03em}
+.ref-table td{padding:10px 14px;border-bottom:1px solid #E8E0CD;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+.ref-table tr:nth-child(even) td{background:#FAFAF5}
+.ref-table tr:hover td{background:#FFFDF5}
+.ref-table .key{color:#8B2242;font-weight:600}
+.ref-note{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
+.ref-note strong{color:#8B2242}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #D6CEB8;padding-top:16px;margin-top:32px}
+.footer a{color:#8B2242;text-decoration:none;font-weight:600}
+.footer a:hover{color:#C9A84C;text-decoration:underline}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Block 4 — Repro</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back-btn">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub 1 — Core Concepts</div>
+  <h1>Female Reproductive System <span>Active Drills</span></h1>
+  <div class="subtitle">
+    Flashcards · Fill-in-Blank · Drag-and-Drop Ordering · Matching · Interactive Test Traps<br>
+    Lecture 03 · Repro Block · Female Reproductive Histology &amp; Menstrual Cycle
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Primary:</strong> RPD03 Lecture Guide (HoyaDocs)</div>
+    <div class="source-badge"><strong>Lecturer:</strong> Histology</div>
+    <div class="source-badge"><strong>Review:</strong> Junqueira's Basic Histology Ch. 22</div>
+    <div class="source-badge"><strong>Topics:</strong> Follicles · Oviduct · Uterus · Menstrual Cycle · External Genitalia · Mammary</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <span class="hub-step current">Hub 1 — Core Concepts</span>
+  <span class="hub-arrow">→</span>
+  <a href="rpd03_hub2.html" class="hub-step next">Hub 2 — Step 1 Extensions</a>
+  <span class="hub-arrow">→</span>
+  <a href="rpd03_hub3.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Fill-in-Blank</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Test Traps</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('fib',this)">Fill-in-Blank</button>
+  <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
+  <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
+</div>
+
+<!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">16</span> cards total</span><span>Female Repro Histology</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Ovary Organization</div><div class="fc-q">Name the three basic regions of the adult ovary from outermost to innermost, and what each contains.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Germinal epithelium</strong> — simple cuboidal surface; underlying <strong>tunica albuginea</strong> (dense CT).<br><br><strong>2. Cortex</strong> — connective tissue containing <strong>ovarian follicles in varying stages</strong>.<br><br><strong>3. Medulla</strong> — loose CT with blood vessels, nerves, lymphatics.<br><br><em>Clinical:</em> Most ovarian cancers arise from the <strong>germinal epithelium</strong>.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Primordial Follicle</div><div class="fc-q">What cells surround the oocyte in a primordial follicle, and at what stage of meiosis is the oocyte arrested?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Primordial follicle:</strong> oocyte surrounded by a single layer of <strong>squamous follicular cells</strong> (+ stromal cells outside).<br><br>All follicles exist in this stage <strong>at birth</strong>, <strong>arrested in prophase I</strong> of meiosis.<br><br>Do NOT respond to FSH until puberty. Each cycle, ~20 are recruited and upgrade their follicular cells to <strong>columnar/granular</strong> (granulosa cells).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Primary Follicles</div><div class="fc-q">Differentiate unilaminar vs. multilaminar primary follicles. When does the zona pellucida form?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Unilaminar primary follicle:</strong> oocyte surrounded by a <strong>single layer of granulosa cells</strong> (cuboidal/columnar) + basal lamina. <strong>Zona pellucida begins forming.</strong><br><br><strong>Multilaminar primary follicle:</strong> hyperplasia → <strong>multiple layers of granulosa cells</strong>. Now the <strong>zona pellucida</strong> is fully visible (proteoglycan-rich ECM between oocyte &amp; granulosa — synthesized by BOTH). Stromal cells begin differentiating into <strong>theca interna</strong>.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Secondary (Antral) Follicle</div><div class="fc-q">What defines the secondary follicle? What is OMI, and what does the theca interna do that the theca externa doesn't?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Defined by the <strong>antrum</strong> — a fluid-filled space containing hyaluronic acid-rich liquor folliculi with <strong>OMI (Oocyte Meiosis Inhibitor)</strong>, which <strong>arrests the oocyte in prophase II</strong>.<br><br><strong>Theca interna:</strong> steroidogenic cells → produce <strong>androstenedione</strong> → aromatized by <strong>granulosa cells into estrogen</strong> (2-cell hypothesis).<br><br><strong>Theca externa:</strong> mainly connective tissue — structural only.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Graafian (Tertiary) Follicle</div><div class="fc-q">What are the corona radiata and cumulus oophorus, and where is the oocyte located in a Graafian follicle?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Graafian follicle = dominant follicle</strong>. Oocyte is <strong>eccentrically located</strong>, surrounded by granulosa cells connected to the mature follicle by a granulosa pedicle.<br><br><strong>Corona radiata:</strong> <em>innermost single layer of granulosa cells</em> directly hugging the oocyte (travels WITH the oocyte at ovulation).<br><br><strong>Cumulus oophorus:</strong> accumulations of granulosa cells continuous with the pedicle — attaches the oocyte complex to the follicle wall.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Ovulation — LH Surge</div><div class="fc-q">What triggers the LH surge, and what happens to meiosis at ovulation?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Rising estrogen</strong> (from the dominant Graafian follicle) → <strong>LH surge</strong>.<br><br>Follicle ruptures → <strong>oocyte releases with corona radiata attached</strong> = ovulation.<br><br><strong>LH overrides OMI</strong> → meiosis resumes, proceeds through meiosis I, then <strong>arrests again in metaphase II</strong> — where it stays until fertilization.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Corpus Luteum</div><div class="fc-q">After ovulation, what do granulosa and theca interna cells become, and what do they each now secrete?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Remnants of the ruptured Graafian follicle → <strong>corpus luteum</strong> ("yellow body"), a temporary endocrine gland.<br><br><strong>Granulosa cells</strong> (estrogen-producing) → <strong>granulosa lutein cells</strong> → now produce <strong>progesterone</strong>.<br><br><strong>Theca interna cells</strong> (androstenedione-secreting) → <strong>theca lutein cells</strong> → now produce <strong>estrogen</strong>.<br><br>If no pregnancy: CL regresses → <strong>corpus albicans</strong> (white scar).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Oviduct — 4 Parts</div><div class="fc-q">Name the four parts of the fallopian tube from ovary to uterus and their key functions.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Infundibulum</strong> — initial trumpet-shaped segment; <strong>fimbriae</strong> move to trap the ovum.<br><br><strong>2. Ampulla</strong> — most dilated, complex mucosal folding; <strong>site of fertilization</strong>.<br><br><strong>3. Isthmus</strong> — shortest; connects to uterus.<br><br><strong>4. Intramural (pars interstitialis)</strong> — passes through uterine wall.<br><br>Mnemonic: <strong>IAII</strong> = "I Ain't Implanting Inside."</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Oviduct Epithelium</div><div class="fc-q">What two cell types line the fallopian tube, and what hormone maintains their function?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Simple columnar epithelium</strong> with two cell types — both <strong>estrogen-dependent</strong>:<br><br><strong>Ciliated cells:</strong> help move the ovum/zygote through the tube.<br><br><strong>Non-ciliated peg (secretory) cells:</strong> secrete proteins to nurture the zygote.<br><br>Wall layers: mucosa → muscularis (inner circular + outer longitudinal) → serosa.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Uterus — 3 Wall Layers</div><div class="fc-q">Name the three layers of the uterine wall and the two sublayers of the endometrium. Which sublayer sheds during menses?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Endometrium</strong> — innermost; simple columnar (ciliated + secretory) + simple tubular glands.<br>• <strong>Functionalis:</strong> superficial layer <strong>sheds at menstruation</strong> (supplied by spiral/coiled arteries).<br>• <strong>Basalis:</strong> deep layer, provides cells to regenerate the functionalis (supplied by straight arteries).<br><br><strong>2. Myometrium</strong> — thickest middle smooth muscle; hypertrophy &amp; hyperplasia during pregnancy.<br><br><strong>3. Perimetrium</strong> — outer CT; forms part of broad ligament.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">HPO Axis</div><div class="fc-q">Trace the hypothalamic-pituitary-ovarian axis: hormones, targets, and feedback loops.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Hypothalamus:</strong> GnRH → ant. pituitary<br><strong>Ant. pituitary:</strong><br>• <strong>FSH</strong> → stimulates follicular phase<br>• <strong>LH</strong> → stimulates ovulation + corpus luteum<br><br><strong>Follicles → estrogen</strong> → <em>negative</em> feedback on hypothalamus (GnRH) UNTIL a threshold → <strong>positive</strong> feedback → LH surge.<br><br><strong>Corpus luteum → estrogen + progesterone</strong> → negative feedback on hypothalamus + pituitary.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Menstrual Cycle Phases</div><div class="fc-q">Name and time the four phases of the menstrual cycle and the dominant hormone of each.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Menses (day 0–5):</strong> ↓estrogen, ↓progesterone (CL has degenerated).<br><strong>2. Proliferative (day 6–14) / Follicular:</strong> estrogen rises → endometrium thickens (2–3×), <strong>straight tubular glands</strong> elongate.<br><strong>3. Secretory (day 15–28) / Luteal:</strong> CL produces estrogen + progesterone → endometrium thickens more, glands become <strong>coiled &amp; convoluted</strong>, spiral arteries elongate; glands secrete for implantation.<br><strong>4. Ischemic (late day 28):</strong> CL degenerates → ↓E, ↓P → vasospasm of spiral arteries → <strong>ischemic necrosis</strong> of functionalis → menses restart.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Cervix — Epithelium &amp; T-Zone</div><div class="fc-q">What type of epithelium lines the ectocervix vs. endocervix, and where does cervical cancer most often arise?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Ectocervix</strong> (projects into vagina): <strong>stratified squamous non-keratinized</strong>.<br><br><strong>Endocervix</strong> (canal): <strong>simple columnar</strong> glandular (secretes mucus).<br><br><strong>Transformation zone (T-zone):</strong> the junction between squamous and columnar — where <strong>HPV (16, 18)</strong> → most cervical cancers arise. Gardasil prevents.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Vagina — Histology</div><div class="fc-q">What are the three layers of the vaginal wall and the type of epithelium in the mucosa?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Mucosa:</strong> <strong>stratified squamous non-keratinized</strong> epithelium (like ectocervix); no glands (lubricated by cervical mucus + Bartholin glands).<br><br><strong>2. Muscularis:</strong> smooth muscle — inner circular, outer longitudinal.<br><br><strong>3. Serosa/Adventitia:</strong> dense CT + elastic fibers.<br><br>Key: estrogen stimulates glycogen deposition → fermented by Lactobacillus → acidic pH.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">External Genitalia &amp; Glands</div><div class="fc-q">Describe the histology of the clitoris, labia minora, and labia majora. Name the homologues of Bartholin's and Skene glands.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Clitoris:</strong> homologue of the penis — venous erectile tissue (corpora cavernosa), blood vessels, sensory nerves (Pacinian corpuscles).<br><strong>Labia minora:</strong> core spongy tissue + <strong>keratinized</strong> stratified squamous epithelium.<br><strong>Labia majora:</strong> skin + adipose + thin smooth muscle; hair, sebaceous, sweat glands; keratinized stratified squamous.<br><br><strong>Bartholin's glands</strong> (greater vestibular) — simple columnar; mucous lubricant → <strong>homologue: bulbourethral (Cowper) glands</strong>.<br><strong>Skene glands</strong> (paraurethral) — pseudostratified/simple columnar; lubricant → <strong>homologue: prostate</strong>.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Mammary Glands</div><div class="fc-q">What is the basic structural unit of the mammary gland? What changes in active (lactating) vs. inactive glands?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Compound tubuloalveolar glands</strong> grouped into <strong>lobes</strong> separated by dense CT (and fat). Milk drains through branching ducts → <strong>lactiferous ducts</strong> → <strong>lactiferous sinuses</strong> → nipple.<br><br><strong>Inactive gland:</strong> predominantly ducts + adipose/CT, few secretory units.<br><strong>Active (lactating) gland:</strong> extensive <strong>tubuloalveolar secretory units</strong> with lumens full of milk; reduced stromal fat.<br><br>Changes driven by: <strong>estrogen</strong> (ducts), <strong>progesterone</strong> (alveoli), <strong>prolactin</strong> (milk production), <strong>oxytocin</strong> (let-down reflex).</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ FILL IN THE BLANK ══════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-fib">
+  <div class="fib-list">
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 01 — Ovary Zones</div>
+      <div class="fib-prompt">The three basic regions of an adult ovary are: the outer ___________ epithelium (simple cuboidal), the ___________ (contains follicles), and the innermost ___________ (loose CT with vessels).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="outer layer..." data-answers="germinal">
+        <input class="fib-input" type="text" placeholder="follicle-containing layer..." data-answers="cortex">
+        <input class="fib-input" type="text" placeholder="innermost..." data-answers="medulla">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Most ovarian cancers arise from the outermost layer.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 02 — Meiotic Arrest</div>
+      <div class="fib-prompt">All primordial follicles at birth are arrested in ___________ I of meiosis. The antral follicle's OMI (Oocyte Meiosis Inhibitor) keeps them arrested in ___________ II. After the LH surge at ovulation, meiosis resumes but arrests again in ___________ II, where it stays until fertilization.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="stage 1..." data-answers="prophase">
+        <input class="fib-input" type="text" placeholder="stage 2..." data-answers="prophase">
+        <input class="fib-input" type="text" placeholder="post-ovulation stage..." data-answers="metaphase">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Prophase I → Prophase II → Metaphase II.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 03 — Two-Cell Model</div>
+      <div class="fib-prompt">In the two-cell hypothesis, ___________ interna cells produce androstenedione (in response to LH), which is then aromatized into estrogen by the ___________ cells (in response to FSH).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="androgen-producing cell..." data-answers="theca">
+        <input class="fib-input" type="text" placeholder="estrogen-producing cell..." data-answers="granulosa">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: "LH likes the theca; FSH feeds the granulosa."</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 04 — Corpus Luteum</div>
+      <div class="fib-prompt">After ovulation, granulosa cells become granulosa lutein cells and now produce ___________, while theca interna cells become theca lutein cells and now produce ___________. If pregnancy doesn't occur, the CL regresses into a white scar called the corpus ___________.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="granulosa lutein product..." data-answers="progesterone">
+        <input class="fib-input" type="text" placeholder="theca lutein product..." data-answers="estrogen">
+        <input class="fib-input" type="text" placeholder="regressed CL..." data-answers="albicans">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 05 — Oviduct Parts</div>
+      <div class="fib-prompt">The 4 parts of the fallopian tube from ovary to uterus are: ___________ (with fimbriae), ___________ (site of fertilization), ___________ (shortest), and intramural portion.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="trumpet-shaped..." data-answers="infundibulum">
+        <input class="fib-input" type="text" placeholder="fertilization site..." data-answers="ampulla">
+        <input class="fib-input" type="text" placeholder="shortest segment..." data-answers="isthmus">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 06 — Endometrium Layers</div>
+      <div class="fib-prompt">The endometrium has two sublayers: the superficial ___________ is shed during menstruation, and the deep ___________ regenerates the lining. The functionalis is supplied by ___________ (coiled) arteries.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="shed layer..." data-answers="functionalis">
+        <input class="fib-input" type="text" placeholder="regenerative layer..." data-answers="basalis">
+        <input class="fib-input" type="text" placeholder="artery type..." data-answers="spiral,coiled">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Spiral arteries are hormonally responsive; straight arteries supply the deep layer.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 07 — Menstrual Cycle Phases</div>
+      <div class="fib-prompt">Days 0–5 = ___________ phase. Days 6–14 = ___________ (or follicular) phase, driven by estrogen. Days 15–28 = ___________ (or luteal) phase, driven by progesterone.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="day 0-5..." data-answers="menses,menstrual">
+        <input class="fib-input" type="text" placeholder="day 6-14..." data-answers="proliferative,proliferation">
+        <input class="fib-input" type="text" placeholder="day 15-28..." data-answers="secretory,secretion">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 08 — LH Surge &amp; Ovulation</div>
+      <div class="fib-prompt">Rising ___________ (hormone) from the dominant Graafian follicle triggers the ___________ surge, which overrides OMI and causes the follicle to rupture at ovulation (~day ___________ of a 28-day cycle).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="hormone..." data-answers="estrogen,estradiol,e2">
+        <input class="fib-input" type="text" placeholder="pituitary hormone..." data-answers="lh,luteinizing hormone">
+        <input class="fib-input" type="text" placeholder="day..." data-answers="14">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Estrogen switches from negative to positive feedback when it reaches a threshold.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 09 — Cervix Epithelium</div>
+      <div class="fib-prompt">The ectocervix is lined by stratified squamous ___________-keratinized epithelium; the endocervix is lined by simple ___________ epithelium. The junction between the two (the ___________ zone) is where cervical cancer most frequently arises.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="keratin status..." data-answers="non">
+        <input class="fib-input" type="text" placeholder="cell shape..." data-answers="columnar">
+        <input class="fib-input" type="text" placeholder="junction name..." data-answers="transformation,transition">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: HPV 16/18 cause most cervical cancers here — Pap smears sample this zone.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 10 — Vestibular Gland Homologues</div>
+      <div class="fib-prompt">Bartholin's (greater vestibular) glands secrete mucus for lubrication and are homologous to the male ___________ glands. Skene (paraurethral) glands secrete lubricating fluid and are homologous to the male ___________.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="Bartholin male homolog..." data-answers="bulbourethral,cowper,cowper's,bulbourethral (cowper's) glands,bulbourethral glands">
+        <input class="fib-input" type="text" placeholder="Skene male homolog..." data-answers="prostate,prostate gland">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: "Big Bar = Bulbourethral; Skene = Prostate."</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ORDERING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-ordering">
+  <div class="ordering-intro">
+    <strong>Instructions:</strong> Drag and drop the items into the correct order, then click "Check Order." Use "Show Answer" if you get stuck.
+  </div>
+
+  <!-- Drill 1: Follicle Maturation -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 1 — Follicular Stages: Primordial → Corpus Albicans</div>
+    <div class="drill-hint">Arrange these 7 stages of follicle maturation from earliest (at birth) to final degeneration.</div>
+    <div class="order-list" id="order-list-1" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-1')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Corpus luteum — granulosa + theca lutein cells produce progesterone + estrogen</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Unilaminar primary follicle — single layer of granulosa cells; zona pellucida begins forming</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Ovulation — LH surge ruptures follicle; oocyte + corona radiata released</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Primordial follicle — oocyte + single squamous follicular cell layer (arrested in prophase I at birth)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Multilaminar primary follicle — several granulosa layers + theca interna differentiates</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="7"><span class="item-grip">⠿</span><span class="item-text">Corpus albicans — white scar in cortex after CL regresses (no pregnancy)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Secondary/Graafian follicle — antrum with OMI; dominant; corona radiata + cumulus oophorus</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-1','order-fb-1')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-1')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-1"></div>
+    <div class="order-answer" id="order-ans-1">
+      <ol><li><span>Primordial follicle</span> — present at birth; arrested prophase I</li><li><span>Unilaminar primary</span> — single layer granulosa; zona pellucida starts</li><li><span>Multilaminar primary</span> — several granulosa layers; theca interna forms</li><li><span>Secondary → Graafian</span> — antrum; corona radiata; cumulus oophorus</li><li><span>Ovulation</span> — LH surge; oocyte + corona radiata released</li><li><span>Corpus luteum</span> — granulosa lutein (P) + theca lutein (E)</li><li><span>Corpus albicans</span> — regression to scar (if no pregnancy)</li></ol>
+    </div>
+  </div>
+
+  <!-- Drill 2: Menstrual Cycle Phases -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 2 — 28-Day Menstrual Cycle: Correct Sequence</div>
+    <div class="drill-hint">Arrange the 6 events of the menstrual cycle in chronological order (starting at day 0).</div>
+    <div class="order-list" id="order-list-2" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-2')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Secretory (luteal) phase — CL makes E + P; glands coil; spiral arteries elongate (days 15–27)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Proliferative (follicular) phase — rising estrogen thickens endometrium 2–3× (days 6–13)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Menses (days 0–5) — low E &amp; P from degenerating CL → functionalis sloughs</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">LH surge — triggered by estrogen threshold (positive feedback)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Ischemic phase — CL degenerates → ↓E/P → spiral artery vasoconstriction → necrosis → menses restart</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Ovulation (day 14) — follicle ruptures; oocyte released</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-2','order-fb-2')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-2')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-2"></div>
+    <div class="order-answer" id="order-ans-2">
+      <ol><li><span>Menses</span> (days 0–5) — ↓E, ↓P, shedding functionalis</li><li><span>Proliferative phase</span> (days 6–13) — estrogen thickens endometrium</li><li><span>LH surge</span> — estrogen positive feedback triggers it</li><li><span>Ovulation</span> (day 14)</li><li><span>Secretory phase</span> (days 15–27) — CL makes E + P; glands coil</li><li><span>Ischemic phase</span> — CL degenerates → menstruation begins next cycle</li></ol>
+    </div>
+  </div>
+
+  <!-- Drill 3: Hormone Signaling at Ovulation -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 3 — HPO Signaling Cascade at Ovulation</div>
+    <div class="drill-hint">Arrange these 6 steps in the correct order of endocrine signaling at mid-cycle.</div>
+    <div class="order-list" id="order-list-3" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-3')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">LH surge — overrides OMI, resumes meiosis; triggers follicular rupture</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Ant. pituitary releases FSH → stimulates growing follicles; promotes granulosa aromatase</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Oocyte arrests in metaphase II; corona radiata travels with it down the oviduct</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Hypothalamus releases GnRH pulses</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Estrogen passes threshold → SWITCHES to positive feedback on hypothalamus/pituitary</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Follicles produce rising estrogen (2-cell: theca → androgen → granulosa aromatizes → estrogen)</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-3','order-fb-3')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-3')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-3"></div>
+    <div class="order-answer" id="order-ans-3">
+      <ol><li><span>GnRH pulses</span> from hypothalamus</li><li><span>FSH release</span> — stimulates granulosa aromatase</li><li><span>Rising estrogen</span> from 2-cell theca–granulosa unit</li><li><span>Positive feedback switch</span> — estrogen now stimulates LH release</li><li><span>LH surge</span> — resumes meiosis; ruptures follicle</li><li><span>Oocyte</span> released, arrests in metaphase II, awaits fertilization</li></ol>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MATCHING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-matching">
+  <div class="match-intro">
+    <strong>Instructions:</strong> Click an item on the left, then click its match on the right. Correct pairs turn green; wrong pairs flash red.
+  </div>
+
+  <!-- Set 1: Follicle Stage → Key Feature -->
+  <div class="match-set">
+    <div class="match-set-title">Set 1 — Follicle Stage → Defining Feature</div>
+    <div class="match-set-hint">Match each follicle stage to its most distinguishing histologic feature.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Follicle Stage</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Primordial follicle</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Multilaminar primary follicle</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Secondary (antral) follicle</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Graafian (tertiary) follicle</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="5">Corpus luteum</div>
+      </div>
+      <div>
+        <div class="match-col-label">Defining Feature</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Cumulus oophorus + corona radiata; eccentric oocyte</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Single layer of squamous follicular cells; arrested prophase I</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="5">Granulosa lutein (P) + theca lutein (E) cells — post-ovulation endocrine gland</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Antrum with OMI (arrests prophase II); theca interna starts aromatization</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Multiple granulosa layers + zona pellucida + forming theca interna</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms1-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms1')">Reset</button>
+  </div>
+
+  <!-- Set 2: Structure → Epithelium -->
+  <div class="match-set">
+    <div class="match-set-title">Set 2 — Female Reproductive Structure → Epithelium</div>
+    <div class="match-set-hint">Match each anatomic region to the epithelium that lines it.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Structure</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Fallopian tube mucosa</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Endocervical canal</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Ectocervix / vagina</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">Labia minora (surface)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="5">Urethra (female)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Epithelium</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Stratified squamous NON-keratinized</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Simple columnar — ciliated + secretory (peg) cells</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="5">Pseudostratified columnar</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">Stratified squamous KERATINIZED</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Simple columnar (glandular, mucus-secreting)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms2-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms2')">Reset</button>
+  </div>
+
+  <!-- Set 3: Cell/Structure → Hormone Produced -->
+  <div class="match-set">
+    <div class="match-set-title">Set 3 — Ovarian Cell/Structure → Hormone Produced</div>
+    <div class="match-set-hint">Match each cell type or endocrine structure to the hormone it makes.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Cell / Structure</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Theca interna cells</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Granulosa cells (pre-ovulation)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Granulosa lutein cells</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Theca lutein cells</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="5">Placenta (after week 10)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Primary Hormone</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Progesterone (main post-ovulation product)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Androstenedione (LH-stimulated precursor)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="5">Estrogen + progesterone (corpus luteum-placental shift)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Estrogen (aromatizes theca's androgens)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Estrogen (in the corpus luteum)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms3-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms3')">Reset</button>
+  </div>
+</div>
+
+<!-- ══ TEST TRAPS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-traps">
+  <div class="trap-intro">
+    <strong>Test Trap Mode:</strong> Each statement is either TRUE or FALSE as written. Many are designed to catch common exam errors. Click T or F — then read the explanation carefully.
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 — Oocyte Arrest</div>
+    <div class="trap-statement">"At birth, all primordial follicles contain oocytes arrested in metaphase II of meiosis."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Primordial follicles are arrested in <strong>prophase I</strong> at birth — where they stay until puberty. After the LH surge at ovulation, meiosis resumes and re-arrests in <strong>metaphase II</strong>. Metaphase II arrest only occurs AFTER ovulation and is only broken by fertilization. Classic order: <strong>prophase I → prophase II (in antral follicles, via OMI) → metaphase II</strong>.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 — 2-Cell Hypothesis</div>
+    <div class="trap-statement">"Granulosa cells produce androgens, which theca interna cells then convert into estrogen."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Completely reversed. The <strong>theca interna</strong> cells (LH-stimulated) produce <strong>androstenedione</strong>, which the <strong>granulosa cells</strong> (FSH-stimulated, expressing aromatase) convert into <strong>estrogen</strong>. Mnemonic: "<strong>L</strong>H likes <strong>L</strong>-theca; <strong>F</strong>SH feeds <strong>F</strong>-granulosa." This is the classic 2-cell 2-gonadotropin model.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 — Corpus Luteum</div>
+    <div class="trap-statement">"In the corpus luteum, granulosa lutein cells still produce estrogen while theca lutein cells now produce progesterone."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Also reversed. In the CL, <strong>granulosa lutein cells NOW make progesterone</strong> (their main CL product) — a switch from the estrogen they made before ovulation. <strong>Theca lutein cells now make estrogen</strong> — also a switch from androstenedione. This hormone "swap" is why the corpus luteum secretes both progesterone (dominant) + estrogen in the secretory phase.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 — Endometrial Regeneration</div>
+    <div class="trap-statement">"After menstruation, the functionalis regenerates the basalis."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Backwards. The <strong>basalis (deep layer)</strong> is preserved during menses and <strong>regenerates the functionalis (superficial layer)</strong> in the proliferative phase. The functionalis is what <em>sheds</em>. Basalis is supplied by <strong>straight arteries</strong> (not hormonally sensitive), while functionalis is supplied by <strong>spiral/coiled arteries</strong> (estrogen/progesterone-responsive; constrict during ischemic phase).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 — Ectocervix Epithelium</div>
+    <div class="trap-statement">"The ectocervix is lined by stratified squamous KERATINIZED epithelium, like the skin."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The ectocervix (and vagina) are lined by stratified squamous <strong>NON-keratinized</strong> epithelium — because they are moist internal surfaces. Keratinization is reserved for dry external surfaces (skin, labia minora/majora surface). The non-keratinized ectocervix meets the simple columnar endocervix at the <strong>transformation zone</strong>, the primary site of HPV-driven cervical cancer.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 — Fertilization Site</div>
+    <div class="trap-statement">"Fertilization most commonly occurs in the isthmus of the fallopian tube because it is the shortest segment."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Fertilization occurs in the <strong>ampulla</strong>, not the isthmus. The ampulla is the <em>longest and most dilated</em> segment with complex mucosal folds that create a favorable environment (transudative fluid accumulation). Sperm travel uterus → isthmus → ampulla, where they encounter the ovum. The isthmus is the shortest segment closer to the uterus. Ectopic pregnancy most commonly occurs in the <strong>ampulla</strong> for the same reason.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 — Menstrual Cycle Timing</div>
+    <div class="trap-statement">"The luteal (secretory) phase varies considerably in length, while the follicular (proliferative) phase is fixed at ~14 days."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Reversed. The <strong>luteal phase is FIXED at ~14 days</strong> (determined by corpus luteum lifespan — CL degenerates after ~14 days if no hCG). The <strong>follicular phase is VARIABLE</strong> — this is why cycle length differs between women. Clinical pearl: ovulation is ~14 days BEFORE the next menstrual period (not 14 days after the current one).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 08 — Corpus Luteum-Placental Shift</div>
+    <div class="trap-statement">"If pregnancy occurs, the corpus luteum must produce progesterone for the entire 9-month gestation."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The <strong>corpus luteum-placental shift</strong>: hCG from the implanting blastocyst maintains the CL through the first trimester. Around <strong>weeks 8–10</strong>, the <strong>placenta takes over</strong> production of progesterone and estrogen — and the CL gradually regresses. Clinical relevance: removing the CL (e.g., oophorectomy) before week 10 risks miscarriage; after that, the placenta alone sustains pregnancy.</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-reference">
+
+  <div class="ref-section">
+    <div class="ref-title">Follicular Stages — Full Reference</div>
+    <table class="ref-table">
+      <thead><tr><th>Stage</th><th>Granulosa Layer</th><th>Oocyte Stage</th><th>Defining Features</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Primordial</td><td>Single squamous layer</td><td>Prophase I (arrested)</td><td>Present at birth; does not respond to FSH until puberty</td></tr>
+        <tr><td class="key">Unilaminar primary</td><td>Single cuboidal/columnar layer</td><td>Prophase I</td><td>Zona pellucida begins forming; basal lamina present</td></tr>
+        <tr><td class="key">Multilaminar primary</td><td>Multiple granulosa layers</td><td>Prophase I</td><td>Zona pellucida fully developed; theca interna starts</td></tr>
+        <tr><td class="key">Secondary (Antral)</td><td>Multilayered + antrum</td><td>Prophase II (OMI-arrested)</td><td>Antrum with liquor folliculi + OMI; theca interna → androstenedione</td></tr>
+        <tr><td class="key">Graafian (Tertiary)</td><td>Corona radiata + cumulus oophorus</td><td>Prophase II</td><td>Dominant follicle; eccentric oocyte attached by pedicle</td></tr>
+        <tr><td class="key">Ovulation</td><td>Released (corona radiata)</td><td>Metaphase II (post-LH surge)</td><td>LH surge overrides OMI; follicle ruptures</td></tr>
+        <tr><td class="key">Corpus luteum</td><td>Granulosa lutein → progesterone</td><td>—</td><td>Theca lutein → estrogen; temporary endocrine gland</td></tr>
+        <tr><td class="key">Corpus albicans</td><td>Fibrous scar</td><td>—</td><td>CL degeneration if no pregnancy; white connective tissue</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Female Reproductive Tract — Epithelium Summary</div>
+    <table class="ref-table">
+      <thead><tr><th>Structure</th><th>Epithelium</th><th>Step 1 Hook</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Ovary (surface)</td><td>Simple cuboidal (germinal epithelium)</td><td>Source of most ovarian cancers (epithelial)</td></tr>
+        <tr><td class="key">Fallopian tube</td><td>Simple columnar: ciliated + peg (secretory)</td><td>Estrogen-dependent; salpingitis → PID → tubal infertility/ectopic</td></tr>
+        <tr><td class="key">Uterus — endometrium</td><td>Simple columnar (ciliated + secretory) + simple tubular glands</td><td>Functionalis sheds w/ menses; basalis regenerates</td></tr>
+        <tr><td class="key">Endocervix</td><td>Simple columnar (glandular)</td><td>Mucus-secreting; hostile in luteal phase</td></tr>
+        <tr><td class="key">Ectocervix</td><td>Stratified squamous NON-keratinized</td><td>HPV 16/18 infects T-zone → cervical cancer</td></tr>
+        <tr><td class="key">Vagina</td><td>Stratified squamous NON-keratinized</td><td>Estrogen → glycogen → Lactobacillus → ↓pH</td></tr>
+        <tr><td class="key">Labia minora surface</td><td>Stratified squamous KERATINIZED</td><td>External skin-like</td></tr>
+        <tr><td class="key">Labia majora surface</td><td>Stratified squamous KERATINIZED (+ hair/sebaceous)</td><td>True skin with adnexae</td></tr>
+        <tr><td class="key">Urethra (♀)</td><td>Pseudostratified columnar</td><td>Short (~4 cm) → ↑UTI risk</td></tr>
+        <tr><td class="key">Bartholin's glands</td><td>Simple columnar (mucus)</td><td>Bartholin cyst/abscess; homolog of Cowper</td></tr>
+        <tr><td class="key">Skene glands</td><td>Pseudostratified/simple columnar</td><td>Homolog of prostate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Menstrual Cycle — Hormonal &amp; Endometrial Events</div>
+    <table class="ref-table">
+      <thead><tr><th>Phase</th><th>Days</th><th>Ovary</th><th>Endometrium</th><th>Dominant Hormone</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Menses</td><td>0–5</td><td>Follicles begin maturing</td><td>Functionalis sloughing</td><td>↓ E, ↓ P</td></tr>
+        <tr><td class="key">Proliferative (Follicular)</td><td>6–13</td><td>Dominant follicle matures</td><td>Functionalis regenerates from basalis; straight tubular glands form</td><td>Estrogen (rising)</td></tr>
+        <tr><td class="key">Ovulation</td><td>14</td><td>Graafian follicle ruptures</td><td>Transitions to secretory</td><td>LH surge</td></tr>
+        <tr><td class="key">Secretory (Luteal)</td><td>15–27</td><td>Corpus luteum</td><td>Glands become <strong>coiled/tortuous</strong>; spiral arteries elongate; glandular secretions peak</td><td>Progesterone (dominant) + estrogen</td></tr>
+        <tr><td class="key">Ischemic</td><td>28</td><td>CL degenerates (corpus albicans)</td><td>Spiral artery vasoconstriction → necrosis of functionalis</td><td>↓ E, ↓ P (sharp drop)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Female ↔ Male Homologues &amp; Clinical Hooks</div>
+    <table class="ref-table">
+      <thead><tr><th>Female Structure</th><th>Male Homolog</th><th>Clinical Hook</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Ovary</td><td>Testis</td><td>Gonadal ridge → gonad</td></tr>
+        <tr><td class="key">Clitoris</td><td>Glans/shaft of penis</td><td>Genital tubercle; erectile tissue + sensory nerves</td></tr>
+        <tr><td class="key">Labia minora</td><td>Penile urethra (fused)</td><td>Urethral folds — unfused in ♀</td></tr>
+        <tr><td class="key">Labia majora</td><td>Scrotum</td><td>Labioscrotal swellings — unfused in ♀</td></tr>
+        <tr><td class="key">Bartholin glands</td><td>Bulbourethral (Cowper) glands</td><td>Cyst/abscess at 5 &amp; 7 o'clock of vaginal introitus</td></tr>
+        <tr><td class="key">Skene glands</td><td>Prostate gland</td><td>Paraurethral; occasionally source of benign masses</td></tr>
+        <tr><td class="key">Gartner's duct cyst</td><td>SEED (Wolffian) derivatives</td><td>Wolffian remnant in ♀ lateral vaginal wall</td></tr>
+        <tr><td class="key">Round ligament + ovarian lig.</td><td>Gubernaculum</td><td>Tethers ovary → uterus / uterus → labia majora</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-note">
+    <strong>Key principle:</strong> The 2-cell 2-gonadotropin model drives ovarian estrogen — <strong>LH on theca → androstenedione</strong> → <strong>FSH on granulosa (aromatase) → estrogen</strong>. After ovulation, the hormonal outputs SWITCH: <strong>granulosa lutein → progesterone</strong>; <strong>theca lutein → estrogen</strong>.
+  </div>
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; RPD03 Hub 1 — Core Concepts &nbsp;·&nbsp; HoyaDocs Repro Block
+</div>
+
+</div><!-- /container -->
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+window.addEventListener('load',function(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+});
+// Tab switching
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+
+// FIB check
+function checkFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  const fb=card.querySelector('.fib-feedback');
+  let allCorrect=true;
+  inputs.forEach(inp=>{
+    const val=inp.value.trim().toLowerCase();
+    const accepted=inp.dataset.answers.split(',').map(a=>a.trim().toLowerCase());
+    if(accepted.some(a=>val.includes(a)||a.includes(val)&&val.length>2)){
+      inp.classList.remove('incorrect');inp.classList.add('correct');
+    } else {
+      inp.classList.remove('correct');inp.classList.add('incorrect');allCorrect=false;
+    }
+  });
+  fb.className='fib-feedback '+(allCorrect?'correct':'incorrect');
+  fb.textContent=allCorrect?'✓ Correct!':'✗ Not quite — use Reveal to see the answer.';
+}
+function revealFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  inputs.forEach(inp=>{
+    const ans=inp.dataset.answers.split(',')[0];
+    inp.value=ans;inp.classList.add('correct');inp.classList.remove('incorrect');
+  });
+  const fb=card.querySelector('.fib-feedback');
+  fb.className='fib-feedback correct';fb.textContent='Answer revealed.';
+}
+
+// Drag-and-Drop Ordering
+let dragSrc=null;
+function dragStart(e){dragSrc=e.currentTarget;e.dataTransfer.effectAllowed='move';}
+function dropOnItem(e,listId){
+  e.preventDefault();e.stopPropagation();
+  const target=e.currentTarget;target.classList.remove('drag-over');
+  if(!dragSrc||dragSrc===target)return;
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  const srcIdx=items.indexOf(dragSrc);
+  const tgtIdx=items.indexOf(target);
+  if(srcIdx<tgtIdx)list.insertBefore(dragSrc,target.nextSibling);
+  else list.insertBefore(dragSrc,target);
+}
+function dropItem(e,listId){e.preventDefault();}
+function checkOrder(listId,fbId){
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  let correct=0;
+  items.forEach((item,idx)=>{
+    item.classList.remove('correct-pos','wrong-pos');
+    if(parseInt(item.dataset.pos)===idx+1){item.classList.add('correct-pos');correct++;}
+    else item.classList.add('wrong-pos');
+  });
+  const fb=document.getElementById(fbId);
+  fb.className='order-feedback '+(correct===items.length?'correct':'incorrect');
+  fb.textContent=correct===items.length?`✓ Perfect! All ${items.length} items in the correct order.`:`${correct}/${items.length} correct — keep trying or show the answer.`;
+}
+function showOrderAnswer(id){
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+// Matching
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,score:0};
+  const state=matchState[setId];
+  if(state.selected===null){
+    document.querySelectorAll(`[onclick*="${setId}"].selected`).forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');state.selected=el;
+  } else {
+    const prev=state.selected;
+    if(prev===el){el.classList.remove('selected');state.selected=null;return;}
+    if(prev.dataset.pair===el.dataset.pair){
+      prev.classList.remove('selected');prev.classList.add('matched-correct');
+      el.classList.add('matched-correct');state.selected=null;state.score++;
+      document.getElementById(setId+'-score').textContent=state.score;
+    } else {
+      [prev,el].forEach(e=>{e.classList.remove('selected');e.classList.add('flash-wrong');setTimeout(()=>e.classList.remove('flash-wrong'),500);});
+      state.selected=null;
+    }
+  }
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,score:0};
+  document.querySelectorAll(`[onclick*="${setId}"]`).forEach(e=>{e.classList.remove('matched-correct','selected','flash-wrong');});
+  document.getElementById(setId+'-score').textContent='0';
+}
+
+// Test Traps
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  const userSaidTrue=btn.classList.contains('trap-btn-true');
+  const isCorrect=(userSaidTrue===correct);
+  btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+
+/* ── THEME TOGGLE ── */
+
+
+</script>
+</body>
+</html>

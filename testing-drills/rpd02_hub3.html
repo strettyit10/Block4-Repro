@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPD02 Hub #3 · Urogenital System — USMLE Step 1 MCQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── BASE ── */
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#F4F3EF;color:#2C2C2C;min-height:100vh;line-height:1.6}
+
+/* ── TOP NAV ── */
+.topnav{background:#2B2B2B;border-bottom:3px solid #D4A84C;padding:0 28px;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;flex-direction:column;justify-content:center;gap:1px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.55em;font-weight:700;color:#F2EDDF;letter-spacing:.02em;line-height:1.2}
+.nav-brand-sub{font-size:.85em;color:#D4A84C;font-weight:500;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:#fff;font-weight:600;padding:6px 14px;border-radius:5px;border:1px solid #D4A84C;background:#D4A84C;text-decoration:none;transition:all .2s}
+.nav-back:hover{background:#BF9540;border-color:#BF9540}
+
+/* ── CONTAINER ── */
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+
+/* ── HEADER ── */
+.header{background:#FFFFFF;border:1px solid #D2CDC4;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#2B2B2B 0%,#D4A84C 50%,#2B2B2B 100%)}
+.hub-tag{display:inline-block;background:#2B2B2B;color:#F2EDDF;font-family:'Source Sans 3',sans-serif;font-size:.82em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:5px 14px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2.3em;color:#2B2B2B;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#8B6914;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#F4F3EF;border:1px solid #D2CDC4;border-radius:4px;padding:5px 12px;font-size:.88em;color:#5A5A5A}
+.source-badge strong{color:#2B2B2B}
+
+/* ── HUB PROGRESSION ── */
+.hub-prog{background:#FFF;border:1px solid #D2CDC4;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:8px 18px;border-radius:4px;font-size:.92em;font-weight:600}
+.hub-step.done{background:#2B2B2B;border:1px solid #2B2B2B;color:#F2EDDF;text-decoration:none;transition:all .2s;font-weight:600}
+.hub-step.done:hover{background:#3A3A3A;border-color:#3A3A3A;color:#fff}
+.hub-step.current{background:#2B2B2B;color:#D4A84C;border:1px solid #D4A84C}
+.hub-step.next{background:#F4F3EF;border:1px solid #D2CDC4;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#D4A84C;color:#8B6914}
+.hub-arrow{color:#D4A84C;font-size:1.1em;font-weight:700}
+.hub-prog-label{font-size:.88em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #D2CDC4;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:2.1em;font-weight:700;color:#2B2B2B}
+.stat-label{font-size:.8em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #D2CDC4;padding-bottom:0}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.96em;font-weight:600;padding:12px 20px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#2B2B2B}
+.tab-btn.active{color:#2B2B2B;border-bottom-color:#D4A84C}
+.tab-content{display:none;animation:fi .25s ease}
+.tab-content.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sec{font-size:.78em;font-weight:700;color:#2B2B2B;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #D2CDC4}
+
+/* ── EXAM HEADER ── */
+.exam-header{background:#2B2B2B;color:#F2EDDF;border-radius:6px;padding:16px 22px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.exam-header-left{display:flex;flex-direction:column;gap:2px}
+.exam-header-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.15em;font-weight:700;color:#D4A84C}
+.exam-header-sub{font-size:.82em;color:rgba(255,255,255,0.7)}
+.exam-timer{display:flex;align-items:center;gap:8px;background:rgba(212,168,76,0.15);border:1px solid rgba(212,168,76,0.4);border-radius:5px;padding:8px 16px}
+.timer-icon{font-size:1.1em}
+.timer-display{font-family:'Source Sans 3',monospace;font-size:1.1em;font-weight:700;color:#D4A84C;letter-spacing:.05em}
+.timer-label{font-size:.72em;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.08em}
+.exam-controls{display:flex;gap:8px}
+.exam-ctrl-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#F2EDDF;padding:6px 14px;border-radius:4px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;transition:all .2s}
+.exam-ctrl-btn:hover{background:rgba(212,168,76,0.2);border-color:#D4A84C;color:#D4A84C}
+
+/* ── VIGNETTE MCQ (STEP 1 STYLE) ── */
+.vig-item{background:#FFFFFF;border:1px solid #D2CDC4;border-radius:6px;padding:22px;margin-bottom:18px}
+.vig-num{font-size:.68em;font-weight:700;color:#D4A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.vig-stem{font-size:.93em;color:#2C2C2C;line-height:1.7;margin-bottom:14px;background:#EDEAE3;padding:14px;border-radius:6px;border-left:3px solid #D4A84C}
+.vig-stem strong{color:#2B2B2B}
+.vig-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.vig-opt{background:#F4F3EF;border:1px solid #D2CDC4;border-radius:5px;padding:10px 14px;cursor:pointer;font-size:.88em;color:#2C2C2C;transition:all .18s;display:flex;align-items:flex-start;gap:10px}
+.vig-opt:hover:not(.locked){border-color:#D4A84C;background:#EDEAE3}
+.vig-opt.correct{background:#F1F8F2;border-color:#2E7D32;color:#1B5E20}
+.vig-opt.correct .vig-opt-letter{color:#2E7D32}
+.vig-opt.wrong{background:#FEF5F5;border-color:#C62828;color:#B71C1C}
+.vig-opt.wrong .vig-opt-letter{color:#C62828}
+.vig-opt.locked{cursor:default}
+.vig-opt-letter{font-weight:700;color:#2B2B2B;flex-shrink:0;width:18px}
+.vig-exp{background:#EDEAE3;border-left:3px solid #D4A84C;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none;margin-top:12px}
+.vig-exp.show{display:block}
+.vig-exp strong{color:#2B2B2B}
+.vig-buzzword{color:#8B6914;font-weight:600}
+
+/* ── INTRO BOXES ── */
+.exam-intro{background:#EDEAE3;border:1px solid #D2CDC4;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.exam-intro strong{color:#2B2B2B}
+
+/* ── SCORE DASHBOARD ── */
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.score-card{background:#FFF;border:1px solid #D2CDC4;border-radius:6px;padding:20px;text-align:center}
+.score-card-num{font-family:'Crimson Pro',Georgia,serif;font-size:2.6em;font-weight:700;color:#2B2B2B;line-height:1.1}
+.score-card-num .pct{font-size:.5em;color:#D4A84C;font-weight:600}
+.score-card-label{font-size:.82em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;font-weight:600}
+.score-bar-wrap{background:#EDEAE3;border-radius:20px;height:10px;margin-top:10px;overflow:hidden}
+.score-bar{background:linear-gradient(90deg,#D4A84C,#8B6914);height:100%;border-radius:20px;transition:width .6s ease}
+.score-breakdown{background:#FFF;border:1px solid #D2CDC4;border-radius:6px;padding:20px;margin-bottom:20px}
+.score-breakdown-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#2B2B2B;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid #D4A84C}
+.score-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #EDEAE3;font-size:.88em}
+.score-row:last-child{border-bottom:none}
+.score-row-label{color:#5A5A5A}
+.score-row-val{font-weight:700;color:#2B2B2B}
+.score-row-val.correct{color:#2E7D32}
+.score-row-val.wrong{color:#C62828}
+.score-reset-btn{background:#2B2B2B;border:none;color:#D4A84C;padding:10px 20px;border-radius:5px;cursor:pointer;font-weight:600;font-size:.88em;font-family:inherit;transition:all .2s;margin-top:10px}
+.score-reset-btn:hover{background:#3A3A3A}
+
+/* ── TABLES ── */
+table{border-collapse:collapse;width:100%}
+table th{background:#2B2B2B;color:#F2EDDF;font-weight:600;text-align:left;padding:10px 14px;font-size:.84em;letter-spacing:.03em}
+table td{padding:10px 14px;border-bottom:1px solid #D2CDC4;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+table tr:nth-child(even) td{background:#FAF9F5}
+table tr:hover td{background:#EDEAE3}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #D2CDC4;padding-top:16px;margin-top:32px}
+.footer a{color:#2B2B2B;text-decoration:none;font-weight:600}
+.footer a:hover{color:#D4A84C;text-decoration:underline}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .container{padding:14px}
+  .header{padding:18px 16px}
+  .header h1{font-size:1.5em}
+  .hub-prog{flex-direction:column;gap:6px;align-items:flex-start}
+  .hub-arrow{display:none}
+  .tab-btn{font-size:.78em;padding:8px 12px}
+  .exam-header{flex-direction:column;align-items:flex-start}
+  .score-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Block 4 — Repro</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub #3 — USMLE Step 1 MCQ</div>
+  <h1>Urogenital System I &amp; II <span>Step 1 Practice Exam</span></h1>
+  <div class="subtitle">
+    Full-length USMLE Step 1-style vignettes · Timed exam blocks · Integrated score tracking<br>
+    Lecture 02 · Repro Block · Urogenital Embryology — Urinary &amp; Genital Development
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Lecturer:</strong> Embryology</div>
+    <div class="source-badge"><strong>Step 1:</strong> First Aid Repro — Embryology</div>
+    <div class="source-badge"><strong>Topics:</strong> Kidney Development, Sexual Differentiation, Anomalies, CAH/DSDs</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <a href="rpd02_hub1.html" class="hub-step done">Hub 1 ✓</a>
+  <span class="hub-arrow">→</span>
+  <a href="rpd02_hub2.html" class="hub-step done">Hub 2 ✓</a>
+  <span class="hub-arrow">→</span>
+  <span class="hub-step current">Hub 3 — USMLE Step 1 MCQ</span>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">15</div><div class="stat-label">Questions</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Exam Blocks</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Core LOs</div></div>
+  <div class="stat-card"><div class="stat-num" id="global-score">—</div><div class="stat-label">Your Score</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('block1',this)">Block 1</button>
+  <button class="tab-btn" onclick="switchTab('block2',this)">Block 2</button>
+  <button class="tab-btn" onclick="switchTab('block3',this)">Block 3</button>
+  <button class="tab-btn" onclick="switchTab('score',this)">Score Report</button>
+</div>
+
+<!-- ══ BLOCK 1: KIDNEY & URINARY EMBRYOLOGY ═════════════════════════════ -->
+<div class="tab-content active" id="tab-block1">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">Block 1 — Kidney &amp; Urinary Embryology</div>
+      <div class="exam-header-sub">5 questions · Kidney development, anomalies, &amp; Potter sequence</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-b1">07:30</div>
+        <div class="timer-label">Block Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('b1')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('b1',450)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. Review your answers at the end of the block before proceeding.</div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 1 of 5 — Kidney Development</div>
+    <div class="vig-stem">
+      A 32-year-old pregnant woman undergoes a routine second-trimester fetal ultrasound at 22 weeks. The fetus has <strong>severe oligohydramnios</strong>, no visible renal tissue bilaterally, and a small bladder that does not fill. On autopsy after intrauterine fetal demise at 26 weeks, the fetus has flattened facial features, low-set ears, and pulmonary hypoplasia. Which of the following embryologic structures is essential for definitive kidney formation, and failure of which event in its development best explains this case?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Pronephros regression failure</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Failure of mesonephros to drain into the cloaca</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Absence of ureteric bud interaction with metanephric blastema bilaterally</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Persistence of the allantois between the umbilicus and bladder</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Failure of the urorectal septum to divide the cloaca</div>
+    </div>
+    <div class="vig-exp"><strong>C — Absent ureteric bud/metanephric blastema interaction.</strong> The definitive kidney forms from <span class="vig-buzzword">reciprocal induction</span> between the <span class="vig-buzzword">ureteric bud</span> (from the mesonephric duct) and the <span class="vig-buzzword">metanephric blastema</span> (intermediate mesoderm). Metanephric blastema → NEPHRON; ureteric bud → COLLECTING system. Bilateral failure of this interaction (bilateral renal agenesis or bilateral MCDK) → no fetal urine → <span class="vig-buzzword">oligohydramnios → Potter sequence</span>: flattened facies, twisted limbs, pulmonary hypoplasia. Death occurs from pulmonary hypoplasia, NOT renal failure. Options A, B, D, and E describe other anomalies that don't produce bilateral kidney absence.</div>
+  </div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 2 of 5 — Horseshoe Kidney</div>
+    <div class="vig-stem">
+      A 15-year-old girl is evaluated for short stature, webbed neck, and primary amenorrhea. Physical exam reveals a shield-shaped chest, wide carrying angle, and a soft systolic murmur consistent with bicuspid aortic valve. Abdominal imaging incidentally demonstrates <strong>fusion of the lower poles of both kidneys across the midline at the L3 vertebral level</strong>, with the renal pelves anteriorly positioned. Which of the following best explains why the fused kidney is NOT in its usual anatomic location in this patient?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>The kidneys migrated too far cephalad because the SMA pushes them upward</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Normal cephalad migration is arrested because the fused mass catches on the inferior mesenteric artery</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Failure of reciprocal induction between ureteric bud and metanephric blastema</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Persistence of the mesonephric duct prevents kidney movement</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Abnormal rotation during ascent reverses kidney orientation</div>
+    </div>
+    <div class="vig-exp"><strong>B — Arrest at the IMA.</strong> In this <span class="vig-buzzword">horseshoe kidney</span> (associated with <span class="vig-buzzword">Turner syndrome, 45 XO</span>), the two metanephric blastemas fuse in the midline during initial kidney formation. As the fused kidney ascends, it catches on the <span class="vig-buzzword">inferior mesenteric artery</span> at about L3–L4 level. The kidney cannot ascend further because the IMA physically blocks movement. Note: don't conflate with a "pelvic kidney," which is a separate anomaly — a unilateral kidney that completely fails to ascend. The clues to Turner here are short stature, webbed neck, shield chest, primary amenorrhea, and bicuspid aortic valve.</div>
+  </div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 3 of 5 — Trigone Origin</div>
+    <div class="vig-stem">
+      A first-year medical student is studying the embryologic origins of the bladder. On histologic examination, the smooth triangular region between the openings of the two ureters and the urethra appears distinct from the rugated dome of the bladder. Which of the following embryonic structures forms this smooth triangular region?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Urogenital sinus endoderm</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Cloacal membrane ectoderm</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Absorbed mesonephric (Wolffian) ducts — mesoderm</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Paramesonephric (Müllerian) duct remnants</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Ureteric bud proper</div>
+    </div>
+    <div class="vig-exp"><strong>C — Absorbed Wolffian ducts (mesoderm).</strong> The bladder has a <span class="vig-buzzword">dual embryologic origin</span>: the dome and walls are <span class="vig-buzzword">endodermal</span> (from urogenital sinus), while the smooth <span class="vig-buzzword">trigone</span> — the triangular region containing the ureteric orifices and internal urethral meatus — is <span class="vig-buzzword">mesodermal</span>, derived from the distal portions of the mesonephric (Wolffian) ducts absorbed into the bladder wall during weeks 5–6. This mixed origin explains why the trigone appears smooth while the bladder dome is rugated. Clinical relevance: the trigone is more fixed and less distensible, contributing to the typical location of bladder cancers and the sensation of fullness.</div>
+  </div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 4 of 5 — Ectopic Ureter</div>
+    <div class="vig-stem">
+      A 4-year-old girl presents with a lifelong history of <strong>continuous dribbling of urine</strong> despite also voiding normally at intervals. Her mother reports she has never been "dry" and has had multiple UTIs. Renal ultrasound shows a <strong>duplicated collecting system on the right kidney</strong> with dilation of the upper pole. MR urography reveals an ectopic ureter from the upper pole entering the vaginal vestibule <strong>below the level of the external urethral sphincter</strong>. This ectopic position is best explained by which of the following embryologic failures?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Failure of the ureteric bud to form</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Persistence of the urachus</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Incomplete/abnormal absorption of the mesonephric duct into the developing bladder</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Failure of urorectal septum formation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Regression of the paramesonephric duct</div>
+    </div>
+    <div class="vig-exp"><strong>C — Abnormal mesonephric duct absorption.</strong> Normally, the mesonephric ducts are absorbed into the bladder, positioning the ureteric orifices at the corners of the trigone. When absorption is <span class="vig-buzzword">incomplete or too low</span>, the ureteric bud implants ectopically below the trigone. In girls, the ectopic ureter commonly drains into structures derived from the urogenital sinus or Müllerian duct — vagina, cervix, vestibule, or urethra distal to the external sphincter — producing <span class="vig-buzzword">continuous dribbling with preserved normal voiding</span> (the other kidney-bladder unit works normally). The <span class="vig-buzzword">Weigert-Meyer rule</span> states that in a duplex system, the upper pole ureter is the ectopic one. Boys rarely have this picture because male ectopic ureters drain above the sphincter (into vas, seminal vesicle).</div>
+  </div>
+
+  <div class="vig-item" data-block="b1">
+    <div class="vig-num">Question 5 of 5 — ADPKD + Berry Aneurysm</div>
+    <div class="vig-stem">
+      A 46-year-old man with long-standing hypertension presents to the ED with the sudden onset of "the worst headache of my life," photophobia, and nausea. Non-contrast head CT shows subarachnoid blood in the basal cisterns. He has a history of renal failure: serum creatinine is 2.8 mg/dL. His father required renal transplantation at age 58 and died of a cerebral hemorrhage. Abdominal imaging reveals <strong>bilateral enlarged kidneys with multiple cysts of varying sizes</strong> and several hepatic cysts. Which of the following genes is most likely mutated in this patient?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">A</span>PKD1 on chromosome 16</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>PKHD1 on chromosome 6</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>VHL on chromosome 3</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>WT1 on chromosome 11</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>NPHS1 on chromosome 19</div>
+    </div>
+    <div class="vig-exp"><strong>A — PKD1 on chromosome 16.</strong> This is <span class="vig-buzzword">Autosomal Dominant Polycystic Kidney Disease (ADPKD)</span>, most commonly caused by mutations in PKD1 (85%) or PKD2. Classic associations include <span class="vig-buzzword">berry aneurysms</span> in the Circle of Willis (→ SAH, the "worst headache of my life"), <span class="vig-buzzword">mitral valve prolapse</span>, <span class="vig-buzzword">hepatic and pancreatic cysts</span>, and diverticulosis. Adult-onset presentation with HTN is earliest finding. Family history is typical (AD inheritance). PKHD1 (B) → ARPKD (infantile, Potter sequence + congenital hepatic fibrosis). VHL (C) → renal cell carcinoma + hemangioblastomas. WT1 (D) → Wilms tumor. NPHS1 (E) → congenital nephrotic syndrome.</div>
+  </div>
+</div>
+
+<!-- ══ BLOCK 2: SEXUAL DIFFERENTIATION & GENITAL DEVELOPMENT ════════════ -->
+<div class="tab-content" id="tab-block2">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">Block 2 — Sexual Differentiation &amp; Genital Development</div>
+      <div class="exam-header-sub">5 questions · SRY/TDF, Wolffian/Müllerian, DHT, DSDs</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-b2">07:30</div>
+        <div class="timer-label">Block Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('b2')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('b2',450)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. Review your answers at the end of the block before proceeding.</div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 6 of 15 — Complete AIS</div>
+    <div class="vig-stem">
+      A 17-year-old tall, well-developed adolescent presents to a gynecologist for <strong>primary amenorrhea</strong>. She has Tanner V breast development, scant pubic and axillary hair, and is 5'10" tall. Pelvic exam reveals a blind-ending vagina of normal length. Pelvic MRI shows no uterus, no ovaries, and bilateral <strong>inguinal masses</strong> consistent with undescended testes. Karyotype is 46,XY. Labs: testosterone 710 ng/dL, LH 52 mIU/mL (elevated), estradiol 95 pg/mL (elevated). Which of the following best explains both the absence of uterus AND the female external genitalia?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>SRY gene deletion prevents testis differentiation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>5α-reductase deficiency blocks DHT formation</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Defective androgen receptor: MIS from Sertoli regresses Müllerian; DHT/T cannot signal externally</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Aromatase deficiency prevents estrogen-driven feminization</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>21-hydroxylase deficiency causes virilization</div>
+    </div>
+    <div class="vig-exp"><strong>C — Defective androgen receptor (CAIS).</strong> In <span class="vig-buzzword">complete androgen insensitivity syndrome</span>, the androgen receptor cannot respond to testosterone or DHT, BUT the testes produce normal <span class="vig-buzzword">MIS/AMH from Sertoli cells</span> — this is INDEPENDENT of the androgen receptor. Therefore: <strong>Müllerian ducts regress → no uterus, no upper vagina</strong> (blind vagina). Wolffian ducts need T signaling → no epididymis or vas. External genitalia also can't respond to DHT → default female appearance. Breasts develop from <span class="vig-buzzword">peripheral aromatization</span> of testosterone to estradiol. <span class="vig-buzzword">Gonadectomy is typically delayed until after puberty</span> to allow spontaneous feminization (malignancy risk rises later).</div>
+  </div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 7 of 15 — 5α-Reductase Deficiency</div>
+    <div class="vig-stem">
+      A child was raised as a girl since birth because of apparently female external genitalia. At age 12, she presents with progressive <strong>voice deepening, growth of a phallus, and descent of testes into the labioscrotal folds</strong>. Karyotype is 46,XY. Pelvic exam demonstrates <strong>normal epididymides, vasa deferentia, and seminal vesicles</strong> bilaterally, but no uterus. Serum testosterone is elevated, and DHT is low. Which of the following best explains why this patient has normal internal male structures but was born with female-appearing external genitalia?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Testosterone is required only for external masculinization</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Testosterone alone maintains the Wolffian ducts; DHT is required for external genital masculinization</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>The SRY gene was never expressed</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Müllerian inhibiting substance was never secreted</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>The androgen receptor is nonfunctional</div>
+    </div>
+    <div class="vig-exp"><strong>B — T maintains internal (Wolffian) structures; DHT is required for external masculinization.</strong> This is classic <span class="vig-buzzword">5α-reductase deficiency</span>. The enzyme converts <span class="vig-buzzword">testosterone → DHT</span>. Without DHT, external genitalia develop along the default (female) pathway at birth, but internal Wolffian derivatives (epididymis, vas deferens, seminal vesicles) develop normally because they depend on testosterone, which is high. <span class="vig-buzzword">Sertoli cells still produce MIS</span>, so Müllerian ducts regress (no uterus). At puberty, massive testosterone surge <em>partially</em> masculinizes external genitalia — dramatic phenotype change (<span class="vig-buzzword">"penis at 12" / "guevedoces"</span>). Diagnostic marker: <span class="vig-buzzword">elevated T:DHT ratio</span>. CAIS (E) would have absent Wolffian derivatives AND breast development at puberty.</div>
+  </div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 8 of 15 — 21-Hydroxylase Deficiency</div>
+    <div class="vig-stem">
+      A 2-week-old phenotypically female infant presents to the ED in <strong>shock</strong>. She has been vomiting and feeding poorly for the past 4 days. Physical exam shows <strong>ambiguous genitalia with clitoromegaly and rugated, hyperpigmented labia</strong>. Vital signs: HR 180, BP 55/30 mmHg, capillary refill 4 seconds. Labs: Na⁺ 118 mEq/L, K⁺ 7.1 mEq/L, glucose 42 mg/dL. Newborn screen returns with markedly elevated 17-hydroxyprogesterone. Which of the following is the most appropriate immediate intervention?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Urgent genitoplasty to reconstruct external genitalia</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Sodium bicarbonate infusion alone</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>IV normal saline bolus, IV hydrocortisone, and fludrocortisone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Oral dexamethasone only</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Spironolactone for hyperkalemia</div>
+    </div>
+    <div class="vig-exp"><strong>C — IV saline + hydrocortisone + fludrocortisone.</strong> This is the classic <span class="vig-buzzword">salt-wasting crisis of 21-hydroxylase deficiency CAH</span> (95% of CAH cases). The enzymatic block impairs <strong>both</strong> cortisol and aldosterone synthesis, shunting precursors to the androgen pathway → virilization of XX females. The clinical tetrad: <span class="vig-buzzword">hypotension + hyponatremia + hyperkalemia + hypoglycemia</span> — reflects combined gluco + mineralocorticoid deficiency. Immediate priorities: (1) <strong>volume resuscitation</strong> (saline), (2) <strong>hydrocortisone</strong> (replaces cortisol; also has some mineralocorticoid activity), (3) <strong>fludrocortisone</strong> (potent mineralocorticoid, replaces aldosterone). Screening marker: <span class="vig-buzzword">17-OH-progesterone</span>. Contrast 11β and 17α deficiencies, which cause HTN instead.</div>
+  </div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 9 of 15 — Wolffian vs Müllerian</div>
+    <div class="vig-stem">
+      A 46-year-old woman undergoes hysterectomy for fibroids. During surgery, the pathologist identifies a small (1.5 cm) fluid-filled cyst in the <strong>broad ligament of the uterus</strong>, near its lateral attachment to the uterus. Histology shows a cuboidal-lined cyst with clear fluid. The surgeon explains this is a "Gartner's duct cyst." From which embryonic structure does this cyst derive?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Paramesonephric (Müllerian) duct remnant</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Mesonephric (Wolffian) duct remnant</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Ureteric bud remnant</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Urogenital sinus invagination</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Neural crest derivative</div>
+    </div>
+    <div class="vig-exp"><strong>B — Mesonephric (Wolffian) duct remnant.</strong> In females, the <span class="vig-buzzword">Wolffian ducts regress</span> due to lack of testosterone, but small remnants may persist. These remnants can become cystic and are called <span class="vig-buzzword">Gartner's duct cysts</span>, typically found in the lateral vaginal wall or broad ligament. They are usually asymptomatic. The male equivalent of the <strong>Müllerian</strong> remnant is the <span class="vig-buzzword">prostatic utricle</span> (a small midline blind pouch in the prostate — homolog of the uterus/upper vagina) and the <strong>appendix testis</strong> (upper pole of the testis). Knowing this duct anatomy is testable: if the cyst is in a <em>male</em> at the prostate midline → Müllerian remnant; if in a <em>female</em> lateral to the uterus/vagina → Wolffian remnant.</div>
+  </div>
+
+  <div class="vig-item" data-block="b2">
+    <div class="vig-num">Question 10 of 15 — Hypospadias</div>
+    <div class="vig-stem">
+      A newborn boy is examined in the nursery. His penis has a <strong>urethral opening on the ventral (underside) surface of the shaft</strong>, approximately at the midshaft level. The foreskin is noted to be <strong>dorsally hooded</strong>. His parents inquire about circumcision. Which of the following is the most appropriate recommendation, and why?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Perform routine circumcision at 2 weeks of age, as usual</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Defer circumcision; the foreskin is needed for surgical urethroplasty</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Perform immediate surgical correction within 24 hours of birth</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Circumcise the baby to prevent infection of the abnormal urethra</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Delay all intervention until after puberty</div>
+    </div>
+    <div class="vig-exp"><strong>B — Defer circumcision; foreskin is needed for urethroplasty.</strong> This is <span class="vig-buzzword">hypospadias</span>, caused by <span class="vig-buzzword">failure of urethral (urogenital) folds to fuse ventrally</span> during week 12. DHT drives fusion; partial androgen insensitivity or insufficient DHT production can contribute. The distal urethra opens on the ventral shaft instead of the glans tip. The characteristic <span class="vig-buzzword">dorsal "hooded" foreskin</span> reflects incomplete ventral development. <strong>Definitive surgical repair (urethroplasty) uses the intact foreskin</strong> as a tissue graft to construct a new urethra — this is usually performed at 6–12 months. Circumcision would remove the graft material. Contrast with <span class="vig-buzzword">epispadias</span> (dorsal opening), which is rarer and classically associated with <strong>bladder exstrophy</strong>.</div>
+  </div>
+</div>
+
+<!-- ══ BLOCK 3: INTEGRATION — CAH, HOMOLOGUES & SYNDROMIC ASSOCIATIONS ══ -->
+<div class="tab-content" id="tab-block3">
+  <div class="exam-header">
+    <div class="exam-header-left">
+      <div class="exam-header-title">Block 3 — Integrated Clinical Scenarios</div>
+      <div class="exam-header-sub">5 questions · CAH forms, Klinefelter/Turner, homologues, testicular descent</div>
+    </div>
+    <div class="exam-timer">
+      <span class="timer-icon">⏱</span>
+      <div>
+        <div class="timer-display" id="timer-b3">07:30</div>
+        <div class="timer-label">Block Timer</div>
+      </div>
+    </div>
+    <div class="exam-controls">
+      <button class="exam-ctrl-btn" onclick="toggleTimer('b3')">Start / Pause</button>
+      <button class="exam-ctrl-btn" onclick="resetTimer('b3',450)">Reset</button>
+    </div>
+  </div>
+  <div class="exam-intro"><strong>Instructions:</strong> Select the single best answer for each question. These questions integrate multiple concepts from urogenital embryology.</div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 11 of 15 — 17α-Hydroxylase Deficiency</div>
+    <div class="vig-stem">
+      A 16-year-old phenotypically <strong>female</strong> presents with <strong>primary amenorrhea</strong>, no breast development, and <strong>hypertension</strong>. She is admitted with BP 176/108 mmHg. Labs: K⁺ 2.9 mEq/L, aldosterone suppressed, renin suppressed, <strong>low estradiol and testosterone</strong>. Further workup reveals <strong>46,XY karyotype</strong> with bilateral inguinal testes but <em>no uterus</em>. Which of the following enzyme deficiencies best explains all of her findings?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>21-hydroxylase deficiency</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>11β-hydroxylase deficiency</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>17α-hydroxylase deficiency</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>5α-reductase deficiency</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Aromatase deficiency</div>
+    </div>
+    <div class="vig-exp"><strong>C — 17α-hydroxylase deficiency.</strong> This rare form of CAH blocks synthesis of both <span class="vig-buzzword">cortisol AND all sex hormones</span> (testosterone, estradiol, DHEA). The mineralocorticoid pathway is INTACT and actually overactive from ACTH stimulation → <span class="vig-buzzword">HTN + hypokalemia</span> (from 11-deoxycortico­sterone). In 46 XY patients, the testis can't make testosterone → no Wolffian derivatives AND no external masculinization → <strong>female phenotype</strong>. Sertoli cells still produce MIS → <strong>no uterus</strong>. At "puberty," no sex steroids = no breast development or menstrual function. Mnemonic: <span class="vig-buzzword">"17 = HTN + NO sex hormones"</span>. Distinguish from CAIS (female phenotype but ↑T, no HTN) and 5α-reductase def (normal Wolffian structures, virilization at puberty). Contrast with 11β (HTN + virilization) and 21 (hypoTN + virilization).</div>
+  </div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 12 of 15 — Klinefelter Syndrome</div>
+    <div class="vig-stem">
+      A 22-year-old male presents to a fertility clinic after 2 years of trying to conceive with his wife. He is <strong>6'5" tall with long extremities (eunuchoid proportions)</strong>, mild <strong>gynecomastia</strong>, and <strong>small, firm testes</strong> bilaterally. Semen analysis shows <strong>azoospermia</strong>. Labs: testosterone 220 ng/dL (low), LH 28 mIU/mL (high), FSH 42 mIU/mL (very high), estradiol 62 pg/mL (elevated). Which of the following best explains the hormonal pattern?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Defective androgen receptor (CAIS)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Hypothalamic-pituitary failure (Kallmann syndrome)</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Klinefelter syndrome (47,XXY): seminiferous tubule dysgenesis ↓ inhibin ↑ FSH; Leydig hypofunction ↓ T ↑ LH; peripheral aromatization → ↑ estradiol</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Primary adrenal insufficiency (Addison disease)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Pituitary adenoma</div>
+    </div>
+    <div class="vig-exp"><strong>C — Klinefelter syndrome (47 XXY).</strong> Buzzwords: <span class="vig-buzzword">tall, eunuchoid body habitus</span>, <span class="vig-buzzword">gynecomastia</span>, <span class="vig-buzzword">small firm testes</span>, <span class="vig-buzzword">azoospermia</span>. Pathophysiology: the extra X chromosome causes <strong>seminiferous tubule dysgenesis</strong> → ↓ inhibin B → ↑ FSH (no feedback). Leydig cell dysfunction → ↓ testosterone → ↑ LH (no feedback). Remaining testosterone is <strong>aromatized peripherally</strong> → ↑ estradiol → gynecomastia. Treatment: testosterone replacement; fertility possible with sperm extraction + ICSI in some cases. Increased risk of <span class="vig-buzzword">breast cancer, extragonadal germ cell tumors, autoimmune disease</span>. Kallmann (B) is hypogonadotropic (↓ LH/FSH) + anosmia.</div>
+  </div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 13 of 15 — Testicular Descent &amp; Hydrocele</div>
+    <div class="vig-stem">
+      A 3-month-old male infant is brought to clinic with a <strong>fluctuating left scrotal swelling that transilluminates</strong>. The swelling enlarges when the infant cries and partially empties when he lies flat. Exam reveals a nontender, smooth left hemiscrotum and an easily palpable left testis within a fluid-filled sac. Which of the following embryologic events best explains this finding?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Failure of the testis to descend through the inguinal canal</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Incomplete regression of the paramesonephric ducts</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Failure of the processus vaginalis to obliterate after testicular descent</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Persistence of the urachus between the bladder and umbilicus</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Malformation of the gubernaculum</div>
+    </div>
+    <div class="vig-exp"><strong>C — Patent processus vaginalis.</strong> This is a <span class="vig-buzzword">communicating hydrocele</span>. During testicular descent, the testis follows an outpouching of peritoneum called the <span class="vig-buzzword">processus vaginalis</span> into the scrotum. Normally, after descent, the processus obliterates, leaving only the <span class="vig-buzzword">tunica vaginalis</span> around the testis. If the processus remains patent, peritoneal fluid communicates with the scrotum → <span class="vig-buzzword">hydrocele that fluctuates with position (larger when upright/crying, smaller when supine)</span>. Most close spontaneously by age 1–2; if persistent, surgical correction is needed. A patent processus can also allow abdominal viscera to herniate → <span class="vig-buzzword">indirect inguinal hernia</span> (passes through the deep inguinal ring, through the canal, into the scrotum). Failure of testicular descent itself = cryptorchidism (A).</div>
+  </div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 14 of 15 — Male/Female Homologues</div>
+    <div class="vig-stem">
+      A 52-year-old woman presents with recurrent <strong>painful vulvar swellings</strong>. Examination reveals a 2-cm tender cystic mass at the 5 o'clock position of the vaginal introitus, just inside the posterior labium majus. The mass is draining purulent fluid. The physician diagnoses a <strong>Bartholin gland abscess</strong>. Which of the following male structures is the embryologic homolog of the Bartholin (greater vestibular) glands?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Prostate gland</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Seminal vesicles</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Bulbourethral (Cowper) glands</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Prostatic utricle</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Tunica vaginalis</div>
+    </div>
+    <div class="vig-exp"><strong>C — Bulbourethral (Cowper) glands.</strong> Both the Bartholin glands (♀) and Cowper glands (♂) are derived from the <span class="vig-buzzword">urogenital sinus</span> and function as mucous-secreting lubricating glands. Other key embryologic homologues to know: <span class="vig-buzzword">Genital tubercle</span> → clitoris (♀) / glans penis (♂); <span class="vig-buzzword">Labioscrotal swellings</span> → labia majora / scrotum; <span class="vig-buzzword">Urogenital folds</span> → labia minora / penile urethra (fused); <span class="vig-buzzword">Gubernaculum</span> → round lig. of uterus + ovarian lig. / gubernaculum testis; <span class="vig-buzzword">Skene glands</span> → prostate; <span class="vig-buzzword">Gartner's duct (♀ Wolffian remnant)</span> ↔ <span class="vig-buzzword">SEED (♂ Wolffian derivatives)</span>; <span class="vig-buzzword">Prostatic utricle (♂ Müllerian remnant)</span> ↔ uterus/upper vagina (♀). The prostate (A) is homologous to the Skene glands, not Bartholin.</div>
+  </div>
+
+  <div class="vig-item" data-block="b3">
+    <div class="vig-num">Question 15 of 15 — Comprehensive Synthesis</div>
+    <div class="vig-stem">
+      A 28-year-old woman (G1P0) at 20 weeks gestation is informed that her fetus has a <strong>46,XY karyotype but female-appearing external genitalia</strong> on anatomic survey. No internal uterus or ovaries are visible. The fetus has normal-appearing intra-abdominal testes. Amniotic fluid volume is normal (no Potter sequence). If this karyotype-phenotype discordance is due to a single enzyme or receptor defect, which of the following best describes the MOST LIKELY diagnosis and the predicted appearance at puberty?
+    </div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>21-hydroxylase deficiency; will develop salt-wasting crisis and virilize externally</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Complete androgen insensitivity syndrome; will develop breasts at puberty from peripheral aromatization but will have primary amenorrhea (no uterus), scant pubic hair, and a blind vagina</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>5α-reductase deficiency; will virilize at puberty with normal internal male structures</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Swyer syndrome; will have a functional uterus but streak gonads, allowing donor-egg pregnancy</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Turner syndrome; will have short stature, webbed neck, and horseshoe kidney</div>
+    </div>
+    <div class="vig-exp"><strong>B — Complete Androgen Insensitivity Syndrome (CAIS).</strong> Integrating everything: 46 XY with female external genitalia but <strong>NO uterus</strong> and functioning testes points to <span class="vig-buzzword">CAIS</span>. Sertoli cells still make <span class="vig-buzzword">MIS → Müllerian ducts regress</span> → no uterus/upper vagina. But the androgen receptor is defective, so Wolffian ducts don't develop AND external genitalia remain default female. At puberty, elevated testosterone is <span class="vig-buzzword">aromatized peripherally to estradiol</span> → breast development. No menses (no uterus). Pubic/axillary hair requires androgen action → scant. <strong>Differentiate from other options:</strong> (A) 21-OH def is XX with virilized XX external genitalia. (C) 5α-red def has <em>normal Wolffian structures</em> and virilizes dramatically at puberty. (D) Swyer has a <em>uterus</em> (no MIS from streak gonads). (E) Turner is 45 XO — incompatible with XY karyotype. Key diagnostic question for any 46 XY with female phenotype: <span class="vig-buzzword">Is there a uterus? Is there an ↑T? What's the T:DHT ratio?</span></div>
+  </div>
+</div>
+
+<!-- ══ SCORE REPORT ══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-score">
+  <div class="sec">Performance Dashboard</div>
+
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-card-num" id="sc-total">— <span class="pct"></span></div>
+      <div class="score-card-label">Total Score</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-total" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-b1">— <span class="pct"></span></div>
+      <div class="score-card-label">Block 1</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-b1" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-b2">— <span class="pct"></span></div>
+      <div class="score-card-label">Block 2</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-b2" style="width:0%"></div></div>
+    </div>
+    <div class="score-card">
+      <div class="score-card-num" id="sc-b3">— <span class="pct"></span></div>
+      <div class="score-card-label">Block 3</div>
+      <div class="score-bar-wrap"><div class="score-bar" id="bar-b3" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="score-breakdown">
+    <div class="score-breakdown-title">Question-by-Question Breakdown</div>
+    <div id="q-breakdown">
+      <div class="exam-intro" style="text-align:center">Answer questions in the Exam Blocks to see your breakdown here.</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:16px">
+    <button class="score-reset-btn" onclick="resetAllScores()">Reset All Scores</button>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp;
+  RPD02 Hub #3 — USMLE Step 1 MCQ &nbsp;·&nbsp; HoyaDocs Repro Block
+</div>
+
+</div>
+
+<script>
+// ── TAB SWITCHING ──
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='score') updateScoreReport();
+}
+
+// ── VIGNETTE MCQ ──
+var answers={};
+function answerVig(opt,correct){
+  var item=opt.closest('.vig-item');
+  if(item.querySelector('.locked'))return;
+  item.querySelectorAll('.vig-opt').forEach(function(o){o.classList.add('locked');o.onclick=null;});
+  opt.classList.add(correct?'correct':'wrong');
+  if(!correct){
+    item.querySelectorAll('.vig-opt').forEach(function(o){
+      var fn=o.getAttribute('onclick');
+      if(fn&&fn.includes('true'))o.classList.add('correct');
+    });
+  }
+  item.querySelector('.vig-exp').classList.add('show');
+  var allVigs=document.querySelectorAll('.vig-item');
+  allVigs.forEach(function(v,i){
+    if(v===item) answers[i]={correct:correct,block:item.getAttribute('data-block')};
+  });
+  updateGlobalScore();
+}
+
+function updateGlobalScore(){
+  var total=Object.keys(answers).length;
+  var right=0;
+  for(var k in answers) if(answers[k].correct) right++;
+  var el=document.getElementById('global-score');
+  if(total>0) el.textContent=right+'/'+total;
+}
+
+// ── SCORE REPORT ──
+function updateScoreReport(){
+  var blocks={b1:{right:0,total:0,max:5},b2:{right:0,total:0,max:5},b3:{right:0,total:0,max:5}};
+  var totalRight=0,totalAnswered=0;
+  for(var k in answers){
+    var a=answers[k];
+    var b=a.block;
+    if(blocks[b]!==undefined){
+      blocks[b].total++;
+      if(a.correct){blocks[b].right++;totalRight++;}
+      totalAnswered++;
+    }
+  }
+  function setCard(id,barId,right,total,max){
+    var el=document.getElementById(id);
+    var bar=document.getElementById(barId);
+    if(total===0){el.innerHTML='— <span class="pct"></span>';bar.style.width='0%';return;}
+    var pct=Math.round((right/max)*100);
+    el.innerHTML=right+'/'+max+' <span class="pct">'+pct+'%</span>';
+    bar.style.width=pct+'%';
+  }
+  var totalMax=15;
+  var totalPct=totalAnswered>0?Math.round((totalRight/totalMax)*100):0;
+  var scTotal=document.getElementById('sc-total');
+  var barTotal=document.getElementById('bar-total');
+  if(totalAnswered===0){scTotal.innerHTML='— <span class="pct"></span>';barTotal.style.width='0%';}
+  else{scTotal.innerHTML=totalRight+'/'+totalMax+' <span class="pct">'+totalPct+'%</span>';barTotal.style.width=totalPct+'%';}
+  setCard('sc-b1','bar-b1',blocks.b1.right,blocks.b1.total,5);
+  setCard('sc-b2','bar-b2',blocks.b2.right,blocks.b2.total,5);
+  setCard('sc-b3','bar-b3',blocks.b3.right,blocks.b3.total,5);
+  var bd=document.getElementById('q-breakdown');
+  if(totalAnswered===0){bd.innerHTML='<div class="exam-intro" style="text-align:center">Answer questions in the Exam Blocks to see your breakdown here.</div>';return;}
+  var html='';
+  var allVigs=document.querySelectorAll('.vig-item');
+  allVigs.forEach(function(v,i){
+    var num=i+1;
+    var label=v.querySelector('.vig-num').textContent;
+    if(answers[i]!==undefined){
+      var cls=answers[i].correct?'correct':'wrong';
+      var icon=answers[i].correct?'✓':'✗';
+      html+='<div class="score-row"><span class="score-row-label">Q'+num+' — '+label.split('·').pop().trim()+'</span><span class="score-row-val '+cls+'">'+icon+'</span></div>';
+    } else {
+      html+='<div class="score-row"><span class="score-row-label">Q'+num+' — '+label.split('·').pop().trim()+'</span><span class="score-row-val" style="color:#7A7060">—</span></div>';
+    }
+  });
+  bd.innerHTML=html;
+}
+
+function resetAllScores(){location.reload();}
+
+// ── BLOCK TIMERS ──
+var timers={};
+function initTimer(id,seconds){
+  timers[id]={total:seconds,remaining:seconds,running:false,interval:null};
+  renderTimer(id);
+}
+function renderTimer(id){
+  var t=timers[id];
+  var m=Math.floor(t.remaining/60);
+  var s=t.remaining%60;
+  document.getElementById('timer-'+id).textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+}
+function toggleTimer(id){
+  var t=timers[id];
+  if(t.running){clearInterval(t.interval);t.running=false;}
+  else{t.running=true;t.interval=setInterval(function(){
+    if(t.remaining>0){t.remaining--;renderTimer(id);}
+    else{clearInterval(t.interval);t.running=false;document.getElementById('timer-'+id).textContent='00:00';}
+  },1000);}
+}
+function resetTimer(id,seconds){
+  var t=timers[id];
+  if(t.interval) clearInterval(t.interval);
+  t.remaining=seconds;t.running=false;
+  renderTimer(id);
+}
+
+// ── INIT ──
+window.addEventListener('load',function(){
+  initTimer('b1',450);
+  initTimer('b2',450);
+  initTimer('b3',450);
+});
+</script>
+</body>
+</html>

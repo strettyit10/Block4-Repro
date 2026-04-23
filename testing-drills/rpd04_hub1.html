@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPD04 Male Reproductive System — Hub 1 Core Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── BASE ── */
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#F7F5F0;color:#2C2C2C;min-height:100vh;line-height:1.6}
+
+/* ── TOP NAV ── */
+.topnav{background:#8B2242;border-bottom:3px solid #C9A84C;padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.35em;font-weight:700;color:#F2E8CF;letter-spacing:.02em}
+.nav-brand-sub{font-size:.72em;color:#C9A84C;font-weight:500;margin-left:6px;letter-spacing:.04em;text-transform:uppercase}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:rgba(255,255,255,0.7);font-weight:500;padding:6px 14px;border-radius:5px;border:1px solid rgba(255,255,255,0.2);text-decoration:none;transition:all .2s}
+.nav-back:hover{border-color:#C9A84C;color:#C9A84C}
+
+/* ── CONTAINER ── */
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+
+/* ── HEADER ── */
+.header{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#8B2242 0%,#C9A84C 50%,#8B2242 100%)}
+.hub-tag{display:inline-block;background:#8B2242;color:#F2E8CF;font-family:'Source Sans 3',sans-serif;font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:4px 12px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2em;color:#8B2242;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#8B6914;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:4px;padding:4px 10px;font-size:.75em;color:#5A5A5A}
+.source-badge strong{color:#8B2242}
+
+/* ── HUB PROGRESSION ── */
+.hub-prog{background:#FFF;border:1px solid #D6CEB8;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:7px 16px;border-radius:4px;font-size:.82em;font-weight:600}
+.hub-step.current{background:#8B2242;color:#F2E8CF}
+.hub-step.next{background:#F7F5F0;border:1px solid #D6CEB8;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#C9A84C;color:#8B6914}
+.hub-arrow{color:#C9A84C;font-size:1em;font-weight:700}
+.hub-prog-label{font-size:.76em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #D6CEB8;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:1.8em;font-weight:700;color:#8B2242}
+.stat-label{font-size:.68em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #D6CEB8;padding-bottom:0}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.84em;font-weight:600;padding:11px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#8B2242}
+.tab-btn.active{color:#8B2242;border-bottom-color:#C9A84C}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* ── FLASHCARDS ── */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #D6CEB8;border-top:3px solid #8B2242}
+.fc-back{transform:rotateY(180deg);background:#FFFDF5;border:1px solid #C9A84C}
+.fc-label{font-size:.66em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#8B2242;font-weight:700}
+
+/* ── FILL-IN-BLANK ── */
+.fib-list{display:flex;flex-direction:column;gap:16px}
+.fib-card{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:22px;border-left:4px solid #8B2242}
+.fib-num{font-size:.68em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fib-prompt{font-size:.93em;color:#2C2C2C;line-height:1.65;margin-bottom:12px}
+.fib-hint{font-size:.8em;color:#7A7060;font-style:italic;margin-bottom:10px}
+.fib-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fib-input{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:9px 14px;color:#2C2C2C;font-size:.9em;font-family:inherit;min-width:200px;transition:border-color .2s}
+.fib-input:focus{outline:none;border-color:#C9A84C;background:#FFFDF5}
+.fib-input.correct{border-color:#2E7D32;background:#F1F8F2}
+.fib-input.incorrect{border-color:#C62828;background:#FEF5F5}
+.fib-btn{background:#8B2242;border:none;color:#F2E8CF;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:background .2s}
+.fib-btn:hover{background:#A83A58}
+.fib-reveal-btn{background:#FFF;border:1px solid #D6CEB8;color:#7A7060;padding:9px 16px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:all .2s}
+.fib-reveal-btn:hover{border-color:#C9A84C;color:#8B6914}
+.fib-feedback{font-size:.82em;margin-top:8px;padding:7px 12px;border-radius:4px;display:none}
+.fib-feedback.correct{background:#F1F8F2;border:1px solid #A5D6A7;color:#2E7D32;display:block}
+.fib-feedback.incorrect{background:#FEF5F5;border:1px solid #FFCDD2;color:#C62828;display:block}
+
+/* ── ORDERING ── */
+.ordering-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.ordering-intro strong{color:#8B2242}
+.order-drill{background:#FFFFFF;border:1px solid #D6CEB8;border-left:4px solid #C9A84C;border-radius:6px;padding:22px;margin-bottom:20px}
+.drill-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#8B2242;margin-bottom:5px}
+.drill-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;min-height:40px}
+.order-item{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:12px 16px;cursor:grab;font-size:.86em;color:#2C2C2C;line-height:1.4;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none}
+.order-item:active{cursor:grabbing}
+.order-item:hover{border-color:#C9A84C;background:#FFFDF5}
+.order-item.dragging{opacity:.6;border-style:dashed;border-color:#C9A84C}
+.order-item.drag-over{border-color:#C9A84C;background:#FFF8E1;transform:scale(1.01)}
+.order-item .item-grip{color:#C9A84C;font-size:1.1em;flex-shrink:0;margin-top:1px}
+.order-item .item-text{flex:1}
+.order-item.correct-pos{background:#F1F8F2;border-color:#66BB6A}
+.order-item.wrong-pos{background:#FEF5F5;border-color:#EF5350;color:#991b1b}
+.order-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.order-check-btn{background:#8B2242;border:none;color:#F2E8CF;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:background .2s}
+.order-check-btn:hover{background:#A83A58}
+.order-ghost-btn{background:none;border:1px solid #D6CEB8;color:#7A7060;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:all .2s}
+.order-ghost-btn:hover{border-color:#C9A84C;color:#8B6914}
+.order-feedback{font-size:.84em;padding:8px 14px;border-radius:5px;margin-bottom:8px}
+.order-feedback.correct{background:#F1F8F2;border:1px solid #66BB6A;color:#2E7D32}
+.order-feedback.incorrect{background:#FEF5F5;border:1px solid #EF5350;color:#C62828}
+.order-answer{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:5px;padding:14px 18px;font-size:.83em;margin-top:8px;display:none}
+.order-answer ol{padding-left:20px;line-height:1.9}
+.order-answer li{color:#2C2C2C}
+.order-answer li span{color:#8B2242;font-weight:600}
+
+/* ── MATCHING ── */
+.match-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A}
+.match-intro strong{color:#8B2242}
+.match-set{background:#FFFFFF;border:1px solid #D6CEB8;border-left:4px solid #8B2242;border-radius:6px;padding:22px;margin-bottom:20px}
+.match-set-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#8B2242;margin-bottom:4px}
+.match-set-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.match-cols{grid-template-columns:1fr}}
+.match-col-label{font-size:.7em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.match-item{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.match-item:hover:not(.matched-correct):not(.matched-wrong){border-color:#C9A84C!important;background:#FFFDF5!important}
+.match-item.selected{border-color:#8B2242!important;background:#F7E8EE!important;color:#8B2242!important;font-weight:600}
+.match-item.matched-correct{border-color:#66BB6A!important;background:#F1F8F2!important;color:#2E7D32!important;cursor:default}
+.match-item.flash-wrong{animation:flashRed .5s ease forwards}
+@keyframes flashRed{0%{background:#FEF5F5;border-color:#EF5350}100%{background:#F7F5F0;border-color:#D6CEB8}}
+.match-score{margin-top:12px;font-size:.83em;color:#7A7060}
+.match-score .correct-count{color:#2E7D32;font-weight:700}
+.match-reset-btn{background:none;border:1px solid #D6CEB8;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px;transition:all .2s}
+.match-reset-btn:hover{border-color:#C9A84C;color:#8B6914}
+
+/* ── TEST TRAPS ── */
+.trap-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-left:4px solid #C9A84C;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.trap-intro strong{color:#8B2242}
+.trap-card{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #C9A84C}
+.trap-num{font-size:.68em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-family:'Crimson Pro',Georgia,serif;font-size:1em;color:#2C2C2C;line-height:1.55;margin-bottom:16px;background:#FFFDF5;border-radius:5px;padding:16px;border-left:3px solid #C9A84C;font-style:italic}
+.trap-btns{display:flex;gap:10px;margin-bottom:8px}
+.trap-btn{padding:9px 28px;border-radius:5px;border:2px solid;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.trap-btn-true{background:none;border-color:#66BB6A;color:#2E7D32}
+.trap-btn-true:hover:not(:disabled){background:#F1F8F2;border-color:#43A047}
+.trap-btn-false{background:none;border-color:#EF5350;color:#C62828}
+.trap-btn-false:hover:not(:disabled){background:#FEF5F5;border-color:#E53935}
+.trap-btn:disabled{opacity:.5;cursor:not-allowed}
+.trap-btn.sel-correct{background:#F1F8F2;border-color:#43A047;color:#2E7D32}
+.trap-btn.sel-wrong{background:#FEF5F5;border-color:#E53935;color:#C62828}
+.trap-exp{padding:14px 18px;border-radius:5px;font-size:.87em;line-height:1.65;margin-top:4px;display:none}
+.trap-exp.show-c{background:#F1F8F2;border:1px solid #A5D6A7;color:#1B5E20;display:block}
+.trap-exp.show-w{background:#FEF5F5;border:1px solid #FFCDD2;color:#B71C1C;display:block}
+.trap-exp strong{color:#8B2242}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:.95em;font-weight:700;color:#8B2242;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #C9A84C}
+.ref-table{width:100%;border-collapse:collapse;font-size:.84em}
+.ref-table th{background:#8B2242;color:#F2E8CF;font-weight:600;text-align:left;padding:10px 14px;font-size:.88em;letter-spacing:.03em}
+.ref-table td{padding:10px 14px;border-bottom:1px solid #E8E0CD;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+.ref-table tr:nth-child(even) td{background:#FAFAF5}
+.ref-table tr:hover td{background:#FFFDF5}
+.ref-table .key{color:#8B2242;font-weight:600}
+.ref-note{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
+.ref-note strong{color:#8B2242}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #D6CEB8;padding-top:16px;margin-top:32px}
+.footer a{color:#8B2242;text-decoration:none;font-weight:600}
+.footer a:hover{color:#C9A84C;text-decoration:underline}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Block 4 — Repro</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back-btn">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub 1 — Core Concepts</div>
+  <h1>Male Reproductive System <span>Active Drills</span></h1>
+  <div class="subtitle">
+    Flashcards · Fill-in-Blank · Drag-and-Drop Ordering · Matching · Interactive Test Traps<br>
+    Lecture 04 · Repro Block · Male Reproductive Histology, Spermatogenesis &amp; Excurrent Ducts
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Primary:</strong> RPD04 Lecture Guide (HoyaDocs)</div>
+    <div class="source-badge"><strong>Lecturer:</strong> Histology</div>
+    <div class="source-badge"><strong>Review:</strong> Junqueira's Basic Histology Ch. 22</div>
+    <div class="source-badge"><strong>Topics:</strong> Testes · Spermatogenesis · Excurrent Ducts · Accessory Glands · Penis · Urethra</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <span class="hub-step current">Hub 1 — Core Concepts</span>
+  <span class="hub-arrow">→</span>
+  <a href="rpd04_hub2.html" class="hub-step next">Hub 2 — Step 1 Extensions</a>
+  <span class="hub-arrow">→</span>
+  <a href="rpd04_hub3.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Fill-in-Blank</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Test Traps</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('fib',this)">Fill-in-Blank</button>
+  <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
+  <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
+</div>
+
+<!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">16</span> cards total</span><span>Male Repro Histology</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Testis — 3 Layers</div><div class="fc-q">Name the three coverings of the testis from outermost to innermost. Which layer is the thickest?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>1. Visceral tunica vaginalis (outermost)</strong> — single-cell mesothelial layer of cuboidal cells; derived from the processus vaginalis.<br><br><strong>2. Tunica albuginea (middle)</strong> — <em>THICKEST</em> layer; dense connective tissue. Sends septa inward to divide testis into lobules.<br><br><strong>3. Tunica vasculosa (innermost)</strong> — loose CT with rich vasculature; supplies nutrients + carries hormones.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pampiniform Plexus &amp; Torsion</div><div class="fc-q">What is the pampiniform plexus and why is it important? What clinical emergency arises when it twists?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Pampiniform plexus</strong> = web of veins wrapping around the testicular artery. Acts as a <strong>countercurrent heat exchanger</strong> to cool arterial blood before it reaches the testis (spermatogenesis needs ~2°C below core body temp).<br><br><strong>Testicular torsion:</strong> twisting of spermatic cord → cuts off arterial supply → ischemia. <span style="color:#8B2242"><strong>Surgical emergency</strong></span> — must be untwisted within 6 hours to save the testis. Presentation: acute severe unilateral scrotal pain, high-riding testis, absent cremasteric reflex, "bell-clapper" deformity.<br><br><strong>Varicocele:</strong> dilation of pampiniform plexus ("bag of worms"), more common on left (left gonadal vein → left renal vein at 90°).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Leydig Cells</div><div class="fc-q">Where are Leydig cells located? What do they produce and under what stimulation? Histologic markers?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Location:</strong> In the <strong>interstitium BETWEEN seminiferous tubules</strong> (not inside the tubules).<br><br><strong>Products:</strong> <strong>Testosterone</strong> (main) + a small amount of DHT. Stimulated by <strong>LH</strong> from anterior pituitary.<br><br><strong>Testosterone maintains:</strong> spermatogenesis, accessory glands (prostate, seminal vesicles, bulbourethral), male secondary sex characteristics, libido.<br><br><strong>Histo markers:</strong> <em>Lipid droplets</em>, smooth ER, mitochondria with <strong>tubular cristae</strong>, Reinke crystals (pathognomonic).<br><br><strong>DHT</strong> = 50× more potent than testosterone (binds androgen receptor with higher affinity).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Sertoli Cells &amp; Blood-Testis Barrier</div><div class="fc-q">Where are Sertoli cells located? What forms the blood-testis barrier and why is it essential?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Location:</strong> INSIDE the seminiferous tubules, resting on the basement membrane. Stimulated by <strong>FSH</strong>.<br><br><strong>Sertoli-Sertoli tight junctions</strong> form the <span style="color:#8B2242"><strong>blood-testis barrier</strong></span>, dividing tubules into:<br>• <strong>Basal compartment</strong> (near BM): spermatogonia<br>• <strong>Adluminal compartment</strong> (near lumen): meiotic germ cells<br><br><strong>Why it matters:</strong><br>1. Separates <em>immune-privileged meiotic cells</em> from circulation (meiosis begins post-puberty — cells are "foreign" to immune system).<br>2. Meiotic cells rely on Sertoli cells for nutrients.<br><br>Also: secrete <strong>inhibin B</strong> (neg feedback on FSH), <strong>MIS/AMH</strong> (fetal), <strong>ABP</strong> (concentrates testosterone).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Spermatogenesis — Cell Progression</div><div class="fc-q">Trace the germ cell progression from base to lumen of the seminiferous tubule. Which step is the only mitotic division?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Germ cells move <strong>from basement membrane → lumen</strong> as they mature:<br><br><strong>1. Spermatogonia (2n)</strong> — divide by <strong>MITOSIS</strong> (only mitotic step) — sit on basement membrane.<br><strong>2. Primary spermatocytes (4n)</strong> — enter <strong>meiosis I</strong>.<br><strong>3. Secondary spermatocytes (2n)</strong> — complete <strong>meiosis II</strong>.<br><strong>4. Spermatids (n)</strong> — begin <strong>spermiogenesis</strong> (morphologic transformation).<br><strong>5. Spermatozoa (n)</strong> — mature sperm released into lumen.<br><br>Process takes <strong>~74 days</strong>. Synchronous divisions via <strong>incomplete cytokinesis</strong> (cytoplasmic bridges) ensure continuous sperm supply.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">HPG Axis (Male)</div><div class="fc-q">Trace the hypothalamic-pituitary-gonadal axis in males. Which hormone targets Leydig vs. Sertoli cells? Where does each feedback signal act?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Hypothalamus:</strong> GnRH → ant. pituitary<br><strong>Ant. pituitary (basophils of pars distalis):</strong><br>• <strong>LH → Leydig cells → testosterone</strong> ("LH → Leydig")<br>• <strong>FSH → Sertoli cells → support germ cells</strong> + ABP + inhibin B ("FSH → Follicle/Sertoli")<br><br><strong>Feedback:</strong><br>• <strong>Testosterone</strong> → negative feedback on <strong>hypothalamus (GnRH)</strong> AND pituitary (LH)<br>• <strong>Inhibin B</strong> → selective negative feedback on <strong>FSH only</strong><br><br>Clinically: ↑FSH + normal T = Sertoli dysfunction (↓ inhibin B); ↑LH + ↓T = Leydig dysfunction.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Spermiogenesis</div><div class="fc-q">What is spermiogenesis (vs. spermatogenesis)? Name the four parts of the mature sperm structure.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Spermiogenesis</strong> = final morphologic transformation of round <strong>spermatid → elongated spermatozoon</strong> (subset of spermatogenesis). <em>No cell division.</em><br><br><strong>Key events:</strong> <strong>acrosome forms</strong> (hydrolytic enzymes for zona pellucida penetration), nucleus condenses, flagellum (axoneme) forms, mitochondria coil around midpiece, residual cytoplasm discarded.<br><br><strong>Mature sperm structure:</strong><br>• <strong>Head</strong>: nucleus + acrosome<br>• <strong>Mid-piece</strong>: axoneme (9+2 microtubules) + <strong>mitochondrial sheath</strong> (ATP for flagellar motility)<br>• <strong>Principal piece</strong>: axoneme + fibrous sheath<br>• <strong>End piece</strong>: axoneme + plasma membrane only</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Excurrent Ducts — Order</div><div class="fc-q">Trace the path of sperm from seminiferous tubule to urethra. Which two ducts are intratesticular?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Sperm pathway: <strong>Seminiferous tubule → Tubulus rectus → Rete testis → Efferent ductules → Epididymis (head→body→tail) → Vas (ductus) deferens → Ampulla → Ejaculatory duct → Prostatic urethra → Membranous urethra → Penile urethra</strong><br><br>Mnemonic: <span class="vig-buzzword">SEVEN UP</span> — <strong>S</strong>eminiferous tubule, <strong>E</strong>pididymis, <strong>V</strong>as deferens, <strong>E</strong>jaculatory duct, <strong>N</strong>othing, <strong>U</strong>rethra, <strong>P</strong>enis.<br><br><strong>Intratesticular:</strong> Tubulus rectus + Rete testis.<br><strong>Extratesticular:</strong> everything else starting with efferent ductules.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Efferent Ductules</div><div class="fc-q">What is the embryologic origin of the efferent ductules? What cell types line them? Function?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Origin:</strong> <strong>Mesonephric tubules</strong> (from pronephric/mesonephric system).<br><br><strong>Structure:</strong> ~20 small tubules leaving rete testis → coalesce into head of epididymis. Give the duct a characteristic "<strong>scalloped/uneven lumen</strong>" on histology.<br><br><strong>Cell types:</strong><br>• <strong>Ciliated cells</strong> → move sperm forward<br>• <strong>Resorptive (non-ciliated) cells</strong> → reabsorb fluid → concentrate sperm<br><br>Key concept: <em>mesonephric tubules → fluid reabsorption</em> = CONCENTRATE sperm as they move toward epididymis.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Epididymis</div><div class="fc-q">What is the epithelium of the epididymis? What are the three parts and what happens in each?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Epithelium:</strong> <strong>Pseudostratified columnar with STEREOCILIA</strong> (long, non-motile microvilli — not true cilia). Also has smooth muscle in wall.<br><br><strong>Three parts (head → tail ~7 m long!):</strong><br>• <strong>Head:</strong> immature sperm enter from efferent ductules; cannot yet fertilize.<br>• <strong>Body:</strong> transit + continued maturation.<br>• <strong>Tail:</strong> sperm fully mature → motility + fertilizing ability.<br><br><strong>Storage:</strong> Lumen widens toward tail → slowed flow → sperm can be <strong>stored up to 1 month</strong>.<br><br><strong>Embryology:</strong> Wolffian (mesonephric) duct derivative.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Vas Deferens &amp; Vasectomy</div><div class="fc-q">What epithelium lines the vas deferens? What are the wall's distinguishing features? What is vasectomy?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Epithelium:</strong> <strong>Pseudostratified columnar with stereocilia</strong> (same as epididymis).<br><br><strong>Wall:</strong> <strong>3 THICK smooth muscle layers</strong> (inner longitudinal, middle circular, outer longitudinal) — provide powerful peristaltic propulsion during ejaculation. This is how to distinguish vas from epididymis histologically (vas has much thicker muscular wall).<br><br><strong>Vasectomy:</strong> surgical cut/ligation of vas deferens → prevents sperm from reaching ejaculate. Sperm are still made in testis but reabsorbed. Testosterone and ejaculate volume unaffected (sperm are &lt;5% of semen volume).<br><br><strong>Embryology:</strong> Wolffian duct (SEED).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Seminal Vesicles</div><div class="fc-q">What do seminal vesicles secrete? What percentage of ejaculate do they contribute? Are sperm stored here?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Histo:</strong> Simple or pseudostratified columnar epithelium; <em>highly folded mucosa</em> for ↑ surface area.<br><br><strong>Secretion (~70% of ejaculate):</strong><br>• <strong>Fructose</strong> (energy for sperm — clinical marker of SV patency)<br>• Alkaline fluid (neutralizes acidic vagina)<br>• Prostaglandins (stimulate uterine contractions)<br>• Clotting proteins (semenogelin)<br>• Vitamin C, flavins (give semen yellow UV fluorescence — forensic use)<br><br><span class="vig-buzzword">SPERM ARE NOT STORED HERE</span> — common exam trap! Sperm are stored in the <strong>tail of the epididymis</strong>. SV fluid joins sperm at the ejaculatory duct.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Prostate</div><div class="fc-q">What lines the prostate? What are corpora amylacea? What is PSA and its clinical use?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Histo:</strong> Simple or <strong>pseudostratified columnar</strong> epithelium. Unique to mammals. Contains the <strong>verumontanum</strong> — landmark where ejaculatory duct meets prostatic urethra.<br><br><strong>Corpora amylacea</strong> = small, round calcified bodies in prostatic glandular lumens. <span class="vig-buzzword">Classic histologic feature of the prostate</span>. Increase with age.<br><br><strong>PSA (prostate-specific antigen):</strong> serine protease secreted by prostatic epithelium. Liquefies semen coagulum after ejaculation. Leaks into blood when prostatic architecture disturbed → ↑ serum PSA = marker of <strong>BPH, prostatitis, or prostate cancer</strong>.<br><br><strong>Clinical:</strong> Prostate cancer is the most common cancer in men (3rd deadliest). Hormone-sensitive → treated with androgen deprivation therapy.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Bulbourethral (Cowper's) Glands</div><div class="fc-q">Where are Cowper's glands located, what do they secrete, and what is the distinguishing histologic clue?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Location:</strong> At the <strong>base of the penis</strong>; secrete into the proximal penile (spongy) urethra. Paired glands.<br><br><strong>Secretion:</strong> Alkaline <strong>mucin</strong> (pre-ejaculate fluid) — two roles: (1) <span class="vig-buzzword">protects urethra from urine acidity</span>; (2) <span class="vig-buzzword">shields sperm from damaging enzymes</span> (residual acrosomal proteases).<br><br><strong>Histologic clue:</strong> the gland is <strong>surrounded by SKELETAL MUSCLE</strong> — the only accessory gland like this — because it sits within the urogenital diaphragm (external urethral sphincter).<br><br><strong>Female homolog:</strong> Bartholin (greater vestibular) glands.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Penis — Erectile Tissues</div><div class="fc-q">Name the paired and unpaired erectile tissues of the penis. Which one surrounds the urethra? What covers them?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Corpus cavernosum</strong> — <em>PAIRED</em> dorsal erectile bodies; fill with blood during erection, surrounded by <strong>tunica albuginea</strong> (dense CT). Compression against tunica during engorgement causes rigidity.<br><br><strong>Corpus spongiosum</strong> — <em>UNPAIRED</em> ventral body; <strong>SURROUNDS the urethra</strong>. Expands distally as the glans penis. Less rigid during erection (doesn't compress urethra — allows ejaculation).<br><br><strong>Penis parts:</strong> Root (fixed, attached to body wall) · Body (shaft, with dartos muscle) · Glans (expanded tip) · Prepuce (foreskin) covers glans.<br><br><strong>Erection:</strong> Parasympathetic (NO, "Point") → vasodilation → engorgement. Ejaculation: sympathetic (NE, "Shoot").</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Urethra — 3 Segments</div><div class="fc-q">Name the three segments of the male urethra and the epithelium of each.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Three segments distinguished by epithelium:<br><br><strong>1. Prostatic urethra</strong> — passes through the prostate; receives ejaculatory ducts + prostatic ducts. Lined by <strong>transitional (urothelium)</strong> epithelium (same as bladder). Contains verumontanum.<br><br><strong>2. Membranous urethra</strong> — shortest; passes through urogenital diaphragm (external urethral sphincter — skeletal muscle, voluntary). Lined by <strong>pseudostratified/stratified columnar</strong> epithelium.<br><br><strong>3. Penile (spongy) urethra</strong> — longest; runs through corpus spongiosum. Lined by <strong>pseudostratified/stratified columnar</strong>, transitions to <strong>stratified squamous</strong> at the glans (navicular fossa).<br><br>Key: transitional (prostatic) → columnar (membranous + penile) → squamous (glans).</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ FILL IN THE BLANK ══════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-fib">
+  <div class="fib-list">
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 01 — Testis Layers</div>
+      <div class="fib-prompt">From outermost to innermost, the three testis coverings are: the visceral tunica ___________ (single layer of mesothelial cells), the tunica ___________ (thickest, dense CT), and the tunica ___________ (loose CT with vasculature).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="outer..." data-answers="vaginalis">
+        <input class="fib-input" type="text" placeholder="thickest/middle..." data-answers="albuginea">
+        <input class="fib-input" type="text" placeholder="innermost..." data-answers="vasculosa">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: The thickest CT layer carries a Latin name meaning "white tunic."</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 02 — Leydig vs Sertoli</div>
+      <div class="fib-prompt">___________ cells sit in the INTERSTITIUM between seminiferous tubules and secrete testosterone under ___________ (gonadotropin) stimulation. ___________ cells sit INSIDE the tubules on the basement membrane and support germ cells under ___________ (gonadotropin) stimulation.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="interstitial cell..." data-answers="leydig">
+        <input class="fib-input" type="text" placeholder="LH or FSH..." data-answers="lh">
+        <input class="fib-input" type="text" placeholder="intratubular cell..." data-answers="sertoli">
+        <input class="fib-input" type="text" placeholder="LH or FSH..." data-answers="fsh">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: "LH → Leydig; FSH → Follicle/Sertoli."</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 03 — Blood-Testis Barrier</div>
+      <div class="fib-prompt">The blood-testis barrier is formed by ___________ junctions between adjacent ___________ cells. It divides the seminiferous tubule into a ___________ compartment (containing spermatogonia) and an ___________ compartment (containing meiotic germ cells).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="junction type..." data-answers="tight">
+        <input class="fib-input" type="text" placeholder="cell type..." data-answers="sertoli">
+        <input class="fib-input" type="text" placeholder="basal or adluminal..." data-answers="basal">
+        <input class="fib-input" type="text" placeholder="basal or adluminal..." data-answers="adluminal">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Protects meiotic germ cells from immune exposure.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 04 — Spermatogenesis Order</div>
+      <div class="fib-prompt">Spermatogenic cells from basement membrane to lumen: ___________ (2n) → primary ___________ (4n) → secondary spermatocytes (2n) → ___________ (n) → spermatozoa. Only the first step is ___________ (mitosis/meiosis).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="earliest cell..." data-answers="spermatogonia,spermatogonium">
+        <input class="fib-input" type="text" placeholder="cell after spermatogonia..." data-answers="spermatocytes,spermatocyte">
+        <input class="fib-input" type="text" placeholder="round haploid cell..." data-answers="spermatids,spermatid">
+        <input class="fib-input" type="text" placeholder="mitosis or meiosis..." data-answers="mitosis">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Takes about 74 days; synchronous divisions via incomplete cytokinesis.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 05 — Sperm Structure</div>
+      <div class="fib-prompt">The sperm head contains the ___________ (enzymes for egg penetration) + condensed nucleus. The mid-piece houses the axoneme (9+2 microtubules) surrounded by a ___________ sheath (ATP production). During spermiogenesis, spermatids transform into ___________.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="head cap..." data-answers="acrosome">
+        <input class="fib-input" type="text" placeholder="midpiece sheath..." data-answers="mitochondrial,mitochondria">
+        <input class="fib-input" type="text" placeholder="mature sperm..." data-answers="spermatozoa,spermatozoon">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 06 — Excurrent Pathway</div>
+      <div class="fib-prompt">Sperm exit the seminiferous tubule via the tubulus ___________, enter the ___________ testis (embedded in mediastinum), pass through ~20 ___________ ductules that reabsorb fluid, then enter the ___________ for maturation + storage.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="straight tubule..." data-answers="rectus">
+        <input class="fib-input" type="text" placeholder="channel network..." data-answers="rete">
+        <input class="fib-input" type="text" placeholder="20-tube structure..." data-answers="efferent">
+        <input class="fib-input" type="text" placeholder="storage/maturation..." data-answers="epididymis,ductus epididymis">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 07 — Epididymis &amp; Vas Histology</div>
+      <div class="fib-prompt">Both the epididymis and vas deferens are lined by ___________ columnar epithelium with ___________ (long non-motile microvilli). The vas has a much thicker wall due to ___________ layers of smooth muscle.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="epithelium type..." data-answers="pseudostratified">
+        <input class="fib-input" type="text" placeholder="apical projections..." data-answers="stereocilia">
+        <input class="fib-input" type="text" placeholder="# muscle layers..." data-answers="3,three">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: These are NOT true motile cilia — they're structural only.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 08 — Seminal Vesicles</div>
+      <div class="fib-prompt">Seminal vesicles contribute about ___________ % of ejaculate volume. They secrete ___________ (sugar for sperm energy), alkaline fluid, prostaglandins, and clotting proteins. Importantly, sperm are ___________ stored here.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="percent volume..." data-answers="70,~70">
+        <input class="fib-input" type="text" placeholder="energy sugar..." data-answers="fructose">
+        <input class="fib-input" type="text" placeholder="yes/no storage..." data-answers="not,no">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Fructose assay is used clinically to check seminal vesicle patency.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 09 — Prostate Histology</div>
+      <div class="fib-prompt">The prostate contains small round calcified bodies called ___________ in the glandular lumens. Prostate epithelium secretes ___________ (a serine protease) that liquefies semen; blood levels are used to screen for prostate ___________ and BPH.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="calcified bodies..." data-answers="corpora amylacea">
+        <input class="fib-input" type="text" placeholder="marker protein..." data-answers="psa,prostate specific antigen,prostate-specific antigen">
+        <input class="fib-input" type="text" placeholder="disease..." data-answers="cancer">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: The rounded calcifications in prostatic glands are sometimes called "prostatic concretions."</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 10 — Urethra Epithelium</div>
+      <div class="fib-prompt">The prostatic urethra is lined by ___________ epithelium (same as bladder). The membranous and most of the penile urethra are lined by ___________ columnar epithelium. At the distal glans (navicular fossa), it transitions to stratified ___________.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="prostatic lining..." data-answers="transitional,urothelium">
+        <input class="fib-input" type="text" placeholder="middle lining..." data-answers="pseudostratified,stratified">
+        <input class="fib-input" type="text" placeholder="glans lining..." data-answers="squamous">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Transitional → columnar → squamous as you move distally.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ORDERING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-ordering">
+  <div class="ordering-intro">
+    <strong>Instructions:</strong> Drag and drop the items into the correct order, then click "Check Order." Use "Show Answer" if you get stuck.
+  </div>
+
+  <!-- Drill 1: Spermatogenesis Progression -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 1 — Spermatogenesis: Stem Cell → Mature Sperm</div>
+    <div class="drill-hint">Arrange these 7 cellular stages from basement membrane to tubule lumen.</div>
+    <div class="order-list" id="order-list-1" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-1')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Spermiogenesis — spermatid morphologically transforms (acrosome, flagellum, mitochondrial sheath)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Spermatogonium undergoes MITOSIS → Type A (stem) + Type B (committed) daughters</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Secondary spermatocyte (2n) — quickly completes MEIOSIS II → spermatids</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Spermatogonia (2n) — sit on basement membrane in basal compartment</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Round spermatid (n) — haploid, yet to be shaped into mature sperm</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="7"><span class="item-grip">⠿</span><span class="item-text">Spermatozoon released into seminiferous tubule lumen (spermiation)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Primary spermatocyte (4n) — enters MEIOSIS I; crosses blood-testis barrier</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-1','order-fb-1')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-1')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-1"></div>
+    <div class="order-answer" id="order-ans-1">
+      <ol><li><span>Spermatogonia (2n)</span> — basal compartment</li><li><span>Mitosis → Type A + B spermatogonia</span></li><li><span>Primary spermatocyte (4n)</span> — enters meiosis I; crosses BTB</li><li><span>Secondary spermatocyte (2n)</span> — completes meiosis II</li><li><span>Round spermatid (n)</span></li><li><span>Spermiogenesis</span> — acrosome, flagellum, mitochondrial sheath form</li><li><span>Spermatozoon released</span> into lumen (spermiation)</li></ol>
+    </div>
+  </div>
+
+  <!-- Drill 2: Excurrent Duct Pathway -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 2 — Sperm Transport: Testis → Urethra</div>
+    <div class="drill-hint">Order the 9 anatomic structures sperm pass through from production to ejaculation.</div>
+    <div class="order-list" id="order-list-2" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-2')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="7"><span class="item-grip">⠿</span><span class="item-text">Ejaculatory duct — union of vas ampulla + seminal vesicle duct</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Tubulus rectus (simple cuboidal) — straight tubule exit</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="8"><span class="item-grip">⠿</span><span class="item-text">Prostatic urethra (transitional epithelium)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Seminiferous tubule (site of spermatogenesis)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Rete testis — network in mediastinum testis</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="9"><span class="item-grip">⠿</span><span class="item-text">Membranous + penile urethra → external meatus</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Vas deferens + ampulla (mixing with seminal vesicle fluid)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Efferent ductules — reabsorb fluid + concentrate sperm</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Epididymis (head → body → tail) — maturation + storage</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-2','order-fb-2')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-2')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-2"></div>
+    <div class="order-answer" id="order-ans-2">
+      <ol><li><span>Seminiferous tubule</span></li><li><span>Tubulus rectus</span></li><li><span>Rete testis</span></li><li><span>Efferent ductules</span></li><li><span>Epididymis</span> (maturation + storage)</li><li><span>Vas deferens + ampulla</span></li><li><span>Ejaculatory duct</span></li><li><span>Prostatic urethra</span></li><li><span>Membranous → penile urethra → meatus</span></li></ol>
+      <p style="color:#7A7060;font-size:.85em;margin-top:6px"><strong>Mnemonic:</strong> <span style="color:#8B2242">SEVEN UP</span> — Seminiferous · Epididymis · Vas · Ejaculatory · Nothing · Urethra · Penis</p>
+    </div>
+  </div>
+
+  <!-- Drill 3: HPG Axis -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 3 — HPG Axis: Hypothalamus → Leydig/Sertoli → Feedback</div>
+    <div class="drill-hint">Arrange the 6 hormonal events of the male HPG axis in the correct physiologic order.</div>
+    <div class="order-list" id="order-list-3" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-3')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Sertoli cells secrete inhibin B → negative feedback on FSH only</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Anterior pituitary releases LH + FSH</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Testosterone provides negative feedback on hypothalamus + pituitary (LH)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Hypothalamus releases GnRH pulses</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">LH acts on Leydig cells (interstitium) → testosterone synthesis</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">FSH acts on Sertoli cells → ABP production + germ cell support</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-3','order-fb-3')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-3')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-3"></div>
+    <div class="order-answer" id="order-ans-3">
+      <ol><li><span>GnRH pulses</span> from hypothalamus</li><li><span>LH + FSH</span> from anterior pituitary</li><li><span>LH → Leydig → testosterone</span></li><li><span>FSH → Sertoli → ABP + germ cell support</span></li><li><span>Inhibin B (Sertoli)</span> → selective negative feedback on FSH</li><li><span>Testosterone</span> → negative feedback on hypothalamus + LH</li></ol>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MATCHING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-matching">
+  <div class="match-intro">
+    <strong>Instructions:</strong> Click an item on the left, then click its match on the right. Correct pairs turn green; wrong pairs flash red.
+  </div>
+
+  <!-- Set 1: Excurrent Duct → Epithelium -->
+  <div class="match-set">
+    <div class="match-set-title">Set 1 — Excurrent Duct Structure → Epithelium</div>
+    <div class="match-set-hint">Match each part of the male excurrent ductal system to its lining epithelium.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Structure</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Tubulus rectus</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Rete testis</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Efferent ductules</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Epididymis / Vas deferens</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="5">Prostatic urethra</div>
+      </div>
+      <div>
+        <div class="match-col-label">Epithelium</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Pseudostratified columnar with STEREOCILIA</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Simple cuboidal — straight exit from seminiferous tubule</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="5">Transitional (urothelium) — same as bladder</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Alternating ciliated + resorptive cells → "scalloped" lumen</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Simple cuboidal with occasional cilia — embedded in mediastinum testis</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms1-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms1')">Reset</button>
+  </div>
+
+  <!-- Set 2: Testicular Cell → Function -->
+  <div class="match-set">
+    <div class="match-set-title">Set 2 — Testicular Cell Type → Product/Function</div>
+    <div class="match-set-hint">Match each testicular cell to its hormone or role.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Cell</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Leydig cells</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Sertoli cells</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Spermatogonia</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">Primary spermatocyte</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="5">Spermatids</div>
+      </div>
+      <div>
+        <div class="match-col-label">Product / Function</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">Enters meiosis I; 4n; has classic "thick" appearance</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Testosterone (LH-stimulated); lipid droplets + tubular cristae</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="5">Haploid (n); undergo spermiogenesis into spermatozoa</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Forms blood-testis barrier; secretes ABP, MIS, inhibin B</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Diploid stem cells (2n); only germ cells to undergo mitosis</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms2-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms2')">Reset</button>
+  </div>
+
+  <!-- Set 3: Accessory Gland → Secretion/Feature -->
+  <div class="match-set">
+    <div class="match-set-title">Set 3 — Accessory Gland → Key Product/Histologic Feature</div>
+    <div class="match-set-hint">Match each male accessory gland to its signature secretion or histologic clue.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Gland</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Seminal vesicles</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Prostate</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Bulbourethral (Cowper's) glands</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Epididymis (tail)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="5">Seminiferous tubule (Sertoli)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Key Product / Histo Clue</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Primary site of sperm storage + final maturation</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Fructose (sperm energy); alkaline fluid; 70% of ejaculate; NO sperm stored</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="5">Produces inhibin B + androgen-binding protein (ABP); blood-testis barrier</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">PSA secretion; corpora amylacea in glandular lumens</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Mucin secretion; surrounded by SKELETAL muscle</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms3-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms3')">Reset</button>
+  </div>
+</div>
+
+<!-- ══ TEST TRAPS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-traps">
+  <div class="trap-intro">
+    <strong>Test Trap Mode:</strong> Each statement is either TRUE or FALSE as written. Many are designed to catch common exam errors. Click T or F — then read the explanation carefully.
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 — Leydig vs Sertoli Location</div>
+    <div class="trap-statement">"Leydig cells are located inside the seminiferous tubules, while Sertoli cells sit in the interstitium between tubules."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Reversed. <strong>Sertoli cells are INSIDE</strong> the seminiferous tubules (on the basement membrane) and surround developing germ cells. <strong>Leydig cells are in the INTERSTITIUM</strong> between tubules. Mnemonic: "L<strong>E</strong>ydig = in <strong>E</strong>xterior; <strong>S</strong>ertoli = <strong>S</strong>itting among sperm." LH → Leydig (→ testosterone); FSH → Sertoli (→ ABP, inhibin B, germ cell support).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 — Which Germ Cell Does Mitosis?</div>
+    <div class="trap-statement">"Primary spermatocytes undergo mitosis to maintain the germ cell pool throughout life."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> <strong>Spermatogonia (not spermatocytes)</strong> are the ONLY germ cells that undergo <strong>mitosis</strong>. They are the stem cells on the basement membrane, dividing into Type A (self-renewal) + Type B (committed) daughters. <strong>Primary spermatocytes undergo MEIOSIS I</strong>. Secondary spermatocytes undergo MEIOSIS II. Spermatids undergo spermiogenesis (no division). Memorize: <span class="vig-buzzword">gonia = mitosis; cytes = meiosis; tids = morphologic shaping</span>.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 — Blood-Testis Barrier</div>
+    <div class="trap-statement">"The blood-testis barrier is formed by tight junctions between Leydig cells, separating spermatogonia from immune-sensitive cells."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The blood-testis barrier is formed by <strong>tight junctions between SERTOLI cells (not Leydig)</strong>. It divides the seminiferous tubule into the <strong>basal compartment (spermatogonia)</strong> and <strong>adluminal compartment (meiotic spermatocytes + spermatids)</strong>. The barrier protects MEIOTIC and post-meiotic cells — which express novel antigens — from circulating immune cells. Damage (e.g., trauma, vasectomy reversal) can cause anti-sperm antibodies → immunologic infertility.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 — Seminal Vesicle Storage</div>
+    <div class="trap-statement">"Seminal vesicles are the primary storage site of mature sperm before ejaculation."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> <span style="color:#8B2242"><strong>SPERM ARE NOT STORED IN SEMINAL VESICLES</strong></span> — classic exam trap! The seminal vesicles produce fluid (fructose, prostaglandins, ~70% of ejaculate volume) that <em>joins</em> sperm at the ejaculatory duct. <strong>Sperm are stored in the TAIL of the epididymis</strong> (up to ~1 month). The name "seminal vesicle" is misleading — it refers to their secretory role in semen, not storage.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 — Pampiniform Plexus</div>
+    <div class="trap-statement">"The pampiniform plexus is an arterial network that warms blood flowing to the testis to optimize sperm production."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Two errors: it's a <strong>VENOUS plexus</strong> (not arterial), and it <strong>COOLS</strong> (not warms) blood. The pampiniform plexus is a web of veins wrapping around the testicular artery, functioning as a <strong>countercurrent heat exchanger</strong> to keep testicular temperature ~2°C below core body. Spermatogenesis is heat-sensitive. Clinically: dilation of the plexus = <strong>varicocele</strong> ("bag of worms," usually left-sided) → infertility. Twisting = <strong>testicular torsion</strong>, a surgical emergency.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 — Cilia vs Stereocilia</div>
+    <div class="trap-statement">"The pseudostratified epithelium of the epididymis has motile cilia that propel sperm toward the vas deferens."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The epididymis (and vas deferens) have <span class="vig-buzzword">STEREOCILIA</span>, NOT true motile cilia. Stereocilia are long, non-motile microvilli — purely structural (↑ surface area for fluid reabsorption, sperm maturation). Sperm are propelled by <strong>smooth muscle contractions</strong> of the ductal wall. True motile cilia exist in the <strong>efferent ductules</strong> and rete testis — but those use dynein-driven 9+2 microtubules for actual movement. Don't confuse the two: stereo = structure, cilia = motion.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 — Bulbourethral Surroundings</div>
+    <div class="trap-statement">"The bulbourethral (Cowper's) glands are surrounded by smooth muscle, distinguishing them from other accessory glands."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The <strong>bulbourethral glands are surrounded by SKELETAL muscle</strong>, not smooth muscle — this is their histologic pathognomonic feature. They sit within the urogenital diaphragm (external urethral sphincter = skeletal). Function: secrete alkaline mucin (pre-ejaculate) that (1) neutralizes residual urine acidity in the urethra and (2) protects sperm from damaging acrosomal enzymes. Female homolog: Bartholin (greater vestibular) glands.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 08 — DHT Potency</div>
+    <div class="trap-statement">"Testosterone binds the androgen receptor more potently than DHT — that's why testosterone is the dominant circulating androgen."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Reversed. <strong>DHT binds the androgen receptor with ~50× higher affinity than testosterone</strong> (DHT is the more potent androgen). Testosterone is the main CIRCULATING androgen (higher serum levels) because most tissues convert it to DHT locally via <strong>5α-reductase</strong>. Drugs like <strong>finasteride</strong> (5α-reductase inhibitor) reduce DHT production specifically — used for BPH and androgenetic alopecia. Defective androgen receptor = Complete Androgen Insensitivity Syndrome (CAIS).</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-reference">
+
+  <div class="ref-section">
+    <div class="ref-title">Spermatogenesis — Full Cellular Progression</div>
+    <table class="ref-table">
+      <thead><tr><th>Stage</th><th>Ploidy</th><th>Location</th><th>Key Event</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Spermatogonium (type A/B)</td><td>2n</td><td>Basal compartment (basement membrane)</td><td>ONLY germ cell to undergo MITOSIS; stem cell renewal</td></tr>
+        <tr><td class="key">Primary spermatocyte</td><td>4n</td><td>Crosses blood-testis barrier into adluminal compartment</td><td>Enters MEIOSIS I (prolonged prophase I); largest germ cell</td></tr>
+        <tr><td class="key">Secondary spermatocyte</td><td>2n</td><td>Adluminal compartment</td><td>Completes MEIOSIS II quickly (rarely seen on histology)</td></tr>
+        <tr><td class="key">Round spermatid</td><td>n</td><td>Near lumen</td><td>Haploid; enters spermiogenesis</td></tr>
+        <tr><td class="key">Elongating spermatid</td><td>n</td><td>Near lumen</td><td>Acrosome forms, flagellum develops, mitochondrial sheath wraps midpiece</td></tr>
+        <tr><td class="key">Spermatozoon</td><td>n</td><td>Seminiferous lumen</td><td>Released (spermiation); still immature — gains motility in epididymis</td></tr>
+        <tr><td colspan="4" style="font-style:italic;color:#7A7060;padding-top:10px"><strong>Total duration:</strong> ~74 days per cycle + another ~2 weeks for epididymal maturation. Synchronous waves via incomplete cytokinesis ensure continuous sperm supply.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Male Reproductive Tract — Epithelium Summary</div>
+    <table class="ref-table">
+      <thead><tr><th>Structure</th><th>Epithelium</th><th>Step 1 Hook</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Seminiferous tubules</td><td>Stratified germinal + Sertoli cells</td><td>Blood-testis barrier via Sertoli tight junctions</td></tr>
+        <tr><td class="key">Tubulus rectus</td><td>Simple cuboidal</td><td>Intratesticular; straight exit from seminiferous tubule</td></tr>
+        <tr><td class="key">Rete testis</td><td>Simple cuboidal (occasional cilia)</td><td>Intratesticular; embedded in mediastinum testis</td></tr>
+        <tr><td class="key">Efferent ductules</td><td>Ciliated + resorptive cells → "scalloped" lumen</td><td>Mesonephric tubule origin; fluid reabsorption + sperm concentration</td></tr>
+        <tr><td class="key">Epididymis</td><td>Pseudostratified columnar with STEREOCILIA</td><td>Sperm maturation + storage (tail); Wolffian duct derivative</td></tr>
+        <tr><td class="key">Vas deferens</td><td>Pseudostratified columnar with STEREOCILIA</td><td>3 thick smooth muscle layers; vasectomy site; Wolffian duct</td></tr>
+        <tr><td class="key">Seminal vesicles</td><td>Simple/pseudostratified columnar; highly folded</td><td>Fructose, alkaline fluid; 70% ejaculate; NO sperm storage</td></tr>
+        <tr><td class="key">Prostate</td><td>Simple/pseudostratified columnar</td><td>Corpora amylacea; PSA; verumontanum landmark</td></tr>
+        <tr><td class="key">Bulbourethral (Cowper's)</td><td>Simple columnar; mucin</td><td>Surrounded by SKELETAL muscle (urogenital diaphragm)</td></tr>
+        <tr><td class="key">Prostatic urethra</td><td>TRANSITIONAL (urothelium)</td><td>Same as bladder</td></tr>
+        <tr><td class="key">Membranous urethra</td><td>Pseudostratified/stratified columnar</td><td>Shortest; external urethral sphincter</td></tr>
+        <tr><td class="key">Penile (spongy) urethra</td><td>Pseudostratified/stratified columnar → stratified squamous at glans</td><td>Receives Cowper's + small mucous glands of Littré</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Male HPG Axis — Hormones &amp; Feedback</div>
+    <table class="ref-table">
+      <thead><tr><th>Hormone</th><th>Source</th><th>Target</th><th>Effect</th><th>Feedback</th></tr></thead>
+      <tbody>
+        <tr><td class="key">GnRH</td><td>Hypothalamus (pulsatile)</td><td>Anterior pituitary</td><td>Releases LH + FSH</td><td>Inhibited by testosterone</td></tr>
+        <tr><td class="key">LH</td><td>Ant. pituitary basophils</td><td>Leydig cells (interstitium)</td><td>Synthesis of testosterone + DHT</td><td>Inhibited by testosterone (neg)</td></tr>
+        <tr><td class="key">FSH</td><td>Ant. pituitary basophils</td><td>Sertoli cells (inside tubules)</td><td>ABP production; supports germ cell development</td><td>Inhibited by <strong>inhibin B</strong> (selectively)</td></tr>
+        <tr><td class="key">Testosterone</td><td>Leydig cells</td><td>Androgen receptors systemically; converted to DHT locally</td><td>Maintains spermatogenesis (local), accessory glands, libido, 2° sex char.</td><td>↓ GnRH, ↓ LH (negative)</td></tr>
+        <tr><td class="key">DHT</td><td>Peripheral conversion via 5α-reductase</td><td>Androgen receptor (50× more potent)</td><td>External genitalia in utero; prostate, male-pattern hair</td><td>Via testosterone axis</td></tr>
+        <tr><td class="key">Inhibin B</td><td>Sertoli cells</td><td>Ant. pituitary</td><td>Selectively ↓ FSH</td><td>Marker of Sertoli function / spermatogenesis</td></tr>
+        <tr><td class="key">ABP</td><td>Sertoli cells</td><td>Seminiferous tubule lumen</td><td>Concentrates testosterone locally for germ cell support</td><td>—</td></tr>
+        <tr><td class="key">MIS / AMH</td><td>Sertoli cells (fetal)</td><td>Paramesonephric (Müllerian) ducts</td><td>Regresses Müllerian ducts in male fetus</td><td>Key in utero; low in adults</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Testis &amp; Duct Clinical Pearls</div>
+    <table class="ref-table">
+      <thead><tr><th>Condition</th><th>Anatomic basis</th><th>Key Feature</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Cryptorchidism</td><td>Failure of testicular descent (gubernaculum-guided)</td><td>↑ seminoma, infertility; orchidopexy by 6–12 months</td></tr>
+        <tr><td class="key">Testicular torsion</td><td>Twisting of spermatic cord → ischemia</td><td>Absent cremasteric reflex; surgical emergency (6h window); bell-clapper deformity</td></tr>
+        <tr><td class="key">Varicocele</td><td>Dilation of pampiniform plexus</td><td>"Bag of worms" — L &gt; R (left gonadal vein → L renal vein at 90°); infertility</td></tr>
+        <tr><td class="key">Hydrocele</td><td>Patent processus vaginalis (communicating) or idiopathic (simple)</td><td>Transilluminates; fluctuates with position (communicating type)</td></tr>
+        <tr><td class="key">BPH</td><td>Nodular hyperplasia of periurethral (transitional/central) zone</td><td>Urinary hesitancy, ↑ frequency; α1-blockers, 5α-reductase inhibitors</td></tr>
+        <tr><td class="key">Prostate cancer</td><td>Adenocarcinoma of posterior (peripheral) zone</td><td>↑ PSA; Gleason score; osteoblastic bone mets; ADT treatment</td></tr>
+        <tr><td class="key">Vasectomy</td><td>Vas deferens cut/tied → obstructs sperm release</td><td>T + ejaculate volume preserved; anti-sperm Ab risk post-reversal</td></tr>
+        <tr><td class="key">Klinefelter (47 XXY)</td><td>Seminiferous tubule dysgenesis + Leydig hypofunction</td><td>↑ FSH, ↑ LH, ↓ T, ↑ estradiol → gynecomastia + azoospermia</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-note">
+    <strong>Key principle:</strong> "LH → Leydig → testosterone" and "FSH → Sertoli → inhibin B + germ cell support" is the foundation of male endocrinology. Dysfunction of Sertoli cells selectively ↑ FSH (↓ inhibin); Leydig dysfunction selectively ↑ LH (↓ testosterone). Peripheral testosterone → <strong>DHT via 5α-reductase</strong> for external genital/prostate effects.
+  </div>
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; RPD04 Hub 1 — Core Concepts &nbsp;·&nbsp; HoyaDocs Repro Block
+</div>
+
+</div><!-- /container -->
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+window.addEventListener('load',function(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+});
+// Tab switching
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+
+// FIB check
+function checkFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  const fb=card.querySelector('.fib-feedback');
+  let allCorrect=true;
+  inputs.forEach(inp=>{
+    const val=inp.value.trim().toLowerCase();
+    const accepted=inp.dataset.answers.split(',').map(a=>a.trim().toLowerCase());
+    if(accepted.some(a=>val.includes(a)||a.includes(val)&&val.length>2)){
+      inp.classList.remove('incorrect');inp.classList.add('correct');
+    } else {
+      inp.classList.remove('correct');inp.classList.add('incorrect');allCorrect=false;
+    }
+  });
+  fb.className='fib-feedback '+(allCorrect?'correct':'incorrect');
+  fb.textContent=allCorrect?'✓ Correct!':'✗ Not quite — use Reveal to see the answer.';
+}
+function revealFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  inputs.forEach(inp=>{
+    const ans=inp.dataset.answers.split(',')[0];
+    inp.value=ans;inp.classList.add('correct');inp.classList.remove('incorrect');
+  });
+  const fb=card.querySelector('.fib-feedback');
+  fb.className='fib-feedback correct';fb.textContent='Answer revealed.';
+}
+
+// Drag-and-Drop Ordering
+let dragSrc=null;
+function dragStart(e){dragSrc=e.currentTarget;e.dataTransfer.effectAllowed='move';}
+function dropOnItem(e,listId){
+  e.preventDefault();e.stopPropagation();
+  const target=e.currentTarget;target.classList.remove('drag-over');
+  if(!dragSrc||dragSrc===target)return;
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  const srcIdx=items.indexOf(dragSrc);
+  const tgtIdx=items.indexOf(target);
+  if(srcIdx<tgtIdx)list.insertBefore(dragSrc,target.nextSibling);
+  else list.insertBefore(dragSrc,target);
+}
+function dropItem(e,listId){e.preventDefault();}
+function checkOrder(listId,fbId){
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  let correct=0;
+  items.forEach((item,idx)=>{
+    item.classList.remove('correct-pos','wrong-pos');
+    if(parseInt(item.dataset.pos)===idx+1){item.classList.add('correct-pos');correct++;}
+    else item.classList.add('wrong-pos');
+  });
+  const fb=document.getElementById(fbId);
+  fb.className='order-feedback '+(correct===items.length?'correct':'incorrect');
+  fb.textContent=correct===items.length?`✓ Perfect! All ${items.length} items in the correct order.`:`${correct}/${items.length} correct — keep trying or show the answer.`;
+}
+function showOrderAnswer(id){
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+// Matching
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,score:0};
+  const state=matchState[setId];
+  if(state.selected===null){
+    document.querySelectorAll(`[onclick*="${setId}"].selected`).forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');state.selected=el;
+  } else {
+    const prev=state.selected;
+    if(prev===el){el.classList.remove('selected');state.selected=null;return;}
+    if(prev.dataset.pair===el.dataset.pair){
+      prev.classList.remove('selected');prev.classList.add('matched-correct');
+      el.classList.add('matched-correct');state.selected=null;state.score++;
+      document.getElementById(setId+'-score').textContent=state.score;
+    } else {
+      [prev,el].forEach(e=>{e.classList.remove('selected');e.classList.add('flash-wrong');setTimeout(()=>e.classList.remove('flash-wrong'),500);});
+      state.selected=null;
+    }
+  }
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,score:0};
+  document.querySelectorAll(`[onclick*="${setId}"]`).forEach(e=>{e.classList.remove('matched-correct','selected','flash-wrong');});
+  document.getElementById(setId+'-score').textContent='0';
+}
+
+// Test Traps
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  const userSaidTrue=btn.classList.contains('trap-btn-true');
+  const isCorrect=(userSaidTrue===correct);
+  btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+
+/* ── THEME TOGGLE ── */
+
+
+</script>
+</body>
+</html>

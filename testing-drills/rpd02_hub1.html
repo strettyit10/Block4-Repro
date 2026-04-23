@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPD02 Urogenital System I & II — Hub 1 Core Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── BASE ── */
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#F7F5F0;color:#2C2C2C;min-height:100vh;line-height:1.6}
+
+/* ── TOP NAV ── */
+.topnav{background:#8B2242;border-bottom:3px solid #C9A84C;padding:0 28px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.35em;font-weight:700;color:#F2E8CF;letter-spacing:.02em}
+.nav-brand-sub{font-size:.72em;color:#C9A84C;font-weight:500;margin-left:6px;letter-spacing:.04em;text-transform:uppercase}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:rgba(255,255,255,0.7);font-weight:500;padding:6px 14px;border-radius:5px;border:1px solid rgba(255,255,255,0.2);text-decoration:none;transition:all .2s}
+.nav-back:hover{border-color:#C9A84C;color:#C9A84C}
+
+/* ── CONTAINER ── */
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+
+/* ── HEADER ── */
+.header{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#8B2242 0%,#C9A84C 50%,#8B2242 100%)}
+.hub-tag{display:inline-block;background:#8B2242;color:#F2E8CF;font-family:'Source Sans 3',sans-serif;font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:4px 12px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2em;color:#8B2242;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#8B6914;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:4px;padding:4px 10px;font-size:.75em;color:#5A5A5A}
+.source-badge strong{color:#8B2242}
+
+/* ── HUB PROGRESSION ── */
+.hub-prog{background:#FFF;border:1px solid #D6CEB8;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:7px 16px;border-radius:4px;font-size:.82em;font-weight:600}
+.hub-step.current{background:#8B2242;color:#F2E8CF}
+.hub-step.next{background:#F7F5F0;border:1px solid #D6CEB8;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#C9A84C;color:#8B6914}
+.hub-arrow{color:#C9A84C;font-size:1em;font-weight:700}
+.hub-prog-label{font-size:.76em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #D6CEB8;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:1.8em;font-weight:700;color:#8B2242}
+.stat-label{font-size:.68em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #D6CEB8;padding-bottom:0}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.84em;font-weight:600;padding:11px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#8B2242}
+.tab-btn.active{color:#8B2242;border-bottom-color:#C9A84C}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* ── FLASHCARDS ── */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #D6CEB8;border-top:3px solid #8B2242}
+.fc-back{transform:rotateY(180deg);background:#FFFDF5;border:1px solid #C9A84C}
+.fc-label{font-size:.66em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#8B2242;font-weight:700}
+
+/* ── FILL-IN-BLANK ── */
+.fib-list{display:flex;flex-direction:column;gap:16px}
+.fib-card{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:22px;border-left:4px solid #8B2242}
+.fib-num{font-size:.68em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.fib-prompt{font-size:.93em;color:#2C2C2C;line-height:1.65;margin-bottom:12px}
+.fib-hint{font-size:.8em;color:#7A7060;font-style:italic;margin-bottom:10px}
+.fib-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fib-input{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:9px 14px;color:#2C2C2C;font-size:.9em;font-family:inherit;min-width:200px;transition:border-color .2s}
+.fib-input:focus{outline:none;border-color:#C9A84C;background:#FFFDF5}
+.fib-input.correct{border-color:#2E7D32;background:#F1F8F2}
+.fib-input.incorrect{border-color:#C62828;background:#FEF5F5}
+.fib-btn{background:#8B2242;border:none;color:#F2E8CF;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:background .2s}
+.fib-btn:hover{background:#A83A58}
+.fib-reveal-btn{background:#FFF;border:1px solid #D6CEB8;color:#7A7060;padding:9px 16px;border-radius:5px;cursor:pointer;font-size:.82em;font-weight:600;font-family:inherit;transition:all .2s}
+.fib-reveal-btn:hover{border-color:#C9A84C;color:#8B6914}
+.fib-feedback{font-size:.82em;margin-top:8px;padding:7px 12px;border-radius:4px;display:none}
+.fib-feedback.correct{background:#F1F8F2;border:1px solid #A5D6A7;color:#2E7D32;display:block}
+.fib-feedback.incorrect{background:#FEF5F5;border:1px solid #FFCDD2;color:#C62828;display:block}
+
+/* ── ORDERING ── */
+.ordering-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.ordering-intro strong{color:#8B2242}
+.order-drill{background:#FFFFFF;border:1px solid #D6CEB8;border-left:4px solid #C9A84C;border-radius:6px;padding:22px;margin-bottom:20px}
+.drill-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#8B2242;margin-bottom:5px}
+.drill-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;min-height:40px}
+.order-item{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:12px 16px;cursor:grab;font-size:.86em;color:#2C2C2C;line-height:1.4;display:flex;align-items:flex-start;gap:10px;transition:all .15s;user-select:none}
+.order-item:active{cursor:grabbing}
+.order-item:hover{border-color:#C9A84C;background:#FFFDF5}
+.order-item.dragging{opacity:.6;border-style:dashed;border-color:#C9A84C}
+.order-item.drag-over{border-color:#C9A84C;background:#FFF8E1;transform:scale(1.01)}
+.order-item .item-grip{color:#C9A84C;font-size:1.1em;flex-shrink:0;margin-top:1px}
+.order-item .item-text{flex:1}
+.order-item.correct-pos{background:#F1F8F2;border-color:#66BB6A}
+.order-item.wrong-pos{background:#FEF5F5;border-color:#EF5350;color:#991b1b}
+.order-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.order-check-btn{background:#8B2242;border:none;color:#F2E8CF;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:background .2s}
+.order-check-btn:hover{background:#A83A58}
+.order-ghost-btn{background:none;border:1px solid #D6CEB8;color:#7A7060;padding:9px 18px;border-radius:5px;cursor:pointer;font-size:.84em;font-weight:600;font-family:inherit;transition:all .2s}
+.order-ghost-btn:hover{border-color:#C9A84C;color:#8B6914}
+.order-feedback{font-size:.84em;padding:8px 14px;border-radius:5px;margin-bottom:8px}
+.order-feedback.correct{background:#F1F8F2;border:1px solid #66BB6A;color:#2E7D32}
+.order-feedback.incorrect{background:#FEF5F5;border:1px solid #EF5350;color:#C62828}
+.order-answer{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:5px;padding:14px 18px;font-size:.83em;margin-top:8px;display:none}
+.order-answer ol{padding-left:20px;line-height:1.9}
+.order-answer li{color:#2C2C2C}
+.order-answer li span{color:#8B2242;font-weight:600}
+
+/* ── MATCHING ── */
+.match-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A}
+.match-intro strong{color:#8B2242}
+.match-set{background:#FFFFFF;border:1px solid #D6CEB8;border-left:4px solid #8B2242;border-radius:6px;padding:22px;margin-bottom:20px}
+.match-set-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#8B2242;margin-bottom:4px}
+.match-set-hint{font-size:.79em;color:#7A7060;margin-bottom:14px;font-style:italic}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.match-cols{grid-template-columns:1fr}}
+.match-col-label{font-size:.7em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.match-item{background:#F7F5F0;border:1px solid #D6CEB8;border-radius:5px;padding:11px 14px;font-size:.85em;color:#2C2C2C;line-height:1.4;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.match-item:hover:not(.matched-correct):not(.matched-wrong){border-color:#C9A84C!important;background:#FFFDF5!important}
+.match-item.selected{border-color:#8B2242!important;background:#F7E8EE!important;color:#8B2242!important;font-weight:600}
+.match-item.matched-correct{border-color:#66BB6A!important;background:#F1F8F2!important;color:#2E7D32!important;cursor:default}
+.match-item.flash-wrong{animation:flashRed .5s ease forwards}
+@keyframes flashRed{0%{background:#FEF5F5;border-color:#EF5350}100%{background:#F7F5F0;border-color:#D6CEB8}}
+.match-score{margin-top:12px;font-size:.83em;color:#7A7060}
+.match-score .correct-count{color:#2E7D32;font-weight:700}
+.match-reset-btn{background:none;border:1px solid #D6CEB8;color:#7A7060;padding:7px 16px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:10px;transition:all .2s}
+.match-reset-btn:hover{border-color:#C9A84C;color:#8B6914}
+
+/* ── TEST TRAPS ── */
+.trap-intro{background:#FFFDF5;border:1px solid #E8DFC8;border-left:4px solid #C9A84C;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.trap-intro strong{color:#8B2242}
+.trap-card{background:#FFFFFF;border:1px solid #D6CEB8;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #C9A84C}
+.trap-num{font-size:.68em;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.trap-statement{font-family:'Crimson Pro',Georgia,serif;font-size:1em;color:#2C2C2C;line-height:1.55;margin-bottom:16px;background:#FFFDF5;border-radius:5px;padding:16px;border-left:3px solid #C9A84C;font-style:italic}
+.trap-btns{display:flex;gap:10px;margin-bottom:8px}
+.trap-btn{padding:9px 28px;border-radius:5px;border:2px solid;font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+.trap-btn-true{background:none;border-color:#66BB6A;color:#2E7D32}
+.trap-btn-true:hover:not(:disabled){background:#F1F8F2;border-color:#43A047}
+.trap-btn-false{background:none;border-color:#EF5350;color:#C62828}
+.trap-btn-false:hover:not(:disabled){background:#FEF5F5;border-color:#E53935}
+.trap-btn:disabled{opacity:.5;cursor:not-allowed}
+.trap-btn.sel-correct{background:#F1F8F2;border-color:#43A047;color:#2E7D32}
+.trap-btn.sel-wrong{background:#FEF5F5;border-color:#E53935;color:#C62828}
+.trap-exp{padding:14px 18px;border-radius:5px;font-size:.87em;line-height:1.65;margin-top:4px;display:none}
+.trap-exp.show-c{background:#F1F8F2;border:1px solid #A5D6A7;color:#1B5E20;display:block}
+.trap-exp.show-w{background:#FEF5F5;border:1px solid #FFCDD2;color:#B71C1C;display:block}
+.trap-exp strong{color:#8B2242}
+
+/* ── REFERENCE ── */
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:.95em;font-weight:700;color:#8B2242;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #C9A84C}
+.ref-table{width:100%;border-collapse:collapse;font-size:.84em}
+.ref-table th{background:#8B2242;color:#F2E8CF;font-weight:600;text-align:left;padding:10px 14px;font-size:.88em;letter-spacing:.03em}
+.ref-table td{padding:10px 14px;border-bottom:1px solid #E8E0CD;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+.ref-table tr:nth-child(even) td{background:#FAFAF5}
+.ref-table tr:hover td{background:#FFFDF5}
+.ref-table .key{color:#8B2242;font-weight:600}
+.ref-note{background:#FFFDF5;border:1px solid #E8DFC8;border-radius:5px;padding:13px 18px;font-size:.83em;color:#5A5A5A;line-height:1.6;margin-top:10px}
+.ref-note strong{color:#8B2242}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #D6CEB8;padding-top:16px;margin-top:32px}
+.footer a{color:#8B2242;text-decoration:none;font-weight:600}
+.footer a:hover{color:#C9A84C;text-decoration:underline}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Block 4 — Repro</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back-btn">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub 1 — Core Concepts</div>
+  <h1>Urogenital System I & II <span>Active Drills</span></h1>
+  <div class="subtitle">
+    Flashcards · Fill-in-Blank · Drag-and-Drop Ordering · Matching · Interactive Test Traps<br>
+    Lecture 02 · Repro Block · Urogenital Embryology — Urinary &amp; Genital Development
+  </div>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Primary:</strong> RPD02 Lecture Guide (HoyaDocs)</div>
+    <div class="source-badge"><strong>Lecturer:</strong> Embryology</div>
+    <div class="source-badge"><strong>Review:</strong> Langman's Medical Embryology Ch. 16</div>
+    <div class="source-badge"><strong>Step 1:</strong> First Aid Repro — Embryology</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <span class="hub-step current">Hub 1 — Core Concepts</span>
+  <span class="hub-arrow">→</span>
+  <a href="rpd02_hub2.html" class="hub-step next">Hub 2 — Step 1 Extensions</a>
+  <span class="hub-arrow">→</span>
+  <a href="rpd02_hub3.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Fill-in-Blank</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ordering Drills</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Match Sets</div></div>
+  <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Test Traps</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('fib',this)">Fill-in-Blank</button>
+  <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering</button>
+  <button class="tab-btn" onclick="switchTab('matching',this)">Matching</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Test Traps</button>
+  <button class="tab-btn" onclick="switchTab('reference',this)">Reference</button>
+</div>
+
+<!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click a card to flip · <span class="prog-num">16</span> cards total</span><span>Urogenital Embryology</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Germ Layers</div><div class="fc-q">From which germ layer does the majority of the urogenital system derive? Name three exceptions.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Intermediate mesoderm</strong> gives rise to most of the urogenital tract.<br><br><strong>Exceptions:</strong><br>• Adrenal <strong>medulla</strong> → ectoderm (neural crest)<br>• Genital swellings → ectoderm<br>• Urogenital sinus → endoderm</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pseudo-Kidneys</div><div class="fc-q">Name the three kidney precursors in chronological order, their timing, and which one makes urine.</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Pronephros</strong> — start of week 4 (neck region); <em>does NOT form urine</em>; regresses by end of wk 4.<br><br><strong>Mesonephros</strong> — end of wk 4 through wk 10; <em>forms urine</em> (glomerulus-like filtration); drains into cloaca.<br><br><strong>Metanephros</strong> — week 5; becomes the <strong>definitive kidney</strong>; starts making urine at week 10.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Reciprocal Induction</div><div class="fc-q">What two structures signal each other to form the definitive kidney, and what does each contribute?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Ureteric bud</strong> (from mesonephric duct) <strong>↔ metanephric blastema</strong> (from intermediate mesoderm) — each induces the other to grow.<br><br><strong>Metanephros → NEPHRON:</strong> Bowman's capsule, PCT, LOH, DCT, cortex &amp; medulla.<br><strong>Ureteric bud → COLLECTING system:</strong> collecting duct, minor/major calyces, renal pelvis, ureter.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Kidney Ascent</div><div class="fc-q">When do the kidneys ascend, what blocks them from ascending if fused, and what's the final adult arterial supply?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Kidneys ascend <strong>just before nephrons develop</strong> (after ureteric bud bifurcates).<br><br>If fused (horseshoe kidney), ascent is blocked by the <strong>IMA (inferior mesenteric artery)</strong>.<br><br>Final supply: <strong>abdominal aorta</strong> (renal arteries). Persistent accessory vessels → anatomical variation.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Cloaca Splitting</div><div class="fc-q">What divides the cloaca? What two cavities result, and what does each become?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">The <strong>urorectal septum</strong> divides the cloaca starting at <strong>week 4 (~day 30)</strong>.<br><br><strong>Anterior → urogenital sinus</strong> → primitive bladder, urethra, lower vagina/prostatic urethra.<br><strong>Posterior → anorectal canal</strong> → rectum &amp; anal canal.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Trigone Origin</div><div class="fc-q">What forms the smooth trigone of the bladder, and why is this embryological origin different from the rest of the bladder?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">The <strong>mesonephric (Wolffian) ducts</strong> get absorbed into the developing bladder during weeks 5–6, forming the <strong>vesical trigone</strong> — a triangular smooth region containing the openings of the ureters and urethra.<br><br>The <strong>rest of the bladder</strong> is derived from <strong>endoderm</strong> (urogenital sinus), so the trigone is <strong>mesodermal</strong> in origin while the bladder dome is endodermal.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">SRY Gene</div><div class="fc-q">What does SRY encode, and which cells secrete MIS vs. testosterone in the developing testis?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>SRY</strong> (on Y chromosome) codes for <strong>TDF (Testis Determining Factor)</strong>.<br><br><strong>Sertoli cells</strong> (from primitive sex cords) → <strong>MIS/AMH</strong> → regresses Müllerian ducts.<br><br><strong>Leydig cells</strong> (weeks 8–10) → <strong>testosterone</strong> → maintains Wolffian ducts.<br><br><strong>Testosterone → DHT</strong> via <strong>5α-reductase</strong> → masculinizes external genitalia.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Duct Fates</div><div class="fc-q">What do the mesonephric (Wolffian) and paramesonephric (Müllerian) ducts become in males vs. females?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Wolffian (mesonephric) duct:</strong><br>• ♂ → <strong>"SEED":</strong> <strong>S</strong>eminal vesicles · <strong>E</strong>pididymis · <strong>E</strong>jaculatory duct · <strong>D</strong>uctus (vas) deferens (+ trigone)<br>• ♀ → <strong>degenerates</strong> (remnants = Gartner's duct cysts)<br><br><strong>Müllerian (paramesonephric) duct:</strong><br>• ♂ → <strong>degenerates</strong> (MIS from Sertoli)<br>• ♀ → <strong>fallopian tubes, uterus, cervix, upper 2/3 vagina</strong></div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">DHT — External Genitalia</div><div class="fc-q">What does DHT do to external genital primordia in males? What happens in females without DHT?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>DHT present (♂):</strong><br>• Genital tubercle → <strong>glans/shaft of penis</strong><br>• Urogenital (urethral) folds → <strong>fuse</strong> ventrally → penile urethra<br>• Labioscrotal swellings → <strong>fuse</strong> midline → <strong>scrotum</strong> (with raphe)<br><br><strong>DHT absent (♀ default):</strong><br>• Tubercle → <strong>clitoris</strong><br>• Urethral folds → labia minora (unfused)<br>• Labioscrotal swellings → labia majora (unfused)</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Potter Sequence</div><div class="fc-q">What is the pneumonic "POTTER," what causes it, and why is it usually fatal?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>POTTER:</strong> <strong>P</strong>ulmonary hypoplasia · <strong>O</strong>ligohydramnios · <strong>T</strong>wisted face · <strong>T</strong>wisted skin · <strong>E</strong>xtremity defects · <strong>R</strong>enal failure<br><br><strong>Causes:</strong> bilateral renal agenesis, polycystic kidney disease, obstructive uropathy, VACTERL defects (esophageal atresia → can't swallow amniotic fluid).<br><br><strong>Lethal</strong> from <strong>pulmonary hypoplasia</strong> — lungs can't mature without amniotic fluid (fetal urine makes amniotic fluid in T2).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Horseshoe Kidney</div><div class="fc-q">What is a horseshoe kidney, where does it get stuck, and what is the classic imaging association?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Lower poles of both kidneys <strong>fuse in the midline</strong> (both metanephric blastemas meet near midline). The U-shaped organ tries to ascend but gets <strong>trapped under the IMA</strong>.<br><br>Usually asymptomatic; found incidentally on prenatal US or CT/MRI/IVP. ↑ association with <strong>Turner syndrome</strong> and ↑ risk of UTI, nephrolithiasis, renal cancer.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">MCDK</div><div class="fc-q">What causes Multicystic Dysplastic Kidney (MCDK), how is it different from ADPKD, and what's its prognosis?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>MCDK:</strong> <strong>abnormal interaction between ureteric bud &amp; metanephric blastema</strong> during <strong>initial kidney development</strong> → non-functioning cysts replace normal tissue.<br><br><strong>Unilateral:</strong> usually asymptomatic — contralateral kidney compensates.<br><strong>Bilateral:</strong> <strong>incompatible with life</strong> (Potter sequence).<br><br>Differs from ADPKD: MCDK is a <strong>developmental</strong> sporadic defect; ADPKD is genetic (PKD1/PKD2), presents in adulthood with hypertension and renal failure.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Hypospadias vs Epispadias</div><div class="fc-q">What fails in hypospadias? In epispadias? Which is more common and which is associated with bladder exstrophy?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Hypospadias</strong> (<em>more common</em>) — urethral folds <strong>fail to fuse</strong> → abnormal urethral opening on the <strong>ventral (inferior)</strong> shaft of penis. Most defects are distal (glanular, subcoronal).<br><br><strong>Epispadias</strong> — faulty positioning of genital tubercle → opening on the <strong>dorsal (superior)</strong> side. Associated with <strong>bladder exstrophy</strong>.<br><br>Treat with urethroplasty (buccal mucosa graft) around 6–12 months.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Cryptorchidism</div><div class="fc-q">What is cryptorchidism, when is orchidopexy performed, and why does timing matter?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">Failure of <strong>testicular descent</strong> through the inguinal canal into the scrotum. Guided by the <strong>gubernaculum</strong>.<br><br>If not descended by <strong>6 months</strong> → <strong>orchidopexy</strong>.<br><br>Early surgery lowers risk of:<br>• <strong>Seminoma</strong> (testicular malignancy)<br>• Infertility (heat-sensitive spermatogenesis)<br>• Inguinal hernia<br><br>Also → ↓risk of torsion &amp; improves cosmesis.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">21-Hydroxylase Deficiency (CAH)</div><div class="fc-q">Why does 21-hydroxylase deficiency virilize XX females? What electrolytes/BP findings are classic?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>95% of CAH cases.</strong> 21-OH is needed for <strong>aldosterone &amp; cortisol</strong> — when blocked, precursors shunt to <strong>androgens</strong> (testosterone, DHT).<br><br><strong>In XX:</strong> excess androgens → <strong>virilized/ambiguous genitalia</strong>.<br><br><strong>Labs:</strong> ↓aldosterone → <strong>salt wasting</strong>, <strong>hyponatremia</strong>, <strong>hyperkalemia</strong>, <strong>hypotension</strong>; ↑17-OH-progesterone (screening marker); ↓cortisol → hypoglycemia.<br><br>Contrast: <strong>11β-OH def</strong> → HTN (desoxycortico­sterone buildup). <strong>17α-OH def</strong> → HTN + <em>no</em> virilization (XX appears phenotypically normal, XY looks female).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">5α-Reductase Deficiency vs AIS</div><div class="fc-q">How do 5α-reductase deficiency and complete androgen insensitivity differ at puberty and in hormone levels?</div><div class="fc-flip-hint">tap to flip</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>5α-reductase deficiency (46 XY):</strong><br>• Testosterone normal, <strong>↑T:DHT ratio</strong><br>• Female/ambiguous external genitalia at birth<br>• At puberty, ↑testosterone → <strong>virilization</strong> ("penis at 12")<br>• Internal male structures present (Wolffian derivatives)<br><br><strong>Complete AIS (46 XY):</strong><br>• <strong>Defective androgen receptor</strong><br>• <strong>Normal/↑ testosterone + ↑ LH</strong><br>• Female external genitalia, blind vagina<br>• <strong>No Müllerian derivatives</strong> (MIS still produced)<br>• At puberty → <strong>breast development</strong> (peripheral aromatization); amenorrhea<br>• Gonadectomy AFTER puberty (↑malignancy risk)</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ FILL IN THE BLANK ══════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-fib">
+  <div class="fib-list">
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 01 — Germ Layers</div>
+      <div class="fib-prompt">The majority of the urogenital system is derived from the ___________ mesoderm. The adrenal ___________, however, is derived from ectoderm (neural crest).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="mesoderm type..." data-answers="intermediate">
+        <input class="fib-input" type="text" placeholder="adrenal region..." data-answers="medulla">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Paraxial / Intermediate / Lateral plate — which one is in the middle?</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 02 — Kidney Precursors</div>
+      <div class="fib-prompt">The ___________ appears at week 4 and does not form urine. The ___________ appears at end of week 4 and filters until week 10. The ___________ develops at week 5 and becomes the definitive kidney.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="wk 4 non-functional..." data-answers="pronephros">
+        <input class="fib-input" type="text" placeholder="wk 4-10 filter..." data-answers="mesonephros">
+        <input class="fib-input" type="text" placeholder="definitive kidney..." data-answers="metanephros">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Think cranial-to-caudal sequence.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 03 — Reciprocal Induction</div>
+      <div class="fib-prompt">The metanephric ___________ gives rise to the NEPHRON (Bowman's capsule, PCT, LOH, DCT). The ureteric ___________ gives rise to the COLLECTING system (collecting ducts, calyces, renal pelvis, ureter).</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="forms nephron..." data-answers="blastema,mesoderm,mesenchyme">
+        <input class="fib-input" type="text" placeholder="forms collecting..." data-answers="bud">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Both structures signal each other to grow — one becomes the filter, the other becomes the plumbing.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 04 — Cloaca Split</div>
+      <div class="fib-prompt">At week 4, the ___________ septum divides the cloaca. The anterior portion becomes the urogenital ___________, which forms the primitive bladder. The posterior portion becomes the ___________ canal.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="dividing wall..." data-answers="urorectal">
+        <input class="fib-input" type="text" placeholder="anterior space..." data-answers="sinus">
+        <input class="fib-input" type="text" placeholder="posterior space..." data-answers="anorectal,anal">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 05 — Trigone Formation</div>
+      <div class="fib-prompt">During weeks 5–6, the ___________ ducts are absorbed into the developing bladder, forming the smooth triangular ___________ — a region of <em>mesodermal</em> origin in an otherwise endodermal bladder.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="duct name..." data-answers="mesonephric,wolffian">
+        <input class="fib-input" type="text" placeholder="region name..." data-answers="trigone,vesical trigone">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 06 — Sexual Differentiation</div>
+      <div class="fib-prompt">The ___________ gene on the Y chromosome encodes Testis Determining Factor. Sertoli cells secrete ___________ (MIS), which regresses the Müllerian ducts. Leydig cells secrete ___________ from week 8.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="gene..." data-answers="sry">
+        <input class="fib-input" type="text" placeholder="Sertoli hormone..." data-answers="mullerian inhibiting substance,mis,amh,anti-mullerian hormone,mullerian inhibiting factor,mif">
+        <input class="fib-input" type="text" placeholder="Leydig hormone..." data-answers="testosterone">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 07 — DHT</div>
+      <div class="fib-prompt">Testosterone is converted to the more potent ___________ (DHT) by the enzyme ___________. DHT masculinizes the <em>external</em> genitalia; testosterone alone maintains <em>internal</em> male ducts.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="active androgen..." data-answers="dihydrotestosterone,dht">
+        <input class="fib-input" type="text" placeholder="enzyme..." data-answers="5-alpha reductase,5a-reductase,5α-reductase,5 alpha reductase,5-alpha-reductase">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 08 — Potter Sequence</div>
+      <div class="fib-prompt">Failure of fetal urine production causes ___________ (low amniotic fluid), leading to pulmonary ___________ (the cause of death). Fetal compression also produces classic flattened facies and extremity defects.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="amniotic fluid status..." data-answers="oligohydramnios">
+        <input class="fib-input" type="text" placeholder="lung finding..." data-answers="hypoplasia">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: "POTTER" mnemonic — the first letter of each.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 09 — CAH</div>
+      <div class="fib-prompt">The most common form of CAH (95%) is ___________-hydroxylase deficiency, which presents with salt wasting, hyponatremia, hyperkalemia, and ___________ (BP finding) due to aldosterone deficiency. The screening marker is elevated ___________-progesterone.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="enzyme #..." data-answers="21">
+        <input class="fib-input" type="text" placeholder="BP finding..." data-answers="hypotension">
+        <input class="fib-input" type="text" placeholder="marker prefix..." data-answers="17-hydroxy,17-oh,17 hydroxy,17-hydroxyprogesterone,17-oh-progesterone,17-hydroxy-progesterone,17-oh,17oh">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+      <div class="fib-hint">Hint: Contrast with 11β-OH deficiency → HTN.</div>
+    </div>
+
+    <div class="fib-card">
+      <div class="fib-num">FIB 10 — Testicular Descent</div>
+      <div class="fib-prompt">The testes descend through the inguinal canal guided by the ___________. Failure of this descent = ___________. If undescended by 6 months, an ___________ is performed to reduce the risk of infertility and seminoma.</div>
+      <div class="fib-row">
+        <input class="fib-input" type="text" placeholder="ligament..." data-answers="gubernaculum">
+        <input class="fib-input" type="text" placeholder="condition..." data-answers="cryptorchidism">
+        <input class="fib-input" type="text" placeholder="surgery..." data-answers="orchidopexy,orchiopexy">
+        <button class="fib-btn" onclick="checkFib(this)">Check</button>
+        <button class="fib-reveal-btn" onclick="revealFib(this)">Reveal</button>
+      </div>
+      <div class="fib-feedback"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ORDERING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-ordering">
+  <div class="ordering-intro">
+    <strong>Instructions:</strong> Drag and drop the items into the correct order, then click "Check Order." Use "Show Answer" if you get stuck.
+  </div>
+
+  <!-- Drill 1: Kidney Development Sequence -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 1 — Kidney Development: Chronological Order</div>
+    <div class="drill-hint">Arrange these 5 kidney embryology milestones from earliest to latest.</div>
+    <div class="order-list" id="order-list-1" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-1')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Ureteric bud bifurcates → renal pelvis + calyces form (wk 6–7)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Mesonephros forms urine; mesonephric duct drains into cloaca (wk 4–10)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Nephrons (Bowman's, PCT, LOH, DCT) form; metanephros starts making urine (wk 8–10)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Pronephros appears in neck region (start of wk 4) — non-functional</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-1')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Ureteric bud sprouts from mesonephric duct → meets metanephric blastema (wk 5)</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-1','order-fb-1')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-1')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-1"></div>
+    <div class="order-answer" id="order-ans-1">
+      <ol><li><span>Pronephros</span> — wk 4 neck; transient, non-functional</li><li><span>Mesonephros</span> — wk 4 end → wk 10; filters urine into cloaca</li><li><span>Ureteric bud + metanephric blastema</span> — wk 5; reciprocal induction</li><li><span>Ureteric bud bifurcation</span> — wk 6–7; renal pelvis &amp; calyces</li><li><span>Nephron formation</span> — wk 8–10; metanephros becomes the definitive kidney</li></ol>
+    </div>
+  </div>
+
+  <!-- Drill 2: Male External Genitalia Development -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 2 — Male External Genitalia Formation (under DHT)</div>
+    <div class="drill-hint">Arrange these 6 steps in the correct order of male external genital development.</div>
+    <div class="order-list" id="order-list-2" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-2')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Labioscrotal swellings fuse at midline → scrotum (with visible raphe)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Leydig cells secrete testosterone (wk 8–10)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="6"><span class="item-grip">⠿</span><span class="item-text">Epithelial invagination at glans forms external urethral meatus</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">SRY gene → TDF → primitive sex cords form Sertoli cells</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">5α-reductase converts testosterone → DHT</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-2')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Genital tubercle elongates; urethral folds fuse ventrally → penile urethra</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-2','order-fb-2')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-2')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-2"></div>
+    <div class="order-answer" id="order-ans-2">
+      <ol><li><span>SRY → TDF → Sertoli cells</span> — also secrete MIS (regresses Müllerian)</li><li><span>Leydig cells secrete testosterone</span> — maintains Wolffian ducts</li><li><span>5α-reductase</span> — testosterone → DHT (required for external genitalia)</li><li><span>Genital tubercle + urethral fold fusion</span> → penis shaft + penile urethra</li><li><span>Labioscrotal swellings fuse</span> → scrotum (raphe marks fusion line)</li><li><span>Urethral meatus</span> — epithelial invagination at glans</li></ol>
+    </div>
+  </div>
+
+  <!-- Drill 3: Cloaca Partition Sequence -->
+  <div class="order-drill">
+    <div class="drill-title">Drill 3 — Bladder/Urethra Formation from Cloaca</div>
+    <div class="drill-hint">Arrange the 5 steps of bladder development from cloaca to final structure.</div>
+    <div class="order-list" id="order-list-3" ondragover="event.preventDefault()" ondrop="dropItem(event,'order-list-3')">
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="4"><span class="item-grip">⠿</span><span class="item-text">Mesonephric ducts absorbed into bladder wall → vesical trigone (wk 5–6)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="2"><span class="item-grip">⠿</span><span class="item-text">Urorectal septum divides cloaca → anterior urogenital sinus + posterior anorectal canal</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="5"><span class="item-grip">⠿</span><span class="item-text">Middle sinus → female urethra OR male prostatic + membranous urethra; bottom sinus → lower vagina (♀) or penile urethra (♂)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="1"><span class="item-grip">⠿</span><span class="item-text">Cloaca is single common chamber for urinary, genital, and GI tracts (through wk 4)</span></div>
+      <div class="order-item" draggable="true" ondragstart="dragStart(event)" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="dropOnItem(event,'order-list-3')" data-pos="3"><span class="item-grip">⠿</span><span class="item-text">Top of urogenital sinus expands → primitive bladder</span></div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('order-list-3','order-fb-3')">Check Order</button>
+      <button class="order-ghost-btn" onclick="showOrderAnswer('order-ans-3')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="order-fb-3"></div>
+    <div class="order-answer" id="order-ans-3">
+      <ol><li><span>Single cloaca</span> — through week 4</li><li><span>Urorectal septum divides</span> — anterior UG sinus / posterior anorectal canal</li><li><span>Top of UG sinus → primitive bladder</span></li><li><span>Mesonephric ducts absorbed → trigone</span> — wk 5–6 (mesodermal, unlike rest of bladder dome)</li><li><span>Middle/bottom sinus → urethra + lower vagina/penile urethra</span></li></ol>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MATCHING ════════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-matching">
+  <div class="match-intro">
+    <strong>Instructions:</strong> Click an item on the left, then click its match on the right. Correct pairs turn green; wrong pairs flash red.
+  </div>
+
+  <!-- Set 1: Embryologic Structure → Adult Derivative -->
+  <div class="match-set">
+    <div class="match-set-title">Set 1 — Embryologic Origin → Adult Structure</div>
+    <div class="match-set-hint">Match each embryonic precursor to its adult derivative.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Embryonic Precursor</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Ureteric bud</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Metanephric blastema</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Mesonephric (Wolffian) duct (♂)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Paramesonephric (Müllerian) duct (♀)</div>
+      </div>
+      <div>
+        <div class="match-col-label">Adult Structure</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="4">Fallopian tubes, uterus, upper 2/3 vagina</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="1">Ureter, renal pelvis, calyces, collecting ducts</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="3">Seminal vesicles, epididymis, ejaculatory duct, vas deferens</div>
+        <div class="match-item" onclick="selectMatch(this,'ms1')" data-pair="2">Nephron (Bowman's, PCT, LOH, DCT)</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms1-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms1')">Reset</button>
+  </div>
+
+  <!-- Set 2: Male/Female Homologues -->
+  <div class="match-set">
+    <div class="match-set-title">Set 2 — Male ↔ Female Homologous Structures</div>
+    <div class="match-set-hint">Match each male structure to its female embryologic homolog.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Male Structure</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Glans/shaft of penis</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Scrotum</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Cowper's (bulbourethral) glands</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">Prostate / prostatic utricle</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="5">Gubernaculum</div>
+      </div>
+      <div>
+        <div class="match-col-label">Female Homolog</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="3">Bartholin's (greater vestibular) glands</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="5">Round ligament of uterus + ovarian ligament</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="1">Clitoris</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="4">Skene's glands (prostatic utricle ↔ vagina/uterus)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms2')" data-pair="2">Labia majora</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms2-score">0</span>/5 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms2')">Reset</button>
+  </div>
+
+  <!-- Set 3: Developmental Anomaly → Defect/Timing -->
+  <div class="match-set">
+    <div class="match-set-title">Set 3 — Congenital Urogenital Anomaly → Underlying Defect</div>
+    <div class="match-set-hint">Match each anomaly to the embryologic failure that produces it.</div>
+    <div class="match-cols">
+      <div>
+        <div class="match-col-label">Anomaly</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Horseshoe kidney</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Multicystic Dysplastic Kidney (MCDK)</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Ectopic ureter</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Hypospadias</div>
+      </div>
+      <div>
+        <div class="match-col-label">Underlying Defect</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="4">Urethral folds fail to fuse → ventral urethral opening on penis</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="1">Metanephric blastemas fuse at midline; ascent blocked by IMA</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="3">Incomplete/abnormal mesonephric duct absorption into bladder</div>
+        <div class="match-item" onclick="selectMatch(this,'ms3')" data-pair="2">Abnormal interaction of ureteric bud and metanephros during initial development</div>
+      </div>
+    </div>
+    <div class="match-score">Score: <span class="correct-count" id="ms3-score">0</span>/4 correct</div>
+    <button class="match-reset-btn" onclick="resetMatch('ms3')">Reset</button>
+  </div>
+</div>
+
+<!-- ══ TEST TRAPS ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-traps">
+  <div class="trap-intro">
+    <strong>Test Trap Mode:</strong> Each statement is either TRUE or FALSE as written. Many are designed to catch common exam errors. Click T or F — then read the explanation carefully.
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 01 — Germ Layers</div>
+    <div class="trap-statement">"The entire adrenal gland is derived from intermediate mesoderm, just like the rest of the urogenital system."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Only the adrenal <strong>cortex</strong> is from intermediate mesoderm. The adrenal <strong>medulla</strong> is derived from <strong>neural crest (ectoderm)</strong> — it is chromaffin tissue that secretes catecholamines. Remember: "GFR = Salty, Sweet, Sexy" for the cortex; medulla = modified sympathetic ganglion.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 02 — Nephron vs Collecting</div>
+    <div class="trap-statement">"The ureteric bud gives rise to the glomerulus, Bowman's capsule, and proximal convoluted tubule."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Reversed! The <strong>metanephric blastema (mesoderm)</strong> → NEPHRON (Bowman's capsule, PCT, LOH, DCT). The <strong>ureteric bud (outgrowth of the mesonephric duct)</strong> → COLLECTING system (collecting duct, calyces, renal pelvis, ureter). They meet via <strong>reciprocal induction</strong>.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 03 — Horseshoe Kidney</div>
+    <div class="trap-statement">"A horseshoe kidney is usually found in the pelvis because the IMA (inferior mesenteric artery) prevents its ascent."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE (partly).</strong> A horseshoe kidney is typically NOT in the pelvis — it's stuck at a <strong>lower-than-normal</strong> position (around L3–L4) because the IMA blocks further ascent. A <strong>pelvic kidney</strong> (a different anomaly) is an unascended unilateral kidney that stays in the pelvis. Don't conflate the two. Horseshoe is also linked with <strong>Turner syndrome</strong>.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 04 — Müllerian Ducts</div>
+    <div class="trap-statement">"In the default (female) pathway, the Müllerian ducts regress and the Wolffian ducts form the upper 2/3 of the vagina."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Completely reversed. In females (no MIS, no testosterone), the <strong>Wolffian ducts regress</strong> and the <strong>Müllerian ducts persist</strong> → fallopian tubes, uterus, cervix, upper 2/3 of vagina. Lower 1/3 of vagina comes from the <strong>urogenital sinus</strong> (endoderm).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 05 — DHT Targets</div>
+    <div class="trap-statement">"Testosterone (not DHT) is responsible for masculinization of the external genitalia in utero."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> <strong>DHT</strong> (not testosterone) masculinizes the <strong>external</strong> genitalia (penis, scrotum, prostate). <strong>Testosterone</strong> maintains the <strong>internal</strong> male ducts (Wolffian derivatives — epididymis, vas, seminal vesicle, ejaculatory duct). This is why 5α-reductase deficiency produces an XY with female-appearing external genitalia but <strong>normal internal male structures</strong>.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 06 — CAH BP</div>
+    <div class="trap-statement">"All forms of congenital adrenal hyperplasia (CAH) cause hypotension due to mineralocorticoid deficiency."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> BP depends on WHICH enzyme is deficient: <strong>21-OH def</strong> (95%) → ↓aldosterone → <strong>hypotension, salt wasting</strong>; <strong>11β-OH def</strong> → 11-deoxycorticosterone buildup (weak mineralocorticoid) → <strong>HYPERtension</strong>; <strong>17α-OH def</strong> → ↑mineralocorticoids → <strong>HYPERtension</strong> + absence of sex hormones.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 07 — Potter Sequence</div>
+    <div class="trap-statement">"Potter sequence babies die from renal failure shortly after birth because their kidneys cannot excrete waste."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> The cause of death in Potter sequence is <strong>pulmonary hypoplasia</strong> → respiratory failure — NOT renal failure. Fetal urine makes amniotic fluid (in T2); <strong>oligohydramnios</strong> prevents lung maturation. The babies have no kidneys <em>OR</em> non-functioning kidneys (bilateral MCDK, PKD, obstructive uropathy), but the lungs are what fail first.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 08 — Cryptorchidism Treatment</div>
+    <div class="trap-statement">"Orchidopexy for cryptorchidism is typically delayed until after puberty to allow maximum testicular growth."</div>
+    <div class="trap-btns">
+      <button class="trap-btn trap-btn-true" onclick="judgeTrap(this,false)">TRUE</button>
+      <button class="trap-btn trap-btn-false" onclick="judgeTrap(this,false)">FALSE</button>
+    </div>
+    <div class="trap-exp"><strong>FALSE.</strong> Orchidopexy should be performed <strong>by 6 months of age</strong> (or no later than 12 months). Delay ↑ risk of <strong>infertility</strong> (heat-sensitive spermatogenesis) and <strong>seminoma/germ cell tumors</strong>. In contrast, <strong>complete AIS</strong> requires gonadectomy AFTER puberty (different indication — undescended testes produce estradiol that drives puberty).</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE ══════════════════════════════════════════════════════════ -->
+<div class="tab-pane" id="tab-reference">
+
+  <div class="ref-section">
+    <div class="ref-title">Kidney Precursors — Timing & Function</div>
+    <table class="ref-table">
+      <thead><tr><th>Structure</th><th>Timing</th><th>Function</th><th>Fate</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Pronephros</td><td>Start of week 4 (neck)</td><td>Non-functional; nephric duct + nephrotomes</td><td>Regresses end of wk 4</td></tr>
+        <tr><td class="key">Mesonephros</td><td>End of wk 4 → wk 10</td><td>Produces urine; drains into cloaca via mesonephric (Wolffian) duct</td><td>Duct persists in ♂ (SEED derivatives + trigone)</td></tr>
+        <tr><td class="key">Metanephros</td><td>Week 5 onwards</td><td>Definitive kidney; begins making urine at wk 10</td><td>Becomes the permanent kidney</td></tr>
+        <tr><td class="key">Ureteric bud</td><td>Sprouts wk 5 from Wolffian</td><td>Induces metanephric blastema; branches repeatedly</td><td>Forms COLLECTING system (CD, calyces, pelvis, ureter)</td></tr>
+        <tr><td class="key">Metanephric blastema</td><td>Mesoderm near mesonephric duct</td><td>Induced by ureteric bud</td><td>Forms NEPHRON (Bowman's, PCT, LOH, DCT)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">UG Tract Derivatives — Male vs Female</div>
+    <table class="ref-table">
+      <thead><tr><th>Origin</th><th>Female Derivative</th><th>Male Derivative</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Ureteric bud</td><td>Ureter, calyces, pelvis, CD</td><td>Ureter, calyces, pelvis, CD</td></tr>
+        <tr><td class="key">Mesonephric (Wolffian) duct</td><td>Trigone of bladder (absorbed); degenerates otherwise (Gartner's duct cyst)</td><td>Trigone + <strong>SEED:</strong> Seminal vesicles, Epididymis, Ejaculatory duct, Ductus (vas) deferens</td></tr>
+        <tr><td class="key">Paramesonephric (Müllerian) duct</td><td>Fallopian tubes, uterus, cervix, upper 2/3 vagina</td><td>Degenerates (MIS from Sertoli); remnant = appendix testis, prostatic utricle</td></tr>
+        <tr><td class="key">Urogenital sinus</td><td>Bladder (except trigone), entire urethra, lower 1/3 vagina, Bartholin's + Skene's glands</td><td>Bladder (except trigone), prostatic + membranous urethra, prostate, bulbourethral (Cowper's) glands</td></tr>
+        <tr><td class="key">Genital tubercle</td><td>Clitoris</td><td>Glans/shaft of penis</td></tr>
+        <tr><td class="key">Urogenital folds</td><td>Labia minora (unfused)</td><td>Penile urethra (fused ventrally)</td></tr>
+        <tr><td class="key">Labioscrotal swellings</td><td>Labia majora (unfused)</td><td>Scrotum (fused with raphe)</td></tr>
+        <tr><td class="key">Gonad</td><td>Ovary</td><td>Testis</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Urinary Tract Developmental Anomalies</div>
+    <table class="ref-table">
+      <thead><tr><th>Anomaly</th><th>Cause</th><th>Clinical Pearls</th></tr></thead>
+      <tbody>
+        <tr><td class="key">MCDK (Multicystic Dysplastic)</td><td>Abnormal ureteric bud / metanephric blastema interaction</td><td>Unilateral → usually asymptomatic; bilateral → Potter sequence (fatal)</td></tr>
+        <tr><td class="key">Horseshoe kidney</td><td>Metanephric blastemas fuse at midline → ascent blocked by IMA</td><td>Lies lower than normal; ↑ risk UTI, stones, Wilms'; assoc. Turner syndrome</td></tr>
+        <tr><td class="key">Pelvic kidney</td><td>Failure of ascent (unilateral)</td><td>Usually asymptomatic; adrenal stays at normal site (separate origin)</td></tr>
+        <tr><td class="key">Ureteral duplication</td><td>Abnormal ureteric bud bifurcation</td><td>Complete (2 ureters) vs incomplete/bifid (fuse before bladder)</td></tr>
+        <tr><td class="key">Ectopic ureter</td><td>Incomplete absorption of mesonephric duct into bladder</td><td>Girls: dribbling + normal voiding (drains below ext. sphincter); often with duplex kidney (upper pole)</td></tr>
+        <tr><td class="key">UPJ obstruction</td><td>Blockage where renal pelvis meets ureter</td><td>Most common cause of <strong>hydronephrosis</strong> in newborns</td></tr>
+        <tr><td class="key">Ureterocele</td><td>Cystic dilation of distal ureter into bladder</td><td>"Cobra head" sign on imaging; often with duplicated system</td></tr>
+        <tr><td class="key">Posterior urethral valves (♂)</td><td>Abnormal folds in prostatic urethra</td><td>Most common cause of bladder outlet obstruction in male infants; oligohydramnios</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Disorders of Sexual Differentiation — Hormone Pattern</div>
+    <table class="ref-table">
+      <thead><tr><th>Condition</th><th>Karyotype</th><th>Internal Genitalia</th><th>External Phenotype</th><th>Key Hormones</th></tr></thead>
+      <tbody>
+        <tr><td class="key">Complete AIS</td><td>46 XY</td><td>No Müllerian (MIS); Wolffian regresses (no AR signal)</td><td>Female, blind vagina, no pubic hair</td><td>↑ testosterone, ↑ LH, ↑ estradiol (aromatized)</td></tr>
+        <tr><td class="key">5α-reductase def</td><td>46 XY</td><td>Normal Wolffian (epididymis, vas)</td><td>Female/ambiguous at birth → virilizes at puberty</td><td>Normal T, ↑ T:DHT ratio</td></tr>
+        <tr><td class="key">21-OH def (CAH)</td><td>46 XX (classic)</td><td>Normal Müllerian</td><td>Virilized/ambiguous; salt-wasting crisis</td><td>↑ 17-OH-progesterone, ↑ androgens, ↓ aldo, ↓ cortisol</td></tr>
+        <tr><td class="key">11β-OH def (CAH)</td><td>46 XX</td><td>Normal Müllerian</td><td>Virilized + <strong>HTN</strong></td><td>↑ 11-deoxycorticosterone, ↑ androgens</td></tr>
+        <tr><td class="key">17α-OH def (CAH)</td><td>XY or XX</td><td>Ambiguous/female</td><td>XY: female phenotype; XX: normal but no 2° sex char. at puberty; <strong>HTN + hypoK</strong></td><td>↑ mineralocorticoids, ↓ sex hormones, ↓ cortisol</td></tr>
+        <tr><td class="key">Klinefelter (XXY)</td><td>47 XXY</td><td>Internal male (T+MIS present)</td><td>Male with tall stature, gynecomastia, small testes</td><td>↑ LH/FSH, ↓ T, ↑ estradiol (aromatase)</td></tr>
+        <tr><td class="key">Turner (XO)</td><td>45 XO</td><td>Streak ovaries</td><td>Short, webbed neck, ovarian failure, horseshoe kidney, coarctation</td><td>↑ LH/FSH, ↓ estrogen</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-note">
+    <strong>Key principle:</strong> In any 46 XY with external "female" or ambiguous genitalia, always ask — is testosterone normal (AIS)? Is DHT normal (5α-reductase deficiency)? Are Müllerian structures present (MIS status)? These three data points isolate the defect.
+  </div>
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp; RPD02 Hub 1 — Core Concepts &nbsp;·&nbsp; HoyaDocs Repro Block
+</div>
+
+</div><!-- /container -->
+
+<script>
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+}
+window.addEventListener('load',function(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    inner.style.height=front.scrollHeight+'px';
+  });
+});
+// Tab switching
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flashcards') requestAnimationFrame(fixCardHeights);
+}
+
+// FIB check
+function checkFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  const fb=card.querySelector('.fib-feedback');
+  let allCorrect=true;
+  inputs.forEach(inp=>{
+    const val=inp.value.trim().toLowerCase();
+    const accepted=inp.dataset.answers.split(',').map(a=>a.trim().toLowerCase());
+    if(accepted.some(a=>val.includes(a)||a.includes(val)&&val.length>2)){
+      inp.classList.remove('incorrect');inp.classList.add('correct');
+    } else {
+      inp.classList.remove('correct');inp.classList.add('incorrect');allCorrect=false;
+    }
+  });
+  fb.className='fib-feedback '+(allCorrect?'correct':'incorrect');
+  fb.textContent=allCorrect?'✓ Correct!':'✗ Not quite — use Reveal to see the answer.';
+}
+function revealFib(btn){
+  const card=btn.closest('.fib-card');
+  const inputs=card.querySelectorAll('.fib-input');
+  inputs.forEach(inp=>{
+    const ans=inp.dataset.answers.split(',')[0];
+    inp.value=ans;inp.classList.add('correct');inp.classList.remove('incorrect');
+  });
+  const fb=card.querySelector('.fib-feedback');
+  fb.className='fib-feedback correct';fb.textContent='Answer revealed.';
+}
+
+// Drag-and-Drop Ordering
+let dragSrc=null;
+function dragStart(e){dragSrc=e.currentTarget;e.dataTransfer.effectAllowed='move';}
+function dropOnItem(e,listId){
+  e.preventDefault();e.stopPropagation();
+  const target=e.currentTarget;target.classList.remove('drag-over');
+  if(!dragSrc||dragSrc===target)return;
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  const srcIdx=items.indexOf(dragSrc);
+  const tgtIdx=items.indexOf(target);
+  if(srcIdx<tgtIdx)list.insertBefore(dragSrc,target.nextSibling);
+  else list.insertBefore(dragSrc,target);
+}
+function dropItem(e,listId){e.preventDefault();}
+function checkOrder(listId,fbId){
+  const list=document.getElementById(listId);
+  const items=Array.from(list.children);
+  let correct=0;
+  items.forEach((item,idx)=>{
+    item.classList.remove('correct-pos','wrong-pos');
+    if(parseInt(item.dataset.pos)===idx+1){item.classList.add('correct-pos');correct++;}
+    else item.classList.add('wrong-pos');
+  });
+  const fb=document.getElementById(fbId);
+  fb.className='order-feedback '+(correct===items.length?'correct':'incorrect');
+  fb.textContent=correct===items.length?`✓ Perfect! All ${items.length} items in the correct order.`:`${correct}/${items.length} correct — keep trying or show the answer.`;
+}
+function showOrderAnswer(id){
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+// Matching
+let matchState={};
+function selectMatch(el,setId){
+  if(el.classList.contains('matched-correct'))return;
+  if(!matchState[setId])matchState[setId]={selected:null,score:0};
+  const state=matchState[setId];
+  if(state.selected===null){
+    document.querySelectorAll(`[onclick*="${setId}"].selected`).forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');state.selected=el;
+  } else {
+    const prev=state.selected;
+    if(prev===el){el.classList.remove('selected');state.selected=null;return;}
+    if(prev.dataset.pair===el.dataset.pair){
+      prev.classList.remove('selected');prev.classList.add('matched-correct');
+      el.classList.add('matched-correct');state.selected=null;state.score++;
+      document.getElementById(setId+'-score').textContent=state.score;
+    } else {
+      [prev,el].forEach(e=>{e.classList.remove('selected');e.classList.add('flash-wrong');setTimeout(()=>e.classList.remove('flash-wrong'),500);});
+      state.selected=null;
+    }
+  }
+}
+function resetMatch(setId){
+  matchState[setId]={selected:null,score:0};
+  document.querySelectorAll(`[onclick*="${setId}"]`).forEach(e=>{e.classList.remove('matched-correct','selected','flash-wrong');});
+  document.getElementById(setId+'-score').textContent='0';
+}
+
+// Test Traps
+function judgeTrap(btn,correct){
+  const card=btn.closest('.trap-card');
+  const btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(b=>b.disabled=true);
+  const userSaidTrue=btn.classList.contains('trap-btn-true');
+  const isCorrect=(userSaidTrue===correct);
+  btn.classList.add(isCorrect?'sel-correct':'sel-wrong');
+  const exp=card.querySelector('.trap-exp');
+  exp.className='trap-exp '+(isCorrect?'show-c':'show-w');
+}
+
+/* ── THEME TOGGLE ── */
+
+
+</script>
+</body>
+</html>

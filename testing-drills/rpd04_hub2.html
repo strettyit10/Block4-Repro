@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GI01 Hub #2 · GI Overview — Step 1 Extensions</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── BASE ── */
+body{font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;background:#F7F5F2;color:#2C2C2C;min-height:100vh;line-height:1.6}
+
+/* ── TOP NAV ── */
+.topnav{background:#5D4037;border-bottom:3px solid #C6875A;padding:0 28px;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{display:flex;flex-direction:column;justify-content:center;gap:1px}
+.nav-brand-text{font-family:'Crimson Pro',Georgia,serif;font-size:1.55em;font-weight:700;color:#F0E8DF;letter-spacing:.02em;line-height:1.2}
+.nav-brand-sub{font-size:.85em;color:#C6875A;font-weight:500;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-back{display:inline-flex;align-items:center;gap:6px;font-size:.8em;color:#fff;font-weight:600;padding:6px 14px;border-radius:5px;border:1px solid #C6875A;background:#C6875A;text-decoration:none;transition:all .2s}
+.nav-back:hover{background:#B57A4F;border-color:#B57A4F}
+
+/* ── CONTAINER ── */
+.container{max-width:1060px;margin:0 auto;padding:28px 24px}
+
+/* ── HEADER ── */
+.header{background:#FFFFFF;border:1px solid #D5CCC0;border-radius:6px;padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#5D4037 0%,#C6875A 50%,#5D4037 100%)}
+.hub-tag{display:inline-block;background:#5D4037;color:#F0E8DF;font-family:'Source Sans 3',sans-serif;font-size:.82em;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:5px 14px;border-radius:3px;margin-bottom:10px}
+.header h1{font-family:'Crimson Pro',Georgia,serif;font-size:2.3em;color:#5D4037;margin-bottom:6px;line-height:1.25;font-weight:700}
+.header h1 span{color:#9A6535;font-weight:600;font-style:italic}
+.header .subtitle{color:#5A5A5A;font-size:.88em;line-height:1.6;margin-bottom:14px}
+.source-strip{display:flex;gap:8px;flex-wrap:wrap}
+.source-badge{background:#F7F5F2;border:1px solid #D5CCC0;border-radius:4px;padding:5px 12px;font-size:.88em;color:#5A5A5A}
+.source-badge strong{color:#5D4037}
+
+/* ── HUB PROGRESSION ── */
+.hub-prog{background:#FFF;border:1px solid #D5CCC0;border-radius:6px;padding:12px 18px;margin-bottom:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hub-step{padding:8px 18px;border-radius:4px;font-size:.92em;font-weight:600}
+.hub-step.done{background:#5D4037;border:1px solid #5D4037;color:#F0E8DF;text-decoration:none;transition:all .2s;font-weight:600}
+.hub-step.done:hover{background:#4E342E;border-color:#4E342E;color:#fff}
+.hub-step.current{background:#5D4037;color:#F0E8DF}
+.hub-step.next{background:#F7F5F2;border:1px solid #D5CCC0;color:#7A7060;text-decoration:none;transition:all .2s}
+.hub-step.next:hover{border-color:#C6875A;color:#9A6535}
+.hub-arrow{color:#C6875A;font-size:1.1em;font-weight:700}
+.hub-prog-label{font-size:.88em;color:#7A7060;margin-right:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:#FFF;border:1px solid #D5CCC0;border-radius:6px;padding:14px;text-align:center}
+.stat-num{font-family:'Crimson Pro',Georgia,serif;font-size:2.1em;font-weight:700;color:#5D4037}
+.stat-label{font-size:.8em;color:#7A7060;text-transform:uppercase;letter-spacing:.08em;margin-top:2px;font-weight:600}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:26px;border-bottom:2px solid #D5CCC0;padding-bottom:0}
+.tab-btn{background:none;border:none;color:#7A7060;font-size:.96em;font-weight:600;padding:12px 20px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;margin-bottom:-2px;font-family:inherit}
+.tab-btn:hover{color:#5D4037}
+.tab-btn.active{color:#5D4037;border-bottom-color:#C6875A}
+.tab-content{display:none;animation:fi .25s ease}
+.tab-content.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sec{font-size:.78em;font-weight:700;color:#5D4037;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #D5CCC0}
+
+/* ── FLASHCARDS ── */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:16px}
+.fc{perspective:1000px;cursor:pointer;position:relative;z-index:1}
+.fc-inner{position:relative;transform-style:preserve-3d;transition:transform .5s,height .3s}
+.fc.flipped{z-index:10}
+.fc.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;top:0;left:0;right:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;padding:22px}
+.fc-front{background:#FFFFFF;border:1px solid #D5CCC0;border-top:3px solid #5D4037}
+.fc-back{transform:rotateY(180deg);background:#F3EFE9;border:1px solid #C6875A}
+.fc-label{font-size:.66em;font-weight:700;color:#C6875A;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.fc-q{font-size:.92em;color:#2C2C2C;line-height:1.55}
+.fc-a{font-size:.88em;color:#2C2C2C;line-height:1.65}
+.fc-a strong{color:#5D4037}
+.fc-a em{color:#9A6535;font-style:normal}
+.fc-flip-hint{font-size:.67em;color:#9A9080;margin-top:10px;font-style:italic}
+.fc-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:.82em;color:#7A7060}
+.fc-progress .prog-num{color:#5D4037;font-weight:700}
+
+/* ── MCQ DRILL ── */
+.mcq-item{background:#FFFFFF;border:1px solid #D5CCC0;border-radius:6px;padding:22px;margin-bottom:18px}
+.mcq-num{font-size:.68em;font-weight:700;color:#C6875A;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.mcq-stem{font-size:.93em;color:#2C2C2C;line-height:1.7;margin-bottom:14px;background:#F3EFE9;padding:14px;border-radius:6px;border-left:3px solid #C6875A}
+.mcq-stem strong{color:#5D4037}
+.mcq-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.mcq-opt{background:#F7F5F2;border:1px solid #D5CCC0;border-radius:5px;padding:10px 14px;cursor:pointer;font-size:.88em;color:#2C2C2C;transition:all .18s;display:flex;align-items:flex-start;gap:10px}
+.mcq-opt:hover:not(.locked){border-color:#C6875A;background:#F3EFE9}
+.mcq-opt.correct{background:#F1F8F2;border-color:#2E7D32;color:#1B5E20}
+.mcq-opt.correct .opt-letter{color:#2E7D32}
+.mcq-opt.wrong{background:#FEF5F5;border-color:#C62828;color:#B71C1C}
+.mcq-opt.wrong .opt-letter{color:#C62828}
+.mcq-opt.locked{cursor:default}
+.opt-letter{font-weight:700;color:#5D4037;flex-shrink:0;width:18px}
+.mcq-exp{background:#F3EFE9;border-left:3px solid #C6875A;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none}
+.mcq-exp.show{display:block}
+.mcq-exp strong{color:#5D4037}
+
+/* ── CLINICAL CORRELATES ── */
+.cc-card{background:#FFFFFF;border:1px solid #D5CCC0;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #C6875A}
+.cc-tag{display:inline-block;background:#F3EFE9;border:1px solid #D5CCC0;border-radius:4px;font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5D4037;padding:2px 8px;margin-bottom:10px}
+.cc-title{font-family:'Crimson Pro',Georgia,serif;font-size:1em;font-weight:700;color:#5D4037;margin-bottom:10px}
+.cc-body{font-size:.88em;color:#5A5A5A;line-height:1.7}
+.cc-body strong{color:#2C2C2C}
+.cc-body em{color:#9A6535;font-style:normal}
+.cc-reveal{background:none;border:1px solid #D5CCC0;color:#7A7060;padding:7px 14px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:600;font-family:inherit;margin-top:12px;transition:all .2s}
+.cc-reveal:hover{border-color:#C6875A;color:#9A6535;background:#F3EFE9}
+.cc-detail{display:none;margin-top:12px;padding:14px;background:#F3EFE9;border-radius:5px;border:1px solid #D5CCC0;font-size:.85em;color:#2C2C2C;line-height:1.7}
+.cc-detail.open{display:block}
+.cc-detail strong{color:#5D4037}
+
+/* ── INTRO BOXES ── */
+.mcq-intro,.cc-intro,.vig-intro,.hy-intro{background:#F3EFE9;border:1px solid #D5CCC0;border-radius:6px;padding:14px 18px;margin-bottom:20px;font-size:.84em;color:#5A5A5A;line-height:1.6}
+.mcq-intro strong,.cc-intro strong,.vig-intro strong,.hy-intro strong{color:#5D4037}
+
+/* ── TABLES ── */
+table{border-collapse:collapse;width:100%}
+table th{background:#5D4037;color:#F0E8DF;font-weight:600;text-align:left;padding:10px 14px;font-size:.84em;letter-spacing:.03em}
+table td{padding:10px 14px;border-bottom:1px solid #D5CCC0;color:#2C2C2C;vertical-align:top;line-height:1.55;background:#FFF}
+table tr:nth-child(even) td{background:#FAF8F5}
+table tr:hover td{background:#F3EFE9}
+
+/* ── FOOTER ── */
+.footer{text-align:center;font-size:.78em;color:#7A7060;border-top:2px solid #D5CCC0;padding-top:16px;margin-top:32px}
+.footer a{color:#5D4037;text-decoration:none;font-weight:600}
+.footer a:hover{color:#C6875A;text-decoration:underline}
+
+/* ── ORDERING DRILLS ── */
+.order-drill{background:#FFF;border:1px solid #D5CCC0;border-radius:6px;padding:22px;margin-bottom:18px}
+.drill-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#5D4037;margin-bottom:8px}
+.drill-hint{font-size:.84em;color:#7A7060;background:#F3EFE9;padding:10px 14px;border-left:2px solid #C6875A;border-radius:4px;margin-bottom:14px}
+.order-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;padding:14px;background:#F7F5F2;border-radius:6px;border:1px solid #D5CCC0;min-height:200px}
+.order-item{background:#FFF;border:2px solid #D5CCC0;border-radius:5px;padding:12px 16px;cursor:grab;font-size:.88em;color:#2C2C2C;transition:all .15s}
+.order-item:hover{border-color:#C6875A;background:#F3EFE9}
+.order-item.dragging{opacity:.6;border-color:#C6875A}
+.order-item.drag-over{border:2px dashed #C6875A;background:#F3EFE9}
+.order-item.correct-pos{border-color:#2E7D32;background:#F1F8F2}
+.order-item.wrong-pos{border-color:#C62828;background:#FEF5F5}
+.order-actions{display:flex;gap:10px;margin-bottom:14px}
+.order-check-btn{background:#5D4037;color:#F0E8DF;border:none;padding:10px 16px;border-radius:5px;cursor:pointer;font-weight:600;font-size:.84em;font-family:inherit;transition:all .2s}
+.order-check-btn:hover{background:#4E342E}
+.order-ghost-btn{background:none;border:1px solid #D5CCC0;color:#7A7060;padding:10px 16px;border-radius:5px;cursor:pointer;font-weight:600;font-size:.84em;font-family:inherit;transition:all .2s}
+.order-ghost-btn:hover{border-color:#C6875A;color:#9A6535;background:#F3EFE9}
+.order-feedback{font-size:.84em;color:#5A5A5A;padding:10px 14px;border-radius:5px;margin-bottom:14px;display:none}
+.order-feedback.correct{background:#F1F8F2;border-left:3px solid #2E7D32;color:#1B5E20;display:block}
+.order-feedback.incorrect{background:#FEF5F5;border-left:3px solid #C62828;color:#B71C1C;display:block}
+.order-answer{background:#F3EFE9;border:1px solid #D5CCC0;border-radius:6px;padding:14px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none}
+.order-answer.show{display:block}
+.order-answer ol{margin-left:24px}
+.order-answer li{margin-bottom:10px}
+.order-answer strong{color:#5D4037}
+
+/* ── VIGNETTE MCQ ── */
+.vig-item{background:#FFF;border:1px solid #D5CCC0;border-radius:6px;padding:22px;margin-bottom:18px}
+.vig-num{font-size:.68em;font-weight:700;color:#C6875A;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.vig-stem{font-size:.93em;color:#2C2C2C;line-height:1.7;margin-bottom:14px;background:#F3EFE9;padding:14px;border-radius:6px;border-left:3px solid #C6875A}
+.vig-stem strong{color:#5D4037}
+.vig-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.vig-opt{background:#F7F5F2;border:1px solid #D5CCC0;border-radius:5px;padding:10px 14px;cursor:pointer;font-size:.88em;color:#2C2C2C;transition:all .18s;display:flex;align-items:flex-start;gap:10px}
+.vig-opt:hover:not(.locked){border-color:#C6875A;background:#F3EFE9}
+.vig-opt.correct{background:#F1F8F2;border-color:#2E7D32;color:#1B5E20}
+.vig-opt.correct .vig-opt-letter{color:#2E7D32}
+.vig-opt.wrong{background:#FEF5F5;border-color:#C62828;color:#B71C1C}
+.vig-opt.wrong .vig-opt-letter{color:#C62828}
+.vig-opt.locked{cursor:default}
+.vig-opt-letter{font-weight:700;color:#5D4037;flex-shrink:0;width:18px}
+.vig-exp{background:#F3EFE9;border-left:3px solid #C6875A;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none;margin-top:12px}
+.vig-exp.show{display:block}
+.vig-exp strong{color:#5D4037}
+.vig-buzzword{color:#9A6535;font-weight:600}
+
+/* ── STEP 1 TRAPS ── */
+.trap-card{background:#FFF;border:1px solid #D5CCC0;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #C6875A}
+.trap-num{font-size:.68em;font-weight:700;color:#C6875A;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.trap-statement{font-size:.92em;color:#2C2C2C;line-height:1.6;margin-bottom:14px;background:#F3EFE9;padding:14px;border-radius:6px;border-left:3px solid #C6875A;font-weight:500}
+.trap-btns{display:flex;gap:10px;margin-bottom:14px}
+.trap-btn{background:none;border:1px solid #D5CCC0;color:#7A7060;padding:10px 16px;border-radius:5px;cursor:pointer;font-weight:600;font-size:.84em;font-family:inherit;transition:all .2s}
+.trap-btn:hover:not(:disabled){border-color:#C6875A;color:#9A6535;background:#F3EFE9}
+.trap-btn:disabled{opacity:.5;cursor:default}
+.trap-btn.sel-correct{border-color:#2E7D32;background:#F1F8F2;color:#1B5E20}
+.trap-btn.sel-wrong{border-color:#C62828;background:#FEF5F5;color:#B71C1C}
+.trap-exp{background:#F3EFE9;border-left:3px solid #C6875A;border-radius:6px;padding:12px 16px;font-size:.84em;color:#5A5A5A;line-height:1.7;display:none}
+.trap-exp.show-c,.trap-exp.show-w{display:block}
+.trap-exp.show-w{border-left-color:#C62828;background:#FEF5F5;color:#B71C1C}
+.trap-exp strong{color:#5D4037}
+
+/* ── REFERENCE TABLES ── */
+.ref-section{margin-bottom:28px}
+.ref-title{font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;font-weight:700;color:#5D4037;margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid #C6875A}
+.ref-table{overflow-x:auto}
+
+/* ── HY TESTING NOTES ── */
+.hy-card{background:#FFF;border:1px solid #D5CCC0;border-radius:6px;padding:22px;margin-bottom:18px;border-left:4px solid #C6875A}
+.hy-card-title{font-family:'Crimson Pro',Georgia,serif;font-size:1em;font-weight:700;color:#5D4037;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.hy-card-body{font-size:.88em;color:#5A5A5A;line-height:1.7}
+.hy-card-body strong{color:#2C2C2C}
+.hy-badge{display:inline-block;font-size:.68em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:3px;background:#F3EFE9;color:#5D4037}
+.hy-badge.trap{background:#FEF5F5;color:#C62828;border:1px solid #C62828}
+.hy-badge.buzzword{background:#FFF8E1;color:#F57F17;border:1px solid #F57F17}
+.hy-badge.testing{background:#E8F5E9;color:#2E7D32;border:1px solid #2E7D32}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .container{padding:14px}
+  .header{padding:18px 16px}
+  .header h1{font-size:1.5em}
+  .fc-grid{grid-template-columns:1fr}
+  .hub-prog{flex-direction:column;gap:6px;align-items:flex-start}
+  .hub-arrow{display:none}
+  .tab-btn{font-size:.78em;padding:8px 12px}
+  .order-list{min-height:auto}
+}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-brand">
+    <span class="nav-brand-text">HoyaDocs</span>
+    <span class="nav-brand-sub">Block 4 — Repro</span>
+  </div>
+  <div class="nav-actions">
+    <a href="../active-recall-hub.html" class="nav-back">← Active Drill Hub</a>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header">
+  <div class="hub-tag">Hub #2 — Step 1 Extensions</div>
+  <h1>Male Reproductive System <span>Step 1 Extensions</span></h1>
+  <div class="source-strip">
+    <div class="source-badge"><strong>Diseases:</strong> Cryptorchidism · Testicular CA (seminoma/NSGCT) · Torsion · Varicocele · BPH · Prostate CA · Klinefelter · Epididymitis · ED</div>
+    <div class="source-badge"><strong>Hormones:</strong> GnRH · FSH · LH · Testosterone · DHT · Inhibin B · MIS · ABP · 5α-reductase</div>
+    <div class="source-badge"><strong>Drugs:</strong> Finasteride · Tamsulosin · Sildenafil · GnRH agonists · Flutamide · Tamoxifen (gyneco) · hCG</div>
+  </div>
+</div>
+
+<div class="hub-prog">
+  <span class="hub-prog-label">Hub Progression:</span>
+  <a href="rpd04_hub1.html" class="hub-step done">Hub 1 ✓</a>
+  <span class="hub-arrow">→</span>
+  <span class="hub-step current">Hub 2 — Step 1 Extensions</span>
+  <span class="hub-arrow">→</span>
+  <a href="rpd04_hub3.html" class="hub-step next">Hub 3 — Practice Questions</a>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num">14</div><div class="stat-label">Flashcards</div></div>
+  <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Ordering</div></div>
+  <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">MCQs</div></div>
+  <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Vignettes</div></div>
+  <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Traps</div></div>
+  <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Ref Tables</div></div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('flashcards',this)">Flashcards</button>
+  <button class="tab-btn" onclick="switchTab('ordering',this)">Ordering Drills</button>
+  <button class="tab-btn" onclick="switchTab('mcq',this)">MCQ</button>
+  <button class="tab-btn" onclick="switchTab('vignettes',this)">Vignettes MCQ</button>
+  <button class="tab-btn" onclick="switchTab('traps',this)">Step 1 Traps</button>
+  <button class="tab-btn" onclick="switchTab('ref',this)">Reference</button>
+  <button class="tab-btn" onclick="switchTab('hynotes',this)">HY Testing Notes</button>
+  <button class="tab-btn" onclick="switchTab('clinical',this)">Clinical Correlates</button>
+</div>
+
+<!-- ══ STEP 1 FLASHCARDS ══════════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-flashcards">
+  <div class="fc-progress"><span>Click any card to flip · <em style="color:#7A7060">14 Step 1 high-yield concepts</em></span><span class="prog-num" id="fc-counter">0 / 14 seen</span></div>
+  <div class="fc-grid">
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Cryptorchidism</div><div class="fc-q">What is cryptorchidism, when is orchidopexy performed, and why does timing matter?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Cryptorchidism:</strong> failure of testicular descent through the inguinal canal (guided by gubernaculum, driven by T/DHT at ~wk 28).<br><br><strong>Orchidopexy by 6 months</strong> (no later than 12 mo). Early surgery lowers risk of:<br>• <strong>Seminoma</strong> (↑ 4–6× even after repair)<br>• <strong>Infertility</strong> — heat-sensitive spermatogenesis<br>• Inguinal hernia, testicular torsion<br><br><strong>Labs:</strong> ↓ inhibin B (Sertoli damage first) + normal testosterone early (Leydig preserved); FSH rises.<br><br><strong>Assoc:</strong> prematurity, Klinefelter, MIS-persistence syndromes.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Testicular Torsion</div><div class="fc-q">Anatomic basis, classic exam findings, key differential, and management window?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Path:</strong> twisting of spermatic cord → cuts off arterial supply → ischemia. Most often due to <span class="vig-buzzword">bell-clapper deformity</span> (tunica vaginalis inserts too high → free-rotating testis).<br><br><strong>Presentation:</strong> Sudden severe unilateral scrotal pain ± abdominal pain + nausea; adolescent boy. Exam: <strong>high-riding testis</strong>, <strong>absent cremasteric reflex</strong>, horizontal lie; no relief with elevation (<em>negative Prehn sign</em>).<br><br><strong>Ddx:</strong> Epididymitis (↑ w/ age; positive Prehn sign). US with Doppler can differentiate.<br><br><span style="color:#8B2242"><strong>Surgical emergency — 6-hour window</strong></span>. Detorsion + bilateral orchiopexy (other side is at risk too).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Varicocele</div><div class="fc-q">What causes a varicocele, why is it usually left-sided, and why does it impair fertility?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Def:</strong> Dilation of the pampiniform plexus (testicular veins).<br><br><strong>Why left &gt; right:</strong> Left gonadal vein drains into the <strong>left renal vein at a 90° angle</strong> (↑ hydrostatic pressure); right gonadal vein drains directly into the IVC at an oblique angle. New-onset LEFT varicocele in an older man → think <strong>renal cell carcinoma invading renal vein</strong>. Sudden RIGHT-sided varicocele → IVC obstruction / retroperitoneal mass.<br><br><strong>Fertility:</strong> Dilated veins → failure of cooling → testicular heat stress → oligospermia, ↓ motility.<br><br><strong>Presentation:</strong> "Bag of worms," enlarges with Valsalva, decompresses when supine. Dx: scrotal US with Doppler. Tx: surgical ligation or embolization if symptomatic/infertile.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Klinefelter Syndrome</div><div class="fc-q">Karyotype, body habitus, hormone pattern, fertility status, and key associated risks?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>47 XXY</strong> (most common sex chromosome disorder in men).<br><br><strong>Body:</strong> <span class="vig-buzzword">Tall, eunuchoid</span> habitus (long arms/legs), mild ID, small firm testes, gynecomastia, female-pattern hair.<br><br><strong>Hormones:</strong> Seminiferous tubule dysgenesis → ↓ inhibin B → ↑ FSH. Leydig dysfunction → ↓ T → ↑ LH. Peripheral aromatization → ↑ estradiol → gynecomastia.<br><br><strong>Fertility:</strong> <strong>Azoospermia</strong> — infertile (sperm extraction + ICSI rarely successful).<br><br><strong>Associated risks:</strong> ↑ breast cancer, extragonadal germ cell tumors, autoimmune disease, osteoporosis, metabolic syndrome.<br><br><strong>Tx:</strong> Testosterone replacement at puberty (bone density, sexual development).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Testicular Germ Cell Tumors</div><div class="fc-q">Main categories, key markers, classic epidemiology, and which is radiosensitive?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Most common cancer in men 15–35.</strong> 95% are germ cell tumors.<br><br><strong>Seminoma (40%):</strong> "fried egg" cells, homogeneous mass, <span class="vig-buzzword">radiosensitive</span>, excellent prognosis, ↑ <strong>placental alkaline phosphatase (PLAP)</strong>; ↑ hCG in some. β-hCG may be slightly elevated; AFP is NORMAL (key: <strong>seminomas never make AFP</strong>).<br><br><strong>Non-seminomatous (NSGCT):</strong> 4 subtypes:<br>• <strong>Embryonal carcinoma</strong> — ↑AFP, ↑hCG, aggressive<br>• <strong>Yolk sac (endodermal sinus)</strong> — <strong>↑↑AFP</strong>, Schiller-Duval bodies; most common in boys &lt;3<br>• <strong>Choriocarcinoma</strong> — <strong>↑↑hCG</strong>, hematogenous spread, hemorrhage<br>• <strong>Teratoma</strong> — multiple germ layers; malignant in adult men<br><br><strong>Risk factors:</strong> cryptorchidism, Klinefelter, family hx.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">BPH — Pathophysiology &amp; Treatment</div><div class="fc-q">Which prostate zone hypertrophies, what symptoms develop, and what are first-line drug classes?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Pathology:</strong> Nodular hyperplasia of the <strong>transitional (periurethral/central) zone</strong> of the prostate — surrounds urethra, causing obstructive symptoms. DHT-driven.<br><br><strong>Symptoms (LUTS):</strong><br>• <em>Obstructive:</em> weak stream, hesitancy, dribbling, incomplete emptying<br>• <em>Irritative:</em> frequency, urgency, nocturia<br><br><strong>Exam:</strong> uniformly enlarged, smooth, rubbery prostate on DRE; PSA mildly ↑.<br><br><strong>Tx:</strong><br>• <strong>α1-blockers</strong> (tamsulosin, terazosin) → relax smooth muscle; fastest relief. Side effect: orthostasis.<br>• <strong>5α-reductase inhibitors</strong> (finasteride) → shrink gland over months; ↓ DHT; side effects: ED, gynecomastia.<br>• TURP for refractory cases.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Prostate Cancer</div><div class="fc-q">Most common zone, screening marker, metastasis pattern, and hormonal treatment rationale?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Most common cancer in men</strong> (3rd deadliest, after lung + colon).<br><br><strong>Location:</strong> <strong>Peripheral (posterior) zone</strong> — palpable on DRE as hard nodule (different from BPH's transitional zone).<br><br><strong>Histology:</strong> adenocarcinoma; <span class="vig-buzzword">Gleason score</span> (sum of primary + secondary architectural patterns, 2–10).<br><br><strong>Marker:</strong> <strong>PSA</strong> (↑ in cancer, BPH, prostatitis); Free:Total PSA ratio ↑ risk if low.<br><br><strong>Metastasis:</strong> <span class="vig-buzzword">OSTEOBLASTIC bone mets</span> (classic pelvis, lumbar spine) — cause back pain + ↑ alk phos.<br><br><strong>Treatment:</strong> Localized → surgery/radiation. Advanced → <strong>androgen deprivation therapy (ADT)</strong>: GnRH agonists (leuprolide), antiandrogens (flutamide/bicalutamide), or orchiectomy. Prostate CA is androgen-sensitive.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Hypospadias vs Epispadias</div><div class="fc-q">Embryologic defect, location of opening, and which is associated with bladder exstrophy?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Hypospadias</strong> (common, 1 in 250 males): urethral (urogenital) folds <strong>fail to fuse</strong> ventrally under DHT → opening on <strong>VENTRAL</strong> surface. Most are distal (glanular, subcoronal); dorsally hooded foreskin.<br><br><strong>Epispadias</strong> (rare): abnormal positioning of genital tubercle → opening on <strong>DORSAL</strong> surface. Classic association: <strong>bladder exstrophy</strong>.<br><br><strong>Mnemonic:</strong> "Ep<em>i</em>" = E on top (dorsal); "Hy<em>p</em>o" = p below (ventral).<br><br><strong>Management:</strong> Do NOT circumcise — foreskin used in urethroplasty. Repair by 6–12 months.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Erectile Dysfunction &amp; PDE5 Inhibitors</div><div class="fc-q">Physiology of erection, how sildenafil works, main contraindication?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Erection physiology:</strong> Parasympathetic S2-S4 ("<strong>P</strong>oint") → nitric oxide (NO) released by cavernous nerves → activates guanylyl cyclase → <strong>cGMP</strong> → smooth muscle relaxation in corpora cavernosa → arterial dilation + venous compression → erection. Sympathetic T11-L2 ("<strong>S</strong>hoot") → NE → ejaculation (+ detumescence).<br><br><strong>Sildenafil, tadalafil, vardenafil:</strong> <strong>PDE5 inhibitors</strong> → block cGMP breakdown → sustained smooth muscle relaxation.<br><br><strong>CONTRAINDICATION:</strong> concurrent <strong>NITRATES</strong> (nitroglycerin) — both raise NO/cGMP → profound hypotension → MI/death.<br><br><strong>Side effects:</strong> HA, flushing, dyspepsia, cyanopia (blue-tinged vision, PDE6 cross-reactivity — sildenafil); NAION (rare).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Epididymitis &amp; Orchitis</div><div class="fc-q">Common pathogens by age, classic presentation, and key differential from torsion?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Epididymitis</strong> (inflammation of epididymis ± testis):<br><br><strong>Pathogens by age:</strong><br>• <strong>&lt; 35 yo (sexually active):</strong> <span class="vig-buzzword">Chlamydia trachomatis</span> (most common) or <em>Neisseria gonorrhoeae</em> — urethritis + epididymitis.<br>• <strong>&gt; 35 yo:</strong> <strong>E. coli</strong>, <em>Pseudomonas</em> (enteric organisms; associated with BPH/obstruction).<br>• Mumps orchitis in post-pubertal males — bilateral swelling 5–10 days after parotitis.<br><br><strong>Presentation:</strong> Gradual-onset unilateral scrotal pain + swelling; dysuria, fever. <strong>POSITIVE Prehn sign</strong> (pain RELIEVED by elevation).<br><br><strong>Key DDx — torsion:</strong><br>• <em>Torsion:</em> sudden onset, absent cremasteric reflex, NEGATIVE Prehn sign, surgical emergency.<br>• <em>Epididymitis:</em> gradual, positive Prehn, positive cremasteric — treat with antibiotics.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Finasteride</div><div class="fc-q">Mechanism, two main clinical uses, and which side effects are expected?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Mechanism:</strong> <strong>5α-reductase inhibitor</strong> → blocks conversion of <strong>testosterone → DHT</strong>. DHT is responsible for prostate growth + male-pattern balding.<br><br><strong>Clinical uses:</strong><br>1. <strong>BPH</strong> — shrinks prostate gland over months (3–6); ↓ PSA by ~50% (interpret labs accordingly!).<br>2. <strong>Androgenetic alopecia (male-pattern baldness)</strong> — lower dose.<br><br><strong>Side effects (DHT deficiency effects):</strong> decreased libido, ED, gynecomastia, decreased ejaculate volume. Note that testosterone levels are NOT lowered (only DHT).<br><br><strong>Pregnancy:</strong> Category X — teratogenic (ambiguous genitalia in XY fetus). Women of reproductive age should not handle crushed tablets.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Male Infertility Workup</div><div class="fc-q">Key hormone patterns for primary hypogonadism, secondary hypogonadism, and Sertoli-only syndrome?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Primary (testicular) hypogonadism:</strong> ↓ T, <strong>↑ LH</strong>, <strong>↑ FSH</strong>, ± ↓ inhibin B. Examples: Klinefelter, orchitis, chemotherapy, cryptorchidism. "Hypergonadotropic."<br><br><strong>Secondary (central) hypogonadism:</strong> ↓ T, <strong>↓ LH</strong>, <strong>↓ FSH</strong>. Examples: Kallmann syndrome (+ anosmia), pituitary tumor, hemochromatosis, opioid use, anabolic steroid abuse. "Hypogonadotropic."<br><br><strong>Sertoli-only syndrome:</strong> NO germ cells on biopsy → ↑ FSH (selectively), normal LH + T, ↓ inhibin B. Azoospermia.<br><br><strong>Workup:</strong> 2× semen analysis → FSH, LH, T, prolactin → if ↓T → image pituitary. Karyotype if azoospermic + ↑ FSH.</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Vasectomy</div><div class="fc-q">What structure is cut, what happens to testosterone and ejaculate volume, and what anti-sperm risk arises?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Procedure:</strong> the <strong>vas deferens</strong> is cut/ligated — prevents sperm from reaching ejaculate.<br><br><strong>Testosterone:</strong> UNCHANGED (Leydig cells intact; blood supply preserved).<br><br><strong>Ejaculate volume:</strong> essentially UNCHANGED — sperm are only ~5% of ejaculate (bulk from seminal vesicles + prostate).<br><br><strong>Sperm fate:</strong> still produced; reabsorbed or phagocytosed in epididymis.<br><br><strong>Anti-sperm antibody risk:</strong> Sperm antigens released into circulation (normally hidden by blood-testis barrier) → immune system can form anti-sperm Ab's. This is why <strong>vasectomy reversal often fails</strong> to restore fertility even when ducts are reconnected.<br><br><strong>Efficacy:</strong> &gt;99% after 2 negative post-op semen analyses (sperm clear over 2–3 months).</div></div>
+      </div>
+    </div>
+
+    <div class="fc" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Hydrocele &amp; Spermatocele</div><div class="fc-q">Differentiate these two scrotal fluid collections. Which is congenital vs acquired?</div></div>
+        <div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a"><strong>Hydrocele:</strong> Fluid collection between layers of the <span class="vig-buzzword">tunica vaginalis</span> around the testis.<br>• <em>Communicating (congenital):</em> <strong>patent processus vaginalis</strong> → peritoneal fluid enters scrotum; fluctuates w/ position; often resolves by age 1–2.<br>• <em>Non-communicating (acquired):</em> obliterated processus + trauma/inflammation → no connection to peritoneum; stable size.<br>• <strong>Transilluminates</strong> (classic sign).<br><br><strong>Spermatocele:</strong> <strong>Epididymal cyst</strong> (usually head) filled with sperm-containing fluid. Distinct from the testis on palpation. Also transilluminates but more cystic feel. Usually asymptomatic.<br><br><strong>Varicocele</strong> (for contrast): dilated pampiniform veins — does NOT transilluminate ("bag of worms").</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ MCQ DRILL ══════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-mcq">
+  <div class="mcq-intro"><strong>Step 1-Style MCQs:</strong> Select the best answer for each question. Your choice locks in immediately and the explanation reveals automatically. <span style="color:#2E7D32">Green</span> = correct, <span style="color:#C62828">Red</span> = incorrect.</div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 1 of 6 — Testicular Torsion vs Epididymitis</div>
+    <div class="mcq-stem">A 16-year-old boy presents to the ED with <strong>sudden-onset severe left scrotal pain</strong> that began 3 hours ago while playing basketball. He is afebrile. On exam, the left testis is <strong>high-riding with a horizontal lie</strong>; the cremasteric reflex is <strong>absent</strong> on the left. Elevating the testis does NOT relieve pain. Which of the following is the most appropriate next step?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Order scrotal ultrasound with Doppler; treat empirically for epididymitis</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Immediate urologic consultation for surgical exploration + bilateral orchiopexy</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Empiric ceftriaxone + doxycycline for STI coverage</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Urinalysis and discharge with analgesics</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>CT abdomen/pelvis to rule out appendicitis</div>
+    </div>
+    <div class="mcq-exp"><strong>B — Immediate surgical exploration.</strong> Classic <span class="vig-buzzword">testicular torsion</span>: sudden severe pain, adolescent, high-riding testis, horizontal lie, absent cremasteric reflex, NEGATIVE Prehn sign (no relief with elevation). Underlying defect is usually a <span class="vig-buzzword">bell-clapper deformity</span> (the tunica vaginalis inserts too high on the cord, allowing free rotation). <strong>Surgical emergency — 6-hour window</strong> to save the testis. Do NOT delay for US if clinical suspicion is high. Bilateral orchiopexy is standard because the contralateral testis typically has the same deformity. Ischemia &gt; 6 hrs → infarction + infertility. Epididymitis would show gradual onset + positive Prehn + preserved cremasteric reflex.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 2 of 6 — Varicocele + RCC</div>
+    <div class="mcq-stem">A 62-year-old man presents with a new-onset <strong>left-sided varicocele</strong> that does NOT decompress when he lies supine. He also reports <strong>flank pain + hematuria</strong> and 10 pounds of unintentional weight loss over the past 3 months. Which of the following is the most likely cause of the varicocele in this setting?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Bell-clapper deformity with torsion</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">B</span>Idiopathic primary varicocele</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">C</span>Renal cell carcinoma invading the left renal vein and obstructing gonadal venous drainage</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Inguinal hernia compressing the testicular veins</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Chronic prostatitis</div>
+    </div>
+    <div class="mcq-exp"><strong>C — Renal cell carcinoma invading left renal vein.</strong> A varicocele that <span class="vig-buzzword">fails to decompress when supine</span> (does not empty with gravity) suggests venous obstruction — NOT the typical anatomic-angle varicocele. The <span class="vig-buzzword">left gonadal (testicular) vein drains into the left renal vein</span> at 90°, so any process obstructing the left renal vein (RCC, tumor thrombus, retroperitoneal mass, nutcracker syndrome) can cause a left varicocele. The combination of flank pain + hematuria + weight loss + new varicocele in an older man is the classic RCC tetrad (though the full triad is flank pain + hematuria + palpable mass). Right-sided gonadal veins drain directly into the IVC — new right varicoceles suggest IVC obstruction. Always workup new/non-reducible varicoceles in older men.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 3 of 6 — BPH Pharmacology</div>
+    <div class="mcq-stem">A 68-year-old man with known BPH is started on combination therapy with <strong>tamsulosin and finasteride</strong> for moderate-severe LUTS. Six months later, his symptoms are improved and his PSA has decreased from 4.2 to 1.9 ng/mL. His internist is concerned about missing prostate cancer because of the PSA drop. What is the correct interpretation of this PSA change?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>The PSA decrease is due to tamsulosin's effect on prostate smooth muscle</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Finasteride reduces PSA by approximately 50%, so the "corrected" PSA is ~3.8 ng/mL; continued monitoring is warranted</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>The PSA decrease rules out prostate cancer entirely</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>PSA fluctuates randomly and this change is clinically meaningless</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>A 50% drop in PSA warrants immediate prostate biopsy</div>
+    </div>
+    <div class="mcq-exp"><strong>B — Finasteride reduces PSA by ~50%.</strong> <span class="vig-buzzword">Finasteride (5α-reductase inhibitor)</span> shrinks the prostate by blocking testosterone → DHT conversion. As the gland shrinks, PSA production drops predictably by about 50% over 6–12 months. To interpret PSA in men on finasteride, <strong>multiply the measured value by 2</strong> (or compare relative changes). If PSA does NOT decrease, or rises on therapy, that is concerning for cancer. Tamsulosin (α1-blocker) relaxes smooth muscle but does not change prostate size or PSA production. Combination tamsulosin + finasteride (or dutasteride) is standard for moderate BPH with gland &gt; 40g.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 4 of 6 — Seminoma vs NSGCT</div>
+    <div class="mcq-stem">A 28-year-old man feels a painless lump in his right testicle. Scrotal ultrasound confirms a 2.5-cm hypoechoic intratesticular mass. Radical inguinal orchiectomy reveals <strong>large clear "fried-egg" cells with central nuclei in sheets separated by fibrous septa infiltrated with lymphocytes</strong>. Tumor markers: β-hCG slightly elevated, AFP <strong>NORMAL</strong>, LDH elevated. Which of the following is the most likely diagnosis and optimal adjuvant therapy?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Yolk sac tumor; treat with BEP chemotherapy</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">B</span>Choriocarcinoma; treat with methotrexate</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">C</span>Seminoma; highly radiosensitive; consider surveillance, radiation, or single-agent carboplatin</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Embryonal carcinoma; requires aggressive multi-agent chemo</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Leydig cell tumor; manage with observation alone</div>
+    </div>
+    <div class="mcq-exp"><strong>C — Seminoma; radiosensitive.</strong> <span class="vig-buzzword">"Fried-egg" cells</span> (large clear cells with central nuclei) in sheets separated by <span class="vig-buzzword">fibrous septa with lymphocytes</span> are classic for <strong>seminoma</strong> (most common testicular germ cell tumor). Markers: <span class="vig-buzzword">AFP is NEVER elevated in pure seminoma</span> (if AFP is up, it's a mixed NSGCT). β-hCG may be slightly elevated (from syncytiotrophoblast-like cells). PLAP is often elevated. Seminomas are <strong>extraordinarily radiosensitive</strong> and chemosensitive — excellent prognosis even with metastases. Treatment options: inguinal orchiectomy + (surveillance / retroperitoneal radiation / single-agent carboplatin for stage I; BEP for advanced). Cryptorchidism, Klinefelter, and family history all ↑ risk. Ages 15–35 peak.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 5 of 6 — Klinefelter Hormone Pattern</div>
+    <div class="mcq-stem">A 21-year-old man presents to a fertility clinic with his partner after 18 months of unprotected intercourse without pregnancy. He is 6'4" tall with long arms and legs, mild gynecomastia, and small firm testes. Semen analysis shows <strong>azoospermia</strong>. Labs: testosterone 180 ng/dL (low), LH 31 mIU/mL (high), FSH 48 mIU/mL (very high), inhibin B undetectable, estradiol 58 pg/mL (elevated). Karyotype confirms 47,XXY. What is the best explanation for the elevated estradiol?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Ectopic estradiol production by a gonadoblastoma</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">B</span>Sertoli cells directly producing estradiol via the 2-cell model</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">C</span>Peripheral aromatization of the residual testosterone to estradiol</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>Estrogen is not actually elevated in Klinefelter; this is a lab error</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Exogenous estrogen administration</div>
+    </div>
+    <div class="mcq-exp"><strong>C — Peripheral aromatization of testosterone.</strong> In Klinefelter (47 XXY), seminiferous tubule dysgenesis → ↓ inhibin B → ↑ FSH (no feedback); Leydig hypofunction → ↓ T → ↑ LH (no feedback). But residual Leydig T is <span class="vig-buzzword">aromatized peripherally to estradiol</span> (in adipose tissue, especially) — and this increased aromatization activity → ↑ E2 → <span class="vig-buzzword">gynecomastia</span>. Tall stature is from ↑ adult height without the normal epiphyseal fusion driven by testosterone. Associated: ↑ breast cancer (male), ↑ extragonadal germ cell tumors, autoimmunity. Tx: testosterone replacement at puberty; sperm extraction + ICSI occasionally enables fertility.</div>
+  </div>
+
+  <div class="mcq-item">
+    <div class="mcq-num">Question 6 of 6 — Sildenafil + Nitrates</div>
+    <div class="mcq-stem">A 58-year-old man with CAD on chronic isosorbide mononitrate for angina presents to the ED 2 hours after taking a friend's sildenafil (Viagra) for erectile dysfunction. He reports severe headache, dizziness, and an episode of syncope. Exam: BP 72/40 mmHg, HR 102. Which of the following molecular mechanisms explains his presentation?</div>
+    <div class="mcq-opts">
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">A</span>Sildenafil directly causes myocardial ischemia</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,true)"><span class="opt-letter">B</span>Nitrates ↑ cGMP via NO; sildenafil blocks cGMP breakdown (PDE5 inhibition); synergistic cGMP accumulation → profound vasodilation</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">C</span>Sildenafil + nitrates both stimulate β1-adrenergic receptors</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">D</span>The combination causes acute renal failure → hypotension</div>
+      <div class="mcq-opt" onclick="answerMCQ(this,false)"><span class="opt-letter">E</span>Sildenafil inhibits β-adrenergic receptors, and nitrates block muscarinic receptors</div>
+    </div>
+    <div class="mcq-exp"><strong>B — Synergistic cGMP accumulation.</strong> Normal erection: PNS (S2-S4, "<strong>P</strong>oint") → NO from cavernous nerves → guanylyl cyclase → <span class="vig-buzzword">↑ cGMP</span> → smooth muscle relaxation in corpora cavernosa. <strong>Sildenafil</strong> (and tadalafil/vardenafil) is a <span class="vig-buzzword">PDE5 inhibitor</span> — it blocks the enzyme that breaks down cGMP, sustaining smooth muscle relaxation. <strong>Nitrates</strong> (nitroglycerin, isosorbide) raise cGMP systemically via the same NO-GC pathway. Combined: massive cGMP accumulation → profound vasodilation → hypotension, reflex tachycardia, syncope, MI, potentially death. <span style="color:#8B2242"><strong>ABSOLUTE contraindication</strong></span>. Separate doses by at least 24h (sildenafil) or 48h (tadalafil). Treat acute hypotension with IV fluids, phenylephrine.</div>
+  </div>
+
+</div>
+
+<!-- ══ ORDERING DRILLS ═══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-ordering">
+  <div class="mcq-intro"><strong>Ordering Drills:</strong> Arrange each sequence of steps in the correct physiologic or pathologic order. Drag items to reorder. Click "Check Order" to verify, or "Show Answer" to reveal the correct sequence.</div>
+
+  <div class="order-drill" id="drill-1">
+    <div class="drill-title">Testicular Torsion — Clinical Cascade</div>
+    <div class="drill-hint">Order the pathophysiology of testicular torsion from predisposition to infarction.</div>
+    <div class="order-list" id="list-1">
+      <div class="order-item" data-correct="4">Severe scrotal pain; high-riding testis; absent cremasteric reflex</div>
+      <div class="order-item" data-correct="2">Spermatic cord twists → kinks testicular artery + venous drainage</div>
+      <div class="order-item" data-correct="1">Bell-clapper deformity — tunica vaginalis inserts high, testis rotates freely</div>
+      <div class="order-item" data-correct="6">&gt; 6 hours → ischemic infarction → loss of testis + potential infertility</div>
+      <div class="order-item" data-correct="5">Emergency detorsion + bilateral orchiopexy (contralateral side likely has same deformity)</div>
+      <div class="order-item" data-correct="3">Venous outflow impaired first → edema → compresses arterial supply → ischemia</div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('drill-1')">Check Order</button>
+      <button class="order-ghost-btn" onclick="shuffleDrill('drill-1')">Shuffle</button>
+      <button class="order-ghost-btn" onclick="showAnswer('drill-1')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="fb-drill-1"></div>
+    <div class="order-answer" id="ans-drill-1">
+      <ol>
+        <li><span>Bell-clapper deformity</span> — predisposition</li>
+        <li><span>Cord twists</span> — kinks artery + veins</li>
+        <li><span>Venous outflow impaired first</span> → compresses arterial inflow</li>
+        <li><span>Severe pain, high-riding, absent cremasteric reflex</span></li>
+        <li><span>Emergency detorsion + bilateral orchiopexy</span></li>
+        <li><span>&gt; 6 h</span> → infarction + infertility</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="order-drill" id="drill-2">
+    <div class="drill-title">Erection — NO-cGMP Pathway</div>
+    <div class="drill-hint">Put the molecular/anatomic steps of erection in order from CNS signal to tumescence.</div>
+    <div class="order-list" id="list-2">
+      <div class="order-item" data-correct="4">Smooth muscle relaxation in corpora cavernosa → arterial dilation + sinusoidal filling</div>
+      <div class="order-item" data-correct="2">Parasympathetic cavernous nerves release NITRIC OXIDE (NO)</div>
+      <div class="order-item" data-correct="6">Sildenafil (PDE5 inhibitor) blocks cGMP breakdown → sustains erection</div>
+      <div class="order-item" data-correct="1">Sexual arousal signal → sacral parasympathetics (S2–S4, "POINT")</div>
+      <div class="order-item" data-correct="5">Expanded tissue compresses subtunical venules against tunica albuginea → venous outflow blocked → rigidity</div>
+      <div class="order-item" data-correct="3">NO activates guanylyl cyclase → ↑ cGMP in vascular smooth muscle</div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('drill-2')">Check Order</button>
+      <button class="order-ghost-btn" onclick="shuffleDrill('drill-2')">Shuffle</button>
+      <button class="order-ghost-btn" onclick="showAnswer('drill-2')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="fb-drill-2"></div>
+    <div class="order-answer" id="ans-drill-2">
+      <ol>
+        <li><span>PNS S2–S4 "Point"</span> signal from sacral cord</li>
+        <li><span>NO release</span> from cavernous nerves</li>
+        <li><span>Guanylyl cyclase → ↑ cGMP</span></li>
+        <li><span>Smooth muscle relaxation</span> → arterial inflow</li>
+        <li><span>Venous compression by engorged sinusoids</span> → rigidity</li>
+        <li><span>PDE5 inhibitors</span> prolong cGMP → sustain erection</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="order-drill" id="drill-3">
+    <div class="drill-title">Prostate Cancer — Androgen Deprivation Therapy Mechanisms</div>
+    <div class="drill-hint">Put the ADT drug mechanisms in the correct order of where they act on the axis.</div>
+    <div class="order-list" id="list-3">
+      <div class="order-item" data-correct="4">Androgen receptor antagonists (flutamide, bicalutamide) block T/DHT binding at tumor cells</div>
+      <div class="order-item" data-correct="2">GnRH agonists (leuprolide) — CONTINUOUS dosing desensitizes pituitary → ↓ LH/FSH</div>
+      <div class="order-item" data-correct="1">Hypothalamic GnRH release (normally pulsatile)</div>
+      <div class="order-item" data-correct="5">Reduced tumor growth (prostate CA is androgen-dependent)</div>
+      <div class="order-item" data-correct="3">↓ LH → ↓ Leydig cell testosterone production</div>
+      <div class="order-item" data-correct="6">"Flare" phenomenon — initial GnRH agonist dose briefly raises LH before desensitization; co-administer antiandrogen to prevent</div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('drill-3')">Check Order</button>
+      <button class="order-ghost-btn" onclick="shuffleDrill('drill-3')">Shuffle</button>
+      <button class="order-ghost-btn" onclick="showAnswer('drill-3')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="fb-drill-3"></div>
+    <div class="order-answer" id="ans-drill-3">
+      <ol>
+        <li><span>Hypothalamus GnRH</span> (pulsatile baseline)</li>
+        <li><span>GnRH agonist (continuous) desensitizes pituitary</span> → ↓ LH</li>
+        <li><span>↓ LH → ↓ Leydig testosterone</span></li>
+        <li><span>AR antagonists</span> block residual T/DHT at target</li>
+        <li><span>Tumor shrinkage</span> (prostate CA is androgen-sensitive)</li>
+        <li><span>Flare phenomenon</span> — co-administer antiandrogen during induction</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="order-drill" id="drill-4">
+    <div class="drill-title">Klinefelter — Pathophysiology Cascade</div>
+    <div class="drill-hint">Order the pathophysiologic events from karyotype to clinical presentation.</div>
+    <div class="order-list" id="list-4">
+      <div class="order-item" data-correct="4">↓ testosterone → ↑ LH (no feedback); peripheral aromatization → ↑ estradiol → gynecomastia</div>
+      <div class="order-item" data-correct="2">Seminiferous tubules degenerate during puberty → azoospermia</div>
+      <div class="order-item" data-correct="6">Tall eunuchoid stature + mild ID + ↑ breast/germ cell cancer risk</div>
+      <div class="order-item" data-correct="1">Nondisjunction at meiosis → 47 XXY karyotype</div>
+      <div class="order-item" data-correct="5">Leydig cell dysfunction → ↓ testosterone</div>
+      <div class="order-item" data-correct="3">Sertoli cell damage → ↓ inhibin B → ↑ FSH (no feedback)</div>
+    </div>
+    <div class="order-actions">
+      <button class="order-check-btn" onclick="checkOrder('drill-4')">Check Order</button>
+      <button class="order-ghost-btn" onclick="shuffleDrill('drill-4')">Shuffle</button>
+      <button class="order-ghost-btn" onclick="showAnswer('drill-4')">Show Answer</button>
+    </div>
+    <div class="order-feedback" id="fb-drill-4"></div>
+    <div class="order-answer" id="ans-drill-4">
+      <ol>
+        <li><span>Nondisjunction</span> → 47 XXY karyotype</li>
+        <li><span>Seminiferous tubule degeneration</span> at puberty</li>
+        <li><span>↓ inhibin B → ↑ FSH</span></li>
+        <li><span>↓ T → ↑ LH; peripheral aromatization → ↑ estradiol</span></li>
+        <li><span>Leydig cell dysfunction</span> → ↓ testosterone</li>
+        <li><span>Tall eunuchoid + gynecomastia + azoospermia</span> + ↑ cancer risk</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ VIGNETTES MCQ ═════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-vignettes">
+  <div class="vig-intro"><strong>Vignette MCQs:</strong> Clinical scenarios testing disease recognition and mechanisms. Select your best answer and the explanation appears automatically.</div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 1 of 4 — Epididymitis vs Torsion</div>
+    <div class="vig-stem">A 23-year-old sexually active man presents with <strong>gradually worsening right scrotal pain and swelling over 3 days</strong>, along with dysuria and low-grade fever. Physical exam: tender, edematous right epididymis; normal testicular lie; cremasteric reflex <strong>PRESENT</strong>; pain <strong>improves when the testis is elevated (positive Prehn sign)</strong>. Urinalysis shows pyuria. Urine NAAT is positive for <em>Chlamydia trachomatis</em>. Which of the following is the most appropriate treatment?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Urgent surgical exploration for suspected torsion</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>IM ceftriaxone + oral doxycycline (for C. trachomatis + N. gonorrhoeae)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Ciprofloxacin alone (enteric coverage)</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Reassurance and discharge with analgesics only</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>High-dose corticosteroids for suspected autoimmune orchitis</div>
+    </div>
+    <div class="vig-exp"><strong>B — Ceftriaxone + doxycycline.</strong> Classic <span class="vig-buzzword">acute epididymitis</span> in a sexually active man &lt; 35. Key features distinguishing from torsion: <span class="vig-buzzword">gradual onset</span>, dysuria/urethritis, fever, preserved cremasteric reflex, <strong>POSITIVE Prehn sign</strong>, normal lie. Pathogens by age: <strong>&lt;35 yo: N. gonorrhoeae + C. trachomatis</strong> (cover both with ceftriaxone + doxycycline); <strong>&gt;35 yo: E. coli/Pseudomonas</strong> (cover with fluoroquinolone). Sexual partners should be treated + tested. Mumps orchitis (different) — post-pubertal males 5–10 days after parotitis.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 2 of 4 — Nonseminomatous Germ Cell Tumor</div>
+    <div class="vig-stem">A 22-year-old man feels a painless right testicular lump. On exam, the right testis is firm and irregular. Scrotal US shows a 3-cm heterogeneous mass. Tumor markers: <strong>AFP 1,820 ng/mL (markedly elevated)</strong>, β-hCG 240 mIU/mL (elevated), LDH 420. Radical inguinal orchiectomy reveals tumor cells with glandular arrangements and <strong>Schiller-Duval bodies</strong> (perivascular glomeruloid structures). Which of the following is the most likely diagnosis?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Seminoma</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">B</span>Yolk sac (endodermal sinus) tumor — NSGCT</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">C</span>Leydig cell tumor</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Sertoli cell tumor</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Teratoma (mature)</div>
+    </div>
+    <div class="vig-exp"><strong>B — Yolk sac tumor.</strong> Buzzwords: <span class="vig-buzzword">elevated AFP</span> (pathognomonic — AFP is NEVER elevated in seminoma), <span class="vig-buzzword">Schiller-Duval bodies</span> (glomeruloid perivascular structures, classic histologic feature). Yolk sac tumor is the <strong>most common testicular tumor in boys &lt;3 years old</strong>, but also occurs in young adults as part of mixed NSGCTs. Markers for testicular tumors:<br>• <strong>Seminoma:</strong> PLAP ↑, β-hCG slightly ↑, AFP NORMAL.<br>• <strong>Yolk sac:</strong> ↑↑ AFP.<br>• <strong>Choriocarcinoma:</strong> ↑↑ β-hCG; hemorrhagic.<br>• <strong>Embryonal carcinoma:</strong> ↑ AFP + ↑ β-hCG.<br>• <strong>Teratoma:</strong> multiple germ layers; malignant in adult men.<br>Tx: inguinal orchiectomy + BEP chemotherapy (bleomycin, etoposide, cisplatin).</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 3 of 4 — BPH with Acute Urinary Retention</div>
+    <div class="vig-stem">A 72-year-old man presents with sudden inability to urinate over the past 8 hours. He has had progressive urinary hesitancy and weak stream for 2 years. After starting <strong>diphenhydramine</strong> for allergic rhinitis yesterday, he now cannot void. He has suprapubic pain and bladder distention on exam. DRE shows a symmetrically enlarged, smooth, rubbery prostate. Which of the following best explains the acute worsening?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Prostate cancer with urethral invasion</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>UTI-induced bladder wall edema</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Anticholinergic effect of diphenhydramine + α1-adrenergic activity at bladder neck ↑ prostatic smooth muscle tone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Bladder rupture from chronic retention</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Primary bladder outlet obstruction due to urethral stricture</div>
+    </div>
+    <div class="vig-exp"><strong>C — Anticholinergic + α-adrenergic exacerbation.</strong> <span class="vig-buzzword">Anticholinergics</span> (diphenhydramine, oxybutynin, TCAs) block M3 muscarinic receptors on bladder <em>detrusor</em> muscle → ↓ detrusor contraction → retention. Men with underlying BPH have marginal function — anticholinergics tip them into <strong>acute urinary retention</strong>. Another common precipitant: <strong>sympathomimetic decongestants</strong> (pseudoephedrine) activate α1 receptors on prostate/bladder neck → ↑ smooth muscle tone → outlet obstruction. Tx: catheter decompression + α1-blocker (tamsulosin). Add 5α-reductase inhibitor (finasteride) for large glands or recurrent retention. DRE reveals <strong>symmetric smooth BPH</strong>; prostate cancer would feel nodular/hard.</div>
+  </div>
+
+  <div class="vig-item">
+    <div class="vig-num">Vignette 4 of 4 — Prostate Cancer with Bone Mets</div>
+    <div class="vig-stem">A 71-year-old man presents with 4 weeks of lower back pain unresponsive to NSAIDs, 12 pounds of unintentional weight loss, and new lower extremity weakness. PSA is 82 ng/mL (markedly elevated). DRE reveals a <strong>hard nodule in the posterior prostate</strong>. MRI spine shows multiple <strong>osteoblastic lesions</strong> in the lumbar vertebrae with epidural cord compression at L3. Alkaline phosphatase is 520 U/L (elevated). Which of the following treatments BEST addresses both the tumor and the hormonal driver?</div>
+    <div class="vig-opts">
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">A</span>Radical prostatectomy alone</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">B</span>Chemotherapy with 5-FU + methotrexate</div>
+      <div class="vig-opt" onclick="answerVig(this,true)"><span class="vig-opt-letter">C</span>Androgen deprivation therapy (leuprolide + bicalutamide) + dexamethasone + emergent spinal radiation</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">D</span>Tamsulosin for symptomatic management only</div>
+      <div class="vig-opt" onclick="answerVig(this,false)"><span class="vig-opt-letter">E</span>Observation with serial PSA monitoring</div>
+    </div>
+    <div class="vig-exp"><strong>C — ADT + corticosteroids + spinal radiation.</strong> Classic <span class="vig-buzzword">metastatic prostate cancer with epidural cord compression</span> — an oncologic emergency. Clues: elderly man, <span class="vig-buzzword">PSA &gt; 80</span>, <span class="vig-buzzword">hard posterior prostate nodule</span> (peripheral zone), <span class="vig-buzzword">osteoBLASTIC bone mets</span> (prostate CA uniquely → blastic; most others → lytic), ↑ alk phos (bone turnover), cord compression signs (weakness, back pain). Treatment of choice:<br>• <strong>ADT</strong>: GnRH agonist (leuprolide) + antiandrogen (bicalutamide/flutamide) to block "flare."<br>• <strong>Emergent radiation + high-dose steroids</strong> for cord compression (within hours).<br>Prostate CA is androgen-dependent so ADT provides durable response. Bisphosphonates/denosumab for bone protection.</div>
+  </div>
+
+</div>
+
+<!-- ══ STEP 1 TRAPS ═════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-traps">
+  <div class="vig-intro"><strong>Step 1 Traps:</strong> Common false statements that appear plausible but are incorrect. Choose the correct answer to reveal the trap explanation.</div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 1 of 7</div>
+    <div class="trap-statement">Testosterone binds the androgen receptor with greater affinity than DHT, making it the primary mediator of male external genital development.</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),false)">TRUE</button>
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),true)">FALSE</button>
+    </div>
+    <div class="trap-exp" id="trap-exp-1">Reversed. <strong>DHT binds the androgen receptor with ~50× higher affinity</strong> than testosterone. DHT is responsible for <strong>external genitalia development in utero</strong>, prostate growth, and male-pattern hair. Testosterone maintains internal (Wolffian) ducts — epididymis, vas, seminal vesicles. This is why <strong>5α-reductase deficiency</strong> produces a 46 XY with normal internal male structures but female-appearing external genitalia at birth (virilizes at puberty).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 2 of 7</div>
+    <div class="trap-statement">Prostate cancer typically causes osteolytic bone metastases with hypercalcemia.</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),false)">TRUE</button>
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),true)">FALSE</button>
+    </div>
+    <div class="trap-exp" id="trap-exp-2">Reversed. <strong>Prostate cancer uniquely causes OSTEOBLASTIC bone mets</strong> (blastic = bone-forming → appear white/dense on X-ray; ↑ alkaline phosphatase). Most other cancers (breast, lung, kidney, multiple myeloma) cause OSTEOLYTIC mets (lytic lesions + hypercalcemia). Classic finding: axial skeleton mets (pelvis, lumbar spine, femur) → back pain in elderly man = consider prostate cancer. Tx: bisphosphonates or denosumab for bone support + ADT.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 3 of 7</div>
+    <div class="trap-statement">The pampiniform plexus is an arterial network that delivers oxygenated blood to the testes and requires precise temperature regulation.</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),false)">TRUE</button>
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),true)">FALSE</button>
+    </div>
+    <div class="trap-exp" id="trap-exp-3">False. The pampiniform plexus is a <strong>VENOUS plexus</strong> (not arterial) that <strong>COOLS</strong> arterial blood heading to the testis via countercurrent heat exchange — the artery is surrounded by the venous plexus, which has already lost heat on its way back from the cooler scrotum. This keeps testicular temp ~2°C below core body. Dilation = <span class="vig-buzzword">varicocele</span> (L &gt; R due to left gonadal vein → left renal vein at 90°). Twisting = testicular torsion.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 4 of 7</div>
+    <div class="trap-statement">Sperm are primarily stored in the seminal vesicles before ejaculation.</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),false)">TRUE</button>
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),true)">FALSE</button>
+    </div>
+    <div class="trap-exp" id="trap-exp-4">False — <span style="color:#8B2242"><strong>sperm are NOT stored in seminal vesicles</strong></span>. The name is misleading. Sperm are stored in the <strong>tail (cauda) of the epididymis</strong>, where the lumen widens and flow slows, allowing storage up to ~1 month. Seminal vesicles contribute ~70% of ejaculate volume (fructose, prostaglandins, alkaline fluid, clotting proteins) that <em>joins</em> sperm at the ejaculatory duct during emission.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 5 of 7</div>
+    <div class="trap-statement">In testicular torsion, elevating the testis relieves pain (positive Prehn sign).</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),false)">TRUE</button>
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),true)">FALSE</button>
+    </div>
+    <div class="trap-exp" id="trap-exp-5">False — reversed. In testicular <strong>torsion</strong>, <span class="vig-buzzword">Prehn sign is NEGATIVE</span> (elevation does NOT relieve pain). In <strong>epididymitis</strong>, <span class="vig-buzzword">Prehn sign is POSITIVE</span> (elevation DOES relieve pain). Other key differences: torsion has <span class="vig-buzzword">absent cremasteric reflex</span>, high-riding testis, horizontal lie, sudden onset, adolescent boys. Epididymitis: present cremasteric, normal lie, gradual onset, fever, dysuria.</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 6 of 7</div>
+    <div class="trap-statement">BPH causes cancer of the peripheral prostate zone and frequently progresses to prostate adenocarcinoma.</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),false)">TRUE</button>
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),true)">FALSE</button>
+    </div>
+    <div class="trap-exp" id="trap-exp-6">Two errors. <strong>BPH involves the CENTRAL/TRANSITIONAL (periurethral) zone</strong> — that's why it causes obstructive urinary symptoms. <strong>Prostate CANCER arises from the PERIPHERAL (posterior) zone</strong> — palpable on DRE. And BPH is NOT a precursor to prostate cancer (they involve different zones). BPH ↑ PSA modestly (mild, diffuse); cancer ↑ PSA more and gives a hard nodule on DRE. Men can have both simultaneously (unrelated).</div>
+  </div>
+
+  <div class="trap-card">
+    <div class="trap-num">Trap 7 of 7</div>
+    <div class="trap-statement">Seminomas always elevate both AFP and β-hCG, which distinguishes them from non-seminomatous germ cell tumors.</div>
+    <div class="trap-btns">
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),false)">TRUE</button>
+      <button class="trap-btn" onclick="answerTrap(this,this.closest('.trap-card'),true)">FALSE</button>
+    </div>
+    <div class="trap-exp" id="trap-exp-7">False — critical distinction. <span class="vig-buzzword">SEMINOMAS NEVER ELEVATE AFP</span>. If AFP is elevated, the tumor is a <strong>non-seminomatous germ cell tumor (NSGCT)</strong>, even if histology looks "seminoma-like." Seminoma may modestly elevate β-hCG (from syncytiotrophoblast-like cells) and PLAP. Pure seminoma markers: PLAP+, LDH+, β-hCG slight↑, AFP NORMAL. NSGCT markers: ↑AFP (yolk sac, embryonal) or ↑↑β-hCG (choriocarcinoma). Treatment differs: seminoma is radiosensitive; NSGCT requires BEP chemotherapy.</div>
+  </div>
+
+</div>
+
+<!-- ══ REFERENCE TABLES ══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-ref">
+  <div class="vig-intro"><strong>Reference Tables:</strong> Quick-lookup tables for scrotal pathology, prostate conditions, and male reproductive pharmacology. Print-friendly format.</div>
+
+  <div class="ref-section">
+    <div class="ref-title">Scrotal Pathology — Quick Comparison</div>
+    <div class="ref-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Condition</th>
+            <th>Pathology</th>
+            <th>Classic Presentation</th>
+            <th>Key Exam / Dx</th>
+            <th>Treatment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Testicular torsion</strong></td>
+            <td>Bell-clapper deformity; cord twists → ischemia</td>
+            <td>Sudden severe pain in adolescent; N/V</td>
+            <td>High-riding, horizontal lie; <strong>absent cremasteric</strong>; NEG Prehn</td>
+            <td><strong>Emergent surgery</strong> + bilateral orchiopexy (6h window)</td>
+          </tr>
+          <tr>
+            <td><strong>Epididymitis</strong></td>
+            <td>&lt;35: Chlamydia/gonorrhea; &gt;35: E. coli</td>
+            <td>Gradual pain, dysuria, fever</td>
+            <td>Normal lie, POS Prehn, preserved cremasteric; pyuria</td>
+            <td>Ceftriaxone + doxycycline (&lt;35) or fluoroquinolone (&gt;35)</td>
+          </tr>
+          <tr>
+            <td><strong>Varicocele</strong></td>
+            <td>Dilated pampiniform plexus (L &gt; R)</td>
+            <td>"Bag of worms"; worse with Valsalva; infertility</td>
+            <td>Palpable venous plexus; scrotal US Doppler</td>
+            <td>Surgical ligation / embolization if symptomatic or infertile</td>
+          </tr>
+          <tr>
+            <td><strong>Hydrocele</strong></td>
+            <td>Fluid between layers of tunica vaginalis (patent PV in infants)</td>
+            <td>Painless swelling; TRANSILLUMINATES</td>
+            <td>Transillumination; US</td>
+            <td>Observation; surgery if persistent/symptomatic</td>
+          </tr>
+          <tr>
+            <td><strong>Spermatocele</strong></td>
+            <td>Epididymal cyst with sperm</td>
+            <td>Cystic mass above/separate from testis; transilluminates</td>
+            <td>US; clinical</td>
+            <td>Usually observation</td>
+          </tr>
+          <tr>
+            <td><strong>Cryptorchidism</strong></td>
+            <td>Failure of testicular descent (gubernaculum)</td>
+            <td>Non-palpable testis in infant</td>
+            <td>Exam; inguinal US if needed</td>
+            <td>Orchidopexy by 6–12 mo; ↓ seminoma + infertility risk</td>
+          </tr>
+          <tr>
+            <td><strong>Testicular cancer</strong></td>
+            <td>95% germ cell (seminoma/NSGCT)</td>
+            <td>Painless firm testicular mass; age 15–35</td>
+            <td>Scrotal US; AFP, β-hCG, LDH tumor markers</td>
+            <td>Radical inguinal orchiectomy + RT (seminoma) or BEP chemo (NSGCT)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Prostate Conditions — BPH vs Prostatitis vs Cancer</div>
+    <div class="ref-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Condition</th>
+            <th>Zone / Pathology</th>
+            <th>Presentation</th>
+            <th>DRE Findings</th>
+            <th>Treatment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>BPH</strong></td>
+            <td>Transitional (periurethral) zone; DHT-driven hyperplasia</td>
+            <td>Obstructive + irritative LUTS; nocturia</td>
+            <td>Symmetric, smooth, rubbery, enlarged</td>
+            <td>α1-blockers (tamsulosin) + 5α-reductase inhibitors (finasteride); TURP</td>
+          </tr>
+          <tr>
+            <td><strong>Acute prostatitis</strong></td>
+            <td>E. coli (older) / STI (younger); bacterial infection</td>
+            <td>Fever, chills, dysuria, pelvic pain, cloudy urine</td>
+            <td>TENDER, warm, boggy prostate; avoid vigorous exam (sepsis risk)</td>
+            <td>Fluoroquinolone or TMP-SMX (6 wks)</td>
+          </tr>
+          <tr>
+            <td><strong>Chronic prostatitis</strong></td>
+            <td>Bacterial or non-bacterial</td>
+            <td>Recurrent UTI; pelvic pain</td>
+            <td>Variable; post-prostatic massage specimens for dx</td>
+            <td>Long-course antibiotics; α-blocker</td>
+          </tr>
+          <tr>
+            <td><strong>Prostate cancer</strong></td>
+            <td>Peripheral (posterior) zone; adenocarcinoma</td>
+            <td>Asymptomatic early; bone pain if mets; urinary obstruction if advanced</td>
+            <td>HARD, nodular, irregular — hard to palpate early</td>
+            <td>Surgery/RT (localized); ADT (metastatic); osteoblastic mets</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-title">Male Repro Pharmacology</div>
+    <div class="ref-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Drug</th>
+            <th>Class / Mechanism</th>
+            <th>Clinical Use</th>
+            <th>Key AE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Finasteride / Dutasteride</strong></td>
+            <td>5α-reductase inhibitor — blocks T → DHT</td>
+            <td>BPH (shrinks gland); androgenetic alopecia</td>
+            <td>↓ libido, ED, gynecomastia; halves PSA readings; category X (teratogenic)</td>
+          </tr>
+          <tr>
+            <td><strong>Tamsulosin</strong></td>
+            <td>α1A-selective blocker (prostate-specific) → relax smooth muscle</td>
+            <td>BPH symptomatic relief</td>
+            <td>Orthostatic hypotension; intraoperative floppy iris syndrome</td>
+          </tr>
+          <tr>
+            <td><strong>Sildenafil / Tadalafil</strong></td>
+            <td>PDE5 inhibitor → ↑ cGMP → vasodilation</td>
+            <td>ED; pulmonary HTN (sildenafil); BPH (tadalafil)</td>
+            <td>HA, flushing, cyanopia; <span style="color:#8B2242"><strong>CI with nitrates → severe hypotension</strong></span></td>
+          </tr>
+          <tr>
+            <td><strong>Leuprolide</strong></td>
+            <td>GnRH agonist — continuous dosing → pituitary desensitization → ↓ LH/FSH</td>
+            <td>Prostate cancer (ADT); endometriosis; precocious puberty</td>
+            <td>"Flare" at initiation; hot flashes; bone loss; impotence</td>
+          </tr>
+          <tr>
+            <td><strong>Flutamide / Bicalutamide / Enzalutamide</strong></td>
+            <td>Androgen receptor antagonists</td>
+            <td>Metastatic prostate cancer (with leuprolide to block flare)</td>
+            <td>Gynecomastia, hot flashes, hepatotoxicity</td>
+          </tr>
+          <tr>
+            <td><strong>Abiraterone</strong></td>
+            <td>CYP17 inhibitor — blocks adrenal + testicular androgen synthesis</td>
+            <td>Castration-resistant prostate cancer</td>
+            <td>HTN, hypokalemia, fluid retention (mineralocorticoid excess)</td>
+          </tr>
+          <tr>
+            <td><strong>Tamoxifen</strong></td>
+            <td>SERM (antagonist in breast)</td>
+            <td>Gynecomastia; male breast cancer</td>
+            <td>VTE; hot flashes</td>
+          </tr>
+          <tr>
+            <td><strong>Exogenous Testosterone</strong></td>
+            <td>Androgen replacement</td>
+            <td>Primary/secondary hypogonadism; Klinefelter</td>
+            <td>Polycythemia, acne, sleep apnea, ↓ spermatogenesis (negative feedback on FSH), prostate hypertrophy</td>
+          </tr>
+          <tr>
+            <td><strong>hCG</strong></td>
+            <td>LH receptor agonist</td>
+            <td>Stimulates Leydig T production; hypogonadotropic hypogonadism; cryptorchidism (rare)</td>
+            <td>Gynecomastia; ovarian hyperstimulation (in women)</td>
+          </tr>
+          <tr>
+            <td><strong>Anabolic steroids (abuse)</strong></td>
+            <td>Exogenous androgens</td>
+            <td>NOT therapeutic — illicit muscle building</td>
+            <td>Testicular ATROPHY (↓ LH/FSH via feedback) → infertility; aggression; cardiovascular disease</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ HY TESTING NOTES ═══════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-hynotes">
+  <div class="vig-intro"><strong>High-Yield Testing Notes:</strong> Key patterns to recognize on exams. Badges indicate trap concepts, buzzword clusters, and testing-focused insights.</div>
+
+  <div class="hy-card">
+    <div class="hy-card-title"><span class="hy-badge testing">TESTING</span> "LH → Leydig; FSH → Sertoli" — HPG Axis Core</div>
+    <div class="hy-card-body">The highest-yield concept in male endocrinology: <strong>LH stimulates Leydig cells</strong> (in the interstitium) to produce <strong>testosterone</strong>. <strong>FSH stimulates Sertoli cells</strong> (inside the tubules) to support germ cells, produce <strong>ABP</strong> (androgen-binding protein) + <strong>inhibin B</strong>. Feedback: testosterone → ↓ GnRH + ↓ LH; inhibin B → ↓ FSH selectively. Clinical pattern recognition: ↑ FSH + normal T → <strong>Sertoli dysfunction</strong> (↓ inhibin B, as in Klinefelter). ↓ T + ↑ LH/FSH → <strong>primary hypogonadism</strong>. ↓ T + ↓ LH/FSH → <strong>secondary (central) hypogonadism</strong>.</div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title"><span class="hy-badge trap">TRAP</span> Testosterone vs DHT — Where Each Acts</div>
+    <div class="hy-card-body">Key USMLE distinction: <strong>Testosterone maintains INTERNAL</strong> structures (Wolffian → SEED: Seminal vesicles, Epididymis, Ejaculatory duct, vas Deferens). <strong>DHT masculinizes EXTERNAL</strong> structures (penis, scrotum, prostate). DHT binds the androgen receptor <strong>~50× more potently</strong> than T. Enzyme: <strong>5α-reductase</strong>. Clinical: finasteride (5α-reductase inhibitor) → ↓ DHT → treats BPH + pattern baldness, but preserves testosterone functions (libido, fertility mostly intact).</div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title"><span class="hy-badge buzzword">BUZZWORD</span> "Painless Testicular Mass" Cluster — Germ Cell Tumor</div>
+    <div class="hy-card-body">USMLE pattern: <strong>painless testicular mass in a man 15–35</strong> = germ cell tumor until proven otherwise. 95% of testicular cancers are germ cell origin. Always <strong>radical inguinal orchiectomy</strong> — do NOT biopsy transscrotally (seeding risk). Markers guide classification:<br>• <span class="vig-buzzword">↑ AFP</span> → NSGCT (yolk sac, embryonal); <strong>pure seminoma NEVER has ↑ AFP</strong><br>• <span class="vig-buzzword">↑↑ β-hCG</span> → choriocarcinoma (or elevated slightly in seminoma)<br>• <span class="vig-buzzword">↑ PLAP</span> → seminoma<br>• <span class="vig-buzzword">↑ LDH</span> → tumor burden marker<br>Risk factors: cryptorchidism (↑ 4–6× even after repair), Klinefelter, family Hx.</div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title"><span class="hy-badge testing">TESTING</span> Torsion vs Epididymitis — Differential</div>
+    <div class="hy-card-body">Common USMLE side-by-side:<br><br><strong>Torsion:</strong> sudden onset, adolescent, high-riding testis, <strong>absent</strong> cremasteric reflex, <strong>NEGATIVE</strong> Prehn sign, horizontal lie, no fever/dysuria. Emergency surgery within 6h.<br><br><strong>Epididymitis:</strong> gradual onset, any age but peak &lt;35 (STI) or &gt;35 (E. coli), normal lie, <strong>present</strong> cremasteric, <strong>POSITIVE</strong> Prehn sign, fever/dysuria. Treat with antibiotics.<br><br>Ultrasound with Doppler confirms if unsure — no flow = torsion. Never delay surgery for imaging if clinical suspicion is high.</div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title"><span class="hy-badge trap">TRAP</span> BPH Zone vs Prostate Cancer Zone</div>
+    <div class="hy-card-body">Two different zones, two different diseases — easy trap: <strong>BPH = TRANSITIONAL (central/periurethral) zone</strong>. Why symptomatic? The gland surrounds the urethra → bulk obstruction → LUTS. Tx: α-blockers + 5α-reductase inhibitors.<br><br><strong>Prostate cancer = PERIPHERAL (posterior) zone</strong>. Why DRE matters? Posterior zone is palpable through rectum → feel hard nodules. <span class="vig-buzzword">BPH does NOT predispose to cancer</span> — they are distinct in zone, pathogenesis, and location. Men can have both simultaneously.</div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title"><span class="hy-badge buzzword">BUZZWORD</span> PSA + Osteoblastic Bone Mets → Prostate CA</div>
+    <div class="hy-card-body">Classic vignette cluster for metastatic prostate cancer: <strong>elderly man</strong> + <strong>back/hip pain</strong> + <strong>↑↑ PSA (&gt; 10)</strong> + <strong>hard posterior prostate nodule on DRE</strong> + <strong>osteoblastic (sclerotic) bone lesions</strong> on imaging + <strong>↑ alkaline phosphatase</strong>. Most common cancer in men (3rd deadliest). <span class="vig-buzzword">Osteoblastic bone mets are virtually pathognomonic</span> (vs. osteolytic mets in breast, lung, kidney, myeloma). Treatment = androgen deprivation (leuprolide + antiandrogen); prostate CA is androgen-sensitive. Bone-directed agents: bisphosphonates or denosumab.</div>
+  </div>
+
+  <div class="hy-card">
+    <div class="hy-card-title"><span class="hy-badge testing">TESTING</span> Sildenafil + Nitrates = Fatal Hypotension</div>
+    <div class="hy-card-body">HY pharmacology: <strong>PDE5 inhibitors</strong> (sildenafil, tadalafil, vardenafil) and <strong>nitrates</strong> (nitroglycerin, isosorbide) BOTH elevate cGMP (via complementary mechanisms). Nitrates → NO → ↑ cGMP; PDE5 inhibitor → blocks cGMP breakdown → prolonged elevation. Combined: massive systemic vasodilation → profound hypotension, syncope, MI, death. <span style="color:#8B2242"><strong>ABSOLUTE contraindication</strong></span>. Separate by 24h (sildenafil) or 48h (tadalafil). Treat acute hypotension with IV fluids + phenylephrine. Also caution with α-blockers (additive hypotension).</div>
+  </div>
+
+</div>
+
+<!-- ══ CLINICAL CORRELATES ════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-clinical">
+  <div class="cc-intro"><strong>Clinical Correlates:</strong> Review key disease profiles and clinical connections. Click "Show" to reveal comparison details.</div>
+
+  <div class="cc-card">
+    <div class="cc-tag">Acute Scrotum Workup</div>
+    <div class="cc-title">Testicular Torsion vs Epididymitis vs Fournier's Gangrene</div>
+    <div class="cc-body">Three entities to differentiate in a man with acute scrotal pain:<br><br>
+    <em>Testicular torsion:</em> Sudden severe pain, adolescent, high-riding testis, absent cremasteric reflex, NEGATIVE Prehn sign. Surgical emergency — 6h window.<br><br>
+    <em>Epididymitis:</em> Gradual onset, STI (age &lt;35) or enteric (age &gt;35), POSITIVE Prehn sign, pyuria, fever, preserved cremasteric.<br><br>
+    <em>Fournier's gangrene:</em> Necrotizing fasciitis of perineum/scrotum — diabetic, immunocompromised, or post-surgical patients. <strong>Polymicrobial</strong> (aerobic + anaerobic). Rapid progression, crepitus, systemic toxicity. SURGICAL emergency — wide debridement + broad-spectrum antibiotics (pip-tazo + clinda + vanc).</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Show Differential Table</button>
+    <div class="cc-detail">
+      <table style="width:100%;font-size:.85em;border-collapse:collapse;">
+        <tr style="border-bottom:1px solid #D5CCC0;"><td style="padding:6px 10px;color:#5D4037;font-weight:700;">Feature</td><td style="padding:6px 10px;color:#5D4037;">Torsion</td><td style="padding:6px 10px;color:#5D4037;">Epididymitis</td><td style="padding:6px 10px;color:#5D4037;">Fournier's</td></tr>
+        <tr style="border-bottom:1px solid #D5CCC0;"><td style="padding:6px 10px;">Onset</td><td style="padding:6px 10px;">Sudden (hours)</td><td style="padding:6px 10px;">Gradual (days)</td><td style="padding:6px 10px;">Rapid, necrotic</td></tr>
+        <tr style="border-bottom:1px solid #D5CCC0;"><td style="padding:6px 10px;">Age</td><td style="padding:6px 10px;">Adolescent (peak)</td><td style="padding:6px 10px;">Any adult</td><td style="padding:6px 10px;">Middle-aged/elderly DM</td></tr>
+        <tr style="border-bottom:1px solid #D5CCC0;"><td style="padding:6px 10px;">Cremasteric</td><td style="padding:6px 10px;">ABSENT</td><td style="padding:6px 10px;">Present</td><td style="padding:6px 10px;">Obscured by inflammation</td></tr>
+        <tr style="border-bottom:1px solid #D5CCC0;"><td style="padding:6px 10px;">Prehn sign</td><td style="padding:6px 10px;">NEGATIVE</td><td style="padding:6px 10px;">POSITIVE</td><td style="padding:6px 10px;">N/A (necrosis)</td></tr>
+        <tr><td style="padding:6px 10px;">Management</td><td style="padding:6px 10px;">Emergent surgery</td><td style="padding:6px 10px;">Antibiotics</td><td style="padding:6px 10px;">Emergent debridement + broad antibiotics</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">HPG Axis + Pharmacology</div>
+    <div class="cc-title">Controlling the Male HPG Axis — ADT, Finasteride, PDE5i</div>
+    <div class="cc-body">The male HPG axis can be targeted at several levels for therapy:<br><br>
+    <em>GnRH agonists (leuprolide):</em> <strong>CONTINUOUS</strong> dosing desensitizes the pituitary → ↓ LH/FSH → ↓ testosterone → medical castration. Uses: prostate cancer (metastatic). Initial "FLARE" of T requires concurrent antiandrogen for 2 weeks.<br><br>
+    <em>Androgen receptor antagonists (flutamide, bicalutamide, enzalutamide):</em> Block testosterone/DHT at target tissue. Combined with leuprolide for full ADT.<br><br>
+    <em>5α-reductase inhibitors (finasteride, dutasteride):</em> Block T → DHT conversion. Uses: BPH, male-pattern alopecia. Reduce PSA by ~50% (interpret labs with caution).<br><br>
+    <em>α1-blockers (tamsulosin):</em> Relax prostate smooth muscle → fast relief of BPH symptoms. Orthostatic hypotension is key AE.<br><br>
+    <em>PDE5 inhibitors (sildenafil, tadalafil):</em> Block cGMP breakdown → sustained smooth muscle relaxation → erection. <strong>CI: nitrates.</strong></div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Show Clinical Pairings</button>
+    <div class="cc-detail">
+      <strong style="color:#5D4037;">Clinical pairings:</strong><br>
+      • <strong>BPH (mild-mod):</strong> α1-blocker (tamsulosin) — fastest relief<br>
+      • <strong>BPH (mod-severe, large gland):</strong> α1-blocker + 5α-reductase inhibitor<br>
+      • <strong>Localized prostate CA:</strong> Surgery (radical prostatectomy) or radiation<br>
+      • <strong>Metastatic prostate CA:</strong> ADT = leuprolide + bicalutamide ± abiraterone/enzalutamide<br>
+      • <strong>ED:</strong> PDE5 inhibitor first-line; avoid if on nitrates
+    </div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">Male Infertility Workup</div>
+    <div class="cc-title">Semen Analysis + Hormone Panel → Differentiate Hypogonadism</div>
+    <div class="cc-body">Standard workup for infertility in men:<br><br>
+    <em>Step 1: 2× Semen analysis</em> (assess count, motility, morphology, volume). Azoospermia vs oligospermia vs asthenospermia.<br><br>
+    <em>Step 2: Hormone panel</em> — FSH, LH, testosterone (morning, fasting), prolactin.<br><br>
+    <em>Primary (testicular) hypogonadism:</em> ↓T + <strong>↑ LH, ↑ FSH</strong>. Hypergonadotropic. Causes: Klinefelter, cryptorchidism, mumps orchitis, chemotherapy, radiation.<br><br>
+    <em>Secondary (central) hypogonadism:</em> ↓T + <strong>↓ LH, ↓ FSH</strong>. Hypogonadotropic. Causes: Kallmann (anosmia), pituitary tumor, prolactinoma (prolactin suppresses GnRH), hemochromatosis, opioids, anabolic steroid abuse.<br><br>
+    <em>Sertoli-only syndrome:</em> Isolated <strong>↑ FSH</strong> + normal T + low inhibin B. Azoospermia from absent germ cells.<br><br>
+    <em>Obstructive azoospermia:</em> Normal hormones + normal testicular biopsy + azoospermia. Think vas deferens absence (CFTR mutation/CBAVD) or prior vasectomy.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Show Reversible Causes</button>
+    <div class="cc-detail">
+      <strong style="color:#5D4037;">Reversible causes of male infertility:</strong><br>
+      • <strong>Varicocele</strong> (#1 treatable cause) → varicocelectomy<br>
+      • <strong>Heat exposure</strong> (hot tubs, laptops on lap, tight underwear) → avoidance<br>
+      • <strong>Anabolic steroid abuse</strong> → discontinuation; may need hCG/clomiphene to restart axis<br>
+      • <strong>Obstructive azoospermia</strong> (CBAVD, post-vasectomy, infection) → surgical reconnection, TESE + ICSI<br>
+      • <strong>Medications:</strong> testosterone supplementation (!), opioids, SSRIs, antipsychotics<br>
+      • <strong>Klinefelter:</strong> rare pregnancies via TESE + ICSI<br>
+      • <strong>Hyperprolactinemia:</strong> cabergoline/bromocriptine
+    </div>
+  </div>
+
+  <div class="cc-card">
+    <div class="cc-tag">Male Repro Histology Synthesis</div>
+    <div class="cc-title">Key Histology-Clinical Correlations</div>
+    <div class="cc-body">Histology directly informs clinical pathology:<br><br>
+    <em>Sertoli cells:</em> Form blood-testis barrier (tight junctions); produce inhibin B (↓FSH), ABP (concentrates T locally), MIS (fetal). Dysfunction → azoospermia + ↑ FSH (Klinefelter, cryptorchidism).<br><br>
+    <em>Leydig cells:</em> Interstitial, Reinke crystals, tubular cristae; produce testosterone under LH. Dysfunction → ↓ T + ↑ LH (primary hypogonadism).<br><br>
+    <em>Efferent ductules:</em> Mesonephric-derived; "scalloped" ciliated + resorptive cell lumen; concentrate sperm.<br><br>
+    <em>Epididymis + Vas deferens:</em> Pseudostratified with STEREOCILIA (non-motile); sperm maturation + storage in tail.<br><br>
+    <em>Prostate:</em> Corpora amylacea in lumens; peripheral zone = cancer; transitional zone = BPH. PSA is clinically essential.<br><br>
+    <em>Cowper's gland:</em> Surrounded by SKELETAL muscle (unique among accessory glands); alkaline mucin.</div>
+    <button class="cc-reveal" onclick="toggleCC(this)">Show Mnemonic Hooks</button>
+    <div class="cc-detail">
+      <strong style="color:#5D4037;">Memory hooks:</strong><br>
+      • <strong>"LH → Leydig; FSH → Follicle/Sertoli"</strong> — core HPG axis<br>
+      • <strong>"SEED"</strong> = Wolffian derivatives: Seminal vesicle, Epididymis, Ejaculatory duct, vas Deferens<br>
+      • <strong>"SEVEN UP"</strong> = Sperm pathway: Seminiferous, Epididymis, Vas, Ejaculatory, Nothing, Urethra, Penis<br>
+      • <strong>"Sperm are NOT stored in seminal vesicles"</strong> (stored in epididymis tail)<br>
+      • <strong>"Bell-clapper"</strong> deformity → testicular torsion<br>
+      • <strong>"Corpora amylacea"</strong> = calcifications in prostate lumen (age-related, benign)<br>
+      • <strong>"Schiller-Duval bodies"</strong> = yolk sac tumor; <strong>"fried-egg cells"</strong> = seminoma
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <a href="../active-recall-hub.html">← Active Recall Hub</a> &nbsp;·&nbsp;
+  RPD04 Hub #2 — Step 1 Extensions &nbsp;·&nbsp; HoyaDocs Repro Block
+</div>
+
+</div>
+
+<script>
+var seenCards=new Set();
+var allFCs;
+function flipCard(fc){
+  const inner=fc.querySelector('.fc-inner');
+  const front=fc.querySelector('.fc-front');
+  const back=fc.querySelector('.fc-back');
+  fc.classList.toggle('flipped');
+  inner.style.height=(fc.classList.contains('flipped')?back:front).scrollHeight+'px';
+  if(!allFCs) allFCs=document.querySelectorAll('.fc');
+  allFCs.forEach(function(c,i){if(c===fc)seenCards.add(i);});
+  document.getElementById('fc-counter').textContent=seenCards.size+' / 14 seen';
+}
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function answerMCQ(opt,correct){
+  const item=opt.closest('.mcq-item');
+  if(item.querySelector('.locked'))return;
+  item.querySelectorAll('.mcq-opt').forEach(o=>{o.classList.add('locked');o.onclick=null;});
+  opt.classList.add(correct?'correct':'wrong');
+  if(!correct)item.querySelectorAll('.mcq-opt').forEach(o=>{const fn=o.getAttribute('onclick');if(fn&&fn.includes('true'))o.classList.add('correct');});
+  const exp=item.querySelector('.mcq-exp');exp.classList.add('show');
+}
+function toggleCC(btn){
+  const d=btn.nextElementSibling;d.classList.toggle('open');
+  btn.textContent=d.classList.contains('open')?'Hide':'Show Key Comparison Table';
+}
+
+// ── ORDERING DRILLS ──
+function initDrills(){
+  document.querySelectorAll('.order-drill').forEach(function(drill){
+    var list=drill.querySelector('.order-list');
+    var items=Array.from(list.children);
+    for(var i=items.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));list.appendChild(items[j]);items.splice(j,1);items.splice(i,0,list.children[i]);}
+    items=Array.from(list.children);
+    items.forEach(function(item){
+      item.setAttribute('draggable','true');
+      item.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain','');item.classList.add('dragging');});
+      item.addEventListener('dragend',function(){item.classList.remove('dragging');});
+      item.addEventListener('dragover',function(e){e.preventDefault();item.classList.add('drag-over');});
+      item.addEventListener('dragleave',function(){item.classList.remove('drag-over');});
+      item.addEventListener('drop',function(e){
+        e.preventDefault();item.classList.remove('drag-over');
+        var dragging=list.querySelector('.dragging');
+        if(dragging&&dragging!==item){
+          var allItems=Array.from(list.children);
+          var dragIdx=allItems.indexOf(dragging);
+          var dropIdx=allItems.indexOf(item);
+          if(dragIdx<dropIdx)list.insertBefore(dragging,item.nextSibling);
+          else list.insertBefore(dragging,item);
+        }
+      });
+    });
+  });
+}
+function checkOrder(drillId){
+  var drill=document.getElementById(drillId);
+  var items=drill.querySelectorAll('.order-item');
+  var allCorrect=true;
+  items.forEach(function(item,i){
+    var correct=parseInt(item.getAttribute('data-correct'));
+    if(correct===i+1){item.classList.add('correct-pos');item.classList.remove('wrong-pos');}
+    else{item.classList.add('wrong-pos');item.classList.remove('correct-pos');allCorrect=false;}
+  });
+  var fb=document.getElementById('fb-'+drillId);
+  fb.textContent=allCorrect?'All correct!':'Some items are out of order. Try again or click Show Answer.';
+  fb.className='order-feedback '+(allCorrect?'correct':'incorrect');
+}
+function shuffleDrill(drillId){
+  var drill=document.getElementById(drillId);
+  var list=drill.querySelector('.order-list');
+  var items=Array.from(list.children);
+  items.forEach(function(item){item.classList.remove('correct-pos','wrong-pos');});
+  for(var i=items.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));list.appendChild(items[j]);items.splice(j,1);}
+  var fb=document.getElementById('fb-'+drillId);fb.textContent='';fb.className='order-feedback';
+}
+function showAnswer(drillId){
+  var ans=document.getElementById('ans-'+drillId);
+  ans.classList.toggle('show');
+}
+
+// ── VIGNETTE MCQ ──
+function answerVig(opt,correct){
+  var item=opt.closest('.vig-item');
+  if(item.querySelector('.locked'))return;
+  item.querySelectorAll('.vig-opt').forEach(function(o){o.classList.add('locked');o.onclick=null;});
+  opt.classList.add(correct?'correct':'wrong');
+  if(!correct)item.querySelectorAll('.vig-opt').forEach(function(o){var fn=o.getAttribute('onclick');if(fn&&fn.includes('true'))o.classList.add('correct');});
+  item.querySelector('.vig-exp').classList.add('show');
+}
+
+// ── STEP 1 TRAPS ──
+function answerTrap(btn,card,correct){
+  var btns=card.querySelectorAll('.trap-btn');
+  btns.forEach(function(b){b.disabled=true;});
+  btn.classList.add(correct?'sel-correct':'sel-wrong');
+  var exp=card.querySelector('.trap-exp');
+  exp.classList.add(correct?'show-c':'show-w');
+}
+
+window.addEventListener('load',function(){
+  document.querySelectorAll('.fc').forEach(function(fc){
+    const inner=fc.querySelector('.fc-inner');
+    const front=fc.querySelector('.fc-front');
+    if(front) inner.style.height=front.scrollHeight+'px';
+  });
+  initDrills();
+});
+</script>
+</body>
+</html>
