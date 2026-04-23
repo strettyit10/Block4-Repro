@@ -739,9 +739,6 @@
         <a class="sb-link" href="lecture-guides/index.html">
           <span class="sb-link-icon sb-icon-blue">📖</span>Lecture Guides
         </a>
-        <a class="sb-link" href="active-lesson-drills/rpd02_active_recall.html">
-          <span class="sb-link-icon sb-icon-rose">🎯</span>Recall Drills
-        </a>
       </nav>
 
       <div class="sb-section-label" style="margin-top:14px;">Mapping Resources</div>
@@ -895,29 +892,77 @@
           <!-- SUBJECT FILTERS -->
           <div class="filter-row" id="filterRow" role="group" aria-label="Filter lectures by subject">
             <button type="button" class="filter-pill active" data-filter="all">All</button>
-            <button type="button" class="filter-pill" data-filter="anatomy"><span class="fp-icon">🏗️</span>Anatomy</button>
-            <button type="button" class="filter-pill" data-filter="clinical"><span class="fp-icon">🩺</span>Clinical &amp; Health</button>
-            <button type="button" class="filter-pill" data-filter="embryo"><span class="fp-icon">🧬</span>Embryology</button>
-            <button type="button" class="filter-pill" data-filter="histo"><span class="fp-icon">🔬</span>Histology</button>
-            <button type="button" class="filter-pill" data-filter="micro"><span class="fp-icon">🧫</span>Microbiology</button>
-            <button type="button" class="filter-pill" data-filter="path"><span class="fp-icon">🦠</span>Pathology</button>
-            <button type="button" class="filter-pill" data-filter="pharm"><span class="fp-icon">💊</span>Pharmacology</button>
-            <button type="button" class="filter-pill" data-filter="physio"><span class="fp-icon">⚗️</span>Physiology &amp; Endo</button>
-            <button type="button" class="filter-pill" data-filter="rad"><span class="fp-icon">🩻</span>Radiology</button>
+            <button type="button" class="filter-pill" data-filter="anat-embryo-histo"><span class="fp-icon">🏗️</span>Anatomy, Embryo &amp; Histo</button>
+            <button type="button" class="filter-pill" data-filter="drt"><span class="fp-icon">💊</span>DRT &amp; Pharm</button>
+            <button type="button" class="filter-pill" data-filter="health"><span class="fp-icon">🩺</span>Health Systems</button>
+            <button type="button" class="filter-pill" data-filter="path-micro"><span class="fp-icon">🦠</span>Path &amp; Micro</button>
+            <button type="button" class="filter-pill" data-filter="physio"><span class="fp-icon">⚗️</span>Physiology</button>
           </div>
 
         </section>
 
         <div class="sections-grid">
-        <!-- ── 🏗️ Anatomy ── -->
-        <div class="section-block" id="anatomy" data-cat="anatomy">
+        <!-- ── 🏗️ Anatomy, Embryology &amp; Histology ── -->
+        <div class="section-block" id="anat-embryo-histo" data-cat="anat-embryo-histo">
           <div class="section-divider">
-            <span class="section-divider-text">🏗️ Anatomy</span>
+            <span class="section-divider-text">🏗️ Anatomy, Embryology &amp; Histology</span>
             <div class="section-divider-line"></div>
           </div>
           <div class="util-list">
 
-            <div class="util-row" id="rpd07" data-cat="anatomy" data-search="rpd07 pelvic structure neurovasculature bones ligaments autonomic innervation micturition erection ejaculation pathways">
+            <div class="util-row" id="rpd01" data-cat="anat-embryo-histo" data-search="rpd01 urogenital primer development differentiation ducts external genitalia gonads sexual timing embryology">
+              <div class="util-icon ui-green">🏗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-green">Lecture 01</span>
+                <strong>IL Urogenital Primer</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd02" data-cat="anat-embryo-histo" data-search="rpd02 urogenital system development disorders sexual differentiation müllerian anomalies hypospadias epispadias embryology">
+              <div class="util-icon ui-green">🏗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-green">Lecture 02</span>
+                <strong>Urogenital System</strong>
+              </div>
+              <div class="row-actions">
+                <a href="./testing-drills/rpd02_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
+                <a href="./testing-drills/rpd02_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
+                <a href="./testing-drills/rpd02_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd03" data-cat="anat-embryo-histo" data-search="rpd03 female reproductive system histology follicles uterus vagina mammary glands tract">
+              <div class="util-icon ui-green">🏗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-green">Lecture 03</span>
+                <strong>Female Reproductive System (Histology)</strong>
+              </div>
+              <div class="row-actions">
+                <a href="./testing-drills/rpd03_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
+                <a href="./testing-drills/rpd03_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
+                <a href="./testing-drills/rpd03_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd04" data-cat="anat-embryo-histo" data-search="rpd04 male reproductive system histology testes excurrent ducts accessory glands penis tract">
+              <div class="util-icon ui-green">🏗️</div>
+              <div class="util-text">
+                <span class="util-badge ub-green">Lecture 04</span>
+                <strong>Male Reproductive System (Histology)</strong>
+              </div>
+              <div class="row-actions">
+                <a href="./testing-drills/rpd04_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
+                <a href="./testing-drills/rpd04_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
+                <a href="./testing-drills/rpd04_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd07" data-cat="anat-embryo-histo" data-search="rpd07 pelvic structure neurovasculature bones ligaments autonomic innervation micturition erection ejaculation pathways anatomy">
               <div class="util-icon ui-green">🏗️</div>
               <div class="util-text">
                 <span class="util-badge ub-green">Lecture 07</span>
@@ -930,7 +975,7 @@
               </div>
             </div>
 
-            <div class="util-row" id="rpd09" data-cat="anatomy" data-search="rpd09 pelvic viscera perineum pudendal nerve pathway pelvic floor musculature">
+            <div class="util-row" id="rpd09" data-cat="anat-embryo-histo" data-search="rpd09 pelvic viscera perineum pudendal nerve pathway pelvic floor musculature anatomy">
               <div class="util-icon ui-green">🏗️</div>
               <div class="util-text">
                 <span class="util-badge ub-green">Lecture 09</span>
@@ -946,19 +991,19 @@
           </div>
         </div>
 
-        <!-- ── 🩺 Clinical &amp; Health Systems ── -->
-        <div class="section-block" id="clinical" data-cat="clinical">
+        <!-- ── 💊 DRT &amp; Pharm ── -->
+        <div class="section-block" id="drt" data-cat="drt">
           <div class="section-divider">
-            <span class="section-divider-text">🩺 Clinical &amp; Health Systems</span>
+            <span class="section-divider-text">💊 DRT &amp; Pharm</span>
             <div class="section-divider-line"></div>
           </div>
           <div class="util-list">
 
-            <div class="util-row" id="rpd10-11" data-cat="clinical" data-search="rpd10 rpd11 sexual health development lifespan epidemiology assessment common disorders management">
-              <div class="util-icon ui-rose">🩺</div>
+            <div class="util-row" id="rpd23" data-cat="drt" data-search="rpd23 pelvic imaging ultrasound ct mri female male pelvic anatomy pathology modalities radiology drt">
+              <div class="util-icon ui-rose">💊</div>
               <div class="util-text">
-                <span class="util-badge ub-rose">Lectures 10-11</span>
-                <strong>Sexual Health &amp; Development Across the Lifespan I &amp; II</strong>
+                <span class="util-badge ub-rose">Lecture 23</span>
+                <strong>Pelvic Imaging</strong>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -967,374 +1012,7 @@
               </div>
             </div>
 
-            <div class="util-row" id="rpd16" data-cat="clinical" data-search="rpd16 contraception contraceptive methods mechanisms efficacy indications contraindications">
-              <div class="util-icon ui-rose">🩺</div>
-              <div class="util-text">
-                <span class="util-badge ub-rose">Lecture 16</span>
-                <strong>Contraception</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd17" data-cat="clinical" data-search="rpd17 fertility infertility evaluation workup diagnostic tests pcos assisted reproduction">
-              <div class="util-icon ui-rose">🩺</div>
-              <div class="util-text">
-                <span class="util-badge ub-rose">Lecture 17</span>
-                <strong>Fertility &amp; Infertility</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd22" data-cat="clinical" data-search="rpd22 pregnancy trimester physiology labor postpartum normal">
-              <div class="util-icon ui-rose">🩺</div>
-              <div class="util-text">
-                <span class="util-badge ub-rose">Lecture 22</span>
-                <strong>Pregnancy 101</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd24" data-cat="clinical" data-search="rpd24 psychosocial pregnancy postpartum perinatal mood disorders parenthood transition">
-              <div class="util-icon ui-rose">🩺</div>
-              <div class="util-text">
-                <span class="util-badge ub-rose">Lecture 24</span>
-                <strong>Psychosocial Aspects of Pregnancy &amp; Postpartum</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd25" data-cat="clinical" data-search="rpd25 menopause hormonal changes symptoms hrt primary ovarian insufficiency">
-              <div class="util-icon ui-rose">🩺</div>
-              <div class="util-text">
-                <span class="util-badge ub-rose">Lecture 25</span>
-                <strong>Menopause</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd38" data-cat="clinical" data-search="rpd38 ccs sexuality illness disability clinical case session">
-              <div class="util-icon ui-rose">🩺</div>
-              <div class="util-text">
-                <span class="util-badge ub-rose">Lecture 38</span>
-                <strong>CCS 3: Sexuality, Illness &amp; Disability</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd40" data-cat="clinical" data-search="rpd40 sexual boundary issues professionalism clinical practice">
-              <div class="util-icon ui-rose">🩺</div>
-              <div class="util-text">
-                <span class="util-badge ub-rose">Lecture 40</span>
-                <strong>IL Sexual Boundary Issues</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd43-44" data-cat="clinical" data-search="rpd43 rpd44 lgbt lgbtq health gender-affirming care transgender hormones">
-              <div class="util-icon ui-rose">🩺</div>
-              <div class="util-text">
-                <span class="util-badge ub-rose">Lectures 43-44</span>
-                <strong>LGBT Health I &amp; II</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── 🧬 Embryology ── -->
-        <div class="section-block" id="embryo" data-cat="embryo">
-          <div class="section-divider">
-            <span class="section-divider-text">🧬 Embryology</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" id="rpd01" data-cat="embryo" data-search="rpd01 urogenital primer development differentiation ducts external genitalia gonads sexual timing">
-              <div class="util-icon ui-purple">🧬</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 01</span>
-                <strong>IL Urogenital Primer</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd02" data-cat="embryo" data-search="rpd02 urogenital system development disorders sexual differentiation müllerian anomalies hypospadias epispadias">
-              <div class="util-icon ui-purple">🧬</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 02</span>
-                <strong>Urogenital System</strong>
-              </div>
-              <div class="row-actions">
-                <a href="./testing-drills/rpd02_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
-                <a href="./testing-drills/rpd02_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
-                <a href="./testing-drills/rpd02_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── 🔬 Histology ── -->
-        <div class="section-block" id="histo" data-cat="histo">
-          <div class="section-divider">
-            <span class="section-divider-text">🔬 Histology</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" id="rpd03" data-cat="histo" data-search="rpd03 female reproductive system histology follicles uterus vagina mammary glands tract">
-              <div class="util-icon ui-green">🔬</div>
-              <div class="util-text">
-                <span class="util-badge ub-green">Lecture 03</span>
-                <strong>Female Reproductive System (Histology)</strong>
-              </div>
-              <div class="row-actions">
-                <a href="./testing-drills/rpd03_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
-                <a href="./testing-drills/rpd03_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
-                <a href="./testing-drills/rpd03_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd04" data-cat="histo" data-search="rpd04 male reproductive system histology testes excurrent ducts accessory glands penis tract">
-              <div class="util-icon ui-green">🔬</div>
-              <div class="util-text">
-                <span class="util-badge ub-green">Lecture 04</span>
-                <strong>Male Reproductive System (Histology)</strong>
-              </div>
-              <div class="row-actions">
-                <a href="./testing-drills/rpd04_hub1.html" class="row-btn">🟢 <span class="rb-label">Hub 1</span></a>
-                <a href="./testing-drills/rpd04_hub2.html" class="row-btn">🟡 <span class="rb-label">Hub 2</span></a>
-                <a href="./testing-drills/rpd04_hub3.html" class="row-btn">🔵 <span class="rb-label">Hub 3</span></a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── 🧫 Microbiology ── -->
-        <div class="section-block" id="micro" data-cat="micro">
-          <div class="section-divider">
-            <span class="section-divider-text">🧫 Microbiology</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" id="rpd37" data-cat="micro" data-search="rpd37 stis sexually transmitted infections chlamydia neisseria treponema trichomonas hsv hpv hiv bv">
-              <div class="util-icon ui-purple">🧫</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 37</span>
-                <strong>Sexually Transmitted Infections</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── 🦠 Pathology ── -->
-        <div class="section-block" id="path" data-cat="path">
-          <div class="section-divider">
-            <span class="section-divider-text">🦠 Pathology</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" id="rpd14" data-cat="path" data-search="rpd14 ovary testes pathology pcos ovarian tumors cryptorchidism testicular cancer varicocele">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 14</span>
-                <strong>Ovary &amp; Testes (Pathology)</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd18" data-cat="path" data-search="rpd18 ovary testes lab gross microscopic pathology neoplasms">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 18</span>
-                <strong>Ovary/Testes Lab</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd19" data-cat="path" data-search="rpd19 obstetrical placenta placental pathology pregnancy loss ectopic molar htn disorders">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 19</span>
-                <strong>Obstetrical / Placenta</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd26" data-cat="path" data-search="rpd26 breast pathology benign conditions dcis lcis invasive carcinoma risk factors">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 26</span>
-                <strong>Breast Diseases</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd28" data-cat="path" data-search="rpd28 breast clinical masses staging treatment approach">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 28</span>
-                <strong>Breast Clinical</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd32" data-cat="path" data-search="rpd32 cervix cervical hpv cin carcinoma bethesda system pathology">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 32</span>
-                <strong>Disorders of the Cervix / HPV</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd33" data-cat="path" data-search="rpd33 vulva vulvar vaginal uterus uterine aub endometriosis endometrial cancer disorders pathology">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 33</span>
-                <strong>Disorders of the Vulva &amp; Uterus</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd34" data-cat="path" data-search="rpd34 gyn gynecologic case review clinicopathologic integrated">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 34</span>
-                <strong>GYN: Case Review</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd35" data-cat="path" data-search="rpd35 breast gyn lab gross microscopic pathology review">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 35</span>
-                <strong>Breast / GYN Lab</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd39" data-cat="path" data-search="rpd39 prostate bph prostatitis prostatic adenocarcinoma pathology">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 39</span>
-                <strong>Prostate (Pathology)</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-            <div class="util-row" id="rpd41" data-cat="path" data-search="rpd41 prostate clinical psa screening diagnosis treatment options">
-              <div class="util-icon ui-purple">🦠</div>
-              <div class="util-text">
-                <span class="util-badge ub-purple">Lecture 41</span>
-                <strong>Prostate Clinical</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── 💊 Pharmacology ── -->
-        <div class="section-block" id="pharm" data-cat="pharm">
-          <div class="section-divider">
-            <span class="section-divider-text">💊 Pharmacology</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" id="rpd42" data-cat="pharm" data-search="rpd42 hormone therapy cancer serms aromatase inhibitors gnrh analogs antiandrogens">
+            <div class="util-row" id="rpd42" data-cat="drt" data-search="rpd42 hormone therapy cancer serms aromatase inhibitors gnrh analogs antiandrogens pharmacology pharm drt">
               <div class="util-icon ui-rose">💊</div>
               <div class="util-text">
                 <span class="util-badge ub-rose">Lecture 42</span>
@@ -1350,15 +1028,310 @@
           </div>
         </div>
 
-        <!-- ── ⚗️ Physiology &amp; Endocrinology ── -->
-        <div class="section-block" id="physio" data-cat="physio">
+        <!-- ── 🩺 Health Systems ── -->
+        <div class="section-block" id="health" data-cat="health">
           <div class="section-divider">
-            <span class="section-divider-text">⚗️ Physiology &amp; Endocrinology</span>
+            <span class="section-divider-text">🩺 Health Systems</span>
             <div class="section-divider-line"></div>
           </div>
           <div class="util-list">
 
-            <div class="util-row" id="rpd05-06" data-cat="physio" data-search="rpd05 rpd06 endocrinology ovary female reproductive tract folliculogenesis hpo axis menstrual cycle estrogen progesterone">
+            <div class="util-row" id="rpd10-11" data-cat="health" data-search="rpd10 rpd11 sexual health development lifespan epidemiology assessment common disorders management clinical">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lectures 10-11</span>
+                <strong>Sexual Health &amp; Development Across the Lifespan I &amp; II</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd16" data-cat="health" data-search="rpd16 contraception contraceptive methods mechanisms efficacy indications contraindications clinical">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lecture 16</span>
+                <strong>Contraception</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd17" data-cat="health" data-search="rpd17 fertility infertility evaluation workup diagnostic tests pcos assisted reproduction clinical">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lecture 17</span>
+                <strong>Fertility &amp; Infertility</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd22" data-cat="health" data-search="rpd22 pregnancy trimester physiology labor postpartum normal clinical">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lecture 22</span>
+                <strong>Pregnancy 101</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd24" data-cat="health" data-search="rpd24 psychosocial pregnancy postpartum perinatal mood disorders parenthood transition clinical">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lecture 24</span>
+                <strong>Psychosocial Aspects of Pregnancy &amp; Postpartum</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd25" data-cat="health" data-search="rpd25 menopause hormonal changes symptoms hrt primary ovarian insufficiency clinical">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lecture 25</span>
+                <strong>Menopause</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd38" data-cat="health" data-search="rpd38 ccs sexuality illness disability clinical case session">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lecture 38</span>
+                <strong>CCS 3: Sexuality, Illness &amp; Disability</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd40" data-cat="health" data-search="rpd40 sexual boundary issues professionalism clinical practice">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lecture 40</span>
+                <strong>IL Sexual Boundary Issues</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd43-44" data-cat="health" data-search="rpd43 rpd44 lgbt lgbtq health gender-affirming care transgender hormones clinical">
+              <div class="util-icon ui-rose">🩺</div>
+              <div class="util-text">
+                <span class="util-badge ub-rose">Lectures 43-44</span>
+                <strong>LGBT Health I &amp; II</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── 🦠 Pathology &amp; Microbiology ── -->
+        <div class="section-block" id="path-micro" data-cat="path-micro">
+          <div class="section-divider">
+            <span class="section-divider-text">🦠 Pathology &amp; Microbiology</span>
+            <div class="section-divider-line"></div>
+          </div>
+          <div class="util-list">
+
+            <div class="util-row" id="rpd14" data-cat="path-micro" data-search="rpd14 ovary testes pathology pcos ovarian tumors cryptorchidism testicular cancer varicocele">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 14</span>
+                <strong>Ovary &amp; Testes (Pathology)</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd18" data-cat="path-micro" data-search="rpd18 ovary testes lab gross microscopic pathology neoplasms">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 18</span>
+                <strong>Ovary/Testes Lab</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd19" data-cat="path-micro" data-search="rpd19 obstetrical placenta placental pathology pregnancy loss ectopic molar htn disorders">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 19</span>
+                <strong>Obstetrical / Placenta</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd26" data-cat="path-micro" data-search="rpd26 breast pathology benign conditions dcis lcis invasive carcinoma risk factors">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 26</span>
+                <strong>Breast Diseases</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd28" data-cat="path-micro" data-search="rpd28 breast clinical masses staging treatment approach pathology">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 28</span>
+                <strong>Breast Clinical</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd32" data-cat="path-micro" data-search="rpd32 cervix cervical hpv cin carcinoma bethesda system pathology">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 32</span>
+                <strong>Disorders of the Cervix / HPV</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd33" data-cat="path-micro" data-search="rpd33 vulva vulvar vaginal uterus uterine aub endometriosis endometrial cancer disorders pathology">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 33</span>
+                <strong>Disorders of the Vulva &amp; Uterus</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd34" data-cat="path-micro" data-search="rpd34 gyn gynecologic case review clinicopathologic integrated pathology">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 34</span>
+                <strong>GYN: Case Review</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd35" data-cat="path-micro" data-search="rpd35 breast gyn lab gross microscopic pathology review">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 35</span>
+                <strong>Breast / GYN Lab</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd37" data-cat="path-micro" data-search="rpd37 stis sexually transmitted infections chlamydia neisseria treponema trichomonas hsv hpv hiv bv microbiology">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 37</span>
+                <strong>Sexually Transmitted Infections</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd39" data-cat="path-micro" data-search="rpd39 prostate bph prostatitis prostatic adenocarcinoma pathology">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 39</span>
+                <strong>Prostate (Pathology)</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+            <div class="util-row" id="rpd41" data-cat="path-micro" data-search="rpd41 prostate clinical psa screening diagnosis treatment options pathology">
+              <div class="util-icon ui-purple">🦠</div>
+              <div class="util-text">
+                <span class="util-badge ub-purple">Lecture 41</span>
+                <strong>Prostate Clinical</strong>
+              </div>
+              <div class="row-actions">
+                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
+                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
+                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── ⚗️ Physiology ── -->
+        <div class="section-block" id="physio" data-cat="physio">
+          <div class="section-divider">
+            <span class="section-divider-text">⚗️ Physiology</span>
+            <div class="section-divider-line"></div>
+          </div>
+          <div class="util-list">
+
+            <div class="util-row" id="rpd05-06" data-cat="physio" data-search="rpd05 rpd06 endocrinology ovary female reproductive tract folliculogenesis hpo axis menstrual cycle estrogen progesterone physiology">
               <div class="util-icon ui-blue">⚗️</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lectures 05-06</span>
@@ -1371,7 +1344,7 @@
               </div>
             </div>
 
-            <div class="util-row" id="rpd08" data-cat="physio" data-search="rpd08 ccs ovary female reproductive tract case clinical presentation endocrinology integration">
+            <div class="util-row" id="rpd08" data-cat="physio" data-search="rpd08 ccs ovary female reproductive tract case clinical presentation endocrinology integration physiology">
               <div class="util-icon ui-blue">⚗️</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lecture 08</span>
@@ -1384,7 +1357,7 @@
               </div>
             </div>
 
-            <div class="util-row" id="rpd13" data-cat="physio" data-search="rpd13 endocrinology testes male reproductive tract sertoli leydig testosterone hpg axis">
+            <div class="util-row" id="rpd13" data-cat="physio" data-search="rpd13 endocrinology testes male reproductive tract sertoli leydig testosterone hpg axis physiology">
               <div class="util-icon ui-blue">⚗️</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lecture 13</span>
@@ -1397,35 +1370,11 @@
               </div>
             </div>
 
-            <div class="util-row" id="rpd20" data-cat="physio" data-search="rpd20 endocrinology pregnancy labor lactation placental hormones parturition">
+            <div class="util-row" id="rpd20" data-cat="physio" data-search="rpd20 endocrinology pregnancy labor lactation placental hormones parturition physiology">
               <div class="util-icon ui-blue">⚗️</div>
               <div class="util-text">
                 <span class="util-badge ub-blue">Lecture 20</span>
                 <strong>Endocrinology of Pregnancy, Labor &amp; Lactation</strong>
-              </div>
-              <div class="row-actions">
-                <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
-                <span class="row-btn rb-soon">🟡 <span class="rb-label">Hub 2</span></span>
-                <span class="row-btn rb-soon">🔵 <span class="rb-label">Hub 3</span></span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── 🩻 Radiology &amp; Imaging ── -->
-        <div class="section-block" id="rad" data-cat="rad">
-          <div class="section-divider">
-            <span class="section-divider-text">🩻 Radiology &amp; Imaging</span>
-            <div class="section-divider-line"></div>
-          </div>
-          <div class="util-list">
-
-            <div class="util-row" id="rpd23" data-cat="rad" data-search="rpd23 pelvic imaging ultrasound ct mri female male pelvic anatomy pathology modalities">
-              <div class="util-icon ui-blue">🩻</div>
-              <div class="util-text">
-                <span class="util-badge ub-blue">Lecture 23</span>
-                <strong>Pelvic Imaging</strong>
               </div>
               <div class="row-actions">
                 <span class="row-btn rb-soon">🟢 <span class="rb-label">Hub 1</span></span>
@@ -1515,7 +1464,7 @@
   });
 
   /* ── ACTIVE SIDEBAR LINK on scroll ── */
-  const sections = ["anatomy", "clinical", "embryo", "histo", "micro", "path", "pharm", "physio", "rad"];
+  const sections = ["anat-embryo-histo", "drt", "health", "path-micro", "physio"];
   function updateActiveLink() {
     let current = sections[0] || '';
     const atBottom = (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - 40);
