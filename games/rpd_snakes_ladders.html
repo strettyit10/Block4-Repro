@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy Snakes &amp; Ligaments — RPD Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f1e3c4;
+    --parchment-deep: #e3cfa1;
+    --ink: #2b1810;
+    --ink-soft: #543b2a;
+    --blood: #8b1a1a;
+    --blood-dark: #5c0f0f;
+    --gold: #b8893d;
+    --gold-bright: #d9a84a;
+    --vein: #2c4a6e;
+    --ligament: #3d6b3a;
+    --ligament-bright: #5a8f56;
+    --bone: #f7eed4;
+    --shadow: rgba(43,24,16,0.4);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background:
+      radial-gradient(ellipse at 30% 20%, #d6bf95 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, #c9b083 0%, transparent 55%),
+      linear-gradient(135deg, #d4ba8c 0%, #b8985f 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: 'Crimson Pro', Georgia, serif;
+    color: var(--ink);
+    padding: 16px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(43,24,16,0.015) 0 2px, transparent 2px 6px),
+      radial-gradient(circle at 20% 30%, rgba(139,26,26,0.06) 0%, transparent 30%),
+      radial-gradient(circle at 80% 70%, rgba(43,24,16,0.08) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    text-align: center;
+    padding: 12px 0 24px;
+    border-bottom: 1px solid rgba(43,24,16,0.15);
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    text-shadow: 1px 1px 0 var(--parchment), 2px 2px 4px var(--shadow);
+    line-height: 1;
+  }
+
+  h1 .amp { color: var(--blood); font-style: italic; }
+
+  .subtitle {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .board-selector {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .board-tab {
+    font-family: 'Cinzel', serif;
+    background: var(--parchment);
+    color: var(--ink-soft);
+    border: 2px solid var(--ink-soft);
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .board-tab:hover { background: var(--bone); color: var(--ink); }
+
+  .board-tab.active {
+    background: var(--ink);
+    color: var(--parchment);
+    border-color: var(--ink);
+    box-shadow: 0 3px 0 var(--gold);
+  }
+
+  .hud {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    margin-top: 18px;
+  }
+
+  .hud-left, .hud-right { display: flex; gap: 18px; align-items: center; }
+  .hud-right { justify-content: flex-end; }
+
+  .stat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .stat-value { color: var(--blood); font-weight: 600; margin-left: 6px; }
+
+  .btn {
+    font-family: 'Cinzel', serif;
+    background: var(--ink);
+    color: var(--parchment);
+    border: 2px solid var(--ink);
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    box-shadow: 3px 3px 0 var(--gold), 5px 5px 8px var(--shadow);
+  }
+
+  .btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--gold), 6px 6px 10px var(--shadow);
+    background: var(--blood);
+    border-color: var(--blood);
+  }
+
+  .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--gold);
+  }
+
+  .btn.gold {
+    background: var(--gold-bright);
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .play-area {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  @media (max-width: 920px) {
+    .play-area { grid-template-columns: 1fr; }
+  }
+
+  .board-wrap {
+    background: var(--parchment);
+    border: 3px double var(--ink);
+    padding: 18px;
+    box-shadow: 8px 8px 0 var(--ink), 14px 14px 30px var(--shadow);
+    position: relative;
+  }
+
+  .board-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(43,24,16,0.2);
+    pointer-events: none;
+  }
+
+  .board-title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .board {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    aspect-ratio: 6 / 6;
+    border: 2px solid var(--ink);
+    background: var(--parchment-deep);
+  }
+
+  .cell {
+    position: relative;
+    border: 1px solid rgba(43,24,16,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 4px;
+    text-align: center;
+    line-height: 1.15;
+    cursor: default;
+    background: var(--parchment);
+    transition: background 0.3s;
+  }
+
+  .cell-num {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    font-weight: 500;
+  }
+
+  .cell-label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    font-weight: 600;
+    margin-top: 6px;
+    padding: 0 2px;
+    line-height: 1.2;
+  }
+
+  .cell.start { background: linear-gradient(135deg, var(--bone) 0%, var(--parchment-deep) 100%); }
+  .cell.start .cell-label { color: var(--ink); font-style: italic; }
+
+  .cell.finish { background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%); }
+  .cell.finish .cell-label { color: var(--ink); font-weight: 700; }
+
+  .cell.ladder-start { background: linear-gradient(135deg, #b8d4b3 0%, #8eb888 100%); }
+  .cell.ladder-start .cell-label { color: #1a3a18; }
+  .cell.ladder-start::after {
+    content: '🦴';
+    position: absolute;
+    bottom: 3px;
+    right: 4px;
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+
+  .cell.snake-start { background: linear-gradient(135deg, #d4a8a8 0%, #b87878 100%); }
+  .cell.snake-start .cell-label { color: #5c0f0f; font-style: italic; }
+  .cell.snake-start::after {
+    content: '🩸';
+    position: absolute;
+    bottom: 3px;
+    right: 4px;
+    font-size: 0.85rem;
+  }
+
+  .cell.player-here {
+    box-shadow: inset 0 0 0 3px var(--blood), inset 0 0 18px rgba(139,26,26,0.3);
+    z-index: 2;
+  }
+
+  .cell.player-here::before {
+    content: '';
+    position: absolute;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #d04545 0%, var(--blood) 50%, var(--blood-dark) 100%);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 1px 1px 2px rgba(255,255,255,0.3);
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: pulse 1.4s ease-in-out infinite;
+    z-index: 3;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.15); box-shadow: 0 2px 12px rgba(139,26,26,0.7), inset 1px 1px 2px rgba(255,255,255,0.4); }
+  }
+
+  .side { display: flex; flex-direction: column; gap: 16px; }
+
+  .panel {
+    background: var(--parchment);
+    border: 2px solid var(--ink);
+    padding: 18px;
+    box-shadow: 5px 5px 0 var(--ink), 8px 8px 16px var(--shadow);
+  }
+
+  .panel h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(43,24,16,0.2);
+    padding-bottom: 6px;
+  }
+
+  .dice-area { text-align: center; }
+
+  .die {
+    width: 90px;
+    height: 90px;
+    margin: 12px auto;
+    background: linear-gradient(145deg, #fffdf3, #e8dcb6);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 14px;
+    gap: 4px;
+    box-shadow: 4px 4px 0 var(--ink), 6px 6px 12px var(--shadow);
+    transition: transform 0.6s cubic-bezier(0.5, 1.5, 0.5, 1);
+  }
+
+  .die.rolling { animation: roll 0.6s ease-in-out; }
+
+  @keyframes roll {
+    0% { transform: rotate(0) scale(1); }
+    25% { transform: rotate(180deg) scale(1.1); }
+    50% { transform: rotate(360deg) scale(0.95); }
+    75% { transform: rotate(540deg) scale(1.05); }
+    100% { transform: rotate(720deg) scale(1); }
+  }
+
+  .pip {
+    background: var(--ink);
+    border-radius: 50%;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.5);
+  }
+  .pip.hidden { background: transparent; box-shadow: none; }
+
+  .legend { display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; }
+  .legend-row { display: flex; align-items: center; gap: 8px; }
+  .legend-swatch {
+    width: 18px; height: 18px;
+    border: 1px solid var(--ink);
+    flex-shrink: 0;
+  }
+  .legend-swatch.ladder { background: linear-gradient(135deg, #b8d4b3 0%, #8eb888 100%); }
+  .legend-swatch.snake { background: linear-gradient(135deg, #d4a8a8 0%, #b87878 100%); }
+  .legend-swatch.start { background: linear-gradient(135deg, var(--bone), var(--parchment-deep)); }
+  .legend-swatch.finish { background: linear-gradient(135deg, var(--gold-bright), var(--gold)); }
+
+  .log {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+
+  .log-entry {
+    padding: 6px 0;
+    border-bottom: 1px dashed rgba(43,24,16,0.18);
+    color: var(--ink-soft);
+  }
+  .log-entry:last-child { border-bottom: none; color: var(--ink); }
+  .log-entry .e-roll { color: var(--vein); font-weight: 600; }
+  .log-entry .e-ladder { color: var(--ligament); font-weight: 600; }
+  .log-entry .e-snake { color: var(--blood); font-weight: 600; }
+  .log-entry .e-correct { color: var(--ligament); font-style: italic; }
+  .log-entry .e-wrong { color: var(--blood); font-style: italic; }
+
+  /* Modal — minimizable */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(43,24,16,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+    backdrop-filter: blur(3px);
+    transition: background 0.25s ease;
+  }
+  .overlay.active { display: flex; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .overlay.minimized {
+    background: transparent;
+    backdrop-filter: none;
+    pointer-events: none;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0;
+  }
+
+  .modal {
+    background: var(--parchment);
+    border: 3px double var(--ink);
+    max-width: 640px;
+    width: 100%;
+    padding: 32px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    animation: slideIn 0.3s ease;
+    transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(43,24,16,0.25);
+    pointer-events: none;
+  }
+
+  .overlay.minimized .modal {
+    max-width: 260px;
+    padding: 14px 18px;
+    margin: 16px;
+    pointer-events: auto;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--ink), 6px 6px 12px var(--shadow);
+    animation: none;
+  }
+
+  .overlay.minimized .modal::before { display: none; }
+
+  .overlay.minimized .modal-stem,
+  .overlay.minimized .choices,
+  .overlay.minimized .feedback,
+  .overlay.minimized .modal-continue,
+  .overlay.minimized .modal-cell {
+    display: none !important;
+  }
+
+  .overlay.minimized .modal-tag {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  .overlay.minimized .modal-tag::after {
+    content: ' · click to restore ↑';
+    font-size: 0.65rem;
+    opacity: 0.8;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    margin-left: 4px;
+  }
+
+  .modal-controls {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+  }
+
+  .modal-ctrl-btn {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: 1.5px solid var(--ink-soft);
+    color: var(--ink);
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    padding: 0;
+    font-weight: 700;
+  }
+
+  .modal-ctrl-btn:hover {
+    background: var(--ink);
+    color: var(--parchment);
+    border-color: var(--ink);
+  }
+
+  .overlay.minimized .modal-ctrl-btn { display: none; }
+
+  .modal-tag {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    text-transform: uppercase;
+  }
+
+  .modal-cell {
+    float: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+  }
+
+  .modal-stem {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 18px 0 22px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(43,24,16,0.2);
+    border-bottom: 1px solid rgba(43,24,16,0.2);
+  }
+
+  .choices { display: flex; flex-direction: column; gap: 8px; }
+
+  .choice {
+    background: var(--parchment-deep);
+    border: 1.5px solid var(--ink-soft);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .choice:hover:not(:disabled) {
+    background: var(--bone);
+    border-color: var(--ink);
+    transform: translateX(3px);
+  }
+
+  .choice:disabled { cursor: default; }
+
+  .choice .letter {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--blood);
+    flex-shrink: 0;
+  }
+
+  .choice.correct {
+    background: #d8e8d4;
+    border-color: var(--ligament);
+    border-width: 2px;
+  }
+  .choice.correct .letter { color: var(--ligament); }
+
+  .choice.incorrect {
+    background: #e8d4d4;
+    border-color: var(--blood);
+    border-width: 2px;
+    opacity: 0.85;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 18px;
+    padding: 14px 16px;
+    border-left: 4px solid;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .feedback.shown { display: block; animation: fadeIn 0.3s ease; }
+  .feedback.correct { background: #e3efe0; border-color: var(--ligament); color: #1f3a1d; }
+  .feedback.incorrect { background: #efe0e0; border-color: var(--blood); color: var(--blood-dark); }
+
+  .feedback-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .modal-continue { display: none; margin: 18px auto 0; }
+  .modal-continue.shown { display: block; }
+
+  .win-modal {
+    text-align: center;
+    background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-deep) 100%);
+  }
+  .win-modal h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    color: var(--blood);
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .win-modal .badge { font-size: 3rem; margin: 12px 0; }
+  .win-modal p {
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 8px 0;
+    font-size: 1.05rem;
+  }
+  .win-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+    padding: 14px;
+    background: var(--parchment);
+    border: 1px solid var(--ink-soft);
+  }
+  .win-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+  }
+  .win-stat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    color: var(--blood);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    opacity: 0.6;
+    letter-spacing: 0.15em;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 720px) {
+    .cell-label { font-size: 0.72rem; }
+    .cell-num { font-size: 0.68rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Anatomy Snakes <span class="amp">&amp;</span> Ligaments</h1>
+    <div class="subtitle">A Reproductive Pelvis Dissection · Roll · Answer · Ascend</div>
+
+    <div class="board-selector" id="boardSelector">
+      <button class="board-tab active" data-board="0">Board I · Foundations</button>
+      <button class="board-tab" data-board="1">Board II · Vascular &amp; Lymphatic</button>
+      <button class="board-tab" data-board="2">Board III · Nerves &amp; Drainage</button>
+    </div>
+
+    <div class="hud">
+      <div class="hud-left">
+        <div class="stat">Position: <span class="stat-value" id="posStat">Start</span></div>
+        <div class="stat">Correct: <span class="stat-value" id="correctStat">0</span></div>
+      </div>
+      <div></div>
+      <div class="hud-right">
+        <div class="stat">Wrong: <span class="stat-value" id="wrongStat">0</span></div>
+        <button class="btn" id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="play-area">
+    <div class="board-wrap">
+      <div class="board-title" id="boardTitle">— The Pelvic Ascent —</div>
+      <div class="board" id="board"></div>
+    </div>
+
+    <div class="side">
+      <div class="panel dice-area">
+        <h3>Roll the Die</h3>
+        <div class="die" id="die">
+          <div class="pip"></div><div class="pip hidden"></div><div class="pip"></div>
+          <div class="pip hidden"></div><div class="pip hidden"></div><div class="pip hidden"></div>
+          <div class="pip"></div><div class="pip hidden"></div><div class="pip"></div>
+        </div>
+        <button class="btn gold" id="rollBtn">Roll</button>
+      </div>
+
+      <div class="panel">
+        <h3>Legend</h3>
+        <div class="legend">
+          <div class="legend-row"><div class="legend-swatch start"></div><span>Start</span></div>
+          <div class="legend-row"><div class="legend-swatch ladder"></div><span>Ligament — climb up 🦴</span></div>
+          <div class="legend-row"><div class="legend-swatch snake"></div><span>Hemorrhage — slide down 🩸</span></div>
+          <div class="legend-row"><div class="legend-swatch finish"></div><span>Finish — Practical Mastery</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Dissection Log</h3>
+        <div class="log" id="log">
+          <div class="log-entry">Welcome to the pelvic cavity. Roll to begin.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>RPD 2026 · STRUCTURE LIST · 90 QUESTIONS · 3 BOARDS</footer>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-controls">
+      <button class="modal-ctrl-btn" id="minimizeBtn" title="Minimize">−</button>
+    </div>
+    <div class="modal-tag" id="modalTag">Question</div>
+    <div class="modal-cell" id="modalCell">Cell —</div>
+    <div class="modal-stem" id="modalStem"></div>
+    <div class="choices" id="choices"></div>
+    <div class="feedback" id="feedback">
+      <div class="feedback-title" id="feedbackTitle"></div>
+      <div id="feedbackText"></div>
+    </div>
+    <button class="btn modal-continue" id="continueBtn">Continue →</button>
+  </div>
+</div>
+
+<div class="overlay" id="winOverlay">
+  <div class="modal win-modal">
+    <div class="badge">🏆</div>
+    <h2 id="winTitle">Practical Passed</h2>
+    <p id="winMsg">You have ascended through the pelvic inlet, traversed the ischioanal fossa, and emerged victorious.</p>
+    <div class="win-stats">
+      <div>
+        <div class="win-stat-label">Correct</div>
+        <div class="win-stat-value" id="winCorrect">0</div>
+      </div>
+      <div>
+        <div class="win-stat-label">Wrong</div>
+        <div class="win-stat-value" id="winWrong">0</div>
+      </div>
+      <div>
+        <div class="win-stat-label">Rolls</div>
+        <div class="win-stat-value" id="winRolls">0</div>
+      </div>
+    </div>
+    <button class="btn gold" id="playAgainBtn">Next Board →</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   QUESTION BANKS — 3 boards × 30 questions = 90 total
+   Sourced from the RPD 2026 structure list
+   ============================================================ */
+/* ============================================================
+   BOARD I — FOUNDATIONS: Pelvis, Perineum, Ligaments, Viscera
+   Q1-30 (original 28 + 2 new)
+   ============================================================ */
+const BOARD1_QUESTIONS = [
+  {
+    stem: "A 35-year-old woman requires a pudendal nerve block before drainage of a Bartholin's cyst. The clinician palpates which bony landmark to locate the nerve?",
+    choices: ["Anterior superior iliac spine", "Coccyx", "Inferior pubic ramus", "Ischial spine", "Ischial tuberosity"],
+    correct: 3,
+    explain: "The pudendal nerve wraps around the ischial spine after exiting the greater sciatic foramen, then re-enters the perineum via the lesser sciatic foramen. This is THE landmark for pudendal blocks."
+  },
+  {
+    stem: "The greater vestibular (Bartholin's) glands are located in which space of the perineum?",
+    choices: ["Deep perineal pouch", "Superficial perineal pouch", "Ischioanal fossa", "Pelvic cavity", "Pudendal canal"],
+    correct: 1,
+    explain: "Greater vestibular glands sit in the SUPERFICIAL perineal pouch, lateral to the vaginal vestibule and deep to the bulbospongiosus. The male analog (bulbourethral/Cowper's gland) sits in the DEEP pouch."
+  },
+  {
+    stem: "Which nerves carry the visceromotor (sympathetic) fibers responsible for emission of seminal/prostatic fluid?",
+    choices: ["Inferior gluteal nerve", "Inferior rectal nerve", "Pelvic splanchnic nerves", "Pudendal nerve", "Sacral splanchnic nerves"],
+    correct: 4,
+    explain: "Point-Squeeze-Shoot: erection = parasympathetic (pelvic splanchnics), emission = SYMPATHETIC (sacral splanchnics → inferior hypogastric plexus), ejaculation = somatic (pudendal n.)."
+  },
+  {
+    stem: "Sensation from BELOW the pectinate line of the anal canal travels via what type of fiber?",
+    choices: ["Aortic plexus", "Inguinal nerves", "Parasympathetic", "Somatic (pudendal)", "Sympathetic"],
+    correct: 3,
+    explain: "Below the pectinate line: somatic innervation via inferior rectal n. (branch of pudendal). Above the pectinate line: visceral innervation. This also explains why hemorrhoids below the line hurt and above don't."
+  },
+  {
+    stem: "Pain from a uterine fibroid in the BODY of the uterus (above the pelvic pain line) ascends to the spinal cord with which fibers?",
+    choices: ["Pelvic splanchnic (parasympathetic)", "Pudendal nerve", "Sympathetic via thoracic/lumbar splanchnics", "Inferior rectal", "Somatic via S2-S4"],
+    correct: 2,
+    explain: "Structures ABOVE the pelvic pain line (touching peritoneum) → pain follows SYMPATHETICS up through the inferior and superior hypogastric plexuses, into thoracolumbar splanchnics. Below the pain line → parasympathetic pelvic splanchnics."
+  },
+  {
+    stem: "Lymph from the body of the uterus (where most fibroids occur) drains FIRST to which group of nodes?",
+    choices: ["Femoral nodes", "Internal iliac (and external iliac) nodes", "Superficial inguinal nodes", "Para-aortic nodes", "Vertebral nodes"],
+    correct: 1,
+    explain: "Inferior body of uterus, cervix, and proximal 2/3 of vagina → iliac nodes. Fundus + ovaries + uterine tubes → para-aortic. Round ligament region of uterus + distal 1/3 vagina → superficial inguinal."
+  },
+  {
+    stem: "During uterine artery embolization, embolic agents may inadvertently flow into which artery due to its anastomosis with the uterine artery?",
+    choices: ["Internal pudendal", "Middle rectal", "Superior vesical", "Umbilical", "Vaginal"],
+    correct: 4,
+    explain: "The uterine artery anastomoses richly with the VAGINAL artery (and the ovarian artery superiorly). Both are branches of the anterior division of the internal iliac (vaginal artery) — risk of non-target embolization."
+  },
+  {
+    stem: "Which ligament contains the ovarian artery and vein, and runs adjacent to the ureter — placing the ureter at risk during oophorectomy?",
+    choices: ["Round ligament of the uterus", "Ovarian ligament", "Broad ligament", "Suspensory ligament of the ovary", "Cardinal ligament"],
+    correct: 3,
+    explain: "Suspensory ligament of the ovary (infundibulopelvic ligament) carries the ovarian vessels. The ureter runs retroperitoneally just deep to it — classic surgical pitfall: 'water under the bridge' (ureter under uterine artery in the cardinal ligament)."
+  },
+  {
+    stem: "The round ligament of the uterus is a derivative of the gubernaculum and exits the abdomen through what structure?",
+    choices: ["Obturator canal", "Greater sciatic foramen", "Inguinal canal", "Femoral canal", "Pudendal canal"],
+    correct: 2,
+    explain: "Round ligament travels through the inguinal canal to attach to the labia majora — homologous to the path of the gubernaculum/processus vaginalis in males."
+  },
+  {
+    stem: "The broad ligament of the uterus consists of three parts. Which part suspends the uterine (Fallopian) tube?",
+    choices: ["Mesometrium", "Mesovarium", "Mesosalpinx", "Mesoappendix", "Mesentery"],
+    correct: 2,
+    explain: "Mesosalpinx → uterine tube ('salpinx' = tube). Mesovarium → ovary. Mesometrium → uterus (largest portion). Memory: Sal-PINX = TUBE."
+  },
+  {
+    stem: "Which structure forms the lateral wall of the ischioanal fossa?",
+    choices: ["Levator ani muscle", "Obturator internus muscle (with its fascia/pudendal canal)", "Piriformis muscle", "Coccygeus muscle", "External anal sphincter"],
+    correct: 1,
+    explain: "Ischioanal fossa boundaries: lateral = obturator internus (pudendal canal in its fascia carries the pudendal n. and internal pudendal vessels); medial = levator ani + external anal sphincter."
+  },
+  {
+    stem: "The external anal sphincter and motor branches to perineal muscles are supplied by which nerve?",
+    choices: ["Inferior gluteal nerve", "Pudendal nerve (S2-S4)", "Pelvic splanchnic nerves", "Obturator nerve", "Lumbosacral trunk"],
+    correct: 1,
+    explain: "Pudendal nerve (S2-S4) supplies: external anal sphincter (via inferior rectal n.), levator ani contributes, all deep & superficial perineal muscles, AND sensation to the entire perineum. 'S2-S4 keeps the floor off the floor.'"
+  },
+  {
+    stem: "The prostate sits immediately inferior to which structure, such that BPH compresses urinary outflow at this level?",
+    choices: ["Internal urethral orifice / prostatic urethra", "Membranous urethra", "Spongy urethra", "Bulb of penis", "Seminal vesicle"],
+    correct: 0,
+    explain: "Prostate surrounds the prostatic urethra — enlargement compresses the internal urethral orifice / prostatic urethra first, causing hesitancy and retention. The membranous urethra (deep pouch, external sphincter) is just inferior."
+  },
+  {
+    stem: "The external urethral sphincter (skeletal muscle, voluntary control) lies in which space?",
+    choices: ["Superficial perineal pouch", "Deep perineal pouch", "Pelvic cavity proper", "Ischioanal fossa", "Pudendal canal"],
+    correct: 1,
+    explain: "External urethral sphincter sits in the DEEP perineal pouch, surrounding the membranous urethra (males) or membranous urethra/vagina (females). It is voluntary — innervated by the pudendal n."
+  },
+  {
+    stem: "Which artery is the FIRST branch of the anterior division of the internal iliac and obliterates after birth to form the medial umbilical ligament?",
+    choices: ["Obturator artery", "Umbilical artery", "Superior vesical artery", "Inferior gluteal artery", "Iliolumbar artery"],
+    correct: 1,
+    explain: "Umbilical artery: distal portion obliterates → medial umbilical ligament. Patent proximal portion gives off the SUPERIOR VESICAL arteries to the bladder."
+  },
+  {
+    stem: "The pudendal nerve and internal pudendal artery exit the pelvis through the greater sciatic foramen, wrap around the ischial spine, and re-enter the perineum through what?",
+    choices: ["Obturator canal", "Lesser sciatic foramen → pudendal canal", "Inguinal canal", "Femoral ring", "Adductor hiatus"],
+    correct: 1,
+    explain: "Pudendal pathway: GSF (out) → wraps ischial spine → LSF (back in) → pudendal canal (Alcock's canal, in obturator internus fascia) → branches in perineum."
+  },
+  {
+    stem: "The rectouterine pouch (pouch of Douglas) is the most dependent part of the female peritoneal cavity. What is its male homolog?",
+    choices: ["Vesicouterine pouch", "Rectovesical pouch", "Retropubic space", "Inguinal canal", "Spermatic cord"],
+    correct: 1,
+    explain: "Females have BOTH vesicouterine and rectouterine pouches (uterus between bladder and rectum). Males have only the rectovesical pouch — most dependent in male peritoneal cavity, where fluid/pus collects."
+  },
+  {
+    stem: "The detrusor muscle of the bladder is contracted by which type of innervation to enable micturition?",
+    choices: ["Sympathetic via lumbar splanchnics", "Sympathetic via sacral splanchnics", "Parasympathetic via pelvic splanchnics (S2-S4)", "Somatic via pudendal nerve", "Inferior gluteal nerve"],
+    correct: 2,
+    explain: "Parasympathetics (pelvic splanchnics S2-S4) → contract detrusor + relax internal urethral sphincter = urination. Sympathetics do the opposite (storage). 'Pee = parasympathetic.'"
+  },
+  {
+    stem: "The corpora cavernosa of the penis are anchored to the ischiopubic rami as which structures?",
+    choices: ["Bulb of penis", "Crura of penis", "Glans penis", "Prepuce", "Frenulum"],
+    correct: 1,
+    explain: "Corpora cavernosa → CRURA (attach to ischiopubic rami, covered by ischiocavernosus muscles). Corpus spongiosum → BULB (attaches to perineal membrane, covered by bulbospongiosus, transmits the spongy urethra)."
+  },
+  {
+    stem: "The deep dorsal vein of the penis pierces the perineal membrane to drain into which venous plexus?",
+    choices: ["External pudendal vein", "Prostatic venous plexus", "Internal pudendal vein", "Inferior epigastric vein", "Vesical venous plexus"],
+    correct: 1,
+    explain: "Deep dorsal vein of penis (deep to Buck's fascia) → prostatic venous plexus → vesical/internal iliac veins. The SUPERFICIAL dorsal vein (in Dartos) → external pudendal → great saphenous."
+  },
+  {
+    stem: "The piriformis muscle exits the pelvis through the greater sciatic foramen. The superior gluteal artery and nerve exit ABOVE piriformis. What major artery exits BELOW piriformis with the inferior gluteal artery?",
+    choices: ["Obturator artery", "Internal pudendal artery", "Uterine artery", "Iliolumbar artery", "Lateral sacral artery"],
+    correct: 1,
+    explain: "Below piriformis through GSF: internal pudendal a., inferior gluteal a., pudendal n., sciatic n., posterior femoral cutaneous n., nerve to obturator internus, nerve to quadratus femoris."
+  },
+  {
+    stem: "Which uterine ligament conducts the uterine artery to the uterus and contains the ureter passing INFERIOR to the artery ('water under the bridge')?",
+    choices: ["Round ligament", "Suspensory ligament of ovary", "Broad ligament / cardinal (transverse cervical) ligament", "Ovarian ligament", "Uterosacral ligament"],
+    correct: 2,
+    explain: "Cardinal (transverse cervical) ligament at the base of the broad ligament transmits the uterine artery. Ureter runs INFERIOR to the uterine artery — surgical mantra: 'water (urine) under the bridge (artery).' Common site of accidental ligation in hysterectomy."
+  },
+  {
+    stem: "The pelvic diaphragm is composed of the coccygeus muscle and which larger muscular sheet?",
+    choices: ["Obturator internus", "Levator ani (pubococcygeus, puborectalis, iliococcygeus)", "Piriformis", "Superficial transverse perineal", "Bulbospongiosus"],
+    correct: 1,
+    explain: "Pelvic diaphragm = LEVATOR ANI (pubococcygeus + puborectalis + iliococcygeus) + COCCYGEUS. Attaches to the tendinous arch on obturator internus fascia. Innervated by S3-S4 + nerve to levator ani."
+  },
+  {
+    stem: "The seminal vesicles contribute fluid to semen. Their ducts join the ductus deferens to form what structure that empties into the prostatic urethra?",
+    choices: ["Bulbourethral duct", "Ejaculatory duct", "Epididymal duct", "Membranous urethra", "Spermatic cord"],
+    correct: 1,
+    explain: "Vas (ductus) deferens + duct of seminal vesicle = EJACULATORY DUCT, which pierces the prostate and empties into the prostatic urethra at the seminal colliculus."
+  },
+  {
+    stem: "Fimbriae of the uterine tube are located at which part of the tube?",
+    choices: ["Uterine (intramural) part", "Isthmus", "Ampulla", "Infundibulum", "Mesosalpinx"],
+    correct: 3,
+    explain: "Tube parts (medial → lateral): uterine part → isthmus → ampulla (most common site of fertilization AND ectopic pregnancy) → infundibulum (with FIMBRIAE that sweep the ovum into the tube)."
+  },
+  {
+    stem: "The perineal body is a fibromuscular node where multiple muscles converge. Which muscle does NOT attach to the perineal body?",
+    choices: ["Bulbospongiosus", "Superficial transverse perineal", "External anal sphincter", "Levator ani", "Obturator internus"],
+    correct: 4,
+    explain: "Obturator internus is a lateral pelvic wall muscle and does NOT insert on the perineal body. The perineal body is critical to pelvic floor support — torn during childbirth → prolapse."
+  },
+  {
+    stem: "The vaginal fornices surround the cervix. Which fornix is deepest and most clinically relevant for transvaginal access to the rectouterine pouch (culdocentesis)?",
+    choices: ["Anterior fornix", "Lateral fornix", "Posterior fornix", "Superior fornix", "Vestibule"],
+    correct: 2,
+    explain: "POSTERIOR vaginal fornix is deepest — needle here enters the rectouterine pouch (pouch of Douglas) for culdocentesis to sample peritoneal fluid (e.g., ruptured ectopic pregnancy → blood)."
+  },
+  {
+    stem: "The obturator nerve emerges from the medial border of psoas major and passes through the obturator foramen alongside which artery?",
+    choices: ["External iliac artery", "Internal pudendal artery", "Obturator artery (branch of internal iliac)", "Inferior epigastric artery", "Superior vesical artery"],
+    correct: 2,
+    explain: "Obturator n. (L2-L4, lumbar plexus) + obturator a. (internal iliac, anterior division) + obturator v. all pass through the obturator canal to reach the medial thigh. Compression here → adductor weakness, medial thigh sensation loss."
+  },
+  {
+    stem: "The ischiopubic ramus is the bony attachment site for which group of perineal muscles?",
+    choices: ["Pelvic diaphragm", "Crura of penis/clitoris and ischiocavernosus muscles", "Piriformis", "Obturator internus", "Coccygeus"],
+    correct: 1,
+    explain: "Ischiopubic rami (ischial + inferior pubic rami) anchor the urogenital triangle: crura of penis/clitoris attach here, covered by the ischiocavernosus muscles. The perineal membrane also spans between the rami."
+  },
+  {
+    stem: "The greater sciatic notch is converted to the greater sciatic foramen by which two ligaments?",
+    choices: ["Inguinal and lacunar", "Sacrotuberous and sacrospinous", "Iliolumbar and pubofemoral", "Cardinal and uterosacral", "Round and broad"],
+    correct: 1,
+    explain: "Sacrotuberous (sacrum/coccyx → ischial tuberosity) and sacrospinous (sacrum → ischial spine) ligaments together close off the sciatic notches, creating both the greater AND lesser sciatic foramina."
+  }
+];
+/* ============================================================
+   BOARD II — VASCULAR & LYMPHATIC FOCUS (Q31-60)
+   Cells 1-18: VASCULAR CORRIDOR (mapped to Q31-48)
+   Cells 19-24: LYMPHATIC CORRIDOR (mapped to Q49-54)
+   Cells 25-30: Mixed (mapped to Q55-60)
+   ============================================================ */
+const BOARD2_QUESTIONS = [
+  /* === VASCULAR CORRIDOR (Q31-48) === */
+  // 31
+  {
+    stem: "The internal iliac artery arises from the bifurcation of which larger vessel at the level of the sacroiliac joint?",
+    choices: ["Abdominal aorta", "Common iliac artery", "External iliac artery", "Median sacral artery", "Inferior mesenteric artery"],
+    correct: 1,
+    explain: "Common iliac artery bifurcates at the sacroiliac joint into external iliac (→ lower limb via femoral a.) and internal iliac (→ pelvic viscera, perineum, gluteal region)."
+  },
+  // 32
+  {
+    stem: "The internal iliac artery typically divides into anterior and posterior divisions. The POSTERIOR division gives rise to which three branches?",
+    choices: ["Umbilical, obturator, uterine", "Iliolumbar, lateral sacral, superior gluteal", "Internal pudendal, inferior gluteal, middle rectal", "Superior vesical, inferior vesical, vaginal", "Superior rectal, middle rectal, inferior rectal"],
+    correct: 1,
+    explain: "Posterior division (3): ILiolumbar, Lateral sacral, Superior gluteal. Mnemonic: 'I Love Sex.' Everything else (~7-8 branches) comes off the anterior division."
+  },
+  // 33
+  {
+    stem: "The superior gluteal artery exits the pelvis through the greater sciatic foramen. Where does it pass relative to the piriformis muscle?",
+    choices: ["Through piriformis", "Above (superior to) piriformis", "Below (inferior to) piriformis", "Through the lesser sciatic foramen", "Through the obturator canal"],
+    correct: 1,
+    explain: "Superior gluteal a. + n. exit ABOVE piriformis. Inferior gluteal a. + n., internal pudendal a. + pudendal n., and the sciatic n. all exit BELOW piriformis. Easy to remember: 'superior = above.'"
+  },
+  // 34
+  {
+    stem: "The iliolumbar artery (posterior division of internal iliac) ascends to supply structures in which region?",
+    choices: ["Perineum", "Gluteal region", "Lower limb", "Greater (false) pelvis and posterior abdominal wall", "Anterior abdominal wall"],
+    correct: 3,
+    explain: "Iliolumbar artery courses superiorly out of the lesser pelvis into the greater (false) pelvis to supply iliacus, psoas, quadratus lumborum, and the cauda equina. It anastomoses with lumbar arteries."
+  },
+  // 35
+  {
+    stem: "Lateral sacral arteries (posterior division of internal iliac) enter which openings to supply spinal nerve roots and sacral structures?",
+    choices: ["Greater sciatic foramen", "Lesser sciatic foramen", "Obturator canal", "Anterior sacral foramina", "Posterior sacral foramina"],
+    correct: 3,
+    explain: "Lateral sacral arteries enter the ANTERIOR sacral foramina to supply the cauda equina and meninges, then exit posterior sacral foramina to supply skin/muscle of the sacral region."
+  },
+  // 36
+  {
+    stem: "The umbilical artery in the adult has a patent proximal portion that gives rise to which arteries?",
+    choices: ["Inferior vesical arteries", "Superior vesical arteries", "Middle rectal arteries", "Vaginal arteries", "Uterine arteries"],
+    correct: 1,
+    explain: "Patent proximal umbilical a. → SUPERIOR vesical aa. (to superior bladder + ductus deferens in male). Distal portion obliterates → medial umbilical ligament. Inferior vesical (M) / vaginal (F) arises separately."
+  },
+  // 37
+  {
+    stem: "The obturator artery typically arises from the anterior division of the internal iliac, but in ~20% of people it originates from a different vessel — what is this aberrant origin called and from what vessel does it arise?",
+    choices: ["Aberrant obturator from external iliac", "Corona mortis from the inferior epigastric artery", "Replaced obturator from femoral artery", "Accessory obturator from common iliac", "Obturator from internal pudendal"],
+    correct: 1,
+    explain: "Corona mortis ('crown of death') = aberrant obturator artery arising from inferior epigastric (a branch of external iliac). Important in pelvic surgery and inguinal hernia repair — accidental injury → severe hemorrhage."
+  },
+  // 38
+  {
+    stem: "After the umbilical artery, what is the typical next branch of the anterior division of the internal iliac in the MALE pelvis?",
+    choices: ["Uterine artery", "Inferior vesical artery", "Vaginal artery", "Ovarian artery", "Testicular artery"],
+    correct: 1,
+    explain: "Male: anterior division → umbilical → INFERIOR VESICAL a. (supplies inferior bladder, prostate, seminal vesicles, ductus deferens). Female homolog = vaginal artery (often arises with uterine)."
+  },
+  // 39
+  {
+    stem: "The middle rectal artery (anterior division of internal iliac) anastomoses with which two other rectal arteries?",
+    choices: ["Superior rectal (from IMA) and inferior rectal (from internal pudendal)", "Superior mesenteric and inferior mesenteric", "Sigmoid arteries only", "Iliolumbar and lateral sacral", "Uterine and vaginal arteries"],
+    correct: 0,
+    explain: "Three rectal arteries form a watershed: SUPERIOR rectal (terminal IMA branch) + MIDDLE rectal (internal iliac anterior div) + INFERIOR rectal (branch of internal pudendal). Important portal-systemic anastomosis."
+  },
+  // 40
+  {
+    stem: "The internal pudendal artery is the chief blood supply to which region?",
+    choices: ["Bladder", "Uterus", "Perineum (including anal canal below pectinate, external genitalia, perineal muscles)", "Lower limb", "Sigmoid colon"],
+    correct: 2,
+    explain: "Internal pudendal a. exits GSF below piriformis → wraps ischial spine → enters pudendal canal → supplies the entire perineum: external anal sphincter, perineal muscles, erectile bodies (deep & dorsal arteries of penis/clitoris)."
+  },
+  // 41
+  {
+    stem: "The uterine artery (female anterior division of internal iliac) crosses OVER which structure as it approaches the uterus — the surgically critical 'water under the bridge'?",
+    choices: ["Round ligament", "Ovarian artery", "Ureter", "Internal iliac vein", "Uterosacral ligament"],
+    correct: 2,
+    explain: "Uterine artery crosses OVER the ureter near the cervix at the cardinal ligament. Mantra: 'water (urine in ureter) flows UNDER the bridge (uterine artery).' Most common site of iatrogenic ureteric injury during hysterectomy."
+  },
+  // 42
+  {
+    stem: "The ovarian arteries arise directly from where, NOT from the internal iliac?",
+    choices: ["Common iliac", "External iliac", "Abdominal aorta (just below the renal arteries)", "Inferior mesenteric", "Internal pudendal"],
+    correct: 2,
+    explain: "Ovarian arteries arise from the abdominal aorta (~L2, just below renals) — testicular arteries are homologs in males, also from aorta. They travel down through the suspensory ligament of the ovary to reach the gonad."
+  },
+  // 43
+  {
+    stem: "Ovarian veins drain asymmetrically. Where does the LEFT ovarian vein drain?",
+    choices: ["Directly to the IVC", "Left renal vein, then to IVC", "Left common iliac vein", "Left internal iliac vein", "Inferior mesenteric vein"],
+    correct: 1,
+    explain: "LEFT ovarian/testicular vein → LEFT RENAL VEIN → IVC. RIGHT ovarian/testicular vein → directly into IVC. Same asymmetry as the gonadal veins generally — clinical relevance: left-sided varicocele more common."
+  },
+  // 44
+  {
+    stem: "The vaginal artery (female) most commonly arises from which vessel and is the homolog of which male artery?",
+    choices: ["Internal pudendal artery; homolog of dorsal artery of penis", "Uterine or directly from anterior internal iliac; homolog of inferior vesical", "Ovarian artery; homolog of testicular", "Obturator artery; homolog of obturator", "External iliac; homolog of cremasteric"],
+    correct: 1,
+    explain: "Vaginal a. usually arises from the uterine a. or directly from the anterior division of internal iliac — homolog of the male INFERIOR VESICAL artery. Anastomoses with uterine, internal pudendal, and middle rectal."
+  },
+  // 45
+  {
+    stem: "The deep artery of the penis (a branch of the internal pudendal) supplies which structure and is responsible for engorgement during erection?",
+    choices: ["Glans penis", "Corpus spongiosum", "Corpus cavernosum (via helicine arteries)", "Bulb of penis", "Skin of the penis"],
+    correct: 2,
+    explain: "Deep artery of penis runs centrally within EACH corpus cavernosum, giving off helicine arteries that fill the cavernous sinusoids → erection. Dorsal a. of penis supplies skin/glans. Artery to bulb supplies corpus spongiosum + bulb."
+  },
+  // 46
+  {
+    stem: "The prostatic venous plexus drains into the internal iliac veins, but also communicates with the vertebral venous plexus (Batson's plexus). What is the clinical significance?",
+    choices: ["Causes hemorrhoids", "Provides path for prostate cancer to metastasize to vertebrae and skull", "Drains the testis", "Carries lymph", "Connects to portal system"],
+    correct: 1,
+    explain: "Prostatic venous plexus ↔ vertebral (Batson's) plexus = valveless route by which prostate cancer reaches the vertebrae, pelvis, and even skull. Explains the classic prostate cancer presentation with back pain from vertebral metastases."
+  },
+  // 47
+  {
+    stem: "The superior rectal artery (chief supply ABOVE the pectinate line) is the terminal branch of which artery?",
+    choices: ["Internal iliac", "Internal pudendal", "Inferior mesenteric", "Superior mesenteric", "Median sacral"],
+    correct: 2,
+    explain: "Superior rectal a. = terminal continuation of the inferior mesenteric a. (IMA). Supplies the rectum and anal canal ABOVE the pectinate line. Below pectinate line = inferior rectal a. (from internal pudendal)."
+  },
+  // 48
+  {
+    stem: "Veins above the pectinate line drain to the SUPERIOR rectal vein → IMV → splenic vein → portal system. Veins below the pectinate line drain to which system?",
+    choices: ["Portal system also", "Caval (systemic) system via inferior rectal v. → internal pudendal v. → internal iliac v. → IVC", "Lymphatic system", "Vertebral plexus", "Azygos system"],
+    correct: 1,
+    explain: "Pectinate line = portal-caval watershed. ABOVE: portal (sup. rectal v. → IMV → splenic → portal). BELOW: caval (inferior rectal v. → internal pudendal v. → internal iliac v. → IVC). Internal hemorrhoids = portal hypertension; external = no portal connection."
+  },
+
+  /* === LYMPHATIC CORRIDOR (Q49-54) === */
+  // 49
+  {
+    stem: "A 52-year-old woman is diagnosed with endometrioid carcinoma of the FUNDUS of the uterus. Which of the following lymph nodes is most likely to contain metastases from the primary tumor?",
+    choices: ["Deep inguinal", "External iliac", "Internal iliac", "Para-aortic (lumbar)", "Superficial inguinal"],
+    correct: 3,
+    explain: "Fundus of the uterus drains lymph along the ovarian vessels → PARA-AORTIC (lumbar) nodes near L2. Same drainage as ovaries and uterine tubes (all share embryologic abdominal origin). Body/cervix → iliac nodes. Round ligament region → superficial inguinal."
+  },
+  // 50
+  {
+    stem: "Lymph from the cervix and proximal 2/3 of the vagina drains to which nodes?",
+    choices: ["Para-aortic nodes", "Superficial inguinal nodes", "External and internal iliac nodes (and sacral)", "Femoral nodes", "Mesenteric nodes"],
+    correct: 2,
+    explain: "Cervix + inferior body of uterus + proximal 2/3 of vagina → external iliac, internal iliac, and sacral nodes. Cervical cancer staging therefore involves pelvic node sampling."
+  },
+  // 51
+  {
+    stem: "Lymph from the DISTAL 1/3 of the vagina (and the vulva, perineal skin, scrotum) drains to which nodes?",
+    choices: ["Para-aortic nodes", "Superficial inguinal nodes", "Internal iliac nodes", "Sacral nodes", "Mesenteric nodes"],
+    correct: 1,
+    explain: "Below the pelvic floor (distal vagina, vulva, scrotum, perineal skin, anal canal below pectinate line) → SUPERFICIAL INGUINAL nodes. The pectinate line and pelvic floor are watershed boundaries for lymph drainage."
+  },
+  // 52
+  {
+    stem: "The TESTIS drains lymph FIRST to which nodes — a key fact in testicular cancer staging?",
+    choices: ["Superficial inguinal nodes", "Deep inguinal nodes", "Para-aortic (lumbar) nodes", "Internal iliac nodes", "External iliac nodes"],
+    correct: 2,
+    explain: "Testis (despite scrotal location) → para-aortic / lumbar nodes (~L2), because the testis descended from the abdomen carrying its lymphatics. SCROTAL SKIN drains to superficial inguinal nodes — different drainage."
+  },
+  // 53
+  {
+    stem: "The fundus of the uterus and superior body share lymph drainage with the round ligament. The round ligament's drainage takes lymph to which UNUSUAL site?",
+    choices: ["Para-aortic nodes only", "Internal iliac nodes only", "Superficial inguinal nodes (via inguinal canal)", "Mesenteric nodes", "Sacral nodes"],
+    correct: 2,
+    explain: "Round ligament travels through the inguinal canal → carries lymph from the fundus/superior uterine body to SUPERFICIAL INGUINAL nodes. This is why uterine cancer can occasionally spread to inguinal nodes."
+  },
+  // 54
+  {
+    stem: "The anal canal ABOVE the pectinate line drains lymph to which nodes — different from below the pectinate line?",
+    choices: ["Superficial inguinal", "Internal iliac and inferior mesenteric nodes", "Para-aortic", "External iliac only", "Sacral nodes"],
+    correct: 1,
+    explain: "Pectinate line is a lymphatic watershed. ABOVE: drains to internal iliac and inferior mesenteric nodes (visceral). BELOW: drains to superficial inguinal nodes. Same divide as innervation (visceral vs somatic) and venous drainage (portal vs caval)."
+  },
+
+  /* === MIXED — TRANSITION CELLS (Q55-60) === */
+  // 55
+  {
+    stem: "The internal iliac vein receives tributaries paralleling the arteries. Which vein does NOT drain to the internal iliac vein?",
+    choices: ["Inferior gluteal vein", "Internal pudendal vein", "Uterine vein", "Ovarian vein", "Middle rectal vein"],
+    correct: 3,
+    explain: "OVARIAN vein does NOT drain to internal iliac — it ascends with the ovarian artery (left → renal vein, right → IVC). All others (inferior gluteal, internal pudendal, uterine, vaginal, middle rectal, vesical) drain to internal iliac vein."
+  },
+  // 56
+  {
+    stem: "A patient has cervical cancer that has spread to lymph nodes. Which pelvic ligament should the surgeon especially consider for nodal sampling because the uterine artery + lymphatics travel within it?",
+    choices: ["Round ligament", "Suspensory ligament of ovary", "Cardinal (transverse cervical) ligament", "Uterosacral ligament", "Broad ligament's mesosalpinx"],
+    correct: 2,
+    explain: "Cardinal ligament (at the base of broad ligament) carries the uterine artery, uterine vein plexus, and lymphatics from the cervix to internal/external iliac nodes. Critical structure in radical hysterectomy for cervical cancer."
+  },
+  // 57
+  {
+    stem: "After uterine artery embolization, the patient develops severe non-target ischemia of the labia. Which artery's anastomosis with the uterine artery is most likely responsible?",
+    choices: ["Internal pudendal artery (supplies labia)", "Superior vesical artery", "Obturator artery", "Iliolumbar artery", "Middle rectal artery"],
+    correct: 0,
+    explain: "Uterine artery has rich anastomoses with vaginal a. → branches to vulva. Internal pudendal a. supplies labia (via posterior labial branches). Embolization can travel via these anastomoses to cause vulvar/labial ischemia."
+  },
+  // 58
+  {
+    stem: "The veins of the broad ligament form the uterine venous plexus. Which structure does this plexus communicate with, allowing transmission of pelvic infections?",
+    choices: ["Portal venous system directly", "Ovarian venous plexus and vaginal venous plexus", "Hepatic veins", "Azygos vein", "Cavernous sinus"],
+    correct: 1,
+    explain: "Uterine venous plexus communicates with ovarian (above) and vaginal (below) venous plexuses, then drains to internal iliac veins. This is why pelvic inflammatory disease can spread along these venous routes."
+  },
+  // 59
+  {
+    stem: "A pelvic lymphocele forms after lymph node dissection. Which group of pelvic nodes lies along the EXTERNAL iliac vessels and is a common site for cervical/endometrial cancer staging?",
+    choices: ["Para-aortic nodes", "External iliac nodes", "Internal iliac nodes", "Inguinal nodes", "Sacral nodes"],
+    correct: 1,
+    explain: "External iliac nodes line the external iliac vessels along the pelvic brim. They receive efferents from internal iliac nodes and drain superiorly to common iliac → para-aortic nodes. Routinely sampled in pelvic malignancy staging."
+  },
+  // 60
+  {
+    stem: "Why does TESTICULAR cancer first metastasize to para-aortic (lumbar) nodes rather than inguinal nodes, despite the testis being in the scrotum?",
+    choices: ["Lymphatics travel with the pudendal nerve", "Testis descended from L2 and brought its lymphatic drainage with it", "Inguinal nodes only drain skin", "Testis is supplied by internal iliac vessels", "Lymph follows the gubernaculum"],
+    correct: 1,
+    explain: "Testis arose embryologically near L2 and descended to the scrotum carrying its blood supply (testicular a. from aorta) AND lymph drainage (to para-aortic / lumbar nodes). The scrotal SKIN, by contrast, drains to superficial inguinal nodes."
+  }
+];
+/* ============================================================
+   BOARD III — NERVES & DRAINAGE (Q61-90)
+   Cells 1-12: NERVE CORRIDOR (Q61-72)
+   Cells 13-18: LYMPHATIC CORRIDOR (Q73-78)
+   Cells 19-24: VASCULAR CORRIDOR (Q79-84)
+   Cells 25-30: SYNTHESIS / PRACTICAL (Q85-90)
+   ============================================================ */
+const BOARD3_QUESTIONS = [
+  /* === NERVE CORRIDOR (Q61-72) === */
+  // 61
+  {
+    stem: "The sacral plexus is formed by the anterior rami of which nerve roots?",
+    choices: ["L1-L4", "L4-S4 (with the lumbosacral trunk = L4-L5)", "S2-S4 only", "T12-L3", "L5-S5"],
+    correct: 1,
+    explain: "Sacral plexus = lumbosacral trunk (L4-L5) + S1-S4 anterior rami. Sits on the piriformis muscle on the posterior pelvic wall. Major branches: sciatic, pudendal, superior/inferior gluteal."
+  },
+  // 62
+  {
+    stem: "The pudendal nerve arises from which spinal levels?",
+    choices: ["L4-S1", "S2-S4", "S1-S3", "L5-S2", "S3-S5"],
+    correct: 1,
+    explain: "Pudendal nerve = S2, S3, S4. Mnemonic: 'S2-S4 keeps the floor off the floor' (pelvic floor) and 'keeps you off the floor' (continence). It's the major somatic nerve of the perineum."
+  },
+  // 63
+  {
+    stem: "A 46-year-old male with type II diabetes presents with fever and pain in the LEFT side of his anal region that worsens when he sits or defecates. Physical exam reveals an abscess of the LEFT ischioanal fossa. Treatment involves making an incision 2 cm lateral to the anus to drain the abscess. Which of the following structures is at MOST risk of injury during the procedure?",
+    choices: ["Inferior gluteal nerve", "Inferior rectal nerve", "Posterior cutaneous nerve of the thigh", "Pudendal nerve", "Superior gluteal nerve"],
+    correct: 1,
+    explain: "The inferior rectal nerve crosses the ischioanal fossa from the pudendal canal (laterally) to reach the external anal sphincter and perianal skin (medially). An incision lateral to the anus passes directly through its course → highest risk of injury. The pudendal n. proper is protected within Alcock's canal further laterally."
+  },
+  // 64
+  {
+    stem: "Following the surgical drainage of the ischioanal abscess (above), the patient develops a long-term complication. Which of the following is most likely to persist?",
+    choices: ["Constipation", "Fecal incontinence", "Portal hypertension", "Rectal varices", "Erectile dysfunction"],
+    correct: 1,
+    explain: "Damage to the inferior rectal nerve denervates the EXTERNAL ANAL SPHINCTER (voluntary). Loss of voluntary sphincter control → fecal incontinence. Constipation is not typical (sphincter is too WEAK, not too tight). Portal hypertension and rectal varices are unrelated to this nerve injury."
+  },
+  // 65
+  {
+    stem: "Pelvic splanchnic nerves are PARASYMPATHETIC and arise from which spinal levels?",
+    choices: ["T10-L2", "L1-L3", "S2-S4 (anterior rami)", "T5-T9", "C1-C4"],
+    correct: 2,
+    explain: "Pelvic splanchnics = parasympathetic from S2-S4 anterior rami. Travel to inferior hypogastric plexus → pelvic organs and hindgut. Functions: detrusor contraction, internal sphincter relaxation, erectile tissue vasodilation (erection)."
+  },
+  // 66
+  {
+    stem: "SACRAL splanchnic nerves are sympathetic. They arise from which structure?",
+    choices: ["S2-S4 anterior rami", "Sacral sympathetic trunk (chain ganglia)", "Inferior mesenteric ganglion", "Vagus nerve", "Pelvic splanchnic nerves"],
+    correct: 1,
+    explain: "SACRAL splanchnics arise from the SACRAL SYMPATHETIC TRUNK (chain ganglia) → join inferior hypogastric plexus → innervate pelvic organs sympathetically. Don't confuse with pelvic splanchnics (parasympathetic, from S2-S4 anterior rami)."
+  },
+  // 67
+  {
+    stem: "The inferior hypogastric plexus contains a mixture of fibers. Which combination correctly describes its content?",
+    choices: ["Sympathetic only", "Parasympathetic only", "Sympathetic (from sacral splanchnics + hypogastric n.) + parasympathetic (from pelvic splanchnics) + visceral afferents", "Somatic motor only", "Somatic sensory only"],
+    correct: 2,
+    explain: "Inferior hypogastric plexus is a mixed autonomic + visceral afferent plexus on the lateral pelvic wall. Sympathetics: sacral splanchnics (local) + hypogastric n. (from superior hypogastric plexus). Parasympathetics: pelvic splanchnics. Plus visceral pain afferents."
+  },
+  // 68
+  {
+    stem: "The SUPERIOR hypogastric plexus lies anterior to the aortic bifurcation. Damage here (e.g., during retroperitoneal node dissection) most commonly causes what?",
+    choices: ["Erectile dysfunction (failure of erection)", "Retrograde ejaculation due to failure of internal urethral sphincter closure", "Urinary incontinence", "Loss of perineal sensation", "Foot drop"],
+    correct: 1,
+    explain: "Superior hypogastric plexus carries SYMPATHETIC fibers down from the lumbar splanchnics. Damage → loss of sympathetic 'emission' phase = internal urethral sphincter doesn't close during ejaculation → retrograde ejaculation into bladder. Erection (parasymp) is preserved."
+  },
+  // 69
+  {
+    stem: "Erection is mediated by which fibers, traveling through which nerves?",
+    choices: ["Sympathetic via lumbar splanchnics", "Parasympathetic via pelvic splanchnics (S2-S4)", "Somatic via pudendal nerve", "Sympathetic via sacral splanchnics", "Parasympathetic via vagus nerve"],
+    correct: 1,
+    explain: "Erection = PARASYMPATHETIC via pelvic splanchnics (S2-S4) → vasodilation of helicine arteries in erectile tissue → engorgement. Memory: 'Point and Shoot, Squeeze' = Parasymp (point/erect), Sympathetic (squeeze/emission), Somatic pudendal (shoot/ejaculate)."
+  },
+  // 70
+  {
+    stem: "Sensation from the body of the uterus and most pelvic viscera ABOVE the pelvic pain line travels with which fibers back to the spinal cord?",
+    choices: ["Pudendal nerve", "Pelvic splanchnic nerves to S2-S4", "Sympathetic fibers retrograde through hypogastric plexuses to T10-L2", "Somatic via obturator nerve", "Phrenic nerve"],
+    correct: 2,
+    explain: "Pelvic pain line ≈ peritoneum reflection. ABOVE: visceral afferents follow SYMPATHETICS retrograde — up through inferior → superior hypogastric plexus → lumbar splanchnics → T10-L2. BELOW: follow PARASYMPATHETICS to S2-S4 (pelvic splanchnics)."
+  },
+  // 71
+  {
+    stem: "Sensation from the cervix, upper vagina, and trigone of the bladder (BELOW the pelvic pain line) returns to the cord via which route?",
+    choices: ["Sympathetic to T10-L2", "Pelvic splanchnic (parasympathetic) to S2-S4", "Pudendal nerve", "Inferior gluteal nerve", "Sacral splanchnic nerves"],
+    correct: 1,
+    explain: "Structures below the pelvic pain line (sub-peritoneal) → visceral afferent pain fibers travel with PARASYMPATHETICS (pelvic splanchnics) back to S2-S4. This is why cervical/labor pain is often referred to S2-S4 dermatomes (back of thigh, perineum)."
+  },
+  // 72
+  {
+    stem: "A patient sustains a pelvic fracture with damage to the SACRAL PLEXUS. Which combination of deficits would you expect?",
+    choices: ["Loss of perineal sensation + weak pelvic floor + weak gluteal muscles + sciatic distribution loss", "Pure motor weakness in medial thigh adductors", "Loss of cremasteric reflex only", "Loss of bladder fullness sensation only", "Loss of erection only"],
+    correct: 0,
+    explain: "Sacral plexus injury produces a constellation: pudendal (perineum + sphincters), superior/inferior gluteal (gluteal muscles), sciatic (posterior thigh, leg, foot). 'Saddle anesthesia' = pudendal + posterior femoral cutaneous distributions."
+  },
+
+  /* === LYMPHATIC CORRIDOR (Q73-78) === */
+  // 73
+  {
+    stem: "The PROSTATE drains lymph primarily to which nodes (most relevant for prostate cancer staging)?",
+    choices: ["Para-aortic nodes", "Superficial inguinal nodes", "Internal iliac (and external iliac, sacral) nodes", "Mesenteric nodes", "Deep inguinal nodes"],
+    correct: 2,
+    explain: "Prostate → internal iliac nodes (primary), with secondary drainage to external iliac and sacral nodes. Prostate cancer can also metastasize to vertebrae via Batson's vertebral venous plexus (different route)."
+  },
+  // 74
+  {
+    stem: "The BLADDER (most of it) drains to which lymph nodes?",
+    choices: ["Para-aortic", "External iliac primarily, with some internal iliac", "Superficial inguinal", "Mesenteric", "Sacral"],
+    correct: 1,
+    explain: "Most of the bladder → external iliac nodes. The neck/trigone may also drain to internal iliac and sacral nodes. Important for bladder cancer staging."
+  },
+  // 75
+  {
+    stem: "The penile/clitoral SKIN and SCROTAL SKIN drain to which lymph nodes — important for penile/scrotal cancer?",
+    choices: ["Para-aortic", "Superficial inguinal nodes", "Internal iliac", "External iliac only", "Deep inguinal exclusively"],
+    correct: 1,
+    explain: "Skin of penis, scrotum, vulva, distal vagina, perineum → SUPERFICIAL INGUINAL nodes. Note: testicular tissue → para-aortic (different drainage from scrotal skin), and glans penis may drain to deep inguinal/external iliac."
+  },
+  // 76
+  {
+    stem: "The GLANS PENIS and GLANS CLITORIS have a special lymphatic drainage to which nodes?",
+    choices: ["Superficial inguinal only", "Deep inguinal and external iliac nodes", "Para-aortic", "Internal iliac alone", "Sacral nodes"],
+    correct: 1,
+    explain: "Glans penis/clitoris → DEEP inguinal nodes (especially node of Cloquet) → external iliac nodes. The shaft/skin of the penis goes to SUPERFICIAL inguinal — different drainage from the glans."
+  },
+  // 77
+  {
+    stem: "What is the FINAL common pathway for almost ALL pelvic lymph drainage before it joins the systemic circulation?",
+    choices: ["Common iliac nodes → para-aortic (lumbar) nodes → cisterna chyli → thoracic duct", "Inguinal nodes → cisterna chyli", "Internal iliac → directly to thoracic duct", "Mesenteric nodes → portal system", "Sacral nodes → azygos vein"],
+    correct: 0,
+    explain: "All pelvic lymph eventually converges: external + internal iliac nodes → COMMON ILIAC nodes → PARA-AORTIC (lumbar) nodes → cisterna chyli (~L1-L2) → THORACIC DUCT → left venous angle (junction of left subclavian + internal jugular veins)."
+  },
+  // 78
+  {
+    stem: "A 50-year-old woman with vulvar cancer requires lymph node dissection. The surgeon will most appropriately sample which group of nodes FIRST?",
+    choices: ["Para-aortic", "Superficial inguinal nodes (then deep inguinal if positive)", "Internal iliac directly", "Sacral nodes", "Mesenteric nodes"],
+    correct: 1,
+    explain: "Vulva drains to SUPERFICIAL INGUINAL nodes first (primary echelon). If positive, drainage continues to DEEP INGUINAL (including node of Cloquet) → external iliac nodes. Sentinel lymph node biopsy in vulvar cancer targets the superficial inguinal first."
+  },
+
+  /* === VASCULAR CORRIDOR (Q79-84) === */
+  // 79
+  {
+    stem: "The TESTICULAR artery, which arises from the abdominal aorta near L2, descends through the abdomen to reach the testis through which structure?",
+    choices: ["Pudendal canal", "Inguinal canal (within the spermatic cord)", "Obturator canal", "Greater sciatic foramen", "Femoral canal"],
+    correct: 1,
+    explain: "Testicular a. + pampiniform venous plexus + ductus deferens + nerves all travel through the inguinal canal as the spermatic cord. Pampiniform plexus serves as a heat exchanger to keep testicular temperature below body temperature."
+  },
+  // 80
+  {
+    stem: "The deep dorsal vein of the penis (deep to Buck's fascia) drains predominantly to which venous plexus?",
+    choices: ["External pudendal vein", "Great saphenous vein", "Prostatic venous plexus (then internal iliac)", "Femoral vein", "Inferior epigastric vein"],
+    correct: 2,
+    explain: "Deep dorsal vein of penis → pierces perineal membrane → joins PROSTATIC VENOUS PLEXUS → internal iliac veins. The SUPERFICIAL dorsal vein (in Dartos fascia, superficial to Buck's) drains via external pudendal v. → great saphenous v."
+  },
+  // 81
+  {
+    stem: "A patient bleeds heavily after a deep perineal laceration. The most likely vessel injured is a branch of which artery?",
+    choices: ["External iliac artery", "Femoral artery", "Internal pudendal artery", "Obturator artery", "Inferior gluteal artery"],
+    correct: 2,
+    explain: "Internal pudendal a. is THE artery of the perineum. Branches: inferior rectal, perineal artery (to perineal muscles + posterior scrotal/labial), artery to bulb, deep artery of penis/clitoris, dorsal artery of penis/clitoris. Perineal lacerations bleed from these branches."
+  },
+  // 82
+  {
+    stem: "During emergency control of major pelvic hemorrhage, surgeons may ligate the internal iliac artery. Why doesn't this typically cause ischemia of the pelvic viscera?",
+    choices: ["The pelvic viscera don't need much blood", "Rich anastomoses with branches of the IMA, ovarian/testicular, and contralateral internal iliac", "External iliac artery takes over", "Median sacral artery supplies everything", "Pelvic veins compensate"],
+    correct: 1,
+    explain: "Pelvic viscera have abundant collateral supply: superior rectal (from IMA) ↔ middle/inferior rectal; ovarian/testicular (from aorta) ↔ uterine/vaginal; lumbar arteries ↔ iliolumbar; contralateral internal iliac via median sacral and cross-pelvic anastomoses."
+  },
+  // 83
+  {
+    stem: "The corona mortis is a vascular variant connecting which two arterial territories?",
+    choices: ["Internal pudendal and inferior gluteal", "Obturator artery and inferior epigastric artery (external iliac branch)", "Ovarian and uterine", "Internal and external iliac via the umbilical artery", "Superior and inferior vesical"],
+    correct: 1,
+    explain: "Corona mortis = anastomosis between obturator artery (from internal iliac) and inferior epigastric artery (from external iliac). Crosses superior pubic ramus. Risk during pelvic surgery, hernia repair, and pelvic fractures — accidental laceration → 'crown of death' hemorrhage."
+  },
+  // 84
+  {
+    stem: "Which of the following cells bear the primary responsibility for forming the blood-testis barrier?",
+    choices: ["Capillary endothelial cells", "Interstitial cells of Leydig", "Primary spermatocytes", "Sertoli cells", "Spermatogonia"],
+    correct: 3,
+    explain: "SERTOLI cells form the blood-testis barrier via tight junctions between adjacent Sertoli cells in the seminiferous epithelium. This protects developing sperm (which express novel antigens at puberty) from autoimmune attack and maintains the unique luminal microenvironment. Leydig cells (interstitial) make testosterone — different role."
+  },
+
+  /* === SYNTHESIS / PRACTICAL (Q85-90) === */
+  // 85
+  {
+    stem: "A 60-year-old man undergoes radical prostatectomy and afterward complains of erectile dysfunction. Damage to which nerves running on the lateral surface of the prostate is most likely responsible?",
+    choices: ["Pudendal nerve", "Cavernous nerves (parasympathetic from inferior hypogastric plexus / pelvic splanchnics)", "Obturator nerve", "Sciatic nerve", "Inferior gluteal nerve"],
+    correct: 1,
+    explain: "Cavernous nerves carry PARASYMPATHETIC fibers (originally pelvic splanchnics) to the erectile tissue. They run alongside the prostate within the prostatic neurovascular bundle. Nerve-sparing prostatectomy attempts to preserve them to maintain erectile function."
+  },
+  // 86
+  {
+    stem: "A woman with a ruptured ectopic pregnancy presents with hypotension and a positive culdocentesis (blood in the cul-de-sac). Where exactly was the needle inserted, and what space did it enter?",
+    choices: ["Anterior vaginal fornix → vesicouterine pouch", "Posterior vaginal fornix → rectouterine pouch (pouch of Douglas)", "Lateral fornix → broad ligament", "Through the cervix → uterine cavity", "Through the perineum → ischioanal fossa"],
+    correct: 1,
+    explain: "Posterior vaginal fornix is deepest and lies just below the peritoneum of the rectouterine pouch (pouch of Douglas). Needle through posterior fornix → directly into peritoneal cavity. Blood here = ruptured ectopic, hemoperitoneum, or other pelvic bleeding."
+  },
+  // 87
+  {
+    stem: "A 30-year-old woman in labor is given a pudendal nerve block to anesthetize the perineum. To anesthetize the WHOLE perineum, what other nerve regions might NOT be covered by this block alone?",
+    choices: ["The block covers everything — no other nerves matter", "Anterior labial branches from ilioinguinal/genitofemoral and the perineal branch of posterior femoral cutaneous nerve are NOT covered", "Sciatic nerve distribution is missed", "Obturator nerve coverage is missed", "Hypogastric plexus must also be blocked"],
+    correct: 1,
+    explain: "Pudendal block covers MOST of perineum but NOT: (1) anterior labia/scrotum (ilioinguinal n. L1, genitofemoral n. L1-L2 — anterior/genital branches); (2) perineal branch of posterior femoral cutaneous n. (S1-S3) covering posterolateral perineum/medial thigh."
+  },
+  // 88
+  {
+    stem: "Which of the following is NOT a homologous pair/match?",
+    choices: ["Clitoris — penis", "Mesonephric tubules — epididymis", "Bartholin's glands — Cowper's glands", "Mesonephric duct — vas deferens", "Skene's glands — prostate"],
+    correct: 2,
+    explain: "⚠️ ANSWER UNCERTAIN — please verify with your course materials. All 5 listed pairs are commonly accepted homologs in standard embryology: clitoris↔penis (genital tubercle), mesonephric tubules↔efferent ductules+epididymis, Bartholin's↔Cowper's (bulbourethral glands — but located in DIFFERENT pouches: superficial vs deep), mesonephric (Wolffian) duct↔vas deferens, Skene's (paraurethral) glands↔prostate. The most common 'trick' answer is C (Bartholin's↔Cowper's) because they sit in different pouches — but they ARE embryologic homologs. If your lecturer teaches a different framework, the intended distractor may differ."
+  },
+  // 89
+  {
+    stem: "A 65-year-old female patient presents with a palpable perineal lesion and dysuria due to pelvic organ prolapse. Damage to which of the following structures is most likely responsible?",
+    choices: ["Coccygeus muscle", "Inferior rectal nerve", "Perineal membrane", "Perineal nerve"],
+    correct: 2,
+    explain: "⚠️ ANSWER NOTE: The original source key marks this as B (inferior rectal nerve), but anatomically the inferior rectal nerve only innervates the external anal sphincter and perianal skin — it would NOT cause pelvic organ prolapse. The PERINEAL MEMBRANE (C) is the structural floor of the urogenital triangle that supports pelvic viscera and the urethra; its disruption explains both the palpable perineal lesion (visceral protrusion) AND dysuria (loss of urethral support). Verify the intended answer with your course; this version uses the anatomically defensible answer (C)."
+  },
+  // 90
+  {
+    stem: "FINAL: A patient has both numbness of the medial thigh AND weakness of hip adduction after a pelvic surgery. Which nerve was most likely injured, and where in the pelvis is it most vulnerable?",
+    choices: ["Pudendal nerve at the ischial spine", "Obturator nerve in the obturator canal / on the lateral pelvic wall", "Sciatic nerve at the greater sciatic foramen", "Inferior gluteal nerve below piriformis", "Femoral nerve in the iliac fossa"],
+    correct: 1,
+    explain: "Obturator nerve (L2-L4) → motor to medial thigh adductors + sensory to medial thigh skin. Vulnerable as it crosses the lateral pelvic wall and traverses the obturator canal. Pelvic surgery, obturator hernia, or pelvic mass → obturator neuropathy. Ace your practical — you've reached the perineum!"
+  }
+];
+/* ============================================================
+   BOARD CONFIGURATIONS
+   3 boards, each 30 cells (6×5 grid, boustrophedon)
+   ============================================================ */
+const TOTAL_CELLS = 30;
+const COLS = 6;
+const ROWS = 5;
+
+const BOARDS = [
+  /* ============ BOARD I — FOUNDATIONS ============ */
+  {
+    title: "— The Pelvic Ascent · Foundations —",
+    questions: BOARD1_QUESTIONS,
+    labels: {
+      1:  "Pelvic Inlet",
+      2:  "Iliac Fossa",
+      3:  "Sacral Promontory",
+      4:  "Greater Sciatic Foramen",
+      5:  "Obturator Foramen",
+      6:  "Ischial Spine",
+      7:  "Sacrospinous Lig.",
+      8:  "Lesser Sciatic Foramen",
+      9:  "Pudendal Canal",
+      10: "Ischioanal Fossa",
+      11: "Levator Ani",
+      12: "Coccygeus",
+      13: "Tendinous Arch",
+      14: "Obturator Internus",
+      15: "Piriformis",
+      16: "Internal Iliac A.",
+      17: "Uterine A.",
+      18: "Vaginal A.",
+      19: "Internal Pudendal A.",
+      20: "Inferior Hypogastric Plexus",
+      21: "Pelvic Splanchnics",
+      22: "Sacral Splanchnics",
+      23: "Bladder",
+      24: "Prostate / Cervix",
+      25: "Vas Deferens / Uterus",
+      26: "Pectinate Line",
+      27: "Perineal Body",
+      28: "Deep Perineal Pouch",
+      29: "Superficial Pouch",
+      30: "Practical Mastery"
+    },
+    ladders: {
+      3:  9,   // Sacral Promontory → Pudendal Canal
+      7:  15,  // Sacrospinous → Piriformis
+      11: 20,  // Levator Ani → Inferior Hypogastric Plexus
+      17: 25,  // Uterine A. → Uterus
+      22: 28   // Sacral splanchnics → Deep pouch
+    },
+    snakes: {
+      29: 13,  // Superficial pouch hematoma → Tendinous arch
+      26: 10,  // Pectinate line bleed → Ischioanal fossa
+      21: 6,   // Pelvic splanchnic injury → Ischial spine
+      16: 4,   // Internal iliac bleed → GSF
+      24: 8    // Prostate/cervix injury → LSF
+    }
+  },
+
+  /* ============ BOARD II — VASCULAR & LYMPHATIC ============ */
+  {
+    title: "— The Vascular Tree · Iliac to Pudendal —",
+    questions: BOARD2_QUESTIONS,
+    labels: {
+      // Cells 1-18: VASCULAR CORRIDOR
+      1:  "Common Iliac A.",
+      2:  "Internal Iliac A.",
+      3:  "Posterior Division",
+      4:  "Iliolumbar A.",
+      5:  "Lateral Sacral A.",
+      6:  "Superior Gluteal A.",
+      7:  "Anterior Division",
+      8:  "Umbilical A.",
+      9:  "Superior Vesical A.",
+      10: "Obturator A.",
+      11: "Corona Mortis",
+      12: "Inferior Vesical A.",
+      13: "Middle Rectal A.",
+      14: "Internal Pudendal A.",
+      15: "Inferior Gluteal A.",
+      16: "Uterine A.",
+      17: "Ovarian A.",
+      18: "Vaginal A.",
+      // Cells 19-24: LYMPHATIC CORRIDOR
+      19: "Para-Aortic Nodes",
+      20: "Cervical Lymph",
+      21: "Vulvar Lymph",
+      22: "Testicular Lymph",
+      23: "Round Lig. Lymph",
+      24: "Anal Canal Lymph",
+      // Cells 25-30: MIXED
+      25: "Internal Iliac V.",
+      26: "Cardinal Lig. Nodes",
+      27: "UAE Anastomosis",
+      28: "Uterine Plexus",
+      29: "External Iliac Nodes",
+      30: "Vascular Mastery"
+    },
+    ladders: {
+      4:  10,  // Iliolumbar (passes over) → Obturator
+      8:  16,  // Umbilical → Uterine
+      14: 22,  // Internal pudendal → Testicular lymph (gonadal)
+      19: 26,  // Para-aortic → Cardinal lig. nodes
+      6:  13   // Superior gluteal → Middle rectal
+    },
+    snakes: {
+      27: 11,  // UAE non-target embolization → Corona mortis
+      21: 5,   // Vulvar lymph spread → Lateral sacral
+      28: 17,  // Uterine plexus infection → Ovarian
+      11: 3,   // Corona mortis bleed → Posterior division
+      24: 9    // Anal canal bleed → Sup. vesical region
+    }
+  },
+
+  /* ============ BOARD III — NERVES & DRAINAGE ============ */
+  {
+    title: "— The Sacral Plexus · Nerves &amp; Drainage —",
+    questions: BOARD3_QUESTIONS,
+    labels: {
+      // Cells 1-12: NERVE CORRIDOR
+      1:  "Sacral Plexus",
+      2:  "Pudendal Nerve",
+      3:  "Inferior Rectal N.",
+      4:  "Obturator Nerve",
+      5:  "Pelvic Splanchnic N.",
+      6:  "Sacral Splanchnic N.",
+      7:  "Inferior Hypogastric Plexus",
+      8:  "Superior Hypogastric Plexus",
+      9:  "Erection Pathway",
+      10: "Visceral Afferent (above pain line)",
+      11: "Visceral Afferent (below pain line)",
+      12: "Sacral Plexus Injury",
+      // Cells 13-18: LYMPHATIC CORRIDOR
+      13: "Prostate Lymph",
+      14: "Bladder Lymph",
+      15: "Skin Lymph",
+      16: "Glans Lymph",
+      17: "Para-Aortic Final",
+      18: "Vulvar Sentinel",
+      // Cells 19-24: VASCULAR CORRIDOR
+      19: "Testicular A.",
+      20: "Deep Dorsal V.",
+      21: "Internal Pudendal A.",
+      22: "Internal Iliac Ligation",
+      23: "Corona Mortis",
+      24: "Cremasteric A.",
+      // Cells 25-30: SYNTHESIS
+      25: "Cavernous Nerves",
+      26: "Culdocentesis",
+      27: "Pudendal Block",
+      28: "Perineal Hematoma",
+      29: "Urethral Injury",
+      30: "Practical Mastery"
+    },
+    ladders: {
+      2:  9,   // Pudendal → Erection pathway
+      6:  12,  // Sacral splanchnic → Plexus injury (ascend via knowledge)
+      14: 20,  // Bladder lymph → Deep dorsal vein
+      17: 25,  // Para-aortic → Cavernous nerves
+      23: 29   // Corona mortis → Urethral injury
+    },
+    snakes: {
+      28: 11,  // Perineal hematoma → Visceral afferent
+      26: 13,  // Culdocentesis bleed → Prostate lymph
+      22: 4,   // Internal iliac ligation → Obturator
+      18: 5,   // Vulvar sentinel → Pelvic splanchnic
+      27: 8    // Pudendal block missed → Superior hypogastric
+    }
+  }
+];
+
+/* ============================================================
+   GAME STATE
+   ============================================================ */
+let state = {
+  boardIdx: 0,
+  position: 1,
+  correct: 0,
+  wrong: 0,
+  rolls: 0,
+  unusedQuestions: [],
+  currentQuestion: null,
+  pendingTarget: null,
+  awaitingAnswer: false,
+  isMinimized: false
+};
+
+function currentBoard() { return BOARDS[state.boardIdx]; }
+
+function shuffleQuestions() {
+  const board = currentBoard();
+  state.unusedQuestions = [...Array(board.questions.length).keys()];
+  for (let i = state.unusedQuestions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [state.unusedQuestions[i], state.unusedQuestions[j]] = [state.unusedQuestions[j], state.unusedQuestions[i]];
+  }
+}
+
+function nextQuestion() {
+  if (state.unusedQuestions.length === 0) shuffleQuestions();
+  const idx = state.unusedQuestions.pop();
+  return { ...currentBoard().questions[idx], idx };
+}
+
+/* ============================================================
+   BOARD RENDERING — boustrophedon
+   ============================================================ */
+function cellToGrid(cellNum) {
+  const zeroIdx = cellNum - 1;
+  const rowFromBottom = Math.floor(zeroIdx / COLS);
+  const row = ROWS - 1 - rowFromBottom;
+  const colInRow = zeroIdx % COLS;
+  const col = (rowFromBottom % 2 === 0) ? colInRow : (COLS - 1 - colInRow);
+  return { row, col };
+}
+
+function renderBoard() {
+  const board = document.getElementById('board');
+  board.innerHTML = '';
+
+  const cfg = currentBoard();
+  document.getElementById('boardTitle').innerHTML = cfg.title;
+
+  const cellArray = Array(ROWS * COLS).fill(null);
+  for (let n = 1; n <= TOTAL_CELLS; n++) {
+    const { row, col } = cellToGrid(n);
+    cellArray[row * COLS + col] = n;
+  }
+
+  cellArray.forEach((cellNum) => {
+    const div = document.createElement('div');
+    div.className = 'cell';
+    if (cellNum === null) return board.appendChild(div);
+
+    div.dataset.cell = cellNum;
+    if (cellNum === 1) div.classList.add('start');
+    if (cellNum === TOTAL_CELLS) div.classList.add('finish');
+    if (cfg.ladders[cellNum]) div.classList.add('ladder-start');
+    if (cfg.snakes[cellNum]) div.classList.add('snake-start');
+    if (cellNum === state.position) div.classList.add('player-here');
+
+    const num = document.createElement('div');
+    num.className = 'cell-num';
+    num.textContent = cellNum;
+    div.appendChild(num);
+
+    const label = document.createElement('div');
+    label.className = 'cell-label';
+    label.textContent = cfg.labels[cellNum] || '';
+    div.appendChild(label);
+
+    if (cfg.ladders[cellNum]) {
+      div.title = `Ligament: cell ${cellNum} → cell ${cfg.ladders[cellNum]} (${cfg.labels[cfg.ladders[cellNum]]})`;
+    } else if (cfg.snakes[cellNum]) {
+      div.title = `Hemorrhage: cell ${cellNum} → cell ${cfg.snakes[cellNum]} (${cfg.labels[cfg.snakes[cellNum]]})`;
+    }
+
+    board.appendChild(div);
+  });
+}
+
+/* ============================================================
+   DICE
+   ============================================================ */
+const PIP_PATTERNS = {
+  1: [4],
+  2: [0, 8],
+  3: [0, 4, 8],
+  4: [0, 2, 6, 8],
+  5: [0, 2, 4, 6, 8],
+  6: [0, 2, 3, 5, 6, 8]
+};
+
+function renderDie(value) {
+  const die = document.getElementById('die');
+  const pips = die.querySelectorAll('.pip');
+  pips.forEach((p, i) => {
+    if (PIP_PATTERNS[value].includes(i)) p.classList.remove('hidden');
+    else p.classList.add('hidden');
+  });
+}
+
+function rollDie() {
+  const die = document.getElementById('die');
+  die.classList.add('rolling');
+  return new Promise((resolve) => {
+    const roll = Math.floor(Math.random() * 6) + 1;
+    setTimeout(() => {
+      die.classList.remove('rolling');
+      renderDie(roll);
+      resolve(roll);
+    }, 600);
+  });
+}
+
+/* ============================================================
+   LOG
+   ============================================================ */
+function log(html) {
+  const el = document.getElementById('log');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = html;
+  el.appendChild(entry);
+  el.scrollTop = el.scrollHeight;
+}
+
+/* ============================================================
+   QUESTION FLOW
+   ============================================================ */
+function showQuestion(target, roll) {
+  const cfg = currentBoard();
+  state.pendingTarget = target;
+  state.awaitingAnswer = true;
+  state.isMinimized = false;
+  state.currentQuestion = nextQuestion();
+
+  document.getElementById('modalTag').textContent = `Roll ${roll} → Cell ${target}`;
+  document.getElementById('modalCell').textContent = cfg.labels[target] || '';
+  document.getElementById('modalStem').innerHTML = state.currentQuestion.stem;
+
+  const choices = document.getElementById('choices');
+  choices.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+  state.currentQuestion.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.dataset.idx = i;
+    btn.innerHTML = `<span class="letter">${letters[i]}</span><span>${c}</span>`;
+    btn.addEventListener('click', () => handleChoice(i));
+    choices.appendChild(btn);
+  });
+
+  document.getElementById('feedback').classList.remove('shown', 'correct', 'incorrect');
+  document.getElementById('continueBtn').classList.remove('shown');
+
+  const overlay = document.getElementById('overlay');
+  overlay.classList.remove('minimized');
+  overlay.classList.add('active');
+  document.getElementById('minimizeBtn').textContent = '−';
+  document.getElementById('minimizeBtn').title = 'Minimize';
+}
+
+function handleChoice(idx) {
+  const q = state.currentQuestion;
+  const cfg = currentBoard();
+  const correctIdx = q.correct;
+  const choices = document.querySelectorAll('.choice');
+
+  choices.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correctIdx) btn.classList.add('correct');
+    else if (i === idx && i !== correctIdx) btn.classList.add('incorrect');
+  });
+
+  const feedback = document.getElementById('feedback');
+  const fbTitle = document.getElementById('feedbackTitle');
+  const fbText = document.getElementById('feedbackText');
+
+  if (idx === correctIdx) {
+    state.correct++;
+    feedback.classList.add('shown', 'correct');
+    fbTitle.textContent = '✓ Correct';
+    fbText.innerHTML = q.explain;
+    log(`<span class="e-correct">✓ Correct</span> — advancing to cell <strong>${state.pendingTarget}</strong>.`);
+  } else {
+    state.wrong++;
+    feedback.classList.add('shown', 'incorrect');
+    fbTitle.textContent = '✗ Not quite';
+    fbText.innerHTML = q.explain + '<br><br><em>You stay put — review and roll again.</em>';
+    log(`<span class="e-wrong">✗ Wrong</span> — staying at cell <strong>${state.position}</strong>. ${cfg.labels[state.position]}.`);
+    state.pendingTarget = null;
+  }
+
+  document.getElementById('continueBtn').classList.add('shown');
+  updateHud();
+}
+
+function continueAfterAnswer() {
+  document.getElementById('overlay').classList.remove('active', 'minimized');
+  state.awaitingAnswer = false;
+  state.isMinimized = false;
+
+  if (state.pendingTarget !== null) {
+    moveTo(state.pendingTarget, true);
+  }
+  state.pendingTarget = null;
+}
+
+function toggleMinimize() {
+  const overlay = document.getElementById('overlay');
+  const btn = document.getElementById('minimizeBtn');
+  state.isMinimized = !state.isMinimized;
+  if (state.isMinimized) {
+    overlay.classList.add('minimized');
+    btn.textContent = '+';
+    btn.title = 'Restore';
+  } else {
+    overlay.classList.remove('minimized');
+    btn.textContent = '−';
+    btn.title = 'Minimize';
+  }
+}
+
+/* ============================================================
+   MOVEMENT
+   ============================================================ */
+function moveTo(target, checkSpecial) {
+  const cfg = currentBoard();
+  state.position = target;
+  renderBoard();
+  updateHud();
+
+  if (state.position === TOTAL_CELLS) {
+    setTimeout(showWin, 600);
+    return;
+  }
+
+  if (checkSpecial) {
+    if (cfg.ladders[target]) {
+      const dest = cfg.ladders[target];
+      log(`<span class="e-ladder">🦴 Ligament!</span> ${cfg.labels[target]} → ${cfg.labels[dest]} (cell ${dest}).`);
+      setTimeout(() => moveTo(dest, false), 700);
+      return;
+    }
+    if (cfg.snakes[target]) {
+      const dest = cfg.snakes[target];
+      log(`<span class="e-snake">🩸 Hemorrhage!</span> ${cfg.labels[target]} → fall to ${cfg.labels[dest]} (cell ${dest}).`);
+      setTimeout(() => moveTo(dest, false), 700);
+      return;
+    }
+  }
+}
+
+async function handleRoll() {
+  if (state.awaitingAnswer) return;
+  document.getElementById('rollBtn').disabled = true;
+
+  const roll = await rollDie();
+  state.rolls++;
+  let target = state.position + roll;
+
+  log(`<span class="e-roll">🎲 Rolled ${roll}</span> from cell ${state.position}.`);
+
+  if (target > TOTAL_CELLS) {
+    log(`Overshoot — you must land exactly on cell ${TOTAL_CELLS}. Staying at ${state.position}.`);
+    document.getElementById('rollBtn').disabled = false;
+    return;
+  }
+
+  showQuestion(target, roll);
+  document.getElementById('rollBtn').disabled = false;
+}
+
+/* ============================================================
+   HUD + WIN
+   ============================================================ */
+function updateHud() {
+  const cfg = currentBoard();
+  document.getElementById('posStat').textContent = `${state.position} · ${cfg.labels[state.position] || ''}`;
+  document.getElementById('correctStat').textContent = state.correct;
+  document.getElementById('wrongStat').textContent = state.wrong;
+}
+
+function showWin() {
+  document.getElementById('winCorrect').textContent = state.correct;
+  document.getElementById('winWrong').textContent = state.wrong;
+  document.getElementById('winRolls').textContent = state.rolls;
+
+  const isLastBoard = state.boardIdx === BOARDS.length - 1;
+  const playAgainBtn = document.getElementById('playAgainBtn');
+  const winTitle = document.getElementById('winTitle');
+  const winMsg = document.getElementById('winMsg');
+
+  if (isLastBoard) {
+    winTitle.textContent = 'All Three Boards Mastered';
+    winMsg.textContent = 'You have traversed Foundations, Vascular, and Nerves. The practical is yours.';
+    playAgainBtn.textContent = 'Reset to Board I';
+  } else {
+    winTitle.textContent = `Board ${['I','II','III'][state.boardIdx]} Cleared`;
+    winMsg.textContent = `Onward to Board ${['II','III'][state.boardIdx]} — ${BOARDS[state.boardIdx + 1].title.replace(/—/g, '').trim()}.`;
+    playAgainBtn.textContent = 'Next Board →';
+  }
+
+  document.getElementById('winOverlay').classList.add('active');
+  log(`🏆 <strong>Board ${state.boardIdx + 1} mastered.</strong>`);
+}
+
+function advanceOrReset() {
+  document.getElementById('winOverlay').classList.remove('active');
+  if (state.boardIdx < BOARDS.length - 1) {
+    switchBoard(state.boardIdx + 1);
+  } else {
+    switchBoard(0);
+  }
+}
+
+function switchBoard(newIdx) {
+  state.boardIdx = newIdx;
+  state.position = 1;
+  state.correct = 0;
+  state.wrong = 0;
+  state.rolls = 0;
+  state.pendingTarget = null;
+  state.awaitingAnswer = false;
+  state.isMinimized = false;
+  shuffleQuestions();
+
+  document.getElementById('log').innerHTML = `<div class="log-entry">Welcome to Board ${['I','II','III'][newIdx]}. Roll to begin.</div>`;
+  document.getElementById('overlay').classList.remove('active', 'minimized');
+  document.getElementById('winOverlay').classList.remove('active');
+
+  document.querySelectorAll('.board-tab').forEach((tab, i) => {
+    tab.classList.toggle('active', i === newIdx);
+  });
+
+  renderDie(1);
+  renderBoard();
+  updateHud();
+}
+
+function reset() {
+  switchBoard(state.boardIdx);
+}
+
+/* ============================================================
+   EVENT BINDINGS
+   ============================================================ */
+document.getElementById('rollBtn').addEventListener('click', handleRoll);
+document.getElementById('resetBtn').addEventListener('click', reset);
+document.getElementById('playAgainBtn').addEventListener('click', advanceOrReset);
+document.getElementById('continueBtn').addEventListener('click', continueAfterAnswer);
+document.getElementById('minimizeBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleMinimize();
+});
+
+// Click on minimized modal to restore
+document.getElementById('overlay').addEventListener('click', (e) => {
+  if (state.isMinimized && (e.target.classList.contains('modal') || e.target.closest('.modal'))) {
+    toggleMinimize();
+  }
+});
+
+// Board selector tabs
+document.querySelectorAll('.board-tab').forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const idx = parseInt(tab.dataset.board);
+    if (idx !== state.boardIdx) switchBoard(idx);
+  });
+});
+
+/* Init */
+shuffleQuestions();
+renderBoard();
+renderDie(1);
+updateHud();
+</script>
+</body>
+</html>
