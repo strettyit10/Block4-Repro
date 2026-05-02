@@ -113,23 +113,120 @@
     box-shadow: 0 3px 0 var(--gold);
   }
 
-  .hud {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+  .mode-selector {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 16px;
-    margin-top: 18px;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .mode-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-right: 4px;
+  }
+  .mode-tab {
+    font-family: 'Cinzel', serif;
+    background: var(--parchment);
+    color: var(--ink-soft);
+    border: 2px solid var(--ink-soft);
+    padding: 6px 14px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .mode-tab:hover { background: var(--bone); color: var(--ink); }
+  .mode-tab.active {
+    background: var(--ink);
+    color: var(--parchment);
+    border-color: var(--ink);
+    box-shadow: 0 2px 0 var(--gold);
   }
 
-  .hud-left, .hud-right { display: flex; gap: 18px; align-items: center; }
-  .hud-right { justify-content: flex-end; }
+  .hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+
+  .player-blocks {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 1;
+    align-items: stretch;
+  }
+
+  .player-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    min-width: 220px;
+  }
+  .player-block.active-turn {
+    background: rgba(43,24,16,0.06);
+    border-color: var(--ink-soft);
+    box-shadow: 0 2px 0 var(--gold);
+  }
+
+  .player-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+  }
+  .player-name::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+  .player-name.p1::before {
+    background: radial-gradient(circle at 30% 30%, #d04545 0%, var(--blood) 60%, var(--blood-dark) 100%);
+  }
+  .player-name.p2::before {
+    background: radial-gradient(circle at 30% 30%, #6ca3ce 0%, var(--vein) 60%, #1a3654 100%);
+  }
+  .player-name .turn-marker {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--blood);
+    margin-left: 2px;
+  }
+
+  .player-stats {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
 
   .stat {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     color: var(--ink-soft);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
   .stat-value { color: var(--blood); font-weight: 600; margin-left: 6px; }
@@ -278,28 +375,42 @@
     font-size: 0.85rem;
   }
 
-  .cell.player-here {
+  .cell.p1-here:not(.p2-here) {
     box-shadow: inset 0 0 0 3px var(--blood), inset 0 0 18px rgba(139,26,26,0.3);
     z-index: 2;
   }
+  .cell.p2-here:not(.p1-here) {
+    box-shadow: inset 0 0 0 3px var(--vein), inset 0 0 18px rgba(44,74,110,0.3);
+    z-index: 2;
+  }
+  .cell.p1-here.p2-here {
+    box-shadow: inset 0 0 0 3px var(--gold), inset 0 0 18px rgba(184,137,61,0.3);
+    z-index: 2;
+  }
 
-  .cell.player-here::before {
-    content: '';
+  .player-token {
     position: absolute;
     width: 22px; height: 22px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #d04545 0%, var(--blood) 50%, var(--blood-dark) 100%);
     box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 1px 1px 2px rgba(255,255,255,0.3);
     bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
     animation: pulse 1.4s ease-in-out infinite;
     z-index: 3;
+    pointer-events: none;
   }
+  .player-token.p1 {
+    background: radial-gradient(circle at 30% 30%, #d04545 0%, var(--blood) 50%, var(--blood-dark) 100%);
+  }
+  .player-token.p2 {
+    background: radial-gradient(circle at 30% 30%, #6ca3ce 0%, var(--vein) 50%, #1a3654 100%);
+  }
+  .player-token.solo { left: calc(50% - 11px); }
+  .player-token.left { left: calc(34% - 11px); }
+  .player-token.right { left: calc(66% - 11px); }
 
   @keyframes pulse {
-    0%, 100% { transform: translateX(-50%) scale(1); }
-    50% { transform: translateX(-50%) scale(1.15); box-shadow: 0 2px 12px rgba(139,26,26,0.7), inset 1px 1px 2px rgba(255,255,255,0.4); }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); box-shadow: 0 2px 12px rgba(0,0,0,0.6), inset 1px 1px 2px rgba(255,255,255,0.4); }
   }
 
   .side { display: flex; flex-direction: column; gap: 16px; }
@@ -679,16 +790,15 @@
       <button class="board-tab" data-board="2">Board III · Nerves &amp; Drainage</button>
     </div>
 
+    <div class="mode-selector" id="modeSelector">
+      <span class="mode-label">Players:</span>
+      <button class="mode-tab active" data-mode="1">1 · Solo</button>
+      <button class="mode-tab" data-mode="2">2 · Hot-Seat</button>
+    </div>
+
     <div class="hud">
-      <div class="hud-left">
-        <div class="stat">Position: <span class="stat-value" id="posStat">Start</span></div>
-        <div class="stat">Correct: <span class="stat-value" id="correctStat">0</span></div>
-      </div>
-      <div></div>
-      <div class="hud-right">
-        <div class="stat">Wrong: <span class="stat-value" id="wrongStat">0</span></div>
-        <button class="btn" id="resetBtn">Reset</button>
-      </div>
+      <div class="player-blocks" id="playerBlocks"></div>
+      <button class="btn" id="resetBtn">Reset</button>
     </div>
   </header>
 
@@ -700,7 +810,7 @@
 
     <div class="side">
       <div class="panel dice-area">
-        <h3>Roll the Die</h3>
+        <h3 id="diceHeading">Roll the Die</h3>
         <div class="die" id="die">
           <div class="pip"></div><div class="pip hidden"></div><div class="pip"></div>
           <div class="pip hidden"></div><div class="pip hidden"></div><div class="pip hidden"></div>
@@ -1587,18 +1697,31 @@ const BOARDS = [
 /* ============================================================
    GAME STATE
    ============================================================ */
+function makePlayer() {
+  return { position: 1, correct: 0, wrong: 0, rolls: 0 };
+}
+
 let state = {
   boardIdx: 0,
-  position: 1,
-  correct: 0,
-  wrong: 0,
-  rolls: 0,
+  numPlayers: 1,
+  currentPlayerIdx: 0,
+  players: [makePlayer(), makePlayer()],
   unusedQuestions: [],
   currentQuestion: null,
   pendingTarget: null,
   awaitingAnswer: false,
-  isMinimized: false
+  isMinimized: false,
+  winnerIdx: null
 };
+
+function currentPlayer() { return state.players[state.currentPlayerIdx]; }
+function playerLabel(i) { return state.numPlayers > 1 ? `Player ${i + 1}` : 'You'; }
+function playerInitial(i) { return `P${i + 1}`; }
+function nextTurn() {
+  if (state.numPlayers > 1) {
+    state.currentPlayerIdx = (state.currentPlayerIdx + 1) % state.numPlayers;
+  }
+}
 
 function currentBoard() { return BOARDS[state.boardIdx]; }
 
@@ -1652,7 +1775,14 @@ function renderBoard() {
     if (cellNum === TOTAL_CELLS) div.classList.add('finish');
     if (cfg.ladders[cellNum]) div.classList.add('ladder-start');
     if (cfg.snakes[cellNum]) div.classList.add('snake-start');
-    if (cellNum === state.position) div.classList.add('player-here');
+
+    // Determine which players occupy this cell
+    const playersHere = [];
+    for (let i = 0; i < state.numPlayers; i++) {
+      if (state.players[i].position === cellNum) playersHere.push(i);
+    }
+    if (playersHere.includes(0)) div.classList.add('p1-here');
+    if (playersHere.includes(1)) div.classList.add('p2-here');
 
     const num = document.createElement('div');
     num.className = 'cell-num';
@@ -1663,6 +1793,15 @@ function renderBoard() {
     label.className = 'cell-label';
     label.textContent = cfg.labels[cellNum] || '';
     div.appendChild(label);
+
+    // Add token elements for each player on this cell
+    playersHere.forEach((pIdx) => {
+      const tok = document.createElement('div');
+      tok.className = `player-token p${pIdx + 1}`;
+      if (playersHere.length === 1) tok.classList.add('solo');
+      else tok.classList.add(pIdx === 0 ? 'left' : 'right');
+      div.appendChild(tok);
+    });
 
     if (cfg.ladders[cellNum]) {
       div.title = `Ligament: cell ${cellNum} → cell ${cfg.ladders[cellNum]} (${cfg.labels[cfg.ladders[cellNum]]})`;
@@ -1730,7 +1869,8 @@ function showQuestion(target, roll) {
   state.isMinimized = false;
   state.currentQuestion = nextQuestion();
 
-  document.getElementById('modalTag').textContent = `Roll ${roll} → Cell ${target}`;
+  const turnPrefix = state.numPlayers > 1 ? `${playerLabel(state.currentPlayerIdx)} · ` : '';
+  document.getElementById('modalTag').textContent = `${turnPrefix}Roll ${roll} → Cell ${target}`;
   document.getElementById('modalCell').textContent = cfg.labels[target] || '';
   document.getElementById('modalStem').innerHTML = state.currentQuestion.stem;
 
@@ -1761,6 +1901,8 @@ function handleChoice(idx) {
   const cfg = currentBoard();
   const correctIdx = q.correct;
   const choices = document.querySelectorAll('.choice');
+  const player = currentPlayer();
+  const who = state.numPlayers > 1 ? `${playerLabel(state.currentPlayerIdx)} ` : '';
 
   choices.forEach((btn, i) => {
     btn.disabled = true;
@@ -1773,17 +1915,20 @@ function handleChoice(idx) {
   const fbText = document.getElementById('feedbackText');
 
   if (idx === correctIdx) {
-    state.correct++;
+    player.correct++;
     feedback.classList.add('shown', 'correct');
     fbTitle.textContent = '✓ Correct';
     fbText.innerHTML = q.explain;
-    log(`<span class="e-correct">✓ Correct</span> — advancing to cell <strong>${state.pendingTarget}</strong>.`);
+    log(`<span class="e-correct">✓ ${who}Correct</span> — advancing to cell <strong>${state.pendingTarget}</strong>.`);
   } else {
-    state.wrong++;
+    player.wrong++;
     feedback.classList.add('shown', 'incorrect');
     fbTitle.textContent = '✗ Not quite';
-    fbText.innerHTML = q.explain + '<br><br><em>You stay put — review and roll again.</em>';
-    log(`<span class="e-wrong">✗ Wrong</span> — staying at cell <strong>${state.position}</strong>. ${cfg.labels[state.position]}.`);
+    const stayMsg = state.numPlayers > 1
+      ? '<br><br><em>You stay put — turn passes to the other player.</em>'
+      : '<br><br><em>You stay put — review and roll again.</em>';
+    fbText.innerHTML = q.explain + stayMsg;
+    log(`<span class="e-wrong">✗ ${who}Wrong</span> — staying at cell <strong>${player.position}</strong>. ${cfg.labels[player.position]}.`);
     state.pendingTarget = null;
   }
 
@@ -1796,8 +1941,19 @@ function continueAfterAnswer() {
   state.awaitingAnswer = false;
   state.isMinimized = false;
 
-  if (state.pendingTarget !== null) {
-    moveTo(state.pendingTarget, true);
+  const hadCorrectAnswer = state.pendingTarget !== null;
+  if (hadCorrectAnswer) {
+    moveTo(state.pendingTarget, true, () => {
+      // Advance turn AFTER any snake/ladder cascade settles, unless game is won
+      if (state.winnerIdx === null) nextTurn();
+      updateHud();
+      updateDiceHeading();
+    });
+  } else {
+    // Wrong answer — pass turn to the other player
+    nextTurn();
+    updateHud();
+    updateDiceHeading();
   }
   state.pendingTarget = null;
 }
@@ -1820,13 +1976,15 @@ function toggleMinimize() {
 /* ============================================================
    MOVEMENT
    ============================================================ */
-function moveTo(target, checkSpecial) {
+function moveTo(target, checkSpecial, done) {
   const cfg = currentBoard();
-  state.position = target;
+  const player = currentPlayer();
+  player.position = target;
   renderBoard();
   updateHud();
 
-  if (state.position === TOTAL_CELLS) {
+  if (player.position === TOTAL_CELLS) {
+    state.winnerIdx = state.currentPlayerIdx;
     setTimeout(showWin, 600);
     return;
   }
@@ -1835,30 +1993,40 @@ function moveTo(target, checkSpecial) {
     if (cfg.ladders[target]) {
       const dest = cfg.ladders[target];
       log(`<span class="e-ladder">🦴 Ligament!</span> ${cfg.labels[target]} → ${cfg.labels[dest]} (cell ${dest}).`);
-      setTimeout(() => moveTo(dest, false), 700);
+      setTimeout(() => moveTo(dest, false, done), 700);
       return;
     }
     if (cfg.snakes[target]) {
       const dest = cfg.snakes[target];
       log(`<span class="e-snake">🩸 Hemorrhage!</span> ${cfg.labels[target]} → fall to ${cfg.labels[dest]} (cell ${dest}).`);
-      setTimeout(() => moveTo(dest, false), 700);
+      setTimeout(() => moveTo(dest, false, done), 700);
       return;
     }
   }
+  if (typeof done === 'function') done();
 }
 
 async function handleRoll() {
   if (state.awaitingAnswer) return;
+  if (state.winnerIdx !== null) return;
   document.getElementById('rollBtn').disabled = true;
 
-  const roll = await rollDie();
-  state.rolls++;
-  let target = state.position + roll;
+  const player = currentPlayer();
+  const who = state.numPlayers > 1 ? `${playerLabel(state.currentPlayerIdx)} ` : '';
 
-  log(`<span class="e-roll">🎲 Rolled ${roll}</span> from cell ${state.position}.`);
+  const roll = await rollDie();
+  player.rolls++;
+  let target = player.position + roll;
+
+  log(`<span class="e-roll">🎲 ${who}rolled ${roll}</span> from cell ${player.position}.`);
 
   if (target > TOTAL_CELLS) {
-    log(`Overshoot — you must land exactly on cell ${TOTAL_CELLS}. Staying at ${state.position}.`);
+    log(`Overshoot — must land exactly on cell ${TOTAL_CELLS}. ${who}stays at ${player.position}.`);
+    if (state.numPlayers > 1) {
+      nextTurn();
+      updateHud();
+      updateDiceHeading();
+    }
     document.getElementById('rollBtn').disabled = false;
     return;
   }
@@ -1872,22 +2040,58 @@ async function handleRoll() {
    ============================================================ */
 function updateHud() {
   const cfg = currentBoard();
-  document.getElementById('posStat').textContent = `${state.position} · ${cfg.labels[state.position] || ''}`;
-  document.getElementById('correctStat').textContent = state.correct;
-  document.getElementById('wrongStat').textContent = state.wrong;
+  const container = document.getElementById('playerBlocks');
+  container.innerHTML = '';
+
+  for (let i = 0; i < state.numPlayers; i++) {
+    const p = state.players[i];
+    const block = document.createElement('div');
+    block.className = 'player-block';
+    if (state.numPlayers > 1 && i === state.currentPlayerIdx && state.winnerIdx === null) {
+      block.classList.add('active-turn');
+    }
+    const turnTag = (state.numPlayers > 1 && i === state.currentPlayerIdx && state.winnerIdx === null)
+      ? `<span class="turn-marker">◀ turn</span>` : '';
+    block.innerHTML = `
+      <div class="player-name p${i + 1}">${playerLabel(i)}${turnTag}</div>
+      <div class="player-stats">
+        <div class="stat">Pos: <span class="stat-value">${p.position} · ${cfg.labels[p.position] || ''}</span></div>
+        <div class="stat">✓ <span class="stat-value">${p.correct}</span></div>
+        <div class="stat">✗ <span class="stat-value">${p.wrong}</span></div>
+      </div>
+    `;
+    container.appendChild(block);
+  }
+}
+
+function updateDiceHeading() {
+  const heading = document.getElementById('diceHeading');
+  if (!heading) return;
+  if (state.numPlayers > 1 && state.winnerIdx === null) {
+    heading.textContent = `${playerLabel(state.currentPlayerIdx)} — Roll`;
+  } else {
+    heading.textContent = 'Roll the Die';
+  }
 }
 
 function showWin() {
-  document.getElementById('winCorrect').textContent = state.correct;
-  document.getElementById('winWrong').textContent = state.wrong;
-  document.getElementById('winRolls').textContent = state.rolls;
+  const winnerIdx = state.winnerIdx ?? state.currentPlayerIdx;
+  const winner = state.players[winnerIdx];
+  document.getElementById('winCorrect').textContent = winner.correct;
+  document.getElementById('winWrong').textContent = winner.wrong;
+  document.getElementById('winRolls').textContent = winner.rolls;
 
   const isLastBoard = state.boardIdx === BOARDS.length - 1;
   const playAgainBtn = document.getElementById('playAgainBtn');
   const winTitle = document.getElementById('winTitle');
   const winMsg = document.getElementById('winMsg');
 
-  if (isLastBoard) {
+  if (state.numPlayers > 1) {
+    winTitle.textContent = `${playerLabel(winnerIdx)} Wins!`;
+    const opp = state.players[1 - winnerIdx];
+    winMsg.textContent = `${playerLabel(winnerIdx)} reached the apex first — ${winner.correct}✓ / ${winner.wrong}✗ vs ${playerLabel(1 - winnerIdx)} ${opp.correct}✓ / ${opp.wrong}✗.`;
+    playAgainBtn.textContent = isLastBoard ? 'Reset to Board I' : 'Next Board →';
+  } else if (isLastBoard) {
     winTitle.textContent = 'All Three Boards Mastered';
     winMsg.textContent = 'You have traversed Foundations, Vascular, and Nerves. The practical is yours.';
     playAgainBtn.textContent = 'Reset to Board I';
@@ -1898,7 +2102,11 @@ function showWin() {
   }
 
   document.getElementById('winOverlay').classList.add('active');
-  log(`🏆 <strong>Board ${state.boardIdx + 1} mastered.</strong>`);
+  const tag = state.numPlayers > 1
+    ? `🏆 <strong>${playerLabel(winnerIdx)} mastered Board ${state.boardIdx + 1}.</strong>`
+    : `🏆 <strong>Board ${state.boardIdx + 1} mastered.</strong>`;
+  log(tag);
+  updateDiceHeading();
 }
 
 function advanceOrReset() {
@@ -1912,16 +2120,18 @@ function advanceOrReset() {
 
 function switchBoard(newIdx) {
   state.boardIdx = newIdx;
-  state.position = 1;
-  state.correct = 0;
-  state.wrong = 0;
-  state.rolls = 0;
+  state.players = [makePlayer(), makePlayer()];
+  state.currentPlayerIdx = 0;
+  state.winnerIdx = null;
   state.pendingTarget = null;
   state.awaitingAnswer = false;
   state.isMinimized = false;
   shuffleQuestions();
 
-  document.getElementById('log').innerHTML = `<div class="log-entry">Welcome to Board ${['I','II','III'][newIdx]}. Roll to begin.</div>`;
+  const intro = state.numPlayers > 1
+    ? `Welcome to Board ${['I','II','III'][newIdx]} — 2 player hot-seat. Player 1 rolls first.`
+    : `Welcome to Board ${['I','II','III'][newIdx]}. Roll to begin.`;
+  document.getElementById('log').innerHTML = `<div class="log-entry">${intro}</div>`;
   document.getElementById('overlay').classList.remove('active', 'minimized');
   document.getElementById('winOverlay').classList.remove('active');
 
@@ -1932,6 +2142,17 @@ function switchBoard(newIdx) {
   renderDie(1);
   renderBoard();
   updateHud();
+  updateDiceHeading();
+}
+
+function setMode(num) {
+  if (state.numPlayers === num) return;
+  state.numPlayers = num;
+  document.querySelectorAll('.mode-tab').forEach((tab) => {
+    tab.classList.toggle('active', parseInt(tab.dataset.mode) === num);
+  });
+  // Reset current board when changing modes (clears positions for both players)
+  switchBoard(state.boardIdx);
 }
 
 function reset() {
@@ -1965,11 +2186,20 @@ document.querySelectorAll('.board-tab').forEach((tab) => {
   });
 });
 
+// Mode selector tabs
+document.querySelectorAll('.mode-tab').forEach((tab) => {
+  tab.addEventListener('click', () => {
+    const n = parseInt(tab.dataset.mode);
+    setMode(n);
+  });
+});
+
 /* Init */
 shuffleQuestions();
 renderBoard();
 renderDie(1);
 updateHud();
+updateDiceHeading();
 </script>
 </body>
 </html>
