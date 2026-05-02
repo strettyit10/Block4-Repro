@@ -38,24 +38,10 @@
     flex-wrap: wrap;
     gap: 12px;
   }
-  header h1 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  header h1 .subtitle {
-    font-weight: 300;
-    font-size: 14px;
-    opacity: 0.85;
-    margin-left: 8px;
-  }
-  .controls {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+  header h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: 0.5px; }
+  header h1 .subtitle { font-weight: 300; font-size: 14px; opacity: 0.85; margin-left: 8px; }
+
+  .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .btn {
     background: rgba(255,255,255,0.12);
     color: var(--cream);
@@ -69,24 +55,16 @@
   }
   .btn:hover { background: rgba(255,255,255,0.22); }
   .btn.active { background: var(--gold); color: var(--slate); border-color: var(--gold); }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--slate);
-    border-color: var(--gold);
-  }
-  .btn-primary:hover { background: #fbbf24; }
 
   .layout {
     display: grid;
-    grid-template-columns: 1fr 340px;
+    grid-template-columns: 1fr 360px;
     gap: 16px;
     padding: 16px;
-    max-width: 1600px;
+    max-width: 1700px;
     margin: 0 auto;
   }
-  @media (max-width: 1100px) {
-    .layout { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } }
 
   .board-container {
     background: white;
@@ -97,57 +75,50 @@
     overflow: hidden;
   }
   .board-legend {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    padding: 8px 12px;
-    margin-bottom: 8px;
-    font-size: 12px;
-    color: var(--slate-light);
+    display: flex; gap: 14px; flex-wrap: wrap;
+    padding: 8px 12px; margin-bottom: 8px;
+    font-size: 12px; color: var(--slate-light);
     border-bottom: 1px solid #e5e7eb;
   }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .legend-swatch {
-    width: 20px;
-    height: 4px;
-    border-radius: 2px;
-  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 20px; height: 4px; border-radius: 2px; }
   .legend-swatch.dot { width: 10px; height: 10px; border-radius: 50%; }
 
-  svg.board {
-    width: 100%;
-    height: auto;
-    user-select: none;
-  }
+  svg.board { width: 100%; height: auto; user-select: none; }
 
   /* SVG element styles */
   .edge {
-    stroke-width: 6;
+    stroke-width: 5;
     fill: none;
     cursor: pointer;
-    opacity: 0.55;
+    opacity: 0.45;
     transition: opacity 0.15s, stroke-width 0.15s;
     stroke-linecap: round;
   }
-  .edge:hover { opacity: 1; stroke-width: 8; }
-  .edge.art { stroke: var(--art-color); stroke-dasharray: none; }
+  .edge:hover { opacity: 0.95; stroke-width: 7; }
+  .edge.art { stroke: var(--art-color); }
   .edge.nerve { stroke: var(--nerve-color); stroke-dasharray: 8 4; }
   .edge.lymph { stroke: var(--lymph-color); stroke-dasharray: 2 5; }
-  .edge.claimed-p1 { stroke: var(--p1-color) !important; opacity: 1; stroke-width: 9; stroke-dasharray: none; }
-  .edge.claimed-p2 { stroke: var(--p2-color) !important; opacity: 1; stroke-width: 9; stroke-dasharray: none; }
-  .edge.locked { opacity: 0.2; cursor: not-allowed; }
-  .edge.dim { opacity: 0.12; pointer-events: none; }
-  .edge.highlight { opacity: 1; stroke-width: 10; filter: drop-shadow(0 0 6px currentColor); }
+  .edge.claimed-p1 { stroke: var(--p1-color) !important; opacity: 1; stroke-width: 8; stroke-dasharray: none; }
+  .edge.claimed-p2 { stroke: var(--p2-color) !important; opacity: 1; stroke-width: 8; stroke-dasharray: none; }
+  .edge.in-progress-p1 { stroke: var(--p1-color); opacity: 0.7; stroke-width: 6; stroke-dasharray: 8 4; }
+  .edge.in-progress-p2 { stroke: var(--p2-color); opacity: 0.7; stroke-width: 6; stroke-dasharray: 8 4; }
+  .edge.dim { opacity: 0.1; pointer-events: none; }
+  .edge.locked { cursor: not-allowed; opacity: 0.3; }
 
-  .node-circle {
-    fill: white;
-    stroke: var(--slate);
+  .mile-dot {
     stroke-width: 1.5;
+    cursor: pointer;
+    pointer-events: none;
   }
+  .mile-dot.empty { fill: white; stroke: #94a3b8; }
+  .mile-dot.empty.art { stroke: var(--art-color); }
+  .mile-dot.empty.nerve { stroke: var(--nerve-color); }
+  .mile-dot.empty.lymph { stroke: var(--lymph-color); }
+  .mile-dot.filled-p1 { fill: var(--p1-color); stroke: var(--p1-color); }
+  .mile-dot.filled-p2 { fill: var(--p2-color); stroke: var(--p2-color); }
+
+  .node-circle { fill: white; stroke: var(--slate); stroke-width: 1.5; }
   .node-circle.organ { fill: #fce7f3; stroke: var(--rose); stroke-width: 2; }
   .node-circle.lymph { fill: #dcfce7; stroke: var(--lymph-color); stroke-width: 2; }
   .node-circle.nerve { fill: #fef3c7; stroke: var(--nerve-color); stroke-width: 2; }
@@ -161,16 +132,9 @@
     text-anchor: middle;
   }
   .node-label.source { fill: var(--cream); font-weight: 700; font-size: 11px; }
-  .node-label.dim { opacity: 0.25; }
-
-  .ticket-glow circle { fill: var(--gold); }
 
   /* Sidebar */
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .sidebar { display: flex; flex-direction: column; gap: 12px; }
   .panel {
     background: white;
     border-radius: 10px;
@@ -185,11 +149,8 @@
     color: var(--burgundy);
     font-weight: 600;
   }
-  .scores {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
+
+  .scores { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .score-card {
     padding: 10px 12px;
     border-radius: 8px;
@@ -202,6 +163,70 @@
   .score-card .label { font-size: 11px; color: var(--slate-light); font-weight: 600; text-transform: uppercase; }
   .score-card .name { font-size: 13px; font-weight: 600; margin-top: 2px; }
   .score-card .points { font-size: 28px; font-weight: 700; line-height: 1; margin-top: 4px; color: var(--burgundy); }
+
+  /* Dice panel */
+  .dice-panel {
+    text-align: center;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-radius: 10px;
+    padding: 14px;
+    border: 2px solid var(--gold);
+  }
+  .dice-display {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--burgundy);
+    transition: transform 0.1s;
+  }
+  .dice-display.rolling { animation: diceRoll 0.5s ease; }
+  @keyframes diceRoll {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-90deg) scale(1.1); }
+    50% { transform: rotate(-180deg) scale(0.9); }
+    75% { transform: rotate(-270deg) scale(1.1); }
+    100% { transform: rotate(-360deg) scale(1); }
+  }
+  .roll-btn {
+    background: var(--burgundy);
+    color: var(--cream);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+  }
+  .roll-btn:hover { background: var(--burgundy-dark); }
+  .roll-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .budget-text {
+    font-size: 13px;
+    color: var(--slate);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  .budget-pips {
+    display: inline-flex;
+    gap: 4px;
+    margin-left: 8px;
+  }
+  .pip {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--slate-light);
+    opacity: 0.3;
+  }
+  .pip.active { background: var(--gold); opacity: 1; box-shadow: 0 0 4px var(--gold); }
 
   .ticket {
     background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%);
@@ -225,12 +250,8 @@
   .ticket .pts { font-weight: 700; color: var(--gold); }
   .ticket.complete .pts { color: var(--lymph-color); }
   .ticket .checkmark {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    color: var(--lymph-color);
-    font-size: 18px;
-    font-weight: 700;
+    position: absolute; top: 8px; right: 8px;
+    color: var(--lymph-color); font-size: 18px; font-weight: 700;
     display: none;
   }
   .ticket.complete .checkmark { display: block; }
@@ -249,14 +270,11 @@
 
   /* Modal */
   .modal-backdrop {
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background: rgba(15, 23, 42, 0.65);
     display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    padding: 20px;
+    align-items: center; justify-content: center;
+    z-index: 100; padding: 20px;
   }
   .modal-backdrop.show { display: flex; }
   .modal {
@@ -279,9 +297,25 @@
   .modal .segment-name {
     font-size: 20px;
     font-weight: 600;
-    margin: 0 0 14px;
+    margin: 0 0 6px;
     color: var(--slate);
   }
+  .modal .segment-status {
+    font-size: 13px;
+    color: var(--slate-light);
+    margin-bottom: 14px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .modal .segment-status .chip {
+    padding: 3px 8px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .modal .segment-status .chip.budget { background: #fef3c7; color: var(--burgundy); }
+  .modal .segment-status .chip.progress { background: #dbeafe; color: var(--p1-color); }
   .modal .question {
     font-size: 15px;
     line-height: 1.5;
@@ -336,33 +370,18 @@
 
   /* Setup screen */
   .setup-screen {
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 200;
-    padding: 20px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200; padding: 20px;
   }
   .setup-card {
-    background: white;
-    border-radius: 14px;
-    padding: 32px;
-    max-width: 540px;
-    width: 100%;
+    background: white; border-radius: 14px; padding: 32px;
+    max-width: 540px; width: 100%;
     box-shadow: 0 30px 80px rgba(0,0,0,0.4);
   }
-  .setup-card h1 {
-    margin: 0 0 4px;
-    color: var(--burgundy);
-    font-size: 26px;
-  }
-  .setup-card .tag {
-    color: var(--slate-light);
-    font-size: 14px;
-    margin-bottom: 22px;
-  }
+  .setup-card h1 { margin: 0 0 4px; color: var(--burgundy); font-size: 26px; }
+  .setup-card .tag { color: var(--slate-light); font-size: 14px; margin-bottom: 22px; }
   .setup-card .section { margin-bottom: 18px; }
   .setup-card label {
     display: block;
@@ -375,8 +394,7 @@
   }
   .choice-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .choice {
-    flex: 1;
-    min-width: 130px;
+    flex: 1; min-width: 130px;
     padding: 14px;
     border: 2px solid #e5e7eb;
     border-radius: 10px;
@@ -398,58 +416,35 @@
   }
   .name-row { display: flex; gap: 10px; }
   .name-row > div { flex: 1; }
-
   .start-btn {
     width: 100%;
-    background: var(--gold);
-    color: var(--slate);
-    border: none;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 8px;
+    background: var(--gold); color: var(--slate);
+    border: none; padding: 14px;
+    border-radius: 8px; font-size: 16px; font-weight: 700;
+    cursor: pointer; margin-top: 8px;
     transition: all 0.15s;
   }
   .start-btn:hover { background: #facc15; transform: translateY(-1px); }
 
-  /* Endgame */
   .end-card { text-align: center; }
-  .end-card .winner {
-    font-size: 28px;
-    font-weight: 700;
-    margin: 16px 0;
-  }
+  .end-card .winner { font-size: 28px; font-weight: 700; margin: 16px 0; }
   .end-card .winner.p1 { color: var(--p1-color); }
   .end-card .winner.p2 { color: var(--p2-color); }
   .end-card .winner.tie { color: var(--gold); }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin: 18px 0;
-  }
-  .stat {
-    padding: 12px;
-    background: #f8fafc;
-    border-radius: 8px;
-  }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
+  .stat { padding: 12px; background: #f8fafc; border-radius: 8px; }
   .stat .num { font-size: 26px; font-weight: 700; color: var(--burgundy); }
   .stat .lbl { font-size: 11px; color: var(--slate-light); text-transform: uppercase; }
 
   .toast {
     position: fixed;
-    bottom: 30px;
-    left: 50%;
+    bottom: 30px; left: 50%;
     transform: translateX(-50%);
-    background: var(--slate);
-    color: white;
+    background: var(--slate); color: white;
     padding: 12px 20px;
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    z-index: 50;
-    font-size: 14px;
+    z-index: 50; font-size: 14px;
     animation: toastIn 0.3s ease;
   }
   .toast.success { background: var(--lymph-color); }
@@ -460,43 +455,20 @@
     to { opacity: 1; transform: translate(-50%, 0); }
   }
 
-  .ticket-progress-line {
-    position: relative;
-    height: 4px;
-    background: #e5e7eb;
-    border-radius: 2px;
-    margin-top: 6px;
-  }
-  .ticket-progress-bar {
-    position: absolute;
-    inset: 0;
-    background: var(--gold);
-    border-radius: 2px;
-    width: 0%;
-    transition: width 0.3s;
-  }
-  .ticket.complete .ticket-progress-bar { background: var(--lymph-color); width: 100% !important; }
+  .help-text { font-size: 11px; color: var(--slate-light); line-height: 1.5; }
 
-  .small-tag {
-    display: inline-block;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 3px;
+  .end-turn-btn {
     background: #f1f5f9;
-    color: var(--slate-light);
-    margin-right: 4px;
-    font-weight: 600;
-    text-transform: uppercase;
+    color: var(--slate);
+    border: 1px solid #cbd5e1;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 8px;
   }
-  .small-tag.art { background: #fee2e2; color: var(--art-color); }
-  .small-tag.nerve { background: #fef3c7; color: var(--nerve-color); }
-  .small-tag.lymph { background: #dcfce7; color: var(--lymph-color); }
-
-  .help-text {
-    font-size: 11px;
-    color: var(--slate-light);
-    line-height: 1.5;
-  }
+  .end-turn-btn:hover { background: #e2e8f0; }
 </style>
 </head>
 <body>
@@ -512,11 +484,11 @@
       <div class="choice-row">
         <div class="choice selected" data-mode="2p" onclick="selectChoice(this, 'mode')">
           <div class="title">2 Players</div>
-          <div class="desc">Hot-seat. First to 30 points wins.</div>
+          <div class="desc">Hot-seat. First to 50 points wins.</div>
         </div>
         <div class="choice" data-mode="solo" onclick="selectChoice(this, 'mode')">
           <div class="title">Solo Study</div>
-          <div class="desc">Complete tickets &amp; rack up points.</div>
+          <div class="desc">Roll dice, claim routes, finish tickets.</div>
         </div>
       </div>
     </div>
@@ -538,24 +510,20 @@
     <div class="section">
       <label>Player Names</label>
       <div class="name-row">
-        <div>
-          <input type="text" id="p1Name" value="Player 1" placeholder="Player 1">
-        </div>
-        <div id="p2NameWrap">
-          <input type="text" id="p2Name" value="Player 2" placeholder="Player 2">
-        </div>
+        <div><input type="text" id="p1Name" value="Player 1" placeholder="Player 1"></div>
+        <div id="p2NameWrap"><input type="text" id="p2Name" value="Player 2" placeholder="Player 2"></div>
       </div>
     </div>
 
-    <button class="start-btn" onclick="startGame()">Begin → Draw Tickets</button>
+    <button class="start-btn" onclick="startGame()">Begin → Roll Dice &amp; Claim Routes</button>
     <div class="help-text" style="margin-top:12px; text-align:center;">
-      Click any segment on the board to claim it. Answer the ID question correctly to keep it.
-      Each ticket completed = bonus points based on route difficulty.
+      <strong>How to play:</strong> Roll a die (1–6) at the start of your turn — that's how many questions you can attempt.
+      Pick any unclaimed segment and answer questions about it. Each correct answer = 1 mile of progress.
+      Claim a segment when you've filled all its miles. Complete tickets for big bonus points.
     </div>
   </div>
 </div>
 
-<!-- MAIN GAME -->
 <header>
   <h1>Pelvic Pursuit <span class="subtitle">Ticket to Ride · Reproductive Anatomy</span></h1>
   <div class="controls">
@@ -563,7 +531,6 @@
     <button class="btn" id="layerArt" onclick="setLayer('art')">Arteries</button>
     <button class="btn" id="layerNerve" onclick="setLayer('nerve')">Nerves</button>
     <button class="btn" id="layerLymph" onclick="setLayer('lymph')">Lymphatics</button>
-    <button class="btn" id="sexToggle" onclick="toggleSex()">⚧ Switch Sex</button>
     <button class="btn" onclick="restart()">↻ Restart</button>
   </div>
 </header>
@@ -574,10 +541,10 @@
       <div class="legend-item"><div class="legend-swatch" style="background:var(--art-color)"></div> Arterial</div>
       <div class="legend-item"><div class="legend-swatch" style="background:var(--nerve-color); border-top:2px dashed var(--nerve-color); height:0; border-radius:0;"></div> Nerve</div>
       <div class="legend-item"><div class="legend-swatch" style="background:var(--lymph-color); border-top:2px dotted var(--lymph-color); height:0; border-radius:0;"></div> Lymph</div>
-      <div class="legend-item"><div class="legend-swatch dot" style="background:#fce7f3; border:2px solid var(--rose);"></div> Organ / Target</div>
-      <div class="legend-item"><div class="legend-swatch dot" style="background:#fef3c7; border:2px solid var(--nerve-color);"></div> Nerve node</div>
-      <div class="legend-item"><div class="legend-swatch dot" style="background:#dcfce7; border:2px solid var(--lymph-color);"></div> Lymph node</div>
-      <div class="legend-item" style="margin-left:auto"><strong>Tip:</strong>&nbsp;Click any colored line to claim that route.</div>
+      <div class="legend-item"><div class="legend-swatch dot" style="background:white; border:1.5px solid #94a3b8;"></div> Empty mile</div>
+      <div class="legend-item"><div class="legend-swatch dot" style="background:var(--p1-color);"></div> Claimed (P1)</div>
+      <div class="legend-item"><div class="legend-swatch dot" style="background:var(--p2-color);"></div> Claimed (P2)</div>
+      <div class="legend-item" style="margin-left:auto"><strong>Tip:</strong>&nbsp;Roll first, then click a segment to start answering its questions.</div>
     </div>
     <svg class="board" id="board" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid meet"></svg>
   </div>
@@ -589,17 +556,25 @@
       <div class="turn-banner" id="turnBanner" style="margin-top:10px;">Player 1's turn</div>
     </div>
 
+    <div class="panel dice-panel" id="dicePanel">
+      <h3 style="color:var(--burgundy); margin-top:0">🎲 Roll Dice</h3>
+      <div class="dice-display" id="diceDisplay">—</div>
+      <button class="roll-btn" id="rollBtn" onclick="rollDice()">Roll for Question Budget</button>
+      <div class="budget-text" id="budgetText"></div>
+      <button class="end-turn-btn" id="endTurnBtn" onclick="endTurn()" style="display:none;">End Turn</button>
+    </div>
+
     <div class="panel">
       <h3>Active Tickets</h3>
       <div id="ticketList"></div>
       <div class="help-text" style="margin-top:8px;">
-        Each player holds 3 tickets. Complete them by claiming a continuous chain of routes from start to end node. Each correct answer also earns +1 pt.
+        Each player holds 3 tickets. Complete one by claiming a continuous chain of segments connecting its endpoints. Bonus = ticket value.
       </div>
     </div>
 
     <div class="panel">
       <h3>Last Move</h3>
-      <div id="lastMove" class="help-text">Click a segment on the board to begin.</div>
+      <div id="lastMove" class="help-text">Roll the dice to begin your turn.</div>
     </div>
   </div>
 </div>
@@ -609,11 +584,12 @@
   <div class="modal">
     <h2 id="qLayer">Arterial Segment</h2>
     <div class="segment-name" id="qSegName">—</div>
+    <div class="segment-status" id="qStatus"></div>
     <div class="question" id="qText">—</div>
     <div class="answers" id="qAnswers"></div>
     <div class="explanation" id="qExplanation"></div>
     <div class="modal-footer" id="qFooter">
-      <button class="btn-modal ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn-modal ghost" onclick="closeModal()">Stop</button>
     </div>
   </div>
 </div>
@@ -634,11 +610,10 @@
 
 <script>
 // ============================================================
-// DATA: NODES, EDGES (questions), TICKETS
+// NODES — graph endpoints
 // ============================================================
-
 const NODES = {
-  // ====== ARTERIAL TREE (top → middle → branches) ======
+  // Arterial tree
   aorta: { x: 700, y: 50, label: 'Abdominal Aorta', layer: 'source' },
   ovarian_a: { x: 220, y: 110, label: 'Ovarian / Testicular a.', layer: 'art' },
   ci: { x: 700, y: 130, label: 'Common Iliac a.', layer: 'art' },
@@ -647,13 +622,9 @@ const NODES = {
   fem: { x: 380, y: 320, label: 'Femoral a. (out)', layer: 'art' },
   ant_div: { x: 980, y: 320, label: 'Anterior Division', layer: 'art' },
   post_div: { x: 760, y: 320, label: 'Posterior Division', layer: 'art' },
-
-  // Posterior division branches
   iliolumbar: { x: 620, y: 410, label: 'Iliolumbar a.', layer: 'art' },
   lat_sacral: { x: 700, y: 410, label: 'Lateral Sacral aa.', layer: 'art' },
   sup_gluteal: { x: 780, y: 410, label: 'Superior Gluteal a.', layer: 'art' },
-
-  // Anterior division branches
   umbilical: { x: 870, y: 410, label: 'Umbilical a.', layer: 'art' },
   sup_vesical: { x: 870, y: 510, label: 'Superior Vesical a.', layer: 'art' },
   obturator_a: { x: 950, y: 410, label: 'Obturator a.', layer: 'art' },
@@ -667,7 +638,7 @@ const NODES = {
   dorsal_pc_a: { x: 1040, y: 600, label: 'Dorsal a. of penis/clitoris', layer: 'art' },
   inf_gluteal: { x: 950, y: 510, label: 'Inferior Gluteal a.', layer: 'art' },
 
-  // ===== ORGANS =====
+  // Organs
   bladder: { x: 770, y: 620, label: 'Bladder', layer: 'organ' },
   prostate: { x: 950, y: 700, label: 'Prostate', layer: 'organ', sex: 'M' },
   uterus: { x: 950, y: 700, label: 'Uterus', layer: 'organ', sex: 'F' },
@@ -685,7 +656,7 @@ const NODES = {
   gluteal_region: { x: 660, y: 510, label: 'Gluteal region', layer: 'organ' },
   medial_thigh: { x: 380, y: 410, label: 'Medial thigh', layer: 'organ' },
 
-  // ===== NERVES (left side) =====
+  // Nerves (left side)
   t12_l2: { x: 80, y: 240, label: 'T12–L2 cord', layer: 'nerve' },
   sym_trunk: { x: 80, y: 320, label: 'Sympathetic trunk', layer: 'nerve' },
   s2: { x: 80, y: 410, label: 'S2', layer: 'nerve' },
@@ -703,7 +674,7 @@ const NODES = {
   shp: { x: 320, y: 180, label: 'Superior hypogastric plexus', layer: 'nerve' },
   ihp: { x: 360, y: 280, label: 'Inferior hypogastric plexus', layer: 'nerve' },
 
-  // ===== LYMPH NODES (right side) =====
+  // Lymph nodes (right side)
   para_aortic: { x: 1340, y: 80, label: 'Para-aortic LN', layer: 'lymph' },
   common_iliac_ln: { x: 1340, y: 160, label: 'Common Iliac LN', layer: 'lymph' },
   ext_iliac_ln: { x: 1340, y: 240, label: 'External Iliac LN', layer: 'lymph' },
@@ -712,533 +683,436 @@ const NODES = {
   deep_inguinal_ln: { x: 1340, y: 680, label: 'Deep Inguinal LN', layer: 'lymph' },
 };
 
-// EDGES — each has a unique id, layer, endpoints, and a question
+// ============================================================
+// EDGES — each has length (1-3 miles to claim) and a question pool
+// ============================================================
 const EDGES = [
   // ============= ARTERIAL =============
-  { id: 'e_aorta_ci', layer: 'art', from: 'aorta', to: 'ci',
-    label: 'Aorta → Common Iliac',
-    q: 'At which vertebral level does the abdominal aorta bifurcate into the common iliac arteries?',
-    options: ['L2', 'L3', 'L4', 'L5'], correct: 2,
-    explanation: 'The abdominal aorta bifurcates at L4 to form the right and left common iliac arteries.' },
+  { id: 'e_aorta_ci', layer: 'art', from: 'aorta', to: 'ci', length: 3, label: 'Aorta → Common Iliac', questions: [
+    { q: 'At which vertebral level does the abdominal aorta bifurcate into the common iliac arteries?', options: ['L2', 'L3', 'L4', 'L5'], correct: 2, explanation: 'The aorta bifurcates at L4 (just below the umbilicus) into the right and left common iliac arteries.' },
+    { q: 'The median sacral artery arises from which vessel just above the aortic bifurcation?', options: ['Inferior mesenteric', 'Aorta itself (small unpaired branch)', 'Common iliac', 'Internal iliac'], correct: 1, explanation: 'The median sacral artery is a small unpaired branch of the aorta arising at L4 (or just above), descending over L5/sacrum.' },
+    { q: 'A 65-year-old with a pulsatile abdominal mass on physical exam most likely has an aneurysm at which level?', options: ['T10 (celiac)', 'L1 (renal)', 'Infrarenal aorta (most common AAA location)', 'L5 (common iliac)'], correct: 2, explanation: 'Most abdominal aortic aneurysms (AAAs) occur in the infrarenal aorta (between renal arteries and bifurcation at L4).' },
+  ]},
 
-  { id: 'e_ci_ei', layer: 'art', from: 'ci', to: 'ei',
-    label: 'Common Iliac → External Iliac',
-    q: 'The external iliac artery becomes which artery as it passes deep to the inguinal ligament?',
-    options: ['Obturator', 'Femoral', 'Profunda femoris', 'Internal pudendal'], correct: 1,
-    explanation: 'The external iliac artery becomes the femoral artery as it passes deep to the inguinal ligament.' },
+  { id: 'e_ci_ei', layer: 'art', from: 'ci', to: 'ei', length: 2, label: 'Common Iliac → External Iliac', questions: [
+    { q: 'The external iliac artery becomes which artery as it passes deep to the inguinal ligament?', options: ['Obturator', 'Femoral', 'Profunda femoris', 'Internal pudendal'], correct: 1, explanation: 'The external iliac becomes the femoral artery as it passes posterior to the inguinal ligament (the midpoint of which is a key surface landmark).' },
+    { q: 'Just before passing under the inguinal ligament, the external iliac gives off which two branches?', options: ['Inferior epigastric & deep circumflex iliac', 'Obturator & superior vesical', 'Iliolumbar & superior gluteal', 'Internal pudendal & vaginal'], correct: 0, explanation: 'The external iliac artery gives off the inferior epigastric (ascends within rectus sheath) and deep circumflex iliac arteries before exiting the pelvis.' },
+  ]},
 
-  { id: 'e_ci_ii', layer: 'art', from: 'ci', to: 'ii',
-    label: 'Common Iliac → Internal Iliac',
-    q: 'At which landmark does the common iliac artery typically bifurcate into the external and internal iliac arteries?',
-    options: ['L4 vertebral body', 'Pubic symphysis', 'Sacroiliac joint', 'Ischial spine'], correct: 2,
-    explanation: 'The common iliac bifurcates near the sacroiliac joint into the external and internal iliac arteries.' },
+  { id: 'e_ci_ii', layer: 'art', from: 'ci', to: 'ii', length: 3, label: 'Common Iliac → Internal Iliac', questions: [
+    { q: 'At which landmark does the common iliac artery typically bifurcate into external and internal iliac arteries?', options: ['L4 vertebral body', 'Pubic symphysis', 'Sacroiliac joint', 'Ischial spine'], correct: 2, explanation: 'The common iliac bifurcates near the sacroiliac joint into external (anterior) and internal (posterior) iliac arteries.' },
+    { q: 'Which structure crosses anterior to the bifurcation of the common iliac artery in females?', options: ['Round ligament', 'Ureter', 'Ovarian vein', 'Uterine artery'], correct: 1, explanation: 'The ureter crosses anterior to the bifurcation of the common iliac artery — a classic surgical landmark for finding the ureter.' },
+    { q: 'The internal iliac artery is also known as which artery?', options: ['Hypogastric artery', 'Pudendal artery', 'Iliolumbar artery', 'Lateral sacral artery'], correct: 0, explanation: 'The internal iliac artery is also called the hypogastric artery — the term used in the "superior/inferior hypogastric plexus" naming of nerves traveling alongside it.' },
+  ]},
 
-  { id: 'e_ei_fem', layer: 'art', from: 'ei', to: 'fem',
-    label: 'External Iliac → Femoral',
-    q: 'The external iliac artery exits the pelvis to become the femoral artery by passing deep to which structure?',
-    options: ['Inguinal ligament', 'Sacrospinous ligament', 'Sacrotuberous ligament', 'Pectineal ligament'], correct: 0,
-    explanation: 'The external iliac passes posterior to the inguinal ligament to enter the thigh as the femoral artery.' },
+  { id: 'e_ei_fem', layer: 'art', from: 'ei', to: 'fem', length: 1, label: 'External Iliac → Femoral', questions: [
+    { q: 'The external iliac artery exits the pelvis to become the femoral artery by passing deep to which structure?', options: ['Inguinal ligament', 'Sacrospinous ligament', 'Sacrotuberous ligament', 'Pectineal ligament'], correct: 0, explanation: 'It passes posterior to the inguinal ligament at its midpoint (NAVEL: from lateral to medial — Nerve, Artery, Vein, Empty space, Lymphatics).' },
+  ]},
 
-  { id: 'e_ii_post', layer: 'art', from: 'ii', to: 'post_div',
-    label: 'Internal Iliac → Posterior Division',
-    q: 'The anterior and posterior divisions of the internal iliac artery split at which approximate level?',
-    options: ['Pelvic inlet', 'Superior border of greater sciatic foramen', 'Ischial spine', 'Pelvic outlet'], correct: 1,
-    explanation: 'The internal iliac splits into anterior and posterior divisions at the superior border of the greater sciatic foramen.' },
+  { id: 'e_ii_post', layer: 'art', from: 'ii', to: 'post_div', length: 2, label: 'Internal Iliac → Posterior Division', questions: [
+    { q: 'The anterior and posterior divisions of the internal iliac artery split at which approximate level?', options: ['Pelvic inlet', 'Superior border of greater sciatic foramen', 'Ischial spine', 'Pelvic outlet'], correct: 1, explanation: 'The internal iliac splits into anterior and posterior divisions at the superior border of the greater sciatic foramen.' },
+    { q: 'Which three branches comprise the POSTERIOR division of the internal iliac artery?', options: ['Iliolumbar, lateral sacral, superior gluteal', 'Iliolumbar, middle rectal, inferior gluteal', 'Lateral sacral, obturator, internal pudendal', 'Superior gluteal, inferior gluteal, internal pudendal'], correct: 0, explanation: 'The posterior division gives off iliolumbar, lateral sacral, and superior gluteal arteries (mnemonic: "I Love Sex" — Iliolumbar, Lateral sacral, Superior gluteal).' },
+  ]},
 
-  { id: 'e_ii_ant', layer: 'art', from: 'ii', to: 'ant_div',
-    label: 'Internal Iliac → Anterior Division',
-    q: 'Which of the following is NOT a branch of the anterior division of the internal iliac artery?',
-    options: ['Umbilical a.', 'Obturator a.', 'Superior gluteal a.', 'Internal pudendal a.'], correct: 2,
-    explanation: 'Superior gluteal is from the POSTERIOR division (along with iliolumbar and lateral sacral). All others listed are anterior division branches.' },
+  { id: 'e_ii_ant', layer: 'art', from: 'ii', to: 'ant_div', length: 2, label: 'Internal Iliac → Anterior Division', questions: [
+    { q: 'Which of the following is NOT a branch of the anterior division of the internal iliac artery?', options: ['Umbilical a.', 'Obturator a.', 'Superior gluteal a.', 'Internal pudendal a.'], correct: 2, explanation: 'Superior gluteal is from the POSTERIOR division. Anterior division branches include umbilical, obturator, inferior vesical (M)/uterine + vaginal (F), middle rectal, internal pudendal, inferior gluteal.' },
+    { q: 'Which artery is the ONLY terminal branch of the ANTERIOR division of internal iliac that exits the pelvis through the greater sciatic foramen?', options: ['Inferior gluteal a.', 'Internal pudendal a.', 'Both inferior gluteal AND internal pudendal', 'Uterine a.'], correct: 2, explanation: 'BOTH inferior gluteal and internal pudendal arteries (terminal branches of the anterior division) exit via GSF inferior to piriformis.' },
+  ]},
 
   // Posterior division
-  { id: 'e_post_iliolumbar', layer: 'art', from: 'post_div', to: 'iliolumbar',
-    label: 'Posterior Div → Iliolumbar a.',
-    q: 'The iliolumbar artery characteristically courses in which direction relative to the pelvic inlet?',
-    options: ['Descends into true pelvis', 'Ascends from pelvic inlet to iliac fossa', 'Travels laterally to obturator canal', 'Courses with pudendal nerve'], correct: 1,
-    explanation: 'The iliolumbar artery ascends from the pelvic inlet and recurs to the iliac fossa.' },
+  { id: 'e_post_iliolumbar', layer: 'art', from: 'post_div', to: 'iliolumbar', length: 2, label: 'Posterior Div → Iliolumbar a.', questions: [
+    { q: 'The iliolumbar artery characteristically courses in which direction relative to the pelvic inlet?', options: ['Descends into true pelvis', 'Ascends from pelvic inlet to iliac fossa', 'Travels laterally to obturator canal', 'Courses with pudendal nerve'], correct: 1, explanation: 'The iliolumbar artery is unique among internal iliac branches — it ASCENDS back out of the pelvic inlet to supply the iliacus, psoas, and quadratus lumborum.' },
+    { q: 'Which two branches does the iliolumbar artery give off?', options: ['Iliac and lumbar branches', 'Superior and inferior vesical', 'Anterior and posterior trunks', 'Spinal and muscular'], correct: 0, explanation: 'The iliolumbar artery splits into an iliac branch (to iliacus and iliac fossa) and a lumbar branch (to psoas, quadratus lumborum, cauda equina).' },
+  ]},
 
-  { id: 'e_post_latsacral', layer: 'art', from: 'post_div', to: 'lat_sacral',
-    label: 'Posterior Div → Lateral Sacral aa.',
-    q: 'Branches of the lateral sacral arteries pass through which structures?',
-    options: ['Anterior sacral foramina', 'Greater sciatic foramen', 'Lesser sciatic foramen', 'Obturator canal'], correct: 0,
-    explanation: 'The lateral sacral arteries send branches through the anterior sacral foramina to supply contents of the sacral canal.' },
+  { id: 'e_post_latsacral', layer: 'art', from: 'post_div', to: 'lat_sacral', length: 1, label: 'Posterior Div → Lateral Sacral aa.', questions: [
+    { q: 'Branches of the lateral sacral arteries pass through which structures?', options: ['Anterior sacral foramina', 'Greater sciatic foramen', 'Lesser sciatic foramen', 'Obturator canal'], correct: 0, explanation: 'Lateral sacral arteries send branches through the anterior sacral foramina to supply contents of the sacral canal (cauda equina, meninges).' },
+  ]},
 
-  { id: 'e_post_supgluteal', layer: 'art', from: 'post_div', to: 'sup_gluteal',
-    label: 'Posterior Div → Superior Gluteal a.',
-    q: 'The superior gluteal artery exits the pelvis through which foramen, in what relation to piriformis?',
-    options: ['GSF, superior to piriformis', 'GSF, inferior to piriformis', 'LSF, lateral to piriformis', 'Obturator canal'], correct: 0,
-    explanation: 'The superior gluteal artery is the terminal branch of the posterior division and exits the GSF SUPERIOR to piriformis (between the lumbosacral trunk and S1 ventral ramus).' },
+  { id: 'e_post_supgluteal', layer: 'art', from: 'post_div', to: 'sup_gluteal', length: 2, label: 'Posterior Div → Superior Gluteal a.', questions: [
+    { q: 'The superior gluteal artery exits the pelvis through which foramen, in what relation to piriformis?', options: ['GSF, superior to piriformis', 'GSF, inferior to piriformis', 'LSF, lateral to piriformis', 'Obturator canal'], correct: 0, explanation: 'Superior gluteal exits the GSF SUPERIOR to piriformis (specifically between the lumbosacral trunk and S1 ventral ramus).' },
+    { q: 'The superior gluteal artery is the terminal branch of which division of the internal iliac?', options: ['Anterior division', 'Posterior division', 'Common iliac', 'External iliac'], correct: 1, explanation: 'Superior gluteal is the terminal (largest) branch of the POSTERIOR division. Inferior gluteal and internal pudendal are the terminal branches of the ANTERIOR division.' },
+  ]},
 
-  { id: 'e_supgluteal_gluteal', layer: 'art', from: 'sup_gluteal', to: 'gluteal_region',
-    label: 'Superior Gluteal a. → Gluteal region',
-    q: 'The superior gluteal artery primarily supplies which group of muscles?',
-    options: ['Hamstrings', 'Adductors of thigh', 'Gluteus medius and minimus (and tensor fasciae latae)', 'Quadriceps'], correct: 2,
-    explanation: 'The superior gluteal artery supplies gluteus medius, gluteus minimus, and tensor fasciae latae after exiting the GSF above piriformis.' },
+  { id: 'e_supgluteal_gluteal', layer: 'art', from: 'sup_gluteal', to: 'gluteal_region', length: 1, label: 'Superior Gluteal a. → Gluteal region', questions: [
+    { q: 'The superior gluteal artery primarily supplies which group of muscles?', options: ['Hamstrings', 'Adductors of thigh', 'Gluteus medius and minimus (and tensor fasciae latae)', 'Quadriceps'], correct: 2, explanation: 'After exiting GSF above piriformis, the superior gluteal artery splits into superficial (to gluteus maximus) and deep (to gluteus medius/minimus + TFL) branches.' },
+  ]},
 
-  // Anterior branches
-  { id: 'e_ant_umbilical', layer: 'art', from: 'ant_div', to: 'umbilical',
-    label: 'Anterior Div → Umbilical a.',
-    q: 'After birth, the distal portion of the obliterated umbilical artery becomes which anatomical structure?',
-    options: ['Median umbilical ligament', 'Medial umbilical ligament', 'Lateral umbilical ligament', 'Round ligament of liver'], correct: 1,
-    explanation: 'The distal umbilical artery obliterates to become the MEDIAL umbilical ligament (paired). The MEDIAN umbilical ligament is the obliterated urachus.' },
+  // Anterior division branches
+  { id: 'e_ant_umbilical', layer: 'art', from: 'ant_div', to: 'umbilical', length: 2, label: 'Anterior Div → Umbilical a.', questions: [
+    { q: 'After birth, the distal portion of the obliterated umbilical artery becomes which anatomical structure?', options: ['Median umbilical ligament', 'Medial umbilical ligament', 'Lateral umbilical ligament', 'Round ligament of liver'], correct: 1, explanation: 'The distal umbilical artery → MEDIAL umbilical ligament (paired). MEDIAN umbilical ligament = obliterated urachus (single, midline). LATERAL = inferior epigastric (still patent).' },
+    { q: 'In the fetus, the umbilical arteries carry blood from the fetus to which structure?', options: ['Inferior vena cava', 'Liver via ductus venosus', 'Placenta', 'Right atrium'], correct: 2, explanation: 'Fetal umbilical arteries (paired) carry deoxygenated blood from the fetus TO the placenta. The single umbilical vein returns oxygenated blood from placenta to fetus.' },
+  ]},
 
-  { id: 'e_umbilical_supvesical', layer: 'art', from: 'umbilical', to: 'sup_vesical',
-    label: 'Umbilical → Superior Vesical a.',
-    q: 'The superior vesical artery branches from which artery and supplies which region of the bladder?',
-    options: ['Inferior vesical, supplies neck', 'Umbilical, supplies superior bladder', 'Internal pudendal, supplies trigone', 'Obturator, supplies dome only'], correct: 1,
-    explanation: 'The superior vesical artery branches from the patent proximal portion of the umbilical artery and supplies the superior aspect of the bladder.' },
+  { id: 'e_umbilical_supvesical', layer: 'art', from: 'umbilical', to: 'sup_vesical', length: 1, label: 'Umbilical → Superior Vesical a.', questions: [
+    { q: 'The superior vesical artery branches from which artery and supplies which region of the bladder?', options: ['Inferior vesical, supplies neck', 'Umbilical (proximal patent portion), supplies superior bladder', 'Internal pudendal, supplies trigone', 'Obturator, supplies dome only'], correct: 1, explanation: 'Superior vesical branches from the patent proximal portion of the umbilical artery and supplies the superior aspect of the bladder.' },
+  ]},
 
-  { id: 'e_supvesical_bladder', layer: 'art', from: 'sup_vesical', to: 'bladder',
-    label: 'Superior Vesical → Bladder',
-    q: 'Which artery (along with the superior vesical) provides the principal blood supply to the urinary bladder in females?',
-    options: ['Uterine a.', 'Vaginal a.', 'Inferior vesical a.', 'Internal pudendal a.'], correct: 1,
-    explanation: 'In FEMALES the vaginal artery (often a branch of uterine) supplies the inferior bladder. In MALES, the inferior vesical artery does so.' },
+  { id: 'e_supvesical_bladder', layer: 'art', from: 'sup_vesical', to: 'bladder', length: 1, label: 'Superior Vesical → Bladder', questions: [
+    { q: 'Which artery (along with the superior vesical) provides the principal blood supply to the urinary bladder in females?', options: ['Uterine a.', 'Vaginal a.', 'Inferior vesical a.', 'Internal pudendal a.'], correct: 1, explanation: 'In FEMALES the vaginal artery (often a branch of uterine) supplies the inferior bladder. In MALES, the inferior vesical artery does so.' },
+  ]},
 
-  { id: 'e_ant_obturator', layer: 'art', from: 'ant_div', to: 'obturator_a',
-    label: 'Anterior Div → Obturator a.',
-    q: 'The obturator artery exits the pelvis through which canal, accompanied by which nerve?',
-    options: ['Obturator canal with obturator n.', 'Inguinal canal with ilioinguinal n.', 'Pudendal canal with pudendal n.', 'Femoral canal with femoral n.'], correct: 0,
-    explanation: 'The obturator artery, vein, and nerve all exit the pelvis via the obturator canal (in the superior aspect of the obturator foramen).' },
+  { id: 'e_ant_obturator', layer: 'art', from: 'ant_div', to: 'obturator_a', length: 2, label: 'Anterior Div → Obturator a.', questions: [
+    { q: 'The obturator artery exits the pelvis through which canal, accompanied by which nerve?', options: ['Obturator canal with obturator n.', 'Inguinal canal with ilioinguinal n.', 'Pudendal canal with pudendal n.', 'Femoral canal with femoral n.'], correct: 0, explanation: 'Obturator artery, vein, and nerve all exit via the obturator canal (in the superior aspect of the obturator foramen).' },
+    { q: 'In ~20% of people, the obturator artery arises from the inferior epigastric artery instead. This anomalous "corona mortis" is dangerous in which surgery?', options: ['Hip replacement', 'Inguinal/femoral hernia repair', 'Hysterectomy', 'Appendectomy'], correct: 1, explanation: 'The aberrant obturator artery ("corona mortis" = "crown of death") crosses the superior pubic ramus and is at risk during inguinal/femoral hernia repair — uncontrolled hemorrhage if cut.' },
+  ]},
 
-  { id: 'e_obturator_thigh', layer: 'art', from: 'obturator_a', to: 'medial_thigh',
-    label: 'Obturator a. → Medial thigh',
-    q: 'The obturator artery primarily supplies which muscle group?',
-    options: ['Anterior thigh (quadriceps)', 'Medial thigh (adductors)', 'Posterior thigh (hamstrings)', 'Gluteal region'], correct: 1,
-    explanation: 'The obturator artery supplies the medial compartment of the thigh — the adductor group.' },
+  { id: 'e_obturator_thigh', layer: 'art', from: 'obturator_a', to: 'medial_thigh', length: 1, label: 'Obturator a. → Medial thigh', questions: [
+    { q: 'The obturator artery primarily supplies which muscle group?', options: ['Anterior thigh (quadriceps)', 'Medial thigh (adductors)', 'Posterior thigh (hamstrings)', 'Gluteal region'], correct: 1, explanation: 'Obturator artery supplies the medial compartment of the thigh — the adductor group (along with the obturator nerve).' },
+  ]},
 
-  { id: 'e_ant_infvesical', layer: 'art', from: 'ant_div', to: 'inf_vesical',
-    label: 'Anterior Div → Inferior Vesical a. (M)',
-    q: 'In males, the inferior vesical artery supplies all of the following EXCEPT:',
-    options: ['Inferior bladder', 'Prostate', 'Seminal vesicles', 'Testis'], correct: 3,
-    explanation: 'The testis is supplied by the testicular artery (branch of the abdominal aorta), NOT the inferior vesical. Inferior vesical supplies bladder neck, prostate, seminal vesicles, and ductus deferens.' },
+  { id: 'e_ant_infvesical', layer: 'art', from: 'ant_div', to: 'inf_vesical', length: 2, label: 'Anterior Div → Inferior Vesical a. (M)', questions: [
+    { q: 'In males, the inferior vesical artery supplies all of the following EXCEPT:', options: ['Inferior bladder', 'Prostate', 'Seminal vesicles', 'Testis'], correct: 3, explanation: 'Testis is supplied by the testicular artery (from abdominal aorta at L2). Inferior vesical supplies bladder neck, prostate, seminal vesicles, ductus deferens.' },
+    { q: 'During radical prostatectomy, the surgeon must preserve which neurovascular bundle to maintain erectile function?', options: ['Inferior vesical artery', 'Cavernous nerves traveling along the prostatic capsule', 'Internal pudendal artery', 'Pudendal nerve'], correct: 1, explanation: 'The cavernous nerves (from inferior hypogastric plexus, parasympathetic) run along the prostatic capsule and are responsible for erection. Damage = ED.' },
+  ]},
 
-  { id: 'e_ant_vaginal', layer: 'art', from: 'ant_div', to: 'vaginal_a',
-    label: 'Anterior Div → Vaginal a. (F)',
-    q: 'In females, the vaginal artery is the female homologue of which male artery?',
-    options: ['Inferior vesical a.', 'Internal pudendal a.', 'Middle rectal a.', 'Obturator a.'], correct: 0,
-    explanation: 'The vaginal artery in females is the homologue of the inferior vesical artery in males. It supplies the vagina, adjacent bladder, and rectum.' },
+  { id: 'e_ant_vaginal', layer: 'art', from: 'ant_div', to: 'vaginal_a', length: 2, label: 'Anterior Div → Vaginal a. (F)', questions: [
+    { q: 'In females, the vaginal artery is the female homologue of which male artery?', options: ['Inferior vesical a.', 'Internal pudendal a.', 'Middle rectal a.', 'Obturator a.'], correct: 0, explanation: 'Vaginal artery in females = homologue of inferior vesical artery in males. It supplies vagina, adjacent bladder, and rectum.' },
+    { q: 'The vaginal artery often arises as a branch of which other anterior division artery in females?', options: ['Uterine a.', 'Obturator a.', 'Superior gluteal a.', 'Iliolumbar a.'], correct: 0, explanation: 'The vaginal artery commonly arises directly from the uterine artery rather than independently from the internal iliac.' },
+  ]},
 
-  { id: 'e_ant_uterine', layer: 'art', from: 'ant_div', to: 'uterine_a',
-    label: 'Anterior Div → Uterine a. (F)',
-    q: 'During hysterectomy, the surgeon must take care because the uterine artery passes ANTERIOR to which structure near the cervix?',
-    options: ['Internal iliac vein', 'Ureter', 'Sciatic nerve', 'Common iliac artery'], correct: 1,
-    explanation: '"Water under the bridge" — the uterine artery crosses anterior (over) the ureter near the cervix. Ureter injury during hysterectomy is a classic surgical risk.' },
+  { id: 'e_ant_uterine', layer: 'art', from: 'ant_div', to: 'uterine_a', length: 2, label: 'Anterior Div → Uterine a. (F)', questions: [
+    { q: 'During hysterectomy, the surgeon must take care because the uterine artery passes ANTERIOR to which structure near the cervix?', options: ['Internal iliac vein', 'Ureter', 'Sciatic nerve', 'Common iliac artery'], correct: 1, explanation: '"Water under the bridge" — the uterine artery crosses anterior (over) the ureter near the cervix. Ureter injury during hysterectomy is a classic surgical complication.' },
+    { q: 'The uterine artery travels within which ligament to reach the uterus?', options: ['Round ligament', 'Suspensory ligament of ovary', 'Cardinal ligament (transverse cervical) within the broad ligament', 'Sacrospinous ligament'], correct: 2, explanation: 'The uterine artery travels in the cardinal ligament (transverse cervical ligament) at the base of the broad ligament, en route to the cervix and lateral uterus.' },
+  ]},
 
-  { id: 'e_uterine_uterus', layer: 'art', from: 'uterine_a', to: 'uterus',
-    label: 'Uterine a. → Uterus',
-    q: 'The uterine artery anastomoses with which artery near the uterine fundus?',
-    options: ['Inferior vesical', 'Ovarian a.', 'Internal pudendal', 'Middle rectal'], correct: 1,
-    explanation: 'The uterine artery anastomoses with the ovarian artery (a branch of the abdominal aorta) along the lateral aspect of the uterus.' },
+  { id: 'e_uterine_uterus', layer: 'art', from: 'uterine_a', to: 'uterus', length: 2, label: 'Uterine a. → Uterus', questions: [
+    { q: 'The uterine artery anastomoses with which artery near the uterine fundus?', options: ['Inferior vesical', 'Ovarian a.', 'Internal pudendal', 'Middle rectal'], correct: 1, explanation: 'The uterine artery anastomoses with the ovarian artery (a branch of the abdominal aorta) along the lateral aspect of the uterus.' },
+    { q: 'During pregnancy, which arteries primarily perfuse the placenta via the spiral arteries?', options: ['Ovarian arteries', 'Uterine arteries', 'Internal pudendal arteries', 'Vaginal arteries'], correct: 1, explanation: 'Branches of the uterine artery → arcuate aa. → radial aa. → spiral aa. (these are the ones remodeled by trophoblast in early pregnancy to perfuse the placenta).' },
+  ]},
 
-  { id: 'e_uterine_cervix', layer: 'art', from: 'uterine_a', to: 'cervix',
-    label: 'Uterine a. → Cervix branches',
-    q: 'During uterine artery embolization for fibroids, embolic agents may inadvertently enter which other artery due to anastomosis?',
-    options: ['Superior vesical', 'Vaginal a.', 'Obturator a.', 'Iliolumbar a.'], correct: 1,
-    explanation: 'The uterine artery anastomoses with the vaginal artery near the cervix. This is a known risk during embolization procedures.' },
+  { id: 'e_uterine_cervix', layer: 'art', from: 'uterine_a', to: 'cervix', length: 1, label: 'Uterine a. → Cervix branches', questions: [
+    { q: 'During uterine artery embolization for fibroids, embolic agents may inadvertently enter which other artery due to anastomosis?', options: ['Superior vesical', 'Vaginal a.', 'Obturator a.', 'Iliolumbar a.'], correct: 1, explanation: 'The uterine artery anastomoses with the vaginal artery near the cervix. This is a known risk during UAE — embolic spread can compromise vaginal/lower urinary tract supply.' },
+  ]},
 
-  { id: 'e_vaginal_proxvag', layer: 'art', from: 'vaginal_a', to: 'proximal_vagina',
-    label: 'Vaginal a. → Vagina',
-    q: 'The vaginal artery shares blood supply to the vagina with which other artery?',
-    options: ['Uterine a.', 'Obturator a.', 'Superior gluteal a.', 'Iliolumbar a.'], correct: 0,
-    explanation: 'The vaginal artery anastomoses with descending vaginal branches of the uterine artery.' },
+  { id: 'e_vaginal_proxvag', layer: 'art', from: 'vaginal_a', to: 'proximal_vagina', length: 1, label: 'Vaginal a. → Vagina', questions: [
+    { q: 'The vaginal artery shares blood supply to the vagina with which other artery?', options: ['Uterine a. (descending vaginal branches)', 'Obturator a.', 'Superior gluteal a.', 'Iliolumbar a.'], correct: 0, explanation: 'The vaginal artery anastomoses with descending vaginal branches of the uterine artery to supply the vagina.' },
+  ]},
 
-  { id: 'e_infvesical_prostate', layer: 'art', from: 'inf_vesical', to: 'prostate',
-    label: 'Inferior Vesical a. → Prostate',
-    q: 'Which artery is the major arterial supply to the prostate gland?',
-    options: ['Superior vesical', 'Inferior vesical', 'Middle rectal', 'Internal pudendal'], correct: 1,
-    explanation: 'Branches of the inferior vesical artery (and to a lesser extent middle rectal) supply the prostate.' },
+  { id: 'e_infvesical_prostate', layer: 'art', from: 'inf_vesical', to: 'prostate', length: 2, label: 'Inferior Vesical a. → Prostate', questions: [
+    { q: 'Which artery is the major arterial supply to the prostate gland?', options: ['Superior vesical', 'Inferior vesical', 'Middle rectal', 'Internal pudendal'], correct: 1, explanation: 'Branches of the inferior vesical artery (and to a lesser extent middle rectal) supply the prostate.' },
+    { q: 'Prostatic venous drainage forms a plexus that connects to which clinically significant venous system?', options: ['Portal venous system', 'Vertebral venous plexus (Batson plexus)', 'Inferior vena cava only', 'Azygos system'], correct: 1, explanation: 'The prostatic venous plexus communicates with the vertebral venous plexus (Batson plexus) — explains why prostate cancer commonly metastasizes to the LUMBAR SPINE.' },
+  ]},
 
-  { id: 'e_infvesical_bladder', layer: 'art', from: 'inf_vesical', to: 'bladder',
-    label: 'Inferior Vesical → Bladder neck',
-    q: 'The inferior vesical artery in males supplies which portion of the bladder?',
-    options: ['Apex / dome', 'Inferior bladder and trigone', 'Only the lateral walls', 'Posterior wall only'], correct: 1,
-    explanation: 'Inferior vesical supplies the inferior bladder, trigone, and bladder neck (along with prostate and seminal vesicles).' },
+  { id: 'e_infvesical_bladder', layer: 'art', from: 'inf_vesical', to: 'bladder', length: 1, label: 'Inferior Vesical → Bladder neck', questions: [
+    { q: 'The inferior vesical artery in males supplies which portion of the bladder?', options: ['Apex / dome', 'Inferior bladder and trigone', 'Only the lateral walls', 'Posterior wall only'], correct: 1, explanation: 'Inferior vesical supplies the inferior bladder, trigone, and bladder neck (along with prostate and seminal vesicles).' },
+  ]},
 
-  { id: 'e_ant_midrectal', layer: 'art', from: 'ant_div', to: 'middle_rectal',
-    label: 'Anterior Div → Middle Rectal a.',
-    q: 'The middle rectal artery anastomoses with which two other arteries to provide rich rectal blood supply?',
-    options: ['Superior rectal (IMA) and inferior rectal (int. pudendal)', 'Splenic and gastric', 'Inferior epigastric and obturator', 'Iliolumbar and superior gluteal'], correct: 0,
-    explanation: 'The middle rectal anastomoses with the superior rectal (from IMA, supplying rectum above pectinate line) and inferior rectal (from internal pudendal, supplying below pectinate line).' },
+  { id: 'e_ant_midrectal', layer: 'art', from: 'ant_div', to: 'middle_rectal', length: 2, label: 'Anterior Div → Middle Rectal a.', questions: [
+    { q: 'The middle rectal artery anastomoses with which two other arteries?', options: ['Superior rectal (IMA) and inferior rectal (int. pudendal)', 'Splenic and gastric', 'Inferior epigastric and obturator', 'Iliolumbar and superior gluteal'], correct: 0, explanation: 'Middle rectal anastomoses with superior rectal (from IMA, supplying rectum above pectinate line) and inferior rectal (from internal pudendal, supplying below pectinate line).' },
+    { q: 'A patient with portal hypertension may develop hemorrhoids because of anastomoses between which veins?', options: ['Superior rectal vein (portal) and middle/inferior rectal veins (caval)', 'Splenic and renal', 'Hepatic and azygos', 'Gonadal and renal'], correct: 0, explanation: 'Internal hemorrhoids arise from porto-caval anastomosis: superior rectal vein → IMV → portal system; middle/inferior rectal → internal iliac → IVC. Portal hypertension shunts blood through this anastomosis.' },
+  ]},
 
-  { id: 'e_midrectal_rectum', layer: 'art', from: 'middle_rectal', to: 'rectum',
-    label: 'Middle Rectal → Rectum',
-    q: 'Which segment of the rectum does the middle rectal artery primarily supply?',
-    options: ['Upper rectum (above peritoneal reflection)', 'Middle and lower rectum', 'Anal canal below pectinate line only', 'Sigmoid colon'], correct: 1,
-    explanation: 'Middle rectal supplies the middle and lower rectum, between superior rectal (upper) and inferior rectal (anal canal below pectinate).' },
+  { id: 'e_midrectal_rectum', layer: 'art', from: 'middle_rectal', to: 'rectum', length: 1, label: 'Middle Rectal → Rectum', questions: [
+    { q: 'Which segment of the rectum does the middle rectal artery primarily supply?', options: ['Upper rectum (above peritoneal reflection)', 'Middle and lower rectum', 'Anal canal below pectinate line only', 'Sigmoid colon'], correct: 1, explanation: 'Middle rectal supplies the middle and lower rectum, between superior rectal (upper) and inferior rectal (anal canal below pectinate).' },
+  ]},
 
-  { id: 'e_ant_intpud', layer: 'art', from: 'ant_div', to: 'internal_pudendal',
-    label: 'Anterior Div → Internal Pudendal a.',
-    q: 'The internal pudendal artery exits the pelvis via _____ and re-enters the perineum via _____.',
-    options: ['Obturator canal; lesser sciatic foramen', 'Greater sciatic foramen (below piriformis); lesser sciatic foramen', 'Lesser sciatic foramen; greater sciatic foramen', 'Femoral canal; obturator canal'], correct: 1,
-    explanation: 'The internal pudendal artery exits the pelvis via the GSF inferior to piriformis, then re-enters the perineum via the LSF, traveling through the pudendal canal with the pudendal nerve.' },
+  { id: 'e_ant_intpud', layer: 'art', from: 'ant_div', to: 'internal_pudendal', length: 3, label: 'Anterior Div → Internal Pudendal a.', questions: [
+    { q: 'The internal pudendal artery exits the pelvis via _____ and re-enters the perineum via _____.', options: ['Obturator canal; lesser sciatic foramen', 'Greater sciatic foramen (below piriformis); lesser sciatic foramen', 'Lesser sciatic foramen; greater sciatic foramen', 'Femoral canal; obturator canal'], correct: 1, explanation: 'The internal pudendal artery exits the pelvis via the GSF inferior to piriformis, wraps around the ischial spine, then re-enters the perineum via the LSF, traveling through the pudendal canal.' },
+    { q: 'The pudendal canal (Alcock\'s canal) lies within the fascia of which muscle?', options: ['Levator ani', 'Obturator internus', 'Coccygeus', 'Piriformis'], correct: 1, explanation: 'The pudendal canal is a fascial sheath within the obturator internus fascia (on the lateral wall of the ischioanal fossa). It carries the pudendal nerve, internal pudendal a/v.' },
+    { q: 'The internal pudendal artery and pudendal nerve travel TOGETHER through which sequence of structures?', options: ['GSF → wrap ischial spine → LSF → pudendal canal', 'Obturator canal → adductor canal', 'Inguinal canal → femoral canal', 'Pelvic inlet → obturator canal'], correct: 0, explanation: 'They travel together: exit pelvis via GSF below piriformis → wrap around ischial spine (key landmark for pudendal block) → enter perineum via LSF → run in pudendal canal.' },
+  ]},
 
-  { id: 'e_intpud_infrectal', layer: 'art', from: 'internal_pudendal', to: 'inf_rectal_a',
-    label: 'Int. Pudendal → Inferior Rectal a.',
-    q: 'The inferior rectal artery (branch of internal pudendal) supplies which region of the anal canal?',
-    options: ['Above pectinate line', 'Below pectinate line', 'The entire anal canal equally', 'None — it supplies only external sphincter'], correct: 1,
-    explanation: 'Inferior rectal supplies the anal canal BELOW the pectinate line. Above the pectinate line is supplied by the superior rectal (from IMA).' },
+  { id: 'e_intpud_infrectal', layer: 'art', from: 'internal_pudendal', to: 'inf_rectal_a', length: 2, label: 'Int. Pudendal → Inferior Rectal a.', questions: [
+    { q: 'The inferior rectal artery (branch of internal pudendal) supplies which region of the anal canal?', options: ['Above pectinate line', 'Below pectinate line', 'The entire anal canal equally', 'None — it supplies only external sphincter'], correct: 1, explanation: 'Inferior rectal supplies anal canal BELOW pectinate line. Above pectinate is supplied by superior rectal (from IMA), middle by middle rectal (internal iliac).' },
+    { q: 'A patient with rectal bleeding from below the pectinate line presents with bright red blood. Which venous system drains this region?', options: ['Portal system via superior rectal vein', 'Caval system via inferior rectal → internal pudendal vein', 'Both equally', 'Lymphatic system only'], correct: 1, explanation: 'Below pectinate drains via inferior rectal v. → internal pudendal v. → internal iliac v. → IVC (caval). Above pectinate drains via superior rectal v. → IMV → portal.' },
+  ]},
 
-  { id: 'e_infrectal_anal', layer: 'art', from: 'inf_rectal_a', to: 'anal_below',
-    label: 'Inf. Rectal a. → Anal canal (below)',
-    q: 'A patient with rectal bleeding from below the pectinate line presents with bright red blood. Which venous system drains this region?',
-    options: ['Portal system via superior rectal vein', 'Caval system via inferior rectal → internal pudendal vein', 'Both equally', 'Lymphatic system only'], correct: 1,
-    explanation: 'Below the pectinate line drains via inferior rectal v. → internal pudendal v. → internal iliac v. → IVC (caval system). Above pectinate drains via superior rectal v. → IMV → portal system.' },
+  { id: 'e_infrectal_anal', layer: 'art', from: 'inf_rectal_a', to: 'anal_below', length: 1, label: 'Inf. Rectal a. → Anal canal (below)', questions: [
+    { q: 'External hemorrhoids are PAINFUL (unlike internal hemorrhoids) because they arise from below the pectinate line. Sensation here is via which nerve?', options: ['Pelvic splanchnic (parasympathetic)', 'Inferior rectal n. (somatic, branch of pudendal)', 'Sacral splanchnic (sympathetic)', 'Vagus nerve'], correct: 1, explanation: 'Below pectinate line: SOMATIC innervation via inferior rectal n. (pudendal branch) → pain. Above pectinate: visceral (autonomic) innervation → painless.' },
+  ]},
 
-  { id: 'e_intpud_perineal', layer: 'art', from: 'internal_pudendal', to: 'perineal_a',
-    label: 'Int. Pudendal → Perineal a.',
-    q: 'The perineal artery supplies which structures?',
-    options: ['Bladder dome', 'Superficial perineal pouch contents (BS, IC mm.)', 'Prostate gland', 'Pelvic diaphragm'], correct: 1,
-    explanation: 'The perineal artery supplies the muscles of the superficial perineal pouch — bulbospongiosus, ischiocavernosus, superficial transverse perineal — and overlying skin.' },
+  { id: 'e_intpud_perineal', layer: 'art', from: 'internal_pudendal', to: 'perineal_a', length: 2, label: 'Int. Pudendal → Perineal a.', questions: [
+    { q: 'The perineal artery supplies which structures?', options: ['Bladder dome', 'Superficial perineal pouch contents (BS, IC mm.)', 'Prostate gland', 'Pelvic diaphragm'], correct: 1, explanation: 'The perineal artery supplies muscles of the superficial perineal pouch — bulbospongiosus, ischiocavernosus, superficial transverse perineal — and overlying skin.' },
+    { q: 'Which artery supplies the bulb of the penis (or bulb of the vestibule in females)?', options: ['Dorsal artery of penis', 'Bulbar artery (branch of internal pudendal)', 'Inferior vesical', 'Obturator'], correct: 1, explanation: 'The artery to the bulb (bulbar artery, branch of internal pudendal) supplies the bulb of penis (M)/bulb of vestibule (F) and the bulbourethral/greater vestibular glands.' },
+  ]},
 
-  { id: 'e_perineal_perineum', layer: 'art', from: 'perineal_a', to: 'perineum',
-    label: 'Perineal a. → Perineum',
-    q: 'The perineal artery is a branch of which vessel?',
-    options: ['Femoral a.', 'Internal pudendal a.', 'Inferior gluteal a.', 'Obturator a.'], correct: 1,
-    explanation: 'Perineal artery is a terminal branch of the internal pudendal artery within the pudendal canal.' },
+  { id: 'e_perineal_perineum', layer: 'art', from: 'perineal_a', to: 'perineum', length: 1, label: 'Perineal a. → Perineum', questions: [
+    { q: 'The perineal artery is a branch of which vessel?', options: ['Femoral a.', 'Internal pudendal a.', 'Inferior gluteal a.', 'Obturator a.'], correct: 1, explanation: 'The perineal artery is a terminal branch of the internal pudendal artery within the pudendal canal.' },
+  ]},
 
-  { id: 'e_intpud_dorsal', layer: 'art', from: 'internal_pudendal', to: 'dorsal_pc_a',
-    label: 'Int. Pudendal → Dorsal a. of penis/clitoris',
-    q: 'The dorsal artery of the penis (or clitoris) is most directly responsible for which function?',
-    options: ['Erection (filling of erectile tissue)', 'Supply of glans and skin', 'Innervation', 'Lymphatic drainage'], correct: 1,
-    explanation: 'The dorsal artery of penis/clitoris supplies the GLANS and SKIN. The DEEP artery of penis (also from internal pudendal) supplies the corpora cavernosa for erection.' },
+  { id: 'e_intpud_dorsal', layer: 'art', from: 'internal_pudendal', to: 'dorsal_pc_a', length: 2, label: 'Int. Pudendal → Dorsal a. of penis/clitoris', questions: [
+    { q: 'The dorsal artery of the penis (or clitoris) supplies which region?', options: ['Crura (corpora cavernosa) for erection', 'Glans and skin', 'Bulb of penis', 'Scrotum/labia majora'], correct: 1, explanation: 'Dorsal artery of penis/clitoris supplies the GLANS and SKIN. The DEEP artery of penis (also from internal pudendal) supplies the corpora cavernosa for erection.' },
+    { q: 'Which artery is the principal vessel filling the corpora cavernosa during erection?', options: ['Dorsal artery of penis', 'Deep (cavernosal) artery of penis', 'Bulbar artery', 'Inferior vesical'], correct: 1, explanation: 'The DEEP (cavernosal) artery of the penis runs through the center of each corpus cavernosum. Parasympathetic stimulation dilates these helicine arteries → engorgement → erection.' },
+  ]},
 
-  { id: 'e_dorsalpc_genitalia', layer: 'art', from: 'dorsal_pc_a', to: 'genitalia',
-    label: 'Dorsal a. → Genitalia',
-    q: 'Which paired arteries primarily fill the corpora cavernosa during erection?',
-    options: ['Dorsal arteries of penis/clitoris', 'Deep arteries of penis/clitoris (cavernosal aa.)', 'Bulbar arteries', 'Inferior vesical arteries'], correct: 1,
-    explanation: 'The DEEP arteries of the penis/clitoris (cavernosal arteries, branches of internal pudendal) fill the corpora cavernosa during erection. Parasympathetic stimulation dilates these.' },
+  { id: 'e_dorsalpc_genitalia', layer: 'art', from: 'dorsal_pc_a', to: 'genitalia', length: 1, label: 'Dorsal a. → Genitalia', questions: [
+    { q: 'A patient with severe pelvic trauma damages the internal pudendal artery bilaterally. Which function would be most acutely impaired?', options: ['Urination', 'Defecation', 'Erection', 'Walking'], correct: 2, explanation: 'Internal pudendal damage → loss of supply to corpora cavernosa via deep arteries → erectile dysfunction. (Urination/defecation/walking have other supplies.)' },
+  ]},
 
-  { id: 'e_ant_infgluteal', layer: 'art', from: 'ant_div', to: 'inf_gluteal',
-    label: 'Anterior Div → Inferior Gluteal a.',
-    q: 'The inferior gluteal artery exits the pelvis through the GSF in what relation to piriformis?',
-    options: ['Superior to piriformis', 'Inferior to piriformis', 'Through piriformis', 'Does not exit GSF'], correct: 1,
-    explanation: 'Inferior gluteal exits GSF INFERIOR to piriformis (along with internal pudendal artery and pudendal nerve). Superior gluteal exits SUPERIOR to piriformis.' },
+  { id: 'e_ant_infgluteal', layer: 'art', from: 'ant_div', to: 'inf_gluteal', length: 2, label: 'Anterior Div → Inferior Gluteal a.', questions: [
+    { q: 'The inferior gluteal artery exits the pelvis through the GSF in what relation to piriformis?', options: ['Superior to piriformis', 'Inferior to piriformis', 'Through piriformis', 'Does not exit GSF'], correct: 1, explanation: 'Inferior gluteal exits GSF INFERIOR to piriformis (along with internal pudendal artery and pudendal n.). Superior gluteal exits SUPERIOR to piriformis.' },
+    { q: 'The inferior gluteal artery is a terminal branch of which division of the internal iliac?', options: ['Anterior division', 'Posterior division', 'Common iliac', 'External iliac'], correct: 0, explanation: 'Inferior gluteal is a terminal branch of the ANTERIOR division (along with internal pudendal). Superior gluteal is the terminal branch of the POSTERIOR division.' },
+  ]},
 
-  { id: 'e_infgluteal_gluteal', layer: 'art', from: 'inf_gluteal', to: 'gluteal_region',
-    label: 'Inf. Gluteal a. → Gluteal region',
-    q: 'Which muscle is primarily supplied by the inferior gluteal artery?',
-    options: ['Gluteus medius', 'Gluteus minimus', 'Gluteus maximus', 'Tensor fasciae latae'], correct: 2,
-    explanation: 'Inferior gluteal artery supplies gluteus maximus (the most superficial and largest of the gluteals).' },
+  { id: 'e_infgluteal_gluteal', layer: 'art', from: 'inf_gluteal', to: 'gluteal_region', length: 1, label: 'Inf. Gluteal a. → Gluteal region', questions: [
+    { q: 'Which muscle is primarily supplied by the inferior gluteal artery?', options: ['Gluteus medius', 'Gluteus minimus', 'Gluteus maximus', 'Tensor fasciae latae'], correct: 2, explanation: 'Inferior gluteal artery supplies gluteus maximus (the most superficial and largest of the gluteals) and contributes to the cruciate anastomosis around the hip.' },
+  ]},
 
-  // Ovarian/testicular direct from aorta
-  { id: 'e_aorta_ovarian', layer: 'art', from: 'aorta', to: 'ovarian_a',
-    label: 'Aorta → Ovarian / Testicular a.',
-    q: 'The ovarian and testicular arteries arise directly from the abdominal aorta at approximately which level?',
-    options: ['T12', 'L1', 'L2', 'L4'], correct: 2,
-    explanation: 'Ovarian and testicular arteries arise from the abdominal aorta at L2, reflecting the embryologic origin of the gonads in the upper abdomen.' },
+  { id: 'e_aorta_ovarian', layer: 'art', from: 'aorta', to: 'ovarian_a', length: 2, label: 'Aorta → Ovarian / Testicular a.', questions: [
+    { q: 'The ovarian and testicular arteries arise directly from the abdominal aorta at approximately which level?', options: ['T12', 'L1', 'L2', 'L4'], correct: 2, explanation: 'Gonadal arteries arise from abdominal aorta at L2, reflecting the embryologic origin of gonads in the upper abdomen.' },
+    { q: 'On the LEFT side, the ovarian/testicular VEIN drains into which vessel? (Important asymmetry)', options: ['IVC directly', 'Left renal vein', 'Left common iliac vein', 'Portal vein'], correct: 1, explanation: 'Left gonadal vein → left renal vein → IVC. Right gonadal vein → IVC directly. Left-sided varicocele is more common because of this longer/lower-pressure drainage path (and possible compression by SMA — "nutcracker").' },
+  ]},
 
-  { id: 'e_ovarian_ovary', layer: 'art', from: 'ovarian_a', to: 'ovary',
-    label: 'Ovarian a. → Ovary',
-    q: 'The ovarian artery reaches the ovary by traveling through which structure?',
-    options: ['Round ligament', 'Mesometrium', 'Suspensory ligament of the ovary (infundibulopelvic)', 'Broad ligament along uterine artery'], correct: 2,
-    explanation: 'Ovarian vessels travel within the suspensory ligament of the ovary (also called infundibulopelvic ligament). The ureter courses retroperitoneally NEAR this ligament — a surgical hazard during oophorectomy.' },
+  { id: 'e_ovarian_ovary', layer: 'art', from: 'ovarian_a', to: 'ovary', length: 2, label: 'Ovarian a. → Ovary', questions: [
+    { q: 'The ovarian artery reaches the ovary by traveling through which structure?', options: ['Round ligament', 'Mesometrium', 'Suspensory ligament of the ovary (infundibulopelvic)', 'Broad ligament along uterine artery'], correct: 2, explanation: 'Ovarian vessels travel within the suspensory ligament (infundibulopelvic) of the ovary. The ureter courses retroperitoneally NEAR this ligament — surgical hazard during oophorectomy.' },
+    { q: 'During oophorectomy, ligation of the suspensory ligament of the ovary risks injury to which structure?', options: ['Sciatic nerve', 'Ureter', 'Common iliac vein', 'External iliac artery'], correct: 1, explanation: 'The ureter passes very close to the suspensory ligament of the ovary. "Water under the bridge" — ovarian vessels go OVER, but you must identify the ureter to avoid clamping it during ligation.' },
+  ]},
 
-  { id: 'e_ovarian_testis', layer: 'art', from: 'ovarian_a', to: 'testis',
-    label: 'Testicular a. → Testis',
-    q: 'In the male, the testicular artery courses through which structure to reach the testis?',
-    options: ['Broad ligament', 'Inguinal canal within the spermatic cord', 'Pudendal canal', 'Pelvic diaphragm'], correct: 1,
-    explanation: 'The testicular artery descends retroperitoneally from L2 and enters the inguinal canal as part of the spermatic cord, ultimately supplying the testis in the scrotum.' },
+  { id: 'e_ovarian_testis', layer: 'art', from: 'ovarian_a', to: 'testis', length: 1, label: 'Testicular a. → Testis', questions: [
+    { q: 'In the male, the testicular artery courses through which structure to reach the testis?', options: ['Broad ligament', 'Inguinal canal within the spermatic cord', 'Pudendal canal', 'Pelvic diaphragm'], correct: 1, explanation: 'Testicular artery descends retroperitoneally from L2, enters the inguinal canal in the spermatic cord, ultimately supplying the testis in the scrotum.' },
+  ]},
 
   // ============= NERVES =============
-  { id: 'n_s2_plex', layer: 'nerve', from: 's2', to: 'sacral_plexus',
-    label: 'S2 anterior ramus → Sacral plexus',
-    q: 'Anterior rami of which spinal levels contribute to the pudendal nerve?',
-    options: ['L4–S1', 'S1–S3', 'S2–S4', 'S3–S5'], correct: 2,
-    explanation: 'The pudendal nerve arises from anterior rami of S2, S3, and S4 (mnemonic: "S2,3,4 keep the penis off the floor").' },
+  { id: 'n_s2_plex', layer: 'nerve', from: 's2', to: 'sacral_plexus', length: 1, label: 'S2 → Sacral plexus', questions: [
+    { q: 'Anterior rami of which spinal levels contribute to the pudendal nerve?', options: ['L4–S1', 'S1–S3', 'S2–S4', 'S3–S5'], correct: 2, explanation: 'Pudendal nerve = S2, S3, S4 (mnemonic: "S2,3,4 keep the pelvis off the floor").' },
+  ]},
 
-  { id: 'n_s3_plex', layer: 'nerve', from: 's3', to: 'sacral_plexus',
-    label: 'S3 anterior ramus → Sacral plexus',
-    q: 'Which pelvic nerve carries parasympathetic preganglionic fibers from S2–S4 to pelvic viscera?',
-    options: ['Sacral splanchnic nerve', 'Lumbar splanchnic nerve', 'Pelvic splanchnic nerve', 'Pudendal nerve'], correct: 2,
-    explanation: 'Pelvic splanchnic nerves (from S2–S4 anterior rami) carry parasympathetic fibers to pelvic organs and the hindgut. PARASYMPATHETIC = PELVIC splanchnic.' },
+  { id: 'n_s3_plex', layer: 'nerve', from: 's3', to: 'sacral_plexus', length: 1, label: 'S3 → Sacral plexus', questions: [
+    { q: 'Which pelvic nerve carries parasympathetic preganglionic fibers from S2–S4 to pelvic viscera?', options: ['Sacral splanchnic nerve', 'Lumbar splanchnic nerve', 'Pelvic splanchnic nerve', 'Pudendal nerve'], correct: 2, explanation: 'Pelvic splanchnic nerves (from S2–S4 anterior rami) carry parasympathetic fibers to pelvic organs and the hindgut. PARASYMPATHETIC = PELVIC splanchnic.' },
+  ]},
 
-  { id: 'n_s4_plex', layer: 'nerve', from: 's4', to: 'sacral_plexus',
-    label: 'S4 anterior ramus → Sacral plexus',
-    q: 'The pudendal nerve provides motor innervation to all of the following EXCEPT:',
-    options: ['External anal sphincter', 'External urethral sphincter', 'Detrusor muscle', 'Levator ani'], correct: 2,
-    explanation: 'Detrusor muscle is SMOOTH muscle controlled by autonomics (parasympathetic for contraction during micturition). Pudendal innervates the SOMATIC skeletal muscles of the perineum.' },
+  { id: 'n_s4_plex', layer: 'nerve', from: 's4', to: 'sacral_plexus', length: 1, label: 'S4 → Sacral plexus', questions: [
+    { q: 'The pudendal nerve provides motor innervation to all of the following EXCEPT:', options: ['External anal sphincter', 'External urethral sphincter', 'Detrusor muscle', 'Levator ani'], correct: 2, explanation: 'Detrusor is SMOOTH muscle controlled by autonomics (parasympathetic for contraction). Pudendal innervates SOMATIC skeletal muscles of the perineum.' },
+  ]},
 
-  { id: 'n_plex_pud', layer: 'nerve', from: 'sacral_plexus', to: 'pudendal_n',
-    label: 'Sacral plexus → Pudendal n.',
-    q: 'Trace the pudendal nerve\'s exit and re-entry: it exits the pelvis via _____ and re-enters via _____.',
-    options: ['Lesser sciatic foramen; greater sciatic foramen', 'Greater sciatic foramen (below piriformis); lesser sciatic foramen', 'Obturator canal; femoral canal', 'Pudendal canal; obturator canal'], correct: 1,
-    explanation: 'The pudendal nerve exits the pelvis via the GSF inferior to piriformis, wraps around the ischial spine (key landmark for pudendal nerve block), and re-enters the perineum via the LSF, then runs in the pudendal canal.' },
+  { id: 'n_plex_pud', layer: 'nerve', from: 'sacral_plexus', to: 'pudendal_n', length: 3, label: 'Sacral plexus → Pudendal n.', questions: [
+    { q: 'Trace the pudendal nerve\'s exit and re-entry: it exits the pelvis via _____ and re-enters via _____.', options: ['LSF; GSF', 'GSF (below piriformis); LSF', 'Obturator canal; femoral canal', 'Pudendal canal; obturator canal'], correct: 1, explanation: 'Pudendal exits via GSF inferior to piriformis, wraps around ischial spine (landmark for nerve block), re-enters via LSF, then runs in pudendal canal.' },
+    { q: 'During a pudendal nerve block, the ischial spine is used as a bony landmark. The needle is typically inserted via which route?', options: ['Transvaginal or transperineal', 'Transrectal', 'Through pubic symphysis', 'Lumbar puncture site'], correct: 0, explanation: 'Pudendal nerve block is administered transvaginally (during labor) or transperineally, palpating the ischial spine to locate the nerve as it wraps around it.' },
+    { q: 'The pudendal nerve has THREE terminal branches. Which is correct?', options: ['Inferior rectal, perineal, dorsal n. of penis/clitoris', 'Inferior gluteal, perineal, posterior cutaneous', 'Sciatic, perineal, pudendal proper', 'Obturator, perineal, dorsal'], correct: 0, explanation: 'Pudendal terminal branches: (1) Inferior rectal n. → external anal sphincter + anal triangle skin, (2) Perineal n. → perineal mm. + posterior scrotal/labial skin, (3) Dorsal n. of penis/clitoris → glans/shaft sensation.' },
+  ]},
 
-  { id: 'n_pud_infrectal', layer: 'nerve', from: 'pudendal_n', to: 'inf_rectal_n',
-    label: 'Pudendal → Inferior rectal n.',
-    q: 'The inferior rectal nerve provides sensory innervation to which region?',
-    options: ['Anal canal above pectinate line', 'Anal canal below pectinate line / anal triangle skin', 'Glans penis only', 'Perineal body'], correct: 1,
-    explanation: 'Inferior rectal n. (somatic, branch of pudendal) provides sensory to skin of the anal triangle and motor to external anal sphincter. Above the pectinate line, sensation is via visceral afferents (autonomic).' },
+  { id: 'n_pud_infrectal', layer: 'nerve', from: 'pudendal_n', to: 'inf_rectal_n', length: 2, label: 'Pudendal → Inferior rectal n.', questions: [
+    { q: 'The inferior rectal nerve provides sensory innervation to which region?', options: ['Anal canal above pectinate line', 'Anal canal below pectinate line / anal triangle skin', 'Glans penis only', 'Perineal body'], correct: 1, explanation: 'Inferior rectal n. (somatic, pudendal branch) → sensory to anal triangle skin/anal canal below pectinate, motor to external anal sphincter.' },
+    { q: 'Damage to the inferior rectal nerve would cause:', options: ['Loss of erection', 'Inability to voluntarily contract external anal sphincter (fecal incontinence)', 'Loss of detrusor function', 'Loss of glans sensation'], correct: 1, explanation: 'Inferior rectal n. is motor to external anal sphincter (skeletal muscle). Loss → fecal incontinence (voluntary control lost; internal anal sphincter is autonomic and unaffected).' },
+  ]},
 
-  { id: 'n_infrectal_anal', layer: 'nerve', from: 'inf_rectal_n', to: 'anal_below',
-    label: 'Inferior rectal n. → External anal sphincter / anal triangle',
-    q: 'The pectinate line is a critical anatomical boundary because:',
-    options: ['It separates urinary from reproductive systems', 'Above = visceral innervation/portal drainage; below = somatic innervation/caval drainage', 'It marks the entrance of ureters', 'It is the level of the perineal membrane'], correct: 1,
-    explanation: 'Above pectinate line: endoderm-derived, visceral innervation (autonomic), portal venous drainage, internal iliac LN. Below: ectoderm-derived, somatic innervation (inferior rectal n.), caval drainage, superficial inguinal LN.' },
+  { id: 'n_infrectal_anal', layer: 'nerve', from: 'inf_rectal_n', to: 'anal_below', length: 1, label: 'Inferior rectal n. → Anal canal (below)', questions: [
+    { q: 'The pectinate line is a critical anatomical boundary because:', options: ['Above = visceral innervation/portal drainage; below = somatic/caval drainage', 'It separates urinary from reproductive systems', 'It marks where ureters enter', 'It is at the level of the perineal membrane'], correct: 0, explanation: 'Above pectinate: endoderm origin, visceral innervation (autonomic), portal venous drainage, internal iliac LN, simple columnar epi. Below: ectoderm origin, somatic innervation (inferior rectal), caval drainage, superficial inguinal LN, stratified squamous epi.' },
+  ]},
 
-  { id: 'n_pud_perineal', layer: 'nerve', from: 'pudendal_n', to: 'perineal_n',
-    label: 'Pudendal → Perineal n.',
-    q: 'The perineal nerve provides motor innervation to muscles in which compartment(s)?',
-    options: ['Superficial perineal pouch only', 'Deep perineal pouch only', 'Both superficial and deep perineal pouches', 'Pelvic diaphragm only'], correct: 2,
-    explanation: 'The perineal n. (branch of pudendal) supplies muscles of BOTH the superficial pouch (BS, IC, STP) and deep pouch (deep transverse perineal, external urethral sphincter).' },
+  { id: 'n_pud_perineal', layer: 'nerve', from: 'pudendal_n', to: 'perineal_n', length: 2, label: 'Pudendal → Perineal n.', questions: [
+    { q: 'The perineal nerve provides motor innervation to muscles in which compartment(s)?', options: ['Superficial perineal pouch only', 'Deep perineal pouch only', 'Both superficial and deep perineal pouches', 'Pelvic diaphragm only'], correct: 2, explanation: 'Perineal n. (pudendal branch) supplies BOTH the superficial pouch (BS, IC, STP) and deep pouch (deep transverse perineal, external urethral sphincter).' },
+    { q: 'The posterior scrotal/labial nerves are sensory branches of which nerve?', options: ['Pudendal n. (perineal branch)', 'Genitofemoral n.', 'Ilioinguinal n.', 'Inferior rectal n.'], correct: 0, explanation: 'Posterior scrotal nerves (M)/posterior labial nerves (F) are superficial sensory branches of the perineal n. (itself a branch of pudendal). Anterior scrotal/labial come from ilioinguinal/genitofemoral.' },
+  ]},
 
-  { id: 'n_perineal_perineum', layer: 'nerve', from: 'perineal_n', to: 'perineum',
-    label: 'Perineal n. → Perineum (sensory)',
-    q: 'The posterior scrotal/labial nerves are sensory branches of which nerve?',
-    options: ['Pudendal n. (perineal branch)', 'Genitofemoral n.', 'Ilioinguinal n.', 'Inferior rectal n.'], correct: 0,
-    explanation: 'Posterior scrotal nerves (M) and posterior labial nerves (F) are superficial sensory branches of the perineal n. (which is itself a branch of the pudendal n.).' },
+  { id: 'n_perineal_perineum', layer: 'nerve', from: 'perineal_n', to: 'perineum', length: 1, label: 'Perineal n. → Perineum (sensory)', questions: [
+    { q: 'A pudendal nerve block (e.g., for episiotomy) would anesthetize all of the following EXCEPT:', options: ['Posterior labia', 'Anal triangle skin', 'Mons pubis (anterior labia)', 'Vaginal introitus'], correct: 2, explanation: 'Mons pubis and ANTERIOR labia are supplied by ilioinguinal/genitofemoral nerves (lumbar plexus, NOT pudendal). Pudendal block only covers POSTERIOR genitalia, perineum, anal triangle.' },
+  ]},
 
-  { id: 'n_pud_dorsalpc', layer: 'nerve', from: 'pudendal_n', to: 'dorsal_pc_n',
-    label: 'Pudendal → Dorsal n. of penis/clitoris',
-    q: 'The dorsal nerve of the penis/clitoris is responsible for which function?',
-    options: ['Motor to ischiocavernosus', 'Sensory to glans and shaft', 'Erection (vasodilation)', 'Ejaculation (smooth muscle)'], correct: 1,
-    explanation: 'Dorsal n. of penis/clitoris is a SENSORY (somatic) branch of pudendal carrying tactile sensation from the glans and shaft. Erection itself is parasympathetic (cavernous nerves from IHP).' },
+  { id: 'n_pud_dorsalpc', layer: 'nerve', from: 'pudendal_n', to: 'dorsal_pc_n', length: 2, label: 'Pudendal → Dorsal n. of penis/clitoris', questions: [
+    { q: 'The dorsal nerve of the penis/clitoris is responsible for which function?', options: ['Motor to ischiocavernosus', 'Sensory to glans and shaft', 'Erection (vasodilation)', 'Ejaculation (smooth muscle)'], correct: 1, explanation: 'Dorsal n. of penis/clitoris is purely SENSORY (somatic) — tactile sensation from glans/shaft. Erection itself = parasympathetic via cavernous nerves from IHP.' },
+    { q: 'Memorize "Point – Squeeze – Shoot": which nerves mediate each phase of male sexual response?', options: ['Erection (paraS, pelvic splanchnic) → Emission (sym) → Ejaculation (somatic, pudendal)', 'All three are pudendal', 'All three are sympathetic', 'Erection (sym) → Emission (paraS) → Ejaculation (somatic)'], correct: 0, explanation: 'POINT (erection) = parasympathetic (pelvic splanchnic, S2–S4). SQUEEZE (emission of sperm/secretions, internal sphincter closure) = sympathetic. SHOOT (ejaculation pulsations) = somatic (pudendal/perineal n.).' },
+  ]},
 
-  { id: 'n_dorsalpc_glans', layer: 'nerve', from: 'dorsal_pc_n', to: 'glans',
-    label: 'Dorsal n. → Glans',
-    q: 'A patient who has lost dorsal nerve of penis function would have which deficit?',
-    options: ['Inability to achieve erection', 'Inability to ejaculate', 'Loss of sensation from glans/shaft', 'Loss of external anal sphincter tone'], correct: 2,
-    explanation: 'The dorsal n. of penis is purely SENSORY. Loss → sensory anesthesia of glans/shaft. Erection (paraS, cavernous nn.) and ejaculation (sym + somatic) would be intact.' },
+  { id: 'n_dorsalpc_glans', layer: 'nerve', from: 'dorsal_pc_n', to: 'glans', length: 1, label: 'Dorsal n. → Glans', questions: [
+    { q: 'A patient who has lost dorsal nerve of penis function would have which deficit?', options: ['Inability to achieve erection', 'Inability to ejaculate', 'Loss of sensation from glans/shaft', 'Loss of external anal sphincter tone'], correct: 2, explanation: 'Dorsal n. of penis is purely SENSORY. Loss → sensory anesthesia of glans/shaft. Erection (paraS) and ejaculation (sym + somatic) intact.' },
+  ]},
 
-  // Autonomic nerves
-  { id: 'n_t12_lumbsplanch', layer: 'nerve', from: 't12_l2', to: 'lumbar_splanchnic',
-    label: 'T12–L2 → Lumbar splanchnic n. (sym)',
-    q: 'Lumbar splanchnic nerves carry which type of fibers and primarily innervate which region?',
-    options: ['Parasympathetic to hindgut', 'Sympathetic to hindgut and pelvic organs (via SHP/IHP)', 'Somatic to lower limb', 'Sensory only'], correct: 1,
-    explanation: 'Lumbar splanchnic nn. carry SYMPATHETIC preganglionic fibers from T12–L2 (lateral horn). They contribute to the superior hypogastric plexus, ultimately innervating the hindgut and (via IHP) pelvic organs.' },
+  { id: 'n_t12_lumbsplanch', layer: 'nerve', from: 't12_l2', to: 'lumbar_splanchnic', length: 2, label: 'T12–L2 → Lumbar splanchnic n. (sym)', questions: [
+    { q: 'Lumbar splanchnic nerves carry which type of fibers and primarily innervate which region?', options: ['Parasympathetic to hindgut', 'Sympathetic to hindgut and pelvic organs (via SHP/IHP)', 'Somatic to lower limb', 'Sensory only'], correct: 1, explanation: 'Lumbar splanchnic nn. carry SYMPATHETIC preganglionic fibers from T12–L2 lateral horn → contribute to superior hypogastric plexus → ultimately innervate hindgut and (via IHP) pelvic organs.' },
+    { q: 'Mnemonic: which two splanchnic nerves are SYMPATHETIC, and which is PARASYMPATHETIC?', options: ['Lumbar + Sacral splanchnic = Sym; Pelvic splanchnic = ParaS', 'All sympathetic', 'Lumbar = paraS, others sym', 'Pelvic = sym; others paraS'], correct: 0, explanation: 'Mnemonic: "Lumbar and Sacral Splanchnic = Sympathetic. PELVIC splanchnic = PARAsympathetic." (P for Parasympathetic and Pelvic.)' },
+  ]},
 
-  { id: 'n_lumbsplanch_shp', layer: 'nerve', from: 'lumbar_splanchnic', to: 'shp',
-    label: 'Lumbar splanchnic → Superior Hypogastric Plexus',
-    q: 'The superior hypogastric plexus lies anterior to which vertebra and divides into bilateral hypogastric nerves?',
-    options: ['L3', 'L5', 'S1', 'S2'], correct: 1,
-    explanation: 'The superior hypogastric plexus sits anterior to L5/sacral promontory and divides into right and left hypogastric nerves that descend to the inferior hypogastric plexus.' },
+  { id: 'n_lumbsplanch_shp', layer: 'nerve', from: 'lumbar_splanchnic', to: 'shp', length: 1, label: 'Lumbar splanchnic → SHP', questions: [
+    { q: 'The superior hypogastric plexus lies anterior to which vertebra and divides into bilateral hypogastric nerves?', options: ['L3', 'L5/sacral promontory', 'S1', 'S2'], correct: 1, explanation: 'SHP sits anterior to L5/sacral promontory and divides into right and left hypogastric NERVES that descend to the inferior hypogastric plexus.' },
+  ]},
 
-  { id: 'n_shp_ihp', layer: 'nerve', from: 'shp', to: 'ihp',
-    label: 'SHP → IHP (via hypogastric nn.)',
-    q: 'The superior hypogastric plexus communicates with the inferior hypogastric plexus via:',
-    options: ['Pelvic splanchnic nerves', 'Right and left hypogastric nerves', 'Sacral splanchnic nerves directly', 'Pudendal nerve branches'], correct: 1,
-    explanation: 'The SHP coalesces into bilateral hypogastric NERVES (not to be confused with the plexuses themselves), which descend over the sacrum and join the IHP. These hypogastric nerves carry sympathetic fibers downward and parasympathetic fibers upward (from pelvic splanchnics ascending through IHP → SHP to reach hindgut).' },
+  { id: 'n_shp_ihp', layer: 'nerve', from: 'shp', to: 'ihp', length: 2, label: 'SHP → IHP (via hypogastric nn.)', questions: [
+    { q: 'The superior hypogastric plexus communicates with the inferior hypogastric plexus via:', options: ['Pelvic splanchnic nerves', 'Right and left hypogastric nerves', 'Sacral splanchnic nerves directly', 'Pudendal nerve branches'], correct: 1, explanation: 'SHP coalesces into bilateral hypogastric NERVES that descend over the sacrum and join the IHP. They carry sym fibers down and (paradoxically) paraS fibers up to reach hindgut.' },
+    { q: 'The inferior hypogastric plexus contains which fiber types?', options: ['Only parasympathetic', 'Only sympathetic', 'Both: sympathetic (sacral splanchnic + descending hypogastric nn.) and parasympathetic (pelvic splanchnic)', 'Only somatic'], correct: 2, explanation: 'IHP is the major autonomic plexus for pelvic viscera. Integrates sympathetic input (sacral splanchnic + descending hypogastric nn.) with parasympathetic input (pelvic splanchnic).' },
+  ]},
 
-  { id: 'n_symtrunk_sacsplanch', layer: 'nerve', from: 'sym_trunk', to: 'sacral_splanchnic',
-    label: 'Sympathetic trunk → Sacral splanchnic n.',
-    q: 'Sacral splanchnic nerves carry which fiber type to the inferior hypogastric plexus?',
-    options: ['Parasympathetic preganglionic', 'Sympathetic preganglionic', 'Sympathetic postganglionic', 'Somatic motor'], correct: 1,
-    explanation: 'Sacral splanchnic nerves arise from sacral sympathetic trunk and carry SYMPATHETIC fibers (NOTE: most other named splanchnics carry preganglionic; once they reach the IHP, they synapse). Mnemonic: Sympathetic = Sacral and Lumbar splanchnic.' },
+  { id: 'n_symtrunk_sacsplanch', layer: 'nerve', from: 'sym_trunk', to: 'sacral_splanchnic', length: 1, label: 'Sympathetic trunk → Sacral splanchnic n.', questions: [
+    { q: 'Sacral splanchnic nerves carry which fiber type to the inferior hypogastric plexus?', options: ['Parasympathetic preganglionic', 'Sympathetic preganglionic', 'Sympathetic postganglionic', 'Somatic motor'], correct: 1, explanation: 'Sacral splanchnic nerves arise from the sacral sympathetic trunk and carry SYMPATHETIC fibers (post-ganglionic to IHP). Mnemonic: Sympathetic = Sacral + Lumbar splanchnic.' },
+  ]},
 
-  { id: 'n_s2_pelvsplanch', layer: 'nerve', from: 's2', to: 'pelvic_splanchnic',
-    label: 'S2 → Pelvic splanchnic n. (paraS)',
-    q: 'Erection of the penis/clitoris is mediated by which fiber type, traveling via which nerve?',
-    options: ['Sympathetic via sacral splanchnic', 'Parasympathetic via pelvic splanchnic (S2–S4)', 'Somatic via pudendal', 'Sympathetic via lumbar splanchnic'], correct: 1,
-    explanation: 'Erection ("Point") is PARASYMPATHETIC, mediated by pelvic splanchnic nerves (S2–S4) that synapse near erectile tissue and trigger vasodilation. Mnemonic: Point (paraS) – Squeeze (sym, emission) – Shoot (somatic, ejaculation).' },
+  { id: 'n_s2_pelvsplanch', layer: 'nerve', from: 's2', to: 'pelvic_splanchnic', length: 2, label: 'S2 → Pelvic splanchnic n. (paraS)', questions: [
+    { q: 'Erection of the penis/clitoris is mediated by which fiber type, traveling via which nerve?', options: ['Sympathetic via sacral splanchnic', 'Parasympathetic via pelvic splanchnic (S2–S4)', 'Somatic via pudendal', 'Sympathetic via lumbar splanchnic'], correct: 1, explanation: 'Erection ("Point") = PARASYMPATHETIC, mediated by pelvic splanchnic nn. (S2–S4) → cavernous nerves → vasodilation of helicine arteries.' },
+    { q: 'Pelvic splanchnic parasympathetic fibers ASCEND from the IHP through the SHP to innervate which region?', options: ['Foregut', 'Midgut', 'Hindgut (descending colon, sigmoid, rectum)', 'Cervical structures'], correct: 2, explanation: 'Pelvic splanchnic paraS fibers ascend through hypogastric plexuses to innervate the HINDGUT (descending colon, sigmoid, rectum). The vagus n. handles foregut + midgut paraS.' },
+  ]},
 
-  { id: 'n_pelvsplanch_ihp', layer: 'nerve', from: 'pelvic_splanchnic', to: 'ihp',
-    label: 'Pelvic splanchnic → Inferior Hypogastric Plexus',
-    q: 'The inferior hypogastric plexus contains which fiber types?',
-    options: ['Only parasympathetic', 'Only sympathetic', 'Both sympathetic (sacral splanchnic) and parasympathetic (pelvic splanchnic)', 'Only somatic'], correct: 2,
-    explanation: 'The IHP integrates sympathetic input (sacral splanchnic + descending hypogastric nn.) with parasympathetic input (pelvic splanchnic). It is the major autonomic plexus for pelvic viscera.' },
+  { id: 'n_pelvsplanch_ihp', layer: 'nerve', from: 'pelvic_splanchnic', to: 'ihp', length: 1, label: 'Pelvic splanchnic → IHP', questions: [
+    { q: 'Parasympathetic stimulation of the bladder (via pelvic splanchnic → IHP) causes:', options: ['Detrusor relaxation + internal sphincter contraction (filling)', 'Detrusor contraction + internal sphincter relaxation (voiding)', 'External sphincter contraction', 'Vasoconstriction of bladder vessels'], correct: 1, explanation: 'PARASYMPATHETIC controls voiding: detrusor contracts, internal urethral sphincter relaxes. Sympathetic does opposite (storage/continence).' },
+  ]},
 
-  { id: 'n_sacsplanch_ihp', layer: 'nerve', from: 'sacral_splanchnic', to: 'ihp',
-    label: 'Sacral splanchnic → IHP',
-    q: 'Emission of semen (movement of sperm + glandular secretions into the prostatic urethra) is controlled by which fiber type?',
-    options: ['Parasympathetic (pelvic splanchnic)', 'Sympathetic (sacral/lumbar splanchnic via IHP)', 'Somatic (pudendal n.)', 'Cranial parasympathetic'], correct: 1,
-    explanation: 'Emission is SYMPATHETIC. Contraction of vas deferens, accessory glands, and closure of internal urethral sphincter (preventing retrograde ejaculation) all = SYM via splanchnics → IHP.' },
+  { id: 'n_sacsplanch_ihp', layer: 'nerve', from: 'sacral_splanchnic', to: 'ihp', length: 1, label: 'Sacral splanchnic → IHP', questions: [
+    { q: 'Emission of semen (movement of sperm + glandular secretions into the prostatic urethra) is controlled by which fiber type?', options: ['Parasympathetic (pelvic splanchnic)', 'Sympathetic (sacral/lumbar splanchnic via IHP)', 'Somatic (pudendal n.)', 'Cranial parasympathetic'], correct: 1, explanation: 'Emission = SYMPATHETIC. Vas deferens contraction, accessory gland secretion, and closure of internal urethral sphincter (preventing retrograde ejaculation) all = sym via splanchnics → IHP.' },
+  ]},
 
-  { id: 'n_ihp_bladder', layer: 'nerve', from: 'ihp', to: 'bladder',
-    label: 'IHP → Bladder (autonomic)',
-    q: 'Parasympathetic stimulation of the bladder (via pelvic splanchnic → IHP) causes:',
-    options: ['Detrusor relaxation + internal sphincter contraction (filling)', 'Detrusor contraction + internal sphincter relaxation (voiding)', 'External sphincter contraction', 'Vasoconstriction of bladder vessels'], correct: 1,
-    explanation: 'PARASYMPATHETIC controls voiding: detrusor contracts, internal urethral sphincter relaxes. SYM does the opposite (storage/continence).' },
+  { id: 'n_ihp_bladder', layer: 'nerve', from: 'ihp', to: 'bladder', length: 1, label: 'IHP → Bladder (autonomic)', questions: [
+    { q: 'A male patient with a spinal cord injury at T12 may present with retrograde ejaculation due to loss of:', options: ['Parasympathetic erection', 'Sympathetic closure of internal urethral sphincter during emission', 'Somatic ejaculation pulsations', 'Pudendal sensation'], correct: 1, explanation: 'Sympathetic injury → internal urethral sphincter fails to close during emission → semen retrogrades into bladder. Patient may notice cloudy urine after orgasm.' },
+  ]},
 
-  { id: 'n_obturator_thigh', layer: 'nerve', from: 'obturator_n', to: 'medial_thigh',
-    label: 'Obturator n. → Medial thigh',
-    q: 'The obturator nerve passes through the pelvis but does NOT supply pelvic structures. It originates from which plexus?',
-    options: ['Sacral plexus', 'Lumbar plexus (L2–L4)', 'Coccygeal plexus', 'Hypogastric plexus'], correct: 1,
-    explanation: 'Obturator n. arises from the LUMBAR plexus (L2–L4 ventral rami). It traverses the pelvis to exit via the obturator canal, supplying the medial thigh adductor compartment.' },
+  { id: 'n_obturator_thigh', layer: 'nerve', from: 'obturator_n', to: 'medial_thigh', length: 1, label: 'Obturator n. → Medial thigh', questions: [
+    { q: 'The obturator nerve passes through the pelvis but does NOT supply pelvic structures. It originates from which plexus?', options: ['Sacral plexus', 'Lumbar plexus (L2–L4)', 'Coccygeal plexus', 'Hypogastric plexus'], correct: 1, explanation: 'Obturator n. arises from the LUMBAR plexus (L2–L4). It traverses the pelvis to exit via the obturator canal, supplying the medial thigh adductor compartment.' },
+  ]},
 
   // ============= LYMPHATICS =============
-  { id: 'l_bladder_intiliac', layer: 'lymph', from: 'bladder', to: 'int_iliac_ln',
-    label: 'Bladder → Internal/External Iliac LN',
-    q: 'Pelvic viscera (including bladder) primarily drain to which lymph node group?',
-    options: ['Para-aortic nodes', 'Iliac nodes (internal & external)', 'Superficial inguinal nodes', 'Deep inguinal nodes'], correct: 1,
-    explanation: 'Pelvic viscera (bladder, uterus body, cervix, prostate, seminal vesicles, proximal vagina) drain primarily to the iliac nodes (internal + external).' },
+  { id: 'l_bladder_intiliac', layer: 'lymph', from: 'bladder', to: 'int_iliac_ln', length: 1, label: 'Bladder → Internal/External Iliac LN', questions: [
+    { q: 'Pelvic viscera (including bladder) primarily drain to which lymph node group?', options: ['Para-aortic nodes', 'Iliac nodes (internal & external)', 'Superficial inguinal nodes', 'Deep inguinal nodes'], correct: 1, explanation: 'Pelvic viscera (bladder, uterus body, cervix, prostate, seminal vesicles, proximal vagina) → iliac nodes (internal + external).' },
+  ]},
 
-  { id: 'l_intiliac_commoniliac', layer: 'lymph', from: 'int_iliac_ln', to: 'common_iliac_ln',
-    label: 'Int. Iliac LN → Common Iliac LN',
-    q: 'Lymph from internal iliac nodes ascends to which next station?',
-    options: ['Superficial inguinal', 'Common iliac nodes', 'Para-aortic directly', 'Cisterna chyli directly'], correct: 1,
-    explanation: 'Internal and external iliac nodes drain into common iliac nodes, which then drain into para-aortic (lumbar) nodes, then to the cisterna chyli and thoracic duct.' },
+  { id: 'l_intiliac_commoniliac', layer: 'lymph', from: 'int_iliac_ln', to: 'common_iliac_ln', length: 1, label: 'Int. Iliac LN → Common Iliac LN', questions: [
+    { q: 'Lymph from internal iliac nodes ascends to which next station?', options: ['Superficial inguinal', 'Common iliac nodes', 'Para-aortic directly', 'Cisterna chyli directly'], correct: 1, explanation: 'Standard chain: internal/external iliac → common iliac → para-aortic → cisterna chyli → thoracic duct.' },
+  ]},
 
-  { id: 'l_extiliac_commoniliac', layer: 'lymph', from: 'ext_iliac_ln', to: 'common_iliac_ln',
-    label: 'Ext. Iliac LN → Common Iliac LN',
-    q: 'A lower-limb melanoma metastasizing via lymphatics would FIRST involve which nodes?',
-    options: ['Common iliac', 'Para-aortic', 'Superficial inguinal', 'Deep inguinal'], correct: 2,
-    explanation: 'Lower limb superficial drainage → superficial inguinal nodes first. From there, deep inguinal → external iliac → common iliac → para-aortic.' },
+  { id: 'l_extiliac_commoniliac', layer: 'lymph', from: 'ext_iliac_ln', to: 'common_iliac_ln', length: 1, label: 'Ext. Iliac LN → Common Iliac LN', questions: [
+    { q: 'A lower-limb melanoma metastasizing via lymphatics would FIRST involve which nodes?', options: ['Common iliac', 'Para-aortic', 'Superficial inguinal', 'Deep inguinal'], correct: 2, explanation: 'Lower limb superficial drainage → superficial inguinal first → deep inguinal → external iliac → common iliac → para-aortic.' },
+  ]},
 
-  { id: 'l_common_paraao', layer: 'lymph', from: 'common_iliac_ln', to: 'para_aortic',
-    label: 'Common Iliac LN → Para-aortic',
-    q: 'After para-aortic (lumbar) nodes, lymph collects into which structure before joining the thoracic duct?',
-    options: ['Right lymphatic duct', 'Cisterna chyli', 'Lacteals', 'Hilar nodes'], correct: 1,
-    explanation: 'Para-aortic nodes drain into the cisterna chyli (a sac at L1–L2) which becomes the thoracic duct, terminating at the left venous angle.' },
+  { id: 'l_common_paraao', layer: 'lymph', from: 'common_iliac_ln', to: 'para_aortic', length: 1, label: 'Common Iliac LN → Para-aortic', questions: [
+    { q: 'After para-aortic (lumbar) nodes, lymph collects into which structure before joining the thoracic duct?', options: ['Right lymphatic duct', 'Cisterna chyli', 'Lacteals', 'Hilar nodes'], correct: 1, explanation: 'Para-aortic nodes → cisterna chyli (saccular dilation at L1–L2) → thoracic duct → terminates at left venous angle (junction of left subclavian and IJ veins).' },
+  ]},
 
-  { id: 'l_ovary_paraao', layer: 'lymph', from: 'ovary', to: 'para_aortic',
-    label: 'Ovary → Para-aortic LN',
-    q: 'Why do the ovaries (and testes) drain directly to PARA-AORTIC nodes, bypassing pelvic nodes?',
-    options: ['They are not in the pelvis', 'Embryologic origin in upper abdomen — they descended with their lymphatics', 'Lymphatic drainage follows venous return only', 'Para-aortic drainage prevents metastasis'], correct: 1,
-    explanation: 'Gonads originate near L2 in the embryo and migrate caudally with their NV bundle. The lymphatic drainage stays at the level of origin, draining to para-aortic (lumbar) nodes — clinically critical for testicular and ovarian cancer staging.' },
+  { id: 'l_ovary_paraao', layer: 'lymph', from: 'ovary', to: 'para_aortic', length: 2, label: 'Ovary → Para-aortic LN', questions: [
+    { q: 'Why do the ovaries (and testes) drain directly to PARA-AORTIC nodes, bypassing pelvic nodes?', options: ['They are not in the pelvis', 'Embryologic origin in upper abdomen — descended with their lymphatics', 'Lymphatic drainage follows venous return only', 'Para-aortic drainage prevents metastasis'], correct: 1, explanation: 'Gonads originate near L2 in the embryo and descend caudally with their NV bundle. Lymphatics retain their original drainage to para-aortic (lumbar) nodes — clinically critical for ovarian/testicular cancer staging.' },
+    { q: 'A patient with ovarian cancer is being staged. Imaging should focus on which nodal region for spread?', options: ['Inguinal', 'Para-aortic / lumbar', 'Mediastinal only', 'Common iliac only'], correct: 1, explanation: 'Ovarian cancer drains to para-aortic LN. Inguinal nodes are NOT typically involved unless there is unusual lymphatic spread (e.g., via round ligament from uterus).' },
+  ]},
 
-  { id: 'l_testis_paraao', layer: 'lymph', from: 'testis', to: 'para_aortic',
-    label: 'Testis → Para-aortic LN',
-    q: 'A 28-year-old man with testicular cancer would typically show first metastatic spread to:',
-    options: ['Inguinal nodes', 'Para-aortic (lumbar) nodes', 'Iliac nodes', 'Mediastinal nodes'], correct: 1,
-    explanation: 'Testicular cancer drains to PARA-AORTIC nodes due to embryologic origin. Inguinal nodes are involved only if the SCROTAL skin is breached (e.g., trans-scrotal biopsy).' },
+  { id: 'l_testis_paraao', layer: 'lymph', from: 'testis', to: 'para_aortic', length: 2, label: 'Testis → Para-aortic LN', questions: [
+    { q: 'A 28-year-old man with testicular cancer would typically show first metastatic spread to:', options: ['Inguinal nodes', 'Para-aortic (lumbar) nodes', 'Iliac nodes', 'Mediastinal nodes'], correct: 1, explanation: 'Testicular cancer drains to PARA-AORTIC nodes (embryologic origin). Inguinal nodes only involved if SCROTAL skin breached (e.g., trans-scrotal biopsy — contraindicated for this reason).' },
+    { q: 'Why is trans-scrotal biopsy contraindicated for suspected testicular cancer?', options: ['Risk of bleeding', 'It would change lymphatic drainage to include inguinal nodes (worse staging/treatment)', 'Pain control is difficult', 'It causes infertility'], correct: 1, explanation: 'Scrotal skin drains to superficial inguinal LN. Crossing scrotal skin during biopsy risks seeding tumor into inguinal lymphatics — patient now needs inguinal node dissection too. Inguinal approach is standard.' },
+  ]},
 
-  { id: 'l_uterus_intiliac', layer: 'lymph', from: 'uterus', to: 'int_iliac_ln',
-    label: 'Uterus body → Iliac LN',
-    q: 'Lymph from the BODY of the uterus drains to which group?',
-    options: ['Para-aortic only', 'Iliac nodes (mainly external)', 'Superficial inguinal only', 'Deep inguinal'], correct: 1,
-    explanation: 'Body of uterus → iliac (mainly external iliac) nodes. Cervix → iliac nodes too. Fundus → para-aortic (with ovary). Round ligament carries some lymphatics from superior body to superficial inguinal — the only weird one.' },
+  { id: 'l_uterus_intiliac', layer: 'lymph', from: 'uterus', to: 'int_iliac_ln', length: 2, label: 'Uterus body → Iliac LN', questions: [
+    { q: 'Lymph from the BODY of the uterus drains to which group?', options: ['Para-aortic only', 'Iliac nodes (mainly external)', 'Superficial inguinal only', 'Deep inguinal'], correct: 1, explanation: 'Body of uterus → external iliac (mainly). Cervix → iliac (external/internal/sacral). Fundus → para-aortic (with ovary). Round ligament carries some lymphatics from superior body to superficial inguinal — the only weird one.' },
+    { q: 'Which lymphatic pathway explains why uterine cancer can occasionally present with INGUINAL adenopathy?', options: ['Internal iliac → inguinal', 'Superior body of uterus drains via the round ligament to superficial inguinal LN', 'Direct lymphatic to femoral nodes', 'Via para-aortic retrograde'], correct: 1, explanation: 'The round ligament of the uterus passes through the inguinal canal, carrying lymphatics from the superior uterine body to superficial inguinal nodes — an unusual but real metastatic pathway.' },
+  ]},
 
-  { id: 'l_cervix_intiliac', layer: 'lymph', from: 'cervix', to: 'int_iliac_ln',
-    label: 'Cervix → Iliac LN',
-    q: 'Cervical cancer staging requires knowledge of lymphatic drainage. The cervix drains primarily to:',
-    options: ['Para-aortic nodes', 'Iliac nodes (external, internal, sacral)', 'Inguinal nodes', 'Mesenteric nodes'], correct: 1,
-    explanation: 'Cervix drains to external iliac, internal iliac, and sacral nodes. Hence radical hysterectomy includes pelvic node dissection.' },
+  { id: 'l_cervix_intiliac', layer: 'lymph', from: 'cervix', to: 'int_iliac_ln', length: 1, label: 'Cervix → Iliac LN', questions: [
+    { q: 'Cervical cancer staging requires knowledge of lymphatic drainage. The cervix drains primarily to:', options: ['Para-aortic nodes', 'Iliac nodes (external, internal, sacral)', 'Inguinal nodes', 'Mesenteric nodes'], correct: 1, explanation: 'Cervix → external iliac, internal iliac, and sacral nodes. Hence radical hysterectomy includes pelvic node dissection.' },
+  ]},
 
-  { id: 'l_proxvag_intiliac', layer: 'lymph', from: 'proximal_vagina', to: 'int_iliac_ln',
-    label: 'Proximal ⅔ vagina → Iliac LN',
-    q: 'The proximal (upper) two-thirds of the vagina drains to which lymph nodes?',
-    options: ['Superficial inguinal', 'Iliac nodes', 'Para-aortic', 'Deep inguinal only'], correct: 1,
-    explanation: 'Upper ⅔ vagina (Müllerian-derived) → iliac nodes. Lower ⅓ vagina (sinovaginal/ectoderm-derived) → superficial inguinal. The dividing line is roughly the hymen.' },
+  { id: 'l_proxvag_intiliac', layer: 'lymph', from: 'proximal_vagina', to: 'int_iliac_ln', length: 1, label: 'Proximal ⅔ vagina → Iliac LN', questions: [
+    { q: 'The proximal (upper) two-thirds of the vagina drains to which lymph nodes?', options: ['Superficial inguinal', 'Iliac nodes', 'Para-aortic', 'Deep inguinal only'], correct: 1, explanation: 'Upper ⅔ vagina (Müllerian-derived) → iliac nodes. Lower ⅓ vagina (sinovaginal/ectoderm-derived) → superficial inguinal. Embryology dictates drainage.' },
+  ]},
 
-  { id: 'l_distvag_supinguinal', layer: 'lymph', from: 'distal_vagina', to: 'sup_inguinal_ln',
-    label: 'Distal ⅓ vagina → Superficial Inguinal LN',
-    q: 'Why does the distal third of the vagina drain to a different lymph node group than the proximal two-thirds?',
-    options: ['Different blood supply', 'Different embryologic origin — distal ⅓ from urogenital sinus, proximal ⅔ from Müllerian ducts', 'Different innervation only', 'Random anatomical variation'], correct: 1,
-    explanation: 'Distal ⅓ vagina derives from the urogenital sinus (ectodermal), so drains to superficial inguinal LN like other perineal skin. Proximal ⅔ derives from Müllerian ducts (mesodermal), draining to iliac LN.' },
+  { id: 'l_distvag_supinguinal', layer: 'lymph', from: 'distal_vagina', to: 'sup_inguinal_ln', length: 2, label: 'Distal ⅓ vagina → Superficial Inguinal LN', questions: [
+    { q: 'Why does the distal third of the vagina drain to a different lymph node group than the proximal two-thirds?', options: ['Different blood supply', 'Different embryologic origin: distal ⅓ from urogenital sinus, proximal ⅔ from Müllerian ducts', 'Different innervation only', 'Random anatomical variation'], correct: 1, explanation: 'Distal ⅓ vagina = urogenital sinus (ectodermal) → drains to superficial inguinal LN like other perineal skin. Proximal ⅔ = Müllerian ducts (mesodermal) → drains to iliac LN. The hymen marks the embryologic boundary.' },
+    { q: 'A patient presents with a lower vaginal carcinoma. Which lymph node region requires staging assessment?', options: ['Para-aortic only', 'Superficial inguinal', 'Mesenteric', 'Common iliac directly'], correct: 1, explanation: 'Lower ⅓ vaginal cancer → superficial inguinal LN involvement (consistent with its urogenital sinus origin). Upper ⅔ would target iliac LN.' },
+  ]},
 
-  { id: 'l_anal_above_intiliac', layer: 'lymph', from: 'anal_above', to: 'int_iliac_ln',
-    label: 'Anal canal (above pectinate) → Internal Iliac LN',
-    q: 'A rectal carcinoma above the pectinate line would metastasize via lymphatics to which nodes first?',
-    options: ['Superficial inguinal', 'Internal iliac nodes', 'Para-aortic', 'Deep inguinal'], correct: 1,
-    explanation: 'Above pectinate line → internal iliac nodes (visceral drainage). Below pectinate line → superficial inguinal nodes (somatic drainage). The pectinate line is everything in proctology.' },
+  { id: 'l_anal_above_intiliac', layer: 'lymph', from: 'anal_above', to: 'int_iliac_ln', length: 1, label: 'Anal canal (above pectinate) → Internal Iliac LN', questions: [
+    { q: 'A rectal carcinoma above the pectinate line would metastasize via lymphatics to which nodes first?', options: ['Superficial inguinal', 'Internal iliac nodes', 'Para-aortic', 'Deep inguinal'], correct: 1, explanation: 'Above pectinate → internal iliac nodes (visceral drainage). Below pectinate → superficial inguinal (somatic). The pectinate line is everything in proctology.' },
+  ]},
 
-  { id: 'l_anal_below_supinguinal', layer: 'lymph', from: 'anal_below', to: 'sup_inguinal_ln',
-    label: 'Anal canal (below pectinate) → Superficial Inguinal LN',
-    q: 'An anal canal lesion below the pectinate line spreads to which lymph nodes?',
-    options: ['Internal iliac', 'External iliac', 'Superficial inguinal', 'Para-aortic'], correct: 2,
-    explanation: 'Below pectinate line: somatic territory → superficial inguinal LN. The pectinate line creates a sharp clinical boundary for cancer spread, blood supply, venous drainage, and innervation.' },
+  { id: 'l_anal_below_supinguinal', layer: 'lymph', from: 'anal_below', to: 'sup_inguinal_ln', length: 2, label: 'Anal canal (below pectinate) → Superficial Inguinal LN', questions: [
+    { q: 'An anal canal lesion below the pectinate line spreads to which lymph nodes?', options: ['Internal iliac', 'External iliac', 'Superficial inguinal', 'Para-aortic'], correct: 2, explanation: 'Below pectinate: somatic territory (ectodermal origin) → superficial inguinal LN. Pectinate line creates a sharp clinical boundary for cancer spread, blood supply, venous drainage, innervation, and epithelium.' },
+    { q: 'A patient has anal squamous cell carcinoma (typically below pectinate line). Inguinal lymphadenopathy is detected. This indicates:', options: ['Disseminated disease (M1)', 'Regional spread consistent with primary tumor location (still potentially curable)', 'Misdiagnosis (anal cancer should not affect these nodes)', 'Para-aortic involvement'], correct: 1, explanation: 'Anal SCC below pectinate naturally drains to superficial inguinal LN. Inguinal involvement = REGIONAL nodal disease, not distant metastasis — still curable with chemoradiation.' },
+  ]},
 
-  { id: 'l_perineum_supinguinal', layer: 'lymph', from: 'perineum', to: 'sup_inguinal_ln',
-    label: 'Perineum → Superficial Inguinal LN',
-    q: 'The perineum, scrotum, and labia majora all drain to which lymph node group?',
-    options: ['Internal iliac', 'Superficial inguinal', 'Deep inguinal', 'Para-aortic'], correct: 1,
-    explanation: 'Superficial perineal/genital structures (perineal skin, scrotum, labia majora, distal vagina) all drain to superficial inguinal nodes. Important: TESTIS itself drains to para-aortic, but scrotal skin → superficial inguinal.' },
+  { id: 'l_perineum_supinguinal', layer: 'lymph', from: 'perineum', to: 'sup_inguinal_ln', length: 1, label: 'Perineum → Superficial Inguinal LN', questions: [
+    { q: 'The perineum, scrotum, and labia majora all drain to which lymph node group?', options: ['Internal iliac', 'Superficial inguinal', 'Deep inguinal', 'Para-aortic'], correct: 1, explanation: 'Superficial perineal/genital skin (perineum, scrotum, labia majora, distal vagina) → superficial inguinal nodes. Note: TESTIS itself → para-aortic (gonad), but SCROTAL SKIN → superficial inguinal.' },
+  ]},
 
-  { id: 'l_glans_deepinguinal', layer: 'lymph', from: 'glans', to: 'deep_inguinal_ln',
-    label: 'Glans penis/clitoris → Deep Inguinal LN',
-    q: 'The glans penis and glans clitoris are the EXCEPTION to perineal lymphatic drainage — they drain to:',
-    options: ['Superficial inguinal LN', 'Deep inguinal LN', 'Internal iliac LN', 'Para-aortic LN'], correct: 1,
-    explanation: 'Glans penis and glans clitoris drain to DEEP inguinal nodes (a high-yield exception). Other superficial genital/perineal skin drains to SUPERFICIAL inguinal.' },
+  { id: 'l_glans_deepinguinal', layer: 'lymph', from: 'glans', to: 'deep_inguinal_ln', length: 2, label: 'Glans penis/clitoris → Deep Inguinal LN', questions: [
+    { q: 'The glans penis and glans clitoris are the EXCEPTION to perineal lymphatic drainage — they drain to:', options: ['Superficial inguinal LN', 'Deep inguinal LN', 'Internal iliac LN', 'Para-aortic LN'], correct: 1, explanation: 'Glans penis and glans clitoris → DEEP inguinal nodes (high-yield exception). Other superficial genital/perineal skin → superficial inguinal.' },
+    { q: 'A patient with penile carcinoma involving the glans needs lymph node assessment. Which group is most relevant?', options: ['Superficial inguinal only', 'Deep inguinal nodes (with sentinel node biopsy)', 'Para-aortic', 'Internal iliac'], correct: 1, explanation: 'Glans → DEEP inguinal nodes. Penile shaft skin (not glans) → superficial inguinal. Sentinel node biopsy of deep inguinal is standard for staging glans-involving penile cancer.' },
+  ]},
 
-  { id: 'l_supingl_extiliac', layer: 'lymph', from: 'sup_inguinal_ln', to: 'ext_iliac_ln',
-    label: 'Sup. Inguinal LN → Ext. Iliac LN',
-    q: 'Lymph from superficial inguinal nodes drains next to:',
-    options: ['Para-aortic directly', 'Deep inguinal → external iliac → common iliac', 'Internal iliac', 'Cisterna chyli'], correct: 1,
-    explanation: 'Standard chain: superficial inguinal → deep inguinal → external iliac → common iliac → para-aortic → cisterna chyli → thoracic duct.' },
+  { id: 'l_supingl_extiliac', layer: 'lymph', from: 'sup_inguinal_ln', to: 'ext_iliac_ln', length: 1, label: 'Sup. Inguinal LN → Ext. Iliac LN', questions: [
+    { q: 'Lymph from superficial inguinal nodes drains next to:', options: ['Para-aortic directly', 'Deep inguinal → external iliac → common iliac', 'Internal iliac', 'Cisterna chyli'], correct: 1, explanation: 'Standard chain: superficial inguinal → deep inguinal → external iliac → common iliac → para-aortic → cisterna chyli → thoracic duct.' },
+  ]},
 
-  { id: 'l_deepingl_extiliac', layer: 'lymph', from: 'deep_inguinal_ln', to: 'ext_iliac_ln',
-    label: 'Deep Inguinal LN → Ext. Iliac LN',
-    q: 'The cloquet (rosenmüller) node is the most superior of which group?',
-    options: ['Superficial inguinal', 'Deep inguinal', 'External iliac', 'Internal iliac'], correct: 1,
-    explanation: 'Cloquet\'s node is the most superior DEEP inguinal node, sitting in the femoral canal. It is the bridge between deep inguinal and external iliac drainage.' },
+  { id: 'l_deepingl_extiliac', layer: 'lymph', from: 'deep_inguinal_ln', to: 'ext_iliac_ln', length: 1, label: 'Deep Inguinal LN → Ext. Iliac LN', questions: [
+    { q: 'The Cloquet (Rosenmüller) node is the most superior of which group?', options: ['Superficial inguinal', 'Deep inguinal', 'External iliac', 'Internal iliac'], correct: 1, explanation: 'Cloquet\'s node is the most superior DEEP inguinal node, sitting in the femoral canal — the bridge between deep inguinal and external iliac drainage.' },
+  ]},
 
-  { id: 'l_rectum_intiliac', layer: 'lymph', from: 'rectum', to: 'int_iliac_ln',
-    label: 'Rectum → Internal Iliac LN',
-    q: 'Lymph from the middle and lower rectum (above pectinate) drains primarily to:',
-    options: ['Para-aortic', 'Internal iliac nodes', 'Superficial inguinal', 'Mesenteric nodes only'], correct: 1,
-    explanation: 'Middle/lower rectum drains via middle rectal vessels to internal iliac nodes. Upper rectum drains via superior rectal to inferior mesenteric nodes (then para-aortic).' },
+  { id: 'l_rectum_intiliac', layer: 'lymph', from: 'rectum', to: 'int_iliac_ln', length: 1, label: 'Rectum → Internal Iliac LN', questions: [
+    { q: 'Lymph from the middle and lower rectum (above pectinate) drains primarily to:', options: ['Para-aortic', 'Internal iliac nodes', 'Superficial inguinal', 'Mesenteric nodes only'], correct: 1, explanation: 'Middle/lower rectum → middle rectal vessels → internal iliac nodes. Upper rectum → superior rectal → inferior mesenteric nodes → para-aortic.' },
+  ]},
 
-  { id: 'l_prostate_intiliac', layer: 'lymph', from: 'prostate', to: 'int_iliac_ln',
-    label: 'Prostate → Internal Iliac LN',
-    q: 'Prostate cancer most commonly spreads via lymphatics to which nodes first?',
-    options: ['Superficial inguinal', 'Internal iliac (and obturator) nodes', 'Para-aortic only', 'Mediastinal'], correct: 1,
-    explanation: 'Prostate drains primarily to internal iliac and obturator nodes. Subsequently to common iliac and para-aortic. Bone metastasis (lumbar spine) occurs via the vertebral venous plexus (Batson plexus).' },
+  { id: 'l_prostate_intiliac', layer: 'lymph', from: 'prostate', to: 'int_iliac_ln', length: 2, label: 'Prostate → Internal Iliac LN', questions: [
+    { q: 'Prostate cancer most commonly spreads via lymphatics to which nodes first?', options: ['Superficial inguinal', 'Internal iliac (and obturator) nodes', 'Para-aortic only', 'Mediastinal'], correct: 1, explanation: 'Prostate → internal iliac and obturator nodes. Then common iliac → para-aortic. Bone metastasis (lumbar spine) via vertebral venous plexus (Batson plexus).' },
+    { q: 'Why does prostate cancer often metastasize to lumbar vertebrae before reaching distant lymph nodes?', options: ['Direct hematogenous spread via vertebral venous plexus (Batson)', 'Retrograde lymphatic flow', 'Cervical seeding', 'Direct extension'], correct: 0, explanation: 'The prostatic venous plexus connects to the vertebral venous plexus (Batson). Valveless veins allow retrograde flow → cancer cells reach lumbar/sacral vertebrae directly, bypassing IVC/lung.' },
+  ]},
 ];
 
-// TICKETS — destination cards. Each defines start/end nodes and point value.
-// Players must claim a contiguous chain of edges connecting them.
+// TICKETS — destinations players try to connect
 const TICKET_TEMPLATES = [
-  { id: 't1', start: 'aorta', end: 'uterus', sex: 'F', pts: 6, label: 'Aorta → Uterus (via internal iliac → uterine a.)' },
-  { id: 't1m', start: 'aorta', end: 'prostate', sex: 'M', pts: 6, label: 'Aorta → Prostate (via internal iliac → inferior vesical a.)' },
-  { id: 't2', start: 'aorta', end: 'bladder', sex: 'B', pts: 5, label: 'Aorta → Bladder (any vesical route)' },
-  { id: 't3', start: 'aorta', end: 'anal_below', sex: 'B', pts: 8, label: 'Aorta → Anal canal below pectinate line' },
-  { id: 't4', start: 'aorta', end: 'genitalia', sex: 'B', pts: 7, label: 'Aorta → Penis/Clitoris (via internal pudendal)' },
-  { id: 't5', start: 'aorta', end: 'ovary', sex: 'F', pts: 4, label: 'Aorta → Ovary (gonadal artery)' },
-  { id: 't5m', start: 'aorta', end: 'testis', sex: 'M', pts: 4, label: 'Aorta → Testis (gonadal artery)' },
-  { id: 't6', start: 'aorta', end: 'rectum', sex: 'B', pts: 5, label: 'Aorta → Rectum (middle rectal a.)' },
-  { id: 't7', start: 'aorta', end: 'gluteal_region', sex: 'B', pts: 5, label: 'Aorta → Gluteal region (via either gluteal a.)' },
-  { id: 't8', start: 'aorta', end: 'medial_thigh', sex: 'B', pts: 5, label: 'Aorta → Medial thigh (obturator a.)' },
+  { id: 't1', start: 'aorta', end: 'uterus', sex: 'F', pts: 8, label: 'Aorta → Uterus (uterine a.)' },
+  { id: 't1m', start: 'aorta', end: 'prostate', sex: 'M', pts: 8, label: 'Aorta → Prostate (inferior vesical a.)' },
+  { id: 't2', start: 'aorta', end: 'bladder', sex: 'B', pts: 7, label: 'Aorta → Bladder (any vesical route)' },
+  { id: 't3', start: 'aorta', end: 'anal_below', sex: 'B', pts: 10, label: 'Aorta → Anal canal (below pectinate)' },
+  { id: 't4', start: 'aorta', end: 'genitalia', sex: 'B', pts: 9, label: 'Aorta → Penis/Clitoris (internal pudendal)' },
+  { id: 't5', start: 'aorta', end: 'ovary', sex: 'F', pts: 5, label: 'Aorta → Ovary (gonadal artery)' },
+  { id: 't5m', start: 'aorta', end: 'testis', sex: 'M', pts: 5, label: 'Aorta → Testis (gonadal artery)' },
+  { id: 't6', start: 'aorta', end: 'rectum', sex: 'B', pts: 7, label: 'Aorta → Rectum (middle rectal a.)' },
+  { id: 't7', start: 'aorta', end: 'gluteal_region', sex: 'B', pts: 7, label: 'Aorta → Gluteal region (either gluteal a.)' },
+  { id: 't8', start: 'aorta', end: 'medial_thigh', sex: 'B', pts: 7, label: 'Aorta → Medial thigh (obturator a.)' },
 
-  // Nerves
-  { id: 'n1', start: 's2', end: 'anal_below', sex: 'B', pts: 6, label: 'S2 → External anal sphincter (pudendal → inf. rectal n.)' },
-  { id: 'n2', start: 's2', end: 'glans', sex: 'B', pts: 7, label: 'S2 → Glans penis/clitoris (pudendal → dorsal n.)' },
-  { id: 'n3', start: 's2', end: 'perineum', sex: 'B', pts: 6, label: 'S2 → Perineum (pudendal → perineal n.)' },
-  { id: 'n4', start: 's2', end: 'bladder', sex: 'B', pts: 5, label: 'S2 → Bladder (parasympathetic pelvic splanchnic → IHP)' },
-  { id: 'n5', start: 't12_l2', end: 'ihp', sex: 'B', pts: 5, label: 'T12-L2 → IHP (sympathetic via lumbar splanchnic)' },
-  { id: 'n6', start: 'sym_trunk', end: 'ihp', sex: 'B', pts: 4, label: 'Sympathetic trunk → IHP (via sacral splanchnic)' },
+  { id: 'n1', start: 's2', end: 'anal_below', sex: 'B', pts: 8, label: 'S2 → External anal sphincter (pudendal)' },
+  { id: 'n2', start: 's2', end: 'glans', sex: 'B', pts: 9, label: 'S2 → Glans penis/clitoris (pudendal → dorsal n.)' },
+  { id: 'n3', start: 's2', end: 'perineum', sex: 'B', pts: 8, label: 'S2 → Perineum (pudendal → perineal n.)' },
+  { id: 'n4', start: 's2', end: 'bladder', sex: 'B', pts: 6, label: 'S2 → Bladder (paraS via pelvic splanchnic)' },
+  { id: 'n5', start: 't12_l2', end: 'ihp', sex: 'B', pts: 7, label: 'T12-L2 → IHP (sym via lumbar splanchnic)' },
+  { id: 'n6', start: 'sym_trunk', end: 'ihp', sex: 'B', pts: 5, label: 'Sympathetic trunk → IHP (sacral splanchnic)' },
 
-  // Lymphatics
-  { id: 'l1', start: 'testis', end: 'para_aortic', sex: 'M', pts: 4, label: 'Testis → Para-aortic LN' },
-  { id: 'l1f', start: 'ovary', end: 'para_aortic', sex: 'F', pts: 4, label: 'Ovary → Para-aortic LN' },
-  { id: 'l2', start: 'glans', end: 'common_iliac_ln', sex: 'B', pts: 6, label: 'Glans penis/clitoris → Common Iliac LN (via deep inguinal)' },
-  { id: 'l3', start: 'perineum', end: 'common_iliac_ln', sex: 'B', pts: 6, label: 'Perineum → Common Iliac LN (via superficial inguinal)' },
-  { id: 'l4', start: 'cervix', end: 'para_aortic', sex: 'F', pts: 6, label: 'Cervix → Para-aortic LN' },
-  { id: 'l4m', start: 'prostate', end: 'para_aortic', sex: 'M', pts: 6, label: 'Prostate → Para-aortic LN' },
-  { id: 'l5', start: 'distal_vagina', end: 'common_iliac_ln', sex: 'F', pts: 7, label: 'Distal ⅓ vagina → Common Iliac LN (sup. inguinal route)' },
-  { id: 'l6', start: 'anal_above', end: 'common_iliac_ln', sex: 'B', pts: 5, label: 'Anal canal above pectinate → Common Iliac LN' },
-  { id: 'l7', start: 'anal_below', end: 'common_iliac_ln', sex: 'B', pts: 6, label: 'Anal canal below pectinate → Common Iliac LN (sup. inguinal route)' },
+  { id: 'l1', start: 'testis', end: 'para_aortic', sex: 'M', pts: 5, label: 'Testis → Para-aortic LN' },
+  { id: 'l1f', start: 'ovary', end: 'para_aortic', sex: 'F', pts: 5, label: 'Ovary → Para-aortic LN' },
+  { id: 'l2', start: 'glans', end: 'common_iliac_ln', sex: 'B', pts: 8, label: 'Glans → Common Iliac LN (deep inguinal route)' },
+  { id: 'l3', start: 'perineum', end: 'common_iliac_ln', sex: 'B', pts: 8, label: 'Perineum → Common Iliac LN (sup. inguinal)' },
+  { id: 'l4', start: 'cervix', end: 'para_aortic', sex: 'F', pts: 8, label: 'Cervix → Para-aortic LN' },
+  { id: 'l4m', start: 'prostate', end: 'para_aortic', sex: 'M', pts: 8, label: 'Prostate → Para-aortic LN' },
+  { id: 'l5', start: 'distal_vagina', end: 'common_iliac_ln', sex: 'F', pts: 9, label: 'Distal ⅓ vagina → Common Iliac LN' },
+  { id: 'l6', start: 'anal_above', end: 'common_iliac_ln', sex: 'B', pts: 6, label: 'Anal canal above pectinate → Common Iliac LN' },
+  { id: 'l7', start: 'anal_below', end: 'common_iliac_ln', sex: 'B', pts: 8, label: 'Anal canal below pectinate → Common Iliac LN' },
 ];
 
 // ============================================================
 // STATE
 // ============================================================
 const state = {
-  mode: '2p',           // '2p' or 'solo'
-  sex: 'F',             // 'F' or 'M'
-  layer: 'all',         // filter
-  currentPlayer: 0,     // 0 or 1
+  mode: '2p',
+  sex: 'F',
+  layer: 'all',
+  currentPlayer: 0,
   playerNames: ['Player 1', 'Player 2'],
   scores: [0, 0],
-  claimed: {},          // edgeId -> playerIdx
-  tickets: [[], []],    // each player's tickets
+  claimed: {},          // edgeId -> playerIdx (fully claimed)
+  progress: {},         // edgeId -> {player: idx, miles: int} (partially claimed)
+  questionsUsed: {},    // edgeId -> Set of question indices used (per edge)
+  tickets: [[], []],
   completedTickets: [[], []],
-  currentEdgeId: null,
   ticketDeck: [],
   segmentsClaimed: [0, 0],
   correctAnswers: [0, 0],
   wrongAnswers: [0, 0],
-  highlightedEdges: new Set(),
   gameOver: false,
+  // Turn-specific
+  diceRoll: 0,
+  budget: 0,
+  hasRolled: false,
+  currentTargetEdge: null,
 };
 
 // ============================================================
-// GRAPH HELPERS — find shortest path / connected route
+// HELPERS
 // ============================================================
+function isEdgeAvailableForSex(e) {
+  const fromN = NODES[e.from], toN = NODES[e.to];
+  if (!fromN || !toN) return false;
+  if (fromN.sex && fromN.sex !== state.sex) return false;
+  if (toN.sex && toN.sex !== state.sex) return false;
+  return true;
+}
+function isNodeAvailable(id) {
+  const n = NODES[id];
+  if (!n) return false;
+  if (n.sex && n.sex !== state.sex) return false;
+  return true;
+}
 function buildAdjacency(playerIdx) {
-  // Adjacency over edges this player has claimed
   const adj = {};
   for (const e of EDGES) {
     if (state.claimed[e.id] !== playerIdx) continue;
     if (!isEdgeAvailableForSex(e)) continue;
-    adj[e.from] = adj[e.from] || [];
-    adj[e.to] = adj[e.to] || [];
-    adj[e.from].push(e.to);
-    adj[e.to].push(e.from);
+    adj[e.from] = adj[e.from] || []; adj[e.from].push(e.to);
+    adj[e.to] = adj[e.to] || []; adj[e.to].push(e.from);
   }
   return adj;
 }
-
 function bfsConnected(adj, start, end) {
   if (!adj[start]) return false;
   if (start === end) return true;
@@ -1248,37 +1122,23 @@ function bfsConnected(adj, start, end) {
     const n = q.shift();
     for (const nb of (adj[n] || [])) {
       if (nb === end) return true;
-      if (!visited.has(nb)) {
-        visited.add(nb);
-        q.push(nb);
-      }
+      if (!visited.has(nb)) { visited.add(nb); q.push(nb); }
     }
   }
   return false;
 }
-
-function isEdgeAvailableForSex(e) {
-  const fromN = NODES[e.from];
-  const toN = NODES[e.to];
-  if (!fromN || !toN) return false;
-  if (fromN.sex && fromN.sex !== state.sex) return false;
-  if (toN.sex && toN.sex !== state.sex) return false;
-  return true;
-}
-
-function isNodeAvailable(nodeId) {
-  const n = NODES[nodeId];
-  if (!n) return false;
-  if (n.sex && n.sex !== state.sex) return false;
-  return true;
+function getEdgeProgress(edgeId, playerIdx) {
+  const p = state.progress[edgeId];
+  if (!p || p.player !== playerIdx) return 0;
+  return p.miles;
 }
 
 // ============================================================
 // SETUP
 // ============================================================
 function selectChoice(el, group) {
-  const siblings = el.parentElement.querySelectorAll('.choice');
-  siblings.forEach(s => s.classList.remove('selected'));
+  const sib = el.parentElement.querySelectorAll('.choice');
+  sib.forEach(s => s.classList.remove('selected'));
   el.classList.add('selected');
   if (group === 'mode') {
     state.mode = el.dataset.mode;
@@ -1293,12 +1153,18 @@ function startGame() {
   state.playerNames[1] = document.getElementById('p2Name').value || 'Player 2';
   state.scores = [0, 0];
   state.claimed = {};
+  state.progress = {};
+  state.questionsUsed = {};
   state.completedTickets = [[], []];
   state.segmentsClaimed = [0, 0];
   state.correctAnswers = [0, 0];
   state.wrongAnswers = [0, 0];
   state.gameOver = false;
   state.currentPlayer = 0;
+  state.diceRoll = 0;
+  state.budget = 0;
+  state.hasRolled = false;
+  state.currentTargetEdge = null;
   state.ticketDeck = shuffleDeck();
   state.tickets[0] = drawTickets(3);
   state.tickets[1] = state.mode === '2p' ? drawTickets(3) : [];
@@ -1307,252 +1173,74 @@ function startGame() {
 }
 
 function shuffleDeck() {
-  const deck = TICKET_TEMPLATES.filter(t => t.sex === 'B' || t.sex === state.sex)
-    .map(t => ({ ...t }));
-  for (let i = deck.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+  const deck = TICKET_TEMPLATES.filter(t => t.sex === 'B' || t.sex === state.sex).map(t => ({...t}));
+  for (let i = deck.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
     [deck[i], deck[j]] = [deck[j], deck[i]];
   }
   return deck;
 }
-
 function drawTickets(n) {
   const drawn = [];
-  for (let i = 0; i < n && state.ticketDeck.length > 0; i++) {
-    drawn.push(state.ticketDeck.shift());
-  }
+  for (let i = 0; i < n && state.ticketDeck.length > 0; i++) drawn.push(state.ticketDeck.shift());
   return drawn;
 }
 
 // ============================================================
-// RENDER
+// DICE / TURN FLOW
 // ============================================================
-function renderAll() {
-  renderBoard();
-  renderScores();
-  renderTickets();
-  renderTurnBanner();
-}
-
-function renderBoard() {
-  const svg = document.getElementById('board');
-  svg.innerHTML = '';
-
-  // Background subtle grid / regions
-  const bg = svgEl('rect', { x: 0, y: 0, width: 1400, height: 900, fill: 'white' });
-  svg.appendChild(bg);
-
-  // Title labels for sections
-  addSectionLabel(svg, 80, 130, 'AUTONOMICS', 'var(--nerve-color)');
-  addSectionLabel(svg, 80, 380, 'SACRAL PLEXUS', 'var(--nerve-color)');
-  addSectionLabel(svg, 700, 30, 'ARTERIAL TREE', 'var(--art-color)');
-  addSectionLabel(svg, 1340, 50, 'LYMPH NODES', 'var(--lymph-color)');
-  addSectionLabel(svg, 870, 580, 'ORGANS / TARGETS', 'var(--rose)');
-
-  // Render edges first (under nodes)
-  for (const e of EDGES) {
-    if (!isEdgeAvailableForSex(e)) continue;
-    const from = NODES[e.from], to = NODES[e.to];
-    if (!from || !to) continue;
-    const claimed = state.claimed[e.id];
-    let cls = 'edge ' + e.layer;
-    if (claimed === 0) cls += ' claimed-p1';
-    if (claimed === 1) cls += ' claimed-p2';
-    if (state.layer !== 'all' && state.layer !== e.layer) cls += ' dim';
-    if (state.highlightedEdges.has(e.id)) cls += ' highlight';
-
-    // Curved path for visual interest
-    const dx = to.x - from.x, dy = to.y - from.y;
-    const mx = (from.x + to.x) / 2, my = (from.y + to.y) / 2;
-    // perpendicular offset
-    const len = Math.sqrt(dx*dx + dy*dy);
-    const off = Math.min(20, len * 0.1);
-    const cx = mx + (dy / len) * off;
-    const cy = my - (dx / len) * off;
-    const path = svgEl('path', {
-      d: `M ${from.x} ${from.y} Q ${cx} ${cy} ${to.x} ${to.y}`,
-      class: cls,
-      'data-edge': e.id,
-    });
-    path.addEventListener('click', () => onEdgeClick(e.id));
-    svg.appendChild(path);
-  }
-
-  // Render nodes
-  for (const [id, n] of Object.entries(NODES)) {
-    if (!isNodeAvailable(id)) continue;
-    const isSource = n.layer === 'source';
-    const r = isSource ? 22 : (n.layer === 'organ' ? 14 : 11);
-    const cls = 'node-circle ' + n.layer;
-    const dim = (state.layer !== 'all' && state.layer !== n.layer && n.layer !== 'organ' && n.layer !== 'source') ? ' dim' : '';
-    const c = svgEl('circle', { cx: n.x, cy: n.y, r, class: cls + dim });
-    svg.appendChild(c);
-
-    // Label
-    const labelLines = wrapLabel(n.label, 18);
-    const yStart = n.y + r + 12;
-    for (let i = 0; i < labelLines.length; i++) {
-      const t = svgEl('text', {
-        x: n.x,
-        y: yStart + i * 11,
-        class: 'node-label' + (isSource ? ' source' : '') + (state.layer !== 'all' && state.layer !== n.layer && n.layer !== 'organ' && n.layer !== 'source' ? ' dim' : ''),
-      });
-      t.textContent = labelLines[i];
-      svg.appendChild(t);
+function rollDice() {
+  if (state.hasRolled) return;
+  const display = document.getElementById('diceDisplay');
+  display.classList.add('rolling');
+  // animate transient values
+  let i = 0;
+  const tick = setInterval(() => {
+    display.textContent = Math.floor(Math.random() * 6) + 1;
+    i++;
+    if (i > 8) {
+      clearInterval(tick);
+      const result = Math.floor(Math.random() * 6) + 1;
+      state.diceRoll = result;
+      state.budget = result;
+      state.hasRolled = true;
+      display.textContent = result;
+      display.classList.remove('rolling');
+      document.getElementById('rollBtn').style.display = 'none';
+      document.getElementById('endTurnBtn').style.display = 'block';
+      updateBudgetDisplay();
+      showToast(`Rolled ${result} — pick a segment to start answering`, 'info');
+      document.getElementById('lastMove').innerHTML =
+        `<strong>${state.playerNames[state.currentPlayer]} rolled a ${result}.</strong> Click any unclaimed segment.`;
     }
-    if (isSource) {
-      const t = svgEl('text', { x: n.x, y: n.y + 4, class: 'node-label source' });
-      t.textContent = 'AORTA';
-      svg.appendChild(t);
-    }
+  }, 60);
+}
+
+function updateBudgetDisplay() {
+  const t = document.getElementById('budgetText');
+  if (!state.hasRolled) { t.innerHTML = ''; return; }
+  let pips = '';
+  for (let i = 0; i < state.diceRoll; i++) {
+    pips += `<span class="pip${i < state.budget ? ' active' : ''}"></span>`;
   }
-
-  // Highlight ticket endpoints
-  highlightTicketEndpoints(svg);
+  t.innerHTML = `Questions remaining: <strong>${state.budget}/${state.diceRoll}</strong><div class="budget-pips">${pips}</div>`;
 }
 
-function highlightTicketEndpoints(svg) {
-  const t = state.tickets[state.currentPlayer];
-  if (!t || t.length === 0) return;
-  for (const ticket of t) {
-    if (state.completedTickets[state.currentPlayer].includes(ticket.id)) continue;
-    for (const nodeId of [ticket.start, ticket.end]) {
-      const n = NODES[nodeId];
-      if (!n || !isNodeAvailable(nodeId)) continue;
-      const halo = svgEl('circle', {
-        cx: n.x, cy: n.y, r: 20,
-        fill: 'none',
-        stroke: 'var(--gold)',
-        'stroke-width': 2.5,
-        'stroke-dasharray': '4 3',
-        opacity: 0.8,
-        class: 'ticket-halo',
-      });
-      svg.appendChild(halo);
-    }
-  }
-}
-
-function addSectionLabel(svg, x, y, text, color) {
-  const t = svgEl('text', {
-    x, y, fill: color,
-    'font-size': 11,
-    'font-weight': 700,
-    'letter-spacing': 1.5,
-    'text-anchor': 'middle',
-    opacity: 0.5,
-  });
-  t.textContent = text;
-  svg.appendChild(t);
-}
-
-function wrapLabel(text, max) {
-  const words = text.split(' ');
-  const lines = [];
-  let line = '';
-  for (const w of words) {
-    if ((line + ' ' + w).trim().length > max && line) {
-      lines.push(line);
-      line = w;
-    } else {
-      line = (line + ' ' + w).trim();
-    }
-  }
-  if (line) lines.push(line);
-  return lines;
-}
-
-function svgEl(tag, attrs) {
-  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
-  for (const [k, v] of Object.entries(attrs)) {
-    e.setAttribute(k, v);
-  }
-  return e;
-}
-
-function renderScores() {
-  const sc = document.getElementById('scores');
-  sc.innerHTML = '';
-  const players = state.mode === '2p' ? [0, 1] : [0];
-  for (const p of players) {
-    const cls = 'score-card p' + (p + 1) + (p === state.currentPlayer && !state.gameOver ? ' active' : '');
-    const card = document.createElement('div');
-    card.className = cls;
-    card.innerHTML = `
-      <div class="label">Player ${p+1}</div>
-      <div class="name" style="color:${p === 0 ? 'var(--p1-color)' : 'var(--p2-color)'};">${state.playerNames[p]}</div>
-      <div class="points">${state.scores[p]}</div>
-    `;
-    sc.appendChild(card);
-  }
-}
-
-function renderTickets() {
-  const tl = document.getElementById('ticketList');
-  tl.innerHTML = '';
-  const tickets = state.tickets[state.currentPlayer];
-  if (!tickets || tickets.length === 0) {
-    tl.innerHTML = '<div class="help-text">No active tickets.</div>';
-    return;
-  }
-  for (const t of tickets) {
-    const completed = state.completedTickets[state.currentPlayer].includes(t.id);
-    const div = document.createElement('div');
-    div.className = 'ticket' + (completed ? ' complete' : '');
-    div.onmouseover = () => highlightTicket(t);
-    div.onmouseout = () => clearHighlight();
-    div.innerHTML = `
-      <div class="checkmark">✓</div>
-      <div class="route">${t.label}</div>
-      <div class="meta">
-        <span>${nodeLabel(t.start)} → ${nodeLabel(t.end)}</span>
-        <span class="pts">+${t.pts} pts</span>
-      </div>
-    `;
-    tl.appendChild(div);
-  }
-}
-
-function nodeLabel(id) {
-  const n = NODES[id];
-  return n ? n.label : id;
-}
-
-function renderTurnBanner() {
-  const tb = document.getElementById('turnBanner');
-  if (state.gameOver) {
-    tb.textContent = 'Game Over';
-    tb.className = 'turn-banner';
-    return;
-  }
-  tb.textContent = state.mode === 'solo' ? `${state.playerNames[0]}'s study run` : `${state.playerNames[state.currentPlayer]}'s turn`;
-  tb.className = 'turn-banner p' + (state.currentPlayer + 1);
-}
-
-// ============================================================
-// LAYER FILTER
-// ============================================================
-function setLayer(layer) {
-  state.layer = layer;
-  document.querySelectorAll('header .btn').forEach(b => b.classList.remove('active'));
-  const map = { all: 'layerAll', art: 'layerArt', nerve: 'layerNerve', lymph: 'layerLymph' };
-  document.getElementById(map[layer]).classList.add('active');
-  renderBoard();
-}
-
-function toggleSex() {
-  state.sex = state.sex === 'F' ? 'M' : 'F';
-  showToast(`Pelvis: ${state.sex === 'F' ? 'Female' : 'Male'}`, 'info');
-  // Re-shuffle ticket deck and re-deal? Or just keep current? Better: keep current but warn if any tickets are sex-locked.
-  // For now we'll re-deal.
-  state.ticketDeck = shuffleDeck();
-  state.tickets[0] = drawTickets(3);
-  state.tickets[1] = state.mode === '2p' ? drawTickets(3) : [];
-  state.completedTickets = [[], []];
-  state.claimed = {};
-  state.scores = [0, 0];
-  state.segmentsClaimed = [0, 0];
+function endTurn() {
+  // Reset turn state
+  state.diceRoll = 0;
+  state.budget = 0;
+  state.hasRolled = false;
+  state.currentTargetEdge = null;
+  // Switch player in 2p mode
+  if (state.mode === '2p') state.currentPlayer = 1 - state.currentPlayer;
+  // Reset dice display
+  document.getElementById('diceDisplay').textContent = '—';
+  document.getElementById('rollBtn').style.display = 'block';
+  document.getElementById('endTurnBtn').style.display = 'none';
+  document.getElementById('budgetText').innerHTML = '';
   renderAll();
+  checkGameOver();
 }
 
 // ============================================================
@@ -1560,14 +1248,27 @@ function toggleSex() {
 // ============================================================
 function onEdgeClick(edgeId) {
   if (state.gameOver) return;
-  if (state.claimed[edgeId] !== undefined) {
-    showToast('Already claimed.', 'error');
+  if (!state.hasRolled) {
+    showToast('Roll the dice first!', 'error');
+    return;
+  }
+  if (state.budget <= 0) {
+    showToast('No questions left this turn — end turn.', 'error');
     return;
   }
   const edge = EDGES.find(e => e.id === edgeId);
-  if (!edge) return;
-  if (!isEdgeAvailableForSex(edge)) return;
-  state.currentEdgeId = edgeId;
+  if (!edge || !isEdgeAvailableForSex(edge)) return;
+  if (state.claimed[edge.id] !== undefined) {
+    showToast('Already claimed.', 'error');
+    return;
+  }
+  // Locked if other player has progress on it
+  const prog = state.progress[edge.id];
+  if (prog && prog.player !== state.currentPlayer) {
+    showToast(`${state.playerNames[prog.player]} is already working on this segment.`, 'error');
+    return;
+  }
+  state.currentTargetEdge = edgeId;
   openModal(edge);
 }
 
@@ -1576,75 +1277,150 @@ function openModal(edge) {
     edge.layer === 'art' ? 'Arterial Segment' :
     edge.layer === 'nerve' ? 'Nerve Segment' : 'Lymphatic Segment';
   document.getElementById('qSegName').textContent = edge.label;
-  document.getElementById('qText').textContent = edge.q;
+  // Status row
+  const miles = getEdgeProgress(edge.id, state.currentPlayer);
+  const remain = edge.length - miles;
+  document.getElementById('qStatus').innerHTML = `
+    <span class="chip">Miles: <strong>${miles}/${edge.length}</strong></span>
+    <span class="chip budget">Questions left: <strong>${state.budget}</strong></span>
+  `;
+  // Pick a question we haven't used yet (if possible) for this edge
+  if (!state.questionsUsed[edge.id]) state.questionsUsed[edge.id] = new Set();
+  const used = state.questionsUsed[edge.id];
+  const available = edge.questions.map((_, i) => i).filter(i => !used.has(i));
+  let qIdx;
+  if (available.length === 0) {
+    // Reuse a random question
+    qIdx = Math.floor(Math.random() * edge.questions.length);
+  } else {
+    qIdx = available[Math.floor(Math.random() * available.length)];
+  }
+  state.questionsUsed[edge.id].add(qIdx);
+  state._activeQIdx = qIdx;
+
+  const q = edge.questions[qIdx];
+  document.getElementById('qText').textContent = q.q;
   const ans = document.getElementById('qAnswers');
   ans.innerHTML = '';
-  edge.options.forEach((opt, i) => {
+  q.options.forEach((opt, i) => {
     const b = document.createElement('button');
     b.className = 'answer-btn';
     b.textContent = opt;
-    b.onclick = () => answerQuestion(i);
+    b.onclick = () => answerQuestion(i, qIdx);
     ans.appendChild(b);
   });
   document.getElementById('qExplanation').classList.remove('show');
   document.getElementById('qExplanation').textContent = '';
-  document.getElementById('qFooter').innerHTML = '<button class="btn-modal ghost" onclick="closeModal()">Cancel</button>';
+  document.getElementById('qFooter').innerHTML = '<button class="btn-modal ghost" onclick="closeModal()">Stop</button>';
   document.getElementById('qModal').classList.add('show');
 }
 
 function closeModal() {
   document.getElementById('qModal').classList.remove('show');
-  state.currentEdgeId = null;
+  state.currentTargetEdge = null;
 }
 
-function answerQuestion(idx) {
-  const edge = EDGES.find(e => e.id === state.currentEdgeId);
+function answerQuestion(idx, qIdx) {
+  const edge = EDGES.find(e => e.id === state.currentTargetEdge);
   if (!edge) return;
+  const q = edge.questions[qIdx];
   const buttons = document.querySelectorAll('#qAnswers .answer-btn');
   buttons.forEach((b, i) => {
     b.classList.add('disabled');
-    if (i === edge.correct) b.classList.add('correct');
-    if (i === idx && i !== edge.correct) b.classList.add('wrong');
+    if (i === q.correct) b.classList.add('correct');
+    if (i === idx && i !== q.correct) b.classList.add('wrong');
   });
-  const correct = idx === edge.correct;
+  const correct = idx === q.correct;
   const exp = document.getElementById('qExplanation');
-  exp.textContent = (correct ? '✓ Correct! ' : '✗ Incorrect. ') + edge.explanation;
+  exp.textContent = (correct ? '✓ Correct! ' : '✗ Incorrect. ') + q.explanation;
   exp.classList.add('show');
 
+  // Update state
+  state.budget -= 1;
   if (correct) {
-    state.claimed[edge.id] = state.currentPlayer;
-    state.scores[state.currentPlayer] += 1;
-    state.segmentsClaimed[state.currentPlayer] += 1;
     state.correctAnswers[state.currentPlayer] += 1;
-    document.getElementById('lastMove').innerHTML =
-      `<strong style="color:var(--lymph-color)">✓ Claimed:</strong> ${edge.label}<br>+1 pt to ${state.playerNames[state.currentPlayer]}`;
-    showToast(`+1 pt — segment claimed`, 'success');
-
-    // Check tickets
-    checkTicketCompletion();
+    state.scores[state.currentPlayer] += 1;
+    // Add a mile of progress
+    let prog = state.progress[edge.id];
+    if (!prog) {
+      prog = { player: state.currentPlayer, miles: 0 };
+      state.progress[edge.id] = prog;
+    }
+    prog.miles += 1;
+    if (prog.miles >= edge.length) {
+      // Fully claim
+      state.claimed[edge.id] = state.currentPlayer;
+      delete state.progress[edge.id];
+      state.segmentsClaimed[state.currentPlayer] += 1;
+      checkTicketCompletion();
+    }
   } else {
     state.wrongAnswers[state.currentPlayer] += 1;
-    document.getElementById('lastMove').innerHTML =
-      `<strong style="color:var(--art-color)">✗ Wrong answer.</strong> ${edge.label} stays available.`;
-    showToast(`Wrong — turn passes`, 'error');
   }
 
-  document.getElementById('qFooter').innerHTML =
-    `<button class="btn-modal primary" onclick="afterAnswer(${correct})">Continue</button>`;
+  // Build footer based on whether segment is claimed and whether budget remains
+  const fullyClaimed = state.claimed[edge.id] !== undefined;
+  const moreBudget = state.budget > 0;
+  let footer = '';
+  if (correct && fullyClaimed) {
+    footer += `<button class="btn-modal primary" onclick="afterClaim(true)">Segment claimed! Continue</button>`;
+  } else if (correct && moreBudget) {
+    footer += `<button class="btn-modal primary" onclick="afterAnswer()">Next question (${state.budget} left)</button>`;
+  } else if (correct && !moreBudget) {
+    footer += `<button class="btn-modal primary" onclick="afterAnswer()">End turn</button>`;
+  } else if (!correct && moreBudget) {
+    footer += `<button class="btn-modal primary" onclick="afterAnswer()">Try again (${state.budget} left)</button>`;
+  } else {
+    footer += `<button class="btn-modal primary" onclick="afterAnswer()">End turn</button>`;
+  }
+  document.getElementById('qFooter').innerHTML = footer;
+
+  // Update last move + sidebar
+  if (correct) {
+    document.getElementById('lastMove').innerHTML =
+      fullyClaimed
+        ? `<strong style="color:var(--lymph-color)">✓ Claimed:</strong> ${edge.label}<br>+1 pt + segment fully captured`
+        : `<strong style="color:var(--lymph-color)">✓ +1 mile</strong> on ${edge.label}<br>${getEdgeProgress(edge.id, state.currentPlayer)}/${edge.length} miles`;
+  } else {
+    document.getElementById('lastMove').innerHTML =
+      `<strong style="color:var(--art-color)">✗ Wrong</strong> on ${edge.label}.<br>Budget: ${state.budget} left`;
+  }
+  showToast(correct ? (fullyClaimed ? '🎉 Segment claimed!' : '+1 mile') : 'Wrong — keep trying', correct ? 'success' : 'error');
+
+  updateBudgetDisplay();
+  renderBoard();
+  renderTickets();
+  renderScores();
 }
 
-function afterAnswer(correct) {
+function afterAnswer() {
+  if (state.budget <= 0) {
+    closeModal();
+    showToast('Turn ending — no questions left.', 'info');
+    setTimeout(() => endTurn(), 500);
+    return;
+  }
+  const edgeId = state.currentTargetEdge;
+  // Segment fully claimed: close so player can pick another
+  if (edgeId && state.claimed[edgeId] !== undefined) {
+    closeModal();
+    return;
+  }
+  // Still working on same segment: load next question without closing
+  if (edgeId) {
+    const edge = EDGES.find(e => e.id === edgeId);
+    if (edge) openModal(edge);
+  } else {
+    closeModal();
+  }
+}
+
+function afterClaim() {
   closeModal();
-  if (state.mode === '2p' && !correct) {
-    // Wrong answer = turn passes
-    state.currentPlayer = 1 - state.currentPlayer;
+  if (state.budget <= 0) {
+    showToast('Turn ending — no questions left.', 'info');
+    setTimeout(() => endTurn(), 500);
   }
-  if (state.mode === '2p' && correct) {
-    // Correct = turn still passes (each player gets one move per turn)
-    state.currentPlayer = 1 - state.currentPlayer;
-  }
-  renderAll();
-  checkGameOver();
 }
 
 function checkTicketCompletion() {
@@ -1656,7 +1432,6 @@ function checkTicketCompletion() {
       state.completedTickets[state.currentPlayer].push(t.id);
       state.scores[state.currentPlayer] += t.pts;
       showToast(`🎯 Ticket complete! +${t.pts} pts`, 'success');
-      // Draw replacement
       const next = drawTickets(1);
       if (next.length) {
         state.tickets[state.currentPlayer] =
@@ -1670,7 +1445,7 @@ function checkTicketCompletion() {
 }
 
 function checkGameOver() {
-  const winThreshold = 30;
+  const winThreshold = 50;
   const noTicketsLeft = state.tickets[0].length === 0 &&
                         (state.mode === 'solo' || state.tickets[1].length === 0) &&
                         state.ticketDeck.length === 0;
@@ -1708,22 +1483,10 @@ function showEndGame() {
       ? Math.round(100 * state.correctAnswers[p] / (state.correctAnswers[p] + state.wrongAnswers[p]))
       : 0;
     stats.innerHTML += `
-      <div class="stat">
-        <div class="num">${state.segmentsClaimed[p]}</div>
-        <div class="lbl">${state.playerNames[p]} segments claimed</div>
-      </div>
-      <div class="stat">
-        <div class="num">${acc}%</div>
-        <div class="lbl">${state.playerNames[p]} accuracy</div>
-      </div>
-      <div class="stat">
-        <div class="num">${state.completedTickets[p].length}</div>
-        <div class="lbl">${state.playerNames[p]} tickets completed</div>
-      </div>
-      <div class="stat">
-        <div class="num">${state.scores[p]}</div>
-        <div class="lbl">${state.playerNames[p]} total points</div>
-      </div>
+      <div class="stat"><div class="num">${state.segmentsClaimed[p]}</div><div class="lbl">${state.playerNames[p]} segments claimed</div></div>
+      <div class="stat"><div class="num">${acc}%</div><div class="lbl">${state.playerNames[p]} accuracy</div></div>
+      <div class="stat"><div class="num">${state.completedTickets[p].length}</div><div class="lbl">${state.playerNames[p]} tickets completed</div></div>
+      <div class="stat"><div class="num">${state.scores[p]}</div><div class="lbl">${state.playerNames[p]} total points</div></div>
     `;
   }
   document.getElementById('endModal').classList.add('show');
@@ -1736,24 +1499,226 @@ function restart() {
 }
 
 // ============================================================
-// HIGHLIGHT TICKET ROUTE
+// LAYER FILTER
 // ============================================================
-function highlightTicket(ticket) {
-  // Highlight any edges connecting start and end through any path (in the relevant layer)
-  state.highlightedEdges.clear();
-  // Find all edges that touch start or end
-  for (const e of EDGES) {
-    if (e.from === ticket.start || e.to === ticket.start ||
-        e.from === ticket.end || e.to === ticket.end) {
-      state.highlightedEdges.add(e.id);
-    }
-  }
+function setLayer(layer) {
+  state.layer = layer;
+  document.querySelectorAll('header .btn').forEach(b => b.classList.remove('active'));
+  const map = { all: 'layerAll', art: 'layerArt', nerve: 'layerNerve', lymph: 'layerLymph' };
+  document.getElementById(map[layer]).classList.add('active');
   renderBoard();
 }
 
-function clearHighlight() {
-  state.highlightedEdges.clear();
+// ============================================================
+// RENDER
+// ============================================================
+function renderAll() {
   renderBoard();
+  renderScores();
+  renderTickets();
+  renderTurnBanner();
+  updateBudgetDisplay();
+}
+
+function bezierPoint(p0, p1, p2, t) {
+  const x = (1-t)*(1-t)*p0.x + 2*(1-t)*t*p1.x + t*t*p2.x;
+  const y = (1-t)*(1-t)*p0.y + 2*(1-t)*t*p1.y + t*t*p2.y;
+  return { x, y };
+}
+
+function renderBoard() {
+  const svg = document.getElementById('board');
+  svg.innerHTML = '';
+
+  // BG
+  svg.appendChild(svgEl('rect', { x: 0, y: 0, width: 1400, height: 900, fill: 'white' }));
+
+  // Section labels
+  addSectionLabel(svg, 80, 130, 'AUTONOMICS', 'var(--nerve-color)');
+  addSectionLabel(svg, 80, 380, 'SACRAL PLEXUS', 'var(--nerve-color)');
+  addSectionLabel(svg, 700, 30, 'ARTERIAL TREE', 'var(--art-color)');
+  addSectionLabel(svg, 1340, 50, 'LYMPH NODES', 'var(--lymph-color)');
+  addSectionLabel(svg, 870, 580, 'ORGANS / TARGETS', 'var(--rose)');
+
+  // Edges
+  for (const e of EDGES) {
+    if (!isEdgeAvailableForSex(e)) continue;
+    const from = NODES[e.from], to = NODES[e.to];
+    if (!from || !to) continue;
+    const claimed = state.claimed[e.id];
+    const prog = state.progress[e.id];
+    let cls = 'edge ' + e.layer;
+    if (claimed === 0) cls += ' claimed-p1';
+    else if (claimed === 1) cls += ' claimed-p2';
+    else if (prog && prog.player === 0) cls += ' in-progress-p1';
+    else if (prog && prog.player === 1) cls += ' in-progress-p2';
+    if (state.layer !== 'all' && state.layer !== e.layer) cls += ' dim';
+
+    // Curved path
+    const dx = to.x - from.x, dy = to.y - from.y;
+    const mx = (from.x + to.x) / 2, my = (from.y + to.y) / 2;
+    const len = Math.sqrt(dx*dx + dy*dy);
+    const off = Math.min(20, len * 0.1);
+    const cx = mx + (dy / len) * off;
+    const cy = my - (dx / len) * off;
+    const path = svgEl('path', {
+      d: `M ${from.x} ${from.y} Q ${cx} ${cy} ${to.x} ${to.y}`,
+      class: cls,
+      'data-edge': e.id,
+    });
+    path.addEventListener('click', () => onEdgeClick(e.id));
+    svg.appendChild(path);
+
+    // Mile markers — small dots along the curve
+    const ctrl = { x: cx, y: cy };
+    for (let i = 1; i <= e.length; i++) {
+      const t = i / (e.length + 1);
+      const p = bezierPoint(from, ctrl, to, t);
+      let dotCls = 'mile-dot empty ' + e.layer;
+      // Determine fill based on progress / claimed
+      if (claimed === 0 || claimed === 1) {
+        dotCls = `mile-dot filled-p${claimed + 1}`;
+      } else if (prog && i <= prog.miles) {
+        dotCls = `mile-dot filled-p${prog.player + 1}`;
+      }
+      svg.appendChild(svgEl('circle', {
+        cx: p.x, cy: p.y, r: 5,
+        class: dotCls,
+      }));
+    }
+  }
+
+  // Nodes
+  for (const [id, n] of Object.entries(NODES)) {
+    if (!isNodeAvailable(id)) continue;
+    const isSource = n.layer === 'source';
+    const r = isSource ? 22 : (n.layer === 'organ' ? 14 : 11);
+    const cls = 'node-circle ' + n.layer;
+    const dim = (state.layer !== 'all' && state.layer !== n.layer && n.layer !== 'organ' && n.layer !== 'source') ? ' dim' : '';
+    svg.appendChild(svgEl('circle', { cx: n.x, cy: n.y, r, class: cls + dim }));
+
+    const labelLines = wrapLabel(n.label, 18);
+    const yStart = n.y + r + 12;
+    for (let i = 0; i < labelLines.length; i++) {
+      const t = svgEl('text', {
+        x: n.x, y: yStart + i*11,
+        class: 'node-label' + (isSource ? ' source' : ''),
+      });
+      t.textContent = labelLines[i];
+      svg.appendChild(t);
+    }
+    if (isSource) {
+      const t = svgEl('text', { x: n.x, y: n.y+4, class: 'node-label source' });
+      t.textContent = 'AORTA';
+      svg.appendChild(t);
+    }
+  }
+
+  // Ticket endpoint halos for active player
+  highlightTicketEndpoints(svg);
+}
+
+function highlightTicketEndpoints(svg) {
+  const t = state.tickets[state.currentPlayer];
+  if (!t) return;
+  for (const ticket of t) {
+    if (state.completedTickets[state.currentPlayer].includes(ticket.id)) continue;
+    for (const nodeId of [ticket.start, ticket.end]) {
+      const n = NODES[nodeId];
+      if (!n || !isNodeAvailable(nodeId)) continue;
+      svg.appendChild(svgEl('circle', {
+        cx: n.x, cy: n.y, r: 20,
+        fill: 'none', stroke: 'var(--gold)',
+        'stroke-width': 2.5, 'stroke-dasharray': '4 3', opacity: 0.8,
+      }));
+    }
+  }
+}
+
+function addSectionLabel(svg, x, y, text, color) {
+  const t = svgEl('text', {
+    x, y, fill: color,
+    'font-size': 11, 'font-weight': 700,
+    'letter-spacing': 1.5, 'text-anchor': 'middle',
+    opacity: 0.5,
+  });
+  t.textContent = text;
+  svg.appendChild(t);
+}
+function wrapLabel(text, max) {
+  const words = text.split(' ');
+  const lines = [];
+  let line = '';
+  for (const w of words) {
+    if ((line + ' ' + w).trim().length > max && line) { lines.push(line); line = w; }
+    else line = (line + ' ' + w).trim();
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+function svgEl(tag, attrs) {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  return e;
+}
+
+function renderScores() {
+  const sc = document.getElementById('scores');
+  sc.innerHTML = '';
+  const players = state.mode === '2p' ? [0, 1] : [0];
+  for (const p of players) {
+    const cls = 'score-card p' + (p+1) + (p === state.currentPlayer && !state.gameOver ? ' active' : '');
+    const card = document.createElement('div');
+    card.className = cls;
+    card.innerHTML = `
+      <div class="label">Player ${p+1}</div>
+      <div class="name" style="color:${p === 0 ? 'var(--p1-color)' : 'var(--p2-color)'};">${state.playerNames[p]}</div>
+      <div class="points">${state.scores[p]}</div>
+    `;
+    sc.appendChild(card);
+  }
+}
+
+function renderTickets() {
+  const tl = document.getElementById('ticketList');
+  tl.innerHTML = '';
+  const tickets = state.tickets[state.currentPlayer];
+  if (!tickets || tickets.length === 0) {
+    tl.innerHTML = '<div class="help-text">No active tickets.</div>';
+    return;
+  }
+  for (const t of tickets) {
+    const completed = state.completedTickets[state.currentPlayer].includes(t.id);
+    const div = document.createElement('div');
+    div.className = 'ticket' + (completed ? ' complete' : '');
+    div.innerHTML = `
+      <div class="checkmark">✓</div>
+      <div class="route">${t.label}</div>
+      <div class="meta">
+        <span>${nodeLabel(t.start)} → ${nodeLabel(t.end)}</span>
+        <span class="pts">+${t.pts} pts</span>
+      </div>
+    `;
+    tl.appendChild(div);
+  }
+}
+
+function nodeLabel(id) {
+  const n = NODES[id];
+  return n ? n.label : id;
+}
+
+function renderTurnBanner() {
+  const tb = document.getElementById('turnBanner');
+  if (state.gameOver) {
+    tb.textContent = 'Game Over';
+    tb.className = 'turn-banner';
+    return;
+  }
+  tb.textContent = state.mode === 'solo'
+    ? `${state.playerNames[0]}'s study run`
+    : `${state.playerNames[state.currentPlayer]}'s turn`;
+  tb.className = 'turn-banner p' + (state.currentPlayer + 1);
 }
 
 // ============================================================
@@ -1773,7 +1738,6 @@ function showToast(msg, type = 'info') {
 // ============================================================
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('p2NameWrap').style.display = '';
-  // Don't render until startGame
 });
 </script>
 
