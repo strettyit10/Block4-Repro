@@ -88,21 +88,21 @@
 
   /* SVG element styles */
   .edge {
-    stroke-width: 5;
+    stroke-width: 3.5;
     fill: none;
     cursor: pointer;
-    opacity: 0.45;
+    opacity: 0.55;
     transition: opacity 0.15s, stroke-width 0.15s;
     stroke-linecap: round;
   }
-  .edge:hover { opacity: 0.95; stroke-width: 7; }
+  .edge:hover { opacity: 1; stroke-width: 6; }
   .edge.art { stroke: var(--art-color); }
   .edge.nerve { stroke: var(--nerve-color); stroke-dasharray: 8 4; }
   .edge.lymph { stroke: var(--lymph-color); stroke-dasharray: 2 5; }
-  .edge.claimed-p1 { stroke: var(--p1-color) !important; opacity: 1; stroke-width: 8; stroke-dasharray: none; }
-  .edge.claimed-p2 { stroke: var(--p2-color) !important; opacity: 1; stroke-width: 8; stroke-dasharray: none; }
-  .edge.in-progress-p1 { stroke: var(--p1-color); opacity: 0.7; stroke-width: 6; stroke-dasharray: 8 4; }
-  .edge.in-progress-p2 { stroke: var(--p2-color); opacity: 0.7; stroke-width: 6; stroke-dasharray: 8 4; }
+  .edge.claimed-p1 { stroke: var(--p1-color) !important; opacity: 1; stroke-width: 6; stroke-dasharray: none; }
+  .edge.claimed-p2 { stroke: var(--p2-color) !important; opacity: 1; stroke-width: 6; stroke-dasharray: none; }
+  .edge.in-progress-p1 { stroke: var(--p1-color); opacity: 0.75; stroke-width: 4.5; stroke-dasharray: 8 4; }
+  .edge.in-progress-p2 { stroke: var(--p2-color); opacity: 0.75; stroke-width: 4.5; stroke-dasharray: 8 4; }
   .edge.dim { opacity: 0.1; pointer-events: none; }
   .edge.locked { cursor: not-allowed; opacity: 0.3; }
 
@@ -119,11 +119,17 @@
   .mile-dot.filled-p2 { fill: var(--p2-color); stroke: var(--p2-color); }
 
   .node-circle { fill: white; stroke: var(--slate); stroke-width: 1.5; }
-  .node-circle.organ { fill: #fce7f3; stroke: var(--rose); stroke-width: 2; }
   .node-circle.lymph { fill: #dcfce7; stroke: var(--lymph-color); stroke-width: 2; }
   .node-circle.nerve { fill: #fef3c7; stroke: var(--nerve-color); stroke-width: 2; }
   .node-circle.art { fill: #fee2e2; stroke: var(--art-color); stroke-width: 2; }
   .node-circle.source { fill: var(--burgundy); stroke: var(--burgundy-dark); stroke-width: 2; }
+  .node-star {
+    fill: #111827;
+    stroke: #000;
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
+  }
   .node-label {
     font-size: 10px;
     font-weight: 500;
@@ -132,6 +138,12 @@
     text-anchor: middle;
   }
   .node-label.source { fill: var(--cream); font-weight: 700; font-size: 11px; }
+  .node-label.organ {
+    font-size: 13px;
+    font-weight: 700;
+    fill: #111827;
+    letter-spacing: 0.2px;
+  }
 
   /* Sidebar */
   .sidebar { display: flex; flex-direction: column; gap: 12px; }
@@ -316,11 +328,32 @@
   }
   .modal .segment-status .chip.budget { background: #fef3c7; color: var(--burgundy); }
   .modal .segment-status .chip.progress { background: #dbeafe; color: var(--p1-color); }
+  .modal .about-segment {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--slate-light);
+    font-weight: 600;
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid #e5e7eb;
+  }
+  .modal .about-segment .layer-pill {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    margin-right: 6px;
+    font-size: 10px;
+  }
+  .modal .about-segment .layer-pill.art { background: #fee2e2; color: var(--art-color); }
+  .modal .about-segment .layer-pill.nerve { background: #fef3c7; color: var(--nerve-color); }
+  .modal .about-segment .layer-pill.lymph { background: #dcfce7; color: var(--lymph-color); }
   .modal .question {
     font-size: 15px;
-    line-height: 1.5;
+    line-height: 1.55;
     margin-bottom: 14px;
     color: var(--slate);
+    margin-top: 6px;
   }
   .answers { display: flex; flex-direction: column; gap: 8px; }
   .answer-btn {
@@ -457,6 +490,49 @@
 
   .help-text { font-size: 11px; color: var(--slate-light); line-height: 1.5; }
 
+  /* Zoom controls */
+  .zoom-controls {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    padding: 4px;
+    z-index: 5;
+  }
+  .zoom-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--burgundy);
+    border-radius: 4px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .zoom-btn:hover { background: #fef0f4; }
+  .zoom-btn:active { background: #fde2ea; }
+  .zoom-info {
+    font-size: 10px;
+    color: var(--slate-light);
+    text-align: center;
+    padding: 2px 0;
+    border-top: 1px solid #e5e7eb;
+  }
+  .board-container { position: relative; }
+  svg.board { cursor: grab; }
+  svg.board.panning { cursor: grabbing; }
+  svg.board path.edge { cursor: pointer; }
+
   .end-turn-btn {
     background: #f1f5f9;
     color: var(--slate);
@@ -546,7 +622,13 @@
       <div class="legend-item"><div class="legend-swatch dot" style="background:var(--p2-color);"></div> Claimed (P2)</div>
       <div class="legend-item" style="margin-left:auto"><strong>Tip:</strong>&nbsp;Roll first, then click a segment to start answering its questions.</div>
     </div>
-    <svg class="board" id="board" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid meet"></svg>
+    <svg class="board" id="board" viewBox="0 0 1800 1200" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="zoom-controls">
+      <button class="zoom-btn" onclick="zoomIn()" title="Zoom in (+)">＋</button>
+      <button class="zoom-btn" onclick="zoomOut()" title="Zoom out (−)">−</button>
+      <button class="zoom-btn" onclick="resetView()" title="Reset view">⟳</button>
+      <div class="zoom-info" id="zoomInfo">100%</div>
+    </div>
   </div>
 
   <div class="sidebar">
@@ -585,6 +667,7 @@
     <h2 id="qLayer">Arterial Segment</h2>
     <div class="segment-name" id="qSegName">—</div>
     <div class="segment-status" id="qStatus"></div>
+    <div class="about-segment" id="qAbout"></div>
     <div class="question" id="qText">—</div>
     <div class="answers" id="qAnswers"></div>
     <div class="explanation" id="qExplanation"></div>
@@ -613,74 +696,93 @@
 // NODES — graph endpoints
 // ============================================================
 const NODES = {
-  // Arterial tree
-  aorta: { x: 700, y: 50, label: 'Abdominal Aorta', layer: 'source' },
-  ovarian_a: { x: 220, y: 110, label: 'Ovarian / Testicular a.', layer: 'art' },
-  ci: { x: 700, y: 130, label: 'Common Iliac a.', layer: 'art' },
-  ei: { x: 530, y: 220, label: 'External Iliac a.', layer: 'art' },
-  ii: { x: 870, y: 220, label: 'Internal Iliac a.', layer: 'art' },
-  fem: { x: 380, y: 320, label: 'Femoral a. (out)', layer: 'art' },
-  ant_div: { x: 980, y: 320, label: 'Anterior Division', layer: 'art' },
-  post_div: { x: 760, y: 320, label: 'Posterior Division', layer: 'art' },
-  iliolumbar: { x: 620, y: 410, label: 'Iliolumbar a.', layer: 'art' },
-  lat_sacral: { x: 700, y: 410, label: 'Lateral Sacral aa.', layer: 'art' },
-  sup_gluteal: { x: 780, y: 410, label: 'Superior Gluteal a.', layer: 'art' },
-  umbilical: { x: 870, y: 410, label: 'Umbilical a.', layer: 'art' },
-  sup_vesical: { x: 870, y: 510, label: 'Superior Vesical a.', layer: 'art' },
-  obturator_a: { x: 950, y: 410, label: 'Obturator a.', layer: 'art' },
-  inf_vesical: { x: 1030, y: 410, label: 'Inferior Vesical a. (M)', layer: 'art', sex: 'M' },
-  vaginal_a:   { x: 1030, y: 410, label: 'Vaginal a. (F)', layer: 'art', sex: 'F' },
-  uterine_a:   { x: 1110, y: 410, label: 'Uterine a. (F)', layer: 'art', sex: 'F' },
-  middle_rectal: { x: 1030, y: 510, label: 'Middle Rectal a.', layer: 'art' },
-  internal_pudendal: { x: 1110, y: 510, label: 'Internal Pudendal a.', layer: 'art' },
-  inf_rectal_a: { x: 1180, y: 600, label: 'Inferior Rectal a.', layer: 'art' },
-  perineal_a: { x: 1110, y: 600, label: 'Perineal a.', layer: 'art' },
-  dorsal_pc_a: { x: 1040, y: 600, label: 'Dorsal a. of penis/clitoris', layer: 'art' },
-  inf_gluteal: { x: 950, y: 510, label: 'Inferior Gluteal a.', layer: 'art' },
+  // ===== SOURCE =====
+  aorta: { x: 900, y: 70, label: 'Abdominal Aorta', layer: 'source' },
 
-  // Organs
-  bladder: { x: 770, y: 620, label: 'Bladder', layer: 'organ' },
-  prostate: { x: 950, y: 700, label: 'Prostate', layer: 'organ', sex: 'M' },
-  uterus: { x: 950, y: 700, label: 'Uterus', layer: 'organ', sex: 'F' },
-  cervix: { x: 1040, y: 760, label: 'Cervix', layer: 'organ', sex: 'F' },
-  proximal_vagina: { x: 970, y: 800, label: 'Vagina (proximal ⅔)', layer: 'organ', sex: 'F' },
-  distal_vagina: { x: 1080, y: 820, label: 'Vagina (distal ⅓)', layer: 'organ', sex: 'F' },
-  ovary: { x: 220, y: 200, label: 'Ovary', layer: 'organ', sex: 'F' },
-  testis: { x: 220, y: 200, label: 'Testis', layer: 'organ', sex: 'M' },
-  rectum: { x: 850, y: 620, label: 'Rectum', layer: 'organ' },
-  anal_above: { x: 870, y: 720, label: 'Anal canal (above pectinate)', layer: 'organ' },
-  anal_below: { x: 970, y: 760, label: 'Anal canal (below pectinate)', layer: 'organ' },
-  perineum: { x: 1180, y: 700, label: 'Perineum', layer: 'organ' },
-  genitalia: { x: 1100, y: 690, label: 'Penis / Clitoris', layer: 'organ' },
-  glans: { x: 1230, y: 770, label: 'Glans penis/clitoris', layer: 'organ' },
-  gluteal_region: { x: 660, y: 510, label: 'Gluteal region', layer: 'organ' },
-  medial_thigh: { x: 380, y: 410, label: 'Medial thigh', layer: 'organ' },
+  // ===== ARTERIAL TREE =====
+  // Strict zone rule: post_div fans LEFT (x ≤ 950); ant_div fans RIGHT (x ≥ 1300)
+  ovarian_a: { x: 380, y: 150, label: 'Ovarian / Testicular a.', layer: 'art' },
+  ci: { x: 900, y: 180, label: 'Common Iliac a.', layer: 'art' },
+  ei: { x: 660, y: 280, label: 'External Iliac a.', layer: 'art' },
+  ii: { x: 1140, y: 280, label: 'Internal Iliac a.', layer: 'art' },
+  fem: { x: 500, y: 380, label: 'Femoral a. (out)', layer: 'art' },
+  post_div: { x: 980, y: 400, label: 'Posterior Division', layer: 'art' },
+  ant_div: { x: 1320, y: 400, label: 'Anterior Division', layer: 'art' },
 
-  // Nerves (left side)
-  t12_l2: { x: 80, y: 240, label: 'T12–L2 cord', layer: 'nerve' },
-  sym_trunk: { x: 80, y: 320, label: 'Sympathetic trunk', layer: 'nerve' },
-  s2: { x: 80, y: 410, label: 'S2', layer: 'nerve' },
-  s3: { x: 80, y: 460, label: 'S3', layer: 'nerve' },
-  s4: { x: 80, y: 510, label: 'S4', layer: 'nerve' },
-  sacral_plexus: { x: 200, y: 460, label: 'Sacral Plexus', layer: 'nerve' },
-  pudendal_n: { x: 320, y: 540, label: 'Pudendal n.', layer: 'nerve' },
-  inf_rectal_n: { x: 280, y: 660, label: 'Inferior Rectal n.', layer: 'nerve' },
-  perineal_n: { x: 360, y: 670, label: 'Perineal n.', layer: 'nerve' },
-  dorsal_pc_n: { x: 440, y: 690, label: 'Dorsal n. of penis/clitoris', layer: 'nerve' },
-  obturator_n: { x: 380, y: 380, label: 'Obturator n. (L2–L4)', layer: 'nerve' },
-  pelvic_splanchnic: { x: 200, y: 540, label: 'Pelvic splanchnic n. (paraS)', layer: 'nerve' },
-  sacral_splanchnic: { x: 200, y: 620, label: 'Sacral splanchnic n. (sym)', layer: 'nerve' },
-  lumbar_splanchnic: { x: 80, y: 160, label: 'Lumbar splanchnic n. (sym)', layer: 'nerve' },
-  shp: { x: 320, y: 180, label: 'Superior hypogastric plexus', layer: 'nerve' },
-  ihp: { x: 360, y: 280, label: 'Inferior hypogastric plexus', layer: 'nerve' },
+  // POSTERIOR DIVISION fan — strictly LEFT of post_div, away from IHP→organ corridor
+  iliolumbar:  { x: 620, y: 530, label: 'Iliolumbar a.', layer: 'art' },
+  lat_sacral:  { x: 760, y: 600, label: 'Lateral Sacral aa.', layer: 'art' },
+  sup_gluteal: { x: 870, y: 660, label: 'Superior Gluteal a.', layer: 'art' },
 
-  // Lymph nodes (right side)
-  para_aortic: { x: 1340, y: 80, label: 'Para-aortic LN', layer: 'lymph' },
-  common_iliac_ln: { x: 1340, y: 160, label: 'Common Iliac LN', layer: 'lymph' },
-  ext_iliac_ln: { x: 1340, y: 240, label: 'External Iliac LN', layer: 'lymph' },
-  int_iliac_ln: { x: 1340, y: 320, label: 'Internal Iliac LN', layer: 'lymph' },
-  sup_inguinal_ln: { x: 1340, y: 600, label: 'Superficial Inguinal LN', layer: 'lymph' },
-  deep_inguinal_ln: { x: 1340, y: 680, label: 'Deep Inguinal LN', layer: 'lymph' },
+  // ANTERIOR DIVISION main fan — strictly RIGHT of ant_div (x ≥ 1300)
+  umbilical:    { x: 1320, y: 500, label: 'Umbilical a.', layer: 'art' },
+  obturator_a:  { x: 1430, y: 480, label: 'Obturator a.', layer: 'art' },
+  uterine_a:    { x: 1620, y: 440, label: 'Uterine a. (F)', layer: 'art', sex: 'F' },
+  inf_vesical:  { x: 1620, y: 530, label: 'Inferior Vesical a. (M)', layer: 'art', sex: 'M' },
+  vaginal_a:    { x: 1620, y: 530, label: 'Vaginal a. (F)', layer: 'art', sex: 'F' },
+
+  // ANTERIOR DIVISION sub-row (further right or below umbilical)
+  sup_vesical:       { x: 1240, y: 600, label: 'Superior Vesical a.', layer: 'art' },
+  inf_gluteal:       { x: 1380, y: 560, label: 'Inferior Gluteal a.', layer: 'art' },
+  middle_rectal:     { x: 1490, y: 690, label: 'Middle Rectal a.', layer: 'art' },
+  internal_pudendal: { x: 1700, y: 600, label: 'Internal Pudendal a.', layer: 'art' },
+
+  // INTERNAL PUDENDAL terminal branches (far right, fanning so they don't stack)
+  inf_rectal_a:  { x: 1640, y: 700, label: 'Inferior Rectal a.', layer: 'art' },
+  perineal_a:    { x: 1740, y: 720, label: 'Perineal a.', layer: 'art' },
+  dorsal_pc_a:   { x: 1660, y: 800, label: 'Dorsal a. of penis/clitoris', layer: 'art' },
+
+  // ===== ORGANS — compacted to y=700-940 to leave room for lymph at bottom =====
+  medial_thigh:    { x: 480, y: 480, label: 'Medial thigh', layer: 'organ' },
+  gluteal_region:  { x: 770, y: 700, label: 'Gluteal region', layer: 'organ' },
+  bladder:         { x: 1100, y: 800, label: 'Bladder', layer: 'organ' },
+  rectum:          { x: 1340, y: 800, label: 'Rectum', layer: 'organ' },
+  prostate:        { x: 1380, y: 880, label: 'Prostate', layer: 'organ', sex: 'M' },
+  uterus:          { x: 1380, y: 880, label: 'Uterus', layer: 'organ', sex: 'F' },
+  cervix:          { x: 1480, y: 880, label: 'Cervix', layer: 'organ', sex: 'F' },
+  proximal_vagina: { x: 1340, y: 940, label: 'Vagina (proximal ⅔)', layer: 'organ', sex: 'F' },
+  distal_vagina:   { x: 1560, y: 940, label: 'Vagina (distal ⅓)', layer: 'organ', sex: 'F' },
+  anal_above:      { x: 1200, y: 870, label: 'Anal canal (above pectinate)', layer: 'organ' },
+  anal_below:      { x: 1280, y: 980, label: 'Anal canal (below pectinate)', layer: 'organ' },
+  genitalia:       { x: 1700, y: 800, label: 'Penis / Clitoris', layer: 'organ' },
+  perineum:        { x: 1740, y: 880, label: 'Perineum', layer: 'organ' },
+  glans:           { x: 1640, y: 940, label: 'Glans penis/clitoris', layer: 'organ' },
+  ovary:           { x: 380, y: 280, label: 'Ovary', layer: 'organ', sex: 'F' },
+  testis:          { x: 380, y: 280, label: 'Testis', layer: 'organ', sex: 'M' },
+
+  // ===== NERVES (left column, wider spacing) =====
+  // Autonomic upper
+  t12_l2:           { x: 130, y: 290, label: 'T12–L2 cord', layer: 'nerve' },
+  lumbar_splanchnic:{ x: 230, y: 220, label: 'Lumbar splanchnic n. (sym)', layer: 'nerve' },
+  shp:              { x: 350, y: 200, label: 'Superior hypogastric plexus', layer: 'nerve' },
+  sym_trunk:        { x: 130, y: 400, label: 'Sympathetic trunk', layer: 'nerve' },
+  sacral_splanchnic:{ x: 250, y: 470, label: 'Sacral splanchnic n. (sym)', layer: 'nerve' },
+  ihp:              { x: 480, y: 380, label: 'Inferior hypogastric plexus', layer: 'nerve' },
+
+  // Obturator nerve — clear separation from sacral_splanchnic, line to medial_thigh visible
+  obturator_n:      { x: 340, y: 540, label: 'Obturator n. (L2–L4)', layer: 'nerve' },
+
+  // Sacral plexus
+  s2: { x: 80, y: 580, label: 'S2', layer: 'nerve' },
+  s3: { x: 80, y: 640, label: 'S3', layer: 'nerve' },
+  s4: { x: 80, y: 700, label: 'S4', layer: 'nerve' },
+  pelvic_splanchnic: { x: 280, y: 600, label: 'Pelvic splanchnic n. (paraS)', layer: 'nerve' },
+  sacral_plexus:    { x: 230, y: 740, label: 'Sacral Plexus', layer: 'nerve' },
+
+  // Pudendal cascade
+  pudendal_n:       { x: 380, y: 940, label: 'Pudendal n.', layer: 'nerve' },
+  inf_rectal_n:     { x: 250, y: 1010, label: 'Inferior Rectal n.', layer: 'nerve' },
+  perineal_n:       { x: 380, y: 1080, label: 'Perineal n.', layer: 'nerve' },
+  dorsal_pc_n:      { x: 540, y: 1110, label: 'Dorsal n. of penis/clitoris', layer: 'nerve' },
+
+  // ===== LYMPH NODES — V-shape at the BOTTOM of the canvas; edges fan UP from organs =====
+  // Order roughly mirrors anatomic chain: para-aortic deepest (drains gonads), inguinal at edges (drain perineum)
+  int_iliac_ln:     { x: 900,  y: 1010, label: 'Internal Iliac LN', layer: 'lymph' },
+  ext_iliac_ln:     { x: 1200, y: 1010, label: 'External Iliac LN', layer: 'lymph' },
+  common_iliac_ln:  { x: 550,  y: 1080, label: 'Common Iliac LN', layer: 'lymph' },
+  sup_inguinal_ln:  { x: 1500, y: 1080, label: 'Superficial Inguinal LN', layer: 'lymph' },
+  para_aortic:      { x: 300,  y: 1170, label: 'Para-aortic LN', layer: 'lymph' },
+  deep_inguinal_ln: { x: 1700, y: 1170, label: 'Deep Inguinal LN', layer: 'lymph' },
 };
 
 // ============================================================
@@ -944,6 +1046,30 @@ const EDGES = [
     { q: 'A male patient with a spinal cord injury at T12 may present with retrograde ejaculation due to loss of:', options: ['Parasympathetic erection', 'Sympathetic closure of internal urethral sphincter during emission', 'Somatic ejaculation pulsations', 'Pudendal sensation'], correct: 1, explanation: 'Sympathetic injury → internal urethral sphincter fails to close during emission → semen retrogrades into bladder. Patient may notice cloudy urine after orgasm.' },
   ]},
 
+  // ===== Organ-hub nerve connections (IHP → viscera) =====
+  { id: 'n_ihp_uterus', layer: 'nerve', from: 'ihp', to: 'uterus', length: 2, label: 'IHP → Uterus (uterovaginal plexus)', questions: [
+    { q: 'The uterovaginal (Frankenhäuser) plexus is an extension of which larger autonomic plexus and innervates the uterus and upper vagina?', options: ['Superior hypogastric plexus', 'Inferior hypogastric plexus', 'Celiac plexus', 'Sacral plexus'], correct: 1, explanation: 'The uterovaginal plexus is a subdivision of the inferior hypogastric plexus, lying within the cardinal ligament. It carries sym + paraS fibers to the uterus and upper vagina.' },
+    { q: 'Pain from a uterine fibroid in the body of the uterus (above pelvic pain line) is conveyed via which fibers?', options: ['Pudendal nerve', 'Sympathetic fibers ascending to T10–L2', 'Parasympathetic fibers descending from S2–S4', 'Somatic afferents'], correct: 1, explanation: 'Above the pelvic pain line (peritonealized), visceral pain follows SYMPATHETIC fibers back to T10–L2 spinal levels — referring to the lower abdomen/back.' },
+  ]},
+
+  { id: 'n_ihp_prostate', layer: 'nerve', from: 'ihp', to: 'prostate', length: 2, label: 'IHP → Prostate (prostatic plexus & cavernous nn.)', questions: [
+    { q: 'During radical prostatectomy, surgeons attempt to spare the cavernous nerves running along the prostatic capsule because they are responsible for:', options: ['Continence (sphincter control)', 'Erection (parasympathetic to corpora cavernosa)', 'Ejaculation (somatic)', 'Sensation of orgasm'], correct: 1, explanation: 'The cavernous nerves (from prostatic plexus → IHP) carry parasympathetic fibers that drive erection. Damage = erectile dysfunction. Nerve-sparing prostatectomy preserves these.' },
+    { q: 'Which fiber type, traveling via the IHP to the prostate, drives the EMISSION of prostatic fluid into the prostatic urethra?', options: ['Parasympathetic (pelvic splanchnic)', 'Sympathetic (sacral/lumbar splanchnic)', 'Somatic (pudendal)', 'Cranial parasympathetic'], correct: 1, explanation: 'Emission = SYMPATHETIC. Prostatic glandular contraction + closure of internal urethral sphincter (preventing retrograde) is sympathetic via splanchnics → IHP → prostatic plexus.' },
+  ]},
+
+  { id: 'n_ihp_rectum', layer: 'nerve', from: 'ihp', to: 'rectum', length: 1, label: 'IHP → Rectum (autonomic)', questions: [
+    { q: 'Which autonomic input causes peristalsis and relaxation of the internal anal sphincter during defecation?', options: ['Sympathetic from sacral splanchnic nn.', 'Parasympathetic from pelvic splanchnic nn. (S2–S4)', 'Somatic from pudendal n.', 'Vagal parasympathetic'], correct: 1, explanation: 'Pelvic splanchnic parasympathetic fibers (S2–S4) → IHP → rectum: drive peristalsis and relax the internal anal sphincter. Hindgut is the only viscera below the diaphragm NOT supplied by vagus.' },
+  ]},
+
+  { id: 'n_ihp_genitalia', layer: 'nerve', from: 'ihp', to: 'genitalia', length: 2, label: 'IHP → Erectile tissue (cavernous nn.)', questions: [
+    { q: 'Erection is mediated by parasympathetic fibers from the IHP that travel via cavernous nerves to which target?', options: ['Bulbospongiosus muscle', 'Helicine arteries within corpora cavernosa', 'Internal urethral sphincter', 'Glans skin'], correct: 1, explanation: 'Cavernous nerves (paraS, S2–S4 origin via pelvic splanchnic → IHP) cause vasodilation of helicine arteries within the corpora cavernosa → engorgement → erection.' },
+    { q: '"Point — Squeeze — Shoot." Which nerve does each phase use?', options: ['Point=paraS via pelvic splanch; Squeeze=sym via splanchnics→IHP; Shoot=somatic via pudendal', 'All three are pudendal', 'All three sympathetic', 'Point=sym; Squeeze=paraS; Shoot=somatic'], correct: 0, explanation: 'POINT (erection) = paraS (pelvic splanchnic). SQUEEZE (emission of sperm/secretions, internal sphincter closure) = SYMPATHETIC. SHOOT (ejaculation pulsations) = somatic (pudendal/perineal n.).' },
+  ]},
+
+  { id: 'n_pud_genitalia', layer: 'nerve', from: 'pudendal_n', to: 'genitalia', length: 1, label: 'Pudendal → External Genitalia (somatic)', questions: [
+    { q: 'The somatic motor component of the pudendal nerve drives which event during orgasm?', options: ['Erection', 'Emission of semen', 'Ejaculation pulsations (bulbospongiosus + ischiocavernosus contractions)', 'Vasodilation'], correct: 2, explanation: 'Pudendal somatic motor (via perineal n.) → rhythmic contractions of bulbospongiosus and ischiocavernosus muscles → ejaculation in males / clitoral pulsations in females. ("Shoot" of point-squeeze-shoot.)' },
+  ]},
+
   { id: 'n_obturator_thigh', layer: 'nerve', from: 'obturator_n', to: 'medial_thigh', length: 1, label: 'Obturator n. → Medial thigh', questions: [
     { q: 'The obturator nerve passes through the pelvis but does NOT supply pelvic structures. It originates from which plexus?', options: ['Sacral plexus', 'Lumbar plexus (L2–L4)', 'Coccygeal plexus', 'Hypogastric plexus'], correct: 1, explanation: 'Obturator n. arises from the LUMBAR plexus (L2–L4). It traverses the pelvis to exit via the obturator canal, supplying the medial thigh adductor compartment.' },
   ]},
@@ -1058,6 +1184,14 @@ const TICKET_TEMPLATES = [
   { id: 'l5', start: 'distal_vagina', end: 'common_iliac_ln', sex: 'F', pts: 9, label: 'Distal ⅓ vagina → Common Iliac LN' },
   { id: 'l6', start: 'anal_above', end: 'common_iliac_ln', sex: 'B', pts: 6, label: 'Anal canal above pectinate → Common Iliac LN' },
   { id: 'l7', start: 'anal_below', end: 'common_iliac_ln', sex: 'B', pts: 8, label: 'Anal canal below pectinate → Common Iliac LN' },
+
+  // Transit tickets — route through organ hubs across systems
+  { id: 'tr1', start: 'aorta', end: 'common_iliac_ln', sex: 'F', pts: 12, label: 'Aorta → Common Iliac LN (artery → uterus → lymph)' },
+  { id: 'tr1m', start: 'aorta', end: 'common_iliac_ln', sex: 'M', pts: 12, label: 'Aorta → Common Iliac LN (artery → prostate → lymph)' },
+  { id: 'tr2', start: 's2', end: 'common_iliac_ln', sex: 'B', pts: 11, label: 'S2 → Common Iliac LN (nerve → bladder → lymph)' },
+  { id: 'tr3', start: 'aorta', end: 'para_aortic', sex: 'F', pts: 14, label: 'Aorta → Para-aortic LN (full loop via uterus)' },
+  { id: 'tr4', start: 't12_l2', end: 'common_iliac_ln', sex: 'B', pts: 13, label: 'T12-L2 → Common Iliac LN (sym → IHP → bladder → lymph)' },
+  { id: 'tr5', start: 'aorta', end: 'sup_inguinal_ln', sex: 'B', pts: 11, label: 'Aorta → Sup. Inguinal LN (artery → perineum → lymph)' },
 ];
 
 // ============================================================
@@ -1085,7 +1219,16 @@ const state = {
   budget: 0,
   hasRolled: false,
   currentTargetEdge: null,
+  // View state
+  viewBox: { x: 0, y: 0, w: 1400, h: 900 },
+  isPanning: false,
+  panStart: null,
+  viewBoxStart: null,
+  panMoved: false,
 };
+const VIEW_DEFAULT = { x: 0, y: 0, w: 1800, h: 1200 };
+const VIEW_MIN_W = 320;
+const VIEW_MAX_W = 1800;
 
 // ============================================================
 // HELPERS
@@ -1247,6 +1390,8 @@ function endTurn() {
 // EDGE CLICK / QUESTION FLOW
 // ============================================================
 function onEdgeClick(edgeId) {
+  // Suppress click that fires after a pan drag
+  if (state.panMoved) { state.panMoved = false; return; }
   if (state.gameOver) return;
   if (!state.hasRolled) {
     showToast('Roll the dice first!', 'error');
@@ -1284,6 +1429,10 @@ function openModal(edge) {
     <span class="chip">Miles: <strong>${miles}/${edge.length}</strong></span>
     <span class="chip budget">Questions left: <strong>${state.budget}</strong></span>
   `;
+  // "About this segment" header — makes it explicit the question is tied to this exact route
+  const layerName = edge.layer === 'art' ? 'Arterial' : edge.layer === 'nerve' ? 'Nerve' : 'Lymphatic';
+  document.getElementById('qAbout').innerHTML =
+    `<span class="layer-pill ${edge.layer}">${layerName}</span> About this segment: <strong style="color:var(--slate)">${edge.label}</strong>`;
   // Pick a question we haven't used yet (if possible) for this edge
   if (!state.questionsUsed[edge.id]) state.questionsUsed[edge.id] = new Set();
   const used = state.questionsUsed[edge.id];
@@ -1531,14 +1680,14 @@ function renderBoard() {
   svg.innerHTML = '';
 
   // BG
-  svg.appendChild(svgEl('rect', { x: 0, y: 0, width: 1400, height: 900, fill: 'white' }));
+  svg.appendChild(svgEl('rect', { x: 0, y: 0, width: 1800, height: 1200, fill: 'white' }));
 
-  // Section labels
-  addSectionLabel(svg, 80, 130, 'AUTONOMICS', 'var(--nerve-color)');
-  addSectionLabel(svg, 80, 380, 'SACRAL PLEXUS', 'var(--nerve-color)');
-  addSectionLabel(svg, 700, 30, 'ARTERIAL TREE', 'var(--art-color)');
-  addSectionLabel(svg, 1340, 50, 'LYMPH NODES', 'var(--lymph-color)');
-  addSectionLabel(svg, 870, 580, 'ORGANS / TARGETS', 'var(--rose)');
+  // Section labels — anchored to the cardinal directions: TOP=arteries, LEFT=nerves, BOTTOM=lymph, MIDDLE=organs
+  addSectionLabel(svg, 220, 165, 'AUTONOMICS', 'var(--nerve-color)');
+  addSectionLabel(svg, 200, 540, 'SACRAL PLEXUS', 'var(--nerve-color)');
+  addSectionLabel(svg, 900, 40, 'ARTERIAL TREE', 'var(--art-color)');
+  addSectionLabel(svg, 900, 1190, 'LYMPH NODES', 'var(--lymph-color)');
+  addSectionLabel(svg, 1280, 760, 'ORGANS / TARGETS', '#1f2937');
 
   // Edges
   for (const e of EDGES) {
@@ -1554,11 +1703,16 @@ function renderBoard() {
     else if (prog && prog.player === 1) cls += ' in-progress-p2';
     if (state.layer !== 'all' && state.layer !== e.layer) cls += ' dim';
 
-    // Curved path
+    // Curved path — bow direction depends on layer so different systems separate visually
+    // Long nerve edges curve more aggressively to arc around arterial branches
     const dx = to.x - from.x, dy = to.y - from.y;
     const mx = (from.x + to.x) / 2, my = (from.y + to.y) / 2;
     const len = Math.sqrt(dx*dx + dy*dy);
-    const off = Math.min(20, len * 0.1);
+    let layerSign, maxOff, scale;
+    if (e.layer === 'nerve') { layerSign = -1; maxOff = 60; scale = 0.12; }
+    else if (e.layer === 'lymph') { layerSign = 0.6; maxOff = 28; scale = 0.07; }
+    else { layerSign = 1; maxOff = 22; scale = 0.06; } // arterial
+    const off = Math.min(maxOff, len * scale) * layerSign;
     const cx = mx + (dy / len) * off;
     const cy = my - (dx / len) * off;
     const path = svgEl('path', {
@@ -1592,17 +1746,36 @@ function renderBoard() {
   for (const [id, n] of Object.entries(NODES)) {
     if (!isNodeAvailable(id)) continue;
     const isSource = n.layer === 'source';
-    const r = isSource ? 22 : (n.layer === 'organ' ? 14 : 11);
-    const cls = 'node-circle ' + n.layer;
-    const dim = (state.layer !== 'all' && state.layer !== n.layer && n.layer !== 'organ' && n.layer !== 'source') ? ' dim' : '';
-    svg.appendChild(svgEl('circle', { cx: n.x, cy: n.y, r, class: cls + dim }));
+    const isOrgan = n.layer === 'organ';
+    const dim = (state.layer !== 'all' && state.layer !== n.layer && !isOrgan && !isSource) ? ' dim' : '';
 
-    const labelLines = wrapLabel(n.label, 18);
-    const yStart = n.y + r + 12;
+    // Draw shape
+    let labelOffset;
+    if (isOrgan) {
+      // Black 5-pointed star for organs
+      svg.appendChild(svgEl('path', {
+        d: starPath(n.x, n.y, 19, 8),
+        class: 'node-star' + dim,
+      }));
+      labelOffset = 22;
+    } else {
+      const r = isSource ? 22 : 11;
+      svg.appendChild(svgEl('circle', {
+        cx: n.x, cy: n.y, r,
+        class: 'node-circle ' + n.layer + dim,
+      }));
+      labelOffset = r + 12;
+    }
+
+    // Draw label
+    const wrapWidth = isOrgan ? 22 : 18;
+    const labelLines = wrapLabel(n.label, wrapWidth);
+    const yStart = n.y + labelOffset;
+    const lineHeight = isOrgan ? 14 : 11;
     for (let i = 0; i < labelLines.length; i++) {
       const t = svgEl('text', {
-        x: n.x, y: yStart + i*11,
-        class: 'node-label' + (isSource ? ' source' : ''),
+        x: n.x, y: yStart + i * lineHeight,
+        class: 'node-label' + (isSource ? ' source' : '') + (isOrgan ? ' organ' : ''),
       });
       t.textContent = labelLines[i];
       svg.appendChild(t);
@@ -1660,6 +1833,17 @@ function svgEl(tag, attrs) {
   const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
   return e;
+}
+function starPath(cx, cy, outerR, innerR, points = 5) {
+  let d = '';
+  for (let i = 0; i < points * 2; i++) {
+    const r = i % 2 === 0 ? outerR : innerR;
+    const angle = (Math.PI / points) * i - Math.PI / 2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    d += (i === 0 ? 'M ' : 'L ') + x.toFixed(2) + ' ' + y.toFixed(2) + ' ';
+  }
+  return d + 'Z';
 }
 
 function renderScores() {
@@ -1722,6 +1906,97 @@ function renderTurnBanner() {
 }
 
 // ============================================================
+// ZOOM / PAN
+// ============================================================
+function applyViewBox() {
+  const svg = document.getElementById('board');
+  const vb = state.viewBox;
+  svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+  const pct = Math.round((VIEW_DEFAULT.w / vb.w) * 100);
+  const info = document.getElementById('zoomInfo');
+  if (info) info.textContent = `${pct}%`;
+}
+function zoomIn() {
+  zoomBy(0.7);
+}
+function zoomOut() {
+  zoomBy(1.4);
+}
+function zoomBy(factor, anchor) {
+  const vb = state.viewBox;
+  let newW = vb.w * factor;
+  newW = Math.max(VIEW_MIN_W, Math.min(VIEW_MAX_W, newW));
+  if (newW === vb.w) return;
+  const newH = newW * (VIEW_DEFAULT.h / VIEW_DEFAULT.w);
+  // Anchor point in current viewBox coordinates (default = center)
+  const ax = anchor ? anchor.x : vb.x + vb.w / 2;
+  const ay = anchor ? anchor.y : vb.y + vb.h / 2;
+  // Keep anchor stationary on screen: scale around it
+  const fx = (ax - vb.x) / vb.w;
+  const fy = (ay - vb.y) / vb.h;
+  const newX = ax - fx * newW;
+  const newY = ay - fy * newH;
+  state.viewBox = { x: newX, y: newY, w: newW, h: newH };
+  clampViewBox();
+  applyViewBox();
+}
+function resetView() {
+  state.viewBox = { ...VIEW_DEFAULT };
+  applyViewBox();
+}
+function clampViewBox() {
+  const vb = state.viewBox;
+  if (vb.x < -150) vb.x = -150;
+  if (vb.y < -150) vb.y = -150;
+  if (vb.x + vb.w > VIEW_DEFAULT.w + 150) vb.x = VIEW_DEFAULT.w + 150 - vb.w;
+  if (vb.y + vb.h > VIEW_DEFAULT.h + 150) vb.y = VIEW_DEFAULT.h + 150 - vb.h;
+}
+function svgPointFromEvent(e) {
+  const svg = document.getElementById('board');
+  const rect = svg.getBoundingClientRect();
+  const fx = (e.clientX - rect.left) / rect.width;
+  const fy = (e.clientY - rect.top) / rect.height;
+  return {
+    x: state.viewBox.x + fx * state.viewBox.w,
+    y: state.viewBox.y + fy * state.viewBox.h,
+  };
+}
+function onWheel(e) {
+  e.preventDefault();
+  const anchor = svgPointFromEvent(e);
+  zoomBy(e.deltaY < 0 ? 0.85 : 1.18, anchor);
+}
+function onPanStart(e) {
+  // Only pan when mousing down on empty SVG background
+  if (e.target.tagName === 'path' || e.target.tagName === 'circle' || e.target.tagName === 'text') return;
+  state.isPanning = true;
+  state.panMoved = false;
+  state.panStart = { x: e.clientX, y: e.clientY };
+  state.viewBoxStart = { ...state.viewBox };
+  document.getElementById('board').classList.add('panning');
+}
+function onPanMove(e) {
+  if (!state.isPanning) return;
+  const svg = document.getElementById('board');
+  const rect = svg.getBoundingClientRect();
+  const dx = (e.clientX - state.panStart.x) * (state.viewBoxStart.w / rect.width);
+  const dy = (e.clientY - state.panStart.y) * (state.viewBoxStart.h / rect.height);
+  if (Math.abs(dx) + Math.abs(dy) > 3) state.panMoved = true;
+  state.viewBox = {
+    x: state.viewBoxStart.x - dx,
+    y: state.viewBoxStart.y - dy,
+    w: state.viewBoxStart.w,
+    h: state.viewBoxStart.h,
+  };
+  clampViewBox();
+  applyViewBox();
+}
+function onPanEnd() {
+  state.isPanning = false;
+  document.getElementById('board').classList.remove('panning');
+}
+
+// ============================================================
 // TOAST
 // ============================================================
 function showToast(msg, type = 'info') {
@@ -1738,6 +2013,19 @@ function showToast(msg, type = 'info') {
 // ============================================================
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('p2NameWrap').style.display = '';
+  const svg = document.getElementById('board');
+  svg.addEventListener('wheel', onWheel, { passive: false });
+  svg.addEventListener('mousedown', onPanStart);
+  window.addEventListener('mousemove', onPanMove);
+  window.addEventListener('mouseup', onPanEnd);
+  // Keyboard shortcuts
+  window.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomIn(); }
+    else if (e.key === '-' || e.key === '_') { e.preventDefault(); zoomOut(); }
+    else if (e.key === '0') { e.preventDefault(); resetView(); }
+  });
+  applyViewBox();
 });
 </script>
 
