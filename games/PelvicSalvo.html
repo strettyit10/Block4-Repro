@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pelvic Salvo — Anatomy Battleship Drill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f1e3c4;
+    --parchment-deep: #e3cfa1;
+    --ink: #2b1810;
+    --ink-soft: #543b2a;
+    --blood: #8b1a1a;
+    --blood-dark: #5c0f0f;
+    --gold: #b8893d;
+    --gold-bright: #d9a84a;
+    --vein: #2c4a6e;
+    --ligament: #3d6b3a;
+    --ligament-bright: #5a8f56;
+    --bone: #f7eed4;
+    --shadow: rgba(43,24,16,0.4);
+    --water: #c2d4e0;
+    --water-deep: #8fa9bb;
+    --hit: #8b1a1a;
+    --miss: #6e6256;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background:
+      radial-gradient(ellipse at 30% 20%, #d6bf95 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, #c9b083 0%, transparent 55%),
+      linear-gradient(135deg, #d4ba8c 0%, #b8985f 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: 'Crimson Pro', Georgia, serif;
+    color: var(--ink);
+    padding: 12px;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: rgba(139,26,26,0.15);
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(43,24,16,0.015) 0 2px, transparent 2px 6px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a { touch-action: manipulation; }
+
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 4px 14px;
+    border-bottom: 1px solid rgba(43,24,16,0.15);
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    width: 34px; height: 34px;
+    background: var(--blood);
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bone);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px var(--shadow);
+  }
+
+  .brand-text .sub {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.65rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    margin-top: -2px;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border: 1px solid var(--ink-soft);
+    border-radius: 4px;
+  }
+  .back-link:hover { background: var(--parchment); color: var(--ink); }
+
+  /* Header */
+  header.hero {
+    text-align: center;
+    padding: 14px 0 18px;
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    text-shadow: 1px 1px 0 var(--parchment), 2px 2px 4px var(--shadow);
+    line-height: 1;
+  }
+  h1 .accent { color: var(--blood); font-style: italic; }
+  .hero .subtitle {
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+  }
+
+  /* Screen container */
+  .screen {
+    background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-deep) 100%);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: 0 4px 14px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.4);
+    margin-bottom: 18px;
+  }
+  .screen.hidden { display: none; }
+
+  .screen h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+  .screen h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin: 14px 0 8px;
+    letter-spacing: 0.04em;
+  }
+  .screen p { color: var(--ink-soft); margin-bottom: 10px; line-height: 1.5; }
+
+  /* Buttons */
+  .btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--bone);
+    padding: 12px 20px;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px var(--shadow);
+    min-height: 44px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn:hover { background: var(--blood); border-color: var(--blood-dark); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { background: var(--ink-soft); border-color: var(--ink-soft); cursor: not-allowed; opacity: 0.6; }
+  .btn.secondary { background: var(--parchment); color: var(--ink); }
+  .btn.secondary:hover { background: var(--gold-bright); border-color: var(--ink); }
+  .btn.danger { background: var(--blood); border-color: var(--blood-dark); }
+  .btn.danger:hover { background: var(--blood-dark); }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+  /* Mode select */
+  .mode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .mode-card {
+    background: var(--bone);
+    border: 2px solid var(--ink-soft);
+    border-radius: 8px;
+    padding: 22px 18px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .mode-card:hover { border-color: var(--blood); transform: translateY(-2px); box-shadow: 0 6px 14px var(--shadow); }
+  .mode-card .mode-icon {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+    color: var(--blood);
+    font-family: 'Cinzel', serif;
+  }
+  .mode-card .mode-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .mode-card .mode-desc {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* Placement layout */
+  .place-layout {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 18px;
+    margin-top: 12px;
+  }
+  @media (max-width: 720px) {
+    .place-layout { grid-template-columns: 1fr; }
+  }
+
+  /* Grids */
+  .grid {
+    display: grid;
+    grid-template-columns: 22px repeat(8, 1fr);
+    grid-template-rows: 22px repeat(8, 1fr);
+    gap: 2px;
+    background: var(--ink);
+    padding: 2px;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .grid.battle { max-width: 440px; }
+  .grid.mini { max-width: 240px; grid-template-columns: 16px repeat(8, 1fr); grid-template-rows: 16px repeat(8, 1fr); }
+
+  .grid .label {
+    background: transparent;
+    color: var(--bone);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .grid.mini .label { font-size: 0.45rem; }
+
+  .cell {
+    background: var(--water);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.1s;
+  }
+  .cell.water { background: var(--water); }
+  .cell.ship { background: var(--ligament); }
+  .cell.preview-ok { background: rgba(61,107,58,0.55); outline: 2px solid var(--ligament-bright); }
+  .cell.preview-bad { background: rgba(139,26,26,0.45); outline: 2px solid var(--blood); }
+  .cell.miss { background: var(--miss); }
+  .cell.miss::after {
+    content: '·';
+    color: var(--bone);
+    font-size: 1.6rem;
+    line-height: 0.4;
+    font-weight: 700;
+  }
+  .cell.hit { background: var(--blood); }
+  .cell.hit::after {
+    content: '✕';
+    color: var(--bone);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .cell.sunk { background: var(--blood-dark); }
+  .cell.sunk::after { content: '✕'; color: var(--gold-bright); font-size: 0.85rem; font-weight: 700; }
+  .cell.disabled { cursor: not-allowed; }
+  .cell.target:hover:not(.miss):not(.hit):not(.sunk):not(.disabled) {
+    background: var(--gold-bright);
+    outline: 2px solid var(--blood);
+  }
+
+  /* Hide own ships when battling (only show hits) */
+  .grid.hide-ships .cell.ship:not(.hit):not(.sunk) { background: var(--water); }
+
+  /* Ship dock */
+  .ship-dock {
+    background: var(--bone);
+    border: 2px solid var(--ink-soft);
+    border-radius: 6px;
+    padding: 12px;
+  }
+  .ship-dock h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .ship-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    background: var(--parchment);
+    transition: all 0.1s;
+  }
+  .ship-item:hover { border-color: var(--ink-soft); }
+  .ship-item.selected {
+    border-color: var(--blood);
+    background: var(--gold-bright);
+  }
+  .ship-item.placed { opacity: 0.5; cursor: default; background: var(--parchment-deep); }
+  .ship-item.placed.sunk { opacity: 0.45; background: rgba(139,26,26,0.18); border-color: var(--blood); text-decoration: line-through; }
+
+  .ship-blocks {
+    display: flex; gap: 2px;
+  }
+  .ship-blocks .block {
+    width: 12px; height: 12px;
+    background: var(--ligament);
+    border-radius: 2px;
+    border: 1px solid var(--ink);
+  }
+  .ship-name {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    flex: 1;
+  }
+  .ship-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink-soft);
+  }
+
+  /* Battle layout */
+  .battle-layout {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 16px;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .battle-layout { grid-template-columns: 1fr; }
+  }
+
+  .battle-side h3 {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .turn-banner {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+    font-size: 1rem;
+  }
+  .turn-banner .you { color: var(--gold-bright); }
+  .turn-banner.fire-ready { background: var(--blood); }
+  .status-line {
+    text-align: center;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 8px 0;
+    min-height: 1.4em;
+    font-size: 0.95rem;
+  }
+
+  .ship-status .ship-item { cursor: default; }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(43,24,16,0.7);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+    padding: 16px;
+  }
+  .modal-overlay.hidden { display: none; }
+
+  .modal {
+    background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-deep) 100%);
+    border: 3px solid var(--ink);
+    border-radius: 10px;
+    padding: 24px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--blood);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .modal .question-text {
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .modal .answer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .answer-btn {
+    text-align: left;
+    background: var(--bone);
+    color: var(--ink);
+    border: 2px solid var(--ink-soft);
+    border-radius: 4px;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    transition: all 0.1s;
+    min-height: 44px;
+  }
+  .answer-btn:hover { background: var(--gold-bright); border-color: var(--ink); }
+  .answer-btn.correct { background: var(--ligament); color: var(--bone); border-color: var(--ink); }
+  .answer-btn.wrong { background: var(--blood); color: var(--bone); border-color: var(--blood-dark); }
+  .answer-btn:disabled { cursor: default; }
+
+  .modal .feedback {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 4px;
+    font-style: italic;
+    text-align: center;
+  }
+  .modal .feedback.correct { background: rgba(61,107,58,0.2); border: 1px solid var(--ligament); color: var(--ligament); }
+  .modal .feedback.wrong { background: rgba(139,26,26,0.2); border: 1px solid var(--blood); color: var(--blood-dark); }
+
+  /* Pass screen */
+  .pass-screen { text-align: center; padding: 30px 20px; }
+  .pass-screen .icon { font-size: 4rem; color: var(--blood); margin-bottom: 14px; font-family: 'Cinzel', serif; }
+  .pass-screen p { font-size: 1.1rem; }
+
+  /* End screen */
+  .end-screen { text-align: center; padding: 30px 20px; }
+  .end-screen .victor {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    color: var(--blood);
+    margin-bottom: 8px;
+    letter-spacing: 0.06em;
+  }
+  .end-screen .stats {
+    background: var(--bone);
+    border: 1px solid var(--ink-soft);
+    border-radius: 6px;
+    padding: 14px;
+    margin: 18px auto;
+    max-width: 380px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+  .end-screen .stats .row { display: flex; justify-content: space-between; padding: 4px 0; }
+
+  /* Mobile tweaks */
+  @media (max-width: 520px) {
+    body { padding: 8px; }
+    .screen { padding: 16px; }
+    .grid { max-width: 100%; }
+    .grid.mini { max-width: 220px; }
+    .brand { font-size: 1.05rem; }
+    .brand-mark { width: 30px; height: 30px; font-size: 0.85rem; }
+    .turn-banner { font-size: 0.9rem; padding: 10px; }
+    .modal { padding: 18px; }
+    .modal .question-text { font-size: 1rem; }
+    .answer-btn { font-size: 0.95rem; padding: 11px 12px; }
+    .ship-item { padding: 6px 8px; }
+    .ship-name { font-size: 0.82rem; }
+    .ship-blocks .block { width: 10px; height: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">H</span>
+      <span class="brand-text">
+        HoyaDocs
+        <span class="sub">Pelvic Salvo</span>
+      </span>
+    </a>
+    <a class="back-link" href="../index.html">← Library</a>
+  </div>
+
+  <header class="hero">
+    <h1>Pelvic <span class="accent">Salvo</span></h1>
+    <p class="subtitle">Anatomy Battleship Drill · Hot-seat 2P or vs. AI</p>
+  </header>
+
+  <main id="game">
+
+    <!-- Mode select -->
+    <section id="screen-mode" class="screen">
+      <h2>Choose your battle</h2>
+      <p>Pick a mode. Each turn you'll answer one anatomy question to fire a shot. Sink your opponent's structures before they sink yours.</p>
+      <div class="mode-grid">
+        <div class="mode-card" data-mode="hotseat">
+          <div class="mode-icon">⚔</div>
+          <div class="mode-title">Hot-seat 2P</div>
+          <div class="mode-desc">Pass &amp; play on one device. Privacy screen between turns.</div>
+        </div>
+        <div class="mode-card" data-mode="solo">
+          <div class="mode-icon">🜲</div>
+          <div class="mode-title">Solo vs. AI</div>
+          <div class="mode-desc">Battle the computer. Adjustable difficulty.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Placement -->
+    <section id="screen-place" class="screen hidden">
+      <h2 id="place-title">Place your structures</h2>
+      <p id="place-instructions">Tap a structure on the right, then tap the grid to place it. Use Rotate to change orientation.</p>
+      <div class="place-layout">
+        <div>
+          <div id="placement-grid" class="grid"></div>
+        </div>
+        <div>
+          <div class="ship-dock">
+            <h4>Your Fleet</h4>
+            <div id="ship-dock-list"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn secondary" id="btn-rotate">Rotate</button>
+            <button class="btn secondary" id="btn-auto">Auto-place</button>
+            <button class="btn secondary" id="btn-reset">Reset</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn" id="btn-place-done" disabled>Done →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pass screen -->
+    <section id="screen-pass" class="screen hidden">
+      <div class="pass-screen">
+        <div class="icon">⛨</div>
+        <h2 id="pass-title">Pass the device</h2>
+        <p id="pass-msg">Hand to the next player.</p>
+        <div class="btn-row" style="justify-content:center;">
+          <button class="btn" id="btn-pass-continue">I'm Ready →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Battle -->
+    <section id="screen-battle" class="screen hidden">
+      <div class="turn-banner" id="turn-banner"></div>
+      <div class="status-line" id="status-line"></div>
+      <div class="battle-layout">
+        <div class="battle-side">
+          <h3>Enemy Waters</h3>
+          <div id="target-grid" class="grid battle"></div>
+        </div>
+        <div>
+          <div class="ship-dock ship-status">
+            <h4>Enemy Fleet</h4>
+            <div id="enemy-status-list"></div>
+          </div>
+          <div style="margin-top:14px;">
+            <h3 style="text-align:center; font-family:'Cinzel',serif; font-size:0.9rem; margin-bottom:6px; color:var(--ink-soft); letter-spacing:0.06em;">Your Waters</h3>
+            <div id="own-grid" class="grid mini"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- End -->
+    <section id="screen-end" class="screen hidden">
+      <div class="end-screen">
+        <div class="victor" id="victor-name">Victory!</div>
+        <p id="victor-msg"></p>
+        <div class="stats" id="end-stats"></div>
+        <div class="btn-row" style="justify-content:center;">
+          <button class="btn" id="btn-restart">Play Again</button>
+          <a class="btn secondary" href="../index.html" style="text-decoration:none; display:inline-flex; align-items:center;">← Library</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Question modal -->
+<div class="modal-overlay hidden" id="modal-overlay">
+  <div class="modal">
+    <h3>Answer to fire</h3>
+    <div class="question-text" id="q-text"></div>
+    <div class="answer-list" id="q-answers"></div>
+    <div class="feedback hidden" id="q-feedback"></div>
+    <div class="btn-row" style="justify-content:flex-end; margin-top:14px;">
+      <button class="btn hidden" id="btn-q-next">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===========================================
+   PELVIC SALVO — Anatomy Battleship Drill
+   =========================================== */
+
+const GRID_SIZE = 8;
+
+const SHIPS = [
+  { id: 'pd', name: 'Pelvic Diaphragm', size: 4 },
+  { id: 'bl', name: 'Bladder',          size: 3 },
+  { id: 'rc', name: 'Rectum',           size: 3 },
+  { id: 'ia', name: 'Internal Iliac A.', size: 2 },
+  { id: 'pn', name: 'Pudendal Nerve',   size: 2 }
+];
+
+/* Anatomy question bank pulled from RPD lab structure list */
+const QUESTIONS = [
+  { q: "Which nerve provides motor and sensory innervation to the perineum?",
+    a: ["Pudendal nerve", "Obturator nerve", "Sciatic nerve", "Inferior gluteal nerve"], correct: 0 },
+  { q: "What spinal levels contribute to the pudendal nerve?",
+    a: ["L4–S1", "S2–S4", "T12–L2", "L1–L3"], correct: 1 },
+  { q: "Parasympathetic fibers to pelvic viscera arise from which nerves?",
+    a: ["Sacral splanchnic nerves", "Sympathetic chain", "Pelvic splanchnic nerves (S2–S4)", "Vagus nerve"], correct: 2 },
+  { q: "Sympathetic innervation reaches pelvic viscera via which nerves?",
+    a: ["Pelvic splanchnic nerves", "Sacral splanchnic nerves", "Pudendal nerve", "Phrenic nerve"], correct: 1 },
+  { q: "The main artery supplying the pelvic viscera is the:",
+    a: ["External iliac artery", "Internal iliac artery", "Femoral artery", "Inferior mesenteric artery"], correct: 1 },
+  { q: "The uterine artery is a branch of which division?",
+    a: ["Posterior division of internal iliac", "External iliac artery", "Anterior division of internal iliac", "Ovarian artery"], correct: 2 },
+  { q: "Which artery is described by 'water (ureter) under the bridge (uterine artery)'?",
+    a: ["Uterine artery crosses anterior to the ureter", "Ureter crosses anterior to uterine artery", "Both run parallel", "Ovarian artery crosses ureter"], correct: 0 },
+  { q: "The dorsal artery of the penis is a terminal branch of the:",
+    a: ["Inferior vesical artery", "Obturator artery", "Internal pudendal artery", "Femoral artery"], correct: 2 },
+  { q: "Which artery supplies the superior aspect of the bladder?",
+    a: ["Inferior vesical artery", "Superior vesical artery", "Middle rectal artery", "Obturator artery"], correct: 1 },
+  { q: "Which two muscle groups make up the pelvic diaphragm?",
+    a: ["Levator ani and coccygeus", "Obturator internus and piriformis", "Bulbospongiosus and ischiocavernosus", "Gluteus maximus and medius"], correct: 0 },
+  { q: "What is the function of the pelvic diaphragm?",
+    a: ["Hip flexion", "Support of pelvic viscera and continence", "External rotation of femur", "Adduction of thigh"], correct: 1 },
+  { q: "Where is the rectouterine pouch (Pouch of Douglas)?",
+    a: ["Between bladder and uterus", "Between rectum and uterus", "Anterior to bladder", "Lateral to ovary"], correct: 1 },
+  { q: "The pectinate line marks the transition between:",
+    a: ["Visceral and somatic innervation of the anal canal", "Bladder and urethra", "Vagina and cervix", "Ureter and bladder"], correct: 0 },
+  { q: "What ligament does the pudendal nerve hook around as it re-enters the perineum?",
+    a: ["Sacrotuberous ligament", "Inguinal ligament", "Sacrospinous ligament", "Round ligament"], correct: 2 },
+  { q: "The round ligament of the uterus passes through which canal?",
+    a: ["Femoral canal", "Inguinal canal", "Obturator canal", "Adductor canal"], correct: 1 },
+  { q: "Which ligament suspends the ovary and contains the ovarian vessels?",
+    a: ["Round ligament", "Broad ligament", "Suspensory ligament of the ovary", "Ovarian ligament"], correct: 2 },
+  { q: "Which structure connects the epididymis to the ejaculatory duct?",
+    a: ["Spermatic cord", "Ductus (vas) deferens", "Seminal vesicle duct", "Membranous urethra"], correct: 1 },
+  { q: "The seminal vesicles contribute approximately what fraction of seminal fluid?",
+    a: ["10%", "30%", "70%", "100%"], correct: 2 },
+  { q: "Which gland surrounds the prostatic urethra?",
+    a: ["Seminal vesicle", "Prostate", "Bulbourethral (Cowper's) gland", "Greater vestibular gland"], correct: 1 },
+  { q: "The female homolog of the bulbourethral (Cowper's) gland is the:",
+    a: ["Greater vestibular (Bartholin's) gland", "Skene's gland", "Vestibular bulb", "Clitoral hood"], correct: 0 },
+  { q: "What is the perineal body?",
+    a: ["A nerve plexus", "A fibromuscular node central to the perineum", "A vascular sinus", "A lymph node group"], correct: 1 },
+  { q: "Which muscle does NOT attach to the perineal body?",
+    a: ["Bulbospongiosus", "Superficial transverse perineal", "Gluteus maximus", "External anal sphincter"], correct: 2 },
+  { q: "The greater sciatic foramen transmits the pudendal nerve in which direction?",
+    a: ["Pelvis to gluteal region (exiting)", "Gluteal region to pelvis (entering)", "Stays in the pelvis", "Crosses the obturator foramen"], correct: 0 },
+  { q: "After exiting the greater sciatic foramen, the pudendal nerve re-enters the perineum through:",
+    a: ["The obturator foramen", "The lesser sciatic foramen", "The femoral canal", "Alcock's canal directly"], correct: 1 },
+  { q: "Where does the pudendal nerve travel through within the lateral wall of the ischioanal fossa?",
+    a: ["Adductor canal", "Pudendal (Alcock's) canal", "Inguinal canal", "Femoral sheath"], correct: 1 },
+  { q: "The ischial spine serves as an attachment for which ligament?",
+    a: ["Sacrotuberous", "Sacrospinous", "Inguinal", "Round ligament of uterus"], correct: 1 },
+  { q: "The boundaries of the pelvic inlet include all EXCEPT:",
+    a: ["Sacral promontory", "Arcuate line", "Pubic symphysis", "Coccyx"], correct: 3 },
+  { q: "Which structure transmits parasympathetic input to the descending colon, sigmoid, and pelvic viscera?",
+    a: ["Vagus nerve", "Pelvic splanchnic nerves", "Greater splanchnic nerve", "Lumbar splanchnics"], correct: 1 },
+  { q: "Which artery is at risk during hysterectomy due to its proximity to the ureter?",
+    a: ["Uterine artery", "Ovarian artery", "Internal pudendal artery", "Inferior epigastric artery"], correct: 0 },
+  { q: "The detrusor muscle is found in which organ?",
+    a: ["Uterus", "Bladder", "Rectum", "Prostate"], correct: 1 },
+  { q: "Which nerve carries general sensation from the clitoris/glans penis?",
+    a: ["Dorsal nerve of clitoris/penis (from pudendal)", "Obturator nerve", "Genitofemoral nerve", "Ilioinguinal nerve"], correct: 0 },
+  { q: "The crura of the penis attach to which bony structure?",
+    a: ["Pubic symphysis", "Ischiopubic ramus", "Iliac crest", "Sacral promontory"], correct: 1 },
+  { q: "Which muscle covers the crura and aids in maintaining erection?",
+    a: ["Bulbospongiosus", "Ischiocavernosus", "Levator ani", "Obturator internus"], correct: 1 },
+  { q: "The uterine (Fallopian) tube opens into which structure laterally?",
+    a: ["Peritoneal cavity via the fimbriae", "Cervix", "Vagina", "Bladder"], correct: 0 },
+  { q: "The broad ligament's subdivision overlying the uterine tube is the:",
+    a: ["Mesometrium", "Mesovarium", "Mesosalpinx", "Mesocolon"], correct: 2 },
+  { q: "The external urethral sphincter is innervated by which nerve?",
+    a: ["Pelvic splanchnic", "Pudendal nerve", "Obturator nerve", "Sympathetic chain"], correct: 1 },
+  { q: "Internal anal sphincter tone is maintained by which division of the autonomic nervous system?",
+    a: ["Parasympathetic", "Sympathetic", "Somatic motor (pudendal)", "Enteric only"], correct: 1 },
+  { q: "Which structure carries lymph from the testis?",
+    a: ["Superficial inguinal nodes", "Para-aortic (lumbar) nodes", "Internal iliac nodes", "Deep inguinal nodes"], correct: 1 },
+  { q: "Lymphatic drainage from the body of the uterus primarily goes to:",
+    a: ["Para-aortic nodes", "External iliac and internal iliac nodes", "Superficial inguinal nodes only", "Mediastinal nodes"], correct: 1 },
+  { q: "Which artery supplies the rectum in its middle third?",
+    a: ["Superior rectal artery", "Middle rectal artery (from internal iliac)", "Inferior rectal artery", "Sigmoid artery"], correct: 1 }
+];
+
+/* =========================================== STATE =========================================== */
+let state = {};
+
+function freshState(mode) {
+  return {
+    mode,             // 'hotseat' or 'solo'
+    phase: 'mode',
+    current: 0,       // active player index (0 or 1)
+    placeIdx: 0,      // which player is currently placing
+    selectedShip: null,
+    rotateH: true,    // true = horizontal placement
+    pendingShot: false,
+    askedIds: new Set(),
+    players: [
+      newPlayer('Player 1'),
+      newPlayer(mode === 'solo' ? 'CPU' : 'Player 2')
+    ],
+    ai: { mode: 'hunt', targets: [], lastHits: [] }
+  };
+}
+
+function newPlayer(name) {
+  return {
+    name,
+    grid: Array.from({length: GRID_SIZE}, () => Array(GRID_SIZE).fill(null)),
+    ships: SHIPS.map(s => ({ ...s, cells: [], hits: 0, sunk: false, placed: false })),
+    shotsByMe: Array.from({length: GRID_SIZE}, () => Array(GRID_SIZE).fill(null)), // null/'miss'/'hit'/'sunk'
+    score: { qCorrect: 0, qWrong: 0, shotsFired: 0, hits: 0 }
+  };
+}
+
+/* =========================================== UI HELPERS =========================================== */
+const $ = id => document.getElementById(id);
+function show(id) { $(id).classList.remove('hidden'); }
+function hide(id) { $(id).classList.add('hidden'); }
+function showScreen(id) {
+  ['screen-mode','screen-place','screen-pass','screen-battle','screen-end'].forEach(s => hide(s));
+  show(id);
+}
+// In solo mode the human (player 0) is always viewing the screen — even on the AI's turn.
+// In hotseat mode, the viewer is whoever's turn it currently is.
+function getViewerIdx() { return state.mode === 'solo' ? 0 : state.current; }
+
+/* =========================================== MODE SELECT =========================================== */
+document.querySelectorAll('.mode-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const mode = card.dataset.mode;
+    state = freshState(mode);
+    state.phase = 'place';
+    state.placeIdx = 0;
+    if (mode === 'solo') {
+      // AI auto-places its fleet
+      autoPlace(state.players[1]);
+    }
+    enterPlacement();
+  });
+});
+
+/* =========================================== PLACEMENT =========================================== */
+function enterPlacement() {
+  showScreen('screen-place');
+  const p = state.players[state.placeIdx];
+  $('place-title').textContent = `${p.name} — place your structures`;
+  state.selectedShip = null;
+  state.rotateH = true;
+  renderShipDock();
+  renderPlacementGrid();
+  updateDoneBtn();
+}
+
+function renderPlacementGrid() {
+  const grid = $('placement-grid');
+  grid.innerHTML = '';
+  // top-left corner
+  grid.appendChild(makeLabel(''));
+  // column headers A-H
+  for (let c = 0; c < GRID_SIZE; c++) grid.appendChild(makeLabel(String.fromCharCode(65 + c)));
+  const p = state.players[state.placeIdx];
+  for (let r = 0; r < GRID_SIZE; r++) {
+    grid.appendChild(makeLabel(r + 1));
+    for (let c = 0; c < GRID_SIZE; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell water';
+      const ship = p.grid[r][c];
+      if (ship) cell.classList.add('ship');
+      cell.dataset.r = r; cell.dataset.c = c;
+      cell.addEventListener('click', () => onPlacementClick(r, c));
+      cell.addEventListener('mouseover', () => onPlacementHover(r, c));
+      cell.addEventListener('mouseout', () => clearPreview());
+      grid.appendChild(cell);
+    }
+  }
+}
+
+function makeLabel(t) {
+  const d = document.createElement('div');
+  d.className = 'label';
+  d.textContent = t;
+  return d;
+}
+
+function renderShipDock() {
+  const dock = $('ship-dock-list');
+  dock.innerHTML = '';
+  const p = state.players[state.placeIdx];
+  p.ships.forEach(ship => {
+    const item = document.createElement('div');
+    item.className = 'ship-item' + (ship.placed ? ' placed' : '') + (state.selectedShip === ship.id ? ' selected' : '');
+    let blocks = '';
+    for (let i = 0; i < ship.size; i++) blocks += '<div class="block"></div>';
+    item.innerHTML = `
+      <div class="ship-blocks">${blocks}</div>
+      <div class="ship-name">${ship.name}</div>
+      <div class="ship-meta">${ship.size}</div>
+    `;
+    if (!ship.placed) {
+      item.addEventListener('click', () => {
+        state.selectedShip = ship.id;
+        renderShipDock();
+      });
+    } else {
+      item.addEventListener('click', () => {
+        // click placed ship to remove
+        removeShip(p, ship.id);
+        renderPlacementGrid();
+        renderShipDock();
+        updateDoneBtn();
+      });
+      item.style.cursor = 'pointer';
+      item.title = 'Click to remove';
+    }
+    dock.appendChild(item);
+  });
+}
+
+function onPlacementClick(r, c) {
+  if (!state.selectedShip) return;
+  const p = state.players[state.placeIdx];
+  const ship = p.ships.find(s => s.id === state.selectedShip);
+  if (!ship || ship.placed) return;
+  const cells = computeShipCells(r, c, ship.size, state.rotateH);
+  if (!cells || !cellsValidFor(p, cells)) return;
+  ship.cells = cells;
+  ship.placed = true;
+  cells.forEach(([rr, cc]) => p.grid[rr][cc] = ship.id);
+  state.selectedShip = null;
+  renderPlacementGrid();
+  renderShipDock();
+  updateDoneBtn();
+}
+
+function onPlacementHover(r, c) {
+  clearPreview();
+  if (!state.selectedShip) return;
+  const p = state.players[state.placeIdx];
+  const ship = p.ships.find(s => s.id === state.selectedShip);
+  if (!ship || ship.placed) return;
+  const cells = computeShipCells(r, c, ship.size, state.rotateH);
+  if (!cells) return;
+  const valid = cellsValidFor(p, cells);
+  cells.forEach(([rr, cc]) => {
+    const idx = rr * GRID_SIZE + cc;
+    const cell = $('placement-grid').children[GRID_SIZE + 1 + rr * (GRID_SIZE + 1) + cc + 1];
+    if (cell) cell.classList.add(valid ? 'preview-ok' : 'preview-bad');
+  });
+}
+
+function clearPreview() {
+  document.querySelectorAll('#placement-grid .cell').forEach(c => {
+    c.classList.remove('preview-ok','preview-bad');
+  });
+}
+
+function computeShipCells(r, c, size, horizontal) {
+  const cells = [];
+  for (let i = 0; i < size; i++) {
+    const rr = horizontal ? r : r + i;
+    const cc = horizontal ? c + i : c;
+    if (rr < 0 || rr >= GRID_SIZE || cc < 0 || cc >= GRID_SIZE) return null;
+    cells.push([rr, cc]);
+  }
+  return cells;
+}
+
+function cellsValidFor(player, cells) {
+  return cells.every(([r,c]) => player.grid[r][c] === null);
+}
+
+function removeShip(player, shipId) {
+  const ship = player.ships.find(s => s.id === shipId);
+  ship.cells.forEach(([r,c]) => player.grid[r][c] = null);
+  ship.cells = [];
+  ship.placed = false;
+}
+
+function updateDoneBtn() {
+  const p = state.players[state.placeIdx];
+  $('btn-place-done').disabled = !p.ships.every(s => s.placed);
+}
+
+$('btn-rotate').addEventListener('click', () => {
+  state.rotateH = !state.rotateH;
+});
+
+$('btn-auto').addEventListener('click', () => {
+  const p = state.players[state.placeIdx];
+  // Reset
+  p.ships.forEach(s => removeShip(p, s.id));
+  autoPlace(p);
+  renderPlacementGrid();
+  renderShipDock();
+  updateDoneBtn();
+});
+
+$('btn-reset').addEventListener('click', () => {
+  const p = state.players[state.placeIdx];
+  p.ships.forEach(s => removeShip(p, s.id));
+  state.selectedShip = null;
+  renderPlacementGrid();
+  renderShipDock();
+  updateDoneBtn();
+});
+
+function autoPlace(player) {
+  player.ships.forEach(s => removeShip(player, s.id));
+  for (const ship of player.ships) {
+    let placed = false, tries = 0;
+    while (!placed && tries < 500) {
+      tries++;
+      const horizontal = Math.random() < 0.5;
+      const r = Math.floor(Math.random() * GRID_SIZE);
+      const c = Math.floor(Math.random() * GRID_SIZE);
+      const cells = computeShipCells(r, c, ship.size, horizontal);
+      if (cells && cellsValidFor(player, cells)) {
+        ship.cells = cells;
+        ship.placed = true;
+        cells.forEach(([rr,cc]) => player.grid[rr][cc] = ship.id);
+        placed = true;
+      }
+    }
+  }
+}
+
+$('btn-place-done').addEventListener('click', () => {
+  if (state.mode === 'hotseat' && state.placeIdx === 0) {
+    state.placeIdx = 1;
+    showPass(`${state.players[1].name}, your turn to place ships`);
+  } else {
+    // Both placed, begin battle
+    state.current = 0;
+    enterBattleTurn();
+  }
+});
+
+/* =========================================== PASS SCREEN =========================================== */
+function showPass(msg, after) {
+  $('pass-title').textContent = 'Pass the device';
+  $('pass-msg').textContent = msg;
+  showScreen('screen-pass');
+  $('btn-pass-continue').onclick = () => {
+    if (state.placeIdx === 1 && !state.players[1].ships[0].placed && state.mode === 'hotseat') {
+      enterPlacement();
+    } else {
+      enterBattleTurn();
+    }
+  };
+}
+
+/* =========================================== BATTLE =========================================== */
+function enterBattleTurn() {
+  showScreen('screen-battle');
+  state.pendingShot = false;
+  const active = state.players[state.current];
+  $('turn-banner').className = 'turn-banner';
+  $('turn-banner').innerHTML = `<span class="you">${active.name}</span>'s turn`;
+  $('status-line').textContent = '';
+  renderBattleGrids();
+  renderEnemyStatus();
+
+  if (state.mode === 'solo' && state.current === 1) {
+    // AI turn
+    setTimeout(aiTurn, 700);
+  } else {
+    // Show question after a brief beat
+    setTimeout(askQuestion, 350);
+  }
+}
+
+function renderBattleGrids() {
+  const viewerIdx = getViewerIdx();
+  const me = state.players[viewerIdx];
+  const opp = state.players[1 - viewerIdx];
+  // Target (opponent's grid) — show only shotsByMe
+  const target = $('target-grid');
+  target.innerHTML = '';
+  target.appendChild(makeLabel(''));
+  for (let c = 0; c < GRID_SIZE; c++) target.appendChild(makeLabel(String.fromCharCode(65 + c)));
+  for (let r = 0; r < GRID_SIZE; r++) {
+    target.appendChild(makeLabel(r + 1));
+    for (let c = 0; c < GRID_SIZE; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell water target';
+      const shot = me.shotsByMe[r][c];
+      if (shot === 'miss') cell.classList.add('miss');
+      else if (shot === 'hit') cell.classList.add('hit');
+      else if (shot === 'sunk') cell.classList.add('sunk');
+      cell.addEventListener('click', () => onTargetClick(r, c));
+      target.appendChild(cell);
+    }
+  }
+  // Own (your grid) — show ships + opp's shots
+  const own = $('own-grid');
+  own.innerHTML = '';
+  own.appendChild(makeLabel(''));
+  for (let c = 0; c < GRID_SIZE; c++) own.appendChild(makeLabel(String.fromCharCode(65 + c)));
+  const oppShots = opp.shotsByMe;
+  for (let r = 0; r < GRID_SIZE; r++) {
+    own.appendChild(makeLabel(r + 1));
+    for (let c = 0; c < GRID_SIZE; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell water';
+      if (me.grid[r][c]) cell.classList.add('ship');
+      const shot = oppShots[r][c];
+      if (shot === 'miss') cell.classList.add('miss');
+      else if (shot === 'hit') cell.classList.add('hit');
+      else if (shot === 'sunk') cell.classList.add('sunk');
+      own.appendChild(cell);
+    }
+  }
+}
+
+function renderEnemyStatus() {
+  const viewerIdx = getViewerIdx();
+  const opp = state.players[1 - viewerIdx];
+  const list = $('enemy-status-list');
+  list.innerHTML = '';
+  opp.ships.forEach(ship => {
+    const item = document.createElement('div');
+    item.className = 'ship-item placed' + (ship.sunk ? ' sunk' : '');
+    let blocks = '';
+    for (let i = 0; i < ship.size; i++) {
+      const isHit = i < ship.hits;
+      blocks += `<div class="block" style="background:${ship.sunk ? 'var(--blood-dark)' : (isHit ? 'var(--blood)' : 'var(--ligament)')}"></div>`;
+    }
+    // For unsunk ships, hide the structure name to maintain mystery; show "???" until sunk
+    const displayName = ship.sunk ? ship.name : '???';
+    item.innerHTML = `
+      <div class="ship-blocks">${blocks}</div>
+      <div class="ship-name">${displayName}</div>
+      <div class="ship-meta">${ship.size}</div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+/* =========================================== QUESTION =========================================== */
+function pickQuestion() {
+  // Avoid repeats until exhausted
+  let pool = QUESTIONS.map((q, i) => ({...q, i})).filter(q => !state.askedIds.has(q.i));
+  if (pool.length === 0) { state.askedIds.clear(); pool = QUESTIONS.map((q, i) => ({...q, i})); }
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  state.askedIds.add(pick.i);
+  return pick;
+}
+
+function askQuestion() {
+  const q = pickQuestion();
+  state.currentQuestion = q;
+  $('q-text').textContent = q.q;
+  const list = $('q-answers');
+  list.innerHTML = '';
+  hide('q-feedback');
+  hide('btn-q-next');
+  q.a.forEach((ans, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = ans;
+    btn.addEventListener('click', () => answerQuestion(idx));
+    list.appendChild(btn);
+  });
+  show('modal-overlay');
+}
+
+function answerQuestion(idx) {
+  const q = state.currentQuestion;
+  const me = state.players[state.current];
+  const buttons = document.querySelectorAll('#q-answers .answer-btn');
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.correct) b.classList.add('correct');
+    else if (i === idx) b.classList.add('wrong');
+  });
+  const fb = $('q-feedback');
+  fb.classList.remove('hidden','correct','wrong');
+  if (idx === q.correct) {
+    me.score.qCorrect++;
+    state.pendingShot = true;
+    fb.classList.add('correct');
+    fb.textContent = 'Correct! Choose a target square to fire.';
+  } else {
+    me.score.qWrong++;
+    state.pendingShot = false;
+    fb.classList.add('wrong');
+    fb.textContent = `Incorrect. Correct answer: ${q.a[q.correct]}. Turn lost.`;
+  }
+  show('btn-q-next');
+}
+
+$('btn-q-next').addEventListener('click', () => {
+  hide('modal-overlay');
+  if (state.pendingShot) {
+    $('turn-banner').classList.add('fire-ready');
+    $('status-line').textContent = 'Tap a square in Enemy Waters to fire.';
+  } else {
+    nextTurn();
+  }
+});
+
+/* =========================================== SHOOTING =========================================== */
+function onTargetClick(r, c) {
+  if (!state.pendingShot) return;
+  const me = state.players[state.current];
+  const opp = state.players[1 - state.current];
+  if (me.shotsByMe[r][c] !== null) return; // already fired here
+  state.pendingShot = false;
+  resolveShot(me, opp, r, c);
+}
+
+function resolveShot(shooter, defender, r, c) {
+  shooter.score.shotsFired++;
+  const shipId = defender.grid[r][c];
+  if (shipId) {
+    shooter.shotsByMe[r][c] = 'hit';
+    shooter.score.hits++;
+    const ship = defender.ships.find(s => s.id === shipId);
+    ship.hits++;
+    let msg = `Hit! You struck enemy tissue.`;
+    if (ship.hits >= ship.size) {
+      ship.sunk = true;
+      ship.cells.forEach(([rr, cc]) => shooter.shotsByMe[rr][cc] = 'sunk');
+      msg = `SUNK! You destroyed the enemy ${ship.name}.`;
+    }
+    $('status-line').textContent = msg;
+  } else {
+    shooter.shotsByMe[r][c] = 'miss';
+    $('status-line').textContent = 'Miss. The shot splashes into pelvic floor.';
+  }
+  renderBattleGrids();
+  renderEnemyStatus();
+  // Check victory
+  if (defender.ships.every(s => s.sunk)) {
+    setTimeout(() => endGame(shooter), 900);
+  } else {
+    setTimeout(nextTurn, 1100);
+  }
+}
+
+/* =========================================== TURN MGMT =========================================== */
+function nextTurn() {
+  state.current = 1 - state.current;
+  if (state.mode === 'hotseat') {
+    showPass(`${state.players[state.current].name}, it's your turn`);
+  } else {
+    enterBattleTurn();
+  }
+}
+
+/* =========================================== AI =========================================== */
+function aiTurn() {
+  // AI answers question — 70% accuracy
+  const correct = Math.random() < 0.70;
+  const me = state.players[1];
+  if (correct) {
+    me.score.qCorrect++;
+    $('status-line').textContent = 'CPU answered correctly. Firing...';
+    setTimeout(aiShoot, 700);
+  } else {
+    me.score.qWrong++;
+    $('status-line').textContent = 'CPU answered incorrectly. Turn lost.';
+    setTimeout(nextTurn, 1100);
+  }
+}
+
+function aiShoot() {
+  const me = state.players[1];
+  const opp = state.players[0];
+  let r, c;
+  // Hunt or target mode
+  if (state.ai.targets.length > 0) {
+    [r, c] = state.ai.targets.shift();
+    while (me.shotsByMe[r][c] !== null && state.ai.targets.length > 0) {
+      [r, c] = state.ai.targets.shift();
+    }
+    if (me.shotsByMe[r][c] !== null) {
+      // fall through to random
+      [r, c] = randomUnshot(me);
+    }
+  } else {
+    [r, c] = randomUnshot(me);
+  }
+  const shipId = opp.grid[r][c];
+  me.score.shotsFired++;
+  if (shipId) {
+    me.shotsByMe[r][c] = 'hit';
+    me.score.hits++;
+    const ship = opp.ships.find(s => s.id === shipId);
+    ship.hits++;
+    state.ai.lastHits.push([r, c]);
+    let msg = `CPU hit your ${ship.name.toLowerCase().slice(0,1)}…`;
+    if (ship.hits >= ship.size) {
+      ship.sunk = true;
+      ship.cells.forEach(([rr, cc]) => me.shotsByMe[rr][cc] = 'sunk');
+      state.ai.lastHits = [];
+      state.ai.targets = [];
+      msg = `CPU SUNK your ${ship.name}!`;
+    } else {
+      // Add adjacent cells to target queue
+      const adj = [[r-1,c],[r+1,c],[r,c-1],[r,c+1]];
+      for (const [rr, cc] of adj) {
+        if (rr>=0 && rr<GRID_SIZE && cc>=0 && cc<GRID_SIZE && me.shotsByMe[rr][cc] === null) {
+          if (!state.ai.targets.find(t => t[0]===rr && t[1]===cc)) state.ai.targets.push([rr, cc]);
+        }
+      }
+    }
+    $('status-line').textContent = msg;
+  } else {
+    me.shotsByMe[r][c] = 'miss';
+    $('status-line').textContent = `CPU fires at ${String.fromCharCode(65+c)}${r+1} — miss.`;
+  }
+  renderBattleGrids();
+  renderEnemyStatus();
+  if (opp.ships.every(s => s.sunk)) {
+    setTimeout(() => endGame(me), 900);
+  } else {
+    setTimeout(nextTurn, 1200);
+  }
+}
+
+function randomUnshot(player) {
+  const open = [];
+  for (let r = 0; r < GRID_SIZE; r++)
+    for (let c = 0; c < GRID_SIZE; c++)
+      if (player.shotsByMe[r][c] === null) open.push([r, c]);
+  return open[Math.floor(Math.random() * open.length)];
+}
+
+/* =========================================== END =========================================== */
+function endGame(winner) {
+  showScreen('screen-end');
+  $('victor-name').textContent = `${winner.name} wins!`;
+  $('victor-msg').textContent = winner === state.players[0]
+    ? 'Pelvic dominance secured.' : 'The enemy fleet has prevailed.';
+  const stats = $('end-stats');
+  const a = state.players[0], b = state.players[1];
+  stats.innerHTML = `
+    <div class="row"><span>${a.name} — Q correct</span><span>${a.score.qCorrect}/${a.score.qCorrect + a.score.qWrong}</span></div>
+    <div class="row"><span>${a.name} — Hits</span><span>${a.score.hits}/${a.score.shotsFired}</span></div>
+    <div class="row"><span>${b.name} — Q correct</span><span>${b.score.qCorrect}/${b.score.qCorrect + b.score.qWrong}</span></div>
+    <div class="row"><span>${b.name} — Hits</span><span>${b.score.hits}/${b.score.shotsFired}</span></div>
+  `;
+}
+
+$('btn-restart').addEventListener('click', () => {
+  showScreen('screen-mode');
+});
+
+</script>
+</body>
+</html>
